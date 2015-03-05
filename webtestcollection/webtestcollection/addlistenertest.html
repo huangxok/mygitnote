@@ -1,0 +1,27 @@
+﻿<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title></title>
+</head>
+<body>
+    <div id="outDiv" style="height: 300px; width: 300px; border: 1px solid #4cff00">
+        <div id="middleDiv" style="height: 200px; width: 200px; border: 1px solid #ff6a00">
+            <div id="inDiv" style="height: 100px; width: 100px; border: 1px solid #00ff90">请在此点击鼠标。</div>
+        </div>
+    </div>
+
+    <div id="info"></div>
+    <script>
+        var outDiv = document.getElementById("outDiv");
+        var middleDiv = document.getElementById("middleDiv");
+        var inDiv = document.getElementById("inDiv");
+        var info = document.getElementById("info");
+
+        outDiv.addEventListener("click", function () { info.innerHTML += "outDiv" + "<br>"; }, true);
+        middleDiv.addEventListener("click", function () { info.innerHTML += "middleDiv" + "<br>"; }, true);
+        inDiv.addEventListener("click", function () { info.innerHTML += "inDiv" + "<br>"; }, false);
+    </script>
+</body>
+
+</html>
