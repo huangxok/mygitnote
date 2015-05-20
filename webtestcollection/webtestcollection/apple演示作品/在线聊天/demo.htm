@@ -1,0 +1,272 @@
+﻿<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>Web IM</title>
+    <style type="text/css">
+        .h21 {
+            width: 400px;
+            height: 21px;
+            margin: 1px;
+            border: #7F9DB9 1px solid;
+            padding: 0px;
+        }
+
+        .h25 {
+            width: 400px;
+            height: 25px;
+            margin: 1px;
+            border: #7F9DB9 1px solid;
+            padding: 0px;
+        }
+
+        .h100 {
+            width: 400px;
+            height: 100px;
+            margin: 1px;
+            border: #7F9DB9 1px solid;
+            padding: 0px;
+        }
+
+        .h120 {
+            width: 400px;
+            height: 120px;
+            margin: 1px;
+            border: #7F9DB9 1px solid;
+            padding: 0px;
+        }
+
+        .h300 {
+            width: 400px;
+            height: 300px;
+            margin: 1px;
+            border: #7F9DB9 1px solid;
+            padding: 0px;
+        }
+
+        .imcore_iframe_reading {
+            float: left;
+            width: 400px;
+            height: 300px;
+            margin: 0px;
+            border: none;
+            padding: 0px;
+        }
+
+        .imcore_iframe_sending {
+            float: left;
+            width: 400px;
+            height: 100px;
+            margin: 0px;
+            border: none;
+            padding: 0px;
+        }
+
+        .imcore_face_a {
+            float: left;
+            width: 32px;
+            height: 32px;
+            margin: 1px;
+            border: none;
+            padding: 1px;
+        }
+
+            .imcore_face_a:hover {
+                border: #7F9DB9 1px solid;
+                padding: 0px;
+            }
+
+            .imcore_face_a img {
+                float: left;
+                width: 32px;
+                height: 32px;
+                margin: 0px;
+                border: none;
+                padding: 0px;
+            }
+
+        .imcore_font_select {
+            float: left;
+            width: auto;
+            height: 19px;
+            margin: 1px;
+            font-family: 宋体;
+            font-size: 13px;
+        }
+
+        .imcore_font_input {
+            float: left;
+            width: 19px;
+            height: 19px;
+            margin: 1px;
+            border: #7F9DB9 1px solid;
+            padding: 0px;
+            background: #FFFFFF;
+            font-family: 宋体;
+            font-size: 13px;
+        }
+    </style>
+    <script type="text/javascript" src="js/is.js"></script>
+    <script type="text/javascript" src="js/is.bin.imcore.js"></script>
+    <script type="text/javascript">
+        //<![CDATA[
+
+        window.onload = function () {
+
+            talk = {
+                "usering-id": "b56255470c73800",
+                "usering-name": "zhengke",
+                "reading-iframe": "imcore_iframe_reading",
+                "sending-iframe": "imcore_iframe_sending"
+            };
+
+            imcoreAction = is.plugin("imcore", "config.xml");
+
+            imcoreAction("talk", talk);
+
+        };
+
+        //]]>
+    </script>
+</head>
+
+<body>
+    <div class="h300">
+        <iframe class="imcore_iframe_reading" frameborder="0" name="imcore_iframe_reading" src="about:blank"></iframe>
+    </div>
+    <div class="h120">
+        <a class="imcore_face_a" href="javascript:;" onclick="imcoreAction('face', talk, 'img/face/01.gif')">
+            <img src="img/face/01.gif" title="微笑" /></a>
+        <a class="imcore_face_a" href="javascript:;" onclick="imcoreAction('face', talk, 'img/face/02.gif')">
+            <img src="img/face/02.gif" title="开心" /></a>
+        <a class="imcore_face_a" href="javascript:;" onclick="imcoreAction('face', talk, 'img/face/03.gif')">
+            <img src="img/face/03.gif" title="可爱" /></a>
+        <a class="imcore_face_a" href="javascript:;" onclick="imcoreAction('face', talk, 'img/face/04.gif')">
+            <img src="img/face/04.gif" title="调皮" /></a>
+        <a class="imcore_face_a" href="javascript:;" onclick="imcoreAction('face', talk, 'img/face/05.gif')">
+            <img src="img/face/05.gif" title="祝贺" /></a>
+        <a class="imcore_face_a" href="javascript:;" onclick="imcoreAction('face', talk, 'img/face/06.gif')">
+            <img src="img/face/06.gif" title="迷恋" /></a>
+        <a class="imcore_face_a" href="javascript:;" onclick="imcoreAction('face', talk, 'img/face/07.gif')">
+            <img src="img/face/07.gif" title="感动" /></a>
+        <a class="imcore_face_a" href="javascript:;" onclick="imcoreAction('face', talk, 'img/face/08.gif')">
+            <img src="img/face/08.gif" title="吐血" /></a>
+        <a class="imcore_face_a" href="javascript:;" onclick="imcoreAction('face', talk, 'img/face/09.gif')">
+            <img src="img/face/09.gif" title="赞" /></a>
+        <a class="imcore_face_a" href="javascript:;" onclick="imcoreAction('face', talk, 'img/face/10.gif')">
+            <img src="img/face/10.gif" title="陶醉" /></a>
+        <a class="imcore_face_a" href="javascript:;" onclick="imcoreAction('face', talk, 'img/face/11.gif')">
+            <img src="img/face/11.gif" title="加油" /></a>
+        <a class="imcore_face_a" href="javascript:;" onclick="imcoreAction('face', talk, 'img/face/12.gif')">
+            <img src="img/face/12.gif" title="惊讶" /></a>
+        <a class="imcore_face_a" href="javascript:;" onclick="imcoreAction('face', talk, 'img/face/13.gif')">
+            <img src="img/face/13.gif" title="汗" /></a>
+        <a class="imcore_face_a" href="javascript:;" onclick="imcoreAction('face', talk, 'img/face/14.gif')">
+            <img src="img/face/14.gif" title="闭嘴" /></a>
+        <a class="imcore_face_a" href="javascript:;" onclick="imcoreAction('face', talk, 'img/face/15.gif')">
+            <img src="img/face/15.gif" title="抽烟" /></a>
+        <a class="imcore_face_a" href="javascript:;" onclick="imcoreAction('face', talk, 'img/face/16.gif')">
+            <img src="img/face/16.gif" title="吃饭" /></a>
+        <a class="imcore_face_a" href="javascript:;" onclick="imcoreAction('face', talk, 'img/face/17.gif')">
+            <img src="img/face/17.gif" title="思考" /></a>
+        <a class="imcore_face_a" href="javascript:;" onclick="imcoreAction('face', talk, 'img/face/18.gif')">
+            <img src="img/face/18.gif" title="难过" /></a>
+        <a class="imcore_face_a" href="javascript:;" onclick="imcoreAction('face', talk, 'img/face/19.gif')">
+            <img src="img/face/19.gif" title="大哭" /></a>
+        <a class="imcore_face_a" href="javascript:;" onclick="imcoreAction('face', talk, 'img/face/20.gif')">
+            <img src="img/face/20.gif" title="生气" /></a>
+        <a class="imcore_face_a" href="javascript:;" onclick="imcoreAction('face', talk, 'img/face/21.gif')">
+            <img src="img/face/21.gif" title="发怒" /></a>
+        <a class="imcore_face_a" href="javascript:;" onclick="imcoreAction('face', talk, 'img/face/22.gif')">
+            <img src="img/face/22.gif" title="惊恐" /></a>
+        <a class="imcore_face_a" href="javascript:;" onclick="imcoreAction('face', talk, 'img/face/23.gif')">
+            <img src="img/face/23.gif" title="崩溃" /></a>
+        <a class="imcore_face_a" href="javascript:;" onclick="imcoreAction('face', talk, 'img/face/24.gif')">
+            <img src="img/face/24.gif" title="尴尬" /></a>
+    </div>
+    <div class="h21">
+        <select class="imcore_font_select" onchange="
+      imcoreAction('font', 'font-family:' + this.value + ';');
+    ">
+            <option value="宋体" title="宋体">宋体   </option>
+            <option value="黑体" title="黑体">黑体   </option>
+            <option value="楷体_GB2312" title="楷体_GB2312">楷体   </option>
+            <option value="Arial" title="Arial">Arial  </option>
+            <option value="Times New Roman" title="Times New Roman">Times  </option>
+            <option value="Verdana" title="Verdana">Verdana</option>
+        </select>
+        <select class="imcore_font_select" onchange="
+      imcoreAction('font', 'font-size:' + this.value + ';');
+    ">
+            <option value="10px" title="10px">10</option>
+            <option value="11px" title="11px">11</option>
+            <option value="12px" title="12px">12</option>
+            <option value="13px" title="13px">13</option>
+            <option value="14px" title="14px">14</option>
+            <option value="15px" title="15px">15</option>
+            <option value="16px" title="16px">16</option>
+            <option value="17px" title="17px">17</option>
+            <option value="18px" title="18px">18</option>
+            <option value="19px" title="19px">19</option>
+            <option value="20px" title="20px">20</option>
+            <option value="21px" title="21px">21</option>
+            <option value="22px" title="22px">22</option>
+        </select>
+        <select class="imcore_font_select" onchange="
+      imcoreAction('font', 'color:' + this.value + ';');
+      this.style.color = this.value;
+    ">
+            <option value="#000000" style="color: #000000;">█</option>
+            <option value="#993366" style="color: #993366;">█</option>
+            <option value="#FF0000" style="color: #FF0000;">█</option>
+            <option value="#FF9900" style="color: #FF9900;">█</option>
+            <option value="#99CC00" style="color: #99CC00;">█</option>
+            <option value="#339966" style="color: #339966;">█</option>
+            <option value="#33CCCC" style="color: #33CCCC;">█</option>
+            <option value="#00CCFF" style="color: #00CCFF;">█</option>
+            <option value="#C0C0C0" style="color: #C0C0C0;">█</option>
+        </select>
+        <input type="button" class="imcore_font_input" value="B" onclick="
+    if (imcoreAction('font')['font-weight'] == 'normal') {
+        imcoreAction('font', 'font-weight:bold;');
+        this.style.fontWeight = 'bold';
+    } else {
+        imcoreAction('font', 'font-weight:normal;');
+        this.style.fontWeight = 'normal';
+    }
+    " />
+        <input type="button" class="imcore_font_input" value="I" onclick="
+    if (imcoreAction('font')['font-style'] == 'normal') {
+        imcoreAction('font', 'font-style:italic;');
+        this.style.fontStyle = 'italic';
+    } else {
+        imcoreAction('font', 'font-style:normal;');
+        this.style.fontStyle = 'normal';
+    }
+    " />
+        <input type="button" class="imcore_font_input" value="U" onclick="
+    if (imcoreAction('font')['text-decoration'] == 'none') {
+        imcoreAction('font', 'text-decoration:underline;');
+        this.style.textDecoration = 'underline';
+    } else {
+        imcoreAction('font', 'text-decoration:none;');
+        this.style.textDecoration = 'none';
+    }
+    " />
+    </div>
+    <div class="h100">
+        <iframe class="imcore_iframe_sending" frameborder="0" name="imcore_iframe_sending" src="about:blank"></iframe>
+    </div>
+    <div class="h25">
+        <input type="button" value="发送" onclick="
+    imcoreAction('send', talk);
+    " />
+        <input type="button" value="按回车发送" onclick="
+    imcoreAction('enter', false);
+    " />
+        <input type="button" value="按回车换行" onclick="
+    imcoreAction('enter', true);
+    " />
+    </div>
+</body>
+</html>

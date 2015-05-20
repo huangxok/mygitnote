@@ -1,0 +1,249 @@
+<?xml version="1.0" encoding="utf-8"?>
+<imdata>
+
+	<setting>
+
+		<!-- 时钟 -->
+		<param name="timer_interval"     value="500" />
+		<param name="timer_step"         value="0"   />
+		<param name="timer_step_setting" value="10"  />
+		<param name="timer_step_waiting" value="10"  />
+		<param name="timer_step_reading" value="10"  />
+		<param name="timer_step_reinner" value="1"   />
+
+		<!-- 行为 -->
+		<param name="action_setting" value="data.xml" />
+		<param name="action_waiting" value="data.xml" />
+		<param name="action_reading" value="data.xml" />
+		<param name="action_sending" value="data.xml" />
+
+		<!-- 方法 -->
+		<param name="method_waiting" value="
+			function() {
+				return true;
+			}
+		" />
+		<param name="method_reading" value="
+			function() {
+				return true;
+			}
+		" />
+		<param name="method_sending" value="
+			function() {
+				return true;
+			}
+		" />
+		<param name="method_changed" value="
+			function() {
+				return true;
+			}
+		" />
+
+		<!-- 格式 -->
+		<param name="format_reading" value="
+			function(e) {
+
+				/* 定义参数 */
+				var reader  = e['usering-reader' ];
+				var sender  = e['usering-sender' ];
+				var name    = e['usering-name'   ];
+				var type    = e['message-type'   ];
+				var icon    = e['message-icon'   ];
+				var elapse  = e['message-elapse' ];
+				var font    = e['message-font'   ];
+				var content = e['message-content'];
+
+				/* 定义角色 */
+				var role = selectPath('//usering/param[@name=\'id\' and @value=\'' + sender + '\']')[0];
+
+				/* 格式时间 */
+				elapse = new Date(parseInt(elapse)).toLocaleTimeString();
+
+				/* 格式内容 */
+				content = decodeURIComponent(content);
+
+				/* 返回执行 */
+				return {
+
+					'talk' : function() {
+
+						/* 定义颜色 */
+						var color = role ? 'color:#008040;' : 'color:#0000FF;';
+
+						/* 定义表情 */
+						var face = {
+							'\x3C!--\\[#01\\]--\x3E' : '\x3Cimg src=\'img/face/01.gif\' /\x3E',
+							'\x3C!--\\[#02\\]--\x3E' : '\x3Cimg src=\'img/face/02.gif\' /\x3E',
+							'\x3C!--\\[#03\\]--\x3E' : '\x3Cimg src=\'img/face/03.gif\' /\x3E',
+							'\x3C!--\\[#04\\]--\x3E' : '\x3Cimg src=\'img/face/04.gif\' /\x3E',
+							'\x3C!--\\[#05\\]--\x3E' : '\x3Cimg src=\'img/face/05.gif\' /\x3E',
+							'\x3C!--\\[#06\\]--\x3E' : '\x3Cimg src=\'img/face/06.gif\' /\x3E',
+							'\x3C!--\\[#07\\]--\x3E' : '\x3Cimg src=\'img/face/07.gif\' /\x3E',
+							'\x3C!--\\[#08\\]--\x3E' : '\x3Cimg src=\'img/face/08.gif\' /\x3E',
+							'\x3C!--\\[#09\\]--\x3E' : '\x3Cimg src=\'img/face/09.gif\' /\x3E',
+							'\x3C!--\\[#10\\]--\x3E' : '\x3Cimg src=\'img/face/10.gif\' /\x3E',
+							'\x3C!--\\[#11\\]--\x3E' : '\x3Cimg src=\'img/face/11.gif\' /\x3E',
+							'\x3C!--\\[#12\\]--\x3E' : '\x3Cimg src=\'img/face/12.gif\' /\x3E',
+							'\x3C!--\\[#13\\]--\x3E' : '\x3Cimg src=\'img/face/13.gif\' /\x3E',
+							'\x3C!--\\[#14\\]--\x3E' : '\x3Cimg src=\'img/face/14.gif\' /\x3E',
+							'\x3C!--\\[#15\\]--\x3E' : '\x3Cimg src=\'img/face/15.gif\' /\x3E',
+							'\x3C!--\\[#16\\]--\x3E' : '\x3Cimg src=\'img/face/16.gif\' /\x3E',
+							'\x3C!--\\[#17\\]--\x3E' : '\x3Cimg src=\'img/face/17.gif\' /\x3E',
+							'\x3C!--\\[#18\\]--\x3E' : '\x3Cimg src=\'img/face/18.gif\' /\x3E',
+							'\x3C!--\\[#19\\]--\x3E' : '\x3Cimg src=\'img/face/19.gif\' /\x3E',
+							'\x3C!--\\[#20\\]--\x3E' : '\x3Cimg src=\'img/face/20.gif\' /\x3E',
+							'\x3C!--\\[#21\\]--\x3E' : '\x3Cimg src=\'img/face/21.gif\' /\x3E',
+							'\x3C!--\\[#22\\]--\x3E' : '\x3Cimg src=\'img/face/22.gif\' /\x3E',
+							'\x3C!--\\[#23\\]--\x3E' : '\x3Cimg src=\'img/face/23.gif\' /\x3E',
+							'\x3C!--\\[#24\\]--\x3E' : '\x3Cimg src=\'img/face/24.gif\' /\x3E'
+						};
+
+						/* 格式表情 */
+						for(var i in face) {
+							content = content.replace(new RegExp(i, 'gi'), face[i]);
+						}
+
+						/* 返回格式 */
+						return '\x3Cdl class=\'talk\'\x3E                                                 ' +
+						       '  \x3Cdt style=\'' + color + '\'\x3E' + name + ' ' + elapse + '\x3C/dt\x3E' +
+						       '  \x3Cdd style=\'' + font + '\'\x3E' + content + '\x3C/dd\x3E             ' +
+						       '\x3C/dl\x3E                                                               ' ;
+
+					},
+
+					'file' : function() {
+
+						/* 返回格式 */
+						if(role) {
+
+							return '\x3Cdl class=\'file\'\x3E                                              ' +
+							       '  \x3Cdt\x3E\x3Cimg src=\'img/' + icon + '\' /\x3E' + elapse + '\x3C/dt\x3E' +
+							       '  \x3Cdd\x3E发送了一个文件。\x3C/dd\x3E                                  ' +
+							       '\x3C/dl\x3E                                                            ' ;
+
+						} else {
+
+							return '\x3Cdl class=\'file\'\x3E                                                                                                   ' +
+							       '  \x3Cdt\x3E\x3Cimg src=\'img/' + icon + '\' /\x3E' + elapse + '\x3C/dt\x3E                                                     ' +
+							       '  \x3Cdd\x3E' + name + ' 发送了一个文件，\x3Ca href=\'' + content + '\' target=\'_blank\'\x3E点击下载\x3C/a\x3E。\x3C/dd\x3E' +
+							       '\x3C/dl\x3E                                                                                                                 ' ;
+
+						}
+
+					},
+
+					'news' : function() {
+
+						/* 返回格式 */
+						if(role) {
+
+							return '\x3Cdl class=\'news\'\x3E                                              ' +
+							       '  \x3Cdt\x3E\x3Cimg src=\'img/' + icon + '\' /\x3E' + elapse + '\x3C/dt\x3E' +
+							       '  \x3Cdd\x3E' + content + '\x3C/dd\x3E                                 ' +
+							       '\x3C/dl\x3E                                                            ' ;
+
+						} else {
+
+							return '\x3Cdl class=\'news\'\x3E                                              ' +
+							       '  \x3Cdt\x3E\x3Cimg src=\'img/' + icon + '\' /\x3E' + elapse + '\x3C/dt\x3E' +
+							       '  \x3Cdd\x3E' + name + ' ' + content + '\x3C/dd\x3E                    ' +
+							       '\x3C/dl\x3E                                                            ' ;
+
+						}
+
+					}
+
+				}[type]();
+
+			}
+		" />
+		<param name="format_sending" value="
+			function(e) {
+
+				/* 定义参数 */
+				var type    = e['message-type'   ];
+				var content = e['message-content'];
+
+				/* 返回执行 */
+				return encodeURIComponent({
+
+					'talk' : function() {
+
+						/* 定义字符 */
+						var char = {
+							'\\t' : '',
+							'\\n' : '',
+							'\\v' : '',
+							'\\f' : '',
+							'\\r' : ''
+						};
+
+						/* 定义表情 */
+						var face = {
+							'\x3Cimg src=\'img/face/01.gif\' /\x3E' : '\x3C!--[#01]--\x3E',
+							'\x3Cimg src=\'img/face/02.gif\' /\x3E' : '\x3C!--[#02]--\x3E',
+							'\x3Cimg src=\'img/face/03.gif\' /\x3E' : '\x3C!--[#03]--\x3E',
+							'\x3Cimg src=\'img/face/04.gif\' /\x3E' : '\x3C!--[#04]--\x3E',
+							'\x3Cimg src=\'img/face/05.gif\' /\x3E' : '\x3C!--[#05]--\x3E',
+							'\x3Cimg src=\'img/face/06.gif\' /\x3E' : '\x3C!--[#06]--\x3E',
+							'\x3Cimg src=\'img/face/07.gif\' /\x3E' : '\x3C!--[#07]--\x3E',
+							'\x3Cimg src=\'img/face/08.gif\' /\x3E' : '\x3C!--[#08]--\x3E',
+							'\x3Cimg src=\'img/face/09.gif\' /\x3E' : '\x3C!--[#09]--\x3E',
+							'\x3Cimg src=\'img/face/10.gif\' /\x3E' : '\x3C!--[#10]--\x3E',
+							'\x3Cimg src=\'img/face/11.gif\' /\x3E' : '\x3C!--[#11]--\x3E',
+							'\x3Cimg src=\'img/face/12.gif\' /\x3E' : '\x3C!--[#12]--\x3E',
+							'\x3Cimg src=\'img/face/13.gif\' /\x3E' : '\x3C!--[#13]--\x3E',
+							'\x3Cimg src=\'img/face/14.gif\' /\x3E' : '\x3C!--[#14]--\x3E',
+							'\x3Cimg src=\'img/face/15.gif\' /\x3E' : '\x3C!--[#15]--\x3E',
+							'\x3Cimg src=\'img/face/16.gif\' /\x3E' : '\x3C!--[#16]--\x3E',
+							'\x3Cimg src=\'img/face/17.gif\' /\x3E' : '\x3C!--[#17]--\x3E',
+							'\x3Cimg src=\'img/face/18.gif\' /\x3E' : '\x3C!--[#18]--\x3E',
+							'\x3Cimg src=\'img/face/19.gif\' /\x3E' : '\x3C!--[#19]--\x3E',
+							'\x3Cimg src=\'img/face/20.gif\' /\x3E' : '\x3C!--[#20]--\x3E',
+							'\x3Cimg src=\'img/face/21.gif\' /\x3E' : '\x3C!--[#21]--\x3E',
+							'\x3Cimg src=\'img/face/22.gif\' /\x3E' : '\x3C!--[#22]--\x3E',
+							'\x3Cimg src=\'img/face/23.gif\' /\x3E' : '\x3C!--[#23]--\x3E',
+							'\x3Cimg src=\'img/face/24.gif\' /\x3E' : '\x3C!--[#24]--\x3E'
+						};
+
+						/* 格式字符 */
+						for(var i in char) {
+							content = content.replace(new RegExp(i, 'gi'), char[i]);
+						}
+
+						/* 格式表情 */
+						for(var i in char) {
+							content = content.replace(new RegExp(i, 'gi'), face[i]);
+						}
+
+						return content;
+					},
+
+					'file' : function() {
+						return content;
+					},
+
+					'news' : function() {
+						return content;
+					}
+
+				}[type]());
+
+			}
+		" />
+
+		<!-- 控制 -->
+		<param name="master_readmax" value="40"                                                                                                                                                                                                                                 />
+		<param name="master_readcss" value="{'body' : 'margin:0px; color:#000000; font-family:Arial; font-size:14px;', 'dl' : 'margin:5px;', 'dd' : 'margin:5px;', 'a' : 'color:#0000FF;', '.talk' : 'color:#000000;', '.file' : 'color:#505050;', '.news' : 'color:#505050;'}" />
+		<param name="master_sendcss" value="{'body' : 'margin:5px; color:#000000; font-family:Arial; font-size:14px;'}"                                                                                                                                                         />
+		<param name="master_codekey" value="/^13$|^10$/"                                                                                                                                                                                                                        />
+		<param name="master_ctrlkey" value="false"                                                                                                                                                                                                                              />
+
+	</setting>
+
+	<usering>
+		<param name="id"   value="94c52085aac7380" />
+		<param name="name" value="zhanghong"       />
+	</usering>
+
+</imdata>

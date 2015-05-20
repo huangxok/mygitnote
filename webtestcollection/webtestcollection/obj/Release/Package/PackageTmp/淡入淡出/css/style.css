@@ -1,0 +1,17 @@
+﻿body {
+}
+
+.container
+{
+    margin-left:auto;
+    margin-right:auto;
+    width:945px;
+}
+    .container .grid_1
+    {
+      width:100px;
+    }
+img
+{
+    border:0 !important;
+}

@@ -1,0 +1,217 @@
+﻿<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>div拖动变大变小</title>
+    <link href="stylesheetjk.css" rel="stylesheet" />
+    <script src="Scripts/jquery-1.7.1.js"></script>
+    <style>
+        body {
+            background-color: #F3F3F3;
+        }
+
+        #box {
+            width: 200px;
+            height: 100px;
+            cursor: move;
+            position: absolute;
+            top: 30px;
+            left: 30px;
+            background-color: #FFF;
+            border: 1px solid #CCCCCC;
+            -webkit-box-shadow: 10px 10px 25px #ccc;
+            -moz-box-shadow: 10px 10px 25px #ccc;
+            box-shadow: 10px 10px 25px #ccc;
+        }
+
+        #coor {
+            width: 10px;
+            height: 10px;
+            overflow: hidden;
+            cursor: se-resize;
+            position: absolute;
+            right: 0;
+            bottom: 0;
+            background-color: #09C;
+        }
+    </style>
+</head>
+<body>
+
+    <div id="box" class="head">
+        <div id="coor">
+        </div>
+    </div>
+    <script language="javascript">
+
+        //获得coolie 的值
+
+
+
+        function cookie(name) {
+
+            var cookieArray = document.cookie.split("; "); //得到分割的cookie名值对
+
+            var cookie = new Object();
+
+            for (var i = 0; i < cookieArray.length; i++) {
+
+                var arr = cookieArray[i].split("=");       //将名和值分开
+
+                if (arr[0] == name) return unescape(arr[1]); //如果是指定的cookie，则返回它的值
+
+            }
+
+            return "";
+
+        }
+
+
+
+        function delCookie(name)//删除cookie
+
+        {
+
+            document.cookie = name + "=;expires=" + (new Date(0)).toGMTString();
+
+        }
+
+
+
+        function getCookie(objName) {//获取指定名称的cookie的值
+
+            var arrStr = document.cookie.split("; ");
+
+            for (var i = 0; i < arrStr.length; i++) {
+
+                var temp = arrStr[i].split("=");
+
+                if (temp[0] == objName) return unescape(temp[1]);
+
+            }
+
+        }
+
+
+
+        function addCookie(objName, objValue, objHours) {      //添加cookie
+
+            var str = objName + "=" + escape(objValue);
+
+            if (objHours > 0) {                               //为时不设定过期时间，浏览器关闭时cookie自动消失
+
+                var date = new Date();
+
+                var ms = objHours * 3600 * 1000;
+
+                date.setTime(date.getTime() + ms);
+
+                str += "; expires=" + date.toGMTString();
+
+            }
+
+            document.cookie = str;
+
+        }
+
+
+
+        function SetCookie(name, value)//两个参数，一个是cookie的名子，一个是值
+
+        {
+
+            var Days = 30; //此 cookie 将被保存 30 天
+
+            var exp = new Date();    //new Date("December 31, 9998");
+
+            exp.setTime(exp.getTime() + Days * 24 * 60 * 60 * 1000);
+
+            document.cookie = name + "=" + escape(value) + ";expires=" + exp.toGMTString();
+
+        }
+
+        function getCookie(name)//取cookies函数
+
+        {
+
+            var arr = document.cookie.match(new RegExp("(^| )" + name + "=([^;]*)(;|$)"));
+
+            if (arr != null) return unescape(arr[2]); return null;
+
+
+
+        }
+
+        function delCookie(name)//删除cookie
+
+        {
+
+            var exp = new Date();
+
+            exp.setTime(exp.getTime() - 1);
+
+            var cval = getCookie(name);
+
+            if (cval != null) document.cookie = name + "=" + cval + ";expires=" + exp.toGMTString();
+
+        }
+
+    </script>
+
+    <script>
+        //var numx = [{ x: 114, y: 206, r: 16, start: 0, end: Math.PI * 2, s: false }, { x: 114, y: 206, r: 16, start: 0, end: Math.PI * 2, s: false }, { x: 114, y: 206, r: 16, start: 0, end: Math.PI * 2, s: false }, { x: 114, y: 206, r: 16, start: 0, end: Math.PI * 2, s: false }, { x: 114, y: 206, r: 16, start: 0, end: Math.PI * 2, s: false }];
+        $(function () {
+
+            $(document).mousemove(function (e) {
+
+                if (!!this.move) {
+                    var posix = !document.move_target ? { 'x': 0, 'y': 0 } : document.move_target.posix;
+                    var callback = document.call_down || function () {
+                        $(this.move_target).css({
+                            'top': e.pageY - posix.y,
+                            'left': e.pageX - posix.x
+                        });
+                    };
+                    callback.call(this, e, posix);
+                }
+            }).mouseup(function (e) {
+                if (!!this.move) {
+                    var callback = document.call_up || function () { };
+                    callback.call(this, e);
+                    $.extend(this, {
+                        'move': false,
+                        'move_target': null,
+                        'call_down': false,
+                        'call_up': false
+                    });
+                }
+            });
+
+            var $box = $('#box').mousedown(function (e) {
+                var offset = $(this).offset();
+                this.posix = {
+                    'x': e.pageX - offset.left,
+                    'y': e.pageY - offset.top
+                };
+                $.extend(document, { 'move': true, 'move_target': this });
+            }).on('mousedown', '#coor', function (e) {
+                var posix = {
+                    'w': $box.width(),
+                    'h': $box.height(),
+                    'x': e.pageX,
+                    'y': e.pageY
+                };
+                $.extend(document, {
+                    'move': true, 'call_down': function (e) {
+                        $box.css({
+                            'width': Math.max(30, e.pageX - posix.x + posix.w),
+                            'height': Math.max(30, e.pageY - posix.y + posix.h)
+                        });
+                    }
+                });
+                return false;
+            });
+        });
+    </script>
+</body>
+</html>

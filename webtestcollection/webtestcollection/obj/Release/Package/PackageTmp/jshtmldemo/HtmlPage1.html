@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=gb2312" />
+    <title>三栏布局</title>
+    <style>
+        #main1 {
+            margin: 20px auto;
+            width: 200px;
+            background-color: #6c9;
+            overflow: hidden;
+        }
+    </style>
+    <script type="text/javascript">
+        var Animate = {
+            obj: null,
+            itime: 0,
+            flag: 1,
+            maxHeight: 0,
+            _$: function (id) {
+                return "string" == typeof (id) ? document.getElementById(id) : id;
+            },
+            slideDown: function () {
+
+                if (parseInt(this.obj.style.height) > this.maxHeight) {
+                    this.flag = 0;
+                    return
+                };
+
+                this.obj.style.height = parseInt(this.obj.style.height) + 1 + 'px';
+                setTimeout("Animate.slideDown()", this.itime);
+            },
+            slideUp: function () {
+                if (parseInt(this.obj.style.height) < 1) {
+                    this.flag = 1; return
+                };
+                this.obj.style.height = parseInt(this.obj.style.height) - 1 + 'px';
+                var repeat = "Animate.slideUp()";
+                setTimeout(repeat, this.itime);
+            },
+            slide: function (objid, itime) {
+                this.obj = this._$(objid);
+                this.itime = itime;
+
+
+                if (this.flag) {
+                    this.maxHeight = this.maxHeight ? this.maxHeight : parseInt(this.obj.style.height);
+                    this.obj.style.display = "block";
+                    this.obj.style.height = "0px";
+                    this.slideDown();
+                }
+                else {
+                    this.slideUp();
+                }
+            },
+            fadeIn: function (objid, itime) {
+                this.obj = this._$(objid);
+                this.itime = itime;
+                var that = this;
+                this.maxHeight = parseInt(this.obj.style.height);
+                var i = 100;
+                var timer = setInterval(function () {
+                    that.obj.style.cssText = "filter :alpha(opacity=" + i + ");-moz-opacity:" + i * 0.01 + ";opacity: " + i * 0.01 + ";height:" + that.maxHeight + "px;";
+                    i--;
+
+                    if (i == 0) clearInterval(timer);
+                }, that.itime);
+            },
+            fadeOut: function (objid, itime) {
+                this.obj = this._$(objid);
+                this.itime = itime;
+                var that = this;
+                this.maxHeight = parseInt(this.obj.style.height);
+                var i = 0;
+                var timer = setInterval(function () {
+                    that.obj.style.cssText = "filter :alpha(opacity=" + i + ");-moz-opacity:" + i * 0.01 + ";opacity: " + i * 0.01 + ";height:" + that.maxHeight + "px;";
+                    i++;
+                    if (i == 100) clearInterval(timer);
+                }, that.itime);
+            }
+        }
+    </script>
+</head>
+<body>
+    <input type="button" value="slide" onclick="Animate.slide('main1', 10)" />
+    <input type="button" value="fadeIn" onclick="Animate.fadeIn('main1', 10)" />
+    <input type="button" value="fadeOut" onclick="Animate.fadeOut('main1', 10)" />
+    <div id="main1" style="height: 200px;">
+        slide && fadeIn && fadeIn && fadeOut 
+    </div>
+</body>
+</html>

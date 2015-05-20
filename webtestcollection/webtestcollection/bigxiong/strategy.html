@@ -1,0 +1,131 @@
+﻿<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <title></title>
+</head>
+<body>
+    <img src="strategy.png" />
+    <script>
+        //策略模式应用比较广泛，比如：我们现在要定义数据交换格式，现有三种方案可选1，XML  2，JSON  3，CSV就可以使用策略模式实现。
+
+        //这里我要强调的是------我们是针对不同数据源选择不同方案，针对的都是同一事物做相同意图的操作只是方案不同。
+        var dataSourceVendor = {
+            xml: {
+                get: function () {
+                    console.log("XML数据源");
+                }
+            },
+            json: {
+                get: function () {
+                    console.log("JSON数据源");
+                }
+            },
+            csv: {
+                get: function () {
+                    console.log("CSV数据源");
+                }
+            }
+        };
+        console.log("选择的数据源：" + dataSourceVendor["json"]["get"]());
+    </script>
+    <script>
+        var validator = {
+
+            types: {},
+
+            messages: [],
+
+            config: {},
+
+            validate: function (data) {
+                var i, msg, type, checker, result_ok;
+                this.messages = [];
+                for (i in data) {
+                    if (data.hasOwnProperty(i)) {
+                        type = this.config[i];
+                        checker = this.types[type];
+                        if (!type) {
+                            continue;
+                        }
+                        if (!checker) {
+                            throw {
+                                name: "ValidationError",
+                                message: "No handler to validate type " + type
+                            };
+                        }
+                        result_ok = checker.validate(data[i]);
+                        if (!result_ok) {
+                            msg = "Invalid value for *" + i + "*, " + checker.instructions;
+                            this.messages.push(msg);
+                        }
+                    }
+                }
+                return this.hasErrors();
+            },
+            hasErrors: function () {
+                return this.messages.length !== 0;
+            }
+        };
+
+        validator.types.isNonEmpty = {
+            validate: function (value) {
+                return value !== "";
+            },
+            instructions: "the value cannot be empty"
+        };
+
+        validator.types.isNumber = {
+            validate: function (value) {
+                return !isNaN(value);
+            },
+            instructions: "the value can only be a valid number, e.g. 1, 3.14 or 2010"
+        };
+
+        validator.types.isAlphaNum = {
+            validate: function (value) {
+                return !/[^a-z0-9]/i.test(value);
+            },
+            instructions: "the value can only contain characters and numbers, no special symbols"
+        };
+
+        var data = {
+            first_name: "Super",
+            last_name: "Man",
+            age: "unknown",
+            username: "o_O"
+        };
+        validator.config = {
+            first_name: 'isNonEmpty',
+            age: 'isNumber',
+            username: 'isAlphaNum'
+        };
+        validator.validate(data);
+        if (validator.hasErrors()) {
+            console.log(validator.messages.join("\n"));
+        }
+        // 策略模式属于对象行为型模式，主要针对一组算法，将每一个算法封装到具有共同接口的独立的类中，从而使得它们可以相互替换。策略模式使得算法可以在不影响 到客户端的情况下发生变化。通常，策略模式适用于当一个应用程序需要实现一种特定的服务或者功能，而且该程序有多种实现方式时使用。
+
+        // 策略模式中有三个对象：
+
+        //（1）环境对象    ：该类中实现了对抽象策略中定义的接口或者抽象类的引用。
+        //（2）抽象策略对象：它可由接口或抽象类来实现。
+        //（3）具体策略对象：它封装了实现同不功能的不同算法。
+
+        // 利用策略模式构建应用程序，可以根据用户配置等内容，选择不同有算法来实现应用程序的功能。具体的选择有环境对象来完成。采用这种方式可以避免由于使用条件语句而带来的代码混乱，提高应用程序的灵活性与条理性。
+
+
+
+        // 策略模式的重心------策略模式的重心不是如何实现算法，而是如何组织、调用这些算法，从而让程序结构更灵活，具有更好的维护性和扩展性。
+
+        // 算法的平等性------策略模式一个很大的特点就是各个策略算法的平等性。对于一系列具体的策略算法，大家的地位是完全一样的，正因为这个平等性，才能实现算法之间可以相互替换。所有的策略算法在实现上也是相互独立的，相互之间是没有依赖的。
+
+        // 所以可以这样描述这一系列策略算法：策略算法是相同行为的不同实现。
+
+        // 运行时策略的唯一性------运行期间，策略模式在每一个时刻只能使用一个具体的策略实现对象，虽然可以动态地在不同的策略实现中切换，但是同时只能使用一个。
+
+        // 公有的行为------经常见到的是，所有的具体策略类都有一些公有的行为。这时候，就应当把这些公有的行为放到共同的抽象策略角色Strategy类里面。
+
+        // 当然这时候抽象策略角色必须要用Java抽象类实现，而不能使用接口。这其实也是典型的将代码向继承等级结构的上方集中的标准做法。
+    </script>
+</body>
+</html>

@@ -1,0 +1,91 @@
+﻿<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>jquery 垂直/水平旋转</title>
+<meta name="description" content="垂直/水平旋转" />
+</head>
+<body>
+<style type="text/css">
+*{margin:0;padding:0;list-style-type:none;}
+a,img{border:0;text-decoration:none;}
+body{font:12px/180% Arial;}
+.brand a{
+	display: block;
+	float: left;
+	margin: 20px;
+	width: 180px;
+	height: 240px;
+	text-align: center;
+	position: relative;
+}
+.brand img{
+	width: 180px;
+	height: 240px;
+}
+.brand .info{
+	display: none;
+	background-color: #f0f0f0;
+	color: #369242;
+}
+.vertical .info{
+	width: 0;
+	height: 240px;
+	margin: 0 auto;
+}
+.horizontal img{
+	position: absolute;
+	top: 0;
+	left: 0;
+}
+.horizontal .info{
+	width: 180px;
+	height: 0;
+	top: 120px;
+	position: absolute;
+	left: 0;
+}
+</style>
+
+<div style="width:720px;margin:0 auto;">
+
+	<div id="vertical" class="brand vertical">
+		<a target="_blank" href="#"><img alt="" src="images/1.jpg" /><div class="info">高圆圆</div></a>
+		<a target="_blank" href="#"><img alt="" src="images/2.jpg" /><div class="info">高圆圆</div></a>
+		<a target="_blank" href="#"><img alt="" src="images/3.jpg" /><div class="info">高圆圆</div></a>
+	</div>
+	
+	<div style="clear:both;"></div>
+	
+	<div id="horizontal" class="brand horizontal">
+		<a target="_blank" href="#"><img alt="" src="images/1.jpg" /><div class="info">高圆圆</div></a>
+		<a target="_blank" href="#"><img alt="" src="images/2.jpg" /><div class="info">高圆圆</div></a>
+		<a target="_blank" href="#"><img alt="" src="images/3.jpg" /><div class="info">高圆圆</div></a>
+	</div>
+
+</div>
+	
+<script type="text/javascript" src="js/jquery-1.9.1.min.js"></script>
+<script type="text/javascript">
+//品牌翻转
+var turn = function(target,time,opts){
+	target.find('a').hover(function(){
+		$(this).find('img').stop().animate(opts[0],time,function(){
+			$(this).hide().next().show();
+			$(this).next().animate(opts[1],time);
+		});
+	},function(){
+		$(this).find('.info').animate(opts[0],time,function(){
+			$(this).hide().prev().show();
+			$(this).prev().animate(opts[1],time);
+		});
+	});
+}
+var verticalOpts = [{'width':0},{'width':'180px'}];
+turn($('#vertical'),1000,verticalOpts);
+var horizontalOpts = [{'height':0,'top':'120px'},{'height':'240px','top':0}];
+turn($('#horizontal'),1000,horizontalOpts);
+</script>
+
+</body>
+</html>

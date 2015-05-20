@@ -1,0 +1,20 @@
+﻿<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+
+    <title></title>
+    <script>
+        var a = (function (x) {
+            alert(x)
+            var y = x;
+            return function (y) {
+                alert(y * y);
+            }
+        })();
+    </script>
+</head>
+<body>
+    <div onclick="a(2);">222536</div>
+</body>
+</html>

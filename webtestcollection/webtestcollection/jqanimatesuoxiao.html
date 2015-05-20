@@ -1,0 +1,131 @@
+﻿<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+
+    <title></title>
+    <script src="Scripts/jquery-1.7.1.min.js"></script>
+    <style>
+        .dd {
+            width: 0px;
+            display: none;
+            background: #f00;
+        }
+    </style>
+    <script>
+
+        var lastScrollY = 0;
+        function heartBeat() {
+            //e=e||window.event;
+            var diffY;
+            if (document.body && document.body.scrollTop) {
+
+                diffY = document.body.scrollTop;
+            }
+            else if (document.body) {
+                diffY = document.body.scrollTop;
+            }
+            else {/*Netscape stuff*/ }
+            //alert(diffY);
+            percent = .1 * (diffY - lastScrollY);
+            if (percent > 0)
+                percent = Math.ceil(percent)
+
+            else
+                percent = Math.floor(percent)
+
+            document.getElementById("LeftAd").style.top = parseInt(document.getElementById("LeftAd").style.top) + percent + "px";
+            document.getElementById("RightAd").style.top = parseInt(document.getElementById("LeftAd").style.top) + percent + "px";
+            lastScrollY = lastScrollY + percent;
+            //alert(lastScrollY);
+        }
+        suspendcode12 = "<DIV id=LeftAd style='left:5px;POSITION:absolute;TOP:390px;'></div>"
+        suspendcode14 = "<DIV id=RightAd style='right:10px;POSITION:absolute;TOP:310px;' ></div>"
+        document.write(suspendcode12);
+        document.write(suspendcode14);
+        window.setInterval("heartBeat()", 1);
+        function ClosedivLeft() {
+            LeftAd.style.visibility = "hidden";
+        }
+        function ClosedivRight() {
+            RightAd.style.visibility = "hidden";
+        }
+    </script>
+    <script>
+        function a() {
+
+        }
+        a.prototype.FullName = function () {
+
+        }
+        var o = {
+            x: 1,
+            get r() {
+                return this.x },
+            set r(value) {
+                this.x = value }
+        }
+        o.r
+    </script>
+    <script>
+        function abc(a, b) {
+            function e(a) {  //a为具体的类型String Number Function Object Array
+                return function (b) { //b为一个对象 可以使字符串 数字 函数 对象 数组 等
+                    return {}.toString.call(b) == "[object " + a + "]";
+                };
+            }
+            return e(a)(b);
+        };
+
+
+        var __extends = this.__extends || function (d, b) {
+            for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p];
+            function __() { this.constructor = d; }
+            __.prototype = b.prototype;
+            d.prototype = new __();
+        };
+        var Animal = (function () {
+            function Animal(theName) {
+                this.name = theName;
+            }
+            return Animal;
+        })();
+        var Rhino = (function (_super) {
+            __extends(Rhino, _super);
+            function Rhino() {
+                _super.call(this, "Rhino");
+            }
+            return Rhino;
+        })(Animal);
+        var Employee = (function () {
+            function Employee(theName) {
+                this.name = theName;
+            }
+            return Employee;
+        })();
+        var animal = new Animal("Goat");
+        var rhino = new Rhino();
+        var employee = new Employee("Bob");
+        animal = employee;
+        animal.name
+    </script>
+    <script>
+        $(document).ready(function () {
+            $("#aa").click(function () {
+                $("#kk").animate({ width: "0px", height: "0px", left: "100px", top: "300" }, 1000, function () {
+                    //$(".dd").stop().show().animate({ width: "1000px",left:"500px",top:"300px" }, 1000)
+                });
+            });
+        });
+    </script>
+
+</head>
+<body>
+    <div style="margin: 0 auto; width: 90%; height: 600px;">
+        <div id="aa">
+            <img id="kk" src="Images/3.jpg" style="margin-left:50%; position: relative; width: 500px; height: 300px; left: -200px; top: 0px;" />
+            <div class="dd">aa</div>
+        </div>
+    </div>
+</body>
+</html>

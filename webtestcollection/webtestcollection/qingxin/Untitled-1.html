@@ -1,0 +1,61 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=gb2312" />
+<title>无标题文档</title>
+<style>
+*{margin:0px;/*外边距*/ padding:0px;}
+  #cont {
+  width:1000px; margin:20px auto; height:560px; }
+   #left{
+   width:200px; float:left; height:560px;}
+   #left ul li{
+   width:149px; height:70px; background-image:url(images/gray1.png); list-style:none; padding-left:35px; line-height:70px;}
+    #left ul li a{
+    color:#FFF; text-decoration:none; padding-left:15px}
+	 #left ul li:hover{background-image:url(images/gray2.png)
+	 }
+	#right{
+	width:790px; height:560px; float:right;/*右浮动*/
+		border:1px solid #ddd;}
+	#right .content{width:790px;height:540px;  padding-top:20px;
+				text-align:center; display:none;}
+
+</style>
+</head>
+
+<body>
+<div id="cont">
+  <div id="left">
+    <ul>
+			<li class="hover"><img src="images/img1.png" align="absmiddle"/><a href="#">虾米音乐</a></li>
+			<li><img src="images/img2.png" align="absmiddle"/><a href="#">豆瓣电台</a></li>
+			<li><img src="images/img3.png" align="absmiddle"/><a href="#">都市之声</a></li>
+			<li><img src="images/img4.png" align="absmiddle"/><a href="#">贝瓦儿歌</a></li>
+			<li><img src="images/img6.png" align="absmiddle"/><a href="#">酷狗音乐</a></li>
+			<li><img src="images/img7.png" align="absmiddle"/><a href="#">音悦台</a></li>
+			<li><img src="images/img8.png" align="absmiddle"/><a href="#">多米音乐</a></li>
+			<li><img src="images/img9.png" align="absmiddle"/><a href="#">酷我音乐</a></li>
+		</ul>
+  </div>
+  <div id="right">
+		<div class="content" style="display:block;"><img src="images/rimg1.png" /></div>
+		<div class="content"><img src="images/rimg2.png" /></div>
+		<div class="content"><img src="images/rimg3.png" /></div>
+		<div class="content"><img src="images/rimg4.png" /></div>
+		<div class="content"><img src="images/rimg5.png" /></div>
+		<div class="content"><img src="images/rimg6.png" /></div>
+		<div class="content"><img src="images/rimg6.png" /></div>
+		<div class="content"><img src="images/rimg7.png" /></div>
+  </div>
+</div>
+<script type="text/javascript" src="js/jquery.js"></script>
+<script type="text/javascript">
+$("#left ul li").hover(function(){//带有left的id下的ul的li触发鼠标hover事件
+var index=$(this).index();//获取hover的那个li的索引值
+$(this).addClass("hover").siblings().removeClass("hover");//把这个hover的li加个class hover 把其兄弟的hover class删除掉
+$("#right .content").eq(index).show().siblings().hide();	//把带有id right并且索引值和上面hover得到的索引值一样的.content属性的标签显示出来并且其兄弟标签隐藏起来
+});
+</script>
+</body>
+</html>

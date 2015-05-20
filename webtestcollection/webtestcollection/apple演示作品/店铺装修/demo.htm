@@ -1,0 +1,2843 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>装修店铺 - 万户通箱包批发购物中心</title>
+
+<!-- 引用 -->
+<script type="text/javascript" src="js/is.js"></script>
+
+<!-- 样式 -->
+<style type="text/css">
+
+	/*
+	 * 公用样式
+	 */
+
+	* {
+		margin:0;
+		padding:0;
+		outline:none;
+	}
+
+	/*
+	 * 用户块
+	 */
+
+	div#shop-user {
+		position:relative;
+	}
+
+	/*
+	 * 模板块
+	 */
+
+	div#shop-template {
+		position:relative;
+	}
+
+	/*
+	 * 行为块
+	 */
+
+	div#shop-action {
+		position:static;
+	}
+
+	div#shop-action div.element {
+		position:absolute;
+		z-index:1;
+	}
+
+	div#shop-action div.element button {
+		width:55px;
+		height:27px;
+		margin-left:5px;
+		border:0;
+		background-image:url("img/shop-action_button.png");
+		cursor:pointer;
+	}
+
+	div#shop-action div.element button:hover {
+		background-position:0 -30px;
+	}
+
+	/*
+	 * 对话块
+	 */
+
+	div#shop-dialog {
+		position:static;
+	}
+
+	div#shop-dialog div.shadow,
+	div#shop-dialog div.window {
+		position:fixed;
+		left:0;
+		top:0;
+		z-index:1000000000;
+	}
+
+	div#shop-dialog div.shadow {
+		width:100%;
+		height:100%;
+		background-color:#000;
+		opacity:.3;
+	}
+
+	div#shop-dialog div.window h4 {
+		border:1px solid #b05321;
+		background-image:url("img/shop-dialog_bg.png");
+		color:#fff;
+		font:normal bold 14px/30px "宋体";
+		text-indent:10px;
+	}
+
+	div#shop-dialog div.window iframe {
+		border:1px solid #b05321;
+		background-color:#fff;
+	}
+
+	div#shop-dialog div.window a {
+		position:absolute;
+		width:18px;
+		height:18px;
+		background:transparent url("img/shop-dialog_button.png") scroll no-repeat 0 0;
+		text-indent:-10000px;
+	}
+
+	div#shop-dialog div.window a.close {
+		right:10px;
+		top:6px;
+		background-position:0 0;
+	}
+
+	div#shop-dialog div.window a:hover {
+		background-position:0 -30px;
+	}
+
+	div#shop-dialog.not-visible div.shadow,
+	div#shop-dialog.not-visible div.window {
+		display:none;
+	}
+
+	div#shop-dialog.loading div.window {
+		background:#fff url("img/shop-dialog_loading.gif") scroll no-repeat center center;
+	}
+
+	div#shop-dialog.error div.window {
+		background:#fff url("img/shop-dialog_error.gif") scroll no-repeat center center;
+	}
+
+	div#shop-dialog.loading div.window iframe,
+	div#shop-dialog.error div.window iframe {
+		opacity:0;
+		filter:alpha(opacity=0);
+	}
+
+	/*
+	 * 动画样式
+	 */
+
+	div#shop-dialog div.window {
+		        transition: top .2s, height .2s;
+		   -moz-transition: top .2s, height .2s;
+		     -o-transition: top .2s, height .2s;
+		-webkit-transition: top .2s, height .2s;
+	}
+
+	/*
+	 * 兼容样式
+	 */
+
+	div#shop-dialog div.shadow,
+	div#shop-dialog div.window {
+		_position:absolute;
+		_left:expression(documentElement.scrollLeft + "px");
+		_top:expression(documentElement.scrollTop + "px");
+	}
+
+	div#shop-dialog div.shadow {
+		_width:expression(documentElement.clientWidth + "px");
+		_height:expression(documentElement.clientHeight + "px");
+		filter:alpha(opacity=30);
+	}
+
+	/*
+	 * 警告块
+	 */
+
+	div#shop-alert {
+		position:static;
+	}
+
+	div#shop-alert.not-visible {
+		display:none;
+	}
+
+	/*
+	 * 确认块
+	 */
+
+	div#shop-confirm {
+		position:static;
+	}
+
+	div#shop-confirm.not-visible {
+		display:none;
+	}
+
+	/*
+	 * 加载块
+	 */
+
+	div#shop-loader {
+		position:static;
+	}
+
+	div#shop-loader div.shadow,
+	div#shop-loader div.border,
+	div#shop-loader div.loader,
+	div#shop-loader div.status {
+		position:fixed;
+		z-index:1000000000;
+	}
+
+	div#shop-loader div.shadow,
+	div#shop-loader div.border,
+	div#shop-loader div.loader {
+		left:0;
+		top:0;
+		width:100%;
+		height:100%;
+	}
+
+	div#shop-loader div.shadow {
+		background-color:#000;
+		opacity:.3;
+	}
+
+	div#shop-loader div.border {
+		background:transparent url("img/shop-loader_border.png") scroll no-repeat center center;
+		opacity:.6;
+	}
+
+	div#shop-loader div.loader {
+		background:transparent url("img/shop-loader_loader.gif") scroll no-repeat center center;
+	}
+
+	div#shop-loader div.status {
+		top:50%;
+		width:100%;
+		color:#fff;
+		font:normal normal 15px/100px "宋体";
+		text-align:center;
+	}
+
+	div#shop-loader.not-visible {
+		display:none;
+	}
+
+	/*
+	 * 兼容样式
+	 */
+
+	div#shop-loader div.shadow,
+	div#shop-loader div.border,
+	div#shop-loader div.loader {
+		_position:absolute;
+		_left:expression(documentElement.scrollLeft + "px");
+		_top:expression(documentElement.scrollTop + "px");
+		_width:expression(documentElement.clientWidth + "px");
+		_height:expression(documentElement.clientHeight + "px");
+	}
+
+	div#shop-loader div.shadow {
+		filter:alpha(opacity=30);
+	}
+
+	div#shop-loader div.border {
+		filter:alpha(opacity=60);
+	}
+
+	div#shop-loader div.status {
+		_position:absolute;
+		_top:expression(documentElement.clientHeight / 2 + documentElement.scrollTop + "px");
+		_width:expression(documentElement.clientWidth + "px");
+	}
+
+</style>
+
+<!-- 脚本 -->
+<script type="text/javascript">
+//<![CDATA[
+
+  /*
+   * 店铺模板 ＆ 接口
+   *
+   * 2012-11-1 By Zhanghong
+   */
+
+  var SHOP_TEMPLATE = (function() {
+
+    //定义元素
+    var shopTemplate;
+    var shopTemplateStyle;
+    var shopTemplateIFrame;
+    var shopAction;
+    var shopDialog;
+
+    //定义对象
+    var shopTemplateDocument;
+    var shopTemplateHead;
+    var shopTemplateBody;
+
+    //定义函数
+    var load = function() {
+
+      //元素赋值
+      shopTemplate       = _$('shop-template');
+      shopTemplateStyle  = _$('shop-template-style');
+      shopTemplateIFrame = _$('shop-template-iframe');
+      shopAction         = _$('shop-action');
+      shopDialog         = _$('shop-dialog');
+
+      //绑定事件
+      _attachEvent(document, {
+
+        'click' : function(event) {
+
+          //执行命令
+          command(event || window.event);
+
+        }
+
+      });
+
+    };
+
+    var shopTemplateIFrameLoad = function() {
+
+      //定义引用
+      var _move_border = move_border;
+      var _move_dotted = move_dotted;
+      var _move_shadow = move_shadow;
+
+      //绑定事件
+      _attachEvent(shopTemplateIFrame, {
+
+        'load' : function() {
+
+          //遍历元素
+          for(var e = shopAction.getElementsByTagName('div'), i = e.length - 1; i > -1; i--) {
+
+            //清除元素
+            shopAction.removeChild(e[i]);
+
+          }
+
+          //引用函数
+          move_border = _move_border;
+          move_dotted = _move_dotted;
+          move_shadow = _move_shadow;
+
+          //执行函数
+          shopTemplateLoad();
+          shopTemplateResize();
+          shopActionLoad();
+
+          //添加样式
+          try {
+
+            //定义样式
+            var style = shopTemplateHead.appendChild(_createElement('style', {'type' : 'text/css'}, null, shopTemplateDocument));
+
+            //样式赋值
+            style.innerHTML = shopTemplateStyle.innerHTML;
+
+          } catch(ex) {
+
+            //样式赋值
+            style.styleSheet.cssText = shopTemplateStyle.innerHTML;
+
+          }
+
+        }
+
+      });
+
+    };
+
+    var shopTemplateLoad = function() {
+
+      //对象赋值
+      shopTemplateDocument = shopTemplateIFrame.contentWindow.document;
+      shopTemplateHead     = shopTemplateDocument.getElementsByTagName('head')[0];
+      shopTemplateBody     = shopTemplateDocument.getElementsByTagName('body')[0];
+
+      //绑定事件
+      _attachEvent(shopTemplateDocument, {
+
+        'mousedown' : function(event) {
+
+          //执行移动
+          move(event || window.event);
+
+        }
+
+      });
+
+    };
+
+    var shopTemplateResize = function() {
+
+      //定义元素
+      var e = shopTemplateDocument.documentElement;
+
+      //定义宽度
+      var w = _getDocumentSize().width;
+
+      //尺寸赋值
+      shopTemplateIFrame.height = e.scrollHeight;
+      shopTemplateIFrame.width  = e.scrollWidth > w ? e.scrollWidth : '100%';
+
+    };
+
+    var shopActionLoad = function() {
+
+      //定义元素
+      var e = arguments[0] || shopTemplateBody;
+
+      //定义关键
+      var a = e.getAttribute('access');
+
+      //判断关键
+      if(a) {
+
+        //判断属性
+        if(!e.shopActionElement) {
+
+          //定义元素
+          var _e = shopAction.appendChild(_createElement('div', {'class' : 'element'}));
+
+          //编辑
+          if(a.charAt(0) == 1) {
+            _e.appendChild(_createElement('button', '编辑'));
+          }
+
+          //隐藏
+          if(a.charAt(1) == 1) {
+            _e.appendChild(_createElement('button', '隐藏'));
+          }
+
+          //引用元素
+           e.shopActionElement = _e;
+          _e.shopActionElement =  e;
+
+        }
+
+        //执行调整
+        shopActionResize(e);
+
+      } else {
+
+        //遍历元素
+        for(e = e.firstChild; e; e = e.nextSibling) {
+
+          //判断类型
+          if(e.nodeType == 1) {
+
+            //递归执行
+            shopActionLoad(e);
+
+          }
+
+        }
+
+      }
+
+    };
+
+    var shopActionResize = function() {
+
+      //定义顶部
+      var t = _getElementPosition(shopTemplate).top;
+
+      //定义函数
+      shopActionResize = function(e/* element */) {
+
+        //判断元素
+        if(e) {
+
+          //定义元素
+          var _e = e.shopActionElement;
+
+          //定义位置
+          var _p = _getElementPosition(e);
+
+          //位置赋值
+          _e.style.left = (_p.left - _e.offsetWidth + e.offsetWidth) + 'px';
+          _e.style.top  = (_p.top + t) + 'px';
+
+        } else {
+
+          //执行加载
+          shopActionLoad();
+
+        }
+
+      };
+
+      //执行函数
+      shopActionResize.apply(this, arguments);
+
+    };
+
+    var defer = function() {
+
+      //定义标识
+      var i = 0;
+
+      //定义函数
+      defer = function(f/* function */, m/* millisec */) {
+
+        //清除延迟
+        window.clearTimeout(i);
+
+        //设置延迟
+        i = window.setTimeout(f, m);
+
+      };
+
+      //执行函数
+      defer.apply(this, arguments);
+
+    };
+
+    var decodeAccess = function() {
+
+      //定义正则
+      var r = /(?:\d{3})(?:0+)(\d+)/g;
+
+      //定义函数
+      decodeAccess = function(a/* access */) {
+
+        //返回解码
+        return a.replace(r, '$1');
+
+      };
+
+      //执行函数
+      return decodeAccess.apply(this, arguments);
+
+    };
+
+    var command = function(c/* command */, p/* param */) {
+
+      //判断参数
+      if(p) {
+
+        //选择执行
+        switch(c) {
+
+          case '1' : {command_add(p);      break}
+          case '2' : {command_edit(p);     break}
+          case '3' : {command_remove(p);   break}
+          case '4' : {command_recovery(p); break}
+
+        }
+
+      } else {
+
+        //定义关键
+        var a = '';
+
+        //定义目标
+        var t = c.target || c.srcElement;
+
+        //判断属性
+        if(!t.disabled) {
+
+          //遍历目标
+          for(t; t; t = t.parentNode) {
+
+            //选择赋值
+            switch(t.innerHTML) {
+
+              case '添加' : {a += '1'; break}
+              case '编辑' : {a += '2'; break}
+              case '隐藏' : {a += '3'; break}
+              case '恢复' : {a += '4'; break}
+
+              default : {
+                a += t.getAttribute('access') || '';
+              }
+
+            }
+
+            //判断执行
+            if(t.shopActionElement) {
+              return command(a.slice(-1), decodeAccess(t.shopActionElement.getAttribute('access')));
+            }
+
+          }
+
+        }
+
+      }
+
+    };
+
+    var command_add = function(p/* param */) {
+
+      /*
+       * => .parent
+       * => .target
+       * => .access
+       * => .className
+       * => .innerHTML
+       */
+
+      //定义元素
+      var e = _createElement('div', {'style' : 'opacity:0; filter:alpha(opacity=0);', 'class' : p.className, 'access' : p.access, 'inner' : p.innerHTML}, null, shopTemplateDocument);
+
+      //插入元素
+      try {
+        p.parent.insertBefore(e, p.target);
+      } catch(ex) {
+        p.parent.appendChild(e);
+      }
+
+      //执行函数
+      shopActionLoad();
+      shopTemplateResize();
+
+      //执行过渡
+      command_transition(e, 'scroll', function() {command_transition(e, 'out-in')});
+
+    };
+
+    var command_edit = function() {
+
+      //定义目标
+      var t;
+
+      //定义函数
+      command_edit = function(p/* param */) {
+
+        //判断执行
+        if(/^\d+$/.test(p)) {
+
+          //执行对话
+          command_dialog('@htm/prompt.htm');
+
+          //引用目标
+          t = command_module(p);
+
+        } else if(t) {
+
+          //判断参数
+          if(p) {
+
+            //内容赋值
+            t.innerHTML = p;
+
+            //执行调整
+            shopTemplateResize();
+            shopActionResize();
+
+            //执行过渡
+            command_transition(t, 'out-in');
+
+          } else {
+
+            //执行过渡
+            command_transition(t, 'jitter');
+
+          }
+
+          //清除引用
+          t = undefined;
+
+        }
+
+      };
+
+      //执行函数
+      command_edit.apply(this, arguments);
+
+    };
+
+    var command_remove = function() {
+
+      //定义目标
+      var t;
+
+      //定义函数
+      command_remove = function(p/* param */) {
+
+        //判断执行
+        if(/^\d+$/.test(p)) {
+
+          //执行对话
+          command_dialog(_$('shop-confirm').innerHTML.replace('<!--[content]-->', '确定将当前模块隐藏吗？'));
+
+          //引用目标
+          t = command_module(p);
+
+        } else if(t) {
+
+          //判断参数
+          if(p) {
+
+            //遍历元素
+            for(var e = t.shopActionElement.firstChild; e; e = e.nextSibling) {
+
+              //判断赋值
+              if(e.getAttribute('access') == '3') {
+                e.setAttribute('access', '4');
+              } else if(e.innerHTML == '隐藏') {
+                e.innerHTML = '恢复';
+              } else {
+                e.disabled = 'disabled';
+              }
+
+            }
+
+            //属性赋值
+            t.setAttribute('status', '4');
+
+            //执行过渡
+            command_transition(t, 'in-out', 'opacity:.5; filter:alpha(opacity=50);');
+
+          } else {
+
+            //执行过渡
+            command_transition(t, 'jitter');
+
+          }
+
+          //清除引用
+          t = undefined;
+
+        }
+
+      };
+
+      //执行函数
+      command_remove.apply(this, arguments);
+
+    };
+
+    var command_recovery = function() {
+
+      //定义目标
+      var t;
+
+      //定义函数
+      command_recovery = function(p/* param */) {
+
+        //判断执行
+        if(/^\d+$/.test(p)) {
+
+          //执行对话
+          command_dialog(_$('shop-confirm').innerHTML.replace('<!--[content]-->', '确定将当前模块恢复吗？'));
+
+          //引用目标
+          t = command_module(p);
+
+        } else if(t) {
+
+          //判断参数
+          if(p) {
+
+            //遍历元素
+            for(var e = t.shopActionElement.firstChild; e; e = e.nextSibling) {
+
+              //判断赋值
+              if(e.getAttribute('access') == '4') {
+                e.setAttribute('access', '3');
+              } else if(e.innerHTML == '恢复') {
+                e.innerHTML = '隐藏';
+              } else {
+                e.disabled = undefined;
+              }
+
+            }
+
+            //属性赋值
+            t.removeAttribute('status');
+
+            //执行过渡
+            command_transition(t, 'out-in');
+
+          } else {
+
+            //执行过渡
+            command_transition(t, 'jitter', 'opacity:.5; filter:alpha(opacity=50);');
+
+          }
+
+          //清除引用
+          t = undefined;
+
+        }
+
+      };
+
+      //执行函数
+      command_recovery.apply(this, arguments);
+
+    };
+
+    var command_dialog = function() {
+
+      //定义元素
+      var shopDialogWindow  = shopDialog.getElementsByTagName('div')[1];
+      var shopDialogHeading = shopDialog.getElementsByTagName('h4')[0];
+      var shopDialogIFrame  = shopDialog.getElementsByTagName('iframe')[0];
+
+      //定义函数
+      var shopDialogClose = function() {
+
+        //判断样式
+        if(shopDialog.className != 'not-visible') {
+
+          //样式赋值
+          shopDialog.className = 'not-visible';
+
+          //内容赋值
+          shopDialogIFrame.load = '';
+          shopDialogIFrame.src  = '';
+
+          //执行函数
+          shopDialogSize();
+          command_dialog.callback.apply(this, arguments);
+
+        }
+
+      };
+
+      var shopDialogDocument = function() {
+
+        try {
+
+          //返回对象
+          return shopDialogIFrame.contentWindow.document;
+
+        } catch(ex) {
+
+          //返回
+          return;
+
+        }
+
+      };
+
+      var shopDialogSize = function() {
+
+        try {
+
+          //尺寸赋值
+          shopDialogIFrame.width  = !shopDialog.className ? shopDialogDocument().documentElement.scrollWidth  : '300';
+          shopDialogIFrame.height = !shopDialog.className ? shopDialogDocument().documentElement.scrollHeight : '150';
+
+        } catch(ex) {
+
+          //尺寸赋值
+          shopDialogIFrame.width  = '300';
+          shopDialogIFrame.height = '150';
+
+        }
+
+      };
+
+      var shopDialogPosition = function() {
+
+        //判断样式
+        if(shopDialog.className != 'not-visible') {
+
+          //定义位置
+          var p = _getElementStyle(shopDialogWindow).position == 'absolute';
+
+          //位置赋值
+          shopDialogWindow.style.left = (p ? _getDocumentScroll().x : 0) + (_getDocumentSize().width  - shopDialogWindow.offsetWidth ) / 2 + 'px';
+          shopDialogWindow.style.top  = (p ? _getDocumentScroll().y : 0) + (_getDocumentSize().height - shopDialogWindow.offsetHeight) / 2 + 'px';
+
+        }
+
+      };
+
+      command_dialog = function(c/* content */) {
+
+        //执行关闭
+        shopDialogClose();
+
+        //判断内容
+        if(c.charAt(0) == '@') {
+
+          //属性赋值
+          shopDialog.className = 'loading';
+          shopDialogHeading.innerHTML = '加载中';
+
+          //内容赋值
+          shopDialogIFrame.load = 'loading';
+          shopDialogIFrame.src  = c.slice(1);
+
+        } else {
+
+          //属性赋值
+          shopDialog.className = '';
+          shopDialogHeading.innerHTML = '提示';
+
+          //内容赋值
+          shopDialogDocument().write('<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8" /><style type="text/css">* {margin:0;padding:0;}</style></head><body>' + c + '</body></html>');
+          shopDialogDocument().close();
+
+        }
+
+        //执行调整
+        shopDialogSize();
+        shopDialogPosition();
+
+        //引用函数
+        command_dialog.callback = command_dialog.callback ? command_dialog.caller : command_dialog.caller.caller;
+
+      };
+
+      //绑定事件
+      _attachEvent(window, {
+
+        'resize' : function() {
+          shopDialogPosition();
+        },
+
+        'scroll' : function() {
+          defer(shopDialogPosition, 50);
+        }
+
+      });
+
+      _attachEvent(shopDialogWindow, {
+
+        'click' : function(event) {
+
+          //定义对象
+          var e = event || window.event;
+
+          //定义目标
+          var t = e.target || e.srcElement;
+
+          //选择执行
+          switch(t.className) {
+
+            case 'close' : {
+              shopDialogClose(); break;
+            }
+
+          }
+
+        }
+
+      });
+
+      _attachEvent(shopDialogIFrame, {
+
+        'load' : function() {
+
+          try {
+
+            //判断加载
+            if(shopDialogIFrame.load) {
+
+              //属性赋值
+              shopDialog.className = '';
+              shopDialogHeading.innerHTML = shopDialogDocument().title;
+
+              //执行调整
+              shopDialogSize();
+              shopDialogPosition();
+
+            }
+
+            //判断兼容
+            if(_getBrowser() < 190) {
+
+              //引用函数
+              _getWindow(shopDialogDocument()).close = shopDialogClose;
+
+            } else {
+
+              //引用函数
+              _getWindow(shopDialogDocument())._$_shopDialogClose_$_ = shopDialogClose;
+              _getWindow(shopDialogDocument()).eval('var close = _$_shopDialogClose_$_;');
+
+            }
+
+          } catch(ex) {
+
+            //属性赋值
+            shopDialog.className = 'error';
+
+            //延迟关闭
+            defer(shopDialogClose, 3000);
+
+          }
+
+        }
+
+      });
+
+      //执行函数
+      command_dialog.apply(this, arguments);
+
+    };
+
+    var command_transition = function(e/* element */, p/* property */, c/* condition */) {
+
+      //定义变量
+      var i = 0;
+      var j = 0;
+      var k = 0;
+
+      //选择执行
+      switch(p) {
+
+        case 'in-out' : {
+
+          //变量赋值
+          i = 200;
+
+          //设置定时
+          j = window.setInterval(function() {
+
+            //变量赋值
+            k += 1;
+
+            //样式赋值
+            e.style.cssText = 'opacity:' + (1 - 0.1 * k) + '; filter:alpha(opacity=' + (100 - 10 * k) + ');';
+
+          }, 20);
+
+          break;
+        }
+
+        case 'out-in' : {
+
+          //变量赋值
+          i = 200;
+
+          //设置定时
+          j = window.setInterval(function() {
+
+            //变量赋值
+            k += 1;
+
+            //样式赋值
+            e.style.cssText = 'opacity:' + (0.1 * k) + '; filter:alpha(opacity=' + (10 * k) + ');';
+
+          }, 20);
+
+          break;
+        }
+
+        case 'jitter' : {
+
+          //变量赋值
+          i = 200;
+
+          //设置定时
+          j = window.setInterval(function() {
+
+            //变量赋值
+            k = k < 0 ? 4 : -4;
+
+            //样式赋值
+            e.style.cssText = 'position:relative; left:' + k + 'px;';
+
+          }, 50);
+
+          break;
+        }
+
+        case 'scroll' : {
+
+          //变量赋值
+          i = 600;
+
+          //设置定时
+          j = window.setInterval(function() {
+
+            //变量赋值
+            k = (_getElementPosition(e).top - _getDocumentScroll().y) * 0.2;
+
+            //滚动赋值
+            document.documentElement.scrollTop += k;
+            document.body.scrollTop            += k;
+
+          }, 20);
+
+          break;
+        }
+
+      }
+
+      //设置延迟
+      window.setTimeout(function() {
+
+        //清除定时
+        window.clearInterval(j);
+
+        //判断执行
+        if(!c) {
+          e.style.cssText = '';
+        } else if(typeof c == 'string') {
+          e.style.cssText = c;
+        } else if(typeof c == 'function') {
+          c();
+        }
+
+      }, i);
+
+    };
+
+    var command_module = function(i/* id */) {
+
+      //定义元素
+      var e = shopTemplateDocument.getElementsByTagName('div');
+
+      //遍历元素
+      for(var j = 0, k = e.length; j < k; j++) {
+
+        //判断返回
+        if(decodeAccess(e[j].getAttribute('access') || '') == i) {
+          return e[j];
+        }
+
+      }
+
+    };
+
+    var command_foreach = function() {
+
+      //定义元素
+      var e = arguments[0] || shopTemplateBody;
+
+      //定义标签
+      var t = /head|body|foot|left|right|center|justify/i.test(e.tagName + e.className);
+
+      //定义关键
+      var a = e.getAttribute('access');
+
+      //判断执行
+      if(t) {
+
+        //定义结果
+        var r = '';
+
+        //遍历结果
+        for(e = e.firstChild; e; e = e.nextSibling) {
+
+          //判断赋值
+          if(e.nodeType == 1) {
+            r += command_foreach(e);
+          }
+
+        }
+
+        //返回结果
+        return '[' + r.slice(0, -1) + ']' + (command_foreach.caller == command_foreach ? ',' : '');
+
+      } else if(a) {
+
+        //返回标识
+        return e.getAttribute('status') != '4' ? decodeAccess(a) + ',' : '';
+
+      } else {
+
+        //返回空值
+        return '';
+
+      }
+
+    };
+
+    var command_classes = function() {
+
+      //定义结果
+      var r = {
+        'head'    : [],
+        'foot'    : [],
+        'left'    : [],
+        'right'   : [],
+        'center'  : [],
+        'justify' : []
+      };
+
+      //定义元素
+      var e = shopTemplateDocument.getElementsByTagName('div');
+
+      //遍历元素
+      for(var i = 0, j = e.length; i < j; i++) {
+
+        //尝试添加
+        try {
+          r[e[i].className].push(e[i]);
+        } catch(ex) {
+          continue;
+        }
+
+      }
+
+      //返回结果
+      return r;
+
+    };
+
+    var move = function(e/* event */) {
+
+      //定义目标
+      var t = move_module(e);
+
+      //判断目标
+      if(t) {
+
+        //定义元素
+        var d = shopTemplateDocument;
+        var p = t.parentNode;
+
+        //定义变量
+        var x            = e.clientX;
+        var y            = e.clientY;
+        var left         = _getElementPosition(t).left;
+        var top          = _getElementPosition(t).top;
+        var width        = t.offsetWidth;
+        var height       = t.offsetHeight;
+        var scrollLeft   = _getElementPosition(p).left;
+        var scrollTop    = _getElementPosition(p).top;
+        var scrollRight  = p.offsetWidth + scrollLeft;
+        var scrollBottom = p.offsetHeight + scrollTop;
+
+        //定义事件
+        p.onmouseover = function(event) {
+
+          //定义对象
+          var _e = event || _getWindow(d).event;
+
+          //定义变量
+          var _o = t;
+          var _p = move_module(_e);
+          var _d = y - _e.clientY > 0;
+
+          //执行延迟
+          defer(function() {
+
+            //执行移动
+            move_result(_o, _p, _d);
+
+          }, 200);
+
+        };
+
+        d.onmousemove = function(event) {
+
+          //定义对象
+          var _e = event || _getWindow(d).event;
+
+          //定义坐标
+          var _y = _e.clientY - y + top;
+
+          //移动元素
+          move_shadow(null, _y < scrollTop ? scrollTop : _y > scrollBottom ? scrollBottom : _y);
+
+          //禁止行为
+          _cancelDefault(e);
+
+        };
+
+        d.onmouseup = function() {
+
+          //清除事件
+          p.onmouseover = null;
+          d.onmousemove = null;
+
+          //执行延迟
+          defer(function() {
+
+            //隐藏元素
+            move_border();
+            move_dotted();
+            move_shadow();
+
+            //移动元素
+            move_result(t);
+
+          }, 50);
+
+        };
+
+        //执行函数
+        move_border(left, top, width, height);
+        move_dotted(left, top, width, height);
+        move_shadow(left, top, width, height);
+
+        //禁止行为
+        _cancelDefault(e);
+
+      }
+
+    };
+
+    var move_module = function(e/* event */) {
+
+      //定义目标
+      var t = e.target || e.srcElement;
+
+      //遍历目标
+      for(t; t; t = t.parentNode) {
+
+        //判断返回
+        if((t.getAttribute('access') || '').charAt(2) == 1) {
+          return t;
+        }
+
+      }
+
+    };
+
+    var move_border = function() {
+
+      //定义元素
+      var border = shopTemplateBody.appendChild(_createElement('div', {'class' : 'move-border'}, null, shopTemplateDocument));
+
+      //定义函数
+      move_border = function(l/* left */, t/* top */, w/* width */, h/* height */) {
+
+        //判断参数
+        if(arguments.length) {
+
+          //判断赋值
+          if(typeof l == 'number') {border.style.left   = (l    ) + 'px'}
+          if(typeof t == 'number') {border.style.top    = (t    ) + 'px'}
+          if(typeof w == 'number') {border.style.width  = (w - 4) + 'px'}
+          if(typeof h == 'number') {border.style.height = (h - 4) + 'px'}
+
+          //显示元素
+          border.style.display = 'block';
+
+        } else {
+
+          //隐藏元素
+          border.style.display = 'none';
+
+        }
+
+      };
+
+      //执行函数
+      move_border.apply(this, arguments);
+
+    };
+
+    var move_dotted = function() {
+
+      //定义元素
+      var dotted = shopTemplateBody.appendChild(_createElement('div', {'class' : 'move-dotted'}, null, shopTemplateDocument));
+
+      //定义函数
+      move_dotted = function(l/* left */, t/* top */, w/* width */, h/* height */) {
+
+        //判断参数
+        if(arguments.length) {
+
+          //判断赋值
+          if(typeof l == 'number') {dotted.style.left   = (l    ) + 'px'}
+          if(typeof t == 'number') {dotted.style.top    = (t    ) + 'px'}
+          if(typeof w == 'number') {dotted.style.width  = (w - 4) + 'px'}
+          if(typeof h == 'number') {dotted.style.height = (h - 4) + 'px'}
+
+          //显示元素
+          dotted.style.display = 'block';
+
+        } else {
+
+          //隐藏元素
+          dotted.style.display = 'none';
+
+        }
+
+      };
+
+      //执行函数
+      move_dotted.apply(this, arguments);
+
+    };
+
+    var move_shadow = function() {
+
+      //定义元素
+      var shadow = shopTemplateBody.appendChild(_createElement('div', {'class' : 'move-shadow'}, null, shopTemplateDocument));
+
+      //定义子元素
+      var left   = shadow.appendChild(_createElement('div', {'class' : 'move-shadow-width' }, null, shopTemplateDocument));
+      var right  = shadow.appendChild(_createElement('div', {'class' : 'move-shadow-width' }, null, shopTemplateDocument));
+      var top    = shadow.appendChild(_createElement('div', {'class' : 'move-shadow-height'}, null, shopTemplateDocument));
+      var bottom = shadow.appendChild(_createElement('div', {'class' : 'move-shadow-height'}, null, shopTemplateDocument));
+
+      //定义函数
+      move_shadow = function(l/* left */, t/* top */, w/* width */, h/* height */) {
+
+        //判断参数
+        if(arguments.length) {
+
+          //判断赋值
+          if(typeof l == 'number') {
+            shadow.style.left = l + 'px';
+          }
+
+          if(typeof t == 'number') {
+            shadow.style.top = t + 'px';
+          }
+
+          if(typeof w == 'number') {
+               top.style.width = (w - 5) + 'px';
+            bottom.style.width = (w - 5) + 'px';
+               top.style.left  = (    5) + 'px';
+             right.style.left  = (w - 5) + 'px';
+          }
+
+          if(typeof h == 'number') {
+              left.style.height = (h - 5) + 'px';
+             right.style.height = (h - 5) + 'px';
+             right.style.top    = (    5) + 'px';
+            bottom.style.top    = (h - 5) + 'px';
+          }
+
+          //显示元素
+          shadow.style.display = 'block';
+
+        } else {
+
+          //隐藏元素
+          shadow.style.display = 'none';
+
+        }
+
+      };
+
+      //执行函数
+      move_shadow.apply(this, arguments);
+
+    };
+
+    var move_result = function() {
+
+      //定义目标
+      var target;
+
+      //定义函数
+      move_result = function(o/* origin */, t/* target */, d/* direction */) {
+
+        //判断目标
+        if(t) {
+
+          //判断引用
+          if(t != target) {
+
+            //清除样式
+            if(target) {
+              target.style.margin = '';
+            }
+
+            //判断方向
+            if(d) {
+
+              //样式赋值
+              t.style.marginTop = (o.offsetHeight + 10) + 'px';
+
+              //移动元素
+              move_dotted(null, _getElementPosition(t).top - o.offsetHeight - 5);
+
+            } else {
+
+              //样式赋值
+              t.style.marginBottom = (o.offsetHeight + 10) + 'px';
+
+              //移动元素
+              move_dotted(null, _getElementPosition(t).top + t.offsetHeight + 5);
+
+            }
+
+            //移动元素
+            move_border(null, _getElementPosition(o).top);
+
+            //引用元素
+            target = t;
+
+          }
+
+        } else {
+
+          //判断目标
+          if(target) {
+
+            //移动元素
+            o.parentNode.insertBefore(o, target.style.marginTop ? target : target.nextSibling);
+
+            //清除样式
+            target.style.margin = '';
+
+            //清除引用
+            target = undefined;
+
+          }
+
+        }
+
+        //执行调整
+        shopTemplateResize();
+        shopActionResize();
+
+      };
+
+      //执行函数
+      move_result.apply(this, arguments);
+
+    };
+
+    //绑定事件 ＆ 程序入口
+    _attachEvent(window, {
+
+      'load' : function() {
+
+        //执行加载
+        load();
+
+        //执行模板帧加载
+        shopTemplateIFrameLoad();
+
+      },
+
+      'resize' : function() {
+
+        //判断对象
+        if(shopTemplateDocument) {
+
+          //执行调整
+          shopTemplateResize();
+          shopActionResize();
+
+        }
+
+      }
+
+    });
+
+    //返回方法
+    return {
+
+      //加载
+      'load' : function(s/* src */) {
+        _$('shop-template-iframe').src = s;
+      },
+
+      //命令
+      'command' : function(c/* command */, p/* param */) {
+        if(shopTemplateDocument) {command(c, p)}
+      },
+
+      //对话
+      'dialog' : function(c/* content */, f/* function */) {
+        (function() {if(arguments.callee.callback) {arguments.callee.callback(arguments[0])} else {command_dialog(c); arguments.callee.callback = f || function() {}}})();
+      },
+
+      //遍历
+      'foreach' : function() {
+        return shopTemplateDocument ? command_foreach() : '';
+      },
+
+      //分类
+      'classes' : function() {
+        return shopTemplateDocument ? command_classes() : {};
+      }
+
+    };
+
+  })();
+
+  /*
+   * 店铺模板用户界面 ＆ 接口
+   *
+   * 2012-12-21 By Zhanghong
+   */
+
+  var SHOP_TEMPLATE_UI = (function() {
+
+    //定义变量
+    var foreach;
+
+    //定义函数
+    var alert = function(c/* content */) {
+
+      //执行对话
+      SHOP_TEMPLATE.dialog(_$('shop-alert').innerHTML.replace('<!--[content]-->', c.toString()));
+
+    };
+
+    var confirm = function(c/* content */, f/* function */) {
+
+      //执行对话
+      SHOP_TEMPLATE.dialog(_$('shop-confirm').innerHTML.replace('<!--[content]-->', c.toString()), f);
+
+    };
+
+    var loader = function() {
+
+      //定义对象
+      var shopLoader         = _$('shop-loader');
+      var shopLoaderStatus   = shopLoader.getElementsByTagName('div')[3];
+      var shopLoaderFunction = arguments;
+
+      //设置指针
+      var i = 0;
+
+      //设置定时
+      var j = window.setInterval(function() {
+
+        //定义函数
+        var f = shopLoaderFunction[i];
+
+        //判断函数
+        if(f) {
+
+          //状态赋值
+          shopLoaderStatus.innerHTML = loader_function(f) + '(' + (i + 1) + '/' + shopLoaderFunction.length + ')';
+
+          //判断显示
+          if(shopLoader.className) {
+            shopLoader.className = '';
+          }
+
+          //判断执行
+          if(f.onload === undefined) {
+            f();
+          }
+
+          //判断赋值
+          if(f.onload === undefined || f.onload) {
+            i++;
+          }
+
+        } else {
+
+          //清除定时
+          window.clearInterval(j);
+
+          //隐藏元素
+          shopLoader.className = 'not-visible';
+
+        }
+
+      }, 500);
+
+    };
+
+    var loader_function = function(f/* function */) {
+
+      //判断状态
+      if(f.status) {
+
+        //返回状态
+        return f.status;
+
+      } else {
+
+        //选择返回
+        switch(/{(?:[^{]*?)(?:\w+\.)?(\w+)(?:[^{]*?)}/.exec(f)[1]) {
+
+          //已知函数
+          case 'loadTemplatePage'        : {return '加载模板页'        }
+          case 'loadTemplateList'        : {return '加载模板列表'      }
+          case 'loadTemplateHistoryList' : {return '加载模板历史列表'  }
+          case 'loadTemplatePageList'    : {return '加载模板页列表'    }
+          case 'loadTemplateXPageList'   : {return '加载模板可选页列表'}
+          case 'save'                    : {return '执行保存'          }
+          case 'exit'                    : {return '执行退出'          }
+
+          //未知函数
+          default : {return '执行过程'}
+
+        }
+
+      }
+
+    };
+
+    var loadTemplatePage = function() {
+
+      //绑定事件
+      _attachEvent(_$('shop-template-iframe'), {
+
+        'load' : function() {
+
+          //变量赋值
+          window.setTimeout(function() {foreach = SHOP_TEMPLATE.foreach()}, 100);
+
+          //属性赋值
+          loadTemplatePage.callback.onload = true;
+
+        }
+
+      });
+
+      //定义函数
+      loadTemplatePage = function(s/* src */) {
+
+        //属性赋值
+        loadTemplatePage.callback        = loadTemplatePage.callback === undefined ? loadTemplatePage.caller.caller : loadTemplatePage.caller;
+        loadTemplatePage.callback.onload = false;
+
+        //执行加载
+        SHOP_TEMPLATE.load(s);
+
+        //定义延迟
+        window.setTimeout(function() {
+
+          //状态赋值
+          loadTemplatePage.callback.status = '加载模板页，如果时间过长您可以尝试<a href="javascript:;" style="color:#ff0;" onclick="SHOP_TEMPLATE.load(\'' + s + '\')">刷新</a>';
+
+        }, 10000);
+
+      };
+
+      //执行函数
+      loadTemplatePage.apply(this, arguments);
+
+    };
+
+    var loadTemplateList = function(a/* action */) {
+
+      //not-support
+
+    };
+
+    var loadTemplateHistoryList = function(a/* action */) {
+
+      //not-support
+
+    };
+
+    var loadTemplatePageList = function(a/* action */) {
+
+      //not-support
+
+    };
+
+    var loadTemplateXPageList = function(a/* action */) {
+
+      //not-support
+
+    };
+
+    var save = function() {
+
+      //属性赋值
+      save.callback        = save.caller;
+      save.callback.onload = false;
+
+      //设置延迟
+      window.setTimeout(function() {
+
+        //属性赋值
+        save.callback.status = '保存成功';
+
+        //延迟赋值
+        window.setTimeout(function() {save.callback.onload = true}, 500);
+
+      }, 2000);
+
+    };
+
+    var exit = function() {
+
+      //执行退出
+      alert(window.close);
+
+    };
+
+    //返回方法
+    return {
+
+      'foreach'                 : function() {return foreach},
+      'alert'                   : alert,
+      'confirm'                 : confirm,
+      'loader'                  : loader,
+      'loadTemplatePage'        : loadTemplatePage,
+      'loadTemplateList'        : loadTemplateList,
+      'loadTemplateHistoryList' : loadTemplateHistoryList,
+      'loadTemplatePageList'    : loadTemplatePageList,
+      'loadTemplateXPageList'   : loadTemplateXPageList,
+      'save'                    : save,
+      'exit'                    : exit
+
+    };
+
+  })();
+
+  /*
+   * 定义引用
+   *
+   * 2012-12-21 By Zhanghong
+   */
+
+  var alert   = SHOP_TEMPLATE_UI.alert;
+  var confirm = SHOP_TEMPLATE_UI.confirm;
+
+  /*
+   * 定义加载 ＆ 全局程序入口
+   *
+   * 2012-12-21 By Zhanghong
+   */
+
+  window.onload = function() {
+
+    //执行加载
+    SHOP_TEMPLATE_UI.loader(
+      function() {SHOP_TEMPLATE_UI.loadTemplatePage('htm/template.htm')},
+      function() {SHOP_TEMPLATE_UI.loadTemplateList()},
+      function() {SHOP_TEMPLATE_UI.loadTemplateHistoryList()},
+      function() {SHOP_TEMPLATE_UI.loadTemplatePageList()},
+      function() {SHOP_TEMPLATE_UI.loadTemplateXPageList()}
+    );
+
+  };
+
+//]]>
+</script>
+
+</head>
+
+<body>
+
+<!-- 用户块 -->
+<div id="shop-user">
+
+<!-- 视图 -->
+<div id="shop-user-menu">
+
+	<h4>
+		<a href="#" target="_blank">我的万户通</a>
+	</h4>
+
+	<ul>
+		<li><a href="javascript:;">使用帮助</a></li>
+		<li><a href="javascript:;">添加模块</a></li>
+		<li><a class="button-1" href="javascript:;">退出</a></li>
+		<li><a class="button-2" href="javascript:;">保存</a></li>
+	</ul>
+
+</div>
+
+<div id="shop-user-list">
+
+	<h4>
+		<a class="button-1" href="javascript:;">选择模板</a>
+	</h4>
+
+	<div>
+
+		<h5>
+			<a class="button-1" href="javascript:;">全部模板</a>
+		</h5>
+
+		<ul>
+			<li class="item-1"><a href="htm/template.htm">默认样式<img src="#"></a></li>
+			<li class="item-1"><a href="htm/template2.htm">默认样式2<img src="#"></a></li>
+		</ul>
+
+		<h5>
+			<a class="button-2" href="javascript:;">使用过的模板</a>
+		</h5>
+
+		<ul>
+			<!-- 请求服务器 -->
+		</ul>
+
+	</div>
+
+	<h4>
+		<a class="button-2" href="javascript:;">选择页面</a>
+	</h4>
+
+	<div>
+
+		<h5>
+			<a class="button-1" href="javascript:;">必选页面</a>
+		</h5>
+
+		<ul>
+			<!-- 请求服务器 -->
+		</ul>
+
+		<h5>
+			<a class="button-2" href="javascript:;">可选页面</a>
+		</h5>
+
+		<ul>
+			<!-- 请求服务器 -->
+		</ul>
+
+	</div>
+
+</div>
+
+<!-- 样式 -->
+<style type="text/css">
+
+	/*
+	 * 块样式
+	 */
+
+	div#shop-user {
+		position:absolute;
+		left:0;
+		top:0;
+		overflow:hidden;
+		width:100%;
+		height:310px;
+		background-image:url("img/shop-user_bg.png");
+	}
+
+	div#shop-user.fixed {
+		position:fixed;
+		z-index:2;
+	}
+
+	div#shop-user.fixed {
+		_position:absolute;
+		_top:expression(documentElement.scrollTop + "px");
+	}
+
+	div#shop-user.not-visible {
+		height:39px;
+	}
+
+	div#shop-user.not-visible div#shop-user-list {
+		visibility:hidden;
+	}
+
+	div#shop-template {
+		margin-top:310px;
+	}
+
+	/*
+	 * 菜单样式
+	 */
+
+	div#shop-user-menu {
+		position:relative;
+		width:1000px;
+		height:39px;
+		margin:0 auto;
+	}
+
+	div#shop-user-menu h4 {
+		position:absolute;
+		left:0;
+	}
+
+	div#shop-user-menu h4 a {
+		display:block;
+		width:120px;
+		height:39px;
+		background-image:url("img/shop-user-menu_logo.png");
+		text-indent:-10000px;
+	}
+
+	div#shop-user-menu ul {
+		position:absolute;
+		right:0;
+	}
+
+	div#shop-user-menu ul li {
+		float:left;
+		list-style-type:none;
+	}
+
+	div#shop-user-menu ul a {
+		display:block;
+		margin-left:10px;
+		color:#fff;
+		font:normal normal 13px/39px "宋体";
+		text-align:center;
+		text-decoration:none;
+	}
+
+	div#shop-user-menu ul a:hover {
+		text-decoration:underline;
+	}
+
+	div#shop-user-menu ul a.button-1,
+	div#shop-user-menu ul a.button-2 {
+		width:52px;
+		height:27px;
+		margin-top:6px;
+		background-image:url("img/shop-user-menu_button.png");
+		font-weight:bold;
+		line-height:27px;
+	}
+
+	div#shop-user-menu ul a.button-1 {
+		background-position:0 0;
+	}
+
+	div#shop-user-menu ul a.button-1:hover {
+		background-position:0 -30px;
+	}
+
+	div#shop-user-menu ul a.button-2 {
+		background-position:-60px 0;
+	}
+
+	div#shop-user-menu ul a.button-2:hover {
+		background-position:-60px -30px;
+	}
+
+	/*
+	 * 列表样式
+	 */
+
+	div#shop-user-list {
+		position:relative;
+		width:1000px;
+		height:270px;
+		margin:0 auto;
+	}
+
+	div#shop-user-list *.hover {
+		z-index:1;
+	}
+
+	div#shop-user-list h5.hover a {
+		z-index:2;
+	}
+
+	div#shop-user-list div.hover {
+		left:0;
+	}
+
+	div#shop-user-list ul.hover {
+		top:0;
+	}
+
+	div#shop-user-list h4 a {
+		position:absolute;
+		width:104px;
+		height:30px;
+		background-image:url("img/shop-user-list_button.png");
+		color:#e6e6e6;
+		font:normal bold 14px/30px "宋体";
+		text-align:center;
+		text-decoration:none;
+	}
+
+	div#shop-user-list h4 a:hover {
+		background-position:0 -30px;
+	}
+
+	div#shop-user-list h4.hover a,
+	div#shop-user-list h4.hover a:hover {
+		background-position:-110px -30px;
+		color:#675050;
+	}
+
+	div#shop-user-list h4 a.button-1 {
+		left:120px;
+		top:-30px;
+	}
+
+	div#shop-user-list h4 a.button-2 {
+		left:230px;
+		top:-30px;
+	}
+
+	div#shop-user-list h5 a {
+		position:absolute;
+		width:120px;
+		height:35px;
+		border-top:1px solid #d1d1d1;
+		border-bottom:1px solid #d1d1d1;
+		color:#675050;
+		font:normal bold 14px/35px "宋体";
+		text-align:center;
+		text-decoration:none;
+	}
+
+	div#shop-user-list h5 a:hover,
+	div#shop-user-list h5.hover a,
+	div#shop-user-list h5.hover a:hover {
+		background-color:#e6e6e6;
+	}
+
+	div#shop-user-list h5 a.button-1 {
+		top:40px;
+	}
+
+	div#shop-user-list h5 a.button-2 {
+		top:76px;
+	}
+
+	div#shop-user-list div {
+		position:absolute;
+		left:200%;
+		top:0;
+		width:1000px;
+		height:270px;
+		background-color:#dbdbdb;
+	}
+
+	div#shop-user-list ul {
+		position:absolute;
+		right:0;
+		top:200%;
+		overflow-x:hidden;
+		overflow-y:scroll;
+		width:880px;
+		height:270px;
+		border-left:1px solid #d1d1d1;
+		background-color:#e6e6e6;
+	}
+
+	div#shop-user-list li {
+		float:left;
+		list-style-type:none;
+	}
+
+	/*
+	 * 列表项样式 - 1
+	 */
+
+	div#shop-user-list li.item-1 {
+		position:relative;
+		width:215px;
+		height:270px;
+		background-image:url("img/shop-user-list_item-1.png");
+	}
+
+	div#shop-user-list li.item-1 a {
+		position:absolute;
+		left:35px;
+		top:226px;
+		width:146px;
+		height:44px;
+		color:#757575;
+		font:normal normal 14px/44px "宋体";
+		text-align:center;
+		text-decoration:none;
+	}
+
+	div#shop-user-list li.item-1 a:hover {
+		text-decoration:underline;
+	}
+
+	div#shop-user-list li.item-1 a img {
+		position:absolute;
+		left:0;
+		top:-191px;
+		width:136px;
+		height:181px;
+		border:5px solid #fff;
+	}
+
+	div#shop-user-list li.item-1 a:hover img {
+		border-color:#f00;
+	}
+
+	/*
+	 * 列表项样式 - 2
+	 */
+
+	div#shop-user-list li.item-2 {
+		position:relative;
+		width:143px;
+		height:135px;
+		background-image:url("img/shop-user-list_item-2.png");
+	}
+
+	div#shop-user-list li.item-2 a,
+	div#shop-user-list li.item-2 a:hover {
+		position:absolute;
+		left:32px;
+		top:13px;
+		width:80px;
+		height:24px;
+		color:#fff;
+		font:normal normal 13px/24px "宋体";
+		text-align:center;
+		text-decoration:none;
+	}
+
+	div#shop-user-list li.item-2 a img {
+		position:absolute;
+		left:0;
+		top:24px;
+		width:80px;
+		height:65px;
+		border:0;
+	}
+
+	div#shop-user-list li.item-2 a:hover img {
+		box-shadow:0 0 3px #555;
+		margin-left:-3px\9;
+		margin-top:-3px\9;
+		filter:progid:DXImageTransform.Microsoft.Shadow(color=#777777, direction=0  , strength=3)\9
+		       progid:DXImageTransform.Microsoft.Shadow(color=#777777, direction=90 , strength=3)\9
+		       progid:DXImageTransform.Microsoft.Shadow(color=#777777, direction=180, strength=3)\9
+		       progid:DXImageTransform.Microsoft.Shadow(color=#777777, direction=270, strength=3)\9;
+	}
+
+	div#shop-user-list li.item-2 a input {
+		position:absolute;
+		left:0;
+		top:94px;
+		width:80px;
+		height:23px;
+		border:0;
+		background-image:url("img/shop-user-list_text.png");
+		text-indent:-10000px;
+	}
+
+	div#shop-user-list li.item-2 a:hover input {
+		background-position:0 -30px;
+	}
+
+	/*
+	 * 列表项样式 - 3
+	 */
+
+	div#shop-user-list li.item-3 {
+		position:relative;
+		width:143px;
+		height:135px;
+		background-image:url("img/shop-user-list_item-3.png");
+	}
+
+	div#shop-user-list li.item-3 a,
+	div#shop-user-list li.item-3 a:hover {
+		position:absolute;
+		left:40px;
+		top:23px;
+		width:64px;
+		height:19px;
+		color:#fff;
+		font:normal normal 13px/19px "宋体";
+		text-align:center;
+		text-decoration:none;
+	}
+
+	div#shop-user-list li.item-3 a img {
+		position:absolute;
+		left:0;
+		top:19px;
+		width:64px;
+		height:52px;
+		border:0;
+	}
+
+	div#shop-user-list li.item-3 a:hover img {
+		box-shadow:0 0 3px #555;
+		margin-left:-3px\9;
+		margin-top:-3px\9;
+		filter:progid:DXImageTransform.Microsoft.Shadow(color=#777777, direction=0  , strength=3)\9
+		       progid:DXImageTransform.Microsoft.Shadow(color=#777777, direction=90 , strength=3)\9
+		       progid:DXImageTransform.Microsoft.Shadow(color=#777777, direction=180, strength=3)\9
+		       progid:DXImageTransform.Microsoft.Shadow(color=#777777, direction=270, strength=3)\9;
+	}
+
+	div#shop-user-list li.item-3 a input {
+		position:absolute;
+		left:15px;
+		top:75px;
+		width:80px;
+		height:23px;
+		border:0;
+		background-image:url("img/shop-user-list_text.png");
+		text-indent:-10000px;
+	}
+
+	div#shop-user-list li.item-3 a:hover input {
+		background-position:0 -30px;
+	}
+
+	div#shop-user-list li.item-3 label {
+		position:absolute;
+		left:18px;
+		top:98px;
+		color:#545454;
+		font:normal normal 13px/23px "宋体";
+	}
+
+	div#shop-user-list li.item-3 label input {
+		 display:inline-block;
+		 margin:0 3px 0 4px;
+		+margin:-1px 0 0 0;
+		_margin:1px 0 0 0;
+		 vertical-align:text-top;
+		+vertical-align:-3px;
+	}
+
+	/*
+	 * 动画样式
+	 */
+
+	div#shop-user-list div {
+		        transition: left .3s .2s;
+		   -moz-transition: left .3s .2s;
+		     -o-transition: left .3s .2s;
+		-webkit-transition: left .3s .2s;
+	}
+
+	div#shop-user-list ul {
+		        transition: top .3s;
+		   -moz-transition: top .3s;
+		     -o-transition: top .3s;
+		-webkit-transition: top .3s;
+	}
+
+</style>
+
+<!-- 脚本 -->
+<script type="text/javascript">
+//<![CDATA[
+
+  /*
+   * 标题星号提示
+   *
+   * 2012-12-21 By Zhanghong
+   */
+
+  (function() {
+
+    //定义标题
+    var title = document.title;
+
+    //执行定时
+    window.setInterval(function() {
+
+      //标题赋值
+      document.title = SHOP_TEMPLATE_UI.foreach() == SHOP_TEMPLATE.foreach() ? title : title + '*';
+
+    }, 1000);
+
+  })();
+
+  /*
+   * 悬浮
+   *
+   * 2012-12-21 By Zhanghong
+   */
+
+  (function() {
+
+    //定义元素
+    var div = _$('shop-user');
+    var ul  = _$('shop-user').getElementsByTagName('ul')[0];
+
+    //绑定事件
+    _attachEvent(window, {
+
+      'scroll' : function() {
+
+        //样式赋值
+        div.className = _getDocumentScroll().y > 310 ? 'fixed not-visible' : '';
+
+      }
+
+    });
+
+    _attachEvent(div, {
+
+      'mouseover' : function(event) {
+
+        //样式赋值
+        div.className = div.className ? 'fixed' : '';
+
+        //禁止冒泡
+        _cancelBubble(event || window.event);
+
+      }
+
+    });
+
+    _attachEvent(document, {
+
+      'mouseover' : function(event) {
+
+        //样式赋值
+        div.className = div.className ? 'fixed not-visible' : '';
+
+      }
+
+    });
+
+  })();
+
+  /*
+   * 点击
+   *
+   * 2012-12-21 By Zhanghong
+   */
+
+  (function() {
+
+    //定义元素
+    var shopUserMenu = _$('shop-user-menu');
+    var shopUserList = _$('shop-user-list');
+
+    //绑定事件
+    _attachEvent(shopUserMenu, {
+
+      'click' : function(event) {
+
+        //定义事件
+        var e = event || window.event;
+
+        //定义目标
+        var t = e.target || e.srcElement;
+
+        //判断执行
+        switch(t.innerHTML) {
+
+          case '使用帮助' : {alert('在模块区域按下鼠标可以拖动！'); break}
+          case '添加模块' : {click_add(); break}
+          case '退出'     : {click_exit(); break}
+          case '保存'     : {click_save(); break}
+
+        }
+
+      }
+
+    });
+
+    _attachEvent(shopUserList, {
+
+      'click' : function(event) {
+
+        //定义事件
+        var e = event || window.event;
+
+        //定义目标
+        var t = e.target || e.srcElement;
+
+        //判断跳出
+        if(t.href == 'javascript:;') {
+          return;
+        }
+
+        //判断赋值
+        if(t.parentNode.tagName == 'A') {
+          t = t.parentNode;
+        }
+
+        //判断执行
+        if(t.tagName == 'A') {
+
+          //执行选择
+          click_select(t.href);
+
+          //禁止冒泡
+          _cancelBubble(e);
+
+          //禁止行为
+          _cancelDefault(e);
+
+        }
+
+      }
+
+    });
+
+  })();
+
+  /*
+   * 点击添加
+   *
+   * 2012-12-21 By Zhanghong
+   */
+
+  var click_add = function() {
+
+    //执行对话
+    SHOP_TEMPLATE.dialog('@htm/append.htm');
+
+  };
+
+  /*
+   * 点击保存
+   *
+   * 2012-12-21 By Zhanghong
+   */
+
+  var click_save = function() {
+
+    //执行保存
+    SHOP_TEMPLATE_UI.loader(function() {SHOP_TEMPLATE_UI.save()});
+
+  };
+
+  /*
+   * 点击退出
+   *
+   * 2012-12-21 By Zhanghong
+   */
+
+  var click_exit = function() {
+
+    //判断遍历
+    if(SHOP_TEMPLATE_UI.foreach() != SHOP_TEMPLATE.foreach()) {
+
+      //执行确认
+      confirm('您还未保存修改过的页面，现在保存？', function(p) {
+
+        //判断行为
+        if(p) {
+
+          //保存退出
+          SHOP_TEMPLATE_UI.loader(
+            function() {SHOP_TEMPLATE_UI.save()},
+            function() {SHOP_TEMPLATE_UI.exit()}
+          );
+
+        } else {
+
+          //执行退出
+          SHOP_TEMPLATE_UI.loader(function() {SHOP_TEMPLATE_UI.exit()});
+
+        }
+
+      });
+
+    } else {
+
+      //执行退出
+      SHOP_TEMPLATE_UI.loader(function() {SHOP_TEMPLATE_UI.exit()});
+
+    }
+
+  };
+
+  /*
+   * 点击选择
+   *
+   * 2012-12-21 By Zhanghong
+   */
+
+  var click_select = function(s/* src */) {
+
+    //判断遍历
+    if(SHOP_TEMPLATE_UI.foreach() != SHOP_TEMPLATE.foreach()) {
+
+      //执行确认
+      confirm('您还未保存修改过的页面，现在保存？', function(p) {
+
+        //判断行为
+        if(p) {
+
+          //保存加载
+          SHOP_TEMPLATE_UI.loader(
+            function() {SHOP_TEMPLATE_UI.save()},
+            function() {SHOP_TEMPLATE_UI.loadTemplatePage(s)}
+          );
+
+        } else {
+
+          //执行加载
+          SHOP_TEMPLATE_UI.loader(function() {SHOP_TEMPLATE_UI.loadTemplatePage(s)});
+
+        }
+
+      });
+
+    } else {
+
+      //执行加载
+      SHOP_TEMPLATE_UI.loader(function() {SHOP_TEMPLATE_UI.loadTemplatePage(s)});
+
+    }
+
+  };
+
+  /*
+   * 选项卡
+   *
+   * 2012-12-21 By Zhanghong
+   */
+
+  (function() {
+
+    //定义元素
+    var h4  = _$('shop-user-list').getElementsByTagName('h4');
+    var h5  = _$('shop-user-list').getElementsByTagName('h5');
+    var div = _$('shop-user-list').getElementsByTagName('div');
+    var ul  = _$('shop-user-list').getElementsByTagName('ul');
+
+    //定义函数
+    var select = function() {
+
+      //定义元素
+      var e = _$('shop-user-list').getElementsByTagName('*')
+
+      //遍历元素
+      for(var i = 0, j = e.length; i < j; i++) {
+
+        //判断清除
+        if(e[i].className == 'hover') {
+          e[i].className = '';
+        }
+
+      }
+
+      //遍历参数
+      for(var i = 0, j = arguments.length; i < j; i++) {
+
+        //样式赋值
+        arguments[i].className = 'hover';
+
+      }
+
+    };
+
+    //绑定事件
+    _attachEvent(h4[0], {'click' : function() {select(h4[0], div[0], h5[0], ul[0])}});
+    _attachEvent(h4[1], {'click' : function() {select(h4[1], div[1], h5[2], ul[2])}});
+    _attachEvent(h5[0], {'click' : function() {select(h4[0], div[0], h5[0], ul[0])}});
+    _attachEvent(h5[1], {'click' : function() {select(h4[0], div[0], h5[1], ul[1])}});
+    _attachEvent(h5[2], {'click' : function() {select(h4[1], div[1], h5[2], ul[2])}});
+    _attachEvent(h5[3], {'click' : function() {select(h4[1], div[1], h5[3], ul[3])}});
+
+    //执行选择
+    select(h4[0], div[0], h5[0], ul[0]);
+
+  })();
+
+//]]>
+</script>
+
+</div>
+
+<!-- 模板块 -->
+<div id="shop-template">
+
+	<!-- 样式帧 -->
+	<style id="shop-template-style" type="text/css">
+
+		div.move-border {
+			position:absolute;
+			border:2px solid #000;
+		}
+
+		div.move-dotted {
+			position:absolute;
+			border:2px dotted #000;
+		}
+
+		div.move-shadow {
+			position:absolute;
+		}
+
+		div.move-shadow-width {
+			width:5px;
+		}
+
+		div.move-shadow-height {
+			height:5px;
+		}
+
+		div.move-shadow-width,
+		div.move-shadow-height {
+			position:absolute;
+			overflow:hidden;
+			background-image:url("img/move-shadow.png");
+		}
+
+		/*
+		 * 动画样式
+		 */
+
+		div.move-dotted {
+			        transition: top .2s;
+			   -moz-transition: top .2s;
+			     -o-transition: top .2s;
+			-webkit-transition: top .2s;
+		}
+
+	</style>
+
+	<!-- 页面帧 -->
+	<iframe id="shop-template-iframe" frameborder="0" scrolling="no"></iframe>
+
+</div>
+
+<!-- 行为块 -->
+<div id="shop-action">
+
+</div>
+
+<!-- 对话块 -->
+<div id="shop-dialog" class="not-visible">
+
+	<!-- 阴影 -->
+	<div class="shadow"></div>
+
+	<!-- 窗口 -->
+	<div class="window">
+
+		<h4>
+			对话框
+		</h4>
+
+		<p>
+			<a class="close" href="javascript:;">关闭</a>
+		</p>
+
+		<iframe frameborder="0" scrolling="no" allowtransparency="true"></iframe>
+
+	</div>
+
+</div>
+
+<!-- 警告块 -->
+<div id="shop-alert" class="not-visible">
+
+	<table class="shop-alert">
+
+		<tbody>
+
+			<tr>
+				<td width="100"><img src="img/shop-alert_img.png" /></td>
+				<td width="300"><!--[content]--></td>
+			</tr>
+
+		</tbody>
+
+		<tfoot>
+
+			<tr>
+				<td colspan="2"><input type="button" value="确定" onclick="window.close()" /></td>
+			</tr>
+
+		</tfoot>
+
+	</table>
+
+	<style type="text/css">
+
+		table.shop-alert {
+			width:400px;
+			border:10px solid #fff;
+		}
+
+		table.shop-alert tbody td {
+			height:100px;
+			font:normal normal 15px/25px "宋体";
+		}
+
+		table.shop-alert tfoot td {
+			height:27px;
+			text-align:center;
+		}
+
+		table.shop-alert img {
+			width:100px;
+			height:100px;
+		}
+
+		table.shop-alert input {
+			width:65px;
+			height:27px;
+			border:0;
+			background-image:url("img/shop-alert_button.png");
+			cursor:pointer;
+			color:#fff;
+			font:normal normal 13px/27px "宋体";
+		}
+
+	</style>
+
+</div>
+
+<!-- 确认块 -->
+<div id="shop-confirm" class="not-visible">
+
+	<table class="shop-confirm">
+
+		<tbody>
+
+			<tr>
+				<td width="100"><img src="img/shop-confirm_img.png" /></td>
+				<td width="300"><!--[content]--></td>
+			</tr>
+
+		</tbody>
+
+		<tfoot>
+
+			<tr>
+				<td colspan="2">
+					<input type="button" value="确定" onclick="window.close(true)" />
+					<input type="button" value="取消" onclick="window.close()" />
+				</td>
+			</tr>
+
+		</tfoot>
+
+	</table>
+
+	<style type="text/css">
+
+		table.shop-confirm {
+			width:400px;
+			border:10px solid #fff;
+		}
+
+		table.shop-confirm tbody {
+			height:100px;
+			font:normal normal 15px/25px "宋体";
+		}
+
+		table.shop-confirm tfoot {
+			height:27px;
+			text-align:center;
+		}
+
+		table.shop-confirm img {
+			width:100px;
+			height:100px;
+		}
+
+		table.shop-confirm input {
+			width:50px;
+			height:27px;
+			border:0;
+			background-image:url("img/shop-confirm_button.png");
+			cursor:pointer;
+			color:#fff;
+			font:normal normal 13px/27px "宋体";
+		}
+
+	</style>
+
+</div>
+
+<!-- 加载块 -->
+<div id="shop-loader" class="not-visible">
+
+	<div class="shadow"><!-- 阴影 --></div>
+	<div class="border"><!-- 边框 --></div>
+	<div class="loader"><!-- 加载 --></div>
+	<div class="status"><!-- 状态 --></div>
+
+</div>
+
+</body>
+</html>

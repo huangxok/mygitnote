@@ -1,0 +1,124 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html>
+<head>
+    <!--声明当前页面的编码集charset=gbk中文编码gb2312,charset=utf-8 国际编码-->
+    <meta http-equiv="Content-Type" content="text/html; charset=gbk">
+    <!--当前页面的三要素-->
+    <title>标题</title>
+    <meta name="Keywords" content="关键词,关键词">
+    <meta name="description" content="描述">
+    <!--css , js-->
+    <style type="text/css">
+        * {
+            margin: 0px; /*外边距*/
+            padding: 0px;
+        }
+        /*css语法规则: 属性:值; px 像素*/
+        #Con {
+            width: 1000px; /*宽度*/
+            height: 560px; /*高度*/ /*background:#999966;背景颜色*/
+            margin: 20px auto; /*上下外边距20px 左右相等，在水平方向距中*/
+        }
+
+        #Left {
+            width: 184px;
+            height: 560px;
+            float: left; /*左浮动*/
+        }
+
+        #Right {
+            width: 790px;
+            height: 560px;
+            float: right; /*右浮动*/
+            border: 1px solid #ddd;
+            box-shadow: 0px 0px 10px #666;
+        }
+
+        #Left ul li {
+            width: 149px;
+            height: 70px;
+            list-style-type: none; /*去掉圆点*/
+            background: url("images/gray1.png");
+            color: #fff;
+            font-size: 12px;
+            line-height: 70px; /*文字在竖直方向距中*/
+            padding-left: 35px;
+        }
+
+            #Left ul li a {
+                color: #fff;
+                text-decoration: none; /*去掉下划线*/
+                padding-left: 15px;
+            }
+
+        #Right .content {
+            width: 790px;
+            height: 540px;
+            padding-top: 20px;
+            text-align: center;
+            display: none;
+        }
+
+        #Left ul li.hover {
+            background: url("images/gray2.png");
+        }
+    </style>
+
+</head>
+<body>
+    <!--div 盒子模型，高度，宽度，放置内容 姓名="张三"-->
+    <div id="Con">
+        <div id="Left">
+            <ul>
+                <li class="hover">
+                    <img src="images/img1.png" align="absmiddle" /><a href="#">虾米音乐</a></li>
+                <li>
+                    <img src="images/img2.png" align="absmiddle" /><a href="#">豆瓣电台</a></li>
+                <li>
+                    <img src="images/img3.png" align="absmiddle" /><a href="#">都市之声</a></li>
+                <li>
+                    <img src="images/img4.png" align="absmiddle" /><a href="#">贝瓦儿歌</a></li>
+                <li>
+                    <img src="images/img6.png" align="absmiddle" /><a href="#">酷狗音乐</a></li>
+                <li>
+                    <img src="images/img7.png" align="absmiddle" /><a href="#">音悦台</a></li>
+                <li>
+                    <img src="images/img8.png" align="absmiddle" /><a href="#">多米音乐</a></li>
+                <li>
+                    <img src="images/img9.png" align="absmiddle" /><a href="#">酷我音乐</a></li>
+            </ul>
+        </div>
+
+
+        <div id="Right">
+            <div class="content" style="display: block;">
+                <img src="images/rimg1.png" /></div>
+            <div class="content">
+                <img src="images/rimg2.png" /></div>
+            <div class="content">
+                <img src="images/rimg3.png" /></div>
+            <div class="content">
+                <img src="images/rimg4.png" /></div>
+            <div class="content">
+                <img src="images/rimg5.png" /></div>
+            <div class="content">
+                <img src="images/rimg6.png" /></div>
+            <div class="content">
+                <img src="images/rimg6.png" /></div>
+            <div class="content">
+                <img src="images/rimg7.png" /></div>
+
+        </div>
+    </div>
+
+    <!--引用外部js,jque库文件-->
+    <script type="text/javascript" src="js/jquery.js"></script>
+    <script type="text/javascript">
+        $("#Left ul li").mousemove(function () {
+            var index = $(this).index();
+            $(this).addClass("hover").siblings().removeClass("hover");
+            $("#Right .content").eq(index).show().siblings().hide();
+        });
+    </script>
+</body>
+</html>

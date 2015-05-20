@@ -1,0 +1,259 @@
+﻿<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <title></title>
+</head>
+<body>
+    <script>
+        //http://www.ruanyifeng.com/blog/2012/09/xmlhttprequest_level_2.html
+        //传统的xmlhttp
+        var xhr = new XMLHttpRequest();
+        xhr.open('GET', 'example.php');
+        xhr.send();
+        xhr.onreadystatechange = function () {
+            if (xhr.readyState == 4 && xhr.status == 200) {
+                alert(xhr.responseText);
+            } else {
+                alert(xhr.statusText);
+            }
+        };
+        //* xhr.readyState：XMLHttpRequest对象的状态，等于4表示数据已经接收完毕。
+        //* xhr.status：服务器返回的状态码，等于200表示一切正常。
+        //* xhr.responseText：服务器返回的文本数据
+        //* xhr.responseXML：服务器返回的XML格式的数据
+        //* xhr.statusText：服务器返回的状态文本。
+        //老版本的XMLHttpRequest对象有以下几个缺点：
+        //* 只支持文本数据的传送，无法用来读取和上传二进制文件。
+        //* 传送和接收数据时，没有进度信息，只能提示有没有完成。
+        //* 受到"同域限制"（Same Origin Policy），只能向同一域名的服务器请求数据。
+    </script>
+    <script>
+        //新版本的XMLHttpRequest对象，针对老版本的缺点，做出了大幅改进。
+        //* 可以设置HTTP请求的时限。
+        //* 可以使用FormData对象管理表单数据。
+        //* 可以上传文件。
+        //* 可以请求不同域名下的数据（跨域请求）。
+        //* 可以获取服务器端的二进制数据。
+        //* 可以获得数据传输的进度信息。
+        //HTTP请求的时限
+        //有时，ajax操作很耗时，而且无法预知要花多少时间。如果网速很慢，用户可能要等很久。
+        //新版本的XMLHttpRequest对象，增加了timeout属性，可以设置HTTP请求的时限。
+        xhr.timeout = 3000; //将最长等待时间设为3000毫秒
+        //与之配套的还有一个timeout事件，用来指定回调函数
+        xhr.ontimeout = function (event) {
+            alert('请求超时！');
+        }
+
+        //FormData对象
+        var formData = new FormData();
+        formData.append('username', '张三');
+        formData.append('id', 123456);
+        xhr.send(formData);
+
+        //FormData对象也可以用来获取网页表单的值。
+        var form = document.getElementById('myform');
+        var formData = new FormData(form);
+        formData.append('secret', '123456'); // 添加一个表单项
+        xhr.open('POST', form.action);
+        xhr.send(formData);
+
+        //上传文件
+        //假定files是一个"选择文件"的表单元素（input[type="file"]），我们将它装入FormData对象。
+        var formData = new FormData();
+        for (var i = 0; i < files.length; i++) {
+            formData.append('files[]', files[i]);//files[] 是键名可以自定义
+        }
+        //然后，发送这个FormData对象。
+        xhr.send(formData);
+
+        //跨域资源共享（CORS）
+        //新版本的XMLHttpRequest对象，可以向不同域名的服务器发出HTTP请求。这叫做"跨域资源共享"（Cross-origin resource sharing，简称CORS）。
+        //使用"跨域资源共享"的前提，是浏览器必须支持这个功能，而且服务器端必须同意这种"跨域"。如果能够满足上面的条件，则代码的写法与不跨域的请求完全一样
+        //服务器端运行跨域请求方式 php
+        //if($_SERVER['HTTP_ORIGIN'] == "http://arunranga.com")
+        //{
+        //    header('Access-Control-Allow-Origin: http://arunranga.com');
+        //    header('Content-type: application/xml');
+        //    readfile('arunerDotNetResource.xml');
+        //}
+        //else
+        //{
+        //    header('Content-Type: text/html');
+        //    echo "<html>";
+        //    echo "<head>";
+        //    echo "   <title>Another Resource</title>";
+        //    echo "</head>";
+        //    echo "<body>",
+        //        "<p>This resource behaves two-fold:";
+        //    echo "<ul>",
+        //            "<li>If accessed from <code>http://arunranga.com</code> it returns an XML document</li>";
+        //    echo " <li>If accessed from any other origin including from simply typing in the URL into the browser's address bar,";
+        //    echo "you get this HTML document</li>",
+        //        "</ul>",
+        //    "</body>",
+        //    "</html>";
+        //}
+        //?>
+
+        //接收二进制数据（方法A：改写MIMEType）
+        //老版本的XMLHttpRequest对象，只能从服务器取回文本数据（否则它的名字就不用XML起首了），新版则可以取回二进制数据。
+        //这里又分成两种做法。较老的做法是改写数据的MIMEType，将服务器返回的二进制数据伪装成文本数据，并且告诉浏览器这是用户自定义的字符集。
+        xhr.overrideMimeType("text/plain; charset=x-user-defined");
+        //然后，用responseText属性接收服务器返回的二进制数据。
+        var binStr = xhr.responseText;
+        //由于这时，浏览器把它当做文本数据，所以还必须再一个个字节地还原成二进制数据。
+        for (var i = 0, len = binStr.length; i < len; ++i) {
+            var c = binStr.charCodeAt(i);
+            var byte = c & 0xff;
+        }
+        //最后一行的位运算"c & 0xff"，表示在每个字符的两个字节之中，只保留后一个字节，将前一个字节扔掉。原因是浏览器解读字符的时候，会把字符自动解读成Unicode的0xF700-0xF7ff区段。
+        //接收二进制数据（方法B：responseType属性）
+        //从服务器取回二进制数据，较新的方法是使用新增的responseType属性。如果服务器返回文本数据，这个属性的值是"TEXT"，这是默认值。较新的浏览器还支持其他值，也就是说，可以接收其他格式的数据。
+        //你可以把responseType设为blob，表示服务器传回的是二进制对象。
+        var xhr = new XMLHttpRequest();
+        xhr.open('GET', '/path/to/image.png');
+        xhr.responseType = 'blob';
+        //接收数据的时候，用浏览器自带的Blob对象即可。
+        var blob = new Blob([xhr.response], {type: 'image/png'});
+        //注意，是读取xhr.response，而不是xhr.responseText。
+        //你还可以将responseType设为arraybuffer，把二进制数据装在一个数组里。
+        var xhr = new XMLHttpRequest();
+        xhr.open('GET', '/path/to/image.png');
+        xhr.responseType = "arraybuffer";
+        //接收数据的时候，需要遍历这个数组。
+        var arrayBuffer = xhr.response;
+        if (arrayBuffer) {
+            var byteArray = new Uint8Array(arrayBuffer);
+            for (var i = 0; i < byteArray.byteLength; i++) {
+                // do something
+            }
+        }
+        //更详细的讨论，请看 https://developer.mozilla.org/en-US/docs/DOM/XMLHttpRequest/Sending_and_Receiving_Binary_Data
+
+        //进度信息
+        //新版本的XMLHttpRequest对象，传送数据的时候，有一个progress事件，用来返回进度信息。
+        //它分成上传和下载两种情况。下载的progress事件属于XMLHttpRequest对象，上传的progress事件属于XMLHttpRequest.upload对象。
+        //我们先定义progress事件的回调函数。
+        xhr.onprogress = updateProgress;        //下载
+        xhr.upload.onprogress = updateProgress; //上传
+        //然后，在回调函数里面，使用这个事件的一些属性。
+        function updateProgress(event) {
+            if (event.lengthComputable) {
+                var percentComplete = event.loaded / event.total;
+            }
+        }
+        //上面的代码中，event.total是需要传输的总字节，event.loaded是已经传输的字节。如果event.lengthComputable不为真，则event.total等于0。
+        //与progress事件相关的，还有其他五个事件，可以分别指定回调函数：
+        //* load事件：传输成功完成。
+        //* abort事件：传输被用户取消。
+        //* error事件：传输中出现错误。
+        //* loadstart事件：传输开始。
+        //* loadEnd事件：传输结束，但是不知道成功还是失败。
+
+
+    </script>
+    <script>
+        //这里的5个函数对应上述的2个事件的函数
+        //loadstart事件 类似
+        function uploadFile() {
+
+            var fd = new FormData();
+            fd.append("SmallImageFile", document.getElementById('SmallImageFile').files[0]);
+            fd.append("BigImageFile", document.getElementById('BigImageFile').files[0]);
+            fd.append("SmallVideoFile", document.getElementById('SmallVideoFile').files[0]);
+            fd.append("BigVideoFile", document.getElementById('BigVideoFile').files[0]);
+            fd.append("RO_Name", $("#RO_Name").val());
+            fd.append("RO_URL", $("#RO_URL").val());
+            fd.append("RO_Remarks", $("#RO_Remarks").val());
+
+            var xmlHttp = null;
+            try {
+                // Firefox, Opera 8.0+, Safari
+                xmlHttp = new XMLHttpRequest();
+                alert("eeeeq");
+            }
+            catch (e) {
+                // Internet Explorer
+
+                try {
+                    xmlHttp = new ActiveXObject("Msxml2.XMLHTTP");
+                    alert("eeeeq1");
+                }
+                catch (e) {
+                    xmlHttp = new ActiveXObject("Microsoft.XMLHTTP");
+                    alert("eeeeq2");
+                }
+            }
+
+
+
+            xmlHttp.upload.addEventListener("progress", uploadProgress, false);
+            xmlHttp.addEventListener("load", uploadComplete, false);
+            xmlHttp.addEventListener("error", uploadFailed, false);
+            xmlHttp.addEventListener("abort", uploadCanceled, false);
+            xmlHttp.open("POST", "/Manager/CustomerResourceManager/ashx/UploadResource.ashx?action=upload&c_id=10");
+            xmlHttp.send(fd);
+            $.messager.progress({
+                title: '请稍后',
+                msg: '正在发送短信......',
+                interval: 0
+            });
+            //$("<div id=\"loadW\" class=\"datagrid-mask\"></div>").css({ display: "block", width: "100%", zIndex: $.fn.window.defaults.zIndex++, height: $(window).height() }).appendTo("body");
+            //$("<div id=\"loadM\" class=\"datagrid-mask-msg\"></div>").html("数据上传中<span id=\"progressNumber\"></span>，请稍候。。。").appendTo("body").css({ display: "block", zIndex: $.fn.window.defaults.zIndex++, left: ($(document.body).outerWidth(true) - 190) / 2, top: ($(window).height() - 45) / 2 });
+
+        }
+        //与progress事件
+        function uploadProgress(evt) {
+
+            if (evt.lengthComputable) {
+                var percentComplete = Math.round(evt.loaded * 100 / evt.total);
+                //   $('#progressNumber').progressbar('setValue', percentComplete);
+                //  $('#progressNumber').html(percentComplete.toString() + "%");
+                //  alert($.messager.progress());
+                $.messager.progress('bar').progressbar('setValue', percentComplete);
+            }
+            else {
+                document.getElementById('progressNumber').innerHTML = '无法计算';
+            }
+        }
+        //load事件
+        function uploadComplete(evt) {
+            //$("#loadW").detach();
+            //$("#loadM").detach();
+            $.messager.progress('close');
+            /* 服务器返回数据*/
+            var message = evt.target.responseText;
+            if (evt.target.status == "200") {
+
+                if (evt.target.responseText == "nosession") {
+
+                    alert('错误 , 您未登录 ');
+                }
+                else if (evt.target.responseText == "ok") {
+                    alert("提示 操作成功");
+                }
+                else {
+                    alert(evt.target.responseText);
+                }
+            }
+
+            else {
+                alert("上传出错.");
+            }
+
+        }
+        //error事件
+        function uploadFailed(evt) {
+            alert("上传出错.");
+        }
+        //abort事件
+        function uploadCanceled(evt) {
+            alert("上传已由用户或浏览器取消删除连接.");
+        }
+        //loadEnd事件
+        function uploadEnd() {
+            alert('上传操作已执行')
+        }
+    </script>
+</body>
+</html>

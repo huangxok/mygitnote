@@ -1,0 +1,214 @@
+﻿<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <title></title>
+</head>
+<body>
+    <script>
+        //异步串行执行
+        function async(arg, callback) {
+            console.log('参数为 ' + arg + ' , 1秒后返回结果');
+            setTimeout(function () { callback(arg * 2); }, 1000);
+        }
+        function final() {
+            alert('success');
+        }
+
+        //var items = [1, 2, 3, 4, 5, 6];
+        //var results = [];
+        //function series(item) {
+        //    if (item) {
+        //        async(item, function (result) {
+        //            results.push(result);
+        //            return series(items.shift());
+        //        });
+        //    } else {
+        //        return final(results);
+        //    }
+        //}
+        //var dd = items.shift()
+        //series(dd);
+
+
+        //并行执行
+        var items = [1, 2, 3, 4, 5, 6];
+        var results = [];
+
+        items.forEach(function (item) {
+            async(item, function (result) {
+                results.push(result);
+                if (results.length == items.length) {
+                    final(results);
+                }
+            })
+        });
+
+        //串和并结合
+        var items = [1, 2, 3, 4, 5, 6];
+        var results = [];
+        var running = 0;
+        var limit = 2;
+
+        function launcher() {
+            while (running < limit && items.length > 0) {
+                var item = items.shift();
+                async(item, function (result) {
+                    results.push(result);
+                    running--;
+                    if (items.length > 0) {
+                        launcher();
+                    } else if (running == 0) {
+                        final();
+                    }
+                });
+                running++;
+            }
+        }
+
+        launcher();
+
+    </script>
+    <script>
+        var Promisemodule;
+        (function (Promisemodule) {
+            Promisemodule.promise = Promise;
+            var Promise = (function (Promise) {
+                //promise实现
+                var Promise = function () {
+                    this.state = 'pending';
+                    this.thenables = [];  //数据用来存放then方法生成的内部对象
+                };
+                //resolve  讲实例对象的状态从 未完成 变为 已完成
+                Promise.prototype.resolve = function (value) {
+                    if (this.state != 'pending') return;
+                    this.state = 'fullfilled';
+                    this.value = value;
+                    this._handleThen(); //内部方法
+                    return this;
+                }
+                Promise.prototype.reject = function (reason) {
+                    if (this.state != 'pending') return;
+                    this.state = 'rejected';
+                    this.reason = reason;
+                    this._handleThen();
+                    return this;
+                }
+                Promise.prototype.then = function (onFullfilled, onReject) {
+                    var thenable = {};
+                    if (typeof onFullfilled == 'function') {
+                        thenable.fullfill = onFullfilled;
+                    }
+                    if (typeof onRejected == 'function') {
+                        thenable.reject = onRejected;
+                    };
+                    if (this.state != 'pending') {
+                        setImmediate(function () {
+                            this._handleThen();
+                        }.bind(this));
+                    }
+                    thenable.promise = new Promise();
+                    this.thenables.push(thenable);
+                    return thenable.promise;
+                }
+                Promise.prototype._handleThen = function () {
+                    if (this.state === 'pending') return;
+
+                    if (this.thenables.length) {
+                        for (var i = 0; i < this.thenables.length; i++) {
+                            var thenPromise = this.thenables[i].promise;
+                            var returnedVal;
+                            try {
+                                // 运行回调函数
+                                switch (this.state) {
+                                    case 'fulfilled':
+                                        if (this.thenables[i].fulfill) {
+                                            returnedVal = this.thenables[i].fulfill(this.value);
+                                        } else {
+                                            thenPromise.resolve(this.value);
+                                        }
+                                        break;
+                                    case 'rejected':
+                                        if (this.thenables[i].reject) {
+                                            returnedVal = this.thenables[i].reject(this.reason);
+                                        } else {
+                                            thenPromise.reject(this.reason);
+                                        }
+                                        break;
+                                }
+
+                                if (returnedVal === null) {
+                                    this.thenables[i].promise.resolve(returnedVal);
+                                }
+                                else if (returnedVal instanceof Promise || typeof returnedVal.then === 'function') {
+                                    returnedVal.then(thenPromise.resolve.bind(thenPromise), thenPromise.reject.bind(thenPromise));
+                                }
+                                else {
+                                    this.thenables[i].promise.resolve(returnedVal);
+                                }
+                            } catch (e) {
+                                thenPromise.reject(e);
+                            }
+                        }
+                        this.thenables = [];
+                    }
+                }
+                return Promise;
+            })()
+        })(Promisemodule || (Promisemodule = {}))
+
+
+    </script>
+    <script>
+        //传统ajax
+        function search(term, onload, onerror) {
+            var xhr, results, url;
+
+            url = 'http://example.com/search?q=' + term;
+
+            xhr = new XMLHttpRequest();
+            xhr.open('GET', url, true);
+
+            xhr.onload = function (e) {
+                if (this.status === 200 && this.readyState === 4) {
+                    results = JSON.parse(this.responseText);
+                    onload(results);
+                }
+            };
+
+            xhr.onerror = function (e) {
+                onerror(e);
+            };
+
+            xhr.send();
+        }
+        search("Hello World", f1, f2);
+        //promise 方式实现ajax
+        function search(term) {
+
+            var url = 'http://example.com/search?q=' + term;
+            var p = new Promise();
+            var xhr = new XMLHttpRequest();
+            var result;
+
+            xhr.open('GET', url, true);
+
+            xhr.onload = function (e) {
+                if (this.status === 200) {
+                    results = JSON.parse(this.responseText);
+                    p.resolve(results);
+                }
+            };
+
+            xhr.onerror = function (e) {
+                p.reject(e);
+            };
+
+            xhr.send();
+
+            return p;
+        }
+
+        search("Hello World").then(f1, f2);
+    </script>
+</body>
+</html>

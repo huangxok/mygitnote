@@ -1,0 +1,128 @@
+datetransfer对象
+
+
+
+属性：dropEffecct       设置或获取拖拽操作的类型和要显示的光标类型 //
+      effectAllowed     设置或获取数据传送操作可应用于该对象的源元素
+      clearData         通过dataTransfer或clipboardData对象从剪切板删除一种或多种数据格式。
+      getData           通过 dataTransfer 或 clipboardData 对象从剪贴板获取指定格式的数据
+      setData		以指定格式给 dataTransfer 或 clipboardData 对象赋予数据。
+
+<HEAD>
+<SCRIPT>
+var sAnchorURL;
+function InitiateDrag()
+/*  setData 参数告诉源对象将数据传送为 URL 并提供
+路径。*/
+{
+event.dataTransfer.setData("URL", oSource.href);
+}
+function FinishDrag()
+/*  传递给 getData 的参数告诉目标对象所期望的数据
+格式。*/
+{
+sAnchorURL = event.dataTransfer.getData("URL");
+oTarget.innerText = sAnchorURL;
+}
+</SCRIPT>
+</HEAD>
+<BODY>
+<A ID=oSource HREF="about:Example_Complete" onclick="return(false)"
+ondragstart="InitiateDrag()">测试锚</A>
+<SPAN ID=oTarget ondragenter="FinishDrag()">将链接拖曳到这里</SPAN>
+</BODY>	
+
+
+
+Javascript--dataTransfer
+
+描述:
+
+提供对于预定义的剪贴板格式的访问,以便在拖拽中使用
+
+ 
+
+属性	                                描述	                                 参数
+dropEffect[=sCursorStyle]	设置或获取拖拽操作的类型和要显示的光标类型	可选的
+                                                                             copy 复制样式被显示
+                                                                             link  链接样式被显示
+                                                                             move  移动样式被显示
+                                                                             none  默认,没有鼠标样式被定义
+effectAllowed[=sEffect]	        设置或获取数据传送操作可应用与该对象的源元素	可选的
+                                                                             copy 选项被复制
+                                                                             link  选项被dataTransfer作为link方式保存
+                                                                             move  当放置时,对象被移动至目标对象
+                                                                             copylink  选项是被复制还是被作为link方式保存关键在于目标对象
+                                                                             linkmove 选项是被作为link方式保存还是被移动关键在于目标对象
+                                                                             all 所有效果都被支持
+                                                                             none 不支持任何效果
+                                                                             uninitialized 默认不能通过这个属性传递任何值
+说明:
+
+effectAllowed定义了在源对象上的操作,可定义在ondragstart事件中.
+
+dropEffect定义了在目标对象上的操作,可定义在ondrop,ondragenter,ondragover事件中.
+
+effectAllowed可以定义all操作,但是dropEffect可以定义copy操作.
+
+The target object of a drag-and-drop operation can set the dropEffect during the ondragenter, ondragover, and ondrop events. To display the desired cursor until the final drop, the default action of the ondragenter, ondragover, and ondrop events must be canceled and the dropEffect must be set.
+
+例子:
+
+    <span ondragstart="DragStart()">
+        This Is A Test String.
+    </span>
+    <p> </p>
+    <div id="dv" style="border:solid 1px black;height:150px;width:200px" ondrop="Drop()" ondragover="DragOver()"
+        ondragenter="DragEnter()">
+        [Drop To Here]
+    </div>
+    <script type="text/javascript">
+        function DragStart(){
+            event.dataTransfer.effectAllowed="copy";
+        }
+        
+        function Drop(){
+            DragOver();          
+            event.srcElement.innerText=event.srcElement.innerText+event.dataTransfer.getData("text");
+        }
+        
+        function DragEnter(){
+            DragOver();
+            event.dataTransfer.dropEffect="copy";
+        }
+        
+        function DragOver(){
+            event.returnValue=false;
+        }
+        
+    </script>
+ 
+
+方法	描述	参数
+setData(sFormat,sData)	将指定格式的数据赋值给dataTransfer或者clipboardData	sFormat:URL,Text
+getData(sFormat)	从dataTransfer或者clipboardData中获取值	sFormat:URL,Text
+clearData([sFormat])	通过dataTransfer或者clipboardData中删除某种格式的数据	sFormat:Text,URL,File,HTML,Image
+例子:
+
+<SCRIPT>
+function InitiateDrag(){   
+    event.dataTransfer.setData("URL", document.getElementById("oSource").href);    
+}
+
+function FinishDrag(){
+    document.getElementById("oTarget").innerText = event.dataTransfer.getData("URL");
+}
+</SCRIPT>
+</HEAD>
+<BODY>
+    <A ID="oSource" href="http://www.sohu.com" ondragstart="InitiateDrag()" onclick="return false;" >Test Anchor</A>
+    <SPAN ID="oTarget" ondragenter="FinishDrag()">Drop Here</SPAN>
+</BODY>
+效果:
+
+image
+
+选中Test Anchor,然后拖放至Drop Here时,效果如下:
+
+image

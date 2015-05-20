@@ -1,0 +1,115 @@
+
+三种在规范中列出并获得跨移动设备广泛实现的基本触摸事件：
+1. touchstart：手指放在一个DOM元素上。
+2. touchmove：手指拖曳一个DOM元素。
+3. touchend：手指从一个DOM元素上移开。
+每个触摸事件都包括了三个触摸列表：
+1. touches：当前位于屏幕上的所有手指的一个列表。
+2. targetTouches：位于当前DOM元素上的手指的一个列表。
+3. changedTouches：涉及当前事件的手指的一个列表。【这三个列表的区别会在后面讲解，那是个老外的文章，讲的比较清楚。】
+例如，在一个touchend事件中，这就会是移开的手指。
+这些列表由包含了触摸信息的对象组成：
+1. identifier：一个数值，唯一标识触摸会话（touch session）中的当前手指。
+2. target：DOM元素，是动作所针对的目标。
+3. 客户/页面/屏幕坐标：动作在屏幕上发生的位置。
+4. 半径坐标和 rotationAngle：画出大约相当于手指形状的椭圆形。
+可触控应用  
+换了触摸屏幕，这样调试起来比较方便了。上一张截图。
+了解touch事件，用canvas做画板
+
+touchstart、touchmove和touchend事件提供了一组足够丰富的功能来支持几乎是任何类型的基于触摸的交互——其中包括常见的多点触摸手势，比如说捏缩放、旋转等待。
+下面的这段代码让你使用单指触摸来四处拖曳一个DOM元素：
+var obj = document.getElementByIdx_x_x_x('id');
+obj.addEventListener('touchmove', function(event) {
+   // 如果这个元素的位置内只有一个手指的话
+   if (event.targetTouches.length == 1) {
+     var touch = event.targetTouches[0];
+     // 把元素放在手指所在的位置
+     obj.style.left = touch.pageX + 'px';
+     obj.style.top = touch.pageY + 'px';
+   }
+}, false);
+
+下面是一个示例，该例子显示了屏幕上当前所有的触点，它的作用就是用来感受一下设备的响应性。
+
+了解touch事件，用canvas做画板
+// 设置画布并通过ctx变量来暴露上下文
+canvas.addEventListener('touchmove', function(event) {
+    for (var i = 0; i < event.touches.length; i++) {
+      var touch = event.touches;
+      ctx.beginPath();
+      ctx.arc(touch.pageX, touch.pageY, 20, 0, 2*Math.PI, true);
+      ctx.fill();
+      ctx.stroke();
+    }
+  }, false);
+
+不如去看看下面这个例子~ 绘画板！
+http://paulirish.com/demo/multi
+<canvas id="example" height="450" width="922" style=""></canvas>
+JS
+          
+var CanvasDrawr = function(options) {
+    // 这个是设定画布信息
+    var canvas = document.getElementByIdx_x_x_x(options.id),
+        ctxt = canvas.getContext("2d");
+       
+    canvas.style.width = '100%'
+    canvas.width = canvas.offsetWidth;
+    canvas.style.width = '';
+    // 设定来自options的属性
+    ctxt.lineWidth = options.size || Math.ceil(Math.random() * 35);
+    ctxt.lineCap = options.lineCap || "round";
+    ctxt.pX = undefined;
+    ctxt.pY = undefined;
+    var lines = [,,];
+    var offset = $(canvas).offset();
+   
+    var self = {
+        //初始化，绑定touchstart 和 touchmove 事件
+        init: function() {        
+            canvas.addEventListener('touchstart', self.preDraw, false);
+            canvas.addEventListener('touchmove', self.draw, false);            
+        },
+        preDraw: function(event) {//当touchstart时，获取相对canvas的x\y位置，画笔的颜色
+            $.each(event.touches, function(i, touch) {
+              
+                var id      = touch.identifier,
+                    colors  = ["red", "green", "yellow", "blue", "magenta", "orangered"],
+                    mycolor = colors[Math.floor(Math.random() * colors.length)];
+             
+                lines[id] = { x     : this.pageX - offset.left,
+                              y     : this.pageY - offset.top,
+                              color : mycolor
+                           };
+            });
+            event.preventDefault();
+        },
+        draw: function(event) {//touchmove开始划线
+            var e = event, hmm = {};
+            $.each(event.touches, function(i, touch) {
+                var id = touch.identifier,
+                    moveX = this.pageX - offset.left - lines[id].x,
+                    moveY = this.pageY - offset.top - lines[id].y;//移动的x\y
+                var ret = self.move(id, moveX, moveY);//canvas的画线
+                lines[id].x = ret.x;
+                lines[id].y = ret.y;
+            });
+            event.preventDefault();
+        },
+        move: function(i, changeX, changeY) {//这个地方需要了解下canvas 的知识哦。
+            ctxt.strokeStyle = lines[i].color;//设定颜色
+            ctxt.beginPath();//开始路径
+            ctxt.moveTo(lines[i].x, lines[i].y);//移动到
+            ctxt.lineTo(lines[i].x + changeX, lines[i].y + changeY);//画线
+            ctxt.stroke();//填充颜色
+            ctxt.closePath();//结束路径
+            return { x: lines[i].x + changeX, y: lines[i].y + changeY };//返回最后的点坐标
+        }
+    };
+    return self.init();//运行init
+};
+
+$(function(){
+  var super_awesome_multitouch_drawing_canvas_thingy = new CanvasDrawr({id:"example", size: 15 });
+});

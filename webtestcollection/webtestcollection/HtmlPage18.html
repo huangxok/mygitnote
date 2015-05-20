@@ -1,0 +1,106 @@
+﻿<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title></title>
+
+    <script>
+
+        var i = 0;
+        //setInterval(function () {  console.log(i++) }, 1000)
+    </script>
+</head>
+<body>
+    <div style="width: 1000px; height: 300px;">
+        <div style="margin-bottom: 10px; height: 100px; width: 1000px; background: #ffd800; float: left;"></div>
+        <div style="margin-top: 10px; height: 100px; width: 1000px; background: #4cff00; float: left;"></div>
+        <textarea style="max-height: 400px; min-height: 200px; max-width: 400px; min-width: 200px"></textarea>
+    </div>
+    <script>
+        d();
+        var d = function () {
+            return 0;
+        }
+        function abcde() {
+            var x = 0;
+        }
+        //var foo = {
+        //    bar: function () {
+        //        return this.baz;
+        //    },
+        //    baz: 1
+        //};
+        //console.log(typeof (f = foo.bar()))
+        //console.log((f = foo.bar));
+        function inherit(p) {
+            if (p == null) throw TypeError();            //若传入为空 抛出类型异常
+            if (Object.create) return Object.create(p); //若支持ecma5 就返回创建的对象
+            var t = typeof p;                             //若不支持ecma5 则获取传入参数的类型
+            if (t !== "Object" && t !== "function") throw TypeError(); //判断类型 若不为类型为Object或者function 抛出错误
+            function f() { };                      //若t为为Object 或 function  新建一个构造函数f
+            f.prototype = p;			     //构造函数f的原型为p 继承p
+            return new f;			     //返回一个新建的对象
+        }
+        var p = {
+            x: 3.0,
+            y: 4.0,
+            get r() { return Math.sqrt(this.x * this.x + this.y * this.y); },
+            set r(newvalue) {
+                var oldvalue = Math.sqrt(this.x * this.x + this.y * this.y);
+                var ratio = newvalue / oldvalue;
+                this.x *= ratio;
+                this.y *= ratio;
+            },
+            get theta() { return Math.atan2(this.y, this.x); }
+
+        }
+        var q = inherit(p);
+        q.x = 1, q.y = 1;
+        console.log(q.r);
+        console.log(q.theta);
+        var random = {
+            get octet() { return Math.floor(Math.random() * 256); },
+            get uint16() { return Math.floor(Math.random() * 65536); },
+            get int16() { return Math.floor(Math.random() * 65536) - 32768; }
+
+        }
+        Object.defineProperty(Object.prototype,
+	            "extend",      //定义Object.prototype.extend
+	            {
+	                writable: true,
+	                enumerable: false,//定义为不可枚举的
+	                configurable: true,
+	                value: function (o) { //值就是这个函数
+	                    //得到多有的自有属性，包括不可枚举的属性
+	                    var names = Object.getOwnPropertyNames(o);
+	                    for (i = 0; i < names.length; i++) {
+	                        //如果属性已经存在，则跳过
+	                        if (names[i] in this) continue;
+	                        //获取o的属性描述符
+	                        var desc = Object.getOwnPropertyDescriptor(o, names[i]);
+	                        //用它给this 创建一个属性
+	                        Object.defineProperty(this, names[i], desc);
+	                    }
+	                }
+
+	            }
+          );
+
+        Object.prototype.extend = function (o) { //值就是这个函数
+            //得到多有的自有属性，包括不可枚举的属性
+            debugger;
+            var names = Object.getOwnPropertyNames(o);
+            for (i = 0; i < names.length; i++) {
+                //如果属性已经存在，则跳过
+                if (names[i] in this) continue;
+                //获取o的属性描述符
+                var desc = Object.getOwnPropertyDescriptor(o, names[i]);
+                //用它给this 创建一个属性
+                Object.defineProperty(this, names[i], desc);
+            }
+        }
+        var abc = { x: 1, y: 2, z: 3, mm: function () { return 1; } }
+        Object.prototype.extend(abc);
+    </script>
+</body>
+</html>

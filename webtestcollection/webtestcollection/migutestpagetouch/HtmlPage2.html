@@ -1,0 +1,60 @@
+﻿<!DOCTYPE html>
+<html xmlns='http://www.w3.org/1999/xhtml'>
+<head>
+    <title></title>
+    <script type="text/javascript">
+        //var dobj = null;//定义拖动对象
+
+        //function dragdown(o) {
+        //    dobj = o;
+        //    document.onmousemove = dragmove;
+        //    //dobj.setCapture();
+        //}//鼠标按下时给拖动对象赋值
+        //document.onmouseup = function () {
+        //    document.onmousemove = null;
+        //    dobj.CancelCapture();
+        //    dobj = null;
+        //}//鼠标松开时移除拖动事件，把拖动对象赋予空。
+        //function dragmove() {
+        //    if (dobj) {//如果拖动对象不为空，则移动拖动对象，但没有进行坐标判断。需要精准的要判断坐标。
+        //        if (event.offsetX > parseInt(document.getElementById("Process").style.width)) {
+        //            dobj.style.left = parseInt(document.getElementById("Process").style.width) + "px";
+        //        }
+        //        else if (event.offsetX < parseInt(document.getElementById("Process").style.left)) {
+        //            dobj.style.left = 0 + "px";
+        //        }
+        //        else {
+        //            dobj.style.left = event.offsetX + "px";
+        //        }
+        //    }
+        //}
+        var pos = {};
+        var p = document.getElementById('Processa');
+        var pp=document.getElementById('Process')
+        p.addEventListener('mousedown', function (e) {
+            e.preventDefault();
+            pos.x = e.target.offsetLeft;
+            pos.y = e.target.offsetTop;
+        }, true)
+        p.addEventListener('mousemove', function (e) {
+            if(e.offsetX>pp.style.width)
+        }, false)
+
+    </script>
+    <!--css代码,js代码写在下面-->
+</head>
+<body>
+    <div id="jilu" style="width: 100px; height: 100px; color: red; background-color: green;"></div>
+    <div id="contain" style="height: 80px; WIDTH: 1000px; POSITION: absolute; LEFT: 200px; TOP: 260px; BACKGROUND: #B81F6D">
+        <p>进度条</p>
+        <div id="processcontain" style="position: relative; height: 4px; background-color: rgba(255,255,255,0.1); cursor: pointer;">
+            <div id="ProcessYet" style="position: absolute; height: 4px; line-height: 4px; left: 0; top: 0; cursor: pointer; background-color: #ffcaaa;">
+            </div>
+            <div id="Process" style="width: 100%; line-height: 4px; height: 4px; cursor: pointer; background-color: rgba(255,255,255,0.3);">
+            </div>
+            <a href="#" id="Processa" style="position: absolute; border-radius: 50%; height: 12px; width: 12px; outline: 0; border: 0; margin: -4px 0 0 0; left: 30px; top: 0px; height: 12px; line-height: 12px; background-color: #ffcaaa; z-index: 99;"></a>
+        </div>
+    </div>
+    <!-- html元素写在下面 -->
+</body>
+</html>

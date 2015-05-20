@@ -1,0 +1,23 @@
+﻿<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title></title>
+
+    <script src="../../第一章%20%20%20%20概要/html/copyObject.js"></script>
+    <script type="text/javascript">
+        function TestResult() {
+            this.x = 1;
+            this.getResults = function () { return [{ a: 1 }, { b: 2 }, { c: 34 }, { d: 8 }]; };
+            this.getDate = function () { return new Date };
+        }
+    </script>
+    <script src="interfaceexample1.js"></script>
+</head>
+<body>
+    <script>
+        var Sd = new Resultmatter(new TestResult(), TestResult);
+        document.body.appendChild(Sd.renderResults());
+    </script>
+</body>
+</html>

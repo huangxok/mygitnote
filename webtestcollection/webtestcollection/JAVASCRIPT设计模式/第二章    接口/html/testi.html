@@ -1,0 +1,31 @@
+﻿<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <title></title>
+</head>
+<body>
+    <script src="interface.js"></script>
+    <script>
+        var Composite = new Interface("Composite", ["add", "remove", "getChild"]);
+        var FormItem = new Interface("FormItem", ["save"]);
+        var f = function () { };
+        f.prototype = {
+            add: function () { },
+            remove: function () { },
+            //getChild: function () { },
+            save: function () { }
+        }
+        function addForm(formInstance) {
+            Interface.ensureImplements(formInstance, Composite, FormItem);
+        }
+
+        var CompositeForm = function (id, method, action) {//implements Composite,FormItem
+            this.id = id;
+            this.method = method;
+            this.action = action;
+
+        }
+
+    </script>
+</body>
+</html>

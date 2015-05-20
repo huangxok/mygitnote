@@ -1,0 +1,344 @@
+﻿<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>趣味连线</title>
+    <style type="text/css">
+        .zi {
+            font-size: 24px;
+            font-weight: bold;
+            padding-left: 600px;
+            color: #000;
+            margin-top: 40px;
+        }
+
+        .point {
+            position: absolute;
+            width: 2px;
+            height: 1px;
+            overflow: hidden;
+            background: green;
+            z-index: -20;
+        }
+
+        .content {
+            width: 600px;
+            height: 300px;
+            margin: 40px auto;
+            border: 1px solid red;
+        }
+
+        .col {
+            float: left;
+            cursor: pointer;
+            margin-left: 50px;
+            background: #fff;
+        }
+
+            .col p {
+                margin-top: 53px;
+                font-weight: bold;
+                font-size: 22px;
+            }
+
+        .right {
+            float: right;
+            cursor: pointer;
+        }
+
+        .content b {
+            display: inline-block;
+            width: 10px;
+            height: 10px;
+            background: yellow;
+            border: 2px solid #ccc;
+            margin-bottom: 5px;
+            -webkit-border-radius: 6px;
+            -webkit-box-shadow: #ccc 1px 3px 5px;
+        }
+
+            .content b:hover {
+                background: pink;
+            }
+
+        .right p img {
+            width: 70px;
+            height: 61px;
+            vertical-align: middle;
+            margin-top: 8px;
+        }
+
+        .right p {
+            margin-top: 20px;
+            margin-right: 50px;
+        }
+
+        .but {
+            padding-left: 800px;
+        }
+    </style>
+    <script src='js/jquery-1.8.0.min.js'></script>
+</head>
+<body>
+    <div class='zi'>一对一连线</div>
+    <div class='content'>
+        <div class='col'>
+            <p>长方形 &nbsp;<input class="grapquestion" type="radio" name="1" value="1"></p>
+            <p>梯&nbsp;&nbsp;形&nbsp; <input class="grapquestion" type="radio" name="2" value="2"></p>
+            <p>圆&nbsp;&nbsp;形&nbsp; <input class="grapquestion" type="radio" name="3" value="3"></p>
+        </div>
+        <div class='col right'>
+            <p> <input class="grapanwser" type="radio" name="4" value="2">&nbsp;<img src="img/tixing.PNG"></p>
+            <p> <input class="grapanwser" type="radio" name="5" value="3">&nbsp;<img src="img/yuanxing.PNG"></p>
+            <p> <input class="grapanwser" type="radio" name="6" value="1">&nbsp;<img src="img/chang.PNG"></p>
+        </div>
+        <div class='but'>
+            <input id="btn" type='button' value='核对答案' onclick="checkanswer()" />
+            <input type='button' value='再做一次' onclick='chongzuo()' />
+        </div>
+    </div>
+    <script>
+        var checkone = 0;
+        var counter = 0;
+        var bbb = [];
+        //var col = document.querySelector('.content');
+        var radios = [];
+        //页面初始加载svg
+        (function () {
+            var questions = document.querySelectorAll('.grapquestion'),
+                anwser = document.querySelectorAll('.grapanwser');
+            for (var i = 0; i < questions.length; i++) {
+                getradios(questions[i]);
+            }
+            for (var i = 0; i < anwser.length; i++) {
+                getradios(anwser[i]);
+            }
+
+            function getradios(el) {
+                var radio = {};
+                var elgetBoundingClientRect = el.getBoundingClientRect()
+                radio.l = elgetBoundingClientRect.left;
+                radio.r = elgetBoundingClientRect.right;
+                radio.t = elgetBoundingClientRect.top;
+                radio.b = elgetBoundingClientRect.bottom;
+                radio.v = el.value;
+                radio.el = el;
+                radios.push(radio);
+            }
+            var svg = createElementsvg('svg');
+            svg.style.width = Math.floor(radios[3].l - radios[0].r) - 3;
+            svg.style.height = '300px';
+            svg.style.position = 'absolute';
+            svg.style.left = Math.ceil(radios[0].r + 2);
+            svg.style.zIndex = '999';
+            document.querySelector('.content').appendChild(svg);
+            var defs = createElementsvg('defs');
+            svg.appendChild(defs);
+            var marker1 = createElementsvg('marker');
+            marker1.setAttribute('id', 'markerArrow');
+            marker1.setAttribute('markerWidth', '5');
+            marker1.setAttribute('markerHeight', '5');
+            marker1.setAttribute('refX', '5');
+            marker1.setAttribute('refY', '5');
+            marker1.setAttribute('orient', 'auto');
+            defs.appendChild(marker1);
+            var path = createElementsvg('path');
+            path.setAttribute('d', 'M 0 0 5 5 0 10 Z');
+            path.style.fill = 'red';
+            marker1.appendChild(path);
+        })()
+
+        for (var i = 0; i < radios.length; i++) {
+            var type = i < 3 ? 1 : 2;
+            bindEvent(radios[i].el, 'click', drawline(i, type, radios[i]));
+        }
+        function bindEvent(node, type, func) { //事件绑定方法
+            if (node.addEventListener) {
+                node.addEventListener(type, func, true);
+            } else if (node.attachEvent) {
+                node.attachEvent("on" + type, func);
+            } else {
+                node["on" + type] = func;
+            }
+        };
+        function drawline(index, type, node) {
+            return function () {
+                var line;
+                var ele = {};
+                ele.point = node;
+                ele.index = index;
+                ele.type = type;
+                bbb.push(ele);
+                counter++;
+                if (bbb.length > 1) {
+                    for (var i = 0; i < 1; i++) {
+                        if (bbb[i].type == bbb[i + 1].type) {
+                            bbb.pop();
+                            alert('小朋友，这样做是不行的哟')
+                            return false;
+                        }
+                    }
+                }
+
+                if (bbb.length % 2 != 0) {
+                    return;
+                }
+                else {
+                    for (var i = bbb.length - 2; i < bbb.length; i += 2) {
+                        line = document.createElementNS('http://www.w3.org/2000/svg', 'line');
+                        if (type == 2) {
+                            line.setAttribute('x1', 0);
+                            line.setAttribute('y1', (bbb[bbb.length - 2].point.t - document.getElementsByTagName('svg')[0].getBoundingClientRect().top) + (bbb[bbb.length - 2].point.b - bbb[bbb.length - 2].point.t) / 2);
+                            line.setAttribute('x2', node.el.getBoundingClientRect().left - bbb[bbb.length - 2].point.r);
+                            line.setAttribute('y2', (node.t - document.getElementsByTagName('svg')[0].getBoundingClientRect().top) + (node.b - node.t) / 2);
+                            //if (bbb[bbb.length - 2].point.v == node.v) {
+                            //    line.style.stroke = 'green';
+                            //}
+                            //else {
+                            //    line.style.stroke = 'red';
+                            //}
+                            line.style.stroke = 'blue';
+                            line.style.strokeWidth = '2px';
+                            line.setAttribute('marker-mid', 'url(#markerArrow)')
+                        }
+                        else {
+                            line.setAttribute('x1', 0);
+                            line.setAttribute('y1', (node.t - document.getElementsByTagName('svg')[0].getBoundingClientRect().top) + (node.b - node.t) / 2);
+                            line.setAttribute('x2', bbb[bbb.length - 2].point.l - node.l);
+                            line.setAttribute('y2', (bbb[bbb.length - 2].point.t - document.getElementsByTagName('svg')[0].getBoundingClientRect().top) + (bbb[bbb.length - 2].point.b - bbb[bbb.length - 2].point.t) / 2);
+                            //if (bbb[bbb.length - 2].point.v == node.v) {
+                            //    line.style.stroke = 'green';
+                            //}
+                            //else {
+                            //    line.style.stroke = 'red';
+                            //}
+                            line.style.stroke = 'blue';
+                            line.style.strokeWidth = '2px';
+                            line.setAttribute('marker-mid', 'url(#markerArrow)')
+                        }
+                        document.getElementsByTagName('svg')[0].appendChild(line);
+                    }
+
+                }
+
+            }
+        }
+        function createElementsvg(nodename) {
+            return document.createElementNS('http://www.w3.org/2000/svg', nodename);
+        }
+        function checkanswer() {
+            if (checkone == 0) {
+                if (bbb.length % 2 != 0) {
+                    return false;
+                }
+                else {
+                    var bl = document.getElementsByTagNameNS('http://www.w3.org/2000/svg', 'line')
+                    for (var i = 0; i < bl.length; i++) {
+                        bl[i].style.strokeDasharray = '2 2';
+                    }
+
+                    for (var i = 0; i < radios.length / 2; i++) {
+                        for (var j = radios.length / 2; j < radios.length; j++) {
+                            if (radios[i].v == radios[j].v) {
+                                var line = createElementsvg('line');
+                                line.setAttribute('x1', 0);
+                                line.setAttribute('y1', radios[i].t - document.getElementsByTagName('svg')[0].getBoundingClientRect().top + (radios[i].b - radios[i].t) / 2);
+                                line.setAttribute('x2', radios[j].l - radios[i].r);
+                                line.setAttribute('y2', radios[j].t - document.getElementsByTagName('svg')[0].getBoundingClientRect().top + (radios[i].b - radios[i].t) / 2);
+                                line.style.stroke = 'green';
+                                line.style.strokeWidth = '2px';
+                                document.getElementsByTagName('svg')[0].appendChild(line);
+                            }
+                        }
+                    }
+                }
+                checkone++;
+            }
+            else {
+                alert('已经给出答案')
+            }
+        }
+        function chongzuo() {
+            location.reload()
+        }
+
+
+
+
+
+    </script>
+
+    <!--<script>
+        var x = [];
+        var y = [];
+        var c = [];
+
+        $('.click').click(function (e) {
+            c.push($(this).val());
+            e = window.event || e;
+            var tx = e.clientX;
+            var ty = e.clientY;
+            x.push(tx);
+            y.push(ty);
+            //console.log( x );
+            //console.log( y );
+            if (x.length == 2 && y.length == 2) {
+                createLine(x[0], y[0], x[1], y[1]);
+                x.length = 0;
+                y.length = 0;
+            }
+            return c, x, y;
+
+        })
+        $("#btn").click(function () {
+            var x, y;
+            if (c[0] != c[1]) {
+
+                $(".point ").css({ background: "red" })
+            } else {
+
+            }
+            if (c[2] != c[3]) {
+                $(".point ").css({ background: "red" })
+            } else {
+
+            }
+            if (c[4] != c[5]) {
+                $(".point ").css({ background: "red" })
+            }
+        });
+        var d = [];
+        function point(x, y) {
+            var div = document.createElement('div');
+            div.style.left = x + 'px';
+            div.style.top = y + 'px';
+            div.className = 'point';
+            document.body.appendChild(div);
+
+        }
+
+        function createLine(x1, y1, x2, y2) {
+            var tmp, x, y;
+            if (x1 >= x2) {
+                tmp = x1;
+                x1 = x2;
+                x2 = tmp;
+                tmp = y1;
+                y1 = y2;
+                y2 = tmp;
+            }
+            for (var i = x1 ; i < x2; i++) {
+                x = i;
+                y = (y2 - y1) / (x2 - x1) * (x - x1) + y1;
+                point(x, y);
+            }
+        }
+
+        function chongzuo() {
+            location.reload()
+        }
+
+    </script>-->
+
+</body>
+</html>

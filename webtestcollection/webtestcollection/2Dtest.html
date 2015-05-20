@@ -1,0 +1,159 @@
+﻿<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title></title>
+    <style>
+        #animated_div {
+            width: 60px;
+            height: 40px;
+            background: #92B901;
+            color: #ffffff;
+            position: relative;
+            font-weight: bold;
+            font: bold 12px '微软雅黑', Verdana, Arial, Helvetica, sans-serif;
+            padding: 20px 10px 0px 10px;
+            animation: animated_div 10s infinite;
+            -moz-animation: animated_div 10s infinite;
+            -webkit-animation: animated_div 10s infinite;
+            -o-animation: animated_div 10s infinite;
+            border-radius: 5px;
+            -webkit-border-radius: 5px;
+        }
+
+        @keyframes animated_div {
+            0% {
+                transform: rotateX(0deg) rotateY(0deg);
+                left: 0px;
+            }
+
+            25% {
+                transform: rotateX(90deg) rotateY(90deg);
+                left: 0px;
+            }
+
+            50% {
+                transform: rotateX(180deg) rotateY(180deg);
+                left: 500px;
+            }
+
+
+
+            75% {
+                transform: rotateX(270deg) rotateY(270deg);
+                left: 500px;
+                background: #1ec7e6;
+            }
+
+            100% {
+                transform: rotate(X360deg) rotateY(360deg);
+                left: 0px;
+            }
+        }
+
+        @-webkit-keyframes animated_div {
+            0% {
+                -webkit-transform: rotate(0deg);
+                left: 0px;
+            }
+
+            25% {
+                -webkit-transform: rotate(20deg);
+                left: 0px;
+            }
+
+            50% {
+                -webkit-transform: rotate(0deg);
+                left: 500px;
+            }
+
+            55% {
+                -webkit-transform: rotate(0deg);
+                left: 500px;
+            }
+
+            70% {
+                -webkit-transform: rotate(0deg);
+                left: 500px;
+                background: #1ec7e6;
+            }
+
+            100% {
+                -webkit-transform: rotate(-360deg);
+                left: 0px;
+            }
+        }
+
+        @-moz-keyframes animated_div {
+            0% {
+                -moz-transform: rotate(0deg);
+                left: 0px;
+            }
+
+            25% {
+                -moz-transform: rotate(20deg);
+                left: 0px;
+            }
+
+            50% {
+                -moz-transform: rotate(0deg);
+                left: 500px;
+            }
+
+            55% {
+                -moz-transform: rotate(0deg);
+                left: 500px;
+            }
+
+            70% {
+                -moz-transform: rotate(0deg);
+                left: 500px;
+                background: #1ec7e6;
+            }
+
+            100% {
+                -moz-transform: rotate(-360deg);
+                left: 0px;
+            }
+        }
+
+        @-o-keyframes animated_div {
+            0% {
+                transform: rotate(0deg);
+                left: 0px;
+            }
+
+            25% {
+                transform: rotate(20deg);
+                left: 0px;
+            }
+
+            50% {
+                transform: rotate(0deg);
+                left: 500px;
+            }
+
+            55% {
+                transform: rotate(0deg);
+                left: 500px;
+            }
+
+            70% {
+                transform: rotate(0deg);
+                left: 500px;
+                background: #1ec7e6;
+            }
+
+            100% {
+                transform: rotate(-360deg);
+                left: 0px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div>
+        <p id="animated_div">csss3动画</p>
+    </div>
+</body>
+</html>

@@ -1,0 +1,158 @@
+﻿<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <title></title>
+</head>
+<body>
+    <script>
+        ; var PromiseClass
+        (function (PromiseClass) {
+
+            //define Promise contructor
+            var Promise = function () {
+                this.state = 'pending'   //未完成
+                this.thenables = [];    //用来存放then方法生成的内部对象
+            }
+
+            //该方法用来将实例对象的状态从“未完成”变为“已完成”
+            Promise.prototype.resolve = function (value) {
+                if (this.state != 'pending') return;
+                this.state = 'fullfilled';
+                this.value = value;
+                this._handleThen();
+                return this;
+            }
+            //上面代码除了改变实例的状态，
+            //还将异步任务的返回值存入实例对象的value属性，
+            //然后调用内部方法_handleThen，最后返回实例对象本身
+
+
+            Promise.prototype.reject = function (reason) {
+                if (this.state != 'pending') return;
+                this.state = 'rejected';
+                this.reason = reason;
+                this._handleThen();
+                return this;
+            }
+
+            Promise.prototype.then = function (onFulfilled, onRejected) {
+                var thenable = {};
+                if (typeof onFulfilled == 'function') {
+                    thenable.fullfill = onFulfilled;
+                }
+                if (typeof onRejected == 'function') {
+                    thenable.reject = onRejected;
+                }
+                if (this.state != 'pending') {
+                    setImmediate(function () {
+                        this._handleThen();
+                    }.bind(this)
+                    )
+                }
+                thenable.promis = new Promise();
+                thi.thenables.push(thenable);
+                return thenable.promis;
+            }
+
+            Promise.prototype._handleThen = function () {
+                if (this.state === 'pending') {
+                    return;
+                }
+                if (this.thenables.length) {
+                    for (var i = 0; i < length; i++) {
+                        var thenPromise = this.thenables[i]
+                        var returnVal;
+                        try {
+                            //运行回调函数
+                            switch (this.state) {
+                                case 'fulfilled':
+                                    if (this.thenables[i].fulfill) {
+                                        returnedVal = this.thenables[i].fulfill(this.value);
+                                    } else {
+                                        thenPromise.resolve(this.value);
+                                    }
+                                    break;
+                                case 'rejected':
+                                    if (this.thenables[i].reject) {
+                                        returnedVal = this.thenables[i].reject(this.reason);
+                                    } else {
+                                        thenPromise.reject(this.reason);
+                                    }
+                                    break;
+                            }
+
+                            if (returnedVal === null) {
+                                this.thenables[i].promise.resolve(returnedVal);
+                            }
+                            else if (returnedVal instanceof Promise || typeof returnedVal.then === 'function') {
+                                returnVal.then(thenPromise.resolve.bind(thenPromise), thenPromise.reject.bind(thenPromise));
+                            }
+                            else {
+                                this.thenables[i].promise.resolve(returnedVal);
+                            }
+                        } catch (e) {
+                            thenPromise.reject(e);
+                        }
+                    }
+                }
+                this.thenables = [];
+            }
+
+            PromiseClass.Promise = Promise;
+
+        })(PromiseClass || (PromiseClass = {}))
+    </script>
+    <script>
+        function search(term, onload, onerror) {
+            var xhr, results, url;
+
+            url = 'http://example.com/search?q=' + term;
+
+            xhr = new XMLHttpRequest();
+            xhr.open('GET', url, true);
+
+            xhr.onload = function (e) {
+                if (this.status === 200) {
+                    results = JSON.parse(this.responseText);
+                    onload(results);
+                }
+            };
+
+            xhr.onerror = function (e) {
+                onerror(e);
+            };
+
+            xhr.send(null);
+        }
+
+        search("Hello World", f1, f2);
+
+        function search(term) {
+
+            var url = 'http://example.com/search?q=' + term;
+            var p = new Promise();
+            var xhr = new XMLHttpRequest();
+            var result;
+
+            xhr.open('GET', url, true);
+
+            xhr.onload = function (e) {
+                if (this.status === 200) {
+                    results = JSON.parse(this.responseText);
+                    p.resolve(results);
+                }
+            };
+
+            xhr.onerror = function (e) {
+                p.reject(e);
+            };
+
+            xhr.send(null);
+
+            return p;
+        }
+
+        search("Hello World").then(f1, f2);
+    </script>
+</body>
+</html>

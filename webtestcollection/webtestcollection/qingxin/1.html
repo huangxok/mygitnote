@@ -1,0 +1,124 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=gb2312" />
+    <title>无标题文档</title>
+    <style type="text/css">
+        ul {
+            margin: 0;
+            padding: 0;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+        }
+
+        #con {
+            width: 1000px;
+            height: 560px;
+            margin: 50px auto;
+        }
+
+        #left {
+            width: 185px;
+            height: 560px;
+            float: left;
+        }
+
+            #left ul li {
+                width: 149px;
+                height: 70px;
+                background-image: url(images/gray1.png);
+                list-style: none;
+                padding-left: 35px;
+                line-height: 70px;
+            }
+
+                #left ul li a {
+                    color: #FFF;
+                    padding-left: 15px;
+                    font-size: 14px;
+                }
+
+                #left ul li:hover {
+                    background-image: url(images/gray2.png);
+                }
+
+        #right {
+            width: 790px;
+            height: 560px;
+            float: right;
+            border: 1px solid #CCC;
+        }
+
+            #right .content {
+                width: 790px;
+                height: 540px;
+                display: none;
+                padding-top: 20px;
+                text-align: center;
+            }
+
+        #Left ul li.hover {
+            background: url("images/gray2.png");
+        }
+    </style>
+</head>
+
+<body>
+    <div id="con">
+        <div id="left">
+            <ul>
+                <li class="hover">
+                    <img src="images/img1.png" align="absmiddle" /><a href="#">百度云</a></li>
+                <li>
+                    <img src="images/img2.png" align="absmiddle" /><a href="#">百度云</a></li>
+                <li>
+                    <img src="images/img3.png" align="absmiddle" /><a href="#">百度云</a></li>
+                <li>
+                    <img src="images/img4.png" align="absmiddle" /><a href="#">百度云</a></li>
+                <li>
+                    <img src="images/img6.png" align="absmiddle" /><a href="#">百度云</a></li>
+                <li>
+                    <img src="images/img7.png" align="absmiddle" /><a href="#">百度云</a></li>
+                <li>
+                    <img src="images/img8.png" align="absmiddle" /><a href="#">百度云</a></li>
+                <li>
+                    <img src="images/img9.png" align="absmiddle" /><a href="#">百度云</a></li>
+            </ul>
+        </div>
+        <div id="right">
+            <ul>
+                <li class="content" style="display: block">
+                    <img src="images/rimg1.png"></li>
+                <li class="content">
+                    <img src="images/rimg2.png"></li>
+                <li class="content">
+                    <img src="images/rimg3.png"></li>
+                <li class="content">
+                    <img src="images/rimg4.png"></li>
+                <li class="content">
+                    <img src="images/rimg5.png"></li>
+                <li class="content">
+                    <img src="images/rimg6.png"></li>
+                <li class="content">
+                    <img src="images/rimg7.png"></li>
+                <li class="content">
+                    <img src="images/rimg8.png"></li>
+            </ul>
+        </div>
+    </div>
+    <script type="text/javascript" src="js/jquery.js"></script>
+    <script type="text/javascript">
+        $("#left ul li").hover(function () {
+            var index = $(this).index();
+            $(this).addClass("hover").sibling().removeClass("hover");
+            $("#right ul li").eq(index).show().siblings().hide();
+        });
+    </script>
+
+
+
+</body>
+</html>

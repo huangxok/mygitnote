@@ -1,0 +1,72 @@
+﻿<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <title></title>
+    <script>
+        //if ("indexedDB" in window) {
+        //    // 支持
+        //    alert(1);
+        //} else {
+        //    // 不支持
+        //    alert("no");
+        //}
+        var openRequest = indexedDB.open("test", 1);
+        var db = openRequest.result;
+
+        openRequest.onupgradeneeded = function (e) {
+            console.log("Upgrading...");
+        }
+
+        openRequest.onsuccess = function (e) {
+            console.log("Success!");
+            db = e.target.result;
+        }
+
+        openRequest.onerror = function (e) {
+            console.log("Error");
+            console.dir(e);
+        }
+        if (!db.objectStoreNames.contains("firstOS")) {
+            db.createObjectStore("firstOS", { keypath: "email" });
+            //db.createObjectStore("firstOS", { autoIncrement: true });
+        }
+        var t = db.transaction(["firstOS"], "readwrite");
+        var store = t.objectStore("firstOS");
+        var o = { p: 123 };
+        var request = store.add(o);
+        request.onerror = function (e) {
+            console.log("Error", e.target.error.name);
+            // error handler
+        }
+        request.onsuccess = function (e) {
+            alert("添加成功")
+        }
+        t.onabort = function (event) {
+            // some code
+        };
+        t.oncomplete = function (event) {
+            // some code
+        };
+        t.onerror = function (event) {
+            // some code
+        };
+        var t = db.transaction(["test"], "readonly");
+        var store = t.objectStore("test");
+
+        var ob = store.get("p");
+        //var ob = store.get(x);
+
+        ob.onsuccess = function (e) {
+            // ...
+            alert(e.target.result);
+        }
+        //db.transaction(["test"], "readonly")
+        //.objectStore("test")
+        //.get(X)
+        //.onsuccess = function (e) { }
+    </script>
+</head>
+<body>
+
+</body>
+</html>

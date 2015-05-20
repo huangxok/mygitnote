@@ -1,0 +1,251 @@
+﻿<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>js图片滚动切换插件标题和图片切换滚动</title>
+    <meta name="description" content="js图片滚动切换插件，制作标题文字和序列按钮对应焦点图片切换滚动，可自定义多种焦点图片滚动切换。js代码。" />
+    <style type="text/css">
+        * {
+            margin: 0;
+            padding: 0;
+            list-style-type: none;
+        }
+
+        a, img {
+            border: 0;
+        }
+
+        body {
+            font: 12px/180% "宋体",Arial, Helvetica, sans-serif;
+        }
+        /*图片轮换*/
+        #slideBox {
+            width: 475px;
+            height: 300px;
+            overflow: hidden;
+            position: relative;
+            margin: 20px auto;
+        }
+
+            #slideBox ul#show_pic {
+                margin: 0;
+                padding: 0;
+                list-style: none;
+                height: 300px;
+                width: 4750px;
+                position: absolute;
+            }
+
+                #slideBox ul#show_pic li {
+                    float: left;
+                    margin: 0;
+                    padding: 0;
+                    height: 285px;
+                }
+
+                    #slideBox ul#show_pic li img {
+                        display: block;
+                    }
+
+        #iconBall {
+            position: absolute;
+            bottom: 0;
+            right: 0;
+        }
+
+            #iconBall li {
+                float: left;
+                color: #7a7a7a;
+                width: 32px;
+                height: 28px;
+                line-height: 28px;
+                cursor: pointer;
+                text-align: center;
+                font-size: 14px;
+                font-weight: bold;
+                padding-top: 4px;
+            }
+
+                #iconBall li.active {
+                    background: url(images/iconbg.png) no-repeat;
+                    color: #fff;
+                }
+
+        #slideText {
+            width: 475px;
+            height: 28px;
+            background: rgba(0,0,0,0.7);
+            color: #fff;
+            position: absolute;
+            left: 0px;
+            bottom: 0px;
+            *background: transparent;
+            filter: progid:DXImageTransform.Microsoft.gradient(startColorstr=#b2000000,endColorstr=#b2000000);
+        }
+
+        #textBall {
+            position: absolute;
+            left: 10px;
+            bottom: 3px;
+        }
+
+            #textBall li {
+                float: left;
+                cursor: pointer;
+                display: none;
+                color: #fff;
+                font-size: 14px;
+            }
+
+                #textBall li.active {
+                    display: block;
+                }
+
+                #textBall li a {
+                    text-decoration: none;
+                    color: #fff;
+                }
+    </style>
+</head>
+
+<body>
+    <div id="slideBox">
+        <ul id="show_pic" style="left: 0px">
+            <li><a href="http://www.17sucai.com/" target="_blank">
+                <img alt="玩家用了都说好" title="" height="300" width="475" src="images/dk.jpg" /></a></li>
+            <li><a href="http://www.17sucai.com/" target="_blank">
+                <img alt="20000份百万庄园咖啡免费领" title="" height="300" width="475" src="images/ldhkf.jpg" /></a></li>
+            <li><a href="http://www.17sucai.com/" target="_blank">
+                <img alt="【网易彩票】93折抢彩票红包" title="" height="300" width="475" src="images/hbdz.jpg" /></a></li>
+            <li><a href="http://www.17sucai.com/" target="_blank">
+                <img alt="【网易保险】变身车主VIP有好礼" title="" height="300" width="475" src="images/baoxianvip.jpg" /></a></li>
+            <li><a href="http://www.17sucai.com/" target="_blank">
+                <img alt="【网易团长】 让团购变得更划算" title="" height="300" width="475" src="images/slide4.jpg" /></a></li>
+            <li><a href="http://www.17sucai.com/" target="_blank">
+                <img alt="【魔术杯】包大人心心念念的神器" title="" height="300" width="475" src="images/bdrhm.jpg" /></a></li>
+        </ul>
+        <div id="slideText"></div>
+        <ul id="iconBall">
+            <li class="active">1</li>
+            <li>2</li>
+            <li>3</li>
+            <li>4</li>
+            <li>5</li>
+            <li>6</li>
+        </ul>
+        <ul id="textBall">
+            <li class="active"><a href="javascript:void(0)">【网易商城】玩家用了都说好</a></li>
+            <li><a href="javascript:void(0)">【网易乐得惠】20000份百万庄园咖啡免费领</a></li>
+            <li><a href="javascript:void(0)">【网易彩票】93折抢彩票红包</a></li>
+            <li><a href="javascript:void(0)">【网易保险】变身车主VIP有好礼</a></li>
+            <li><a href="javascript:void(0)">【网易团长】让团购变得更划算</a></li>
+            <li><a href="javascript:void(0)">【魔术杯】包大人心心念念的神器</a></li>
+        </ul>
+    </div>
+    <!--slideBox end-->
+
+    <script type="text/javascript">
+
+        var glide = new function () {
+            function $id(id) { return document.getElementById(id); };
+            this.layerGlide = function (auto, oicoball, otextball, oshowpic, movepx, second, fSpeed, point) {
+                debugger;
+                var oicoli = $id(oicoball).getElementsByTagName('li');      //获取 iconBall中 li的集合
+                var otextli = $id(otextball).getElementsByTagName('li');    //获取 textBall中 li的集合
+                var interval, timeout, oshowpicleft;  //定义变量
+                var time = 1;
+                var sum = oicoli.length;     //获取 iconBall中 li的个数
+                var a = 0;
+                var delay = second * 1000;   //间隔时间
+                //左滚动
+                var setValLeft = function (s) {    //设置左滚动
+                    return function () {
+                        oshowpicleft = Math.abs(parseInt($id(oshowpic).style[point])); //获取show_pic的left的属性
+                        $id(oshowpic).style[point] = -Math.floor(oshowpicleft + (parseInt(s * movepx) - oshowpicleft) * fSpeed) + 'px'; //向左滚动10%（speed为百分比）
+                        if (oshowpicleft == [(movepx * s)]) {  //当滚动到最后张图片时 清除循环滚动 a为最后涨图片的索引
+                            clearInterval(interval);
+                            a = s;
+                        }
+                    }
+                };
+                //右滚动
+                var setValRight = function (s) {
+                    return function () {
+                        oshowpicleft = Math.abs(parseInt($id(oshowpic).style[point]));
+                        $id(oshowpic).style[point] = -Math.ceil(oshowpicleft + (parseInt(s * movepx) - oshowpicleft) * fSpeed) + 'px';
+                        if (oshowpicleft == [(movepx * s)]) {
+                            clearInterval(interval);
+                            a = s;
+                        }
+                    }
+                }
+                //自动滚动
+                //function autoGlide() {
+                //    for (var c = 0; c < sum; c++) {
+                //        oicoli[c].className = '';
+                //        otextli[c].className = '';
+                //    };
+                //    clearTimeout(interval);     //清除自动滚动事件（循环）
+                //    if (a == (parseInt(sum) - 1)) {   //若滚动到最后张图片 重新设置a=0 即索引0
+                //        for (var c = 0; c < sum; c++) {
+                //            oicoli[c].className = '';
+                //            otextli[c].className = '';
+                //        };
+                //        a = 0;
+                //        oicoli[a].className = "active";
+                //        otextli[a].className = "active";
+                //        interval = setTimeout(setTimeout(setValLeft(a)), time);  //回滚到第一张图片
+                //        timeout = setTimeout(autoGlide, delay);       //执行autoGlide  （ 递归 ）和setinterval 一样
+                //    } else {
+                //        a++;
+                //        oicoli[a].className = "active";
+                //        otextli[a].className = "active";
+                //        interval = setTimeout(setTimeout(setValRight(a)), time);
+                //        timeout = setTimeout(autoGlide, delay);
+                //    }
+                //}
+
+                //if (auto) {
+                //    timeout = setTimeout(autoGlide, delay);
+                //};
+                for (var i = 0; i < sum; i++) {  //为每个iconball中li 添加mouseover事件
+                    oicoli[i].onmouseover = (
+                        function (i) {
+                            return function () {
+                                for (var c = 0; c < sum; c++) {
+                                    oicoli[c].className = '';
+                                    otextli[c].className = '';
+                                };
+                                clearTimeout(timeout);    //清除自动滚动
+                                clearTimeout(interval);   //清除默认的mouseover
+                                oicoli[i].className = "active";
+                                otextli[i].className = "active";
+                                if (Math.abs(parseInt($id(oshowpic).style[point])) > [(movepx * i)]) {
+                                    interval = setInterval(setValLeft(i), time);
+                                    this.onmouseout = function () { if (auto) { timeout = setTimeout(autoGlide, delay); }; };
+                                } else if (Math.abs(parseInt($id(oshowpic).style[point])) < [(movepx * i)]) {
+                                    interval = setInterval(setValRight(i), time);
+                                    this.onmouseout = function () { if (auto) { timeout = setTimeout(autoGlide, delay); }; };
+                                }
+                            }
+                        })(i)
+                }
+
+            }
+        }
+
+        //调用语句
+        glide.layerGlide(
+            true,         //设置是否自动滚动
+            'iconBall',   //对应索引按钮
+            'textBall',   //标题内容文本
+            'show_pic',   //焦点图片容器
+            475,          //设置滚动图片位移像素
+            2,			  //设置滚动时间2秒 
+            0.1,          //设置过渡滚动速度
+            'left'		  //设置滚动方向“向左”
+        );
+    </script>
+
+</body>
+</html>

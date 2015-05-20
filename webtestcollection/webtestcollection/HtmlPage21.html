@@ -1,0 +1,73 @@
+﻿<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <title></title>
+    <style>
+        .auto0 {
+            margin: 0 auto;
+        }
+    </style>
+    <script src="Scripts/jquery-1.7.1.js"></script>
+</head>
+<body>
+
+    <svg width="1000" height="1000" color="rgb(2,34,123)">
+        <line x1="0" y1="0" x2="200" y2="0" style="stroke:rgb(0,0,0);stroke-width:1"></line>
+        <rect x="0" y="0" height="100" width="200" style="stroke: #70d5dd; fill: #dd524b" />
+        <ellipse cx="60" cy="60" ry="40" rx="20" stroke="black" stroke-width="5" fill="rgb(233,232,33)"></ellipse>
+        <polygon fill="green" stroke="orange" stroke-width="10" points="350, 75  379,161 469,161 397,215 423,301 350,250 277,301 303,215 231,161 321,161"></polygon>
+        <path id="path1" d="M160.143,196c0,0,62.777-28.033,90-17.143c71.428,28.572,73.952-25.987,84.286-21.428" style="fill:blue;stroke-width:2;"></path>
+    </svg>
+    <!--<form novalidate="novalidate">
+        <input type="email" />
+        <input type="submit" />
+    </form>-->
+    <div>
+        <div id="addf" style="width:100px;height:100px;background:#70d5dd;opacity:0;position:relative;top:110px;">dddsf<br />dafafsdf<br />dafafsdf<br />dafafsdf</div>
+        <input type="text" style="position:absolute;" />
+    </div>
+    <div class="auto0">
+        <ul style="display:list-item;width:200px;">
+            <li>香蕉1</li>
+            <li>香蕉2</li>
+            <li>香蕉3</li>
+            <li>香蕉4</li>
+            <li>香蕉5</li>
+            <li>香蕉6</li>
+        </ul>
+        <ul style="display:inline;width:200px;">
+            <li>香蕉1</li>
+            <li>香蕉2</li>
+            <li>香蕉3</li>
+            <li>香蕉4</li>
+            <li>香蕉5</li>
+            <li>香蕉6</li>
+        </ul>
+        <ul style="display:block;width:200px;">
+            <li>香蕉1</li>
+            <li>香蕉2</li>
+            <li>香蕉3</li>
+            <li>香蕉4</li>
+            <li>香蕉5</li>
+            <li>香蕉6</li>
+        </ul>
+        <ul style="display:-moz-grid,grid,-webkit-box,-ms-grid;width:200px;">
+            <li>香蕉1</li>
+            <li>香蕉2</li>
+            <li>香蕉3</li>
+            <li>香蕉4</li>
+            <li>香蕉5</li>
+            <li>香蕉6</li>
+        </ul>
+    </div>
+
+    <script>
+        (function () {
+            $(document).focusin(function () {
+                $("#addf").animate({ "top": "0px", "opacity": 0 }, 1000, function () { });
+            });
+        })()
+
+    </script>
+</body>
+</html>

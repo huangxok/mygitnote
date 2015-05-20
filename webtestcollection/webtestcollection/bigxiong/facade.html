@@ -1,0 +1,61 @@
+﻿<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <title></title>
+</head>
+<body>
+    <script>
+        //层与层调用(3层)
+        //家人类
+        function Family() {
+            this.prisoners = new Prisoners();
+            this.visit = function (prisoners) {
+                console.log("家人说：");
+                this.prisoners.helpEachOther();
+            };
+        };
+        //犯人类
+        function Prisoners() {
+            this.inmates = new Inmates();
+            this.helpEachOther = function () {
+                console.log("犯人和狱友之间应该互相帮助...");
+                console.log("犯人说：");
+                inmates.weAreFriends();
+            };
+        };
+        //狱友类
+        function Inmates() {
+            this.weAreFriends = function () {
+                console.log('我们是狱友...')
+            };
+        };
+        //场景类
+        function Prison() {
+            new Family().visit(new Prisoners());
+        }
+        //迪米特法则的总结：
+
+        //迪米特法则不希望类直接建立直接的接触。如果真的有需要建立联系，也希望能通过它的友元类来转达。因此，应用迪米特法则有可能造成的一个后果就是：系统中存在大量的中介类，
+
+        //这些类之所以存在完全是为了传递类之间的相互调用关系------这在一定程度上增加了系统的复杂度。有兴趣可以研究一下设计模式的门面模式（Facade）和中介模式（Mediator），
+
+        //都是迪米特法则应用的例子。
+
+
+
+        //门面模式的优点：
+
+        //松散耦合
+
+        //门面模式松散了客户端与子系统的耦合关系，让子系统内部的模块能更容易扩展和维护。
+
+        //简单易用
+
+        //门面模式让子系统更加易用，客户端不再需要了解子系统内部的实现，也不需要跟众多子系统内部的模块进行交互，只需要跟门面类交互就可以了。
+
+        //更好的划分访问层次
+
+        //通过合理使用Facade，可以帮助我们更好地划分访问的层次。有些方法是对系统外的，有些方法是系统内部使用的。把需要暴露给外部的功能集中到门面中，这样既方便客户端使用，也很好地隐藏了内部的细节。
+    </script>
+</body>
+</html>

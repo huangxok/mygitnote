@@ -1,0 +1,282 @@
+﻿<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <title></title>
+</head>
+<body>
+    <script>
+        //参考：
+        //  Promises / A + 规范 http://promises-aplus.github.io/promises-spec/
+        //  Promises/A 规范 http://wiki.commonjs.org/wiki/Promises/A
+        //  Q https://github.com/kriskowal/q/wiki/API-Reference
+        //  Promise.TypeScript https://github.com/pragmatrix/Promise
+        var __extends = this.__extends || function (d, b) {
+            for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p];
+            function __() { this.constructor = d; }
+            __.prototype = b.prototype;
+            d.prototype = new __();
+        };
+        var mbe_common;
+        (function (mbe_common) {
+            var Promise = (function () {
+                function Promise() {
+                }
+                /**
+                * onDone/onFail 应该返回值（或抛出异常），即不应返回 undefined，忘记返回值通常是 Bug，因此会在控制台给出警告。
+                * 如果确实不需要返回值，可返回 null。
+                */
+                Promise.prototype.then = function (onDone, onFail) {
+                    return null;
+                };
+                Object.defineProperty(Promise.prototype, "status", {
+                    get: function () {
+                        return 0;
+                    },
+                    enumerable: true,
+                    configurable: true
+                });
+                Object.defineProperty(Promise.prototype, "result", {
+                    get: function () {
+                        return undefined;
+                    },
+                    enumerable: true,
+                    configurable: true
+                });
+                Promise.prototype.done = function (onDone) {
+                    return this;
+                };
+                Promise.prototype.fail = function (onFail) {
+                    return this;
+                };
+                Promise.prototype.progress = function (onProgress) {
+                    return this;
+                };
+                Promise.when = function (promises) {
+                    var allDone = new Deferred();
+                    if (!promises.length) {
+                        allDone.resolve([]);
+                        return allDone;
+                    }
+                    var resolved = 0;
+                    for (var i = 0; i < promises.length; i++) {
+                        promises[i].done(function (v) {
+                            ++resolved;
+                            if (resolved === promises.length && allDone.status === Promise.UNFULFILLED) {
+                                var results = promises.map(function (p) { return p.result; });
+                                allDone.resolve(results);
+                            }
+                        }).fail(function (e) {
+                            if (allDone.status === Promise.UNFULFILLED)
+                                allDone.reject(e); //TODO 此处i是无用的，怎么指示是哪一个promise的信息？
+                        }).progress(function (v) {
+                            if (allDone.status === Promise.UNFULFILLED) {
+                                allDone.notify(v); //TODO 此处i是无用的，怎么指示是哪一个promise的信息？
+                            }
+                        });
+                    }
+                    return allDone;
+                };
+                /**
+                 * 将其他库的 promise 实现包装成 mbe_common.Deferred 的实例。
+                 */
+                Promise.wrap = function (promiseLike) {
+                    var ret = new Deferred();
+                    promiseLike.then(function (res) {
+                        ret.resolve(res);
+                    }, function (err) {
+                        ret.reject(err);
+                    });
+                    return ret;
+                };
+                Promise.UNFULFILLED = 0;
+                Promise.RESOLVED = 1;
+                Promise.REJECTED = 2;
+                return Promise;
+            })();
+            mbe_common.Promise = Promise;
+            var Deferred = (function (_super) {
+                __extends(Deferred, _super);
+                function Deferred() {
+                    _super.call(this);
+                    this._onDones = null;
+                    this._onFails = null;
+                    this._onProgresses = null;
+                    this._status = Promise.UNFULFILLED;
+                    this._result = undefined;
+                    if (Deferred._DEBUG) {
+                        try {
+                            throw new Error('Deferred constructor calling stack');
+                        }
+                        catch (e) {
+                            this._stack = e;
+                        }
+                    }
+                }
+                Object.defineProperty(Deferred.prototype, "status", {
+                    get: function () {
+                        return this._status;
+                    },
+                    enumerable: true,
+                    configurable: true
+                });
+                Object.defineProperty(Deferred.prototype, "result", {
+                    get: function () {
+                        return this._result;
+                    },
+                    enumerable: true,
+                    configurable: true
+                });
+                Deferred.prototype.done = function (onDone) {
+                    if (this._status == Promise.UNFULFILLED) {
+                        this._onDones = this._onDones || [];
+                        this._onDones.push(onDone);
+                    }
+                    else if (this._status == Promise.RESOLVED)
+                        this._emitEventDirectly(onDone);
+                    return this;
+                };
+                Deferred.prototype.fail = function (onFail) {
+                    if (this._status == Promise.UNFULFILLED) {
+                        this._onFails = this._onFails || [];
+                        this._onFails.push(onFail);
+                    }
+                    else if (this._status == Promise.REJECTED)
+                        this._emitEventDirectly(onFail);
+                    return this;
+                };
+                Deferred.prototype.progress = function (onProgress) {
+                    if (this._status == Promise.UNFULFILLED) {
+                        this._onProgresses = this._onProgresses || [];
+                        this._onProgresses.push(onProgress);
+                    }
+                    return this;
+                };
+                Deferred.prototype.then = function (onDone, onFail) {
+                    var _this = this;
+                    var def = new Deferred();
+                    var result;
+                    this.done(function (data) {
+                        if (onDone) {
+                            try {
+                                result = onDone(data);
+                                _this._warnReturnValue(result);
+                                if (result instanceof Promise) {
+                                    def._bindTo(result);
+                                    return result;
+                                }
+                                else
+                                    def.resolve(result);
+                            }
+                            catch (err) {
+                                def.reject(err);
+                            }
+                        }
+                        else
+                            def.resolve(data);
+                    });
+                    this.fail(function (err) {
+                        if (onFail) {
+                            try {
+                                result = onFail(err);
+                                _this._warnReturnValue(result);
+                                if (result instanceof Promise) {
+                                    def._bindTo(result);
+                                    return result;
+                                }
+                                else {
+                                    def.resolve(result);
+                                }
+                            }
+                            catch (err2) {
+                                def.reject(err2);
+                            }
+                        }
+                        else
+                            def.reject(err);
+                    });
+                    return def;
+                };
+                Deferred.prototype.resolve = function (data) {
+                    if (typeof data === 'undefined')
+                        console.warn('>>>> Deferred.resolve() received undefined, likely a bug');
+                    return this._emitEvent(data, Promise.RESOLVED);
+                };
+                Deferred.prototype.reject = function (err) {
+                    if (Deferred._DEBUG) {
+                        try {
+                            throw new Error('Deferred.reject calling stack');
+                        }
+                        catch (e) {
+                            logw('rejected: Defered.constructor stack:\n' + (this._stack['stack'] || this._stack) + '\nrejected: Defered.rejected stack:\n' + (e['stack'] || e) + '\nrejected: reason stack:\n' + (err['stack'] || err));
+                        }
+                    }
+                    return this._emitEvent(err, Promise.REJECTED);
+                };
+                Deferred.prototype.notify = function (data) {
+                    return this._emitEvent(data);
+                };
+                Deferred.prototype._emitEvent = function (data, status) {
+                    if (this._status != Promise.UNFULFILLED) {
+                        throw Error('fulfilled');
+                    }
+                    var callbacks;
+                    if (status === Promise.RESOLVED)
+                        callbacks = this._onDones;
+                    else if (status === Promise.REJECTED)
+                        callbacks = this._onFails;
+                    else
+                        callbacks = this._onProgresses;
+                    if (status) {
+                        this._status = status;
+                        this._result = data;
+                        this._onDones = this._onFails = this._onProgresses = null;
+                    }
+                    if (callbacks) {
+                        for (var i = 0; i < callbacks.length; i++) {
+                            try {
+                                callbacks[i](data);
+                            }
+                            catch (e) {
+                                this._log(e);
+                            }
+                        }
+                    }
+                    return this;
+                };
+                Deferred.prototype._bindTo = function (p) {
+                    p.done(this.resolve.bind(this)).fail(this.reject.bind(this)).progress(this.notify.bind(this));
+                };
+                Deferred.prototype._emitEventDirectly = function (callback) {
+                    var _this = this;
+                    if (!callback)
+                        return;
+                    setTimeout(function () {
+                        try {
+                            callback(_this._result);
+                        }
+                        catch (e) {
+                            _this._log(e);
+                        }
+                    }, 0);
+                };
+                Deferred.prototype._log = function (err) {
+                    console.warn(err.stack || err);
+                };
+                Deferred.prototype._warnReturnValue = function (value) {
+                    if (typeof value === 'undefined')
+                        console.warn('>>>> Promise.then(): onDone/onFail returns undefined, likely a bug');
+                    else if (value && !(value instanceof Promise) && typeof value.then === 'function')
+                        console.warn('>>>> Promise.then(): onDone/onFail returns a promise-like object, likely a bug. Consider Promise.wrap().');
+                };
+                /**
+                * 将 _DEBUG 设置为 true 时，_stack.stack 将反调用映构造器时的调用栈，从而有助于调试。
+                */
+                Deferred._DEBUG = false;
+                return Deferred;
+            })(Promise);
+            mbe_common.Deferred = Deferred;
+        })(mbe_common || (mbe_common = {}));
+
+    </script>
+</body>
+</html>

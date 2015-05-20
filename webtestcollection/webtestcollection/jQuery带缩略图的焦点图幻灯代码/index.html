@@ -1,0 +1,67 @@
+﻿<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>幻灯片切换</title>
+
+    <link href="css/style.css" type="text/css" rel="stylesheet" />
+
+    <script type="text/javascript" src="js/jquery-1.4.4.min.js"></script>
+    <script type="text/javascript">
+        $(function () {
+            $(".flashBanner").each(function () {
+                var timer;
+                $(".flashBanner .mask img").click(function () {
+                    var index = $(".flashBanner .mask img").index($(this));
+                    changeImg(index);
+                }).eq(0).click();
+                $(this).find(".mask").animate({
+                    "bottom": "0"
+                }, 700);
+                $(".flashBanner").hover(function () {
+                    clearInterval(timer);
+                }, function () {
+                    timer = setInterval(function () {
+                        var show = $(".flashBanner .mask img.show").index();
+                        if (show >= $(".flashBanner .mask img").length - 1)
+                            show = 0;
+                        else
+                            show++;
+                        changeImg(show);
+                    }, 3000);
+                });
+                function changeImg(index) {
+                    $(".flashBanner .mask img").removeClass("show").eq(index).addClass("show");
+                    $(".flashBanner .bigImg").parents("a").attr("href", $(".flashBanner .mask img").eq(index).attr("link"));
+                    $(".flashBanner .bigImg").fadeOut(2000).attr("src", $(".flashBanner .mask img").eq(index).attr("uri")).fadeIn(200);
+                }
+                timer = setInterval(function () {
+                    var show = $(".flashBanner .mask img.show").index();
+                    if (show >= $(".flashBanner .mask img").length - 1)
+                        show = 0;
+                    else
+                        show++;
+                    changeImg(show);
+                }, 3000);
+            });
+        });
+    </script>
+
+</head>
+<body>
+
+
+    <div class="flashBanner">
+        <a href="http://www.17sucai.com/">
+            <img class="bigImg" width="782" height="326" /></a>
+        <div class="mask">
+            <img src="images/1.jpg" uri="images/1.jpg" link="http://www.17sucai.com/" width="60" height="22" />
+            <img src="images/2.jpg" uri="images/2.jpg" link="http://www.17sucai.com/" width="60" height="22" />
+            <img src="images/3.jpg" uri="images/3.jpg" link="http://www.17sucai.com/" width="60" height="22" />
+            <img src="images/4.jpg" uri="images/4.jpg" link="http://www.17sucai.com/" width="60" height="22" />
+            <img src="images/5.jpg" uri="images/5.jpg" link="http://www.17sucai.com/" width="60" height="22" />
+        </div>
+    </div>
+
+</body>
+</html>

@@ -1,0 +1,475 @@
+﻿<!DOCTYPE html >
+<html>
+<head>
+    <title>音乐天气</title>
+    <meta charset='utf-8' />
+</head>
+<style type='text/css'>
+    body {
+        margin: 0;
+        padding: 0;
+    }
+
+    .clear {
+        clear: both;
+    }
+
+    #weather-body {
+        margin: 0;
+        padding: 0;
+    }
+
+    #weather {
+        position: absolute;
+        left: 20px;
+        top: 30px;
+        font-family: "Microsoft YaHei","SimHei";
+    }
+
+        #weather p {
+        }
+
+    p#weather-city {
+        width: 100px;
+        color: #FFF;
+        margin: 20px;
+        font-size: 28px;
+    }
+
+    p#weather-temperature {
+        width: 200px;
+        color: #FFF;
+        margin: 20px;
+        margin-left: 50px;
+        font-size: 32px;
+    }
+
+    p#weather-stat {
+        width: 200px;
+        color: #FFF;
+        margin: 20px;
+        font-size: 26px;
+    }
+
+    #music-box {
+        position: absolute;
+        right: 20px;
+        padding: 30px;
+        filter: alpha(opacity=70);
+        -moz-opacity: 0.7;
+        -khtml-opacity: 0.7;
+        opacity: 0.7;
+        bottom: 30px;
+        text-align: center;
+    }
+
+        #music-box div {
+        }
+
+        #music-box:hover {
+            filter: alpha(opacity=100);
+            -moz-opacity: 1;
+            -khtml-opacity: 1;
+            opacity: 1;
+        }
+
+    h2#song-title {
+        font-family: "Microsoft YaHei","SimHei";
+        color: #fff;
+    }
+
+    h3#song-author {
+        font-family: "Microsoft YaHei","SimHei";
+        color: #fff;
+    }
+
+    div#music-process {
+        width: 400px;
+    }
+
+    div#music-process-p {
+        float: left;
+        margin: 0px 20px 0 20px;
+        display: block;
+        width: 290px;
+        height: 40px;
+    }
+
+    span#music-process-slide {
+        cursor: pointer;
+        display: block;
+        float: left;
+        width: 30px;
+        height: 30px;
+    }
+
+    div#music-ctime {
+        display: block;
+        float: left;
+        color: #FFF;
+        font-weight: bold;
+        width: 40px;
+        height: 30px;
+        font-family: "Arial";
+    }
+
+    div#music-etime {
+        display: block;
+        float: left;
+        color: #FFF;
+        font-weight: bold;
+        width: 40px;
+        height: 30px;
+        font-family: "Arial";
+    }
+
+    div#music-play {
+        cursor: pointer;
+        display: none;
+        margin: 10px auto;
+        width: 100px;
+        border: 0px #FFF solid;
+        height: 70px;
+    }
+
+    div#music-next {
+        cursor: pointer;
+        display: none;
+        margin: 10px auto;
+        width: 100px;
+        margin-top: 15px;
+        border: 0px #FFF solid;
+        height: 40px;
+    }
+
+    div#music-volume {
+        float: right;
+        margin: 10px;
+        width: 50px;
+    }
+
+    div#music-volume-v {
+        float: left;
+        display: block;
+        width: 50px;
+        height: 100px;
+    }
+
+    span#music-volume-slide {
+        cursor: pointer;
+        display: block;
+        float: left;
+        width: 40px;
+        height: 30px;
+    }
+</style>
+<script type="text/javascript">
+    /* 
+    版权声明 
+    作者:EI Nino 
+    Email:Jinyachen@gmail.com 
+    */
+    var music = '';
+    var musicBox = '';
+    var musicPlay = '';
+    var musicNext = '';
+    var musicV = '';
+    var musicProcess = '';
+    var musicSlide = '';
+    var musicSlideLeft = 0;
+    var musicCtime = '';
+    var musicEtime = '';
+    var musicVolume = '';
+    var musicVolumeSlide = '';
+    var mouseX = '';
+    var mouseY = '';
+    var mouseDown = false;
+    var bdy = '';
+    var backgroundImages = new Array();
+    var backgroundNumber = 1;
+    var songNumver = 1;
+    var playList = new Array();
+    var nextSong = '';
+    var songs = new Array();
+    //**************************************// 
+    //INIT WEB 
+    //*************************************// 
+    function init() {
+        //**************************************// 
+        //Musci Box 
+        //*************************************// 
+        musicBox = document.getElementById("music-box");
+        musicPlay = document.getElementById('music-play');
+        musicNext = document.getElementById('music-next');
+        musicCtime = document.getElementById('music-ctime');
+        musicEtime = document.getElementById('music-etime');
+        musicSlide = document.getElementById('music-process-slide');
+        musicProcess = document.getElementById('music-process-p');
+        musicVolume = document.getElementById('music-volume-v');
+        musicVolumeSlide = document.getElementById('music-volume-slide');
+        musicSlide.style.marginLeft = "0px";
+        musicProcess.style.width = "270px";
+        bdy = document.getElementsByTagName('body');
+        bdy = bdy[0];
+        var screenH = window.screen.height;
+        var screenW = document.body.clientWidth;
+        //Background cache // 
+        backgroundNumber = Math.ceil(Math.random() * 10);
+        backgroundImages[0] = new Image();
+        backgroundImages[1] = new Image();
+
+
+
+        //*****************// 
+        music = document.getElementsByTagName('audio');
+        music = music[0];
+        music.autobuffer = true;
+        setInterval(mProcess, 1000);
+        musicProcess.addEventListener('mousedown', mSlideProcessDown);
+        musicProcess.addEventListener('mousemove', mSlideProcessMove);
+        musicProcess.addEventListener('mouseup', mSlideProcessUp);
+        musicVolume.addEventListener('mousedown', mSlideVolumeDown);
+        musicVolume.addEventListener('mousemove', mSlideVolumeMove);
+        musicVolume.addEventListener('mouseup', mSlideVolumeUp);
+        //*******************Music Box end******************// 
+        //********************************************************// 
+        //Weather Box 
+        //*******************************************************// 
+
+        //*******************Weather Box end*************************************// 
+    }
+    function mProcess() {
+        if (1) {
+            var ctime = music.currentTime;
+            var time = Math.floor(ctime / 60) + ":" + (Math.floor(ctime - 60 * Math.floor(ctime / 60)) < 10 ? "0" + Math.floor(ctime - 60 * Math.floor(ctime / 60)) : Math.floor(ctime - 60 * Math.floor(ctime / 60)));
+            var time2 = music.duration - music.currentTime;
+            var etime = Math.floor(time2 / 60) + ":" + (Math.floor(time2 - 60 * Math.floor(time2 / 60)) < 10 ? "0" + Math.floor(time2 - 60 * Math.floor(time2 / 60)) : Math.floor(time2 - 60 * Math.floor(time2 / 60)));
+            var ra = music.currentTime / music.duration;
+
+            var mpw = musicProcess.style.width;
+            mpw = mpw.substring(0, mpw.indexOf('px'));
+            musicSlide.style.marginLeft = mpw * ra + "px";
+
+            musicCtime.innerHTML = time;
+            musicEtime.innerHTML = etime;
+            if (music.ended == true) {
+                mRandPlay();
+            }
+        }
+    }
+    //**************************************************************// 
+    //Process 
+    //**************************************************************// 
+    function mSlideProcessDown(e) {
+        mouseDown = true;
+        mouseX = e.pageX;
+    }
+    function mSlideProcessMove(e) {
+        if (mouseDown == true) {
+            var mLeft = (e.pageX - mouseX);
+            var t2 = music.currentTime + music.duration * mLeft / musicProcess.style.width.substring(0, musicProcess.style.width.indexOf('px'));
+            t2 = t2 > 0 ? t2 : 0;
+            mLeft = musicProcess.style.width.substring(0, musicProcess.style.width.indexOf('px')) * t2 / music.duration;
+            musicSlide.style.marginLeft = (mLeft > 0 && mLeft < 300 ? mLeft : 0) + "px";
+
+        }
+    }
+    function mSlideProcessUp(e) {
+        if (mouseDown == true) {
+            mouseDown = false;
+
+            var mLeft = (e.pageX - mouseX);
+            var t2 = music.currentTime + music.duration * mLeft / musicProcess.style.width.substring(0, musicProcess.style.width.indexOf('px'));
+            mLeft = musicProcess.style.width.substring(0, musicProcess.style.width.indexOf('px')) * t2 / music.duration;
+            t2 = t2 > 0 ? t2 : 0;
+            musicSlide.style.marginLeft = (mLeft > 0 && mLeft < 300 ? mLeft : 0) + "px";
+            mouseDown = false;
+            mouseX = 0;
+
+            music.currentTime = t2;
+
+
+        }
+        mouseDown = false;
+    }
+    //**********************Process end****************************************// 
+    //**************************************************************// 
+    //Volume// 
+    //**************************************************************// 
+    function mVolume() {
+        music.volume = 0.5;
+        musicVolumeSlide.style.marginTop = 70 * (1 - music.volume) + "px";
+    }
+    var vT = 0;
+    var aT = 0;
+    function mSlideVolumeDown(e) {
+        mouseDown = true;
+        mouseY = e.pageY;
+        if (musicVolume.style.height == '')
+            musicVolume.style.height = "100px";
+        vT = musicVolumeSlide.style.marginTop.substring(0, musicVolumeSlide.style.marginTop.indexOf('px'));
+        aT = musicVolumeSlide.style.marginTop.substring(0, musicVolumeSlide.style.marginTop.indexOf('px')) / musicVolume.style.height.substring(0, musicVolume.style.height.indexOf('px'));
+
+    }
+    function mSlideVolumeMove(e) {
+        if (mouseDown == true) {
+            var mTop = (e.pageY - mouseY);
+            //document.getElementById('show-statu').innerHTML=aT*musicVolume.style.height.substring(0,musicVolume.style.height.indexOf('px'))+mTop; 
+            mTop = aT * musicVolume.style.height.substring(0, musicVolume.style.height.indexOf('px')) + mTop;
+            musicVolumeSlide.style.marginTop = (mTop > 0 && mTop < 100 ? mTop : 0) + "px";
+
+        }
+    }
+    function mSlideVolumeUp(e) {
+        if (mouseDown == true) {
+            mouseDown = false;
+            var mTop = (e.pageY - mouseY);
+            mTop = aT * musicVolume.style.height.substring(0, musicVolume.style.height.indexOf('px')) + mTop;
+            musicVolumeSlide.style.marginTop = (mTop > 0 && mTop < 100 ? mTop : 0) + "px";
+            mouseDown = false;
+            mouseY = 0;
+            music.volume = 1 - mTop / 100;
+        }
+        mouseDown = false;
+    }
+    //**********************Volume end****************************************// 
+    /* 
+    播放和暂停按钮 
+    */
+    function mPlay() {
+        var time = Math.floor(music.duration / 60) + "分" + Math.floor(music.duration - 60 * Math.floor(music.duration / 60)) + "秒";
+        switch (music.paused) {
+            case true:
+                {
+                    music.play();
+
+                    break;
+                }
+            case false:
+                {
+                    music.pause();
+
+                    break;
+                }
+        }
+    }
+    /* 
+    载入歌曲 
+    */
+    var songNum = 1;
+    function loadSongs() {
+        playList = {
+            0: 11,
+            1: { 'title': "我们没有在一起", 'author': '刘若英', 'src': "./storage/womenmeiyouzaiyiqi.mp3" },
+            2: { 'title': "Apologize", 'author': 'Onerepublic', 'src': "./storage/Apologize.mp3" },
+            3: { 'title': "Breathless", 'author': 'Shayne Ward', 'src': "./storage/Breathless.mp3" },
+            4: { 'title': "Call Me Maybe", 'author': 'Carly Rae Jepsen', 'src': "./storage/Carly Rae Jepsen - Call Me Maybe.mp3" },
+            5: { 'title': "valder fields", 'author': 'tamas wells', 'src': "./storage/tamas-wells-valder-fields.mp3" },
+            6: { 'title': "不再联系", 'author': '夏天Alex', 'src': "./storage/buzailianxi.mp3" },
+            7: { 'title': "What Are Words", 'author': 'chris medina', 'src': "./storage/What Are Words.mp3" },
+            8: { 'title': "you can trust in me", 'author': 'tang nguoi toi yeu', 'src': "./storage/tang nguoi toi yeu - you can trust in me.mp3" },
+            9: { 'title': "Stay Here Forever", 'author': 'Jewel', 'src': "./storage/Stay Here Forever.mp3" },
+            10: { 'title': "泪的物语", 'author': 'Oceans Of Love', 'src': "./storage/tears.mp3" },
+            11: { 'title': "亲爱的路人", 'author': '刘若英', 'src': "./storage/qinaideluren.mp3" },
+        };
+        //Songs cache and change// 
+        var listCount = playList[0];
+        var num = Math.ceil(Math.random() * 10) % (listCount + 1);
+        songNum = num;
+        if (songNum > listCount)
+            songNum = 1;
+        num = songNum;
+        songs[0] = playList[num > 0 ? num : num + 1];
+        num = ((songNum + 1) > listCount ? 1 : (songNum + 1));
+        songs[1] = playList[num > 0 ? num : num + 1];
+        music.src = songs[0]['src'];
+        nextSong = new Audio();
+        nextSong.src = songs[1]['src'];
+        nextSong.load();
+        //**************************// 
+        document.getElementById('song-title').innerHTML = songs[0]['title'];
+        document.getElementById('song-author').innerHTML = songs[0]['author'];
+        setTimeout(canPlay, 2000);
+        setTimeout(canRand, 30000);
+    }
+    /* 
+    随机播放列表的歌曲 
+    */
+    function mRandPlay() {
+        //Backgorund cache and change// 
+        backgroundNumber = Math.ceil(Math.random() * 10);
+        bdy.style.background = "url(" + backgroundImages[1].src + ") top";
+
+        //***************// 
+        var listCount = playList[0];
+        //Songs cache and change// 
+        music.pause();
+        music = nextSong;
+        document.getElementById('song-title').innerHTML = songs[1]['title'];
+        document.getElementById('song-author').innerHTML = songs[1]['author'];
+        var num = Math.ceil(Math.random() * 10) % (listCount + 1);
+        songNum += 1;
+        if (songNum > listCount)
+            songNum = 1;
+        num = songNum;
+        songs[1] = playList[num > 0 ? num : num + 1];
+        nextSong = new Audio();
+        nextSong.src = songs[1]['src'];
+        nextSong.load();
+        //***************// 
+        //musicPlay.style.display='block'; 
+        musicNext.style.display = 'none';
+        setTimeout(canRand, 30000);
+        mPlay();
+    }
+    function canPlay() {
+        musicPlay.setAttribute('onClick', 'javascript:mPlay()');
+        musicPlay.style.display = 'block';
+    }
+    function canRand() {
+        musicNext.setAttribute('onClick', 'javascript:mRandPlay()');
+        musicNext.style.display = 'block';
+    }
+</script>
+<body>
+    <div id='weather-body'>
+        <div id='weather'>
+            <p id='weather-city'>喜欢一个人</p>
+            <p id='weather-temperature'>不难</p>
+            <p id='weather-stat'>
+                被同一个人喜欢<br />
+                好难
+            </p>
+        </div>
+        <div id='music-box'>
+            <audio src="刘若英 - 原来你也在这里.mp3">
+                您的浏览器暂不支持HTML5 请选择Google chrome或其他支持HTML5的浏览器 
+            </audio>
+            <div id='music-process'>
+                <h2 id='song-title'></h2>
+                <h3 id='song-author'></h3>
+                <div id='music-ctime'>0:00</div>
+                <div id='music-process-p'>
+                    <span id='music-process-slide'></span>
+                </div>
+                <div id='music-etime'>0:00</div>
+                <br class='clear' />
+            </div>
+            <div id='music-volume'>
+                <div id='music-volume-v'>
+                    <span id='music-volume-slide'></span>
+                </div>
+                <br class='clear' />
+            </div>
+            <div id='music-play'></div>
+            <div id='music-next'></div>
+            <br class='clear' />
+        </div>
+    </div>
+</body>
+<script type="text/javascript">
+    window.onload = init();
+    mVolume();
+    loadSongs();
+</script>
+</html>

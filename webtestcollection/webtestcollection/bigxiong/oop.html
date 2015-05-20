@@ -1,0 +1,80 @@
+﻿<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <title></title>
+</head>
+<body>
+    <script>
+        //用户账号   钱和等级
+        function Account(balance, rank) {
+            this.balance = balance;
+            this.rank = rank;
+        };
+        Account.prototype = {
+            getBalance: function () {
+                return this.balance;
+            },
+            getRank: function () {
+                return this.rank;
+            },
+            setBalance: function (balan) {
+                this.balance = balan;
+            }
+        };
+        //业务操作  转账
+        function TransferTransaction(fromAccount, toAccount) {
+            this.fromAccount = fromAccount;
+            this.toAccount = toAccount;
+        };
+        TransferTransaction.prototype = {
+            transfer: function (balance) {
+                this.fromAccount.setBalance(this.fromAccount.getBalance() - balance);
+                this.toAccount.setBalance(this.toAccount.getBalance() + balance);
+            },
+            getFromAccount: function () {
+                return this.fromAccount;
+            },
+            getToAccount: function () {
+                return this.toAccount;
+            },
+
+        };
+        //管理业务和账
+        function TransTManager(fromAccount, toAccount) {
+            this.fromAccount = fromAccount;
+            this.toAccount = toAccount;
+            this.transferTransaction = null;
+            this.rankVendor = {
+                "normal": {
+                    get: function () {
+                        return 1000;
+                    }
+                },
+                "vip": {
+                    get: function () {
+                        return 5000;
+                    }
+                }
+            };
+        };
+        TransTManager.prototype = {
+            transfer: function (balance) {
+                //获取其等级
+                var transBalance = this.rankVendor[this.fromAccount.getRank()]["get"]();
+                if (this.fromAccount.getBalance() > transBalance) {
+                    throw new Error("您的转账金额超出了规定范围!");
+                }
+                if (this.fromAccount.getBalance() < balance) {
+                    throw new Error("余额不足!");
+                }
+                //转账操作
+                this.transferTransaction = new TransferTransaction(this.fromAccount, this.toAccount);
+                this.transferTransaction.transfer(balance);
+            }
+        };
+
+        var tt = new TransTManager(new Account(5000, "vip"), new Account(3000, "Normal"));
+        tt.transfer(3000);
+    </script>
+</body>
+</html>

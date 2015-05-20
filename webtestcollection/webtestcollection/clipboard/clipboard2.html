@@ -1,0 +1,51 @@
+﻿<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta name="Keywords" content="YES!B/S!" />
+    <meta name="Description" content="This page is from http://Justinyoung.cnblogs.com" />
+    <title>CSS/Javascript demo</title>
+
+</head>
+<body>
+    <button onclick="test();">复制到粘贴板</button>
+    <script type="text/javascript" language="javascript">
+        function test() {
+            copyToClipboard("dddd");
+        }
+        copyToClipboard = function (txt) {
+            if (window.clipboardData) {
+                window.clipboardData.clearData();
+                window.clipboardData.setData("Text", txt);
+            } else if (navigator.userAgent.indexOf("Opera") != -1) {
+                window.location = txt;
+            } else if (window.netscape) {
+                try {
+                    netscape.security.PrivilegeManager.enablePrivilege("UniversalXPConnect");
+                } catch (e) {
+                    alert("您的firefox安全限制限制您进行剪贴板操作，请打开’about:config’将signed.applets.codebase_principal_support’设置为true’之后重试");
+                    return false;
+                }
+                var clip = Components.classes['@mozilla.org/widget/clipboard;1'].createInstance(Components.interfaces.nsIClipboard);
+                if (!clip)
+                    return;
+                var trans = Components.classes['@mozilla.org/widget/transferable;1'].createInstance(Components.interfaces.nsITransferable);
+                if (!trans)
+                    return;
+                trans.addDataFlavor('text/unicode');
+                var str = new Object();
+                var len = new Object();
+                var str = Components.classes["@mozilla.org/supports-string;1"].createInstance(Components.interfaces.nsISupportsString);
+                var copytext = txt;
+                str.data = copytext;
+                trans.setTransferData("text/unicode", str, copytext.length * 2);
+                var clipid = Components.interfaces.nsIClipboard;
+                if (!clip)
+                    return false;
+                clip.setData(trans, null, clipid.kGlobalClipboard);
+            }
+        }
+    </script>
+
+</body>
+</html>

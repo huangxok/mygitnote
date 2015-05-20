@@ -1,0 +1,117 @@
+﻿<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title></title>
+    <script src="../../../Scripts/jquery-1.7.1.min.js"></script>
+    <script type="text/javascript">
+        //(function () {
+        //    var b = false;
+
+        //    var num = "a";
+
+        //    var c = "7.1";
+
+        //    console.log(b.toString());
+        //    console.log(!num);
+        //    console.log(!!num);
+        //    console.log(parseFloat(c));
+        //})()
+
+        //(function () {
+        //    var foo = 10;
+        //    var bar = 2;
+        //    alert(foo * bar);
+        //}())
+        //(function (foo, bar) {
+
+        //    alert(foo * bar);
+        //}(10, 2))
+        //function Person(name) {
+        //    this.name = name
+        //}
+        //Person.prototype.getName = function () {
+        //    return this.name;
+        //}
+        //function Author(name, books) {
+        //    debugger;
+        //    Person.call(this, name);
+        //    this.books = books;
+        //}
+        //Author.prototype.getBooks = function () {
+        //    return this.books, this.name;
+        //}
+        //var au = new Author("zhang", "101");
+        //var p = new Person("kk")
+        //console.log(au.name);
+        //console.log(au.books);
+        //console.log(p.name);
+        function inherit(o) {
+            if (arguments.length > 1) {
+                throw Error("the parameter's length is expected one")
+            }
+            if (Object.create) {  //支持ECMAScript5 则直接创建
+                return Object.create(o);
+            }
+            else {
+                var t = typeof o
+                if (t !== "object" && t !== "function") {
+                    throw TypeError("the parameter is expected a  Object or a Function")
+                }
+                function F() { };
+                F.prototype = o;
+                return new F();
+            }
+        }
+        function enumerationObject(namesToValues) {
+            var enumeration = function () {
+                throw "Can't Instantiate Enumeration"
+            };
+            var proto = enumeration.prototype = {
+                constructor: enumeration,
+                toString: function () { return this.name },
+                valueOf: function () { return this.value },
+                toJSON: function () { return this.name }
+            };
+            enumeration.values = [];
+            for (n in namesToValues) {
+                var e = inherit(proto);
+                e.name = n;
+                e.value = namesToValues[n];
+                enumeration[name] = e;
+                enumeration.values.push(e);
+            }
+            enumeration.foreach = function (f, c) {
+                for (var i = 0; i < this.values.length; i++) {
+                    f.call(c, this.values[i])
+                }
+            }
+            return enumeration.values;
+        }
+
+        var b = enumerationObject({ "clubs": 1, "Diamonds": 2, "Heart": 3, "Spades": 4 })
+        console.log(b);
+
+        var c = function () { return 1; };
+        d = c();
+
+    </script>
+</head>
+<body>
+    <div id="ad" style="width: 100px; height: 100px; background: #f00"></div>
+    <script type="text/javascript">
+        var States;
+        (function (States) {
+            States._map = [];
+            States._map[0] = "Solid";
+            States.Solid = 0;
+            States._map[1] = "Liquid";
+            States.Liquid = 1;
+            States._map[2] = "Gas";
+            States.Gas = 2;
+        })(States || (States = {}));
+        console.log(States);
+
+    </script>
+</body>
+</html>

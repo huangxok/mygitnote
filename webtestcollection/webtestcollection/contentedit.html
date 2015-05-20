@@ -1,0 +1,113 @@
+﻿<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <title></title>
+
+</head>
+<body>
+    <canvas id="aa" width="500" height="500">
+        aaa
+    </canvas>
+    <script>
+        var canva = document.getElementById('aa');
+        var cxt = canva.getContext("2d");
+
+        //function mydate() {
+        //var cxt = mycanvas.getContext("2d");
+        //获取当前时间
+        //var now = new Date();
+        //var shi = now.getHours();
+        //var fen = now.getMinutes();
+        //var miao = now.getSeconds();
+
+        //cxt绘制矩形：fillRect(空心矩形fillStyle="red"设置填充色) strokeRect(空心矩形)
+        //cxt.clearRect(0, 0, mycanvas.width, mycanvas.height);  //清除mycanvas举行区域的内容
+        cxt.save(); //保存上下文环境 restore用于恢复到上一次的上下文环境
+
+
+        //画时针
+        //cxt.beginPath(); //开始画线条
+        //cxt.lineWidth = 25; //设置线条的宽度
+        //cxt.fillStyle = "white";//设置填充色
+        ////cxt.strokeStyle = "white";//设置线的边框颜色 用于无填充的框
+        //cxt.translate(115, 115);//将时针的移动到画布中间 宽230 高230
+        //cxt.rotate(30 / 180 * Math.PI);//shi 代表小时数 30为一个小时时针走的角度
+        //cxt.lineCap = "round"; //lineCap:butt(默认：向线条的每个末端添加平直的边缘) round：添加圆形线帽  square：正方形线帽
+        //cxt.moveTo(0, -60);//起点
+        //cxt.lineTo(0, 15);//另外的点
+        //cxt.fill();//填充当前路径 为框属性
+        //cxt.stroke();//绘制已定义的路径
+        //cxt.closePath();//关闭的路径
+        //cxt.restore();//恢复到上一次保存的上下文的环境
+
+        ////分针
+        //cxt.save();
+        //cxt.beginPath(); //开始画
+        //cxt.lineWidth = 20; //设置线条的宽度
+        //cxt.fillStyle = "white";//设置填充色
+        //cxt.strokeStyle = "white";//设置线的边框
+        //cxt.translate(115, 115);//将时针的移动到画布中间 宽230 高230
+        //cxt.rotate(fen * 6 / 180 * Math.PI);//fen 代表分钟数 6为一个分钟分针走的角度
+        //cxt.lineCap = "round"; //lineCap:butt(默认：向线条的每个末端添加平直的边缘) round：添加圆形线帽  square：正方形线帽
+        //cxt.moveTo(0, -80);//起点
+        //cxt.lineTo(0, 10);//另外的点
+        //cxt.fill();//填充当前路径 为框属性
+        //cxt.stroke();//绘制已定义的路径
+        //cxt.closePath();//关闭的路径
+        //cxt.restore();//恢复到上一次保存的上下文的环境
+
+        //秒针
+        cxt.save();
+        cxt.beginPath();
+        cxt.lineWidth = 7;
+        //cxt.fillStyle = "white";
+        cxt.strokeStyle = "black";
+        cxt.translate(115, 115);
+        cxt.rotate(80 * Math.PI / 180);
+        cxt.lineCap = "round";
+        cxt.moveTo(0, -110);
+        cxt.lineTo(0, 30);
+        cxt.fill();
+        cxt.stroke();
+        cxt.closePath();
+        cxt.restore();
+
+        ////得到当前时间
+        //cxt.beginPath();
+        //cxt.strokeStyle = "white";
+        //cxt.fillStyle = "white";
+        //var str = now.toLocaleTimeString();
+        //cxt.fillText(str, 90, 160);
+        //cxt.fill();
+        //cxt.stroke();
+        //cxt.closePath();
+        ////---螺丝钉
+        //cxt.beginPath();
+        //cxt.strokeStyle = "gray";
+        //cxt.fillStyle = "#4E433B";
+
+        //cxt.arc(115, 115, 10, 0, 360);
+        //cxt.fill();
+        //cxt.stroke();
+        //cxt.closePath();
+        //cxt.restore();
+        //}
+        //function login() {
+        //    var logObj = document.getElementById("login");
+        //    logObj.style.setProperty("visibility", " visible");
+        //    logObj.style.setProperty("-webkit-animation", "myanimation 3s linear")
+        //}
+
+        //window.setInterval(mydate, 10);
+
+    </script>
+    <script>
+        Date.prototype.diff = function (start, end) {
+            diff = end - start;
+
+            this.setDate(diff);
+
+        }
+    </script>
+</body>
+</html>

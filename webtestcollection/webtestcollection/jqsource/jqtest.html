@@ -1,0 +1,25 @@
+﻿<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <title></title>
+    <script src="jquery-1.7.1.js"></script>
+</head>
+<body>
+    <div id="aaa"></div>
+    <script>
+        var b = $('#aaa');
+        function aa(x){
+            return x*x;
+        }
+        function bb(){
+            return {
+                cc:function(){
+                    return aa.call(this,this.dd,this.ee);
+                },
+                dd:2,
+                ee:3
+            }
+        }
+    </script>
+</body>
+</html>

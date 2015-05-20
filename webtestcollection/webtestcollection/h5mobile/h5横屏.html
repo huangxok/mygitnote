@@ -1,0 +1,21 @@
+﻿<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta name="screen-orientation" content="portrait"><!-- uc强制竖屏 -->
+    <meta name="x5-orientation" content="portrait"><!-- QQ强制竖屏 -->
+    <title></title>
+</head>
+<body>
+    <script>
+        window.addEventListener("onorientationchange" in window ? "orientationchange" : "resize", hengshuping, false);
+
+        function hengshuping() {
+            if (window.orientation == 90 || window.orientation == -90) {
+                //横屏
+            } else {
+                //竖屏
+            }
+        }
+    </script>
+</body>
+</html>

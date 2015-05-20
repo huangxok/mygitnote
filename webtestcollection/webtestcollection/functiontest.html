@@ -1,0 +1,622 @@
+﻿<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title></title>
+    <script>
+        //1  函数定义表达式
+        //var t = (function (x) { return x * x })(10);
+        //var t = (function (x) { return x * x }(10));
+        //alert(t);
+        //2 
+        //var a = new Array(4, 1, 2, 3);
+        //console.log(a);
+        //a.sort(function (x, y) { return x - y });
+        //console.log(a);
+        //3  嵌套函数
+        //function a(x, y) {
+        //    function k(z) { return z * z };
+        //    return k(x) + k(y);
+        //}
+        //console.log(a(2, 3));
+        //4  函数调用1 判断严格模式
+        //'use strict'
+        //var strict = (function () { return !this }())
+        //console.log(strict);
+        //5 函数调用2 函数赋值给对象的属性
+        //var o = {};
+        //function f(x) { return x * x };
+        //o.m = f;
+        //console.log(o.m(3));
+        //6 函数调用3 对象嵌套对象 方法调用 关于this关键字
+        //var o = {
+        //    x: 1,
+        //    y: 2,
+        //    k: {
+        //        m: function (x) {
+        //            this.z = o.add();
+        //            return this.z * this.z + x
+        //        }
+        //    },
+        //    add: function () {
+        //        this.z = this.x + this.y;
+        //        return this.z;
+        //    }
+        //}
+        //console.log(o.add());
+        //console.log(o.k.m(4))
+        //console.log(o.k['m'](4))
+        //7 this关键字2
+        //var o = {
+        //    x: function (x) {
+        //        var self = this;
+        //        console.log(this === o); //此this为对象o
+        //        f();
+        //        function f() {
+        //            console.log(this === o) //此this为window
+        //            console.log(self === o)
+        //        };
+        //    }
+        //}
+        //o.x(1);
+        //8  方法链
+        //var o = {
+        //    x: function (m) {
+        //        this.a = m;
+        //        return this;
+        //    },
+        //    y: function (m) {
+        //        this.b = m;
+        //        return this;
+        //    },
+        //    z: function (m) {
+        //        this.c = m;
+        //        return this;
+        //    },
+        //    sum: function () {
+        //        return this.a + this.b + this.c;
+        //    }
+        //}
+        //console.log(o.x(1).y(2).z(3).sum());
+        //9  实参对象  类似与math.max();
+        //function maxd(/*.....*/) {
+        //    var max1 = Number.NEGATIVE_INFINITY;
+        //    for (var i = 0; i < arguments.length; i++) {
+        //        if (arguments[i] > max1) {
+        //            max1 = arguments[i];
+        //        }
+        //    }
+        //    return max1;
+        //}
+        //var largetst = maxd(99, 10, 1000, 2, 3, 5, 10000, 7, 8);
+        //console.log(largetst);
+        //10 实参对象 callee与caller 属性
+        //callee 表示当前执行的函数
+        //caller 表示调用的函数
+        //var o = {
+        //    x: function (x) {
+        //        if (x <= 1) {
+        //            return 1;
+        //        }
+        //        return x + arguments.callee(x - 1);
+        //    },
+        //    y: function te(x) {
+        //        if (te.caller) {
+        //            alert(te.caller)
+        //        }
+        //        else {
+        //            alert('top function');
+        //        }
+        //    },
+        //    z: function (x) {
+        //        this.y(1);
+        //    }
+        //};
+        //var b = o.x(100);
+        //console.log(b)
+        //o.z(1);//弹出  function (x) {this.y(1);}
+
+
+        //11 判断是否为 类数组 
+        //var isArrayLike = function (o) {
+        //    if (o && typeof o === "object" &&
+        //        isFinite(o.length) &&
+        //        o.length >= 0 &&
+        //        o.length === Math.floor(o.length) &&
+        //        o.length < 4294967296) {
+        //        return true;
+        //    }
+        //    else {
+        //        return false;
+        //    }
+
+        //}
+        //12 类数组累加
+        //function sum(a) {
+        //    if (isArryLike(a)) {
+        //        var total = 0;
+        //        for (var i = 0; i < a.length; i++) {
+        //            var element = arguments[i];
+        //            var n;
+        //            if (element == null)       //忽略null和undefinded
+        //                continue;
+        //            if (isArrayLike(element)) {//若实参为数组 则递归累加该数组
+        //                n = sum.apply(this, Element); 
+        //            }
+        //            else if (typeof element === "function") {//函数 就调用函数
+        //                n = Number(element());
+        //            }
+        //            else {
+        //                n = Number(element)  //直接类型转换
+        //            }
+        //            if (isNaN(n)) {
+        //                throw Error("cant covert " + element);
+        //            }
+        //            total += n;
+        //        }
+        //    }
+        //}
+        //13  函数自定义属性
+        //function abc() {
+        //    return abc.couter++;
+        //}
+        //abc.couter = 0;
+        //for (var i = 0; i < 10; i++) {
+        //    console.log(abc()); 
+        //}  ----1到9
+        //14 函数使用自身属性
+        //function ff(n) {
+        //    if (isFinite(n) && n > 0 && n == Math.round(n)) { //判断是大于0的数字
+        //        if (!(n in ff)) {          //判断是否存在n 不存在 则
+        //            ff[n] = n * ff(n - 1); //将值保存为ff的一个属性n
+        //        }
+        //        return ff[n]
+        //    } else {
+        //        return NaN;
+        //    }
+        //}
+        //ff[1] = 1;
+        //15 特定场景下返回带
+        //补丁的extend版本
+        //定义一个拓展函数，用来将第二个以及后续参数复制到第一个参数
+        //这里处理了IE bug:在多数ie版本中
+        //如果o的属性拥有一个不可枚举的同名属性，则for/in循环
+        //不会枚举对象o的可枚举属性，也就是说，将不会正确的处理诸如tostring的属性
+        //var extend = (function () {  //将这个函数的返回值赋值给extend
+        //    //修复之前，首先检查是否存在bug
+        //    debugger;
+        //    for (var p in { toString: null }) {
+        //        //如果代码执行到这里，那么for/in 循环会正确工作并返回
+        //        //一个简单版本的extend()函数
+        //        return function extend(o) {
+        //            debugger;
+        //            for (var i = 0; i < arguments.length; i++) {
+        //                var source = arguments[i];
+        //                for (var prop in source) {
+        //                    o[prop] = source[prop];
+        //                }
+        //            }
+        //            return o;
+        //        }
+        //    }
+        //    //如果代码执行到这里，说明for/in循环不会枚举测试对象的toString属性
+        //    //因此返回另一个版本的extend()函数，这个函数显式测试
+        //    //Object.prototype中的不可枚举
+        //    return function patched_extend(o) {
+        //        for (var i = 1; i < arguments.length; i++) {
+        //            var source = arguments[i];
+        //            //赋值所有可枚举的属性
+        //            for (var prop in source) {
+        //                o[prop] = source[prop]
+        //            }
+        //            //检查特殊属性
+        //            for (var i = 0; i < length; i++) {
+        //                prop = protoprops[j];
+        //                if (source.hasOwnProperty(prop)) {
+        //                    o[prop] = source[prop];
+        //                }
+        //            }
+        //        }
+        //        return o;
+        //    }
+        //    //列表列出需要检查的特殊属性
+        //    var protoprops = ["toString", "valueof", "constructor", "hasOwnProperty", "isPrototypeof", "propertyIsEnumerable", "tolocaleString"];
+        //}());
+        //16 闭包 的理解
+        //function 1  返回的是具体的值
+        //var scope = "global scope";
+        //function checkscope() {
+        //    var scope = "local scope";
+        //    function fn() { return scope };
+        //    return fn();
+        //}
+        //checkscope();
+        //function 2   闭包  注意与function1的区别 这个是返回的函数
+        //var scope = "global scope";
+        //function checkscope() {
+        //    var scope = "local scope";
+        //    function fn() { return scope }
+        //    return fn;
+        //}
+        //console.log(checkscope()());
+        //17   存取器实现类似闭包
+        //function counter(n) {
+        //    return {
+        //        get count() { return n++; },
+        //        set count(m) {
+        //            if (m >= n)
+        //                n = m;
+        //            else
+        //                throw Error("count 只能设置一个较大的值")
+        //        }
+        //    }
+        //}
+        //var c = new counter(1000);
+        //console.log(c.count);
+        //console.log(c.count);
+        //console.log(c.count);
+        //c.count = 2000;PPTV聚力
+        //console.log(c.count);
+        //18 使用闭包共享私有状态的通用做法
+        //function addPrivateProperty(o, name, predicate) {
+        //    var value;
+        //    o['get' + name] = function () { return value };
+        //    o['set' + name] = function (v) {
+        //        if (predicate && !predicate(v)) {
+        //            throw Error('set' + name + "：无效的值" + v);
+        //        }
+        //        else {
+        //            value = v;
+        //        }
+        //    }
+        //}
+        //var o = {};
+        //addPrivateProperty(o, "Name", function (x) { return typeof x == "string" });
+        //o.setName("frank");
+        //console.log(o.getName());
+        //o.setName(o);
+        //19 闭包
+        //function constfunc(v) {
+        //    return function () {
+        //        return v;
+        //    };
+        //}
+        //var funcs = [];
+        //for (var i = 0; i < 10; i++) {
+        //    funcs[i] = constfunc(i)
+        //}
+        //console.log(funcs[5]());
+        //20  闭包经典
+        //function constfunc() {
+        //    var funcs = [];//空数组
+        //    for (var i = 0; i < 10; i++) {
+        //        funcs[i] = function () {
+        //            return i;    
+        //        }              
+        //    }
+        //    return funcs;
+        //}
+        //var funcs = constfunc(); //funcs[0]：function(){return i} funcs[1]：function(){return i}
+        //console.log(funcs[5]());
+        // 闭包实例
+        //var dd
+        //function a() {
+        //    var value = 0;
+        //    return {
+        //        cc: function fd() {
+        //            value++;
+        //            dd = value;
+        //        }
+        //    }
+        //};
+        //var kk = new a();
+        //for (var i = 0; i < 10; i++) {
+        //    kk.cc();
+        //    alert(dd);
+        //}
+        //kk.cc();
+        //console.log(dd);
+        //21
+        //function check(args) {
+        //    debugger;
+        //    var actual = args.length;
+        //    var expected = args.callee.length;//args.callee 代表 check()函数
+        //    if (actual !== expected) {
+        //        throw Error("期望参数" + expected + "，args：得到" + actual);
+        //    }
+        //}
+        //function f(x, y, z) {
+        //    check(arguments);
+        //    return x + y + z;
+        //}
+        //f(1, 2)
+
+        //22 monkey-patching 猴子补丁
+        //动态修改 已有的方法
+        //function trance(o, m) {
+        //    //var _s = this;
+        //    var original = o[m]
+        //    console.log(new Date(), "Entering:", m)
+        //    var result = original.apply(this, arguments); //this 为window
+        //    console.log(new Date(), "Exiting:", m);
+        //    return result;
+        //}
+        //var o = { x: function () { alert(111); }, dd: this };
+        //var b = trance(o, "x");
+
+        //23 bing();
+        //function f(y) { return this.x + y }
+        //var o = { x: 1 }
+        //var g = f.bind(o);
+        //g(2);  //---3
+
+        //24 bind   
+        //'use strict'
+        //var ff = function () {
+        //    return 1;
+        //}
+        //var oo = {};
+        //function bind(f, o) {
+        //    debugger;
+        //    if (f.bind) {
+        //        return f.bind(o);
+        //    }
+        //    else {
+        //        return function () {
+        //            return f.apply(o, arguments);
+        //        }
+        //    }
+        //}
+        //console.log(bind(ff, oo));
+        //25   bind 不仅仅是将函数绑定给一个对象，还附带其他应用：除了第一个实参之外也会绑定至this，这个附带的应用是一种常见的函数式编程技术-------柯里化
+        //var sum = function (x, y) { return x + y }
+        //var succ = sum.bing(null, 1);
+        //succ(2) //----3   x 绑定到1   并传入2作为实参y
+
+        //function f(y, z) { return this.x + y + z };
+        //var g = f.bind({ x: 1 }, 2);
+        //g(3) //---6   this.x绑定x  y绑定2 z绑定3
+
+        //26 bind ECMA3 中Function.bind()方法
+        //if (Function.prototype.bind) {
+        //    Function.prototype.bind = function (o/*,args*/) {
+        //        debugger;
+        //        var self = this, boundargs = arguments;
+        //        return function () {
+        //            var args = [], i;
+        //            for (var i = 1; i < boundargs.length; i++) {
+        //                args.push(boundargs[i]);
+        //            }
+        //            for (var i = 0; i < arguments.length; i++) {
+        //                args.push(arguments[i]);
+        //            }
+        //            return self.apply(o.args);
+        //        }
+        //    }
+
+        //}
+
+        // 27 使用函数处理数组
+        //var data=[1,2,3,4,5]
+        //var total=0;
+        //for(var i=0;i<data.length;i++)  {
+        //    total+=data[i];
+        //}
+        //var avg=total/data.length
+
+        ////数组方法 ECMA5 数组章节  第七章
+        ////ECMA3
+        //var map=Array.prototype.map?function(a,f){return a.map(f)} 
+        //    :function(a,f){var results=[];
+        //        for(var i=0;len=a.length;a<len;i++){
+        //            if(i in a) results[i]=f.call(null,a[i],i,a)
+        //        }
+        //    };
+        //var reduce = Array.prototype.reduce?
+        //    function(a,f,initial){  //如果存在reduce方法
+        //        if(arguments.length>2) 
+        //            return a.reduce(f,initial);//如果传入了一个初始值
+        //        else 
+        //            return a.reduce(f);        //否则没有初始值
+        //    }:
+        //        function(a,f,initial){             //这个算法来自ES5 规范
+        //            var i=o,len=a.length,accumulator;
+        //            //以特定的初始值开始，否则第一个值取自a
+        //            if(arguments.length > 2) accumulator=initial;
+
+        //            else { //找到数组中第一个已定义的缩影
+        //                if(len==0) throw TypeError();
+        //                else i++	
+        //            }
+        //            //对于数组中剩下的元素依次调用
+        //            while(i<len){if(i in a) accumulator=f.call(undefined,accumulator,a[i],i,a); i++;}
+        //            return accumulator;
+        //        }
+        ////使用已定义的map()和reduce()函数，计算平均值和标准差
+        //var data=[1,2,3,4,5];
+        //var sum=function (x,y){return x+y}     
+        //var square=function(x){return x*x}
+        //var mean=reduce(data,sum)/data.length
+        //var deviations=map(data,function(x){return x-mean;});
+        //var stddev=Math.sqrt(reduce(map(deviations,square),sum)/(data.length-1));
+
+        //28 高阶函数
+        //function not(f) {
+        //    debugger;
+        //    var a = arguments;
+        //    return function () {
+        //        var b = arguments;
+        //        debugger;
+        //        var results = f.apply(this, arguments) //
+        //        return results;  //对结果求反
+        //    }
+        //}
+        //var even = function (x) {
+        //    return x % 2 === 0;
+        //}
+        //var odd = not(even);
+        //[1, 1, 7, 3, 9, 5].every(odd)    //--true:每个元素都是奇数
+
+
+        //28 高阶函数2
+        //function mapper(f) {
+        //    return function (a) { return map(a, f); };
+        //}
+        //var increment = function (x) { return x + 1; };
+        //var incrementer = mapper(increment);
+        //incrementer([1, 2, 3]); //---2 3 4
+
+        ////29 ga高阶函数2
+        //function compose(f, g) {
+        //    return function () {
+        //        debugger;
+        //        return f.call(this, g.apply(this, arguments))
+        //    }
+        //}
+        //debugger;
+        //var square = function (x) { return x * x; };
+        //var sum = function (x, y) { return x + y };
+        //var squarefsum = compose(square, sum)
+        //console.log(squarefsum(2, 3)); //squarefsum 返回的是 f.call(this, g.apply(this, arguments))
+
+        //30 不完全函数
+        //var map = Array.prototype.map ? function (a, f) { return a.map(f) }
+        //            : function (a, f) {
+        //                var results = [];
+        //                for (var i = 0, len = a.length; a < len; i++) {
+        //                    if (i in a) results[i] = f.call(null, a[i], i, a)
+        //                }
+        //            };
+        //var reduce = Array.prototype.reduce ?
+        //    function (a, f, initial) {  //如果存在reduce方法
+        //        if (arguments.length > 2)
+        //            return a.reduce(f, initial);//如果传入了一个初始值
+        //        else
+        //            return a.reduce(f);        //否则没有初始值
+        //    } : function (a, f, initial) {             //这个算法来自ES5 规范
+        //        var i = o, len = a.length, accumulator;
+        //        //以特定的初始值开始，否则第一个值取自a
+        //        if (arguments.length > 2) accumulator = initial;
+
+        //        else { //找到数组中第一个已定义的缩影
+        //            if (len == 0) throw TypeError();
+        //            else i++
+        //        }
+        //        //对于数组中剩下的元素依次调用
+        //        while (i < len) { if (i in a) accumulator = f.call(undefined, accumulator, a[i], i, a); i++; }
+        //        return accumulator;
+        //    }
+
+        //31 
+        //function array(a, n) { return Array.prototype.slice.call(a, n || 0) }
+
+        //function partialLeft(f /*,...*/) {
+        //    var args = arguments  //保存外部的实参数组
+        //    return function () {  //并返回这个函数
+        //        var a = array(args, 1);    //开始处理外部的第一个args
+        //        a = a.concat(array(arguments));//然后增加所有的内部参数
+        //        return f.apply(this, a);      //然后基于这个实参列表调用f();
+        //    }
+        //}
+
+        //function partiaRight(f/*,...*/) {
+        //    var args = arguments;                //保存外部实参数组
+        //    return function () {		   //返回这个函数
+        //        var a = array(arguments);    //从内部参数开始
+        //        a = a.concat(array(args, 1)); //然后从外部第一个args开始添加
+        //        return f.apply(this, a);	   //最后基于这个实参列表调用f()
+        //    }
+        //}
+
+        //function partial(f /*,...*/) {
+        //    var args = arguments;
+        //    return function () {
+        //        var a = array(args, 1);
+        //        var i = 0, j = 0;
+        //        for (; i < a.length; i++) {
+        //            if (a[i] === undefined) a[i] = arguments[j++];
+        //        }
+        //        a = a.concat(array(arguments, j));
+        //        return f.apply(this, a);
+        //    }
+        //}
+        ////这个函数带有3个实参
+        //var f = function (x, y, z) { return x * (y - z) }
+        ////注意这三个不完全调用的区别
+        //partialLeft(f, 2)(3, 4);   // --2  绑定第一个实参：2*(3-4)
+        //partialRight(f, 2)(3, 4);   //--6  绑定最后一个实参 3*(4-2)
+        //partial(f, undefined, 2)(3, 4)//-- -6 绑定中间的实参 3*(2-4)
+
+
+        //32 利用以上函数 调用
+        //var increment = partiaLeft(sum, 1);
+        //var cuberoot = partialRight(Math.pw, 1 / 3);
+        //String.prototype.first = partial(String.prototype.charAt, 0);
+        //String.prototype.last = parial(String.prototype.substring, -1, 1);
+
+        //33 不完全函数
+        //var not = partialLeft(compose, function (x) { return !x; });
+        //var event = function (x) { return x % 2 === 0; };
+        //var odd = not(even);
+        //var isNumber = not(isNaN);
+
+        //34  函数式编程
+        //var data = [1, 1, 3, 5, 7];
+        //var sum = function (x, y) { return x + y; }
+        //var product = function (x, y) { return x * y; }
+        //var neg = partial(product, -1);
+        //var square = partial(Math.pow, undefined, 2);
+        //var sqrt = partial(Math.pow, undefined, 0.5);
+        //var reciprocal = partial(Math.pow, undefined, -1)
+
+
+        //var mean = product(reduce(data, sum), reciprocal(data.length));
+        //var stddev = sqrt(
+        //                  product(
+        //                          reduce(
+        //                                    map(data, compose(
+        //                                                        square, partial(
+        //                                                                            sum, neg(mean)
+        //                                                                       )
+        //                                                      )
+        //                                       ), sum
+        //                                 ),
+        //                          reciprocal(
+        //                                         sum(data.length - 1)
+        //                                    )
+        //                        )
+        //                );
+        //35 记忆  闭包
+
+        //function memorize(f) {
+        //    var cache = {};
+        //    return function () {
+        //        var key = arguments.length + Array.prototype.join.call(arguments, ",");
+        //        if (key in cache) return cache[key];
+        //        else return cache[key] = f.apply(this, arguments);
+        //    }
+
+        //}
+        ////使用记忆
+        //function gcd(a, b) {
+        //    var t;
+        //    if (a < b) t = b, b = a, a = t;
+        //    while (b != 0) t = b, b = a % b, a = t;
+        //    return a;
+
+        //}
+
+        //var gcdmemo = memorize(gcd);
+        //gcdmemo(85, 187) //---17
+        ////注意：递归时 往往需要实现记忆功能 更希望调用实现记忆功能的递归函数，而不是原递归函数
+
+        //var factorial = memorize(function (n) {
+        //    return (n <= 1) ? 1 : n * factorial(n - 1);
+        //});
+        //factorial(5)    //--120   1---5的值缓存
+    </script>
+</head>
+<body>
+</body>
+</html>
+

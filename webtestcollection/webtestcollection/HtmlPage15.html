@@ -1,0 +1,33 @@
+﻿<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title></title>
+    <script src="Scripts/jquery-1.7.1.js"></script>
+</head>
+<body>
+    <div>
+        <a id="abc" href="#">add</a>
+        <a id="cba" href="#">dddd</a>
+        <iframe src="a.html"></iframe>
+    </div>
+    <script>
+
+        $(function () {
+            $("body").load(function () {
+                window.open("HtmlPage7.html");
+
+            })
+
+            $("#cba").click(function () {
+                window.open("HtmlPage4.html", "", "width=200,height=200")
+
+            })
+            $("body").trigger('load');
+            $("#cba").trigger('click');
+        })
+
+    </script>
+
+</body>
+</html>

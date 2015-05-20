@@ -1,0 +1,70 @@
+﻿<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title></title>
+    <script type="text/javascript">
+        var isdrag = false;
+        var x, tx, y, ty, j;
+        var dobj = null;//定义拖动对象
+        function dragdown(o) { dobj = o; dobj.xx = event.clientX - parseInt(dobj.style.left); document.onmousemove = dragmove; dobj.setCapture(); }//鼠标按下时给拖动对象赋值
+        document.onmouseup = function () { document.onmousemove = null; dobj = null; }//鼠标松开时移除拖动事件，把拖动对象赋予空。
+        function dragmove() {
+            if (dobj) {//如果拖动对象不为空，则移动拖动对象，但没有进行坐标判断。需要精准的要判断坐标。
+                var _l = event.clientX,//计算拖动对象左坐标。
+                j = document.getElementById("Process").getBoundingClientRect();//得到进度条坐标。
+                //判断是否在进度条范围内。
+                if (_l > j.left && _l < (j.right - 8))
+                    dobj.style.left = _l - j.left + "px";
+                if (_l > j.right) dobj.style.left = (j.right - j.left - 8) + "px";//如果大于进度条右边，直接置于最右边。
+                if (_l < j.left) dobj.style.left = 0 + "px";//如果小于进度条左边，直接置于最左边
+            }
+        }
+        //document.getElementById("processa").addEventListener('touchstart', touchStart);
+        //document.getElementById("processa").addEventListener('touchmove', touchMove);
+        //document.getElementById("processa").addEventListener('touchend', function () {
+        //    isdrag = false;
+        //});
+        //function touchStart(e) {
+        //    isdrag = true;
+        //    e.preventDefault();
+        //    j = document.getElementById("Process").getBoundingClientRect()
+        //    tx = parseInt(document.getElementById("processa").style.left);
+        //    ty = parseInt(document.getElementById("processa").style.top);
+        //    x = e.touches[0].pageX;
+        //    y = e.touches[0].pageY;
+        //}
+        //function touchMove(e) {
+        //    if (isdrag) {
+        //        e.preventDefault();
+        //        if (tx + e.touches[0].pageX - x > 0 && tx + e.touches[0].pageX - x < j.right) {
+        //            $("#processa").css("left", tx + e.touches[0].pageX - x);
+        //        }
+        //        if (tx + e.touches[0].pageX - x <= 0) {
+        //            $("#processa").css("left", 0);
+        //        }
+        //        if (tx + e.touches[0].pageX - x >= j.right) {
+        //            $("#processa").css("left", j.right - j.left);
+        //        }
+        //    }
+        //}
+
+    </script>
+</head>
+<body>
+    <div style="width: 1000px; height: 800px; background-color: #eb32dc; margin-left: 100px;">
+        <h2 style="color: #fff;" id="songname">牛</h2>
+        <p style="color: #fff;" id="loadingmessage">00.00</p>
+        <div style="position: relative; height: 4px; background-color: rgba(255,255,255,0.1); cursor: pointer;">
+            <div id="ProcessYet" style="position: absolute; height: 4px; line-height: 4px; left: 0; top: 0; cursor: pointer; background-color: #ffcaaa;">
+            </div>
+            <div id="Process" style="width: 100%; line-height: 4px; height: 4px; cursor: pointer; background-color: rgba(255,255,255,0.3);">
+            </div>
+            <div id="processa" onmousedown="dragdown(this);" style="position: absolute; border-radius: 50%; height: 12px; width: 12px; outline: 0; border: 0; margin: -4px 0 0 0; left: 0px; top: 0px; background-color: #ffcaaa; z-index: 99;">
+            </div>
+        </div>
+    </div>
+</body>
+</html>

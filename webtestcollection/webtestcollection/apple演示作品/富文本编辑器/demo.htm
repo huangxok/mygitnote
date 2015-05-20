@@ -1,0 +1,858 @@
+﻿<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>Miniweaver</title>
+    <script type="text/javascript">
+  <!--
+    function Miniweaver() {
+        //创建常量
+        var _MW = document.createDocumentFragment();
+        var _I = Math.floor(Math.random() * 8999 + 1000);
+
+        var _BUTTONS = [
+          ["toolbarCommon", { m: "新建", l: 0, c: "BLANK", u: 1 },
+                            { m: "保存", l: 20, c: "SAVEAS", u: 1 },
+                            {},
+                            { m: "剪切", l: 40, c: "CUT" },
+                            { m: "复制", l: 60, c: "COPY" },
+                            { m: "粘贴", l: 80, c: "PASTE" },
+                            { m: "删除", l: 100, c: "DELETE" },
+                            { m: "擦除格式", l: 120, c: "REMOVEFORMAT" },
+                            {},
+                            { m: "撤销", l: 140, c: "UNDO" },
+                            { m: "重复", l: 160, c: "REDO" }],
+          ["toolbarAid", { m: "全屏\/取消全屏", l: 180, c: "FULLSCREEN", u: 1 },
+                            { m: "预览", l: 200, c: "PREVIEW", u: 1 },
+                            { m: "打印", l: 220, c: "PRINT", u: 1 },
+                            {},
+                            { m: "关于", l: 240, c: "ABOUT", u: 1 }],
+          ["toolbarFont", { m: "加粗", l: 260, c: "BOLD" },
+                            { m: "倾斜", l: 280, c: "ITALIC" },
+                            { m: "下划线", l: 300, c: "UNDERLINE" },
+                            { m: "删除线", l: 320, c: "STRIKETHROUGH" },
+                            { m: "上标", l: 340, c: "SUPERSCRIPT" },
+                            { m: "下标", l: 360, c: "SUBSCRIPT" },
+                            {},
+                            { m: "字体", l: 380, c: "FONTNAME" },
+                            { m: "字号", l: 400, c: "FONTSIZE" },
+                            { m: "字体颜色", l: 420, c: "FORECOLOR" },
+                            { m: "突出显示", l: 440, c: "BACKCOLOR" }],
+          ["toolbarPart", { m: "左对齐", l: 460, c: "JUSTIFYLEFT" },
+                            { m: "居中", l: 480, c: "JUSTIFYCENTER" },
+                            { m: "右对齐", l: 500, c: "JUSTIFYRIGHT" },
+                            { m: "两端对齐", l: 520, c: "JUSTIFYFULL" },
+                            { m: "分栏", l: 540, c: "COLUMNS" },
+                            {},
+                            { m: "向左缩进", l: 560, c: "OUTDENT" },
+                            { m: "向右缩进", l: 580, c: "INDENT" },
+                            { m: "行高", l: 600, c: "LINEOFHIGH" },
+                            {},
+                            { m: "有序列表", l: 620, c: "INSERTORDEREDLIST" },
+                            { m: "无序列表", l: 640, c: "INSERTUNORDEREDLIST" },
+                            { m: "文字环绕", l: 660, c: "TEXTWRAPPING" }],
+          ["toolbarMedia", { m: "插入超链接", l: 680, c: "CREATELINK" },
+                            { m: "删除超链接", l: 700, c: "UNLINK" },
+                            {},
+                            { m: "插入图片", l: 720, c: "INSERTIMAGE" },
+                            { m: "插入表格", l: 740, c: "INSERTTABLE" },
+                            { m: "插入矩形", l: 760, c: "INSERTFIELDSET" },
+                            { m: "插入水平线", l: 780, c: "INSERTHORIZONTALRULE" },
+                            {},
+                            { m: "插入符号", l: 800, c: "INSERTSYMBOL" },
+                            { m: "插入时间", l: 820, c: "INSERTTIME" }]
+        ];
+
+        var _PATTERN = {
+            top: 0, left: 0, index: 100000000, width: 600, height: 450, heightToolbox: 50,
+            skin: "img/default.gif", baseColor: "#FFFFFF", foreColor: "#2A66C9", backColor: "#C3DAF9",
+            toolbarCommon: true, toolbarAid: true, toolbarFont: true, toolbarPart: true, toolbarMedia: true,
+            editableCache: true, editableCode: true, editableHead: false,
+            content: ""
+        };
+
+        //创建模型
+        var _MODEL = {
+            /*公共状态模型*/
+            STATUS: { v: 0, t: 0, b: { e: null, m_0: null, m_1: null, m_2: null, m_3: null }, tb: 0, mkl: 0, mul: 0 },
+            CANCELBUTTON: {},
+            CONTAINER: {},
+            /*公共功能模型*/
+            TIPBOX: function (t, i, m, b) {
+                _MODEL.MASKLAYER();
+                var p = {
+                    t: "position:" + (i ? "relative" : "absolute") + "; " + (i ? "float:left;" : "") + " top:0px; left:0px; overflow:hidden; width:100%; height:25px; margin:0px; border:none; padding:0px 0px 0px 10px; background:" + _PATTERN.foreColor + "; cursor:move; color:" + _PATTERN.baseColor + "; font-family:Arial; font-size:14px; font-weight:bold; font-style:normal; text-decoration:none; line-height:25px; text-align:left;",
+                    i: i ? "position:relative; float:left; top:0px; left:0px; overflow:hidden; width:100px; height:100px; margin:0px; border:none; padding:0px; background:none; color:" + _PATTERN.foreColor + "; font-family:Arial; font-size:96px; font-weight:normal; font-style:normal; text-decoration:none; line-height:normal; text-align:center;" : "display:none;",
+                    m: "position:" + (i ? "relative" : "absolute") + "; " + (i ? "float:left;" : "") + " top:" + (i ? 0 : 25) + "px; left:0px; overflow:" + (i ? "hidden" : "auto") + "; width:" + (i ? 370 : 770) + "px; height:" + (i ? "auto" : "445px") + "; margin:0px; border:none; padding:" + (i ? "50px 30px 30px 0px" : "15px") + "; background:" + (i ? "none" : "#FFFFFF") + ";" + (i ? " color:" + _PATTERN.foreColor + "; font-family:Arial; font-size:16px; font-weight:normal; font-style:normal; text-decoration:none; line-height:normal; text-align:left;" : ""),
+                    b: "position:" + (i ? "relative" : "absolute") + "; " + (i ? "float:left;" : "") + " top:" + (i ? 0 : 40) + "px; left:0px; overflow:hidden; width:100%; height:30px; margin:0px; border:none; padding:0px; background:none; text-align:" + (i ? "center" : "left") + ";"
+                };
+                var TIPBOX = _createElement("DIV", { id: "MW_TIPBOX_" + _I, style: _createStyle("MW_TIPBOX") + " top:" + (i ? (200 + _getElementByScroll().t) : (50 + _getElementByScroll().t)) + "px; left:" + ((document.documentElement.offsetWidth - (i ? 504 : 804)) / 2 + _getElementByScroll().l) + "px; width:" + (i ? 500 : 800) + "px; height:" + (i ? "auto" : "500px") + ";", onmouseover: function (e) { _cancelBubble(e || window.event) }, onmousedown: function (e) { _cancelBubble(e || window.event) }, onmouseup: function (e) { _cancelBubble(e || window.event) }, onmouseout: function (e) { _cancelBubble(e || window.event) } }, [
+                  _createElement("DIV", { style: p.t, onmousedown: function (e) { _drag(this.parentNode, e || window.event) } }, t),
+                  _createElement("DIV", { style: p.i }, i),
+                  _createElement("DIV", { style: p.m }, m),
+                  _createElement("DIV", { style: p.b })
+                ]);
+                for (var j = 0; j < b.length; j++) { TIPBOX.lastChild.appendChild(_createElement("BUTTON", { style: "overflow:hidden; width:auto; height:auto; margin:0px 0px 0px 15px; border:none; padding:0px; background:" + (i ? "none" : "#FFFFFF") + "; cursor:pointer; color:" + _PATTERN.foreColor + "; font-family:Arial; font-size:" + (i ? 16 : 14) + "px; font-weight:bold; font-style:normal; text-decoration:none; line-height:normal; text-align:center;", index: j, onmouseup: function () { b[this.getAttribute("index")].f() } }, b[j].l)) }
+                document.body.appendChild(TIPBOX);
+                _MODEL.STATUS.tb = 1;
+            },
+            MASKLAYER: function () {
+                var MASKLAYER = _$("MW_MASKLAYER_" + _I), BODY = document.body, HTML = document.documentElement;
+                if (!MASKLAYER) { MASKLAYER = _createElement("DIV", { id: "MW_MASKLAYER_" + _I, style: _createStyle("MW_MASKLAYER") + " display:none;", onmouseover: function (e) { _cancelBubble(e || window.event) }, onmousedown: function (e) { _cancelBubble(e || window.event) }, onmouseup: function (e) { _cancelBubble(e || window.event) }, onmouseout: function (e) { _cancelBubble(e || window.event) } }) }
+                BODY.appendChild(MASKLAYER);
+                BODY.setAttribute("overflow", BODY.style.overflow); BODY.style.overflow = "hidden";
+                HTML.setAttribute("overflow", HTML.style.overflow); HTML.style.overflow = "hidden";
+                MASKLAYER.style.top = _getElementByScroll().t + "px";
+                MASKLAYER.style.left = _getElementByScroll().l + "px";
+                MASKLAYER.style.display = "";
+                _MODEL.STATUS.mkl = 1;
+            },
+            MENULAYER: function (e, w, h) {
+                var MENULAYER = _$("MW_MENULAYER_" + _I);
+                if (!MENULAYER) { MENULAYER = _createElement("DIV", { id: "MW_MENULAYER_" + _I, style: _createStyle("MW_MENULAYER") + " display:none;", onmouseover: function (e) { _cancelBubble(e || window.event) }, onmousedown: function (e) { _cancelBubble(e || window.event) }, onmouseup: function (e) { _cancelBubble(e || window.event) }, onmouseout: function (e) { _cancelBubble(e || window.event) } }) }
+                document.body.appendChild(MENULAYER);
+                MENULAYER.appendChild(e);
+                MENULAYER.style.top = _getElementBySite(_MODEL.STATUS.b.e).t + 22 + "px";
+                MENULAYER.style.left = _getElementBySite(_MODEL.STATUS.b.e).l + "px";
+                MENULAYER.style.width = w ? (w + "px") : "auto";
+                MENULAYER.style.height = h ? (h + "px") : "auto";
+                MENULAYER.style.display = "";
+                _MODEL.STATUS.mul = 1;
+            },
+            COLORPICKER: function (c) {
+                var COLORPICKER = _MODEL.CONTAINER[c];
+                if (!COLORPICKER) {
+                    var p = {
+                        s: "position:relative; float:left; top:0px; left:0px; overflow:hidden; width:78px; height:18px; margin:5px 166px 5px 5px; border:" + _PATTERN.foreColor + " 1px solid; padding:0px; background:#none;",
+                        c: "position:relative; float:left; top:0px; left:0px; overflow:hidden; margin:0px; border:none; padding:0px; background:#000000;",
+                        b: "position:relative; float:left; top:0px; left:0px; overflow:hidden; width:11px; height:11px; border:none; padding:0px;",
+                        bm_0: function () { this.parentNode.parentNode.firstChild.style.background = this.getAttribute("command") },
+                        bm_2: function () { _EXEC.INDEX(this.parentNode.parentNode.getAttribute("command"), this.getAttribute("command")) }
+                    }
+                    var rgb = [["#000000", "#333333", "#666666", "#999999", "#CCCCCC", "#FFFFFF", "#FF0000", "#00FF00", "#0000FF", "#FFFF00", "#00FFFF", "#FF00FF"], ["00", "33", "66", "99", "CC", "FF"]];
+                    COLORPICKER = _createElement("DIV", { command: c }, [
+                      _createElement("SPAN", { style: p.s }),
+                      _createElement("SPAN", { style: p.c + " width:35px; height:144px;" })
+                    ]);
+                    for (var i = 0; i < 12; i++) { COLORPICKER.lastChild.appendChild(_createElement("BUTTON", { style: p.b + " margin:1px 12px 0px 12px; background:" + rgb[0][i] + ";", command: rgb[0][i], onmouseover: p.bm_0, onmouseup: p.bm_2 })) }
+                    for (var i = 0; i < 6; i++) {
+                        COLORPICKER.appendChild(_createElement("SPAN", { style: p.c + " width:72px; height:72px;" }));
+                        for (var j = 0; j < 6; j++) {
+                            for (var k = 0; k < 6; k++) {
+                                var v = "#" + rgb[1][i] + rgb[1][k] + rgb[1][j];
+                                COLORPICKER.lastChild.appendChild(_createElement("BUTTON", { style: p.b + " margin:1px 0px 0px 1px; background:" + v + ";", command: v, onmouseover: p.bm_0, onmouseup: p.bm_2 }));
+                            }
+                        }
+                    }
+                }
+                _MODEL.MENULAYER(COLORPICKER, 251, 174);
+            },
+            INPUTGROUP: function (c, k) {
+                var INPUTGROUP = _MODEL.CONTAINER[c];
+                if (!INPUTGROUP) {
+                    var p = {
+                        a: "position:relative; float:left; top:0px; left:0px; overflow:hidden; width:240px; height:20px; margin:9px; border:" + _PATTERN.foreColor + " 1px solid; padding:0px; background:none;",
+                        l: "position:relative; float:left; top:-8px; left:0px; overflow:auto; width:240px; height:120px; margin:0px 9px 1px 9px; border:" + _PATTERN.foreColor + " 1px solid; padding:0px; background:none;",
+                        i: "position:relative; float:left; top:0px; left:0px; overflow:hidden; width:174px; height:20px; margin:0px; border:none; padding:0px 3px 0px 3px; background:none; color:" + _PATTERN.foreColor + "; font-family:Arial; font-size:13px; font-weight:normal; font-style:normal; text-decoration:none; line-height:20px; text-align:left;",
+                        b: "position:relative; float:left; top:0px; left:0px; overflow:hidden; height:20px; margin:0px; border:none; padding:0px 3px 0px 3px; font-family:Arial; font-size:13px; font-weight:normal; font-style:normal; text-decoration:none; line-height:20px;",
+                        m_0: function () { this.style.background = _PATTERN.foreColor; this.style.color = _PATTERN.baseColor },
+                        m_3: function () { this.style.background = _PATTERN.baseColor; this.style.color = _PATTERN.foreColor },
+                        lm_2: function () { var pp = this.parentNode.parentNode, pn = this.parentNode.nextSibling; if (pp.getAttribute("status")) { pn.style.display = "none"; pp.setAttribute("status", "") } else { pn.style.display = ""; pp.setAttribute("status", "1") } },
+                        om_2: function () { var ppf = this.parentNode.previousSibling.firstChild; ppf.value = this.getAttribute("command") + ppf.value.replace(ppf.getAttribute("command"), ""); ppf.setAttribute("command", this.getAttribute("command")) },
+                        bm_2: function () { var pp = this.parentNode.parentNode, pn = this.parentNode.nextSibling, pf = this.parentNode.firstChild, v = pf.value; pf.value = k.v[0]; pf.setAttribute("command", k.v[0]); pn.style.display = "none"; pp.setAttribute("status", ""); _EXEC.INDEX(pp.getAttribute("command"), v) }
+                    };
+                    INPUTGROUP = _createElement("DIV", { command: c, status: "" }, [
+                      _createElement("SPAN", { style: p.a }, [
+                        _createElement("INPUT", { style: p.i, command: k.v[0], value: k.v[0] }),
+                        _createElement("BUTTON", { style: p.b + " width:22px; background:" + _PATTERN.baseColor + "; color:" + _PATTERN.foreColor + "; text-align:center;", onmouseover: p.m_0, onmouseup: p.lm_2, onmouseout: p.m_3 }, "▼"),
+                        _createElement("BUTTON", { style: p.b + " width:38px; background:" + _PATTERN.foreColor + "; color:" + _PATTERN.baseColor + "; text-align:center;", onmouseup: p.bm_2 }, "确定")
+                      ]),
+                      _createElement("SPAN", { style: p.l + "display:none;" })
+                    ]);
+                    if (!k.k) {
+                        INPUTGROUP.firstChild.childNodes[0].onfocus = function () { if (this.value == this.getAttribute("command")) { this.value = "" } };
+                        INPUTGROUP.firstChild.childNodes[0].style.width = "196px";
+                        INPUTGROUP.firstChild.childNodes[1].style.display = "none";
+                    } else { for (var i = 0; i < k.k.length; i++) { INPUTGROUP.lastChild.appendChild(_createElement("BUTTON", { style: p.b + " width:" + ((k.k.length < 7) ? 240 : 220) + "px; background:" + _PATTERN.baseColor + "; color:" + _PATTERN.foreColor + "; text-align:left;", command: k.v[i], onmouseover: p.m_0, onmouseup: p.om_2, onmouseout: p.m_3 }, k.k[i])) } }
+                }
+                _MODEL.MENULAYER(INPUTGROUP, 260, 0);
+            },
+            BUTTONGROUP: function (c, w, b) {
+                var BUTTONGROUP = _MODEL.CONTAINER[c];
+                if (!BUTTONGROUP) {
+                    var p = {
+                        m_0: function () { this.style.background = _PATTERN.foreColor; this.style.color = _PATTERN.baseColor },
+                        m_3: function () { this.style.background = _PATTERN.baseColor; this.style.color = _PATTERN.foreColor },
+                        m_2: function () { this.style.background = _PATTERN.baseColor; this.style.color = _PATTERN.foreColor; _EXEC.INDEX(this.parentNode.getAttribute("command"), this.getAttribute("command")) }
+                    };
+                    BUTTONGROUP = _createElement("DIV", { command: c });
+                    for (var i = 0; i < b.e.length; i++) { BUTTONGROUP.appendChild(_createElement("BUTTON", { style: (typeof b.s == "string" ? b.s : b.s[i]), command: b.c[i], onmouseover: p.m_0, onmouseup: p.m_2, onmouseout: p.m_3 }, b.e[i])) }
+                }
+                _MODEL.MENULAYER(BUTTONGROUP, w, 0);
+            },
+            /*用户命令模型*/
+            BLANK: function () {
+                _MODEL.TIPBOX("新建", "?", "您可能会丢失尚未保存的文档，确定继续？", [{ l: "确定", f: function () { _clear(); if (_MODEL.STATUS.v) { _changeView(0) } window.frames["MW_IFRAME_" + _I].document.body.innerHTML = "" } }, { l: "取消", f: function () { _clear() } }]);
+            },
+            SAVEAS: function () {
+                if (!+[1, ]) {
+                    if (_MODEL.STATUS.v) { _changeView(0) }
+                    _EXEC.INDEX("SAVEAS");
+                } else { _MODEL.TIPBOX("保存", "!", "很抱歉！当前浏览器安全限制不支持使用该功能，您可以手动复制保存。", [{ l: "确定", f: function () { _clear() } }]) }
+            },
+            FULLSCREEN: function () {
+                var MW = _$("MW_" + _I);
+                var b = _MODEL.STATUS.b, r = window.onresize;
+                var s = [], t = _PATTERN.top, l = _PATTERN.left, w = _PATTERN.width, h = _PATTERN.height;
+                _MODEL.STATUS.b = { e: null, m_0: null, m_1: null, m_2: null, m_3: null }; b.e.onmouseup = mouseup; window.onresize = resize;
+                changeStyle(MW, s); _refreshStyle({ top: _getElementByScroll().t, left: _getElementByScroll().l, width: MW.parentNode.offsetWidth, height: MW.parentNode.offsetHeight }); MW.style.zIndex = _PATTERN.index; MW.style.background = "#FFFFFF";
+                function mouseup(e) {
+                    _clear();
+                    b.e.onmouseover = b.m_0; b.e.onmousedown = b.m_1; b.e.onmouseup = b.m_2; b.e.onmouseout = b.m_3; window.onresize = r;
+                    b.e.style.cssText = _createStyle("MW_TOOLBAR_BUTTON_OUT"); b.e.firstChild.style.top = "-20px";
+                    changeStyle(MW, s); _refreshStyle({ top: t, left: l, width: w, height: h }); MW.style.zIndex = ""; MW.style.background = "none";
+                    _cancelBubble(e || window.event);
+                }
+                function resize() {
+                    _refreshStyle({ top: _getElementByScroll().t, left: _getElementByScroll().l, width: MW.parentNode.offsetWidth, height: MW.parentNode.offsetHeight });
+                }
+                function changeStyle(e, s) {
+                    for (var i = 0, t = e.parentNode; t; t = t.parentNode) {
+                        if (t.nodeType == 1) {
+                            if (!s.length) {
+                                s[i] = t.style.cssText;
+                                t.style.cssText = "position:absolute; top:0px; left:0px; z-index:" + _PATTERN.index + "; overflow:hidden; width:100%; height:100%; margin:0px; border:none; padding:0px;";
+                            } else { t.style.cssText = s[i] }
+                            i++;
+                        }
+                    }
+                }
+            },
+            PREVIEW: function () {
+                var m = _createElement("SPAN");
+                m.innerHTML = _content().body + _content().style;
+                _MODEL.TIPBOX("打印预览", "", m, [{ l: "打印", f: function () { _MODEL.PRINT() } }, { l: "新窗口预览", f: function () { _clear(); var w = window.open(); w.document.write(_content().all); w.document.close() } }, { l: "关闭窗口", f: function () { _clear() } }])
+            },
+            PRINT: function () {
+                _clear();
+                var c = _createElement("SPAN"); c.innerHTML = _content().body;
+                var w = window.open("about:blank", "MW_PRINTWINDOW_" + _I, "top=0, left=0, z-look=yes, width=300, Height=200");
+                w.document.write("<!DOCTYPE html PUBLIC \"-\/\/W3C\/\/DTD XHTML 1.0 Transitional\/\/EN\" \"http:\/\/www.w3.org\/TR\/xhtml1\/DTD\/xhtml1-transitional.dtd\">\n" +
+                                 "<HTML>\n" +
+                                 "<HEAD>\n" +
+                                 "<TITLE>Miniweaver Document Print<\/TITLE>\n" +
+                                 "<STYLE type=\"text\/css\" media=\"all\">\n" +
+                                 "@media print{body{background:#FFFFFF;}.PRINT{display:block;}.NOTES{display:none;}}\n" +
+                                 "@media screen{body{background:#ECE9D8;}.BLOCK{display:block;}.NONE{display:none;}}\n" +
+                                 "<\/STYLE>\n" + _content().style + "\n" +
+                                 "<SCRIPT type=\"text\/javascript\">\n" +
+                                 "  window.onload = function() {\n" +
+                                 "    document.getElementsByTagName(\"H5\")[0].innerHTML = new Date().toLocaleString() + \" Printing... (" + _content().all.length + " Bytes)\";\n" +
+                                 "    window.print();\n" +
+                                 "    setTimeout(\"window.close()\", 500);\n" +
+                                 "  }\n" +
+                                 "<\/SCRIPT>\n" +
+                                 "<\/HEAD>\n" +
+                                 "<BODY>\n" +
+                                 "<H5 class=\"NOTES BLOCK\">请注意！当前浏览器可能阻止打印脚本，请确认脚本通过。<\/H5>\n" +
+                                 "<SPAN class=\"PRINT NONE\">" + c.innerHTML + "<\/SPAN>\n" +
+                                 "<\/BODY>\n" +
+                                 "<\/HTML>");
+                w.document.close();
+            },
+            ABOUT: function () {
+                var m = _createElement("SPAN");
+                m.innerHTML = "<SPAN style=\"font-size:32px;\">Miniweaver 2010<\/SPAN><BR \/>\n" +
+                              "<SPAN style=\"font-size:12px;\">Version 3.0 &copy; Mr.lonely, All Rights Reserved.<\/SPAN><BR \/><BR \/>\n" +
+                              "<SPAN style=\"font-size:16px;\">\n" +
+                              "Get help please login:<BR \/><A style=\"color:" + _PATTERN.foreColor + ";\" href=\"http:\/\/miniweaver.izhaoyang.com\/help\/\" target=\"_blank\">http:\/\/miniweaver.izhaoyang.com\/help\/<\/A><BR \/><BR \/>\n" +
+                              "Contact the author: <A style=\"color:" + _PATTERN.foreColor + ";\" href=\"mailto:Mr.lonely@vip.163.com\">Mr.lonely@vip.163.com<\/A>\n" +
+                              "<\/SPAN>";
+                _MODEL.TIPBOX("关于", "!", m, [{ l: "确定", f: function () { _clear() } }]);
+            },
+            FONTNAME: function () {
+                var c = ["宋体", "黑体", "楷体_GB2312", "幼圆", "Arial", "Arial Black", "Times New Roman", "Verdana"], s = [];
+                for (var i = 0; i < 8; i++) { s[i] = "position:relative; float:left; top:0px; left:0px; overflow:hidden; width:120px; height:25px; margin:0px; border:none; padding:0px 0px 0px 7px; background:" + _PATTERN.baseColor + "; color:" + _PATTERN.foreColor + "; font-family:" + c[i] + "; font-size:13px; font-weight:normal; font-style:normal; text-decoration:none; line-height:25px; text-align:left;" }
+                _MODEL.BUTTONGROUP("FONTNAME", 120, { e: c, c: c, s: s });
+            },
+            FONTSIZE: function () {
+                var e = ["初号", "一号", "二号", "三号", "四号", "五号", "六号"], s = [48, 32, 24, 18, 16, 13, 10], c = [];
+                for (var i = 0; i < 7; i++) {
+                    c[i] = 7 - i;
+                    s[i] = "position:relative; float:left; top:0px; left:0px; overflow:hidden; width:120px; height:" + (s[i] + 10) + "px; margin:0px; border:none; padding:5px 0px 0px 7px; background:" + _PATTERN.baseColor + "; color:" + _PATTERN.foreColor + "; font-family:Arial; font-size:" + s[i] + "px; font-weight:normal; font-style:normal; text-decoration:none; line-height:normal; text-align:left;";
+                }
+                _MODEL.BUTTONGROUP("FONTSIZE", 120, { e: e, c: c, s: s });
+            },
+            FORECOLOR: function () {
+                _MODEL.COLORPICKER("FORECOLOR");
+            },
+            BACKCOLOR: function () {
+                _MODEL.COLORPICKER(+[1, ] ? "HILITECOLOR" : "BACKCOLOR");
+            },
+            CREATELINK: function () {
+                _MODEL.INPUTGROUP("CREATELINK", { k: ["超文本传输协议 HTTP", "文件传输协议 FTP", "远程登陆协议 TELNET", "电子邮件协议 MAILTO", "迅雷下载协议 THUNDER", "网际快车下载协议 FLASHGET", "超级旋风下载协议 QQDL", "电驴下载协议 ED2K"], v: ["http:\/\/", "ftp:\/\/", "telnet:\/\/", "mailto:", "thunder:\/\/", "flashget:\/\/", "qqdl:\/\/", "ed2k:\/\/"] });
+            },
+            INSERTIMAGE: function () {
+                _MODEL.INPUTGROUP("INSERTIMAGE", { v: ["请输入图片地址"] });
+            },
+            INSERTTABLE: function () {
+                var TABLEGROUP = _MODEL.CONTAINER["INSERTTABLE"];
+                if (!TABLEGROUP) {
+                    var p = {
+                        s: "position:relative; float:left; top:0px; left:0px; overflow:hidden; width:258px; height:28px; margin:0px; border:none; padding:0px; background:none; color:" + _PATTERN.foreColor + "; font-family:Arial; font-size:14px; font-weight:normal; font-style:normal; text-decoration:none; line-height:28px; text-align:center;",
+                        c: "position:relative; float:left; top:0px; left:0px; overflow:hidden; height:135px; margin:5px 0px 0px 7px; border:none; padding:0px; background:none;",
+                        b: "position:relative; float:left; top:0px; left:0px; overflow:hidden; padding:0px;",
+                        cm_0: function () { for (var e = this.parentNode.firstChild; e; e = e.nextSibling) { e.style.width = "16px"; e.style.height = "16px"; e.style.marginLeft = "9px" } this.style.width = "25px"; this.style.height = "25px"; this.style.marginLeft = "0px"; this.parentNode.setAttribute("command", this.getAttribute("command")) },
+                        sm_0: function () { for (var m, n, e = this.parentNode.firstChild; e; e = e.nextSibling) { m = this.getAttribute("command").split(","); n = e.getAttribute("command").split(","); if (n[0] <= m[0] && n[1] <= m[1]) { e.style.background = _PATTERN.foreColor } else { e.style.background = "none" } this.parentNode.nextSibling.innerHTML = m[0] + " 行 × " + m[1] + " 列　表格" } },
+                        sm_1: function () { for (var e = this.parentNode.firstChild; e; e = e.nextSibling) { e.style.background = "none" } this.parentNode.nextSibling.innerHTML = "0 行 × 0 列　表格"; _EXEC.INDEX(this.parentNode.parentNode.getAttribute("command"), this.parentNode.previousSibling.getAttribute("command") + "," + this.getAttribute("command")) }
+                    };
+                    var rgb = ["#000000", "#FF0000", "#00FF00", "#0000FF", "#FFFF00", "#00FFFF", "#FF00FF"];
+                    TABLEGROUP = _createElement("DIV", { command: "INSERTTABLE" }, [
+                      _createElement("SPAN", { style: p.c + " width:25px;", command: rgb[0] }),
+                      _createElement("SPAN", { style: p.c + " width:216px;" }),
+                      _createElement("SPAN", { style: p.s }, "0 行 × 0 列　表格")
+                    ]);
+                    for (var i = 0; i < 7; i++) { TABLEGROUP.childNodes[0].appendChild(_createElement("BUTTON", { style: p.b + " width:" + (i ? 16 : 25) + "px; height:" + (i ? 16 : 25) + "px; margin:0px 0px 2px " + (i ? 9 : 0) + "px; border:none; background:" + rgb[i] + ";", command: rgb[i], onmouseover: p.cm_0 })) }
+                    for (var i = 1; i < 6; i++) {
+                        for (var j = 1; j < 9; j++) {
+                            TABLEGROUP.childNodes[1].appendChild(_createElement("BUTTON", { style: p.b + " width:25px; height:25px; margin:0px 2px 2px 0px; border:" + _PATTERN.foreColor + " 1px solid; background:none;", command: i + "," + j, onmouseover: p.sm_0, onmouseup: p.sm_1 }));
+                        }
+                    }
+                }
+                _MODEL.MENULAYER(TABLEGROUP, 258, 168);
+            },
+            INSERTSYMBOL: function () {
+                var c = ["　", "、", "。", "·", "ˉ", "ˇ", "¨", "〃", "々", "—", "～", "‖", "…", "‘", "’", "“", "”", "〔", "〕", "〈", "〉", "《", "》", "「", "」", "『", "』", "〖", "〗", "【", "】", "±", "×", "÷", "∶", "∧", "∨", "∑", "∏", "∪", "∩", "∈", "∷", "√", "⊥", "∥", "∠", "⌒", "⊙", "∫", "∮", "≡", "≌", "≈", "∽", "∝", "≠", "≮", "≯", "≤", "≥", "∞", "∵", "∴", "♂", "♀", "°", "′", "″", "℃", "＄", "¤", "￠", "￡", "‰", "§", "№", "☆", "★", "○", "●", "◎", "◇", "◆", "□", "■", "△", "▲", "※", "→", "←", "↑", "↓", "〓"];
+                var s = "position:relative; float:left; top:0px; left:0px; overflow:hidden; width:20px; height:20px; margin:0px; border:none; padding:0px; background:" + _PATTERN.baseColor + "; color:" + _PATTERN.foreColor + "; font-family:Arial; font-size:10px; font-weight:normal; font-style:normal; text-decoration:none; line-height:20px; text-align:center;";
+                _MODEL.BUTTONGROUP("INSERTSYMBOL", 240, { e: c, c: c, s: s });
+            }
+        };
+
+        //创建命令
+        var _EXEC = {
+            //公共命令
+            CLIPBOARD: null,
+            CLIP: function (c) {
+                if (c) {
+                    var w = window.frames["MW_IFRAME_" + _I];
+                    w.focus();
+                    if (w.getSelection) {
+                        var s = w.getSelection(), r = s.getRangeAt(0);
+                        var n = _createElement("SPAN", null, c == 1 ? r.cloneContents() : r.extractContents());
+                        _EXEC.CLIPBOARD = n.innerHTML;
+                        s.removeAllRanges();
+                    } else if (w.document.selection) {
+                        var s = w.document.selection, r = s.createRange();
+                        _EXEC.CLIPBOARD = r.htmlText;
+                        if (c == 2) { s.clear() }
+                        s.empty();
+                    }
+                } else { if (_EXEC.CLIPBOARD) { _EXEC.INSERT(_EXEC.CLIPBOARD) } }
+            },
+            INSERT: function (v) {
+                var w = window.frames["MW_IFRAME_" + _I];
+                if (w.getSelection) { _EXEC.INDEX("INSERTHTML", v) }
+                else if (w.document.selection) {
+                    w.focus();
+                    w.document.selection.createRange().pasteHTML(v);
+                }
+            },
+            INDEX: function (c, v) {
+                _clear();
+                if (!_EXEC[c]) {
+                    window.frames["MW_IFRAME_" + _I].focus();
+                    window.frames["MW_IFRAME_" + _I].document.execCommand(c, false, v);
+                } else { _EXEC[c](v) }
+            },
+            //用户命令
+            CUT: function () {
+                _EXEC.CLIP(2);
+            },
+            COPY: function () {
+                _EXEC.CLIP(1);
+            },
+            PASTE: function () {
+                _EXEC.CLIP(0);
+            },
+            INSERTTABLE: function (v) {
+                var v = v.split(","), n = _createElement("SPAN", _createElement("TABLE", { style: "border-bottom:" + v[0] + " 1px solid; border-left:" + v[0] + " 1px solid;", cellSpacing: "0", cellPadding: "0", border: "0" }, _createElement("TBODY")));
+                for (var i = 0; i < v[1]; i++) {
+                    n.firstChild.firstChild.appendChild(_createElement("TR"));
+                    for (var j = 0; j < v[2]; j++) {
+                        var TD = _createElement("TD", { style: "border-top:" + v[0] + " 1px solid; border-right:" + v[0] + " 1px solid;", width: "100", height: "25" }); TD.innerHTML = "&nbsp;";
+                        n.firstChild.firstChild.lastChild.appendChild(TD);
+                    }
+                }
+                _EXEC.INSERT(n.innerHTML);
+            },
+            INSERTFIELDSET: function () {
+                var n = _createElement("SPAN", _createElement("DIV", { style: "overflow:hidden; width:100%; height:auto; border:#CCCCCC 1px solid;" }));
+                if (+[1, ]) { n.lastChild.appendChild(_createElement("BR")) }
+                _EXEC.INSERT(n.innerHTML);
+            },
+            INSERTSYMBOL: function (v) {
+                _EXEC.INSERT(v);
+            },
+            INSERTTIME: function () {
+                _EXEC.INSERT(new Date().toLocaleString());
+            }
+        };
+
+        //创建工具
+        var _$ = function (e) {
+            if (typeof e == "string") { return document.getElementById(e) }
+            else { return e }
+        };
+
+        var _getElementByScroll = function () {
+            var s = { o: null, t: 0, l: 0 };
+            (s.t = document.documentElement.scrollTop) ? s.t : (s.t = document.body.scrollTop) ? s.t : (s.t = 0);
+            (s.l = document.documentElement.scrollLeft) ? s.l : (s.l = document.body.scrollLeft) ? s.l : (s.l = 0);
+            return s;
+        };
+
+        var _getElementBySite = function (e) {
+            var s = { t: 0, l: 0 };
+            while (e) {
+                s.t += e.offsetTop;
+                s.l += e.offsetLeft;
+                e = e.offsetParent;
+            }
+            return s;
+        };
+
+        var _cancelBubble = function (e) {
+            if (e.stopPropagation) { e.stopPropagation() }
+            else { e.cancelBubble = true }
+        };
+
+        var _cancelDefault = function (e) {
+            if (e.preventDefault) { e.preventDefault() }
+            else { e.returnValue = false }
+        };
+
+        //创建工厂
+        var _createElement = function (tn, a, c, w) {
+            if (!w) { w = window }
+            var e = w.document.createElement(tn);
+            if (arguments.length == 2 && a.constructor != Object) {
+                c = a;
+                a = null;
+            }
+            if (a) {
+                for (var n in a) {
+                    if (a[n] == a["style"]) { e.style.cssText = a[n]; continue }
+                    else if (a[n] == a["onmouseover"]) { e.onmouseover = a[n]; continue }
+                    else if (a[n] == a["onmousedown"]) { e.onmousedown = a[n]; continue }
+                    else if (a[n] == a["onmouseup"]) { e.onmouseup = a[n]; continue }
+                    else if (a[n] == a["onmouseout"]) { e.onmouseout = a[n]; continue }
+                    else if (a[n] == a["ondblclick"]) { e.ondblclick = a[n]; continue }
+                    else { e.setAttribute(n, a[n]) }
+                }
+            }
+            if (c) {
+                if (c.constructor == String) { e.appendChild(document.createTextNode(c)) }
+                else if (c.constructor == Array) {
+                    for (var i = 0; i < c.length; i++) {
+                        if (c[i].constructor == String) { c[i] = document.createTextNode(c[i]) }
+                        e.appendChild(c[i]);
+                    }
+                } else { e.appendChild(c) }
+            }
+            return e;
+        };
+
+        var _createStyle = function (e) {
+            switch (e) {
+                case "MW": return "position:absolute; top:" + _PATTERN.top + "px; left:" + _PATTERN.left + "px; overflow:hidden; width:" + _PATTERN.width + "px; height:" + _PATTERN.height + "px; margin:0px; border:none; padding:0px; background:none;";
+                case "MW_MAIN": return "position:relative; top:0px; left:0px; overflow:hidden; width:" + (_PATTERN.width - 4) + "px; height:" + (_PATTERN.editableCode ? (_PATTERN.height - 31) : (_PATTERN.height - 4)) + "px; margin:0px; border:" + _PATTERN.backColor + " 2px solid; padding:0px; background:" + _PATTERN.baseColor + ";";
+                case "MW_TOOLBOX_FIXED": return "position:relative; top:1px; left:1px; overflow:hidden; width:" + (_PATTERN.width - 6) + "px; height:" + _PATTERN.heightToolbox + "px; margin:0px; border:none; padding:0px; background:" + _PATTERN.backColor + "; cursor:default;";
+                case "MW_TOOLBOX_FLOAT": return "position:absolute; z-index:" + (_PATTERN.index + 1) + "; overflow:hidden; width:" + (_PATTERN.width - 6) + "px; height:" + _PATTERN.heightToolbox + "px; margin:0px; border:" + _PATTERN.foreColor + " 2px solid; padding:0px; background:" + _PATTERN.backColor + "; cursor:move;";
+                case "MW_TOOLBAR": return "position:relative; float:left; top:0px; left:0px; overflow:hidden; height:25px; margin:0px; border:none; padding:0px; background:none; cursor:default;";
+                case "MW_TOOLBAR_LEFT": return "position:relative; float:left; top:0px; left:0px; overflow:hidden; width:7px; height:25px; margin:0px; border:none; padding:0px; background-image:url(" + _PATTERN.skin + "); background-position:-180px -80px; background-repeat:no-repeat;";
+                case "MW_TOOLBAR_RIGHT": return "position:relative; float:left; top:0px; left:0px; overflow:hidden; width:13px; height:25px; margin:0px; border:none; padding:0px; background-image:url(" + _PATTERN.skin + "); background-position:-218px -80px; background-repeat:no-repeat;";
+                case "MW_TOOLBAR_AR": return "position:relative; float:left; top:0px; left:0px; overflow:hidden; width:6px; height:25px; margin:0px; border:none; padding:0px; background-image:url(" + _PATTERN.skin + "); background-position:-187px -80px; background-repeat:no-repeat;";
+                case "MW_TOOLBAR_BUTTON": return "position:relative; float:left; top:0px; left:0px; overflow:hidden; width:22px; height:25px; margin:0px; border:none; padding:0px; background-image:url(" + _PATTERN.skin + "); background-position:-193px -80px; background-repeat:no-repeat;";
+                case "MW_TOOLBAR_BUTTON_OVER": return "position:relative; top:1px; left:0px; overflow:hidden; width:20px; height:20px; margin:0px; border:" + _PATTERN.foreColor + " 1px solid; padding:0px; background:none;";
+                case "MW_TOOLBAR_BUTTON_OUT": return "position:relative; top:1px; left:0px; overflow:hidden; width:20px; height:20px; margin:1px; border:none; padding:0px; background:none;";
+                case "MW_EDITOR_BIGGER": return "position:relative; top:1px; left:1px; overflow:hidden; width:" + (_PATTERN.width - 10) + "px; height:" + (_PATTERN.editableCode ? (_PATTERN.height - 37) : (_PATTERN.height - 10)) + "px; margin:0px; border:" + _PATTERN.baseColor + " 2px inset; padding:0px; background:#FFFFFF;";
+                case "MW_EDITOR_LITTLE": return "position:relative; top:1px; left:1px; overflow:hidden; width:" + (_PATTERN.width - 10) + "px; height:" + (_PATTERN.editableCode ? (_PATTERN.height - _PATTERN.heightToolbox - 37) : (_PATTERN.height - _PATTERN.heightToolbox - 10)) + "px; margin:0px; border:" + _PATTERN.baseColor + " 2px inset; padding:0px; background:#FFFFFF;";
+                case "MW_IFRAME_BIGGER": return "position:absolute; top:0px; left:0px; overflow:auto; width:" + (_PATTERN.width - 10) + "px; height:" + (_PATTERN.editableCode ? (_PATTERN.height - 37) : (_PATTERN.height - 10)) + "px; margin:0px; border:none; padding:0px;";
+                case "MW_IFRAME_LITTLE": return "position:absolute; top:0px; left:0px; overflow:auto; width:" + (_PATTERN.width - 10) + "px; height:" + (_PATTERN.editableCode ? (_PATTERN.height - _PATTERN.heightToolbox - 37) : (_PATTERN.height - _PATTERN.heightToolbox - 10)) + "px; margin:0px; border:none; padding:0px;";
+                case "MW_TEXTAREA_BIGGER": return "position:absolute; top:-1px; left:-1px; overflow:auto; width:" + (_PATTERN.width - 11) + "px; height:" + (_PATTERN.editableCode ? (_PATTERN.height - 38) : (_PATTERN.height - 11)) + "px; margin:0px; border:none; padding:2px 0px 0px 2px;";
+                case "MW_TEXTAREA_LITTLE": return "position:absolute; top:-1px; left:-1px; overflow:auto; width:" + (_PATTERN.width - 11) + "px; height:" + (_PATTERN.editableCode ? (_PATTERN.height - _PATTERN.heightToolbox - 38) : (_PATTERN.height - _PATTERN.heightToolbox - 11)) + "px; margin:0px; border:none; padding:2px 0px 0px 2px;";
+                case "MW_OPTIONS": return "position:relative; top:-2px; left:20px; overflow:hidden; width:186px; height:29px; margin:0px; border:none; padding:0px; background:" + _PATTERN.backColor + ";";
+                case "MW_OPTIONS_OVER": return "position:relative; float:left; top:0px; left:0px; overflow:hidden; width:90px; height:27px; margin:0px 0px 0px 2px; border:none; padding:0px; background:none; cursor:default;";
+                case "MW_OPTIONS_OUT": return "position:relative; float:left; top:2px; left:0px; overflow:hidden; width:90px; height:25px; margin:0px 0px 0px 2px; border:none; padding:0px; background:none; cursor:pointer;";
+                case "MW_TIPBOX": return "position:absolute; z-index:" + (_PATTERN.index + 4) + "; overflow:hidden; margin:0px; border:" + _PATTERN.foreColor + " 2px solid; padding:0px; background:" + _PATTERN.baseColor + "; cursor:default;";
+                case "MW_MASKLAYER": return "position:absolute; z-index:" + (_PATTERN.index + 3) + "; overflow:hidden; width:" + screen.width + "px; height:" + screen.height + "px; margin:0px; border:none; padding:0px; background:#000000; opacity:.50; -moz-opacity:.50; filter:alpha(opacity=50); cursor:default;";
+                case "MW_MENULAYER": return "position:absolute; z-index:" + (_PATTERN.index + 2) + "; overflow:hidden; margin:0px; border:" + _PATTERN.foreColor + " 1px solid; padding:0px; background:" + _PATTERN.baseColor + "; cursor:default;";
+                default: return;
+            }
+        };
+
+        var _createView = function () {
+            var MW = _createElement("DIV", { id: "MW_" + _I, style: _createStyle("MW") },
+              _createElement("DIV", { id: "MW_MAIN_" + _I, style: _createStyle("MW_MAIN") }, [
+                _createElement("DIV", { id: "MW_TOOLBOX_" + _I, style: _createStyle("MW_TOOLBOX_FIXED"), title: "双击这里可以切换工具箱的模式", ondblclick: function (e) { _clear(); _changeToolbox(); _cancelBubble(e || window.event) } }),
+                _createElement("DIV", { id: "MW_EDITOR_" + _I, style: _createStyle("MW_EDITOR_LITTLE") }, [
+                  _createElement("IFRAME", { id: "MW_IFRAME_" + _I, name: "MW_IFRAME_" + _I, style: _createStyle("MW_IFRAME_LITTLE"), frameborder: "0", scrolling: "auto", src: "about:blank" }),
+                  _createElement("TEXTAREA", { id: "MW_TEXTAREA_" + _I, name: "MW_TEXTAREA_" + _I, style: "display:none;", wrap: "off" })
+                ])
+              ])
+            );
+            if (_PATTERN.editableCode) {
+                MW.appendChild(_createElement("DIV", { id: "MW_OPTIONS_" + _I, style: _createStyle("MW_OPTIONS") }, [
+                  _createElement("SPAN", { style: _createStyle("MW_OPTIONS_OVER"), onmouseup: function (e) { _clear(); _changeView(0); _cancelBubble(e || window.event) } }, _createElement("IMG", { style: "position:absolute; top:-80px; left:0px; width:840px; height:107px; margin:0px; border:none; padding:0px;", src: _PATTERN.skin })),
+                  _createElement("SPAN", { style: _createStyle("MW_OPTIONS_OUT"), onmouseup: function (e) { _clear(); _changeView(1); _cancelBubble(e || window.event) } }, _createElement("IMG", { style: "position:absolute; top:-80px; left:-90px; width:840px; height:107px; margin:0px; border:none; padding:0px;", src: _PATTERN.skin }))
+                ]));
+            }
+            _MW.appendChild(MW);
+        };
+
+        var _createToolbox = function () {
+            for (var i = 0; i < _BUTTONS.length; i++) { if (_PATTERN[_BUTTONS[i][0]]) { createToolbar(_BUTTONS[i]) } }
+            function createToolbar(b) {
+                var MW_TOOLBAR = _createElement("DIV", { style: _createStyle("MW_TOOLBAR") }, [
+                  _createElement("SPAN", { style: _createStyle("MW_TOOLBAR_LEFT") }),
+                  _createElement("SPAN", { style: _createStyle("MW_TOOLBAR_RIGHT") })
+                ]);
+                for (var w = 20, i = 1; i < b.length; i++) {
+                    if (b[i].m) {
+                        MW_TOOLBAR.insertBefore(_createElement("SPAN", { style: _createStyle("MW_TOOLBAR_BUTTON") },
+                          _createElement("DIV", {
+                              style: _createStyle("MW_TOOLBAR_BUTTON_OUT"), title: b[i].m, command: b[i].c,
+                              onmouseover: function (e) {
+                                  if (!_MODEL.STATUS.v || (_MODEL.STATUS.v && !_MODEL.CANCELBUTTON[this.getAttribute("command")])) {
+                                      this.style.cssText = _createStyle("MW_TOOLBAR_BUTTON_OVER");
+                                      this.firstChild.style.top = "-40px";
+                                  }
+                                  _cancelBubble(e || window.event);
+                              },
+                              onmousedown: function (e) {
+                                  if (!_MODEL.STATUS.v || (_MODEL.STATUS.v && !_MODEL.CANCELBUTTON[this.getAttribute("command")])) {
+                                      this.style.cssText = _createStyle("MW_TOOLBAR_BUTTON_OVER");
+                                      this.firstChild.style.top = "-60px";
+                                  }
+                                  _cancelBubble(e || window.event);
+                              },
+                              onmouseup: function (e) {
+                                  if (!_MODEL.STATUS.v || (_MODEL.STATUS.v && !_MODEL.CANCELBUTTON[this.getAttribute("command")])) {
+                                      _clear();
+                                      _MODEL.STATUS.b.e = this;
+                                      _MODEL.STATUS.b.m_0 = this.onmouseover; this.onmouseover = function (e) { _cancelBubble(e || window.event) };
+                                      _MODEL.STATUS.b.m_1 = this.onmousedown; this.onmousedown = function (e) { _cancelBubble(e || window.event) };
+                                      _MODEL.STATUS.b.m_2 = this.onmouseup; this.onmouseup = function (e) { _cancelBubble(e || window.event) };
+                                      _MODEL.STATUS.b.m_3 = this.onmouseout; this.onmouseout = function (e) { _cancelBubble(e || window.event) };
+                                      _exec(this.getAttribute("command"));
+                                  }
+                                  _cancelBubble(e || window.event);
+                              },
+                              onmouseout: function (e) {
+                                  if (!_MODEL.STATUS.v || (_MODEL.STATUS.v && !_MODEL.CANCELBUTTON[this.getAttribute("command")])) {
+                                      this.style.cssText = _createStyle("MW_TOOLBAR_BUTTON_OUT");
+                                      this.firstChild.style.top = "-20px";
+                                  }
+                                  _cancelBubble(e || window.event);
+                              },
+                              ondblclick: function (e) { _cancelBubble(e || window.event) }
+                          }, _createElement("IMG", { style: "position:absolute; top:-20px; left:-" + b[i].l + "px; width:" + (!b[i].s ? 840 : b[i].w) + "px; height:" + (!b[i].s ? 107 : b[i].h) + "px; margin:0px; border:none; padding:0px;", src: (!b[i].s ? _PATTERN.skin : b[i].s) }))
+                        ), MW_TOOLBAR.lastChild);
+                        if (!b[i].u) { _MODEL.CANCELBUTTON[b[i].c] = MW_TOOLBAR.lastChild.previousSibling }
+                        w += 22;
+                    } else {
+                        MW_TOOLBAR.insertBefore(_createElement("SPAN", { style: _createStyle("MW_TOOLBAR_AR") }), MW_TOOLBAR.lastChild);
+                        w += 6;
+                    }
+                }
+                MW_TOOLBAR.style.width = w + "px";
+                _MW.firstChild.firstChild.firstChild.appendChild(MW_TOOLBAR);
+            }
+        };
+
+        //创建方法
+        var _refreshPattern = function (p) {
+            for (var n in p) { _PATTERN[n] = p[n] }
+        };
+
+        var _refreshStyle = function (p) {
+            if (_MODEL.STATUS.v) { _changeView(0) }
+            if (_MODEL.STATUS.t) { _changeToolbox() }
+            if (typeof p == "object") {
+                if (_MODEL.STATUS.tb) { _clear() }
+                if (_$("MW_MENULAYER_" + _I)) {
+                    if (_MODEL.STATUS.mul) { _clear() }
+                    _MODEL.CONTAINER = {};
+                    document.body.removeChild(_$("MW_MENULAYER_" + _I));
+                }
+                if (typeof p.heightToolbox == "number") { _$("MW_TOOLBOX_" + _I).style.height = p.heightToolbox + "px" }
+                if (typeof p.top == "number") { _$("MW_" + _I).style.top = p.top + "px" }
+                if (typeof p.left == "number") { _$("MW_" + _I).style.left = p.left + "px" }
+                if (typeof p.width == "number") {
+                    _$("MW_" + _I).style.width = p.width + "px";
+                    _$("MW_MAIN_" + _I).style.width = (p.width - 4) + "px";
+                    _$("MW_TOOLBOX_" + _I).style.width = (p.width - 6) + "px";
+                    _$("MW_EDITOR_" + _I).style.width = (p.width - 10) + "px";
+                    _$("MW_IFRAME_" + _I).style.width = (p.width - 10) + "px";
+                }
+                if (typeof p.height == "number") {
+                    var th = parseInt(_$("MW_TOOLBOX_" + _I).style.height);
+                    _$("MW_" + _I).style.height = p.height + "px";
+                    _$("MW_MAIN_" + _I).style.height = (_PATTERN.editableCode ? (p.height - 31) : (p.height - 4)) + "px";
+                    _$("MW_EDITOR_" + _I).style.height = (_PATTERN.editableCode ? (p.height - th - 37) : (p.height - th - 10)) + "px";
+                    _$("MW_IFRAME_" + _I).style.height = (_PATTERN.editableCode ? (p.height - th - 37) : (p.height - th - 10)) + "px";
+                }
+                if (typeof p.baseColor == "string") {
+                    _$("MW_MAIN_" + _I).style.background = p.baseColor;
+                    _$("MW_EDITOR_" + _I).style.borderColor = p.baseColor;
+                }
+                if (typeof p.backColor == "string") {
+                    _$("MW_MAIN_" + _I).style.borderColor = p.backColor;
+                    _$("MW_TOOLBOX_" + _I).style.background = p.backColor;
+                    if (_PATTERN.editableCode) { _$("MW_OPTIONS_" + _I).style.background = p.backColor }
+                }
+                if (typeof p.skin == "object") {
+                    (function refreshButton(e) {
+                        if (e.tagName == "SPAN") { e.style.backgroundImage = "url(" + p.skin[0] + ")" }
+                        if (e.tagName == "IMG") {
+                            if (p.skin[1]) { var s = p.skin[1][e.parentNode.getAttribute("command")] }
+                            if (s) { e.setAttribute("src", s) }
+                            else if (e.getAttribute("src").indexOf(_PATTERN.skin) > -1) { e.setAttribute("src", p.skin[0]) }
+                        }
+                        if (e.firstChild) { for (var t = e.firstChild; t; t = t.nextSibling) { refreshButton(t) } }
+                    })(_$("MW_TOOLBOX_" + _I))
+                    if (_PATTERN.editableCode) {
+                        _$("MW_OPTIONS_" + _I).childNodes[0].firstChild.setAttribute("src", p.skin[0]);
+                        _$("MW_OPTIONS_" + _I).childNodes[1].firstChild.setAttribute("src", p.skin[0]);
+                    }
+                }
+                _refreshPattern(p);
+            }
+        };
+
+        var _changeView = function (c) {
+            if (!c && _MODEL.STATUS.v) {
+                if (!_MODEL.STATUS.t) { _$("MW_IFRAME_" + _I).style.cssText = _createStyle("MW_IFRAME_LITTLE") }
+                else { _$("MW_IFRAME_" + _I).style.cssText = _createStyle("MW_IFRAME_BIGGER") }
+                _$("MW_TEXTAREA_" + _I).style.display = "none";
+                _$("MW_OPTIONS_" + _I).firstChild.style.cssText = _createStyle("MW_OPTIONS_OVER");
+                _$("MW_OPTIONS_" + _I).lastChild.style.cssText = _createStyle("MW_OPTIONS_OUT");
+                if (_PATTERN.editableHead) {
+                    window.frames["MW_IFRAME_" + _I].document.write(_$("MW_TEXTAREA_" + _I).value);
+                    window.frames["MW_IFRAME_" + _I].document.close();
+                } else { window.frames["MW_IFRAME_" + _I].document.body.innerHTML = _$("MW_TEXTAREA_" + _I).value }
+                _changeButton(0);
+                _MODEL.STATUS.v = 0;
+            }
+            if (c && !_MODEL.STATUS.v) {
+                if (!_MODEL.STATUS.t) { _$("MW_TEXTAREA_" + _I).style.cssText = _createStyle("MW_TEXTAREA_LITTLE") }
+                else { _$("MW_TEXTAREA_" + _I).style.cssText = _createStyle("MW_TEXTAREA_BIGGER") }
+                _$("MW_IFRAME_" + _I).style.display = "none";
+                _$("MW_OPTIONS_" + _I).firstChild.style.cssText = _createStyle("MW_OPTIONS_OUT");
+                _$("MW_OPTIONS_" + _I).lastChild.style.cssText = _createStyle("MW_OPTIONS_OVER");
+                if (_PATTERN.editableHead) { _$("MW_TEXTAREA_" + _I).value = window.frames["MW_IFRAME_" + _I].document.documentElement.innerHTML.replace(/></g, ">\n<") }
+                else { _$("MW_TEXTAREA_" + _I).value = window.frames["MW_IFRAME_" + _I].document.body.innerHTML.replace(/></g, ">\n<") }
+                _changeButton(1);
+                _MODEL.STATUS.v = 1;
+            }
+        };
+
+        var _changeToolbox = function () {
+            if (!_MODEL.STATUS.t) {
+                _$("MW_TOOLBOX_" + _I).onmousedown = function (e) { _drag(this, e || window.event) };
+                _$("MW_TOOLBOX_" + _I).style.cssText = _createStyle("MW_TOOLBOX_FLOAT");
+                _$("MW_TOOLBOX_" + _I).style.top = _getElementBySite(_$("MW_" + _I)).t + "px";
+                _$("MW_TOOLBOX_" + _I).style.left = _getElementBySite(_$("MW_" + _I)).l + "px";
+                _$("MW_EDITOR_" + _I).style.cssText = _createStyle("MW_EDITOR_BIGGER");
+                if (!_MODEL.STATUS.v) { _$("MW_IFRAME_" + _I).style.cssText = _createStyle("MW_IFRAME_BIGGER") }
+                else { _$("MW_TEXTAREA_" + _I).style.cssText = _createStyle("MW_TEXTAREA_BIGGER") }
+                document.body.appendChild(_$("MW_TOOLBOX_" + _I));
+                _MODEL.STATUS.t = 1;
+            } else {
+                _$("MW_TOOLBOX_" + _I).onmousedown = function (e) { };
+                _$("MW_TOOLBOX_" + _I).style.cssText = _createStyle("MW_TOOLBOX_FIXED");
+                _$("MW_EDITOR_" + _I).style.cssText = _createStyle("MW_EDITOR_LITTLE");
+                if (!_MODEL.STATUS.v) { _$("MW_IFRAME_" + _I).style.cssText = _createStyle("MW_IFRAME_LITTLE") }
+                else { _$("MW_TEXTAREA_" + _I).style.cssText = _createStyle("MW_TEXTAREA_LITTLE") }
+                _$("MW_MAIN_" + _I).insertBefore(_$("MW_TOOLBOX_" + _I), _$("MW_EDITOR_" + _I));
+                _MODEL.STATUS.t = 0;
+            }
+        };
+
+        var _changeButton = function (c) {
+            for (var n in _MODEL.CANCELBUTTON) {
+                if (c) { _MODEL.CANCELBUTTON[n].firstChild.firstChild.style.top = "0px" }
+                else { _MODEL.CANCELBUTTON[n].firstChild.firstChild.style.top = "-20px" }
+            }
+        };
+
+        var _exec = function (c) {
+            if (_MODEL[c]) { _MODEL[c]() }
+            else { _EXEC.INDEX(c) }
+        };
+
+        var _drag = function (t, e) {
+            if (t.getAttribute("id") == "MW_TOOLBOX_" + _I) { _clear() }
+            document.body.appendChild(t);
+            var x = e.clientX - t.offsetLeft, y = e.clientY - t.offsetTop;
+            if (document.addEventListener) {
+                document.addEventListener("mouseup", targetUp, true);
+                document.addEventListener("mousemove", targetMove, true);
+            } else if (document.attachEvent) {
+                t.setCapture();
+                t.attachEvent("onmouseup", targetUp);
+                t.attachEvent("onmousemove", targetMove);
+                t.attachEvent("onlosecapture", targetUp);
+            } else {
+                var m_2 = document.onmouseup, m_4 = document.onmousemove;
+                document.onmouseup = targetUp;
+                document.onmousemove = targetMove;
+            }
+            _cancelBubble(e);
+            _cancelDefault(e);
+            function targetUp(e) {
+                if (document.removeEventListener) {
+                    document.removeEventListener("mouseup", targetUp, true);
+                    document.removeEventListener("mousemove", targetMove, true);
+                } else if (document.detachEvent) {
+                    t.detachEvent("onmouseup", targetUp);
+                    t.detachEvent("onmousemove", targetMove);
+                    t.detachEvent("onlosecapture", targetUp);
+                    t.releaseCapture();
+                } else {
+                    document.onmouseup = m_2;
+                    document.onmousemove = m_4;
+                }
+                _cancelBubble(e || window.event);
+            }
+            function targetMove(e) {
+                e = e || window.event;
+                t.style.top = e.clientY - y + "px";
+                t.style.left = e.clientX - x + "px";
+                _cancelBubble(e);
+            }
+        };
+
+        var _clear = function () {
+            if (_MODEL.STATUS.tb) {
+                document.body.removeChild(_$("MW_TIPBOX_" + _I));
+                _MODEL.STATUS.b.e.style.cssText = _createStyle("MW_TOOLBAR_BUTTON_OUT");
+                _MODEL.STATUS.b.e.firstChild.style.top = "-20px";
+                _MODEL.STATUS.tb = 0;
+            }
+            if (_MODEL.STATUS.mkl) {
+                var BODY = document.body, HTML = document.documentElement;
+                BODY.style.overflow = BODY.getAttribute("overflow");
+                HTML.style.overflow = HTML.getAttribute("overflow");
+                _$("MW_MASKLAYER_" + _I).style.display = "none";
+                _MODEL.STATUS.mkl = 0;
+            }
+            if (_MODEL.STATUS.mul) {
+                var mul = _$("MW_MENULAYER_" + _I), c = mul.firstChild.getAttribute("command");
+                mul.style.display = "none";
+                if (_PATTERN.editableCache) {
+                    _MODEL.CONTAINER[c] = document.createDocumentFragment();
+                    _MODEL.CONTAINER[c].appendChild(mul.firstChild);
+                } else { mul.removeChild(mul.firstChild) }
+                _MODEL.STATUS.b.e.style.cssText = _createStyle("MW_TOOLBAR_BUTTON_OUT");
+                _MODEL.STATUS.b.e.firstChild.style.top = "-20px";
+                _MODEL.STATUS.mul = 0;
+            }
+            if (_MODEL.STATUS.b.e) {
+                var b = _MODEL.STATUS.b;
+                b.e.onmouseover = b.m_0;
+                b.e.onmousedown = b.m_1;
+                b.e.onmouseup = b.m_2;
+                b.e.onmouseout = b.m_3;
+                _MODEL.STATUS.b = { e: null, m_0: null, m_1: null, m_2: null, m_3: null };
+            }
+        };
+
+        //显示编辑器
+        var _show = function (e, p) {
+            this.elapse = new Date().getTime();
+            _refreshPattern(p);
+            _createView();
+            _createToolbox();
+            _$(e).appendChild(_MW);
+            window.frames["MW_IFRAME_" + _I].document.write(_PATTERN.content);
+            window.frames["MW_IFRAME_" + _I].document.close();
+            window.frames["MW_IFRAME_" + _I].document.designMode = "on";
+            if (document.addEventListener) { document.addEventListener("mouseup", function () { _clear() }, false) }
+            else if (document.attachEvent) { document.attachEvent("onmouseup", function () { _clear() }) }
+            this.elapse = new Date().getTime() - this.elapse;
+        };
+
+        //获取内容
+        var _content = function () {
+            var d = window.frames["MW_IFRAME_" + _I].document;
+            var p = {
+                head: /<head[^>]*?>([\s\S]+?)<\/head>/ig,
+                body: /<body[^>]*?>([\s\S]+?)<\/body>/ig,
+                style: /<style[^>]*?>([\s\S]+?)<\/style>/ig,
+                script: /<script[^>]*?>([\s\S]+?)<\/script>/ig
+            };
+            var c = {
+                all: _MODEL.STATUS.v ? _$("MW_TEXTAREA_" + _I).value : (_PATTERN.editableHead ? d.documentElement.innerHTML : d.body.innerHTML)
+            };
+            if (_PATTERN.editableHead) { var v = c.all } else { var v = "<BODY>" + c.all + "<\/BODY>" }
+            if (v.match(p.script)) { c.script = v.match(p.script).join("\n"); v = v.replace(p.script, "") } else { c.script = "" }
+            if (v.match(p.style)) { c.style = v.match(p.style).join("\n"); v = v.replace(p.style, "") } else { c.style = "" }
+            if (v.match(p.body)) { c.body = v.match(p.body).join("\n"); v = v.replace(p.body, "") } else { c.body = "" }
+            if (v.match(p.head)) { c.head = v.match(p.head).join("\n"); v = v.replace(p.head, "") } else { c.head = "" }
+            return c;
+        };
+
+        //添加引用
+        this.version = "3.0";
+        this.elapse = null;
+        this.index = _I;
+        this.show = _show;
+        this.content = _content;
+        this.refreshStyle = _refreshStyle;
+    }
+
+    var M1 = new Miniweaver();
+    var M2 = new Miniweaver();
+
+    var cancelBubble = function (e) {
+        if (e.stopPropagation) e.stopPropagation();
+        else e.cancelBubble = true;
+    };
+
+    window.onerror = function (msg, url, line) {
+        alert(url +
+              "\n____________________________________________________________" +
+              "\n\nLine:" + line +
+              "\nError:" + msg);
+        return true;
+    };
+
+    window.onload = function () {
+        M1.show(document.body, {
+            top: 100, left: 100, editableHead: true,
+            content: "欢迎使用“Miniweaver 2010”！"
+        });
+        M2.show(document.body, {
+            top: 100, left: 750, editableCache: false,
+            skin: "img/green.gif", foreColor: "#3F5D38", backColor: "#CBDAA5",
+            content: "<h1>GOOD</h1>"
+        });
+    };
+    //-->
+    </script>
+</head>
+
+<body>
+    <button onclick="M1.refreshStyle({
+  skin : ['img/default_b.gif'], baseColor : '#000000', foreColor : '#D49A37', backColor : '#3C2506'
+})"
+        onmouseup="cancelBubble(event || window.event)">
+        改变皮肤1</button>
+    <button onclick="M2.refreshStyle({
+  skin : ['img/green_b.gif'], baseColor : '#000000', foreColor : '#BEA3C6', backColor : '#34265B'
+})"
+        onmouseup="cancelBubble(event || window.event)">
+        改变皮肤2</button>
+</body>
+</html>

@@ -1,0 +1,52 @@
+﻿<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <title></title>
+    
+</head>
+<body>
+    <script>
+        //http://sjpsega.iteye.com/blog/1729350
+    </script>
+    <script>
+        _count_info = 0;
+        function ajax_callback(ajax_text, ajax_status) {
+            var info = document.getElementById('show_data');
+            info.innerHTML = info.innerHTML + '<br/>' + ajax_text;
+            var num = document.getElementById('num');
+            _count_info++;
+            num.innerHTML = _count_info;
+
+        }
+
+        function ajax_get() {
+            var xmlHttp = false;
+            try {
+                xmlHttp = new ActiveXObject("Msxml2.XMLHTTP");
+            } catch (e) {
+                try {
+                    xmlHttp = new ActiveXObject("Microsoft.XMLHTTP");
+                } catch (e2) {
+                    xmlHttp = false;
+                }
+            }
+
+            if (!xmlHttp && typeof XMLHttpRequest != 'undefined') {
+                xmlHttp = new XMLHttpRequest();
+            }
+            var ee = document.getElementById('content');
+            var data = 'data=' + ee.value;
+            xmlHttp.open("POST", "ajax.php", true);
+            xmlHttp.setRequestHeader("CONTENT-TYPE", "application/x-www-form-urlencoded");
+            xmlHttp.setRequestHeader("Content-Length", data.length);
+            xmlHttp.onreadystatechange = function () {
+                if (xmlHttp.readyState == 4) {
+                    ajax_callback(xmlHttp.responseText, xmlHttp.status);
+                    delete (xmlHttp);
+                }
+            }
+            xmlHttp.send(data);
+        }
+    </script>
+</body>
+</html>

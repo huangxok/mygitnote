@@ -1,0 +1,158 @@
+﻿<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title></title>
+    <link id="ddf" href="web/css/Style.css" rel="stylesheet" media="screen" />
+    <script src="Scripts/jquery-1.7.1.min.js"></script>
+    <script type="text/javascript">
+        function employee(name, job, born) {
+            this.name = name;
+            this.job = job;
+            this.born = born;
+        }
+
+        var bill = new employee("Bill Gates", "Engineer", 1985);
+
+        var c = function (name, job, born) {
+            var ddd = {}
+            ddd.dn = name;
+            ddd.dj = job;
+            ddd.db = born
+            return ddd;
+        }
+        document.write(bill.name + "" + bill.job + "" + bill.born + "");
+        var dddddd = c("Bill Gates", "Engineer", 1985)
+        document.write(dddddd.dn + "" + dddddd.dj + "" + dddddd.db)
+    </script>
+    <script>
+
+        function isPropertySupported(property) {
+            debugger;
+            if (property in document.body.style) return true;
+
+            var prefixes = ['Moz', 'Webkit', 'O', 'ms', 'Khtml'];
+            var prefProperty = property.charAt(0).toUpperCase() + property.substr(1);
+
+            for (var i = 0; i < prefixes.length; i++) {
+                if ((prefixes[i] + prefProperty) in document.body.style) return true;
+            }
+
+            return false;
+        }
+    </script>
+    <style>
+        .ak {
+        }
+
+        .ab {
+        }
+    </style>
+    <script>
+
+        function createXMLHttpRequest() {
+            if (window.XMLHttpRequest) {
+                XMLHttpR = new XMLHttpRequest();
+            } else if (window.ActiveXObject) {
+                try {
+                    XMLHttpR = new ActiveXObject("Msxml2.XMLHTTP");
+                } catch (e) {
+                    try {
+                        XMLHttpR = new ActiveXObject("Microsoft.XMLHTTP");
+                    } catch (e) {
+                    }
+                }
+            }
+        }
+        function sendRequest(url) {
+            createXMLHttpRequest();
+            XMLHttpR.open("GET", url, true);
+            XMLHttpR.setRequestHeader("Content-Type", "text/html;charset=gb2312");
+            XMLHttpR.onreadystatechange = processResponse;
+            XMLHttpR.send(null);
+        }
+        function processResponse() {
+            if (XMLHttpR.readyState == 4 && XMLHttpR.status == 200) {
+                document.write(XMLHttpR.responseText);
+            }
+        }
+        sendRequest("http://www.baidu.com/");
+    </script>
+</head>
+<body>
+    <input type="button" value="abc" />
+
+    <img src="Images/5.jpg" />
+    <div id="aa" style="position: absolute">
+        <div id="abc" title="abc" name="a" data-a="bbb" class="ak ab" style="background: url(Images/5.jpg) no-repeat center #f00; width: 100px; height: 100px;">
+            ddffadafsfs
+        </div>
+        <p>abcdefghi</p>
+    </div>
+    <script>
+        document.getElementById('abc').style.backgroundSize = '100px 100px'
+        var MutationObserver = window.MutationObserver ||
+        window.WebKitMutationObserver ||
+        window.MozMutationObserver;
+
+        var observeMutationSupport = !!MutationObserver;
+        console.log(document.getElementById('abc').offsetParent.nodeName);
+        console.log(document.getElementById('abc').style.backgroundSize);
+
+    </script>
+    <script>
+        var cl = document.getElementById('abc')
+        cl.dataset.a
+    </script>
+    <script>
+
+        window.onload = function (e) {
+            e.elapsedTime
+            var elems = document.getElementsByTagName("div");
+            if (elems != null && elems.length > 0) {
+                var length = elems.length;
+                //遍历所有DIV控件 
+                for (var i = 0; i < length; i++) {
+                    var elem = elems[i];
+                    //获取该控件的自定义属性 
+                    var customAttr = elem.dataset.chb;
+                    //也可以通过如下方式获得自定义属性 
+                    //var customAttr = elem.dataset["chb"]; 
+                    //如果是我们预先定义好的header值，表示需要处理 
+                    if (customAttr == "header") {
+                        //添加样式 
+                        elem.setAttribute("class", "ui_header");
+                    }
+                }
+            }
+        }
+    </script>
+    <script>
+        var me = document.styleSheets[0];
+        me.insertRule('.kkkkkkkk{color:red}', 1)
+        var aaa = $("[title='abc']")
+        var bbb = $("[data-a='a']");
+
+    </script>
+    <!-- <script>
+        var ab = 1;
+        function aaa() {
+            console.log(ab++)
+        }
+        setInterval(aaa, 1000);
+    </script>-->
+    <script>
+        var input = document.getElementsByTagName('input')[0];
+
+        input.onclick = function A() {
+            setTimeout(function B() {
+                input.value += ' input';
+            }, 0)
+        };
+
+        document.body.onclick = function C() {
+            input.value += ' body'
+        };
+    </script>
+</body>
+</html>

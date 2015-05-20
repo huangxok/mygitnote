@@ -1,0 +1,37 @@
+﻿<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <title></title>
+</head>
+<body>
+    <script>
+        //var X36 = "0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+
+        ////10进制转换成36进制
+        //function ConvertTo36(val) {
+        //    var result = "";
+        //    while (val >= 36) {
+        //        result = X36[val % 36] + result;
+        //        val /= 36;
+        //    }
+        //    if (val >= 0) result = X36[val] + result;
+        //    return result;
+        //}
+        var X36 = "0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+        //36进制转换成10进制
+        function ConvertTo10(str, wei) {
+            var result = 0;
+            var length = str.length;
+            for (var i = 0; i < length; i++) {
+                if (1 == length) {
+                    result += X36.indexOf(str[i]);
+                }
+                else {
+                    result += (X36.indexOf(str[i]) * Math.pow(wei, length - 1 - i));
+                }
+            }
+            return result;
+        }
+    </script>
+</body>
+</html>

@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=gb2312">
+    <title>图片的淡入淡出效果</title>
+    <script>
+        var intTimeStep = 100;
+        var isIe = (window.ActiveXObject) ? true : false;
+        var intAlphaStep = (isIe) ? 5 : 0.05;
+        var curSObj = null;
+        var myobj = null;
+        var mypacity = null;
+        var curOpacity = null;
+        function startObjVisible(objId) {
+            curSObj = document.getElementById(objId);
+            setObjState();
+        }
+        function setObjState() {
+            if (curSObj.style.display == "") { curOpacity = 1; mypacity = 0; setObjClose(); }
+            else {
+                if (isIe) {
+                    curSObj.style.cssText = 'DISPLAY: none;Z-INDEX: 1; FILTER: alpha(opacity=0); POSITION: absolute;';
+                    curSObj.filters.alpha.opacity = 0;
+                } else {
+                    curSObj.style.opacity = 0;
+                    //myobj.style.opacity = 1;
+                }
+                curSObj.style.display = '';
+                document.getElementById("MyDiv").style.display = "none";
+                curOpacity = 0;
+                mypacity = 1;
+                setObjOpen();
+            }
+        }
+        function setObjOpen() {
+            if (isIe) {
+                curSObj.filters.alpha.opacity += intAlphaStep;
+                if (curSObj.filters.alpha.opacity < 100) setTimeout('setObjOpen()', intTimeStep);
+            } else {
+                curOpacity += intAlphaStep;
+                curSObj.style.opacity = curOpacity;
+                if (curOpacity < 1) setTimeout('setObjOpen()', intTimeStep);
+            }
+        }
+        function setObjClose() {
+            if (isIe) {
+                curSObj.filters.alpha.opacity -= intAlphaStep;
+                if (curSObj.filters.alpha.opacity > 0) {
+                    setTimeout('setObjClose()', intTimeStep);
+                }
+                else { curSObj.style.display = "none"; document.getElementById("MyDiv").style.display = "block"; }
+            } else {
+                curOpacity -= intAlphaStep;
+                if (curOpacity > 0) {
+                    curSObj.style.opacity = curOpacity;
+                    setTimeout('setObjClose()', intTimeStep);
+                }
+                else { curSObj.style.display = 'none'; document.getElementById("MyDiv").style.display = "block"; }
+            }
+        }
+    </script>
+</head>
+<body>
+    <table width="80%">
+        <tr>
+            <td>
+                <input type="button" onclick="startObjVisible('objDiv'); if (this.value == '点击展现') { this.value = '点击隐藏' } else { this.value = '点击展现' }" value="点击展现">
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <div id="objDiv" style="DISPLAY: none;">
+                    <img src="Image/MailBox.png">效果怎么样？<img src="Image/MailBox.png">
+                </div>
+                <div id="MyDiv" style="DISPLAY: block;">
+                    <img src="Image/MailBox.png">文字也会跟着变哟！<img src="Image/MailBox.png">
+                </div>
+            </td>
+        </tr>
+    </table>
+</body>
+</html>

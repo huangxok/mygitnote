@@ -1,0 +1,13 @@
+/********************
+ *	mx-slide-left
+ ********************/
+#mx-left {position:relative; width:1200px; height:310px;}
+#mx-left .mx-hidden {width:100%; height:100%; overflow:hidden;}
+#mx-left .mx-width {width:9999%; height:100%;}
+#mx-left .mx-content {float:left; height:100%;}
+#mx-left .mx-content a {float:left; height:100%;}
+#mx-left .mx-content a img {border:0;}
+#mx-left .mx-change {position:absolute; z-index:9; bottom:5px; right:10px; text-align:center; font:normal 12px 'SimSun'}
+#mx-left .mx-change span {position:relative; float:left; margin-left:6px; cursor:pointer; padding:2px 6px 2px 6px; background:#333; border:5px solid #fff; color:#fff; border-radius:50%;}
+#mx-left .mx-change span.mx-cur {background:#F28E43;}
+

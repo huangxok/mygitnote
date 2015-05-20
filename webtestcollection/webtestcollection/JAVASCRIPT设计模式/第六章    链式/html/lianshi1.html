@@ -1,0 +1,168 @@
+﻿<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <title></title>
+</head>
+<body>
+    <div id="aaa" style="width:100px;height:100px;background:#b6ff00;display:none;"></div>
+
+    <!--<script>
+        //调用链的结构
+        function $() {
+            var elements = [];
+            for (var i = 0, len = arguments.length; i < len; i++) {
+                var element = arguments[i];
+                if (typeof element === 'string') {
+                    element = document.getElementById(element);
+                }
+                if (arguments.length === 1) {
+                    return element;
+                }
+                elements.push(element);
+            }
+            return elements;
+        }
+    </script>-->
+    <script>
+        //链式方法调用
+        (function () {
+            function _$(els) {
+                this.elements = [];
+                for (var i = 0, len = els.length; i < len; i++) {
+                    var element = els[i];
+                    if (typeof element === 'string') {
+                        element = document.getElementById(element);
+                    }
+                    this.elements.push(element);
+                }
+            }
+            _$.prototype = {
+                each: function (fn) {
+                    for (var i = 0; i < this.elements.length; i++) {
+                        fn.call(this, this.elements[i]);
+                    }
+                    return this;
+                },
+                setStyle: function (prop, val) {
+                    this.each(function (el) {
+                        el.style[prop] = val;
+                    });
+                    return this;
+                },
+                show: function () {
+                    var that = this;
+                    this.each(function () {
+                        that.setStyle('display', 'block');
+                    });
+                    return this;
+                },
+                addEvent: function (type, fn) {
+                    var add = function (el) {
+                        if (window.addEventListener) {
+                            el.addEventListener(type, fn, false)
+                        }
+                        else if (window.attachEvent) {
+                            el.attachEvent('on' + type, fn)
+                        }
+                    };
+                    this.each(function (el) {
+                        add(el);
+                    });
+                    return this;
+                }
+
+            }
+            window.$ = function () {
+                return new _$(arguments);
+            }
+        })()
+        $('aaa').show().setStyle('backgroundColor', 'red').addEvent('click', function (e) {
+            $(this).setStyle('backgroundColor', 'green');
+        })
+    </script>
+    <script>
+        /////////////////////////////////////////////////
+        //  常见的JavaScript库
+        //  特性                             说明
+        //  events 事件                     添加和删除事件，规范化处理
+        //  DOM    文档                     类名管理：样式的管理
+        //  Ajax 异步请求                   对XMLHttpRequest进行规范处理
+        // 伪代码
+        Function.prototype.method = function (name, fn) {
+            this.prototype[name] = fn;
+            return this;
+        }
+        (function () {
+            function _$(els) {
+                //....
+            }
+            /*
+            Events
+               addEvent
+               getEvent
+               removeEvent
+            */
+            _$.method('addEvent', function () {
+
+            }).method('getEvent', function () {
+
+            })
+            /*
+            DOM
+               addClass
+               removeClass
+               replaceClass
+               hasClass
+               getStyle
+               setStyle
+            */
+            .method('addClass', function (className) {
+
+            }).method('removeClass', function (className) {
+
+            }).method('relaceClass', function (oldClass, newClass) {
+
+            }).method('hasClass', function (className) {
+
+            }).method('getStyle', function (prop) {
+
+            }).method('setStyle', function (prop, val) {
+
+            }).
+            /*
+            Ajax
+             load Feches an HTML fragment from a URL and insert it into an element
+            */
+            method('load', function (uri, method) {
+                //....
+            })
+            window.$ = function () {
+                return new _$(arguments);
+            }
+        })()
+    </script>
+    <script>
+        //安装器 解决$符号作为选择器的问题
+        //
+        Function.prototype.method = function () {
+            //...
+        };
+        (function () {
+            function _$(els) {
+
+            }
+            _$.method('addEvent', function (type, fn) {
+
+            })
+            window.instalHelper = function (scope, interfaces) {
+                scope[interfaces] = function () {
+                    return new _$(arguments);
+                }
+            }
+        })();
+        //用户使用
+        //instalHelper(window, '$');
+        //$('example').show();
+    </script>
+</body>
+</html>

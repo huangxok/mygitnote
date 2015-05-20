@@ -1,0 +1,2 @@
+# mytest  initgit add README.mdgit commit -m "first commit"git remote add origin https://github.com/huangxok/mytest.gitgit push -u origin master
+# mytest  initgit add README.mdgit commit -m "first commit"git remote add origin git@github.com:huangxok/mytest.gitgit push -u origin master

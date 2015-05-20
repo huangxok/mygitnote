@@ -1,0 +1,29 @@
+﻿<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title></title>
+    <script src="Scripts/jquery-1.7.1.js"></script>
+    <!--<script src="http://172.16.100.206:8080/ts.js"></script>-->
+    <script>
+        var popup = window.open('http://172.16.100.206:8080/jsonptest.html');
+        popup.postMessage("Hello World!", "http://172.16.100.206:80/jsonp.html");
+        window.addEventListener("message", receiveMessage, false);
+
+        function receiveMessage(event) {
+            if (event.origin !== "http://172.16.100.206:8080/jsonptest.html")
+                return;
+
+            if (event.data == 'Hello World') {
+                event.source.postMessage('Hello', event.origin);
+            } else {
+                console.log(event.data);
+            }
+
+        }
+    </script>
+</head>
+<body>
+    <div id="res"></div>
+</body>
+</html>

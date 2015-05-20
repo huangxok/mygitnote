@@ -1,0 +1,139 @@
+﻿<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <title></title>
+</head>
+<body>
+    <script>
+        /*枚举类*/
+        function enumerationObject(namesToValues) {
+            var enumeration = function () {
+                //throw "Can't Instantiate Enumeration"
+            };
+            var proto = enumeration.prototype = {
+                constructor: enumeration,
+                toString: function () { return this.name },
+                valueOf: function () { return this.value },
+                toJSON: function () { return this.name }
+            };
+            enumeration.values = [];
+            for (n in namesToValues) {
+                var e = inherit(proto);
+                e.name = n;
+                e.value = namesToValues[n];
+                enumeration[name] = e;
+                enumeration.values.push(e);
+            }
+            enumeration.foreach = function (f, c) {
+                for (var i = 0; i < this.values.length; i++) {
+                    f.call(c, this.values[i])
+                }
+            }
+            return enumeration;
+        }
+        function inherit(o) {
+            if (arguments.length > 1) {
+                throw Error("the parameter's length is expected one")
+            }
+            if (Object.create) {  //支持ECMAScript5 则直接创建
+                return Object.create(o);
+            }
+            else {
+                var t = typeof o
+                if (t !== "object" && t !== "function") {
+                    throw TypeError("the parameter is expected a  Object or a Function")
+                }
+                function F() { };
+                F.prototype = o;
+                return new F();
+            }
+        }
+        function Card(suit, rank) {
+            this.suit = suit;
+            this.rank = rank;
+        }
+        Card.Suit = enumerationObject({ Clubs: 1, Diamonds: 2, heart: 3, spades: 4 });
+        var num = { Two: 2, Three: 3, Four: 4, Five: 5, Six: 6, Seven: 7, Eight: 8, Nine: 9, ten: 10, Jack: 11, Queen: 12, King: 13, Ace: 14 }
+        Card.Rank = enumerationObject(num);
+        Card.prototype.toString = function () {
+            return this.rank.toString() + "of" + this.suit.toString();
+        }
+        Card.prototype.comparetTo = function (that) {
+            if (this.rank < that.rank) return -1;
+            if (this.rank > that.rank) return 1;
+            return 0;
+        }
+        Card.orderByRank = function (a, b) {
+            return a.comparetTo(b);
+        }
+        Card.orderBySuit = function (a, b) {
+            if (a.suit < b.suit) return -1;
+            if (a.suit > b.suit) return 1;
+            if (a.rank < b.rank) return -1;
+            if (a.rank > b.rank) return 1;
+            return 0;
+        }
+
+        function Deck() {
+            var card = this.cards = [];
+            Card.Suit.foreach(function (s) {
+                var a = s;
+                Card.Rank.foreach(function (r) {
+                    var b = r;
+                    card.push(new Card(s, r));
+                });
+            });
+        }
+        Deck.prototype.shuffle = function () {
+            var deck = this.cards, len = deck.length;
+            for (var i = len - 1; i > 0; i--) {
+                var r = Math.floor(Math.random() * (i + 1));
+                var temp = deck[i];
+                deck[i] = deck[r];
+                deck[r] = temp
+
+            }
+            return this;
+
+        }
+        Deck.prototype.deal = function (n) {
+            if (this.cards.length < n) throw "out of cards";
+            return this.cards.splice(this.cards.length - n, n);
+        }
+        //排序
+        //var a = [1, 2, 3, 4, 5, 6, 7];
+        //a.sort(function (x, y) {
+        //    debugger;
+        //    return Math.random() - 0.5
+        //});
+    </script>
+    <script>
+        //创建一副新的扑克牌，洗牌并发牌
+        var deck = (new Deck()).shuffle();
+        var hand = deck.deal(13).sort(Card.orderBySuit);
+
+
+    </script>
+    <script>
+        //枚举的另外一种形式
+        var Operator;
+        (function (Operator) {
+            Operator[Operator["ADD"] = 0] = "ADD";
+            Operator[Operator["DIV"] = 1] = "DIV";
+            Operator[Operator["MUL"] = 2] = "MUL";
+            Operator[Operator["SUB"] = 3] = "SUB";
+        })(Operator || (Operator = {}));
+        //上面这种方式可以尝试这按照第一个script标签中的enum枚举方法改写一些通过参数定义一个枚举
+        //Operator[Operator["SUB"] = 3] = "SUB";
+        //对于对象有2中方式获取其属性和方法
+        //如 对象名[属性名] -》 Operator["SUB"]
+        //   对象名.属性名  -》 Operator.SUB
+        //下面的解释用前者 对象吗[属性名]
+        //执行过程是 
+        //先是Operator[Operator["SUB"] = 3] = "SUB"中
+        //Operator["SUB"] 和 = 忽略掉
+        //形如 Operator[3] = "SUB"
+        //然后才是 执行 Operator["SUB"] = 3
+    </script>
+</body>
+</html>

@@ -1,0 +1,99 @@
+﻿<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title></title>
+</head>
+<body>
+    <div>
+        <select id="selAnimal">
+            <option value="cat">cat</option>
+            <option value="fish">fish</option>
+            <option value="bird">bird</option>
+        </select>
+        <p id="whatDoesThisAnimalDo"></p>
+    </div>
+    <script>
+        // whatDoesAnimalDo 就是一个controller
+        var whatDoesAnimalDo = {
+            // 选择视图
+            start: function () {
+                this.view.start();
+            },
+            // 将用户的操作映射到模型的更新上
+            set: function (animalName) {
+                this.model.setAnimal(animalName);
+            },
+        };
+        // whatDoesAnimalDo的数据model
+        whatDoesAnimalDo.model = {
+            // animal的数据
+            animalDictionary: {
+                cat: "meows",
+                fish: "swims",
+                bird: "flies"
+            },
+            // 当前的animal，也就是这个application的状态
+            currentAnimal: null,
+            // 数据模型负责业务逻辑和数据存储
+            setAnimal: function (animalName) {
+                this.currentAnimal = this.animalDictionary[animalName] ? animalName : null;
+                this.onchange();
+            },
+            // 并且通知视图更新显示
+            onchange: function () {
+                whatDoesAnimalDo.view.update();
+            },
+            // 还需要响应视图对当前状态的查询
+            getAnimalAction: function () {
+                return this.currentAnimal ? this.currentAnimal + " " + this.animalDictionary[this.currentAnimal] : "wuff?";
+            }
+        };
+        // whatDoesAnimalDo的视图
+        whatDoesAnimalDo.view = {
+            // 用户输入触发onchange事件
+            start: function () {
+                document.getElementById('selAnimal').onchange = this.onchange;
+            },
+            // 该事件将用户请求发送给控制器
+            onchange: function () {
+                whatDoesAnimalDo.set(document.getElementById('selAnimal').value);
+            },
+            // 视图更新显示的方法，其中视图会向model查询当前的状态，并将其显示给用户
+            update: function () {
+                document.getElementById('whatDoesThisAnimalDo').innerHTML = whatDoesAnimalDo.model.getAnimalAction();
+            }
+        };
+        whatDoesAnimalDo.start();
+    </script>
+    <script>
+        function View() {
+            this.el = document.createElement('div');
+            this.getEl = function () {
+                return this.el;
+            }
+        }
+        function Ctrl(view) {
+            this.view = view;
+            this.model = new Model({
+                name: '大熊',
+                memo: '大家好'
+            });
+            this.init = function () {
+                this.view.getEl().onclick = function () {
+                    this.model.save();
+                }
+            }
+        }
+        function Model(info) {
+            this.save = function () {
+                console.log('保存信息' + info);
+            }
+        }
+        function requestClient() {
+            new Ctrl(new View()).init();
+        }
+        requestClient();
+    </script>
+</body>
+</html>

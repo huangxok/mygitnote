@@ -1,0 +1,118 @@
+<!doctype html>
+<meta charset="utf-8">
+<canvas id="canvas" width="300" height="300"></canvas>
+<script>
+/**
+ * 如果需要查看演示可以在控制台使用window.nextRect()查看
+ * 由于没有存储点与点之间的连接关系， 所以会多算4个
+ */
+(function(){
+	"use strict";
+	
+	// 原图对应的简化坐标
+	var map = [
+		0,0,		2,0,			4,0,			6,0,		8,0,
+							3,1,	4,1,	5,1,
+		0,2,		2,2,	3,2,	4,2,	5,2,	6,2,		8,2,
+							3,3,	4,3,	5,3,
+		0,4,		2,4,			4,4,			6,4,		8,4,
+							3,5,	4,5,	5,5,
+		0,6,		2,6,	3,6,	4,6,	5,6,	6,6,		8,6,
+							3,7,	4,7,	5,7,
+		0,8,		2,8,			4,8,			6,8,		8,8
+	],
+	gMat	// 存储处理后的坐标矩阵
+	;
+	
+	// 按位置放到9*9矩阵中
+	function parsePoints(ps) {
+		var _mat = new Array(9*9);
+		var offset=0, size=ps.length, x,y;
+		for(;offset<size;offset+=2) {
+			x = ps[offset];
+			y = ps[offset+1];
+			
+			// 计算偏移量
+			_mat[y*9+x] = {x:x, y:y};
+		}
+		return _mat;
+	}
+	
+	// 是否是由连续单位构成的线
+	function isValidLine(start, end) {
+		if (start.x == end.x) { // x坐标相同
+			for(var i=start.x+1;i<end.x;++i) {
+				if (!gMat.get(i,end.y))
+					return false;
+			}
+			return true;
+		}else if (start.y == end.y) { // y坐标相同
+			for(var i=start.y+1;i<end.y;++i) {
+				if (!gMat.get(end.x, i))
+					return false;
+			}
+			return true;
+		}
+		return false;
+	}
+	
+	gMat = parsePoints(map);
+	gMat.get = function(x,y) { return gMat[y*9+x]; };
+
+	var i,j,
+		item,	// 左上角坐标
+		item1,	// 右上角坐标
+		item2,	// 右下角坐标
+		item3,	// 左下角坐标
+		t,l,
+		count,
+		run_count=0;	// 记录计算了多少个坐标
+
+	var ctx = document.getElementById("canvas").getContext("2d");
+	var DW = ctx.canvas.width/8;
+	var color,r,g,b;
+	ctx.lineWidth=1;
+	var datas = [];
+	for(i=0;i<8;++i) {	// 遍历列
+		for(j=0;j<8;++j){	// 遍历行
+			item = gMat.get(j,i);
+			if (item) {	// 以当前坐标向右下寻找正方形
+				run_count++;
+				t = Math.max(9-i,9-j);
+				while(t>=0) {
+					item1 = gMat.get(j,i+t);
+					item2 = gMat.get(j+t,i+t);
+					item3 = gMat.get(j+t,i);
+					if ( item1 && item2  && item3 ) {// 检查构成正方形的其余3个点是否存在
+						// 检查此正方形的每个边是否由连续的坐标组成
+						if (isValidLine(item, item1) &&
+							isValidLine(item, item3) &&
+							isValidLine(item1, item2) &&
+							isValidLine(item3, item2)
+						){
+							ctx.strokeStyle = "rgb("+(Math.random()*255|0) +","+ (Math.random()*255|0) +","+(Math.random()*255|0) +")";
+							ctx.strokeRect(j*DW, i*DW, t*DW, t*DW);
+							datas.push([j*DW, i*DW, t*DW, t*DW]);
+							count++;
+						}
+					}
+					--t;
+				}
+			}
+		}
+	}
+
+	console.log("共遍历"+run_count+"个节点");
+	console.log("找到正方形"+(datas.length-4)+"个");
+
+	var next=0;
+	function nextRect(){
+		if (next == 0) {
+			ctx.clearRect(0,0, ctx.canvas.width, ctx.canvas.height);
+		}
+		ctx.strokeStyle = "rgb("+(Math.random()*255|0) +","+ (Math.random()*255|0) +","+(Math.random()*255|0) +")";
+		ctx.strokeRect.apply(ctx, datas[next++]);
+	}
+	window.nextRect = nextRect
+})();
+</script>

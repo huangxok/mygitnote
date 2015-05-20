@@ -1,0 +1,26 @@
+﻿<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <title></title>
+</head>
+<body>
+    <script>
+        var makeArray = function (obj) {
+            return Array.prototype.slice.call(obj, 0);
+        }
+        try {
+            Array.prototype.slice.call(document.documentElement.childNodes, 0)[0].nodeType;
+        } catch (e) {
+            makeArray = function (obj) {
+                var res = [];
+                for (var i = 0, len = obj.length; i < len; i++) {
+                    res.push(obj[i]);
+                }
+                return res;
+            }
+        }
+
+        var a = makeArray(document.getElementsByTagName('p'))
+    </script>
+</body>
+</html>

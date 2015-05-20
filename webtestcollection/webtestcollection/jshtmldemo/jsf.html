@@ -1,0 +1,160 @@
+﻿<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>js图片滚动切换插件标题和图片切换滚动</title>
+    <meta name="description" content="js图片滚动切换插件，制作标题文字和序列按钮对应焦点图片切换滚动，可自定义多种焦点图片滚动切换。js代码。" />
+    <style type="text/css">
+        * {
+            margin: 0;
+            padding: 0;
+            list-style-type: none;
+        }
+
+        a, img {
+            border: 0;
+        }
+
+        body {
+            font: 12px/180% "宋体",Arial, Helvetica, sans-serif;
+        }
+        /*图片轮换*/
+        #slideBox {
+            width: 475px;
+            height: 300px;
+            overflow: hidden;
+            position: relative;
+            margin: 20px auto;
+        }
+
+            #slideBox ul#show_pic {
+                margin: 0;
+                padding: 0;
+                list-style: none;
+                height: 300px;
+                width: 4750px;
+                position: absolute;
+            }
+
+                #slideBox ul#show_pic li {
+                    float: left;
+                    margin: 0;
+                    padding: 0;
+                    height: 285px;
+                }
+
+                    #slideBox ul#show_pic li img {
+                        display: block;
+                    }
+
+        #iconBall {
+            position: absolute;
+            bottom: 0;
+            right: 0;
+        }
+
+            #iconBall li {
+                float: left;
+                color: #7a7a7a;
+                width: 32px;
+                height: 28px;
+                line-height: 28px;
+                cursor: pointer;
+                text-align: center;
+                font-size: 14px;
+                font-weight: bold;
+                padding-top: 4px;
+            }
+
+                #iconBall li.active {
+                    background: url(images/iconbg.png) no-repeat;
+                    color: #fff;
+                }
+
+        #slideText {
+            width: 475px;
+            height: 28px;
+            background: rgba(0,0,0,0.7);
+            color: #fff;
+            position: absolute;
+            left: 0px;
+            bottom: 0px;
+            *background: transparent;
+            filter: progid:DXImageTransform.Microsoft.gradient(startColorstr=#b2000000,endColorstr=#b2000000);
+        }
+
+        #textBall {
+            position: absolute;
+            left: 10px;
+            bottom: 3px;
+        }
+
+            #textBall li {
+                float: left;
+                cursor: pointer;
+                display: none;
+                color: #fff;
+                font-size: 14px;
+            }
+
+                #textBall li.active {
+                    display: block;
+                }
+
+                #textBall li a {
+                    text-decoration: none;
+                    color: #fff;
+                }
+    </style>
+</head>
+
+<body>
+    <div id="slideBox">
+        <ul id="show_pic" style="left: 0px">
+            <li><a href="http://www.17sucai.com/" target="_blank">
+                <img id="ab" alt="玩家用了都说好" title="" height="300" width="475" src="../Gallery_DemoCool/images/900x500_1.jpg" /></a></li>
+            <!--   <li><a href="http://www.17sucai.com/" target="_blank">
+                <img alt="20000份百万庄园咖啡免费领" title="" height="300" width="475" src="../Gallery_DemoCool/images/900x500_2.jpg" /></a></li>
+            <li><a href="http://www.17sucai.com/" target="_blank">
+                <img alt="【网易彩票】93折抢彩票红包" title="" height="300" width="475" src="../Gallery_DemoCool/images/900x500_3.jpg" /></a></li>
+            <li><a href="http://www.17sucai.com/" target="_blank">
+                <img alt="【网易保险】变身车主VIP有好礼" title="" height="300" width="475" src="../Gallery_DemoCool/images/900x500_4.jpg" /></a></li>
+            <li><a href="http://www.17sucai.com/" target="_blank">
+                <img alt="【网易团长】 让团购变得更划算" title="" height="300" width="475" src="../Gallery_DemoCool/images/900x500_5.jpg" /></a></li>
+            <li><a href="http://www.17sucai.com/" target="_blank">
+                <img alt="【魔术杯】包大人心心念念的神器" title="" height="300" width="475" src="../Gallery_DemoCool/images/900x500_6.jpg" /></a></li>-->
+        </ul>
+        <div id="slideText"></div>
+        <ul id="iconBall">
+            <li>1</li>
+            <li>2</li>
+            <li>3</li>
+            <li>4</li>
+            <li>5</li>
+            <li>6</li>
+        </ul>
+        <ul id="textBall">
+            <li class="active"><a href="javascript:void(0)">【网易商城】玩家用了都说好</a></li>
+            <li><a href="javascript:void(0)">【网易乐得惠】20000份百万庄园咖啡免费领</a></li>
+            <li><a href="javascript:void(0)">【网易彩票】93折抢彩票红包</a></li>
+            <li><a href="javascript:void(0)">【网易保险】变身车主VIP有好礼</a></li>
+            <li><a href="javascript:void(0)">【网易团长】让团购变得更划算</a></li>
+            <li><a href="javascript:void(0)">【魔术杯】包大人心心念念的神器</a></li>
+        </ul>
+    </div>
+    <!--slideBox end-->
+
+    <script type="text/javascript">
+        function $id(i) { return document.getElementById(i); };
+        function setimgsrc() {
+            var iconli = $id("iconBall").getElementsByTagName("li");
+            for (var i = 0; i < iconli.length; i++) {
+                iconli[i].click(function () {
+                    $id("ab").src = "../Gallery_DemoCool/images/900x500_" + (i + 1) + ".jpg"
+                })
+            }
+        }
+    </script>
+
+</body>
+</html>

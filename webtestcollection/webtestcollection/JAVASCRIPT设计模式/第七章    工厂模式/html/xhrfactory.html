@@ -1,0 +1,282 @@
+﻿<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <title></title>
+</head>
+<body>
+    <!--<script>
+        var inheritClass
+        //继承
+        ; (function (inheritClass) {
+            /*原型继承*/ {
+                //继承函数 ------------ 原型链继承
+                var inherit = function (o) {
+                    if (arguments.length > 1) {
+                        throw Error("the parameter's length is expected one");
+                    }
+                    if (Object.create) {  //支持ECMAScript5 则直接创建
+                        return Object.create(o);
+                    }
+                    else {
+                        var t = typeof o;
+                        if (t !== "object" && t !== "function") {
+                            throw TypeError("the parameter is expected a  Object or a Function");
+                        }
+                        function F() { };
+                        F.prototype = o;
+                        return new F();
+                    }
+
+                }
+                ; inheritClass.inherit = inherit;
+            }
+            /*类继承*/{
+                //子类继承函数完善版 --- 类继承
+                ; var subinherit = function (/*子类*/subclass,/*超类或父类*/superclass) {
+                    var F = function () { }
+                    F.prototype = superclass.prototype;
+                    subclass.prototype = new F();
+                    subclass.prototype.constructor = subclass;
+                    if (superclass.prototype.constructor == Object.prototype.constructor) {
+                        superclass.prototype.constructor = superclass;
+                    }
+                }
+                ; inheritClass.subinherit = subinherit;
+                //子类继承函数完善版 --- 类继承(将类的自有属性进行克隆复制)
+                ; var subinheritown = function (/*子类*/subclass,/*超类或父类*/superclass) {
+                    for (var p in superclass) {
+                        if (superclass.haOwnProperty(p)) {
+                            subclass[p] = superclass[p];
+                        }
+                    }
+                    function F() { this.constructor = subclass };
+                    F.prototype = superclass.prototype;
+                    subclass.prototype = new F();
+                    if (superclass.prototype.constructor == Object.prototype.constructor) {
+                        superclass.prototype.constructor = superclass;
+                    }
+
+                }
+                inheritClass.subinheritown = subinheritown;
+
+                //子类继承函数精简版
+                ; var subinheritsimple = function (subclass, superclass) {
+                    subclass.prototype = inherit(superclass);
+                    subclass.prototype.constructor = subclass;
+                }
+                ; inheritClass.subinheritsimple = subinheritsimple;
+
+            }
+
+        })(inheritclass || (inheritclass = {}));
+    </script>-->
+    <!--<script>
+        var SimpleHandler = function () { };
+        SimpleHandler.prototype = {
+            request: function (method, url, callback, postvar) {
+                var xhr = this.createxhrobject();
+                xhr.onreadystatechange = function () {
+                    if (xhr.readyState !== 4) return;
+                    (xhr.status === 200) ? callback.success(xhr.responseText, xhr.responseXML) :
+                    callback.failure(xhr.status);
+                };
+                xhr.open(method, url, true);
+                if (method !== 'post') postvar = null;
+                xhr.send(postvar);
+            },
+            createxhrobject: function () {
+                var methods = [//工厂方法
+                    function () { return new XMLHttpRequest(); },
+                    function () { return new ActiveXObject('Msxml2.XMLHTTP'); },
+                    function () { return new ActiveXObject('Microsofe.XMLHTTP'); }
+                ]
+                for (var i = 0; i < methods.length; i++) {
+                    try {
+                        methods[i]();
+                    } catch (e) {
+                        continue;
+                    }
+                    this.createxhrobject = methods[i];
+                    return methods[i];
+                }
+                throw new Error('SimpleHandler: could not create an xhr object')
+            }
+        }
+
+        var myhandler = new SimpleHandler();
+        var callback = {
+            success: function (responText) { alert('success :' + responText) },
+            failure: function (statusCode) { alert('Failure :' + statusCode) }
+        }
+        myhandler.request('get', 'script.php', callback);
+    </script>-->
+    <script>
+        var inheritClass
+        //继承
+        ; (function (inheritClass) {
+            /*原型继承*/ {
+                //继承函数 ------------ 原型链继承
+                var inherit = function (o) {
+                    if (arguments.length > 1) {
+                        throw Error("the parameter's length is expected one");
+                    }
+                    if (Object.create) {  //支持ECMAScript5 则直接创建
+                        return Object.create(o);
+                    }
+                    else {
+                        var t = typeof o;
+                        if (t !== "object" && t !== "function") {
+                            throw TypeError("the parameter is expected a  Object or a Function");
+                        }
+                        function F() { };
+                        F.prototype = o;
+                        return new F();
+                    }
+
+                }
+                ; inheritClass.inherit = inherit;
+            }
+            /*类继承*/{
+                //子类继承函数完善版 --- 类继承
+                ; var subinherit = function (/*子类*/subclass,/*超类或父类*/superclass) {
+                    var F = function () { }
+                    F.prototype = superclass.prototype;
+                    subclass.prototype = new F();
+                    subclass.prototype.constructor = subclass;
+                    if (superclass.prototype.constructor == Object.prototype.constructor) {
+                        superclass.prototype.constructor = superclass;
+                    }
+                }
+                ; inheritClass.subinherit = subinherit;
+                //子类继承函数完善版 --- 类继承(将类的自有属性进行克隆复制)
+                ; var subinheritown = function (/*子类*/subclass,/*超类或父类*/superclass) {
+                    for (var p in superclass) {
+                        if (superclass.haOwnProperty(p)) {
+                            subclass[p] = superclass[p];
+                        }
+                    }
+                    function F() { this.constructor = subclass };
+                    F.prototype = superclass.prototype;
+                    subclass.prototype = new F();
+                    if (superclass.prototype.constructor == Object.prototype.constructor) {
+                        superclass.prototype.constructor = superclass;
+                    }
+
+                }
+                inheritClass.subinheritown = subinheritown;
+
+                //子类继承函数精简版
+                ; var subinheritsimple = function (subclass, superclass) {
+                    subclass.prototype = inherit(superclass);
+                    subclass.prototype.constructor = subclass;
+                }
+                ; inheritClass.subinheritsimple = subinheritsimple;
+
+            }
+
+        })(inheritclass || (inheritclass = {}));
+        var SimpleHandler = function () { };
+        SimpleHandler.prototype = {
+            request: function (method, url, callback, postvar) {
+                var xhr = this.createxhrobject();
+                xhr.onreadystatechange = function () {
+                    if (xhr.readyState !== 4) return;
+                    (xhr.status === 200) ? callback.success(xhr.responseText, xhr.responseXML) :
+                    callback.failure(xhr.status);
+                };
+                xhr.open(method, url, true);
+                if (method !== 'post') postvar = null;
+                xhr.send(postvar);
+            },
+            createxhrobject: function () {
+                var methods = [//工厂方法
+                    function () { return new XMLHttpRequest(); },
+                    function () { return new ActiveXObject('Msxml2.XMLHTTP'); },
+                    function () { return new ActiveXObject('Microsofe.XMLHTTP'); }
+                ];
+                for (var i = 0; i < methods.length; i++) {
+                    try {
+                        methods[i]();
+                    } catch (e) {
+                        continue;
+                    }
+                    this.createxhrobject = methods[i];
+                    return methods[i];
+                }
+                throw new Error('SimpleHandler: could not create an xhr object')
+            }
+        }
+        var QueuedHandler = function () {
+            this.queue = [];
+            this.requestInProgress = false;
+            this.retryDelay = 5; //in seconds
+        }
+        var callback = {
+            success: function (responText) { alert('success :' + responText) },
+            failure: function (statusCode) { alert('Failure :' + statusCode) }
+        }
+        inheritClass.subinherit(QueuedHandler, SimpleHandler);
+        QueuedHandler.prototype.request = function (method, url, callback, postvar, override) {
+            if (this.requestInProgress && !override) {
+                this.queue.push({
+                    method: method,
+                    url: url,
+                    callback: callback,
+                    postvar: postvar
+                });
+            }
+            else {
+                this.requestInProgress = true;
+                var xhr = this.createxhrobject();
+                var that = this;
+                xhr.onreadystatechange = function () {
+                    if (xhr.readyState !== 4) return;
+                    if (xhr.status === 200) {
+                        callback.success(xhr.responseText, xhr.responseXML);
+                        that.advanceQueue();
+                    } else {
+                        callback.failure(xhr.status);
+                        setTimeout(function () { that.request(method, url, callback, postvar, true); }, this.retryDelay * 1000);
+                    }
+                }
+                xhr.open(method, url, true);
+                if (method !== 'post') postvar = null;
+                xhr.send(postvar);
+            }
+
+        }
+        QueuedHandler.prototype.advanceQueue = function () {
+            if (this.queue.length === 0) {
+                this.requestInProgress = false;
+                return;
+            }
+            var req = this.queue.shift();
+            this.request(res.method, req.url, req.callback, req.postvar, true);
+        }
+        var OfflineHandler = function () {
+            this.storeRequests = [];
+        }
+        inheritClass.subinherit(OfflineHandler, SimpleHandler);
+        OfflineHandler.prototype.requst = function (method, url, callback, postvar) {
+            if (XhrManager.isOffline()) {
+                this.storeRequests.push({
+                    method: method,
+                    url: url,
+                    callback: callback,
+                    postvar: postvar
+                })
+            }
+            else {//call simplehandler's request method if we are online
+                this.flushStoreRequests();
+                OfflineHandler.superclass.request(method, url, callback, postvar);
+            }
+        };
+        OfflineHandler.prototype.flushStoreRequests = function () {
+            for (var i = 0; i < StoreRequests[i]; i++) {
+                var req = storeRequests[i];
+                OfflineHandler.superclass.request(req.method, req.url, req.callback, req.postvar)
+            }
+        }
+    </script>
+</body>
+</html>

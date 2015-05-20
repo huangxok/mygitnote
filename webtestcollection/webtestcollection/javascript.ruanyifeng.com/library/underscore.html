@@ -1,0 +1,828 @@
+<!DOCTYPE html>
+<!-- saved from url=(0056)http://javascript.ruanyifeng.com/library/underscore.html -->
+<html class="no-js" lang="en"><!--<![endif]--><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+  <meta charset="utf-8">
+
+  <!-- Set the viewport width to device width for mobile -->
+  <meta name="viewport" content="width=device-width">
+
+  <title>Underscore.js -- JavaScript 标准参考教程（alpha）</title>
+  
+  <!-- Included CSS Files (Uncompressed) -->
+  <!--
+  <link rel="stylesheet" href="stylesheets/foundation.css">
+  -->
+  
+  <!-- Included CSS Files (Compressed) -->
+  <link rel="stylesheet" href="http://javascript.ruanyifeng.com/css/foundation.css">
+  <link rel="stylesheet" href="http://javascript.ruanyifeng.com/css/main.css">
+
+  <!-- IE Fix for HTML5 Tags -->
+  <!--[if lt IE 9]>
+    <script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+  <![endif]-->
+
+  <script async="" src="./underscore_files/analytics.js"></script><script src="./underscore_files/jquery.js"></script>
+  <script src="./underscore_files/toc.js"></script>
+  <script src="./underscore_files/main.js"></script>
+
+<script type="text/javascript" async="" src="./underscore_files/embed.js"></script></head>
+<body>
+
+<header class="top-bar" id="header">
+
+<div class="fixed">
+
+<nav class="top-bar">
+<ul>
+<!-- Title Area -->
+	<li class="name has-dropdown">
+	<h1><a href="http://javascript.ruanyifeng.com/">JavaScript 标准参考教程（alpha） </a></h1>
+		<ul class="dropdown">
+			
+			<li><a href="http://javascript.ruanyifeng.com/#introduction">导论</a></li>
+			
+			<li><a href="http://javascript.ruanyifeng.com/#grammar">基本语法</a></li>
+			
+			<li><a href="http://javascript.ruanyifeng.com/#stdlib">标准库</a></li>
+			
+			<li><a href="http://javascript.ruanyifeng.com/#oop">面向对象编程</a></li>
+			
+			<li><a href="http://javascript.ruanyifeng.com/#dom">DOM</a></li>
+			
+			<li><a href="http://javascript.ruanyifeng.com/#bom">浏览器对象</a></li>
+			
+			<li><a href="http://javascript.ruanyifeng.com/#htmlapi">HTML网页的API</a></li>
+			
+			<li><a href="http://javascript.ruanyifeng.com/#jquery">jQuery</a></li>
+			
+			<li><a href="http://javascript.ruanyifeng.com/#tool">开发工具</a></li>
+			
+			<li><a href="http://javascript.ruanyifeng.com/#advanced">高级语法</a></li>
+			
+			<li><a href="http://javascript.ruanyifeng.com/#appendix">附录</a></li>
+			
+			<li><a href="http://javascript.ruanyifeng.com/#library">草稿一：函数库</a></li>
+			
+			<li><a href="http://javascript.ruanyifeng.com/#nodejs">草稿二：Node.js</a></li>
+			
+		</ul>
+	</li>
+</ul>
+
+<section>
+
+
+<ul class="left">
+<li class="divider"></li>
+<li class="has-dropdown"><a class="active" href="http://javascript.ruanyifeng.com/library/underscore.html#"> 草稿一：函数库 </a><ul class="dropdown">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<li><a href="http://javascript.ruanyifeng.com/library/d3.html">D3.js</a></li>
+
+
+
+
+
+
+
+<li><a href="http://javascript.ruanyifeng.com/library/datejs.html">Datejs</a></li>
+
+
+
+
+
+
+
+<li><a href="http://javascript.ruanyifeng.com/library/designpattern.html">设计模式</a></li>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<li><a href="http://javascript.ruanyifeng.com/library/modernizr.html">Modernizr</a></li>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<li><a href="http://javascript.ruanyifeng.com/library/sorting.html">排序算法</a></li>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<li class="active"><a href="http://javascript.ruanyifeng.com/library/underscore.html#">Underscore.js</a></li>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</ul></li>
+<li class="divider"></li>
+<li class="has-dropdown nav-3"><a href="http://javascript.ruanyifeng.com/library/underscore.html#"> Underscore.js</a><ul class="dropdown">
+<li class="toc-h2"><a href="http://javascript.ruanyifeng.com/library/underscore.html#toc0">概述</a></li><li class="toc-h2"><a href="http://javascript.ruanyifeng.com/library/underscore.html#toc1">集合相关方法</a></li><li class="toc-h2"><a href="http://javascript.ruanyifeng.com/library/underscore.html#toc5">对象相关方法</a></li><li class="toc-h2"><a href="http://javascript.ruanyifeng.com/library/underscore.html#toc6">与函数相关的方法</a></li><li class="toc-h2"><a href="http://javascript.ruanyifeng.com/library/underscore.html#toc9">工具方法</a></li><li class="toc-h2"><a href="http://javascript.ruanyifeng.com/library/underscore.html#toc12">参考链接</a></li></ul></li>
+</ul>
+
+
+<ul class="right">
+	<li class="divider"></li>
+	<li>
+		<a href="https://github.com/ruanyf/jstutorial" target="_blank">GitHub <i class="foundicon-edit"></i></a>
+	</li>
+	<li class="divider"></li>
+	<li>
+		<a href="http://javascript.ruanyifeng.com/library/underscore.html#">TOP <i class="foundicon-up-arrow"></i></a>
+	</li>
+</ul>
+
+</section>
+
+</nav>  
+</div>
+</header>
+
+
+<article class="bookPage">
+
+  <div class="row">
+    <div class="twelve columns">
+
+<h1> Underscore.js </h1>
+
+<aside class="right"><p>来自<a href="http://javascript.ruanyifeng.com/">《JavaScript 标准参考教程（alpha）》</a>，by 阮一峰</p></aside>
+
+<h2>目录</h2><div id="toc" class="panel callout radius"><ul><li class="toc-h2"><a href="http://javascript.ruanyifeng.com/library/underscore.html#toc0">概述</a></li><li class="toc-h2"><a href="http://javascript.ruanyifeng.com/library/underscore.html#toc1">集合相关方法</a></li><li class="toc-h3"><a href="http://javascript.ruanyifeng.com/library/underscore.html#toc2">集合处理</a></li><li class="toc-h3"><a href="http://javascript.ruanyifeng.com/library/underscore.html#toc3">集合特征</a></li><li class="toc-h3"><a href="http://javascript.ruanyifeng.com/library/underscore.html#toc4">集合过滤</a></li><li class="toc-h2"><a href="http://javascript.ruanyifeng.com/library/underscore.html#toc5">对象相关方法</a></li><li class="toc-h2"><a href="http://javascript.ruanyifeng.com/library/underscore.html#toc6">与函数相关的方法</a></li><li class="toc-h3"><a href="http://javascript.ruanyifeng.com/library/underscore.html#toc7">绑定运行环境和参数</a></li><li class="toc-h3"><a href="http://javascript.ruanyifeng.com/library/underscore.html#toc8">函数运行控制</a></li><li class="toc-h2"><a href="http://javascript.ruanyifeng.com/library/underscore.html#toc9">工具方法</a></li><li class="toc-h3"><a href="http://javascript.ruanyifeng.com/library/underscore.html#toc10">链式操作</a></li><li class="toc-h3"><a href="http://javascript.ruanyifeng.com/library/underscore.html#toc11">template</a></li><li class="toc-h2 toc-active"><a href="http://javascript.ruanyifeng.com/library/underscore.html#toc12">参考链接</a></li></ul></div>
+
+
+<span id="toc0"></span><div class="chapter"><h2 id="概述">概述</h2></div>
+
+<p><a href="http://underscorejs.org/">Underscore.js</a>是一个很精干的库，压缩后只有4KB。它提供了几十种函数式编程的方法，弥补了标准库的不足，大大方便了JavaScript的编程。MVC框架Backbone.js就将这个库作为自己的工具库。除了可以在浏览器环境使用，Underscore.js还可以用于Node.js。</p>
+
+<p>Underscore.js定义了一个下划线（_）对象，函数库的所有方法都属于这个对象。这些方法大致上可以分成：集合（collection）、数组（array）、函数（function）、对象（object）和工具（utility）五大类。</p>
+
+<span id="toc1"></span><div class="chapter"><h2 id="集合相关方法">集合相关方法</h2></div>
+
+<p>Javascript语言的数据集合，包括两种结构：数组和对象。以下的方法同时适用于这两种结构。</p>
+
+<span id="toc2"></span><h3 id="集合处理">集合处理</h3>
+
+<p>数组处理指的是对数组元素进行加工。</p>
+
+<p><strong>（1）map</strong></p>
+
+<p>map方法对集合的每个成员依次进行某种操作，将返回的值依次存入一个新的数组。</p>
+
+<div class="highlight"><pre><code class="language-javascript" data-lang="javascript"><span class="nx">_</span><span class="p">.</span><span class="nx">map</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">],</span> <span class="kd">function</span><span class="p">(</span><span class="nx">num</span><span class="p">){</span> <span class="k">return</span> <span class="nx">num</span> <span class="o">*</span> <span class="mi">3</span><span class="p">;</span> <span class="p">});</span>
+<span class="c1">// [3, 6, 9]</span>
+
+<span class="nx">_</span><span class="p">.</span><span class="nx">map</span><span class="p">({</span><span class="nx">one</span> <span class="o">:</span> <span class="mi">1</span><span class="p">,</span> <span class="nx">two</span> <span class="o">:</span> <span class="mi">2</span><span class="p">,</span> <span class="nx">three</span> <span class="o">:</span> <span class="mi">3</span><span class="p">},</span> <span class="kd">function</span><span class="p">(</span><span class="nx">num</span><span class="p">,</span> <span class="nx">key</span><span class="p">){</span> <span class="k">return</span> <span class="nx">num</span> <span class="o">*</span> <span class="mi">3</span><span class="p">;</span> <span class="p">});</span>
+<span class="c1">// [3, 6, 9]</span></code></pre></div>
+
+<p><strong>（2）each</strong></p>
+
+<p>each方法与map类似，依次对数组所有元素进行某种操作，不返回任何值。</p>
+
+<div class="highlight"><pre><code class="language-javascript" data-lang="javascript"><span class="nx">_</span><span class="p">.</span><span class="nx">each</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">],</span> <span class="nx">alert</span><span class="p">);</span>
+
+<span class="nx">_</span><span class="p">.</span><span class="nx">each</span><span class="p">({</span><span class="nx">one</span> <span class="o">:</span> <span class="mi">1</span><span class="p">,</span> <span class="nx">two</span> <span class="o">:</span> <span class="mi">2</span><span class="p">,</span> <span class="nx">three</span> <span class="o">:</span> <span class="mi">3</span><span class="p">},</span> <span class="nx">alert</span><span class="p">);</span></code></pre></div>
+
+<p><strong>（3）reduce</strong></p>
+
+<p>reduce方法依次对集合的每个成员进行某种操作，然后将操作结果累计在某一个初始值之上，全部操作结束之后，返回累计的值。该方法接受三个参数。第一个参数是被处理的集合，第二个参数是对每个成员进行操作的函数，第三个参数是累计用的变量。</p>
+
+<div class="highlight"><pre><code class="language-javascript" data-lang="javascript"><span class="nx">_</span><span class="p">.</span><span class="nx">reduce</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">],</span> <span class="kd">function</span><span class="p">(</span><span class="nx">memo</span><span class="p">,</span> <span class="nx">num</span><span class="p">){</span> <span class="k">return</span> <span class="nx">memo</span> <span class="o">+</span> <span class="nx">num</span><span class="p">;</span> <span class="p">},</span> <span class="mi">0</span><span class="p">);</span>
+<span class="c1">// 6</span></code></pre></div>
+
+<p>reduce方法的第二个参数是操作函数，它本身又接受两个参数，第一个是累计用的变量，第二个是集合每个成员的值。</p>
+
+<p><strong>（4）reduceRight</strong></p>
+
+<p>reduceRight是逆向的reduce，表示从集合的最后一个元素向前进行处理。</p>
+<div class="highlight"><pre><code class="language-javascript" data-lang="javascript"><span class="kd">var</span> <span class="nx">list</span> <span class="o">=</span> <span class="p">[[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">],</span> <span class="p">[</span><span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">],</span> <span class="p">[</span><span class="mi">4</span><span class="p">,</span> <span class="mi">5</span><span class="p">]];</span>
+<span class="kd">var</span> <span class="nx">flat</span> <span class="o">=</span> <span class="nx">_</span><span class="p">.</span><span class="nx">reduceRight</span><span class="p">(</span><span class="nx">list</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">a</span><span class="p">,</span> <span class="nx">b</span><span class="p">)</span> <span class="p">{</span> <span class="k">return</span> <span class="nx">a</span><span class="p">.</span><span class="nx">concat</span><span class="p">(</span><span class="nx">b</span><span class="p">);</span> <span class="p">},</span> <span class="p">[]);</span>
+<span class="c1">// [4, 5, 2, 3, 0, 1]</span>
+</code></pre></div>
+<p><strong>（5）shuffle</strong></p>
+
+<p>shuffle方法返回一个打乱次序的集合。</p>
+
+<div class="highlight"><pre><code class="language-javascript" data-lang="javascript"><span class="nx">_</span><span class="p">.</span><span class="nx">shuffle</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">6</span><span class="p">]);</span>
+<span class="c1">// [4, 1, 6, 3, 5, 2]</span></code></pre></div>
+
+<p><strong>（6）invoke</strong></p>
+
+<p>invoke方法对集合的每个成员执行指定的操作。</p>
+<div class="highlight"><pre><code class="language-javascript" data-lang="javascript"><span class="nx">_</span><span class="p">.</span><span class="nx">invoke</span><span class="p">([[</span><span class="mi">5</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">7</span><span class="p">],</span> <span class="p">[</span><span class="mi">3</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">1</span><span class="p">]],</span> <span class="s1">'sort'</span><span class="p">)</span>
+<span class="c1">// [[1, 5, 7], [1, 2, 3]]</span>
+</code></pre></div>
+<p><strong>（7）sortBy</strong></p>
+
+<p>sortBy方法根据处理函数的返回值，返回一个排序后的集合，以升序排列。</p>
+<div class="highlight"><pre><code class="language-javascript" data-lang="javascript"><span class="nx">_</span><span class="p">.</span><span class="nx">sortBy</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">6</span><span class="p">],</span> <span class="kd">function</span><span class="p">(</span><span class="nx">num</span><span class="p">){</span> <span class="k">return</span> <span class="nb">Math</span><span class="p">.</span><span class="nx">sin</span><span class="p">(</span><span class="nx">num</span><span class="p">);</span> <span class="p">});</span>
+<span class="c1">// [5, 4, 6, 3, 1, 2]</span>
+</code></pre></div>
+<p><strong>（8）indexBy</strong></p>
+
+<p>indexBy方法返回一个对象，根据指定键名，对集合生成一个索引。</p>
+<div class="highlight"><pre><code class="language-javascript" data-lang="javascript"><span class="kd">var</span> <span class="nx">person</span> <span class="o">=</span> <span class="p">[{</span><span class="nx">name</span><span class="o">:</span> <span class="s1">'John'</span><span class="p">,</span> <span class="nx">age</span><span class="o">:</span> <span class="mi">40</span><span class="p">},</span> <span class="p">{</span><span class="nx">name</span><span class="o">:</span> <span class="s1">'larry'</span><span class="p">,</span> <span class="nx">age</span><span class="o">:</span> <span class="mi">50</span><span class="p">},</span> <span class="p">{</span><span class="nx">name</span><span class="o">:</span> <span class="s1">'curly'</span><span class="p">,</span> <span class="nx">age</span><span class="o">:</span> <span class="mi">60</span><span class="p">}];</span>
+<span class="nx">_</span><span class="p">.</span><span class="nx">indexBy</span><span class="p">(</span><span class="nx">person</span><span class="p">,</span> <span class="s1">'age'</span><span class="p">);</span>
+<span class="c1">// { "50": {name: 'larry', age: 50},</span>
+     <span class="s2">"60"</span><span class="o">:</span> <span class="p">{</span><span class="nx">name</span><span class="o">:</span> <span class="s1">'curly'</span><span class="p">,</span> <span class="nx">age</span><span class="o">:</span> <span class="mi">60</span><span class="p">}</span> <span class="p">}</span>
+</code></pre></div>
+<span id="toc3"></span><h3 id="集合特征">集合特征</h3>
+
+<p>Underscore.js提供了一系列方法，判断数组元素的特征。这些方法都返回一个布尔值，表示是否满足条件。</p>
+
+<p><strong>（1）every</strong></p>
+
+<p>every方法判断数组的所有元素是否都满足某个条件。如果都满足则返回true，否则返回false。</p>
+
+<div class="highlight"><pre><code class="language-javascript" data-lang="javascript"><span class="nx">_</span><span class="p">.</span><span class="nx">every</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">6</span><span class="p">],</span> <span class="kd">function</span><span class="p">(</span><span class="nx">num</span><span class="p">){</span> <span class="k">return</span> <span class="nx">num</span> <span class="o">%</span> <span class="mi">2</span> <span class="o">==</span> <span class="mi">0</span><span class="p">;</span> <span class="p">});</span>
+<span class="c1">// false</span></code></pre></div>
+
+<p><strong>（2）some</strong></p>
+
+<p>some方法则是只要有一个元素满足，就返回true，否则返回false。</p>
+
+<div class="highlight"><pre><code class="language-javascript" data-lang="javascript"><span class="nx">_</span><span class="p">.</span><span class="nx">some</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">6</span><span class="p">],</span> <span class="kd">function</span><span class="p">(</span><span class="nx">num</span><span class="p">){</span> <span class="k">return</span> <span class="nx">num</span> <span class="o">%</span> <span class="mi">2</span> <span class="o">==</span> <span class="mi">0</span><span class="p">;</span> <span class="p">});</span>
+<span class="c1">// true</span>
+
+<span class="nx">_</span><span class="p">.</span><span class="nx">some</span><span class="p">([</span><span class="kc">null</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="s1">'yes'</span><span class="p">,</span> <span class="kc">false</span><span class="p">])</span>
+<span class="c1">// true</span></code></pre></div>
+
+<p><strong>（3）size</strong></p>
+
+<p>size方法返回集合的成员数量。</p>
+
+<div class="highlight"><pre><code class="language-javascript" data-lang="javascript"><span class="nx">_</span><span class="p">.</span><span class="nx">size</span><span class="p">({</span><span class="nx">one</span> <span class="o">:</span> <span class="mi">1</span><span class="p">,</span> <span class="nx">two</span> <span class="o">:</span> <span class="mi">2</span><span class="p">,</span> <span class="nx">three</span> <span class="o">:</span> <span class="mi">3</span><span class="p">});</span>
+<span class="c1">// 3</span></code></pre></div>
+
+<p><strong>（4）sample</strong></p>
+
+<p>sample方法用于从集合中随机取样。</p>
+<div class="highlight"><pre><code class="language-javascript" data-lang="javascript"><span class="nx">_</span><span class="p">.</span><span class="nx">sample</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">6</span><span class="p">])</span>
+<span class="c1">// 4</span>
+</code></pre></div>
+<span id="toc4"></span><h3 id="集合过滤">集合过滤</h3>
+
+<p>Underscore.js提供了一系列方法，用于过滤数组，找到符合要求的成员。</p>
+
+<p><strong>（1）filter</strong></p>
+
+<p>filter方法依次对集合的每个成员进行某种操作，只返回操作结果为true的成员。</p>
+
+<div class="highlight"><pre><code class="language-javascript" data-lang="javascript"><span class="nx">_</span><span class="p">.</span><span class="nx">filter</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">6</span><span class="p">],</span> <span class="kd">function</span><span class="p">(</span><span class="nx">num</span><span class="p">){</span> <span class="k">return</span> <span class="nx">num</span> <span class="o">%</span> <span class="mi">2</span> <span class="o">==</span> <span class="mi">0</span><span class="p">;</span> <span class="p">});</span>
+<span class="c1">// [2, 4, 6]</span></code></pre></div>
+
+<p><strong>（2）reject</strong></p>
+
+<p>reject方法只返回操作结果为false的成员。</p>
+
+<div class="highlight"><pre><code class="language-javascript" data-lang="javascript"><span class="nx">_</span><span class="p">.</span><span class="nx">reject</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">6</span><span class="p">],</span> <span class="kd">function</span><span class="p">(</span><span class="nx">num</span><span class="p">){</span> <span class="k">return</span> <span class="nx">num</span> <span class="o">%</span> <span class="mi">2</span> <span class="o">==</span> <span class="mi">0</span><span class="p">;</span> <span class="p">});</span>
+<span class="c1">// [1, 3, 5]</span></code></pre></div>
+
+<p><strong>（3）find</strong></p>
+
+<p>find方法依次对集合的每个成员进行某种操作，返回第一个操作结果为true的成员。如果所有成员的操作结果都为false，则返回undefined。</p>
+
+<div class="highlight"><pre><code class="language-javascript" data-lang="javascript"><span class="nx">_</span><span class="p">.</span><span class="nx">find</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">6</span><span class="p">],</span> <span class="kd">function</span><span class="p">(</span><span class="nx">num</span><span class="p">){</span> <span class="k">return</span> <span class="nx">num</span> <span class="o">%</span> <span class="mi">2</span> <span class="o">==</span> <span class="mi">0</span><span class="p">;</span> <span class="p">});</span>
+<span class="c1">// 2</span></code></pre></div>
+
+<p><strong>（4）contains</strong></p>
+
+<p>contains方法表示如果某个值在数组内，则返回true，否则返回false。</p>
+
+<div class="highlight"><pre><code class="language-javascript" data-lang="javascript"><span class="nx">_</span><span class="p">.</span><span class="nx">contains</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">],</span> <span class="mi">3</span><span class="p">);</span>
+<span class="c1">// true</span></code></pre></div>
+
+<p><strong>（5）countBy</strong></p>
+
+<p>countBy方法依次对集合的每个成员进行某种操作，将操作结果相同的成员算作一类，最后返回一个对象，表明每种操作结果对应的成员数量。</p>
+
+<div class="highlight"><pre><code class="language-javascript" data-lang="javascript"><span class="nx">_</span><span class="p">.</span><span class="nx">countBy</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">5</span><span class="p">],</span> <span class="kd">function</span><span class="p">(</span><span class="nx">num</span><span class="p">)</span> <span class="p">{</span>
+  <span class="k">return</span> <span class="nx">num</span> <span class="o">%</span> <span class="mi">2</span> <span class="o">==</span> <span class="mi">0</span> <span class="o">?</span> <span class="s1">'even'</span> <span class="o">:</span> <span class="s1">'odd'</span><span class="p">;</span>
+<span class="p">});</span>
+<span class="c1">// {odd: 3, even: 2}</span></code></pre></div>
+
+<p><strong>（6）where</strong></p>
+
+<p>where方法检查集合中的每个值，返回一个数组，其中的每个成员都包含指定的键值对。</p>
+<div class="highlight"><pre><code class="language-javascript" data-lang="javascript"><span class="nx">_</span><span class="p">.</span><span class="nx">where</span><span class="p">(</span><span class="nx">listOfPlays</span><span class="p">,</span> <span class="p">{</span><span class="nx">author</span><span class="o">:</span> <span class="s2">"Shakespeare"</span><span class="p">,</span> <span class="nx">year</span><span class="o">:</span> <span class="mi">1611</span><span class="p">});</span>
+<span class="c1">// [{title: "Cymbeline", author: "Shakespeare", year: 1611},</span>
+<span class="c1">//  {title: "The Tempest", author: "Shakespeare", year: 1611}]</span>
+</code></pre></div>
+<p><strong>（7）max，min</strong></p>
+
+<p>max方法返回集合中的最大值。如果提供一个处理函数，则该函数的返回值用作排名标准。</p>
+<div class="highlight"><pre><code class="language-javascript" data-lang="javascript"><span class="kd">var</span> <span class="nx">person</span> <span class="o">=</span> <span class="p">[{</span><span class="nx">name</span><span class="o">:</span> <span class="s1">'John'</span><span class="p">,</span> <span class="nx">age</span><span class="o">:</span> <span class="mi">40</span><span class="p">},</span> 
+              <span class="p">{</span><span class="nx">name</span><span class="o">:</span> <span class="s1">'larry'</span><span class="p">,</span> <span class="nx">age</span><span class="o">:</span> <span class="mi">50</span><span class="p">},</span> 
+              <span class="p">{</span><span class="nx">name</span><span class="o">:</span> <span class="s1">'curly'</span><span class="p">,</span> <span class="nx">age</span><span class="o">:</span> <span class="mi">60</span><span class="p">}];</span>
+<span class="nx">_</span><span class="p">.</span><span class="nx">max</span><span class="p">(</span><span class="nx">person</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">per</span><span class="p">){</span> <span class="k">return</span> <span class="nx">per</span><span class="p">.</span><span class="nx">age</span><span class="p">;</span> <span class="p">});</span>
+<span class="c1">// {name: 'curly', age: 60};</span>
+</code></pre></div>
+<p>min方法返回集合中的最小值。如果提供一个处理函数，则该函数的返回值用作排名标准。</p>
+<div class="highlight"><pre><code class="language-javascript" data-lang="javascript"><span class="kd">var</span> <span class="nx">numbers</span> <span class="o">=</span> <span class="p">[</span><span class="mi">10</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">100</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">1000</span><span class="p">];</span>
+<span class="nx">_</span><span class="p">.</span><span class="nx">min</span><span class="p">(</span><span class="nx">numbers</span><span class="p">)</span>
+<span class="c1">// 2</span>
+</code></pre></div>
+<span id="toc5"></span><div class="chapter"><h2 id="对象相关方法">对象相关方法</h2></div>
+
+<p><strong>（1）toArray</strong></p>
+
+<p>toArray方法将对象转为数组，只包含对象成员的值。典型应用是将对类似数组的对象转为真正的数组。</p>
+
+<div class="highlight"><pre><code class="language-javascript" data-lang="javascript"><span class="nx">_</span><span class="p">.</span><span class="nx">toArray</span><span class="p">({</span><span class="nx">a</span><span class="o">:</span><span class="mi">0</span><span class="p">,</span><span class="nx">b</span><span class="o">:</span><span class="mi">1</span><span class="p">,</span><span class="nx">c</span><span class="o">:</span><span class="mi">2</span><span class="p">});</span>
+<span class="c1">// [0, 1, 2]</span></code></pre></div>
+
+<p><strong>（2）pluck</strong></p>
+
+<p>pluck方法将多个对象的某一个属性的值，提取成一个数组。</p>
+
+<div class="highlight"><pre><code class="language-javascript" data-lang="javascript"><span class="kd">var</span> <span class="nx">person</span> <span class="o">=</span> <span class="p">[{</span><span class="nx">name</span><span class="o">:</span> <span class="s1">'John'</span><span class="p">,</span> <span class="nx">age</span><span class="o">:</span> <span class="mi">40</span><span class="p">},</span> 
+              <span class="p">{</span><span class="nx">name</span><span class="o">:</span> <span class="s1">'larry'</span><span class="p">,</span> <span class="nx">age</span><span class="o">:</span> <span class="mi">50</span><span class="p">},</span> 
+              <span class="p">{</span><span class="nx">name</span><span class="o">:</span> <span class="s1">'curly'</span><span class="p">,</span> <span class="nx">age</span><span class="o">:</span> <span class="mi">60</span><span class="p">}];</span>
+
+<span class="nx">_</span><span class="p">.</span><span class="nx">pluck</span><span class="p">(</span><span class="nx">person</span><span class="p">,</span> <span class="s1">'name'</span><span class="p">);</span>
+<span class="c1">// ["moe", "larry", "curly"]</span></code></pre></div>
+
+<span id="toc6"></span><div class="chapter"><h2 id="与函数相关的方法">与函数相关的方法</h2></div>
+
+<span id="toc7"></span><h3 id="绑定运行环境和参数">绑定运行环境和参数</h3>
+
+<p>在不同的运行环境下，JavaScript函数内部的变量所在的上下文是不同的。这种特性会给程序带来不确定性，为了解决这个问题，Underscore.js提供了两个方法，用来给函数绑定上下文。</p>
+
+<p><strong>（1）bind方法</strong></p>
+
+<p>该方法绑定函数运行时的上下文，返回一个新函数。</p>
+
+<div class="highlight"><pre><code class="language-javascript" data-lang="javascript"><span class="kd">var</span> <span class="nx">o</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="nx">p</span><span class="o">:</span> <span class="mi">2</span><span class="p">,</span>
+    <span class="nx">m</span><span class="o">:</span> <span class="kd">function</span> <span class="p">(){</span><span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nx">p</span><span class="p">);}</span>
+<span class="p">};</span>
+
+<span class="nx">o</span><span class="p">.</span><span class="nx">m</span><span class="p">()</span>
+<span class="c1">// 2</span>
+
+<span class="nx">_</span><span class="p">.</span><span class="nx">bind</span><span class="p">(</span><span class="nx">o</span><span class="p">.</span><span class="nx">m</span><span class="p">,{</span><span class="nx">p</span><span class="o">:</span><span class="mi">1</span><span class="p">})()</span>
+<span class="c1">// 1</span></code></pre></div>
+
+<p>上面代码将o.m方法绑定到一个新的对象上面。</p>
+
+<p>除了前两个参数以外，bind方法还可以接受更多参数，它们表示函数方法运行时所需的参数。</p>
+
+<div class="highlight"><pre><code class="language-javascript" data-lang="javascript"><span class="kd">var</span> <span class="nx">add</span> <span class="o">=</span> <span class="kd">function</span><span class="p">(</span><span class="nx">n1</span><span class="p">,</span><span class="nx">n2</span><span class="p">,</span><span class="nx">n3</span><span class="p">)</span> <span class="p">{</span>
+  <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nx">sum</span> <span class="o">+</span> <span class="nx">n1</span> <span class="o">+</span> <span class="nx">n2</span> <span class="o">+</span> <span class="nx">n3</span><span class="p">);</span>
+<span class="p">};</span>
+
+<span class="nx">_</span><span class="p">.</span><span class="nx">bind</span><span class="p">(</span><span class="nx">add</span><span class="p">,</span> <span class="p">{</span><span class="nx">sum</span><span class="o">:</span><span class="mi">1</span><span class="p">},</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">)()</span>
+<span class="c1">// 4</span></code></pre></div>
+
+<p>上面代码中bind方法有5个参数，最后那三个是给定add方法的运行参数，所以运行结果为4。</p>
+
+<p><strong>（2）bindall方法</strong></p>
+
+<p>该方法可以一次将多个方法，绑定在某个对象上面。</p>
+
+<div class="highlight"><pre><code class="language-javascript" data-lang="javascript"><span class="kd">var</span> <span class="nx">o</span> <span class="o">=</span> <span class="p">{</span>
+  <span class="nx">p1</span> <span class="o">:</span> <span class="s1">'123'</span><span class="p">,</span>
+  <span class="nx">p2</span> <span class="o">:</span> <span class="s1">'456'</span><span class="p">,</span>
+  <span class="nx">m1</span> <span class="o">:</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span> <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nx">p1</span><span class="p">);</span> <span class="p">},</span>
+  <span class="nx">m2</span> <span class="o">:</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span> <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nx">p2</span><span class="p">);</span> <span class="p">},</span>
+<span class="p">};</span>
+
+<span class="nx">_</span><span class="p">.</span><span class="nx">bindAll</span><span class="p">(</span><span class="nx">o</span><span class="p">,</span> <span class="s1">'m1'</span><span class="p">,</span> <span class="s1">'m2'</span><span class="p">);</span></code></pre></div>
+
+<p>上面代码一次性将两个方法（m1和m2）绑定在o对象上面。</p>
+
+<p><strong>（3）partial方法</strong></p>
+
+<p>除了绑定上下文，Underscore.js还允许绑定参数。partial方法将函数与某个参数绑定，然后作为一个新函数返回。</p>
+
+<div class="highlight"><pre><code class="language-javascript" data-lang="javascript"><span class="kd">var</span> <span class="nx">add</span> <span class="o">=</span> <span class="kd">function</span><span class="p">(</span><span class="nx">a</span><span class="p">,</span> <span class="nx">b</span><span class="p">)</span> <span class="p">{</span> <span class="k">return</span> <span class="nx">a</span> <span class="o">+</span> <span class="nx">b</span><span class="p">;</span> <span class="p">};</span>
+
+<span class="nx">add5</span> <span class="o">=</span> <span class="nx">_</span><span class="p">.</span><span class="nx">partial</span><span class="p">(</span><span class="nx">add</span><span class="p">,</span> <span class="mi">5</span><span class="p">);</span>
+
+<span class="nx">add5</span><span class="p">(</span><span class="mi">10</span><span class="p">);</span>
+<span class="c1">// 15</span></code></pre></div>
+
+<p><strong>（4）wrap方法</strong></p>
+
+<p>该方法将一个函数作为参数，传入另一个函数，最终返回前者的一个新版本。</p>
+
+<div class="highlight"><pre><code class="language-javascript" data-lang="javascript"><span class="kd">var</span> <span class="nx">hello</span> <span class="o">=</span> <span class="kd">function</span><span class="p">(</span><span class="nx">name</span><span class="p">)</span> <span class="p">{</span> <span class="k">return</span> <span class="s2">"hello: "</span> <span class="o">+</span> <span class="nx">name</span><span class="p">;</span> <span class="p">};</span>
+
+<span class="nx">hello</span> <span class="o">=</span> <span class="nx">_</span><span class="p">.</span><span class="nx">wrap</span><span class="p">(</span><span class="nx">hello</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">func</span><span class="p">)</span> <span class="p">{</span>
+  <span class="k">return</span> <span class="s2">"before, "</span> <span class="o">+</span> <span class="nx">func</span><span class="p">(</span><span class="s2">"moe"</span><span class="p">)</span> <span class="o">+</span> <span class="s2">", after"</span><span class="p">;</span>
+<span class="p">});</span>
+
+<span class="nx">hello</span><span class="p">();</span>
+<span class="c1">// 'before, hello: moe, after'</span></code></pre></div>
+
+<p>上面代码先定义hello函数，然后将hello传入一个匿名定义，返回一个新版本的hello函数。</p>
+
+<p><strong>（5）compose方法</strong></p>
+
+<p>该方法接受一系列函数作为参数，由后向前依次运行，上一个函数的运行结果，作为后一个函数的运行参数。也就是说，将f(g(),h())的形式转化为f(g(h()))。</p>
+
+<div class="highlight"><pre><code class="language-javascript" data-lang="javascript"><span class="kd">var</span> <span class="nx">greet</span>    <span class="o">=</span> <span class="kd">function</span><span class="p">(</span><span class="nx">name</span><span class="p">){</span> <span class="k">return</span> <span class="s2">"hi: "</span> <span class="o">+</span> <span class="nx">name</span><span class="p">;</span> <span class="p">};</span>
+<span class="kd">var</span> <span class="nx">exclaim</span>  <span class="o">=</span> <span class="kd">function</span><span class="p">(</span><span class="nx">statement</span><span class="p">){</span> <span class="k">return</span> <span class="nx">statement</span> <span class="o">+</span> <span class="s2">"!"</span><span class="p">;</span> <span class="p">};</span>
+<span class="kd">var</span> <span class="nx">welcome</span> <span class="o">=</span> <span class="nx">_</span><span class="p">.</span><span class="nx">compose</span><span class="p">(</span><span class="nx">exclaim</span><span class="p">,</span> <span class="nx">greet</span><span class="p">);</span>
+<span class="nx">welcome</span><span class="p">(</span><span class="s1">'moe'</span><span class="p">);</span>
+<span class="c1">// 'hi: moe!'</span></code></pre></div>
+
+<p>上面代码调用welcome时，先运行greet函数，再运行exclaim函数。并且，greet函数的运行结果是exclaim函数运行时的参数。</p>
+
+<span id="toc8"></span><h3 id="函数运行控制">函数运行控制</h3>
+
+<p>Underscore.js允许对函数运行行为进行控制。</p>
+
+<p><strong>（1）memoize方法</strong></p>
+
+<p>该方法缓存一个函数针对某个参数的运行结果。</p>
+
+<div class="highlight"><pre><code class="language-javascript" data-lang="javascript"><span class="kd">var</span> <span class="nx">fibonacci</span> <span class="o">=</span> <span class="nx">_</span><span class="p">.</span><span class="nx">memoize</span><span class="p">(</span><span class="kd">function</span><span class="p">(</span><span class="nx">n</span><span class="p">)</span> <span class="p">{</span>
+  <span class="k">return</span> <span class="nx">n</span> <span class="o">&lt;</span> <span class="mi">2</span> <span class="o">?</span> <span class="nx">n</span> <span class="o">:</span> <span class="nx">fibonacci</span><span class="p">(</span><span class="nx">n</span> <span class="o">-</span> <span class="mi">1</span><span class="p">)</span> <span class="o">+</span> <span class="nx">fibonacci</span><span class="p">(</span><span class="nx">n</span> <span class="o">-</span> <span class="mi">2</span><span class="p">);</span>
+<span class="p">});</span></code></pre></div>
+
+<p><strong>（2）delay方法</strong></p>
+
+<p>该方法可以将函数推迟指定的时间再运行。</p>
+
+<div class="highlight"><pre><code class="language-javascript" data-lang="javascript"><span class="kd">var</span> <span class="nx">log</span> <span class="o">=</span> <span class="nx">_</span><span class="p">.</span><span class="nx">bind</span><span class="p">(</span><span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">,</span> <span class="nx">console</span><span class="p">);</span>
+
+<span class="nx">_</span><span class="p">.</span><span class="nx">delay</span><span class="p">(</span><span class="nx">log</span><span class="p">,</span> <span class="mi">1000</span><span class="p">,</span> <span class="s1">'logged later'</span><span class="p">);</span>
+<span class="c1">// 'logged later'</span></code></pre></div>
+
+<p>上面代码推迟1000毫秒，再运行console.log方法，并且指定参数为“logged later”。</p>
+
+<p><strong>（3）defer方法</strong></p>
+
+<p>该方法可以将函数推迟到待运行的任务数为0时再运行，类似于setTimeout推迟0秒运行的效果。</p>
+
+<div class="highlight"><pre><code class="language-javascript" data-lang="javascript"><span class="nx">_</span><span class="p">.</span><span class="nx">defer</span><span class="p">(</span><span class="kd">function</span><span class="p">(){</span> <span class="nx">alert</span><span class="p">(</span><span class="s1">'deferred'</span><span class="p">);</span> <span class="p">});</span></code></pre></div>
+
+<p><strong>（4）throttle方法</strong></p>
+
+<p>该方法返回一个函数的新版本。连续调用这个新版本的函数时，必须等待一定时间才会触发下一次执行。</p>
+
+<div class="highlight"><pre><code class="language-javascript" data-lang="javascript"><span class="c1">// 返回updatePosition函数的新版本</span>
+<span class="kd">var</span> <span class="nx">throttled</span> <span class="o">=</span> <span class="nx">_</span><span class="p">.</span><span class="nx">throttle</span><span class="p">(</span><span class="nx">updatePosition</span><span class="p">,</span> <span class="mi">100</span><span class="p">);</span>
+
+<span class="c1">// 新版本的函数每过100毫秒才会触发一次</span>
+<span class="nx">$</span><span class="p">(</span><span class="nb">window</span><span class="p">).</span><span class="nx">scroll</span><span class="p">(</span><span class="nx">throttled</span><span class="p">);</span></code></pre></div>
+
+<p><strong>（5）debounce方法</strong></p>
+
+<p>该方法返回的新函数有调用的时间限制，每次调用必须与上一次调用间隔一定的时间，否则就无效。它的典型应用是防止用户双击某个按钮，导致两次提交表单。</p>
+
+<div class="highlight"><pre><code class="language-javascript" data-lang="javascript"><span class="nx">$</span><span class="p">(</span><span class="s2">"button"</span><span class="p">).</span><span class="nx">on</span><span class="p">(</span><span class="s2">"click"</span><span class="p">,</span> <span class="nx">_</span><span class="p">.</span><span class="nx">debounce</span><span class="p">(</span><span class="nx">submitForm</span><span class="p">,</span> <span class="mi">1000</span><span class="p">,</span> <span class="kc">true</span><span class="p">));</span></code></pre></div>
+
+<p>上面代码表示click事件发生后，调用函数submitForm的新版本。该版本的两次运行时间，必须间隔1000毫秒以上，否则第二次调用无效。最后那个参数true，表示click事件发生后，立刻触发第一次submitForm函数，否则就是等1000毫秒再触发。</p>
+
+<p><strong>（6）once方法</strong></p>
+
+<p>该方法返回一个只能运行一次的新函数。该方法主要用于对象的初始化。</p>
+
+<div class="highlight"><pre><code class="language-javascript" data-lang="javascript"><span class="kd">var</span> <span class="nx">initialize</span> <span class="o">=</span> <span class="nx">_</span><span class="p">.</span><span class="nx">once</span><span class="p">(</span><span class="nx">createApplication</span><span class="p">);</span>
+<span class="nx">initialize</span><span class="p">();</span>
+<span class="nx">initialize</span><span class="p">();</span>
+<span class="c1">// Application只被创造一次</span></code></pre></div>
+
+<p><strong>（7）after方法</strong></p>
+
+<p>该方法返回的新版本函数，只有在被调用一定次数后才会运行，主要用于确认一组操作全部完成后，再做出反应。</p>
+
+<div class="highlight"><pre><code class="language-javascript" data-lang="javascript"><span class="kd">var</span> <span class="nx">renderNotes</span> <span class="o">=</span> <span class="nx">_</span><span class="p">.</span><span class="nx">after</span><span class="p">(</span><span class="nx">notes</span><span class="p">.</span><span class="nx">length</span><span class="p">,</span> <span class="nx">render</span><span class="p">);</span>
+
+<span class="nx">_</span><span class="p">.</span><span class="nx">each</span><span class="p">(</span><span class="nx">notes</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">note</span><span class="p">)</span> <span class="p">{</span>
+  <span class="nx">note</span><span class="p">.</span><span class="nx">asyncSave</span><span class="p">({</span><span class="nx">success</span><span class="o">:</span> <span class="nx">renderNotes</span><span class="p">});</span>
+<span class="p">});</span></code></pre></div>
+
+<p>上面代码表示，函数renderNotes是函数render的新版本，只有调用notes.length次以后才会运行。所以，后面就可以放心地等到notes的每个成员都处理完，才会运行一次renderNotes。</p>
+
+<span id="toc9"></span><div class="chapter"><h2 id="工具方法">工具方法</h2></div>
+
+<span id="toc10"></span><h3 id="链式操作">链式操作</h3>
+
+<p>Underscore.js允许将多个操作写成链式的形式。</p>
+
+<div class="highlight"><pre><code class="language-javascript" data-lang="javascript"><span class="nx">_</span><span class="p">.(</span><span class="nx">users</span><span class="p">)</span>
+<span class="p">.</span><span class="nx">filter</span><span class="p">(</span><span class="kd">function</span><span class="p">(</span><span class="nx">user</span><span class="p">)</span> <span class="p">{</span> <span class="k">return</span> <span class="nx">user</span><span class="p">.</span><span class="nx">name</span> <span class="o">===</span> <span class="nx">name</span> <span class="p">})</span>
+<span class="p">.</span><span class="nx">sortBy</span><span class="p">(</span><span class="kd">function</span><span class="p">(</span><span class="nx">user</span><span class="p">)</span> <span class="p">{</span> <span class="k">return</span> <span class="nx">user</span><span class="p">.</span><span class="nx">karma</span> <span class="p">})</span>
+<span class="p">.</span><span class="nx">first</span><span class="p">()</span>
+<span class="p">.</span><span class="nx">value</span><span class="p">()</span></code></pre></div>
+
+<span id="toc11"></span><h3 id="template">template</h3>
+
+<p>该方法用于编译HTML模板。它接受三个参数。</p>
+
+<div class="highlight"><pre><code class="language-javascript" data-lang="javascript"><span class="nx">_</span><span class="p">.</span><span class="nx">template</span><span class="p">(</span><span class="nx">templateString</span><span class="p">,</span> <span class="p">[</span><span class="nx">data</span><span class="p">],</span> <span class="p">[</span><span class="nx">settings</span><span class="p">])</span></code></pre></div>
+
+<p>三个参数的含义如下：</p>
+
+<ul>
+<li>templateString：模板字符串</li>
+<li>data：输入模板的数据</li>
+<li>settings：设置</li>
+</ul>
+
+<p><strong>（1）templateString</strong></p>
+
+<p>模板字符串templateString就是普通的HTML语言，其中的变量使用&lt;%= … %&gt;的形式插入；data对象负责提供变量的值。</p>
+
+<div class="highlight"><pre><code class="language-javascript" data-lang="javascript"><span class="kd">var</span> <span class="nx">txt</span> <span class="o">=</span> <span class="s2">"&lt;h2&gt;&lt;%= word %&gt;&lt;/h2&gt;"</span><span class="p">;</span>
+
+<span class="nx">_</span><span class="p">.</span><span class="nx">template</span><span class="p">(</span><span class="nx">txt</span><span class="p">,</span> <span class="p">{</span><span class="nx">word</span> <span class="o">:</span> <span class="s2">"Hello World"</span><span class="p">})</span>
+<span class="c1">// "&lt;h2&gt;Hello World&lt;/h2&gt;"</span></code></pre></div>
+
+<p>如果变量的值包含五个特殊字符（&amp; &lt; &gt; " ' /），就需要用&lt;%- ... %&gt;转义。</p>
+
+<div class="highlight"><pre><code class="language-javascript" data-lang="javascript"><span class="kd">var</span> <span class="nx">txt</span> <span class="o">=</span> <span class="s2">"&lt;h2&gt;&lt;%- word %&gt;&lt;/h2&gt;"</span><span class="p">;</span>
+
+<span class="nx">_</span><span class="p">.</span><span class="nx">template</span><span class="p">(</span><span class="nx">txt</span><span class="p">,</span> <span class="p">{</span><span class="nx">word</span> <span class="o">:</span> <span class="s2">"H &amp; W"</span><span class="p">})</span>
+<span class="c1">// &lt;h2&gt;H &amp;amp; W&lt;/h2&gt;</span></code></pre></div>
+
+<p>JavaScript命令可以采用&lt;% … %&gt;的形式插入。下面是判断语句的例子。</p>
+
+<div class="highlight"><pre><code class="language-javascript" data-lang="javascript"><span class="kd">var</span> <span class="nx">txt</span> <span class="o">=</span> <span class="s2">"&lt;% var i = 0; if (i&lt;1){ %&gt;"</span>
+        <span class="o">+</span> <span class="s2">"&lt;%= word %&gt;"</span>
+        <span class="o">+</span> <span class="s2">"&lt;% } %&gt;"</span><span class="p">;</span>
+
+<span class="nx">_</span><span class="p">.</span><span class="nx">template</span><span class="p">(</span><span class="nx">txt</span><span class="p">,</span> <span class="p">{</span><span class="nx">word</span> <span class="o">:</span> <span class="s2">"Hello World"</span><span class="p">})</span>
+<span class="c1">// Hello World</span></code></pre></div>
+
+<p>常见的用法还有循环语句。</p>
+
+<div class="highlight"><pre><code class="language-javascript" data-lang="javascript"><span class="kd">var</span> <span class="nx">list</span> <span class="o">=</span> <span class="s2">"&lt;% _.each(people, function(name) { %&gt; &lt;li&gt;&lt;%= name %&gt;&lt;/li&gt; &lt;% }); %&gt;"</span><span class="p">;</span>
+
+<span class="nx">_</span><span class="p">.</span><span class="nx">template</span><span class="p">(</span><span class="nx">list</span><span class="p">,</span> <span class="p">{</span><span class="nx">people</span> <span class="o">:</span> <span class="p">[</span><span class="s1">'moe'</span><span class="p">,</span> <span class="s1">'curly'</span><span class="p">,</span> <span class="s1">'larry'</span><span class="p">]});</span>
+<span class="c1">// "&lt;li&gt;moe&lt;/li&gt;&lt;li&gt;curly&lt;/li&gt;&lt;li&gt;larry&lt;/li&gt;"</span></code></pre></div>
+
+<p>如果template方法只有第一个参数templateString，省略第二个参数，那么会返回一个函数，以后可以向这个函数输入数据。</p>
+
+<div class="highlight"><pre><code class="language-javascript" data-lang="javascript"><span class="kd">var</span> <span class="nx">t1</span> <span class="o">=</span> <span class="nx">_</span><span class="p">.</span><span class="nx">template</span><span class="p">(</span><span class="s2">"Hello &lt;%=user%&gt;!"</span><span class="p">);</span>  
+
+<span class="nx">t1</span><span class="p">({</span> <span class="nx">user</span><span class="o">:</span> <span class="s2">"&lt;Jane&gt;"</span> <span class="p">})</span> 
+<span class="c1">// 'Hello &lt;Jane&gt;!'</span></code></pre></div>
+
+<p>** （2）data **</p>
+
+<p>templateString中的所有变量，在内部都是obj对象的属性，而obj对象就是指第二个参数data对象。下面两句语句是等同的。</p>
+
+<div class="highlight"><pre><code class="language-javascript" data-lang="javascript"><span class="nx">_</span><span class="p">.</span><span class="nx">template</span><span class="p">(</span><span class="s2">"Hello &lt;%=user%&gt;!"</span><span class="p">,</span> <span class="p">{</span> <span class="nx">user</span><span class="o">:</span> <span class="s2">"&lt;Jane&gt;"</span> <span class="p">})</span>
+<span class="nx">_</span><span class="p">.</span><span class="nx">template</span><span class="p">(</span><span class="s2">"Hello &lt;%=obj.user%&gt;!"</span><span class="p">,</span> <span class="p">{</span> <span class="nx">user</span><span class="o">:</span> <span class="s2">"&lt;Jane&gt;"</span> <span class="p">})</span></code></pre></div>
+
+<p>如果要改变obj这个对象的名字，需要在第三个参数中设定。</p>
+
+<div class="highlight"><pre><code class="language-javascript" data-lang="javascript"><span class="nx">_</span><span class="p">.</span><span class="nx">template</span><span class="p">(</span><span class="s2">"&lt;%if (data.title) { %&gt;Title: &lt;%= title %&gt;&lt;% } %&gt;"</span><span class="p">,</span> <span class="kc">null</span><span class="p">,</span>
+                <span class="p">{</span> <span class="nx">variable</span><span class="o">:</span> <span class="s2">"data"</span> <span class="p">});</span></code></pre></div>
+
+<p>因为template在变量替换时，内部使用with语句，所以上面这样的做法，运行速度会比较快。</p>
+
+<span id="toc12"></span><div class="chapter"><h2 id="参考链接" class="reference">参考链接</h2></div>
+
+<ul class="reference-list">
+<li>Amy Lee, <a href="http://eng.wealthfront.com/2012/12/using-underscorejss-debounce-to-filter.html">Using Underscore.js's debounce() to filter double-clicks</a></li>
+<li>Axel Rauschmayer, <a href="http://www.2ality.com/2012/06/underscore-templates.html">A closer look at Underscore templates</a></li>
+<li>Jules Boussekeyt, <a href="http://jules.boussekeyt.org/2012/underscorejs.html">Write concise code with UnderscoreJS</a></li>
+</ul>
+
+
+</div></div></article>
+
+<div class="row">
+    <div class="twelve columns">
+
+<sectioni id="feature">
+
+<h2>功能链接</h2>
+
+<ul>
+
+	<li><a href="https://github.com/ruanyf/jstutorial/issues">论坛</a></li>
+	<li><a href="https://raw.github.com/ruanyf/jstutorial/gh-pages/library/underscore.md">Markdown源码</a></li>
+	<li><a href="https://github.com/ruanyf/jstutorial/commits/gh-pages/library/underscore.md">修订历史</a></li>
+
+</ul>
+
+<h2>留言</h2>
+
+<div id="disqus_thread"></div>
+    <script type="text/javascript">
+        /* * * CONFIGURATION VARIABLES: EDIT BEFORE PASTING INTO YOUR WEBPAGE * * */
+        var disqus_shortname = 'jstutorial'; // required: replace example with your forum shortname
+
+        /* * * DON'T EDIT BELOW THIS LINE * * */
+        (function() {
+            var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+            dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+            (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+        })();
+    </script>
+    <noscript>Please enable JavaScript to view the &lt;a href="http://disqus.com/?ref_noscript"&gt;comments powered by Disqus.&lt;/a&gt;</noscript>
+    <a href="http://disqus.com/" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+
+
+
+</sectioni></div>
+</div>
+
+<footer>
+<div class="row">
+<div class="twelve columns">
+	<p><a href="http://javascript.ruanyifeng.com/introduction/license.html">版权声明</a> | last modified on 2013-10-24 </p>
+</div>
+</div>
+</footer>
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-43771063-1', 'ruanyifeng.com');
+  ga('send', 'pageview');
+</script>
+
+
+
+
+</body></html>

@@ -1,0 +1,80 @@
+﻿<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title></title>
+</head>
+<body>
+    <div contenteditable="true" style="width: 700px; height: 700px;outline:none; margin: 0 auto">
+        <canvas id="mycan" width="230" height="230" style=""></canvas>
+    </div>
+    <!--  <script>
+        var c = document.getElementById("mycan");
+        var cxt = c.getContext("2d");
+        cxt.fillStyle = "#0000ff";
+        cxt.fillRect(0, 0, 230, 230);
+
+
+        cxt.beginPath(); //开始画
+        cxt.lineWidth = 25; //设置线条的宽度
+        cxt.fillStyle = "green";//设置填充色
+        cxt.strokeStyle = "red";//设置线的边框
+        cxt.translate(115, 115);//将时针的移动到画布中间 宽230 高230
+        cxt.rotate(3 * 30 / 180 * Math.PI);//shi 代表小时数 30为一个小时时针走的角度
+        cxt.lineCap = "round"; //lineCap:butt(默认：向线条的每个末端添加平直的边缘) round：添加圆形线帽  square：正方形线帽
+        cxt.moveTo(0, -60);//起点
+        cxt.lineTo(0, 15);//另外的点
+        cxt.fill();//填充当前路径 为框属性
+        cxt.stroke();//绘制已定义的路径
+        cxt.closePath();//关闭的路径
+        cxt.restore();//恢复到上一次保存的上下文的环境
+    </script>-->
+    <script>
+        var Vector = (function () {
+            //构造函数
+            function Vector(x, y, z) {
+                this.x = x;
+                this.y = y;
+                this.z = z;
+            }
+            //构造函数静态方法
+            {
+                //k为倍数，v为坐标点
+                Vector.times = function (k, v) {
+                    return new Vector(k * v.x, k * v.y, k * v.z);
+                };
+                //两坐标相减
+                Vector.minus = function (v1, v2) {
+                    return new Vector(v1.x - v2.x, v1.y - v2.y, v1.z - v2.z);
+                };
+                //两坐标相加
+                Vector.plus = function (v1, v2) {
+                    return new Vector(v1.x + v2.x, v1.y + v2.y, v1.z + v2.z);
+                };
+                //两坐标相乘的和     即 坐标上两点三维x与x y与y z与z 相乘后的一起相加
+                Vector.dot = function (v1, v2) {
+                    return v1.x * v2.x + v1.y * v2.y + v1.z * v2.z;  //垂直
+                };
+                //坐标平方的和 开方  即 坐标到原点的三维距离
+                Vector.mag = function (v) {
+                    return Math.sqrt(v.x * v.x + v.y * v.y + v.z * v.z);
+                };
+
+                Vector.norm = function (v) {
+                    var mag = Vector.mag(v);
+                    var div = (mag === 0) ? Infinity : 1.0 / mag;
+                    return Vector.times(div, v);
+                };
+
+                Vector.cross = function (v1, v2) {
+                    return new Vector(v1.y * v2.z - v1.z * v2.y, v1.z * v2.x - v1.x * v2.z, v1.x * v2.y - v1.y * v2.x);
+                };
+            }
+            return Vector;
+        })();
+        debugger;
+        var dd = new Vector(1, 2, 3)
+        var cc = Vector.times(3, dd);
+    </script>
+</body>
+</html>

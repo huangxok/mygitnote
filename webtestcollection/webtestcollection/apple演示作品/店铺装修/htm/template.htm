@@ -1,0 +1,129 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>默认模板</title>
+<style type="text/css">
+
+	/*
+	 * 页面样式
+	 */
+
+	body {
+		margin:0 auto;
+		padding:0;
+	}
+
+	div.head {
+		width:100%;
+	}
+
+	div.body {
+		width:1000px;
+	}
+
+	div.foot {
+		width:100%;
+	}
+
+	div.head,
+	div.body,
+	div.foot {
+		overflow:hidden;
+		margin:auto;
+	}
+
+	div.left {
+		width:300px;
+	}
+
+	div.right {
+		width:700px;
+	}
+
+	div.left,
+	div.right {
+		float:left;
+	}
+
+	div.module {
+		height:100px;
+		margin:5px;
+	}
+
+	div.head div.module,
+	div.foot div.module {
+		width:1000px;
+		margin:5px auto;
+	}
+
+	/*
+	 * 测试样式
+	 */
+
+	div.head {
+		background-color:#ff7400;
+	}
+
+	div.body {
+		background-color:#009999;
+	}
+
+	div.foot {
+		background-color:#00cc00;
+	}
+
+	div.module {
+		background-color:#ffffcc;
+	}
+
+</style>
+</head>
+
+<body>
+
+<!-- 头部 -->
+<div class="head">
+
+	<div class="module" access="11100000000011">11</div>
+	<div class="module" access="11100000000012">12</div>
+
+</div>
+
+<!-- 内容 -->
+<div class="body">
+
+	<!-- 左侧 -->
+	<div class="left">
+
+		<div class="module" access="11100000000021">21</div>
+		<div class="module" access="11100000000022">22</div>
+		<div class="module" access="11100000000023">23</div>
+		<div class="module" access="11100000000024">24</div>
+		<div class="module" access="11100000000025">25</div>
+
+	</div>
+
+	<!-- 右侧 -->
+	<div class="right">
+
+		<div class="module" access="11100000000031">31</div>
+		<div class="module" access="11100000000032">32</div>
+		<div class="module" access="11100000000033">33</div>
+		<div class="module" access="11100000000034">34</div>
+		<div class="module" access="11100000000035">35</div>
+
+	</div>
+
+</div>
+
+<!-- 底部 -->
+<div class="foot">
+
+	<div class="module" access="11100000000041">41</div>
+	<div class="module" access="11100000000042">42</div>
+
+</div>
+
+</body>
+</html>

@@ -1,0 +1,132 @@
+﻿<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>幻灯片切换</title>
+
+
+</head>
+<body>
+
+
+    <div style="margin: 0 auto; width: 1000px;">
+        <div style="width: 1000px;">
+            <a href="http://www.17sucai.com/">
+                <img alt="没有图片" src="images/1.jpg" id="bigImg" class="bigImg" width="782" height="326" /></a>
+        </div>
+        <div style="width: 1000px;">
+            <ul id="iconBall" style="list-style-type: none; width: 800px;">
+                <li style="float: left; width: 100px; background-color: #f00">1</li>
+                <li style="float: left; width: 100px; background-color: #ffd800">2</li>
+                <li style="float: left; width: 100px; background-color: #4cff00">3</li>
+                <li style="float: left; width: 100px; background-color: #2255e2">4</li>
+            </ul>
+        </div>
+    </div>
+    <script type="text/javascript">
+        var glide = new function () {
+
+            function $id(id) { return document.getElementById(id); };    //获取对象
+
+            this.layerglide = function (auto, iconba, img, sencond, speedval, time) {   //主要函数
+                var iconli = $id(iconba).getElementsByTagName('li');                    //获取对象的子项
+                var interval, timeout, timer;  //定义的功能函数变量
+                var opacity;
+                var sum = iconli.length;     //获取iconli的个数
+                var delay = sencond * 1000;  //自动轮播的时间间隔
+                var a = 0;                   //变量  用于自动轮播时对iconli的下标处理 
+                var setvalIn = function (elem, opacity, speed) {  //淡入效果
+                    return function () {
+                        elem.style.cssText = "filter :alpha(opacity=" + opacity + ");-moz-opacity:" + opacity + ";opacity: " + opacity + ";"     //设置元素的透明度
+
+                        if (opacity >= 1) {                    //如果透明度为1时 则
+
+                            clearTimeout(interval);             //清除淡入时的改变透明度的功能函数
+
+                        }
+                        else {
+                            opacity += speed;                   //每次增加speed的透明度    
+                            setTimeout(setvalIn(elem, opacity, speed), time) //递归调用
+                        }
+                    }
+
+                }
+                //此函数若有兴趣的同学，欢迎去开发  淡出效果 （目前只做了一个图片的淡入）
+                var setvalout = function (elem, opacity, speed) {
+                    return function () {
+                        elem.style.cssText = "filter :alpha(opacity=" + opacity + ");-moz-opacity:" + opacity + ";opacity: " + opacity + ";"     //设置元素的透明度
+
+                        if (opacity <= 0) {
+                            interval = clearTimeout(interval);
+                        }
+                        else {
+                            opacity -= speed;
+                            setTimeout(setvalout(elem, opacity, speed), time)
+                        }
+
+
+                    }
+                }
+                function autoGlide() {
+                    clearTimeout(interval);     //清除自动滚动事件（循环）
+                    clearTimeout(timeout);
+                    if (a == sum) {   //若滚动到最后张图片 重新设置a=0 即索引0
+                        a = 0;
+                        $id(img).src = "images/" + (a + 1) + ".jpg";
+                        $id(img).style.cssText = "filter :alpha(opacity=" + 0 + ");-moz-opacity:" + 0 + ";opacity: " + 0 + ";"
+                        interval = setTimeout(setvalIn($id(img), 0, speedval), time);
+                        timer = setTimeout(autoGlide, delay);       //执行autoGlide  （ 递归 ）和setinterval 一样
+                    } else {
+
+                        $id(img).src = "images/" + (a + 1) + ".jpg";
+                        a++;
+                        $id(img).style.cssText = "filter :alpha(opacity=" + 0 + ");-moz-opacity:" + 0 + ";opacity: " + 0 + ";"
+                        interval = setTimeout(setvalIn($id(img), 0, speedval), time);
+                        timer = setTimeout(autoGlide, delay)
+                    }
+                }
+                if (auto) {
+                    timer = setTimeout(autoGlide, delay);
+                }
+                for (var i = 0; i < sum; i++) {
+                    iconli[i].onclick = (function (i) {
+                        return function () {
+                            clearTimeout(timer);
+                            clearInterval(interval);
+                            //clearInterval(timeout);
+                            a = i + 1;
+                            $id(img).src = "images/" + (i + 1) + ".jpg";
+                            $id(img).style.cssText = "filter :alpha(opacity=" + 0 + ");-moz-opacity:" + 0 + ";opacity: " + 0 + ";"
+                            interval = setTimeout(setvalIn($id(img), 0, speedval), time);
+
+                        }
+                    })(i);
+                    iconli[i].onmouseout = (function (i) {
+                        return function () {
+                        
+                            a = i + 1;
+                            timer = setTimeout(autoGlide, delay)
+                            //clearTimeout(timer);
+                            //$id("bigImg").style.cssText = "filter :alpha(opacity=" + 0 + ");-moz-opacity:" + 0 + ";opacity: " + 0 + ";";
+                            //clearInterval(interval);
+
+                            //$id("bigImg").style.opacity = 1;
+                            ////interval = setInterval(setvalIn(i), 100);
+                            //timeout = setInterval(setvalout($id("bigImg"), $id("bigImg").style.opacity * 100, 10), 100);
+                            //clearInterval(timeout);
+                        }
+                    })(i);
+                }
+            }
+        }
+        glide.layerglide(
+            true,
+            'iconBall',
+            'bigImg',
+            3,
+            0.1,
+            100
+        );
+    </script>
+</body>
+</html>

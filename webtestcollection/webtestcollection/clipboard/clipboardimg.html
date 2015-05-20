@@ -1,0 +1,137 @@
+﻿<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <!-- <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0;" name="viewport" />
+    <!--强制让文档的宽度与设备的宽度保持1:1，并且文档最大的宽度比例是1.0，且不允许用户点击屏幕放大浏览-->
+    <!--<meta http-equiv="Content-Type" content="text/html, charset=utf-8" />-->
+    <title>test360</title>
+    <!--<script src="Scripts/jquery-1.7.1.min.js"></script>-->
+</head>
+<body>
+    <div id="imgdiv" style="width: 100px; height: 100px; background: #edf" contenteditable="true">
+        <!--<input type="file" id="abc" />-->
+        <!--<script>
+            var a = [12, 2, 2, 23];
+            a.forEach(function () { }, this);
+            var filelist = document.getElementById("abc").files
+            for (var i = 0; i < filelist.length; i++) {
+                filelist[i].type;
+                filelist[i].size;
+                filelist[i].name;
+
+            }
+        </script>-->
+    </div>
+    <div id="contend" contenteditable="true" onfocus=""></div>
+    <script>
+        document.getElementById('imgdiv').onpaste = function (e) {
+            var items = e.clipboardData.items;
+            for (var i = 0; i < items.length; ++i) {
+
+                if (items[i].kind == 'file' && items[i].type.indexOf('image/') !== -1) {
+                    var contend = document.getElementById('contend');
+                    contend.focus();
+                    var img = document.createElement('img');
+                    contend.appendChild(img);
+                    var reader = new FileReader();
+                    reader.onload = function (e) {
+                        img.src = this.result;;
+
+                    }
+                    reader.readAsDataURL(items[i].getAsFile());
+                    document.getElementById('imgdiv').appendChild(img);
+                }
+
+            }
+        }
+    </script>
+    <!--例子-->
+    <!--<script>
+        window.addEventListener('load', function (e) {
+
+            document.body.onpaste = function (e) {
+                var items = e.clipboardData.items;
+                for (var i = 0; i < items.length; ++i) {
+
+                    if (items[i].kind == 'file' &&
+                        items[i].type.indexOf('image/') !== -1) {
+
+                        var blob = items[i].getAsFile();
+                        window.URL = window.URL || window.webkitURL;
+                        var blobUrl = window.URL.createObjectURL(blob);
+
+                        var img = document.createElement('img');
+                        img.src = blobUrl;
+                        var logBox = document.getElementById('log-box');
+                        logBox.appendChild(img);
+                    }
+
+                }
+            }
+
+            var btn = document.getElementById('clear-logs')
+            btn.addEventListener('click', function (e) {
+                clearLog();
+            });
+        });
+
+
+        function clearLog() {
+            var node = document.getElementById('log-box');
+            while (node.firstChild) {
+                node.removeChild(node.firstChild);
+            }
+        }
+    </script>-->
+    <!--   <script type="text/javascript">
+        function copyUrl2() {
+            var Url2 = document.getElementById("biao1");
+            Url2.select(); // 选择对象document.execCommand("Copy"); // 执行浏览器复制命令alert("已复制好，可贴粘。");
+        }</script>
+    <textarea cols="20" rows="10" id="biao1">用户定义的代码区域</textarea><input type="button" onclick="            copyUrl2()" value="点击复制代码" />-->
+    <!--   <p>
+        <input type="button" name="anniu1" onclick='copyToClipBoard()' value="复制专题地址和url地址，传给QQ/MSN上的好友">
+    </p>-->
+    <!--
+      <script language="javascript">
+          function copyToClipBoard() {
+              var clipBoardContent = "";
+              clipBoardContent += document.title;
+              clipBoardContent += ""; clipBoardContent += this.location.href;
+              window.clipboardData.getData("text/plain", clipBoardContent);
+              alert("复制成功，请粘贴到你的QQ/MSN上推荐给你的好友");
+          }
+
+    <!--</script>
+      -->
+    <!--   <script>
+        function copyToClipboard(txt) {
+            if (window.clipboardData) {
+                window.clipboardData.clearData();
+
+                clipboardData.setData("Text", txt); alert("复制成功！");
+            } else if (navigator.userAgent.indexOf("Opera") != -1) {
+                window.location = txt;
+            } else if (window.netscape) {
+                try {
+                    netscape.security.PrivilegeManager.enablePrivilege("UniversalXPConnect");
+                } catch (e) {
+                    alert("被浏览器拒绝！/n请在浏览器地址栏输入'about:config'并回车/n然后将 'signed.applets.codebase_principal_support'设置为'true'");
+                }
+                var clip = Components.classes['@mozilla.org/widget/clipboard;1'].createInstance(Components.interfaces.nsIClipboard);
+                if (!clip) return;
+                var trans = Components.classes['@mozilla.org/widget/transferable;1'].createInstance(Components.interfaces.nsITransferable);
+                if (!trans) return; trans.addDataFlavor("text/unicode");
+                var str = new Object();
+                var len = new Object();
+                var str = Components.classes["@mozilla.org/supports-string;1"].createInstance(Components.interfaces.nsISupportsString);
+                var copytext = txt; str.data = copytext; trans.setTransferData("text/unicode", str, copytext.length * 2);
+                var clipid = Components.interfaces.nsIClipboard; if (!clip) return false;
+                clip.setData(trans, null, clipid.kGlobalClipboard);
+                alert("复制成功！");
+            }
+        }
+        copyToClipboard("text/plain");
+    </script>-->
+</body>
+</html>

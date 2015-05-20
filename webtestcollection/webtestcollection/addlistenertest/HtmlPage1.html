@@ -1,0 +1,54 @@
+﻿<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <title></title>
+    <style>
+        *, html, body {
+            height: 100%;
+        }
+    </style>
+</head>
+<body>
+    <div id="cc" style="margin:0 auto; width:500px;height:500px;background:#ff0000;position:absolute;left:100px;top:100px;">
+        <div id="abc" style="width:100px;height:100px;background:#b6ff00;position:absolute;left:0;top:0;"></div>
+    </div>
+    <img hidden="hidden" />
+    <svg xmlns="http://www.w3.org/2000/svg" hidden="hidden" style="width:100px;height:100px;background-color:none;">
+        <polygon hidden="hidden" points="1 50 50 1 50 25 99 25 99 75 50 75 50 75 50 99 1 50" style="stroke: rgba(115,156,195,1); stroke-width: 2px; fill: none;"></polygon>
+    </svg>
+    <script>
+        var ddddd = document.getElementById('cc');
+        var dragt = null;
+        var pos = {};
+        var temp = {};
+        document.addEventListener('mousedown', function (ev) {
+            ev.preventDefault();
+            if (ev.target.id == "abc"); {
+                dragt = ev.target;
+                pos.x = ev.clientX;
+                pos.y = ev.clientY;
+                pos.l = parseFloat(ev.target.style.left);
+                pos.t = parseFloat(ev.target.style.top);
+                console.log(pos.x + ',' + pos.y);
+                console.log(pos.l);
+            }
+        }, true);
+        document.addEventListener('mousemove', function (ev) {
+            ev.preventDefault();
+            console.log('aa');
+            temp.x = ev.clientX;
+            temp.y = ev.clientY;
+            if (dragt) {
+                dragt.style.left = pos.l + (pos.x - temp.x) + 'px';
+                dragt.style.top = pos.t + (pos.y - temp.y) + 'px';
+            }
+        }, true);
+        document.addEventListener('mouseup', function (ev) {
+            ev.preventDefault();
+            if (dragt) {
+                dragt = null;
+            }
+        }, true);
+    </script>
+</body>
+</html>

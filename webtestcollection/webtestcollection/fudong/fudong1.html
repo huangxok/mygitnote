@@ -1,0 +1,45 @@
+﻿<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <title></title>
+    <style>
+        .box {
+            padding: 10px;
+            background: gray;
+        }
+
+        .fix {
+            *zoom: 1;
+        }
+
+            .fix:after {
+                display: block;
+                content: "clear";
+                height: 0;
+                clear: both;
+                overflow: hidden;
+                visibility: hidden;
+            }
+
+        .l {
+            float: left;
+        }
+    </style>
+</head>
+<body>
+    <div class="box fix">
+        <img class="l" src="../Images/3.jpg" width="200" height="200" />
+    </div>
+    <script>
+        function Person(name) {
+            this.name = name;
+        }
+
+        Person.prototype.greet = function (otherName) {
+            return "Hi " + otherName + ", my name is " + name;
+        }
+        var p = new Person();
+        p.greet();
+    </script>
+</body>
+</html>

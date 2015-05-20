@@ -1,0 +1,31 @@
+﻿<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <title></title>
+</head>
+<body>
+    <script>
+        var d = document.createElement('div');
+        document.body.appendChild(d);
+        d.innerHTML = '&prop;'
+
+    </script>
+    <!--<script>
+        window.addEventListener("message", receiveMessage, false);
+
+        function receiveMessage(event) {
+            alert(event.origin);
+            if (event.origin !== "http://localhost:10803/postmessage/posthost.html")
+                return;
+            alert(event.data);
+            if (event.data == 'hello,host') {
+                alert(event.source);
+                event.source.postMessage('Hello', event.origin);
+            } else {
+                console.log(event.data);
+            }
+
+        }
+    </script>-->
+</body>
+</html>

@@ -1,0 +1,118 @@
+﻿<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <title></title>
+    <script src="../Scripts/jquery-1.7.1.js"></script>
+    <link href="../DragDropInteractions/css/bottom-area.css" rel="stylesheet" />
+    <style>
+        #img1d {
+            width: 10px;
+        }
+
+        .img1c, .img2, …… {
+            width: 50px;
+        }
+
+        img {
+            width: 100px;
+        }
+    </style>
+</head>
+<body>
+    <script>
+        $(function () {
+            $('#img1d').load(function (ev) {
+                alert('success');
+            })
+            //$('body').load(
+            //           'testajax.ashx',
+            //            { 'username': 'panzhao' },
+            //            function (data) {
+            //                var obj = JSON.parse(data);
+            //                var s = '<span>' + obj.name + '</span>';
+            //                $('body').append(s);
+
+            //            });
+        });
+    </script>
+    <input id="testbtn" type="button" value="click" />
+    <div id="abc" class="aa cc"></div>
+    <img id="img1d" onload="abc()" src="../Images/3.jpg" style="width:100px;" />
+    <script>
+        function abc() {
+            alert('ytt');
+        }
+
+
+        $(function () {
+            //$('#div').load(
+            //        'testajax.ashx',
+            //        { 'username': 'panzhao' },
+            //        function (data) {
+            //            var obj = JSON.parse(data);
+            //            //alert(responseTxt);
+            //            //alert(statusTxt);
+            //            alert(obj.name);
+            //            alert(obj.age);
+            //        }
+            //        )
+            //$('#testbtn').click(function () {
+            //    $.get('testdata.json',//?username=panzhao&age=20',
+            //        { 'username': 'panzhaozhao', 'age': '20' },
+            //        function (data) {
+            //            var obj = JSON.parse(data);
+            //            //alert(responseTxt);
+            //            //alert(statusTxt);
+            //            alert(obj.name);
+            //            alert(obj.age);
+            //        });
+            //});
+            //$('#testbtn').click(function () {
+            //    $.post('testajax.ashx',
+            //        { 'username': 'panzhaozhao1' },
+            //        function (data) {
+            //            var obj = JSON.parse(data);
+            //            //alert(responseTxt);
+            //            //alert(statusTxt);
+            //            alert(obj.name);
+            //            alert(obj.age);
+            //        });
+            //});
+            $('#testbtn').click(function () {
+                $.ajax({
+                    global: true,
+                    url: 'testajax.ashxd',
+                    type: 'post',
+                    dataType: 'json', //script/text/html/xml/ jsonp
+                    data: { 'username': 'panzhaozhao1' },
+                    async: true, //default:true
+                    beforeSend: function (XMLHttpRequest) {
+                        alert(XMLHttpRequest.state)
+                    },
+                    complete: function (XMLHttpRequest) {
+                        alert('ddd')
+                    },
+                    success: function (data, textstatus) {
+                        alert(textstatus);
+                        alert(data);
+                    },
+                    error: function (XMLHttpRequest, textStatus, errorThrown) {
+
+                    }
+                })
+            });
+
+            //http://blog.sina.com.cn/s/blog_4f925fc30100la36.html
+            //$(document).ready(function () {
+
+            //});
+            //(function ($) {
+
+            //})(jQuery);
+
+            //window.onload = function () {
+
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,113 @@
+﻿<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <title></title>
+</head>
+<body>
+
+    <script>
+        //简单工厂模式
+        var FullTime = function () {
+            this.hourly = "$12";
+        };
+
+        var PartTime = function () {
+            this.hourly = "$11";
+        };
+
+        var Temporary = function () {
+            this.hourly = "$10";
+        };
+
+        var Contractor = function () {
+            this.hourly = "$15";
+        };
+        function Factory() {
+            this.createEmployee = function (type) {
+                var employee;
+                if (type === "fulltime") {
+                    employee = new FullTime();
+                } else if (type === "parttime") {
+                    employee = new PartTime();
+                } else if (type === "temporary") {
+                    employee = new Temporary();
+                } else if (type === "contractor") {
+                    employee = new Contractor();
+                }
+                employee.type = type;
+                employee.say = function () {
+                    console.log(this.type + ": rate " + this.hourly + "/hour");
+                }
+                return employee;
+            };
+        }
+        var factory = new Factory();
+        factory.createEmployee("fulltime").say();
+    </script>
+    <script>
+        //抽象工厂
+        function Employee(name) {
+            this.name = name;
+            this.say = function () {
+                console.log("I am employee " + name);
+            };
+        }
+        function EmployeeFactory() {
+            this.create = function (name) {
+                return new Employee(name);
+            };
+        }
+        function Vendor(name) {
+            this.name = name;
+            this.say = function () {
+                console.log("I am vendor " + name);
+            };
+        }
+        function VendorFactory() {
+            this.create = function (name) {
+                return new Vendor(name);
+            };
+        }
+
+        var employeeFactory = new EmployeeFactory();
+        employeeFactory.create("BigBear");
+    </script>
+    <script>
+        //产品
+        function McChicken() {
+            this.getFood = function () {
+                console.log('给我来一份麦香鸡');
+            }
+        }
+        //产品
+        function Potato() {
+            this.getFood = function () {
+                console.log('给我来一份薯条');
+            }
+        }
+        //工厂
+        function FoodFactory() {
+            return {
+                create: function (type) {
+                    var food;
+                    if (type === 'McChicken') {
+                        food = new McChicken();
+                    }
+                    else if (type === 'Potato') {
+                        food = new Potato();
+                    }
+                    return food;
+                }
+            }
+        }
+        //客户端
+        function Mclient() {
+            //do wash
+            var food = FoodFactory().create('McChicken');
+            food.getFood();
+        }
+        //（1），我们需要将创建实例的工作与使用实例的工作分开
+        //（2），封装(Encapsulation)和分派(Delegation)告诉我们，尽量将长的代码分派"切割"成每段，将每段再"封装"起来(减少段和段之间偶合联系性)，这样，就会将风险分散，以后如果需要修改，只要更改每段，不会再发生牵一动百的事情。
+    </script>
+</body>
+</html>

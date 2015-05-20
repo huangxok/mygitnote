@@ -1,0 +1,33 @@
+﻿<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <title></title>
+</head>
+<body>
+    <div id="abc" style="margin:0 auto;width:1000px;height:700px;background:rgba(115,52,26,0.2)" contenteditable="true"></div>
+    <script>
+        var abc = document.getElementById('abc');
+        abc.onpaste = function (e) {
+            var items = e.clipboardData.items;
+            for (var i = 0; i < items.length; i++) {
+                if (items[i].kind === 'string' && items[i].type === 'text/plain') {
+                    alert(0);
+                    console.log(e.clipboardData.getData('text/plain'));
+                }
+                if (items[i].kind === 'string' && items[i].type === 'text/html') {
+                    alert(1);
+                    console.log(e.clipboardData.getData('text/html'))
+                }
+                if (items[i].kind === 'string' && items[i].type === 'text/rtf') {
+                    alert(2);
+                    console.log(e.clipboardData.getData('text/rtf'));
+                }
+                if (items[i].kind === 'file' && items[i].type.indexOf('image/') !== -1) {
+
+                }
+            }
+        }
+
+    </script>
+</body>
+</html>

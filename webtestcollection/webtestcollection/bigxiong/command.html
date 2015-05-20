@@ -1,0 +1,187 @@
+﻿<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <title></title>
+</head>
+<body>
+    <img src="commd1.png" />
+    <script>
+        //日常生活中，我们在看电视的时候，通过遥控器选择我们喜欢的频道时，此时我们就是客户端的角色，遥控器的按钮相当于客户请求，而具体执行的对象就是命令对象，
+        //命令模式把一个请求或者操作封装到一个对象中。命令模式允许系统使用不同的请求把客户端参数化，对请求排队或者记录请求日志，可以提供命令的撤销和恢复功能。
+        function add(x, y) { return x + y; };
+        function sub(x, y) { return x - y; };
+        function mul(x, y) { return x * y; };
+        function div(x, y) { return x / y; };
+
+        var Command = function (execute, undo, value) {
+            this.execute = execute;
+            this.undo = undo;
+            this.value = value;
+        }
+
+        var AddCommand = function (value) {
+            return new Command(add, sub, value);
+        };
+
+        var SubCommand = function (value) {
+            return new Command(sub, add, value);
+        };
+
+        var MulCommand = function (value) {
+            return new Command(mul, div, value);
+        };
+
+        var DivCommand = function (value) {
+            return new Command(div, mul, value);
+        };
+
+        var Calculator = function () {
+            var current = 0;
+            var commands = [];
+
+            function action(command) {
+                var name = command.execute.toString().substr(9, 3);
+                return name.charAt(0).toUpperCase() + name.slice(1);
+            }
+
+            return {
+                execute: function (command) {
+                    current = command.execute(current, command.value);
+                    commands.push(command);
+                    log.add(action(command) + ": " + command.value);
+                },
+
+                undo: function () {
+                    var command = commands.pop();
+                    current = command.undo(current, command.value);
+                    log.add("Undo " + action(command) + ": " + command.value);
+                },
+
+                getCurrentValue: function () {
+                    return current;
+                }
+            }
+        }
+
+        var log = (function () {
+            var log = "";
+
+            return {
+                add: function (msg) { log += msg + "\n"; },
+                show: function () { alert(log); log = ""; }
+            }
+        })();
+
+        function run() {
+            var calculator = new Calculator();
+            calculator.execute(new AddCommand(100));
+            calculator.execute(new SubCommand(24));
+            calculator.execute(new MulCommand(6));
+            calculator.execute(new DivCommand(2));
+            calculator.undo();
+            calculator.undo();
+            log.add("\nValue: " + calculator.getCurrentValue());
+            log.show();
+        }
+        run();
+    </script>
+    <script>
+        //（1） ，建立程序猿实体类
+        function Programmer() {
+            this.execute = function () {
+                console.log("程序猿写代码！");
+            };
+        };
+
+        //（2） ，建立工程师实体类
+        function Engineer() {
+            this.execute = function () {
+                console.log("工程师盖房子！");
+            };
+        };
+
+        //（3） ，建立政治家实体类
+        function Politician() {
+            this.execute = function () {
+                console.log("政治家喷人！");
+            };
+        };
+
+        //（4） ，建立黑盒子类
+        //按照通常做法，我们就可以直接调用这三个Command，但是使用Command模式，我们要将他们封装起来，扔到黑盒子List里去:
+        //复制代码
+        function Producer() {
+            var list = [];
+            return {
+                produceRequests: function () {
+                    list.push(new Engineer());
+                    list.push(new Programmer());
+                    list.push(new Politician());
+                    return list;
+                }
+            }
+        }
+        //复制代码
+        //这三个命令进入List中后，已经失去了其外表特征，以后再取出，也可能无法分辨出谁是Engineer，谁是Programmer了，看下面客户端如何调用Command模式:
+        //（5） ，建立命令客户端类
+
+        function CMDClient() {
+            var cmdlist = Producer().produceRequests();
+            for (var p in cmdlist) {
+                (cmdlist[p]).execute();
+            }
+        };
+
+    </script>
+    <script>
+        //使用Command模式的一个好理由还因为它能实现Undo功能.每个具体命令都可以记住它刚刚执行的动作,并且在需要时恢复.
+        //命令具有以下的优点：
+
+        //（1）命令模式使新的命令很容易地被加入到系统里。
+
+        //（2）允许接收请求的一方决定是否要否决请求。
+
+        //（3）能较容易地设计一个命令队列。
+
+        //（4）可以容易地实现对请求的撤销和恢复。
+
+        //（5）在需要的情况下，可以较容易地将命令记入日志。
+
+        //更松散的耦合
+
+        //命令模式使得发起命令的对象——客户端，和具体实现命令的对象——接收者对象完全解耦，也就是说发起命令的对象完全不知道具体实现对象是谁，也不知道如何实现。
+
+        //更动态的控制
+
+        //命令模式把请求封装起来，可以动态地对它进行参数化、队列化和日志化等操作，从而使得系统更灵活。
+
+        //很自然的复合命令
+
+        //命令模式中的命令对象能够很容易地组合成复合命令，也就是宏命令，从而使系统操作更简单，功能更强大。
+
+        //更好的扩展性
+
+        //由于发起命令的对象和具体的实现完全解耦，因此扩展新的命令就很容易，只需要实现新的命令对象，然后在装配的时候，把具体的实现对象设置到命令对象中，然后就可以使用这个命令对象，已有的实现完全不用变化。
+
+
+
+        //应用场景
+
+
+
+        //1）使用命令模式作为"CallBack"在面向对象系统中的替代。"CallBack"讲的便是先将一个函数登记上，然后在以后调用此函数。
+
+
+
+        //2）需要在不同的时间指定请求、将请求排队。一个命令对象和原先的请求发出者可以有不同的生命期。换言之，原先的请求发出者可能已经不在了，而命令对象本身仍然是活动的。这时命令的接收者可以是在本地，也可以在网络的另外一个地址。命令对象可以在串形化之后传送到另外一台机器上去。
+
+
+
+        //3）系统需要支持命令的撤消(undo)。命令对象可以把状态存储起来，等到客户端需要撤销命令所产生的效果时，可以调用undo()方法，把命令所产生的效果撤销掉。命令对象还可以提供redo()方法，以供客户端在需要时，再重新实施命令效果。
+
+
+
+        //4）如果一个系统要将系统中所有的数据更新到日志里，以便在系统崩溃时，可以根据日志里读回所有的数据更新命令，重新调用Execute()方法一条一条执行这些命令，从而恢复系统在崩溃前所做的数据更新。
+    </script>
+</body>
+</html>

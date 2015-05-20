@@ -1,0 +1,246 @@
+﻿<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <script type="text/javascript" src="jquery-1.7.1.min.js"></script>
+</head>
+
+<body>
+
+    <button onclick="_alert(1)">警告</button>
+
+    <br />
+    <br />
+    <br />
+    <br />
+    <br />
+    <br />
+    <br />
+    <br />
+    <br />
+    <br />
+    <br />
+    <br />
+    <br />
+    <br />
+    <br />
+    <br />
+    <br />
+    <br />
+    <br />
+    <br />
+    <br />
+    <br />
+    <br />
+    <br />
+    <br />
+    <br />
+    <br />
+    <br />
+    <br />
+    <br />
+    <br />
+    <br />
+    <br />
+    <br />
+    <br />
+    <br />
+    <br />
+    <br />
+    <br />
+    <br />
+    <br />
+    <br />
+    <br />
+    <br />
+    <br />
+    <br />
+    <br />
+    <br />
+    <br />
+    <br />
+    <br />
+    <br />
+    <br />
+    <br />
+    <br />
+    <br />
+    <br />
+    <br />
+    <br />
+    <br />
+
+
+    <style type="text/css">
+        div.alert-layer {
+        }
+
+            div.alert-layer.close {
+                display: none;
+            }
+
+            div.alert-layer div.shadow {
+                position: fixed;
+                left: 0;
+                top: 0;
+                z-index: 99999;
+                width: 100%;
+                height: 100%;
+                background-color: #808080;
+                opacity: 0.5;
+            }
+
+            div.alert-layer div.shadow {
+                _position: absolute;
+                _left: expression(eval(document.documentElement.scrollLeft));
+                _top: expression(eval(document.documentElement.scrollTop));
+                _width: expression(eval(document.documentElement.clientWidth));
+                _height: expression(eval(document.documentElement.clientHeight));
+                filter: alpha(opacity=30);
+            }
+
+            div.alert-layer div.window {
+                position: fixed;
+                left: 50%;
+                top: 25%;
+                z-index: 99999;
+                width: 400px;
+                margin-left: -205px;
+                border: 5px solid #D0D0D0;
+                background-color: #FFF;
+            }
+
+            div.alert-layer div.window {
+                _position: absolute;
+                _left: expression(eval(document.documentElement.scrollLeft + document.documentElement.clientWidth / 2));
+                _top: expression(eval(document.documentElement.scrollTop + document.documentElement.clientHeight / 4));
+            }
+
+                div.alert-layer div.window h6 {
+                    margin: 0;
+                    background-color: #A90602;
+                    color: #FFF;
+                    font-size: 14px;
+                    line-height: 36px;
+                    text-indent: 10px;
+                }
+
+                    div.alert-layer div.window h6 a {
+                        position: absolute;
+                        right: 10px;
+                        top: 8px;
+                        width: 19px;
+                        height: 19px;
+                        background: transparent url("img/close.png") no-repeat scroll -25px 0;
+                        text-indent: -99999px;
+                    }
+
+                        div.alert-layer div.window h6 a:hover {
+                            background-position: 0 0;
+                        }
+
+                div.alert-layer div.window p {
+                    margin: 25px;
+                    text-align: center;
+                }
+
+                    div.alert-layer div.window p,
+                    div.alert-layer div.window p * {
+                        font-size: 14px;
+                    }
+
+                        div.alert-layer div.window p img {
+                            margin-right: 10px;
+                            vertical-align: -5px;
+                        }
+
+                        div.alert-layer div.window p button {
+                            width: 100px;
+                            height: 30px;
+                            border: none;
+                            background-color: #A90602;
+                            cursor: pointer;
+                            color: #FFF;
+                        }
+    </style>
+
+    <div class="alert-layer close">
+
+        <div class="shadow">
+            <!-- 遮罩层 -->
+        </div>
+
+        <div class="window">
+
+            <h6>温馨提示
+			<a href="javascript:;" action="close">关闭</a>
+            </h6>
+
+            <p>
+                <!-- 内容 -->
+            </p>
+
+            <p>
+                <button action="close">确　定</button>
+            </p>
+
+        </div>
+
+    </div>
+
+    <script type="text/javascript">
+        //<![CDATA[
+
+        /*
+         * 警告框
+         *
+         * 15:26 2013-8-29	Zhanghong
+         */
+
+        var _alert = (function () {
+            /* 元素 */ {
+                var $ = jQuery('div.alert-layer')[0];
+
+            }
+
+            /* 绑定 */
+            {
+
+                jQuery($).mousedown(function (e) {
+                    var t = e.target;
+
+                    if (t.getAttribute('action') == 'close') {
+                        $.className = 'alert-layer close';
+                    }
+
+                });
+
+                jQuery($).mouseup(function (e) {
+                    debugger;
+                    e.stopPropagation();
+                });
+
+                jQuery($).click(function (e) {
+                    debugger;
+                    e.stopPropagation();
+                });
+
+            }
+
+            return function (t/* String text */) {
+                debugger;
+                //内容
+                jQuery($).find('p')[0].innerHTML = '<img src="img/sign.png" />' + t;
+
+                //显示
+                $.className = 'alert-layer';
+
+            };
+
+        })();
+
+        //]]>
+    </script>
+
+</body>
+</html>

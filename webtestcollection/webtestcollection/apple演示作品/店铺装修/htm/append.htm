@@ -1,0 +1,225 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>对话框 - 添加示例</title>
+<style>
+
+	* {
+		margin:0;
+		padding:0;
+	}
+
+	table {
+		width:470px;
+		border:10px solid #fff;
+		table-layout:fixed;
+		border-collapse:collapse;
+	}
+
+	td {
+		height:30px;
+		font:normal normal 14px/30px "宋体";
+	}
+
+	textarea {
+		width:400px;
+		height:200px;
+		resize:none;
+	}
+
+</style>
+</head>
+
+<body>
+
+<table>
+
+	<tbody>
+
+		<tr>
+			<td width="70">　添加到：</td>
+			<td width="400">
+				<select>
+					<optgroup access="head" ></optgroup>
+					<optgroup access="left" ></optgroup>
+					<optgroup access="right"></optgroup>
+					<optgroup access="foot" ></optgroup>
+				</select>
+				<select>
+					<option value="firstChild">第一个位置</option>
+					<option value="lastChild">最后一个位置</option>
+				</select>
+			</td>
+		</tr>
+
+		<tr>
+			<td>　可编辑：</td>
+			<td><input type="checkbox" checked="checked" /></td>
+		</tr>
+
+		<tr>
+			<td>　可隐藏：</td>
+			<td><input type="checkbox" checked="checked" /></td>
+		</tr>
+
+		<tr>
+			<td>　可移动：</td>
+			<td><input type="checkbox" checked="checked" /></td>
+		</tr>
+
+		<tr>
+			<td>ＨＴＭＬ：</td>
+			<td><textarea></textarea></td>
+		</tr>
+
+	</tbody>
+
+	<tfoot>
+
+		<tr>
+			<td colspan="2" align="center">
+				<input type="button" value="确定" onclick="submit()" />
+				<input type="button" value="取消" onclick="cancel()" />
+			</td>
+		</tr>
+
+	</tfoot>
+
+</table>
+
+<script type="text/javascript" src="../js/is.js"></script>
+<script type="text/javascript">
+//<![CDATA[
+
+  var select = function(e) {
+
+    //遍历选项
+    for(var i = 0, j = e.options.length; i < j; i++) {
+
+      //判断赋值
+      if(e.options[i].selected) {
+        e = e.options[i]; break;
+      }
+
+    }
+
+    //返回对象
+    return top.SHOP_TEMPLATE.classes()[e.parentNode.getAttribute('access')][e.value];
+
+  };
+
+  var classes = function() {
+
+    //定义分类
+    var c = top.SHOP_TEMPLATE.classes();
+
+    //定义元素
+    var e = document.getElementsByTagName('optgroup');
+
+    //遍历元素
+    for(var i = e.length - 1; i > -1; i--) {
+
+      //定义元素
+      var _e = e[i];
+
+      //定义关键
+      var _a = _e.getAttribute('access');
+
+      //选择赋值
+      switch(_a) {
+
+        case 'head'    : {_e.label = '头部'; break}
+        case 'foot'    : {_e.label = '底部'; break}
+        case 'left'    : {_e.label = '左侧'; break}
+        case 'right'   : {_e.label = '右侧'; break}
+        case 'center'  : {_e.label = '中间'; break}
+        case 'justify' : {_e.label = '通栏'; break}
+
+      }
+
+      //判断添加
+      for(var j = 0, k = c[_a].length; j < k; j++) {
+
+        //添加元素
+        _e.appendChild(_createElement('option', {'value' : j}, '第' + number(j + 1) + '个' + _e.label + '区域'));
+
+      }
+
+    }
+
+  };
+
+  var number = function(n/* number */) {
+
+    //定义变量
+    var _n = '零';
+
+    //选择赋值
+    switch(n) {
+
+      case 1  : {_n = '一'; break}
+      case 2  : {_n = '二'; break}
+      case 3  : {_n = '三'; break}
+      case 4  : {_n = '四'; break}
+      case 5  : {_n = '五'; break}
+      case 6  : {_n = '六'; break}
+      case 7  : {_n = '七'; break}
+      case 8  : {_n = '八'; break}
+      case 9  : {_n = '九'; break}
+      case 10 : {_n = '十'; break}
+
+    }
+
+    //返回数字
+    return _n;
+
+  };
+
+  function submit() {
+
+    //定义函数
+    submit = null;
+
+    //定义元素
+    var s = document.getElementsByTagName('select');
+    var i = document.getElementsByTagName('input');
+    var t = document.getElementsByTagName('textarea');
+
+    //执行命令
+    top.SHOP_TEMPLATE.command('1', {
+      'parent'    : select(s[0]),
+      'target'    : select(s[0])[s[1].value],
+      'access'    : Number(i[0].checked).toString() + Number(i[1].checked).toString() + Number(i[2].checked).toString() + (Math.random() * 10E11).toString().slice(0, 10),
+      'className' : 'module',
+      'innerHTML' : t[0].value
+    });
+
+    //执行关闭
+    window.close();
+
+  };
+
+  function cancel() {
+
+    //执行关闭
+    window.close();
+
+  };
+
+  _attachEvent(window, {
+
+    'load' : function() {
+
+      //执行分类
+      classes();
+
+    }
+
+  });
+
+//]]>
+</script>
+
+</body>
+</html>

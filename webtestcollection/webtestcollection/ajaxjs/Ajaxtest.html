@@ -1,0 +1,56 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+    <script src="../Scripts/jquery-1.7.1.min.js"></script>
+    <!--<script type="text/javascript">
+        var delay = setTimeout('showHint();', 3000);
+        function showHint() {
+            var xmlhttp;
+            if (window.XMLHttpRequest) {// code for IE7+, Firefox, Chrome, Opera, Safari
+                xmlhttp = new XMLHttpRequest();
+            }
+            else {// code for IE6, IE5
+                xmlhttp = new ActiveXObject("Microsoft.XMLHTTP");
+            }
+            xmlhttp.onreadystatechange = function () {
+                if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
+                    console.log(xmlhttp.responseText);
+                    document.getElementById("txtHint").innerHTML = "<br>" + xmlhttp.responseText;
+                } else {
+
+                }
+            }
+
+            xmlhttp.open("GET", "user.json", true);
+            xmlhttp.send();
+        }
+    </script>-->
+</head>
+<body>
+    <p>目录：<span id="txtHint"></span></p>
+    <script>
+        $.ajax({
+            global: true,
+            url: 'ajax.html',
+            type: 'get',
+            dataType: 'html', //script/text/html/xml/ jsonp
+            data: { 'username': 'panzhaozhao1' },
+            async: true, //default:true
+            beforeSend: function (XMLHttpRequest) {
+
+            },
+            complete: function (XMLHttpRequest) {
+
+            },
+            success: function (data, textstatus) {
+                window.location = 'www.baidu.com'
+            },
+            error: function (XMLHttpRequest, textStatus, errorThrown) {
+                return;
+            }
+        })
+    </script>
+</body>
+</html>

@@ -1,0 +1,737 @@
+<!DOCTYPE html>
+<!-- saved from url=(0059)http://javascript.ruanyifeng.com/advanced/asynchronous.html -->
+<html class="no-js" lang="en"><!--<![endif]--><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+  <meta charset="utf-8">
+
+  <!-- Set the viewport width to device width for mobile -->
+  <meta name="viewport" content="width=device-width">
+
+  <title>JavaScript异步编程的模式 -- JavaScript 标准参考教程（alpha）</title>
+  
+  <!-- Included CSS Files (Uncompressed) -->
+  <!--
+  <link rel="stylesheet" href="stylesheets/foundation.css">
+  -->
+  
+  <!-- Included CSS Files (Compressed) -->
+  <link rel="stylesheet" href="http://javascript.ruanyifeng.com/css/foundation.css">
+  <link rel="stylesheet" href="http://javascript.ruanyifeng.com/css/main.css">
+
+  <!-- IE Fix for HTML5 Tags -->
+  <!--[if lt IE 9]>
+    <script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+  <![endif]-->
+
+  <script async="" src="./asynchronous_files/analytics.js"></script><script src="./asynchronous_files/jquery.js"></script>
+  <script src="./asynchronous_files/toc.js"></script>
+  <script src="./asynchronous_files/main.js"></script>
+
+<script type="text/javascript" async="" src="./asynchronous_files/embed.js"></script></head>
+<body>
+
+<header class="top-bar" id="header">
+
+<div class="fixed">
+
+<nav class="top-bar">
+<ul>
+<!-- Title Area -->
+	<li class="name has-dropdown">
+	<h1><a href="http://javascript.ruanyifeng.com/">JavaScript 标准参考教程（alpha） </a></h1>
+		<ul class="dropdown">
+			
+			<li><a href="http://javascript.ruanyifeng.com/#introduction">导论</a></li>
+			
+			<li><a href="http://javascript.ruanyifeng.com/#grammar">基本语法</a></li>
+			
+			<li><a href="http://javascript.ruanyifeng.com/#stdlib">标准库</a></li>
+			
+			<li><a href="http://javascript.ruanyifeng.com/#oop">面向对象编程</a></li>
+			
+			<li><a href="http://javascript.ruanyifeng.com/#dom">DOM</a></li>
+			
+			<li><a href="http://javascript.ruanyifeng.com/#bom">浏览器对象</a></li>
+			
+			<li><a href="http://javascript.ruanyifeng.com/#htmlapi">HTML网页的API</a></li>
+			
+			<li><a href="http://javascript.ruanyifeng.com/#jquery">jQuery</a></li>
+			
+			<li><a href="http://javascript.ruanyifeng.com/#tool">开发工具</a></li>
+			
+			<li><a href="http://javascript.ruanyifeng.com/#advanced">高级语法</a></li>
+			
+			<li><a href="http://javascript.ruanyifeng.com/#appendix">附录</a></li>
+			
+			<li><a href="http://javascript.ruanyifeng.com/#library">草稿一：函数库</a></li>
+			
+			<li><a href="http://javascript.ruanyifeng.com/#nodejs">草稿二：Node.js</a></li>
+			
+		</ul>
+	</li>
+</ul>
+
+<section>
+
+
+<ul class="left">
+<li class="divider"></li>
+<li class="has-dropdown"><a class="active" href="http://javascript.ruanyifeng.com/advanced/asynchronous.html#"> 高级语法 </a><ul class="dropdown">
+
+
+
+
+
+
+
+
+
+
+
+
+
+<li class="active"><a href="http://javascript.ruanyifeng.com/advanced/asynchronous.html#">JavaScript异步编程的模式</a></li>
+
+
+
+
+
+<li><a href="http://javascript.ruanyifeng.com/advanced/backbonejs.html">MVC框架与Backbone.js</a></li>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<li><a href="http://javascript.ruanyifeng.com/advanced/ecmascript6.html">ECMAScript 6 介绍</a></li>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<li><a href="http://javascript.ruanyifeng.com/advanced/fsm.html">JavaScript与有限状态机</a></li>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<li><a href="http://javascript.ruanyifeng.com/advanced/strict.html">严格模式</a></li>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</ul></li>
+<li class="divider"></li>
+<li class="has-dropdown nav-3"><a href="http://javascript.ruanyifeng.com/advanced/asynchronous.html#"> JavaScript异步编程的模式</a><ul class="dropdown">
+<li class="toc-h2"><a href="http://javascript.ruanyifeng.com/advanced/asynchronous.html#toc0">概述</a></li><li class="toc-h2"><a href="http://javascript.ruanyifeng.com/advanced/asynchronous.html#toc1">回调函数</a></li><li class="toc-h2"><a href="http://javascript.ruanyifeng.com/advanced/asynchronous.html#toc2">事件监听</a></li><li class="toc-h2"><a href="http://javascript.ruanyifeng.com/advanced/asynchronous.html#toc3">发布/订阅</a></li><li class="toc-h2"><a href="http://javascript.ruanyifeng.com/advanced/asynchronous.html#toc4">Promises对象</a></li><li class="toc-h2"><a href="http://javascript.ruanyifeng.com/advanced/asynchronous.html#toc10">参考链接</a></li></ul></li>
+</ul>
+
+
+<ul class="right">
+	<li class="divider"></li>
+	<li>
+		<a href="https://github.com/ruanyf/jstutorial" target="_blank">GitHub <i class="foundicon-edit"></i></a>
+	</li>
+	<li class="divider"></li>
+	<li>
+		<a href="http://javascript.ruanyifeng.com/advanced/asynchronous.html#">TOP <i class="foundicon-up-arrow"></i></a>
+	</li>
+</ul>
+
+</section>
+
+</nav>  
+</div>
+</header>
+
+
+<article class="bookPage">
+
+  <div class="row">
+    <div class="twelve columns">
+
+<h1> JavaScript异步编程的模式 </h1>
+
+<aside class="right"><p>来自<a href="http://javascript.ruanyifeng.com/">《JavaScript 标准参考教程（alpha）》</a>，by 阮一峰</p></aside>
+
+<h2>目录</h2><div id="toc" class="panel callout radius"><ul><li class="toc-h2"><a href="http://javascript.ruanyifeng.com/advanced/asynchronous.html#toc0">概述</a></li><li class="toc-h2"><a href="http://javascript.ruanyifeng.com/advanced/asynchronous.html#toc1">回调函数</a></li><li class="toc-h2"><a href="http://javascript.ruanyifeng.com/advanced/asynchronous.html#toc2">事件监听</a></li><li class="toc-h2"><a href="http://javascript.ruanyifeng.com/advanced/asynchronous.html#toc3">发布/订阅</a></li><li class="toc-h2"><a href="http://javascript.ruanyifeng.com/advanced/asynchronous.html#toc4">Promises对象</a></li><li class="toc-h3"><a href="http://javascript.ruanyifeng.com/advanced/asynchronous.html#toc5">简介</a></li><li class="toc-h3"><a href="http://javascript.ruanyifeng.com/advanced/asynchronous.html#toc6">Promises接口</a></li><li class="toc-h3"><a href="http://javascript.ruanyifeng.com/advanced/asynchronous.html#toc7">Promises对象的实现</a></li><li class="toc-h3"><a href="http://javascript.ruanyifeng.com/advanced/asynchronous.html#toc8">实例：Ajax操作</a></li><li class="toc-h3"><a href="http://javascript.ruanyifeng.com/advanced/asynchronous.html#toc9">小结</a></li><li class="toc-h2 toc-active"><a href="http://javascript.ruanyifeng.com/advanced/asynchronous.html#toc10">参考链接</a></li></ul></div>
+
+
+<span id="toc0"></span><div class="chapter"><h2 id="概述">概述</h2></div>
+
+<p>Javascript语言的执行环境是"单线程"（single thread）。所谓"单线程"，就是指一次只能完成一件任务。如果有多个任务，就必须排队，前面一个任务完成，再执行后面一个任务，以此类推。</p>
+
+<p>这种模式的好处是实现起来比较简单，执行环境相对单纯；坏处是只要有一个任务耗时很长，后面的任务都必须排队等着，会拖延整个程序的执行。常见的浏览器无响应（假死），往往就是因为某一段Javascript代码长时间运行（比如死循环），导致整个页面卡在这个地方，其他任务无法执行。</p>
+
+<p>为了解决这个问题，Javascript语言将任务的执行模式分成两种：同步（Synchronous）和异步（Asynchronous）。</p>
+
+<p>"同步模式"就是上一段的模式，后一个任务等待前一个任务结束，然后再执行，程序的执行顺序与任务的排列顺序是一致的、同步的；"异步模式"则完全不同，每一个任务有一个或多个回调函数（callback），前一个任务结束后，不是执行后一个任务，而是执行回调函数，后一个任务则是不等前一个任务结束就执行，所以程序的执行顺序与任务的排列顺序是不一致的、异步的。</p>
+
+<p>"异步模式"非常重要。在浏览器端，耗时很长的操作都应该异步执行，避免浏览器失去响应，最好的例子就是Ajax操作。在服务器端，"异步模式"甚至是唯一的模式，因为执行环境是单线程的，如果允许同步执行所有http请求，服务器性能会急剧下降，很快就会失去响应。</p>
+
+<p>以下总结了"异步模式"编程的4种方法，理解它们可以让你写出结构更合理、性能更出色、维护更方便的JavaScript程序。</p>
+
+<span id="toc1"></span><div class="chapter"><h2 id="回调函数">回调函数</h2></div>
+
+<p>回调函数是异步编程最基本的方法。</p>
+
+<p>假定有两个函数f1和f2，后者等待前者的执行结果。</p>
+
+<div class="highlight"><pre><code class="language-javascript" data-lang="javascript"><span class="nx">f1</span><span class="p">();</span>
+
+<span class="nx">f2</span><span class="p">();</span></code></pre></div>
+
+<p>如果f1是一个很耗时的任务，可以考虑改写f1，把f2写成f1的回调函数。</p>
+
+<div class="highlight"><pre><code class="language-javascript" data-lang="javascript"><span class="kd">function</span> <span class="nx">f1</span><span class="p">(</span><span class="nx">callback</span><span class="p">){</span>
+    <span class="nx">setTimeout</span><span class="p">(</span><span class="kd">function</span> <span class="p">()</span> <span class="p">{</span>
+        <span class="c1">// f1的任务代码</span>
+        <span class="nx">callback</span><span class="p">();</span>
+    <span class="p">},</span> <span class="mi">1000</span><span class="p">);</span>
+<span class="p">}</span></code></pre></div>
+
+<p>执行代码就变成下面这样：</p>
+
+<div class="highlight"><pre><code class="language-javascript" data-lang="javascript"><span class="nx">f1</span><span class="p">(</span><span class="nx">f2</span><span class="p">);</span></code></pre></div>
+
+<p>采用这种方式，我们把同步操作变成了异步操作，f1不会堵塞程序运行，相当于先执行程序的主要逻辑，将耗时的操作推迟执行。</p>
+
+<p>回调函数的优点是简单、容易理解和部署，缺点是不利于代码的阅读和维护，各个部分之间高度[耦合](<a href="http://en.wikipedia.org/wiki/Coupling_(computer_programming)%EF%BC%88Coupling%EF%BC%89%EF%BC%8C%E4%BD%BF%E5%BE%97%E7%A8%8B%E5%BA%8F%E7%BB%93%E6%9E%84%E6%B7%B7%E4%B9%B1%E3%80%81%E6%B5%81%E7%A8%8B%E9%9A%BE%E4%BB%A5%E8%BF%BD%E8%B8%AA%EF%BC%88%E5%B0%A4%E5%85%B6%E6%98%AF%E5%9B%9E%E8%B0%83%E5%87%BD%E6%95%B0%E5%B5%8C%E5%A5%97%E7%9A%84%E6%83%85%E5%86%B5%EF%BC%89%EF%BC%8C%E8%80%8C%E4%B8%94%E6%AF%8F%E4%B8%AA%E4%BB%BB%E5%8A%A1%E5%8F%AA%E8%83%BD%E6%8C%87%E5%AE%9A%E4%B8%80%E4%B8%AA%E5%9B%9E%E8%B0%83%E5%87%BD%E6%95%B0%E3%80%82">http://en.wikipedia.org/wiki/Coupling_(computer_programming)（Coupling），使得程序结构混乱、流程难以追踪（尤其是回调函数嵌套的情况），而且每个任务只能指定一个回调函数。</a></p>
+
+<span id="toc2"></span><div class="chapter"><h2 id="事件监听">事件监听</h2></div>
+
+<p>另一种思路是采用事件驱动模式。任务的执行不取决于代码的顺序，而取决于某个事件是否发生。</p>
+
+<p>还是以f1和f2为例。首先，为f1绑定一个事件（这里采用的jQuery的<a href="http://api.jquery.com/on/">写法</a>）。</p>
+
+<div class="highlight"><pre><code class="language-javascript" data-lang="javascript"><span class="nx">f1</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s1">'done'</span><span class="p">,</span> <span class="nx">f2</span><span class="p">);</span></code></pre></div>
+
+<p>上面这行代码的意思是，当f1发生done事件，就执行f2。然后，对f1进行改写：</p>
+
+<div class="highlight"><pre><code class="language-javascript" data-lang="javascript"><span class="kd">function</span> <span class="nx">f1</span><span class="p">(){</span>
+    <span class="nx">setTimeout</span><span class="p">(</span><span class="kd">function</span> <span class="p">()</span> <span class="p">{</span>
+        <span class="c1">// f1的任务代码</span>
+        <span class="nx">f1</span><span class="p">.</span><span class="nx">trigger</span><span class="p">(</span><span class="s1">'done'</span><span class="p">);</span>
+    <span class="p">},</span> <span class="mi">1000</span><span class="p">);</span>
+<span class="p">}</span></code></pre></div>
+
+<p>f1.trigger('done')表示，执行完成后，立即触发done事件，从而开始执行f2。</p>
+
+<p>这种方法的优点是比较容易理解，可以绑定多个事件，每个事件可以指定多个回调函数，而且可以"<a href="http://en.wikipedia.org/wiki/Decoupling">去耦合</a>"（Decoupling），有利于实现模块化。缺点是整个程序都要变成事件驱动型，运行流程会变得很不清晰。</p>
+
+<span id="toc3"></span><div class="chapter"><h2 id="发布/订阅">发布/订阅</h2></div>
+
+<p>"事件"完全可以理解成"信号"，如果存在一个"信号中心"，某个任务执行完成，就向信号中心"发布"（publish）一个信号，其他任务可以向信号中心"订阅"（subscribe）这个信号，从而知道什么时候自己可以开始执行。这就叫做"<a href="http://en.wikipedia.org/wiki/Publish-subscribe_pattern">发布/订阅模式</a>"（publish-subscribe pattern），又称"<a href="http://en.wikipedia.org/wiki/Observer_pattern">观察者模式</a>"（observer pattern）。</p>
+
+<p>这个模式有多种<a href="http://msdn.microsoft.com/en-us/magazine/hh201955.aspx">实现</a>，下面采用的是Ben Alman的<a href="https://gist.github.com/661855">Tiny Pub/Sub</a>，这是jQuery的一个插件。</p>
+
+<p>首先，f2向"信号中心"jQuery订阅"done"信号。</p>
+
+<div class="highlight"><pre><code class="language-javascript" data-lang="javascript"><span class="nx">jQuery</span><span class="p">.</span><span class="nx">subscribe</span><span class="p">(</span><span class="s2">"done"</span><span class="p">,</span> <span class="nx">f2</span><span class="p">);</span></code></pre></div>
+
+<p>然后，f1进行如下改写：</p>
+
+<div class="highlight"><pre><code class="language-javascript" data-lang="javascript"><span class="kd">function</span> <span class="nx">f1</span><span class="p">(){</span>
+    <span class="nx">setTimeout</span><span class="p">(</span><span class="kd">function</span> <span class="p">()</span> <span class="p">{</span>
+        <span class="c1">// f1的任务代码</span>
+        <span class="nx">jQuery</span><span class="p">.</span><span class="nx">publish</span><span class="p">(</span><span class="s2">"done"</span><span class="p">);</span>
+    <span class="p">},</span> <span class="mi">1000</span><span class="p">);</span>
+<span class="p">}</span></code></pre></div>
+
+<p>jQuery.publish("done")的意思是，f1执行完成后，向"信号中心"jQuery发布"done"信号，从而引发f2的执行。</p>
+
+<p>f2完成执行后，也可以取消订阅（unsubscribe）。</p>
+
+<div class="highlight"><pre><code class="language-javascript" data-lang="javascript"><span class="nx">jQuery</span><span class="p">.</span><span class="nx">unsubscribe</span><span class="p">(</span><span class="s2">"done"</span><span class="p">,</span> <span class="nx">f2</span><span class="p">);</span></code></pre></div>
+
+<p>这种方法的性质与"事件监听"类似，但是明显优于后者。因为我们可以通过查看"消息中心"，了解存在多少信号、每个信号有多少订阅者，从而监控程序的运行。</p>
+
+<span id="toc4"></span><div class="chapter"><h2 id="promises对象">Promises对象</h2></div>
+
+<span id="toc5"></span><h3 id="简介">简介</h3>
+
+<p>Promises对象是CommonJS工作组提出的一种规范，目的是为异步编程提供<a href="http://wiki.commonjs.org/wiki/Promises/A">统一接口</a>。</p>
+
+<p>那么，什么是Promises？首先，它是一个对象，也就是说与其他JavaScript对象的用法，没有什么两样；其次，它起到代理作用（proxy），使得异步操作具备同步操作（synchronous code）的接口，即充当异步操作与回调函数之间的中介，使得程序具备正常的同步运行的流程，回调函数不必再一层层包裹起来。</p>
+
+<p>简单说，它的思想是，每一个异步任务立刻返回一个Promise对象，由于是立刻返回，所以可以采用同步操作的流程。这个Promises对象有一个then方法，允许指定回调函数，在异步任务完成后调用。比如，f1的回调函数f2,可以写成：</p>
+
+<div class="highlight"><pre><code class="language-javascript" data-lang="javascript"><span class="p">(</span><span class="k">new</span> <span class="nx">Promise</span><span class="p">(</span><span class="nx">f1</span><span class="p">)).</span><span class="nx">then</span><span class="p">(</span><span class="nx">f2</span><span class="p">);</span></code></pre></div>
+
+<p>这种写法对于嵌套的回调函数尤其有用。</p>
+
+<div class="highlight"><pre><code class="language-javascript" data-lang="javascript"><span class="c1">// 传统写法</span>
+
+<span class="nx">step1</span><span class="p">(</span><span class="kd">function</span> <span class="p">(</span><span class="nx">value1</span><span class="p">)</span> <span class="p">{</span>
+    <span class="nx">step2</span><span class="p">(</span><span class="nx">value1</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">value2</span><span class="p">)</span> <span class="p">{</span>
+        <span class="nx">step3</span><span class="p">(</span><span class="nx">value2</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">value3</span><span class="p">)</span> <span class="p">{</span>
+            <span class="nx">step4</span><span class="p">(</span><span class="nx">value3</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">value4</span><span class="p">)</span> <span class="p">{</span>
+                <span class="c1">// ...</span>
+            <span class="p">});</span>
+        <span class="p">});</span>
+    <span class="p">});</span>
+<span class="p">});</span>
+
+<span class="c1">// Promises的写法</span>
+
+<span class="p">(</span><span class="k">new</span> <span class="nx">Promise</span><span class="p">(</span><span class="nx">step1</span><span class="p">))</span>
+<span class="p">.</span><span class="nx">then</span><span class="p">(</span><span class="nx">step2</span><span class="p">)</span>
+<span class="p">.</span><span class="nx">then</span><span class="p">(</span><span class="nx">step3</span><span class="p">)</span>
+<span class="p">.</span><span class="nx">then</span><span class="p">(</span><span class="nx">step4</span><span class="p">);</span></code></pre></div>
+
+<p>从上面代码可以看到，采用Promises接口以后，程序流程变得非常清楚，十分易读。</p>
+
+<p>总的来说，传统的回调函数写法使得代码混成一团，变得横向发展而不是向下发展。Promises规范就是为了解决这个问题而提出的，目标是使用正常的程序流程（同步），来处理异步操作。它先返回一个Promise对象，后面的操作以同步的方式，寄存在这个对象上面。等到异步操作有了结果，再执行前期寄放在它上面的其他操作。</p>
+
+<p>Promises原本只是社区提出的一个构想，一些外部函数库率先实现了这个功能，目前ECMAScript 6正在考虑将其写入语言标准，Chrome和Firefox浏览器的最新版本都初步部署了这个功能。</p>
+
+<span id="toc6"></span><h3 id="promises接口">Promises接口</h3>
+
+<p>当异步任务返回一个promise对象（小写表示这是Promise的实例）时，该对象只有三种状态：未完成（pending）、已完成（fulfilled）、失败（rejected）。</p>
+
+<p>这三种的状态的变化途径只有两个，且只能发生一次：从“未完成”到“已完成”，或者从“未完成”到“失败”。一旦当前状态变为“已完成”或“失败”，就意味着不会再发生状态变化了。</p>
+
+<p>promise对象的then方法用来添加回调函数。它可以接受两个回调函数，第一个是操作成功（fulfilled）时的回调函数，第二个是操作失败（rejected）时的回调函数（可以不提供）。一旦状态改变，就调用相应的回调函数。</p>
+
+<div class="highlight"><pre><code class="language-javascript" data-lang="javascript"><span class="p">(</span><span class="k">new</span> <span class="nx">Promise</span><span class="p">(</span><span class="nx">step1</span><span class="p">))</span>
+<span class="p">.</span><span class="nx">then</span><span class="p">(</span><span class="nx">step2</span><span class="p">)</span>
+<span class="p">.</span><span class="nx">then</span><span class="p">(</span><span class="nx">step3</span><span class="p">)</span>
+<span class="p">.</span><span class="nx">then</span><span class="p">(</span><span class="nx">step4</span><span class="p">)</span>
+<span class="p">.</span><span class="nx">then</span><span class="p">(</span><span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">,</span> <span class="nx">console</span><span class="p">.</span><span class="nx">error</span><span class="p">);</span></code></pre></div>
+
+<p>再来看上面的代码就很清楚，step1是一个耗时很长的异步任务，然后使用then方法，依次绑定了三个step1操作成功后的回调函数step2、step3、step4，最后再用then方法绑定两个回调函数：操作成功时的回调函数console.log，操作失败时的回调函数console.error。</p>
+
+<p>console.log和console.error这两个最后的回调函数，用法上有一点重要的区别。console.log只显示回调函数step4的返回值，而console.error可以显示step2、step3、step4之中任何一个发生的错误。也就是说，假定step2操作失败，抛出一个错误，这时step3和step4都不会再运行了，promises对象开始寻找接下来的第一个错误回调函数，在上面代码中是console.error。所以，结论就是Promises对象的错误有传递性。</p>
+
+<span id="toc7"></span><h3 id="promises对象的实现">Promises对象的实现</h3>
+
+<p>Promises只是一个规范，JavaScript语言原生还未提供支持。一般来说，总是选用现成的函数库。为了真正理解Promises对象，下面我们自己动手写一个Promises的实现。</p>
+
+<p>首先，将Promise定义成构造函数。</p>
+
+<div class="highlight"><pre><code class="language-javascript" data-lang="javascript"><span class="kd">var</span> <span class="nx">Promise</span> <span class="o">=</span> <span class="kd">function</span> <span class="p">()</span> <span class="p">{</span>
+  <span class="k">this</span><span class="p">.</span><span class="nx">state</span> <span class="o">=</span> <span class="s1">'pending'</span><span class="p">;</span>
+  <span class="k">this</span><span class="p">.</span><span class="nx">thenables</span> <span class="o">=</span> <span class="p">[];</span>
+<span class="p">};</span></code></pre></div>
+
+<p>上面代码表示，Promise的实例对象的state属性默认为“未完成”状态（pending），还有一个thenables属性指向一个数组，用来存放then方法生成的内部对象。</p>
+
+<p>接下来，部署实例对象的resolve方法，该方法用来将实例对象的状态从“未完成”变为“已完成”。</p>
+
+<div class="highlight"><pre><code class="language-javascript" data-lang="javascript"><span class="nx">Promise</span><span class="p">.</span><span class="nx">prototype</span><span class="p">.</span><span class="nx">resolve</span> <span class="o">=</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">value</span><span class="p">)</span> <span class="p">{</span>
+  <span class="k">if</span> <span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nx">state</span> <span class="o">!=</span> <span class="s1">'pending'</span><span class="p">)</span> <span class="k">return</span><span class="p">;</span>
+
+  <span class="k">this</span><span class="p">.</span><span class="nx">state</span> <span class="o">=</span> <span class="s1">'fulfilled'</span><span class="p">;</span>
+  <span class="k">this</span><span class="p">.</span><span class="nx">value</span> <span class="o">=</span> <span class="nx">value</span><span class="p">;</span>
+  <span class="k">this</span><span class="p">.</span><span class="nx">_handleThen</span><span class="p">();</span>
+  <span class="k">return</span> <span class="k">this</span><span class="p">;</span>
+<span class="p">}</span></code></pre></div>
+
+<p>上面代码除了改变实例的状态，还将异步任务的返回值存入实例对象的value属性，然后调用内部方法_handleThen，最后返回实例对象本身。</p>
+
+<p>类似地，部署实例对象的reject方法。</p>
+
+<div class="highlight"><pre><code class="language-javascript" data-lang="javascript"><span class="nx">Promise</span><span class="p">.</span><span class="nx">prototype</span><span class="p">.</span><span class="nx">reject</span> <span class="o">=</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">reason</span><span class="p">)</span> <span class="p">{</span>
+  <span class="k">if</span> <span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nx">state</span> <span class="o">!=</span> <span class="s1">'pending'</span><span class="p">)</span> <span class="k">return</span><span class="p">;</span>
+
+  <span class="k">this</span><span class="p">.</span><span class="nx">state</span> <span class="o">=</span> <span class="s1">'rejected'</span><span class="p">;</span>
+  <span class="k">this</span><span class="p">.</span><span class="nx">reason</span> <span class="o">=</span> <span class="nx">reason</span><span class="p">;</span>
+  <span class="k">this</span><span class="p">.</span><span class="nx">_handleThen</span><span class="p">();</span>
+  <span class="k">return</span> <span class="k">this</span><span class="p">;</span>
+<span class="p">};</span></code></pre></div>
+
+<p>然后，部署实例对象的then方法。它接受两个参数，分别是异步任务成功时的回调函数（onFulfilled）和出错时的回调函数（onRejected）。为了可以部署链式操作，它必须返回一个新的Promise对象。</p>
+
+<div class="highlight"><pre><code class="language-javascript" data-lang="javascript"><span class="nx">Promise</span><span class="p">.</span><span class="nx">prototype</span><span class="p">.</span><span class="nx">then</span> <span class="o">=</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">onFulfilled</span><span class="p">,</span> <span class="nx">onRejected</span><span class="p">)</span> <span class="p">{</span>
+  <span class="kd">var</span> <span class="nx">thenable</span> <span class="o">=</span> <span class="p">{};</span>
+
+  <span class="k">if</span> <span class="p">(</span><span class="k">typeof</span> <span class="nx">onFulfilled</span> <span class="o">==</span> <span class="s1">'function'</span><span class="p">)</span> <span class="p">{</span>
+    <span class="nx">thenable</span><span class="p">.</span><span class="nx">fulfill</span> <span class="o">=</span> <span class="nx">onFulfilled</span><span class="p">;</span>
+  <span class="p">};</span>
+
+  <span class="k">if</span> <span class="p">(</span><span class="k">typeof</span> <span class="nx">onRejected</span> <span class="o">==</span> <span class="s1">'function'</span><span class="p">)</span> <span class="p">{</span>
+    <span class="nx">thenable</span><span class="p">.</span><span class="nx">reject</span> <span class="o">=</span> <span class="nx">onRejected</span><span class="p">;</span>
+  <span class="p">};</span>
+
+  <span class="k">if</span> <span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nx">state</span> <span class="o">!=</span> <span class="s1">'pending'</span><span class="p">)</span> <span class="p">{</span>
+    <span class="nx">setImmediate</span><span class="p">(</span><span class="kd">function</span> <span class="p">()</span> <span class="p">{</span>
+      <span class="k">this</span><span class="p">.</span><span class="nx">_handleThen</span><span class="p">();</span>
+    <span class="p">}.</span><span class="nx">bind</span><span class="p">(</span><span class="k">this</span><span class="p">));</span>
+  <span class="p">}</span>
+
+  <span class="nx">thenable</span><span class="p">.</span><span class="nx">promise</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Promise</span><span class="p">();</span>
+  <span class="k">this</span><span class="p">.</span><span class="nx">thenables</span><span class="p">.</span><span class="nx">push</span><span class="p">(</span><span class="nx">thenable</span><span class="p">);</span>
+
+  <span class="k">return</span> <span class="nx">thenable</span><span class="p">.</span><span class="nx">promise</span><span class="p">;</span>
+<span class="p">}</span></code></pre></div>
+
+<p>上面代码首先定义了一个内部变量thenable对象，将then方法的两个参数都加入这个对象的属性。然后，检查当前状态，如果不等于“未完成”，则在当前操作结束后，立即调用_handleThen方法。接着，在thenable对象的promise属性上生成一个新的Promise对象，并在稍后返回这个对象。最后，将thenable对象加入实例对象的thenables数组。</p>
+
+<p>下一步就要部署内部方法_handleThen，它用来处理通过then方法绑定的回调函数。</p>
+
+<div class="highlight"><pre><code class="language-javascript" data-lang="javascript"><span class="nx">Promise</span><span class="p">.</span><span class="nx">prototype</span><span class="p">.</span><span class="nx">_handleThen</span> <span class="o">=</span> <span class="kd">function</span> <span class="p">()</span> <span class="p">{</span>
+  <span class="k">if</span> <span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nx">state</span> <span class="o">===</span> <span class="s1">'pending'</span><span class="p">)</span> <span class="k">return</span><span class="p">;</span>
+
+  <span class="k">if</span> <span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nx">thenables</span><span class="p">.</span><span class="nx">length</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">for</span> <span class="p">(</span><span class="kd">var</span> <span class="nx">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="nx">i</span> <span class="o">&lt;</span> <span class="k">this</span><span class="p">.</span><span class="nx">thenables</span><span class="p">.</span><span class="nx">length</span><span class="p">;</span> <span class="nx">i</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
+      <span class="kd">var</span> <span class="nx">thenPromise</span> <span class="o">=</span> <span class="k">this</span><span class="p">.</span><span class="nx">thenables</span><span class="p">[</span><span class="nx">i</span><span class="p">].</span><span class="nx">promise</span><span class="p">;</span>
+      <span class="kd">var</span> <span class="nx">returnedVal</span><span class="p">;</span>
+      <span class="k">try</span> <span class="p">{</span>
+        <span class="c1">// 运行回调函数</span>
+      <span class="p">}</span> <span class="k">catch</span> <span class="p">(</span><span class="nx">e</span><span class="p">)</span> <span class="p">{</span>
+        <span class="nx">thenPromise</span><span class="p">.</span><span class="nx">reject</span><span class="p">(</span><span class="nx">e</span><span class="p">);</span>
+      <span class="p">}</span>
+    <span class="p">}</span>
+    <span class="k">this</span><span class="p">.</span><span class="nx">thenables</span> <span class="o">=</span> <span class="p">[];</span>
+  <span class="p">}</span>
+<span class="p">}</span></code></pre></div>
+
+<p>上面代码的逻辑是这样的：如果实例对象的状态是“未完成”，就返回，否则检查thenables属性是否有值。如果有值，表明里面储存了需要执行的回调函数，则依次运行回调函数。</p>
+
+<p>之所以把回调函数的执行放在try...catch结构中，是因为一旦出错，就会自动执行catch代码块，从而可以运行下一个Promise实例对象的reject方法，这使得调用reject方法变得很简单。下面是try代码块中的代码。</p>
+
+<div class="highlight"><pre><code class="language-javascript" data-lang="javascript"><span class="k">try</span> <span class="p">{</span>
+        <span class="k">switch</span> <span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nx">state</span><span class="p">)</span> <span class="p">{</span>
+          <span class="k">case</span> <span class="s1">'fulfilled'</span><span class="o">:</span>
+            <span class="k">if</span> <span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nx">thenables</span><span class="p">[</span><span class="nx">i</span><span class="p">].</span><span class="nx">fulfill</span><span class="p">)</span> <span class="p">{</span>
+              <span class="nx">returnedVal</span> <span class="o">=</span> <span class="k">this</span><span class="p">.</span><span class="nx">thenables</span><span class="p">[</span><span class="nx">i</span><span class="p">].</span><span class="nx">fulfill</span><span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nx">value</span><span class="p">);</span>
+            <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+              <span class="nx">thenPromise</span><span class="p">.</span><span class="nx">resolve</span><span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nx">value</span><span class="p">);</span>
+            <span class="p">}</span>
+            <span class="k">break</span><span class="p">;</span>
+          <span class="k">case</span> <span class="s1">'rejected'</span><span class="o">:</span>
+            <span class="k">if</span> <span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nx">thenables</span><span class="p">[</span><span class="nx">i</span><span class="p">].</span><span class="nx">reject</span><span class="p">)</span> <span class="p">{</span>
+              <span class="nx">returnedVal</span> <span class="o">=</span> <span class="k">this</span><span class="p">.</span><span class="nx">thenables</span><span class="p">[</span><span class="nx">i</span><span class="p">].</span><span class="nx">reject</span><span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nx">reason</span><span class="p">);</span>
+            <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+              <span class="nx">thenPromise</span><span class="p">.</span><span class="nx">reject</span><span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nx">reason</span><span class="p">);</span>
+            <span class="p">}</span>
+            <span class="k">break</span><span class="p">;</span>
+        <span class="p">}</span>
+ 
+          <span class="k">if</span> <span class="p">(</span><span class="nx">returnedVal</span> <span class="o">===</span> <span class="kc">null</span><span class="p">)</span> <span class="p">{</span> 
+            <span class="k">this</span><span class="p">.</span><span class="nx">thenables</span><span class="p">[</span><span class="nx">i</span><span class="p">].</span><span class="nx">promise</span><span class="p">.</span><span class="nx">resolve</span><span class="p">(</span><span class="nx">returnedVal</span><span class="p">);</span>
+          <span class="p">}</span>
+          <span class="k">else</span> <span class="k">if</span> <span class="p">(</span><span class="nx">returnedVal</span> <span class="k">instanceof</span> <span class="nx">Promise</span> <span class="o">||</span> <span class="k">typeof</span> <span class="nx">returnedVal</span><span class="p">.</span><span class="nx">then</span> <span class="o">===</span> <span class="s1">'function'</span><span class="p">)</span> <span class="p">{</span>
+            <span class="nx">returnedVal</span><span class="p">.</span><span class="nx">then</span><span class="p">(</span><span class="nx">thenPromise</span><span class="p">.</span><span class="nx">resolve</span><span class="p">.</span><span class="nx">bind</span><span class="p">(</span><span class="nx">thenPromise</span><span class="p">),</span> <span class="nx">thenPromise</span><span class="p">.</span><span class="nx">reject</span><span class="p">.</span><span class="nx">bind</span><span class="p">(</span><span class="nx">thenPromise</span><span class="p">));</span>
+          <span class="p">}</span>
+          <span class="k">else</span> <span class="p">{</span>
+            <span class="k">this</span><span class="p">.</span><span class="nx">thenables</span><span class="p">[</span><span class="nx">i</span><span class="p">].</span><span class="nx">promise</span><span class="p">.</span><span class="nx">resolve</span><span class="p">(</span><span class="nx">returnedVal</span><span class="p">);</span>
+          <span class="p">}</span>
+<span class="p">}</span></code></pre></div>
+
+<p>上面代码首先根据实例对象的状态，分别调用fulfill或reject回调函数，并传入相应的参数，并将返回值存入returnVal变量。然后再去改变this.thenables[i].promise对象的状态，触发下一个Promise对象的resolve或者reject方法。</p>
+
+<p>最后，由于我们写的是供调用的函数库，需要将构造函数输出。</p>
+
+<div class="highlight"><pre><code class="language-javascript" data-lang="javascript"><span class="nx">module</span><span class="p">.</span><span class="nx">exports</span> <span class="o">=</span> <span class="nx">Promise</span><span class="p">;</span></code></pre></div>
+
+<span id="toc8"></span><h3 id="实例：ajax操作">实例：Ajax操作</h3>
+
+<p>Ajax操作是典型的异步操作，传统上往往写成下面这样。</p>
+
+<div class="highlight"><pre><code class="language-javascript" data-lang="javascript"><span class="kd">function</span> <span class="nx">search</span><span class="p">(</span><span class="nx">term</span><span class="p">,</span> <span class="nx">onload</span><span class="p">,</span> <span class="nx">onerror</span><span class="p">)</span> <span class="p">{</span>
+    <span class="kd">var</span> <span class="nx">xhr</span><span class="p">,</span> <span class="nx">results</span><span class="p">,</span> <span class="nx">url</span><span class="p">;</span>
+
+    <span class="nx">url</span> <span class="o">=</span> <span class="s1">'http://example.com/search?q='</span> <span class="o">+</span> <span class="nx">term</span><span class="p">;</span>
+
+    <span class="nx">xhr</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">XMLHttpRequest</span><span class="p">();</span>
+    <span class="nx">xhr</span><span class="p">.</span><span class="nx">open</span><span class="p">(</span><span class="s1">'GET'</span><span class="p">,</span> <span class="nx">url</span><span class="p">,</span> <span class="kc">true</span><span class="p">);</span>
+
+    <span class="nx">xhr</span><span class="p">.</span><span class="nx">onload</span> <span class="o">=</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">e</span><span class="p">)</span> <span class="p">{</span>
+        <span class="k">if</span> <span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nx">status</span> <span class="o">===</span> <span class="mi">200</span><span class="p">)</span> <span class="p">{</span>
+            <span class="nx">results</span> <span class="o">=</span> <span class="nx">JSON</span><span class="p">.</span><span class="nx">parse</span><span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nx">responseText</span><span class="p">);</span>
+            <span class="nx">onload</span><span class="p">(</span><span class="nx">results</span><span class="p">);</span>
+        <span class="p">}</span>
+    <span class="p">};</span>
+
+    <span class="nx">xhr</span><span class="p">.</span><span class="nx">onerror</span> <span class="o">=</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">e</span><span class="p">)</span> <span class="p">{</span>
+        <span class="nx">onerror</span><span class="p">(</span><span class="nx">e</span><span class="p">);</span>
+    <span class="p">};</span>
+
+    <span class="nx">xhr</span><span class="p">.</span><span class="nx">send</span><span class="p">();</span>
+<span class="p">}</span>
+
+<span class="nx">search</span><span class="p">(</span><span class="s2">"Hello World"</span><span class="p">,</span> <span class="nx">f1</span><span class="p">,</span> <span class="nx">f2</span><span class="p">);</span></code></pre></div>
+
+<p>上面代码的回调函数，必须直接传入。如果使用Promises方法，就可以写成下面这样。</p>
+
+<div class="highlight"><pre><code class="language-javascript" data-lang="javascript"><span class="kd">function</span> <span class="nx">search</span><span class="p">(</span><span class="nx">term</span><span class="p">)</span> <span class="p">{</span>
+
+    <span class="kd">var</span> <span class="nx">url</span> <span class="o">=</span> <span class="s1">'http://example.com/search?q='</span> <span class="o">+</span> <span class="nx">term</span><span class="p">;</span>
+    <span class="kd">var</span> <span class="nx">p</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Promise</span><span class="p">();</span>
+    <span class="kd">var</span> <span class="nx">xhr</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">XMLHttpRequest</span><span class="p">();</span>
+    <span class="kd">var</span> <span class="nx">result</span><span class="p">;</span>
+
+    <span class="nx">xhr</span><span class="p">.</span><span class="nx">open</span><span class="p">(</span><span class="s1">'GET'</span><span class="p">,</span> <span class="nx">url</span><span class="p">,</span> <span class="kc">true</span><span class="p">);</span>
+ 
+    <span class="nx">xhr</span><span class="p">.</span><span class="nx">onload</span> <span class="o">=</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">e</span><span class="p">)</span> <span class="p">{</span>
+        <span class="k">if</span> <span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nx">status</span> <span class="o">===</span> <span class="mi">200</span><span class="p">)</span> <span class="p">{</span>
+            <span class="nx">results</span> <span class="o">=</span> <span class="nx">JSON</span><span class="p">.</span><span class="nx">parse</span><span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nx">responseText</span><span class="p">);</span>
+            <span class="nx">p</span><span class="p">.</span><span class="nx">resolve</span><span class="p">(</span><span class="nx">results</span><span class="p">);</span>
+        <span class="p">}</span>
+    <span class="p">};</span>
+ 
+    <span class="nx">xhr</span><span class="p">.</span><span class="nx">onerror</span> <span class="o">=</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">e</span><span class="p">)</span> <span class="p">{</span>
+        <span class="nx">p</span><span class="p">.</span><span class="nx">reject</span><span class="p">(</span><span class="nx">e</span><span class="p">);</span>
+    <span class="p">};</span>
+ 
+    <span class="nx">xhr</span><span class="p">.</span><span class="nx">send</span><span class="p">();</span>
+ 
+    <span class="k">return</span> <span class="nx">p</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="nx">search</span><span class="p">(</span><span class="s2">"Hello World"</span><span class="p">).</span><span class="nx">then</span><span class="p">(</span><span class="nx">f1</span><span class="p">,</span> <span class="nx">f2</span><span class="p">);</span></code></pre></div>
+
+<p>用了Promises以后，回调函数就可以用then方法加载。</p>
+
+<span id="toc9"></span><h3 id="小结">小结</h3>
+
+<p>Promises的优点在于，让回调函数变成了规范的链式写法，程序流程可以看得很清楚。它的一整套接口，可以实现许多强大的功能，比如为多个异步操作部署一个回调函数、为多个回调函数中抛出的错误统一指定处理方法等等。</p>
+
+<p>而且，它还有一个前面三种方法都没有的好处：如果一个任务已经完成，再添加回调函数，该回调函数会立即执行。所以，你不用担心是否错过了某个事件或信号。这种方法的缺点就是，编写和理解都相对比较难。</p>
+
+<p>实际可以使用的Promises实现，参见jQuery的deferred对象一节。</p>
+
+<span id="toc10"></span><div class="chapter"><h2 id="参考链接" class="reference">参考链接</h2></div>
+
+<ul class="reference-list">
+<li>Sebastian Porto, <a href="http://sporto.github.com/blog/2012/12/09/callbacks-listeners-promises/">Asynchronous JS: Callbacks, Listeners, Control Flow Libs and Promises</a></li>
+<li>Rhys Brett-Bowen, <a href="http://modernjavascript.blogspot.com/2013/08/promisesa-understanding-by-doing.html">Promises/A+ - understanding the spec through implementation</a></li>
+<li>Matt Podwysocki, Amanda Silver, <a href="http://blogs.msdn.com/b/ie/archive/2011/09/11/asynchronous-programming-in-javascript-with-promises.aspx">Asynchronous Programming in JavaScript with “Promises”</a></li>
+<li>Marc Harter, <a href="https://gist.github.com//wavded/5692344">Promise A+ Implementation</a></li>
+<li>Bryan Klimt, <a href="http://blog.parse.com/2013/01/29/whats-so-great-about-javascript-promises/">What’s so great about JavaScript Promises?</a></li>
+<li>Jake Archibald, <a href="http://www.html5rocks.com/en/tutorials/es6/promises/">JavaScript Promises There and back again</a></li>
+</ul>
+
+
+</div></div></article>
+
+<div class="row">
+    <div class="twelve columns">
+
+<sectioni id="feature">
+
+<h2>功能链接</h2>
+
+<ul>
+
+	<li><a href="https://github.com/ruanyf/jstutorial/issues">论坛</a></li>
+	<li><a href="https://raw.github.com/ruanyf/jstutorial/gh-pages/advanced/asynchronous.md">Markdown源码</a></li>
+	<li><a href="https://github.com/ruanyf/jstutorial/commits/gh-pages/advanced/asynchronous.md">修订历史</a></li>
+
+</ul>
+
+<h2>留言</h2>
+
+<div id="disqus_thread"><iframe id="dsq-2" data-disqus-uid="2" allowtransparency="true" frameborder="0" scrolling="no" tabindex="0" title="Disqus" width="100%" src="./asynchronous_files/saved_resource.htm" style="width: 100% !important; border: none !important; overflow: hidden !important; height: 800px !important;" horizontalscrolling="no" verticalscrolling="no"></iframe></div>
+    <script type="text/javascript">
+        /* * * CONFIGURATION VARIABLES: EDIT BEFORE PASTING INTO YOUR WEBPAGE * * */
+        var disqus_shortname = 'jstutorial'; // required: replace example with your forum shortname
+
+        /* * * DON'T EDIT BELOW THIS LINE * * */
+        (function() {
+            var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+            dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+            (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+        })();
+    </script>
+    <noscript>Please enable JavaScript to view the &lt;a href="http://disqus.com/?ref_noscript"&gt;comments powered by Disqus.&lt;/a&gt;</noscript>
+    
+
+
+
+</sectioni></div>
+</div>
+
+<footer>
+<div class="row">
+<div class="twelve columns">
+	<p><a href="http://javascript.ruanyifeng.com/introduction/license.html">版权声明</a> | last modified on 2013-11-28 </p>
+</div>
+</div>
+</footer>
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-43771063-1', 'ruanyifeng.com');
+  ga('send', 'pageview');
+</script>
+
+
+
+
+</body></html>

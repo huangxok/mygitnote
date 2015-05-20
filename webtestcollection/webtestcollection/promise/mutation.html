@@ -1,0 +1,672 @@
+﻿<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <title></title>
+</head>
+<body>
+    <script>
+        var __extends = this.__extends || function (d, b) {
+            for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p];
+            function __() { this.constructor = d; }
+            __.prototype = b.prototype;
+            d.prototype = new __();
+        };
+        window.MutationObserver || (window.MutationObserver = window['webkitMutationObserver']);
+        var mbe_core;
+        (function (mbe_core) {
+            /**
+            * UndoManager 用于管理对DOM树的撤销重做（undo/redo）。
+            * UndoManager 有两种工作模式：
+            *  1. 使用 HTML5 MutationObserver 监视 DOM 修改，并自动记录和形成撤销重做条目。
+            *   用 beginObservation() 和 endObservation() 来开始和结束监视，在这两者之间的DOM修改都会被记录，
+            *   但是ignore()方法的中的修改会被忽略。
+            *
+            *  2. 使用 UndoManager 提供的方法记录和形成撤销重做条目。
+            *   使用 nodeXXX() 三个方法来手工记录和形成撤销重做条目。
+            *
+            * 无论那种工作模式，都可以用transact()方法将多个修改合并到一个撤销重做条目中。
+            *
+            * 用于监视可能产生大量修改的操作的区域（例如文本编辑，拖动）时，宜设置 isMerging = true，可以将短时间内连续发生的编辑操作合并为一个条目。
+            * transact(desc, action, true) 可以允许transact产生的条目被自动合并；interuptAutoMerging() 可打断当前自动合并序列。
+            *
+            * 事件：
+            *   stackSizeChanged 当undo/redoStackSize发生变化时触发。
+            */
+            var UndoManager = (function (_super) {
+                __extends(UndoManager, _super);
+                function UndoManager(docRoot) {
+                    _super.call(this);
+                    this._undoStack = [];
+                    this._undoPointer = 0;
+                    this._markPointer = 0;
+                    this._isObserving = false;
+                    this._transDepth = 0; // 嵌套的transact()调用的深度。无transact时为0
+                    this._transDirty = false; // transact() 中是否有实际的修改
+                    this._lastCommandTime = 0; //上个命令发生的时间。
+                    this._autoMergingStartTime = 0; //本系列自动合并开始的时间。如果要终止本系列合并，置为0。
+                    this._isAutoMerging = false;
+                    /**
+                     * 相继的自动合并命令的超时时间。毫秒。
+                     */
+                    this.autoMergingTimeout = 700;
+                    /**
+                     * 最大的系列自动合并时间范围，超出这个时间的，另外开始一个自动合并系列。毫秒。
+                     */
+                    this.autoMergingMaxTime = 6000;
+                    /**
+                     * 最大撤销重做条目数
+                     */
+                    this.maxStackSize = 100;
+                    this.onTreeCreation = null;
+                    this._docRoot = docRoot;
+                    if (!window.MutationObserver) {
+                        var msg = 'MutationObserver not supported';
+                        //console.error(msg);
+                        alert(msg);
+                        throw new Error(msg);
+                    }
+                    this._observer = new window.MutationObserver(this._handleMutation.bind(this));
+                    this._observerOptions = {
+                        attributes: true,
+                        childList: true,
+                        characterData: true,
+                        subtree: true,
+                        attributeOldValue: true,
+                        characterDataOldValue: true,
+                    };
+                }
+                Object.defineProperty(UndoManager.prototype, "docRoot", {
+                    get: function () {
+                        return this._docRoot;
+                    },
+                    enumerable: true,
+                    configurable: true
+                });
+                Object.defineProperty(UndoManager.prototype, "undoStackSize", {
+                    get: function () {
+                        return this._undoPointer;
+                    },
+                    enumerable: true,
+                    configurable: true
+                });
+                Object.defineProperty(UndoManager.prototype, "redoStackSize", {
+                    get: function () {
+                        return this._undoStack.length - this._undoPointer;
+                    },
+                    enumerable: true,
+                    configurable: true
+                });
+                Object.defineProperty(UndoManager.prototype, "isAutoMerging", {
+                    /**
+                     * 是否在合并模式。在此模式下，间隔足够短 (< mergeTimeout) 的修改会被合并。
+                     * 建议只在用户操作可编辑元素并打开观察时打开这个选项。
+                     */
+                    get: function () {
+                        return this._isAutoMerging;
+                    },
+                    set: function (merging) {
+                        //console.log('auto merge:' + merging);
+                        this._isAutoMerging = merging;
+                        if (!merging)
+                            this._autoMergingStartTime = 0;
+                    },
+                    enumerable: true,
+                    configurable: true
+                });
+                /**
+                 * 打断当前的自动合并序列（但并不停止自动合并）。下一个修改被将记录为一条独立的命令。
+                 */
+                UndoManager.prototype.interuptAutoMerging = function () {
+                    this._autoMergingStartTime = 0;
+                };
+                /**
+                 * 标记文档的修改状态（即 _undoPointer 指向的条目）。
+                 */
+                UndoManager.prototype.mark = function () {
+                    this._markPointer = this._undoPointer;
+                };
+                /**
+                 * 自上次 mark 之后，文档是否被修改了？当 _markPointer == _undoPointer 时认为没有修改。
+                 */
+                UndoManager.prototype.isModifiedSinceMark = function () {
+                    return this._markPointer !== this._undoPointer;
+                };
+                UndoManager.prototype.resetUndoStack = function () {
+                    this._undoStack.length = 0;
+                    this._undoPointer = 0;
+                    this._stackSizeChanged();
+                };
+                UndoManager.prototype.redo = function () {
+                    var isobs = this._isObserving;
+                    if (this.redoStackSize === 0)
+                        return;
+                    var cmd = this._undoStack[this._undoPointer++];
+                    this._stackSizeChanged();
+                    var created = [];
+                    if (isobs)
+                        this.endObservation();
+                    cmd.apply(created);
+                    if (isobs)
+                        this.beginObservation();
+                    if (created.length > 0)
+                        this._fireTreeCreation(created);
+                };
+                UndoManager.prototype.undo = function () {
+                    var isobs = this._isObserving;
+                    if (this._undoPointer <= 0)
+                        return;
+                    var cmd = this._undoStack[--this._undoPointer];
+                    this._stackSizeChanged();
+                    var created = [];
+                    if (isobs)
+                        this.endObservation();
+                    cmd.unapply(created);
+                    if (isobs)
+                        this.beginObservation();
+                    if (created.length > 0)
+                        this._fireTreeCreation(created);
+                };
+                Object.defineProperty(UndoManager.prototype, "redoDescription", {
+                    get: function () {
+                        return this.redoStackSize !== 0 ? this._undoStack[this._undoPointer].description : null;
+                    },
+                    enumerable: true,
+                    configurable: true
+                });
+                Object.defineProperty(UndoManager.prototype, "undoDescription", {
+                    get: function () {
+                        return this.undoStackSize !== 0 ? this._undoStack[this._undoPointer - 1].description : null;
+                    },
+                    enumerable: true,
+                    configurable: true
+                });
+                /**
+                * 向 UndoManager 登记 nodeChanged 事件。
+                * 这个事件涉及节点的属性和/或其内容的改变。
+                * 节点可以是元素和文本类型；后者唯一可以修改的属性是'#textContent'。
+                * 这个方法可在节点被改变之前或之后调用。
+                * @param desc 事件的文字描述
+                * @parem node 修改发生后的节点
+                * @param attrsBefore 节点修改前的HTML/XML属性值；有几个以"#"开始的特殊属性，会被映射到同名的DOM对象的属性（去掉#）：
+                * '#innerHTML'
+                * '#textContent'
+                * 注意，修改innerHTML属性的时候要保证传入的字符串语法符合html规范，否则解析器会自行纠错，扰乱UndoManager；
+                * 甚至DOM中的不规范结构（例如h2在h1之下）也会间接影响innerHTML，扰乱UndoManager。
+                * 所以，保证DOM以及innerHTML符合规范对于UndoManager的正常工作是很重要的。
+                */
+                //TODO svg-edit 的 ChangeElementCommand 使用 #text 而不是 #textContent，另外还支持 #href；还处理了几何变换。
+                UndoManager.prototype.nodeChanged = function (desc, node, attrsBefore) {
+                    this._addCommand(new ChangeNodeCommand(desc, node, attrsBefore));
+                };
+                /**
+                * 向 UndoManager 登记 nodeRemoving （节点将被删除）事件。
+                * 这个方法应该在元素真正被删除之前调用。
+                * 支持Element和Text节点。
+                * @param desc 事件的文字描述
+                * @parem node 将被删除的节点。
+                */
+                UndoManager.prototype.nodeRemoving = function (desc, node) {
+                    var path = DOMUtils.getPath(this.docRoot, node);
+                    this._addCommand(new InsertRemoveNodeCommand(desc, node, false, path));
+                };
+                /**
+                * 向 UndoManager 登记 nodeInserted （节点被插入）事件。
+                * 这个方法应该在元素被插入之后调用。
+                * 支持Element和Text节点。
+                * @param desc 事件的文字描述
+                * @parem node 被插入的节点。
+                */
+                UndoManager.prototype.nodeInserted = function (desc, node) {
+                    var path = DOMUtils.getPath(this.docRoot, node);
+                    this._addCommand(new InsertRemoveNodeCommand(desc, node, true, path));
+                };
+                /**
+                * 执行批量修改动作。
+                * @param desc 此动作的文字描述。
+                * @param action 执行的修改。
+                * @param allowAutoMerging 是否允许与前后的修改自动合并。默认false，即本方法中的修改是独立的。
+                * action是同步执行的。
+                * 如果是在 beginObservation() 和 endObservation() 之间调用此方法，则 action 中只要修改DOM即可；
+                * 否则，还应调用 nodeXXX() 方法登记修改事件。
+                * 当使用Oberserver时，transact期望在调用前mutaion队列是空的，否则transact会抛出异常 （TODO 是否改为自动刷新？）;
+                * 所以如果在transact之外对DOM进行了修改，则必须在下次调用transact之前调用flushMutation()方法或者调用endObservation()。
+                * 可以在 action 参数中嵌套调用 transact，这将导致其修改被合并到外层的 transact 中，desc 和 allowAutoMerging 都采用最外层的，。
+                */
+                UndoManager.prototype.transact = function (desc, action, allowAutoMerging) {
+                    if (allowAutoMerging === void 0) { allowAutoMerging = false; }
+                    // 只考虑最外层 transact() 的 allowAutoMerging 参数
+                    if (this._transDepth === 0) {
+                        if (!allowAutoMerging)
+                            this.interuptAutoMerging();
+                    }
+                    else
+                        this.flushMutations(); //嵌套调用transact()时，上一次的修改可能还没有产生事件。
+                    ++this._transDepth;
+                    var obs = this._observer;
+                    var muts;
+                    if (this._isObserving) {
+                        muts = obs.takeRecords();
+                        if (muts && muts.length)
+                            throw new Error('unexpected pending mutations');
+                    }
+                    try {
+                        action();
+                    }
+                    catch (e) {
+                        console.warn(e.stack || e);
+                    }
+                    this.flushMutations();
+                    var newTop = this._undoStack[this._undoPointer - 1];
+                    // 可能在 transact 中没有做修改 ，这时不更改 description
+                    if (this._transDirty)
+                        newTop.description = desc;
+                    --this._transDepth;
+                    if (this._transDepth === 0) {
+                        this._transDirty = false;
+                        if (!allowAutoMerging)
+                            this.interuptAutoMerging();
+                    }
+                };
+                /**
+                * 临时停止监视对DOM的修改，忽略action执行期间对DOM的修改，执行完毕后立即恢复监视。
+                * 如果此时并没有监视DOM，则只是简单地执行action。
+                * 如果在action中调用elemetXXX等方法显式地登记修改，则并不会被忽略。
+                * action是同步执行的。
+                */
+                UndoManager.prototype.ignore = function (action) {
+                    var isobs = this._isObserving;
+                    if (isobs)
+                        this.endObservation();
+                    action();
+                    if (isobs)
+                        this.beginObservation();
+                };
+                Object.defineProperty(UndoManager.prototype, "isObserving", {
+                    /**
+                    * 是否在使用Oberserver
+                    */
+                    get: function () {
+                        return this._isObserving;
+                    },
+                    enumerable: true,
+                    configurable: true
+                });
+                /**
+                * 将mutaion队列中未被登记的DOM修改进行登记，形成undo条目。
+                * 因为MutationObserver报告DOM修改是延迟进行的，所以如果在某个时间点希望所有的修改都已经被登记，则可以调用此方法。
+                * 如果一直使用transact进行修改，则无需使用此方法。
+                */
+                UndoManager.prototype.flushMutations = function () {
+                    if (this._isObserving) {
+                        var muts = this._observer.takeRecords();
+                        if (muts && muts.length)
+                            this._handleMutation(muts);
+                    }
+                };
+                /**
+                * 开始监视DOM修改，自动登记修改动作。
+                */
+                UndoManager.prototype.beginObservation = function () {
+                    //console.log('beginObservation');
+                    if (!this._isObserving) {
+                        this._isObserving = true;
+                        this._observer.observe(this._docRoot, this._observerOptions);
+                    }
+                    else
+                        console.warn('warning: already observing');
+                };
+                /**
+                * 停止监视DOM修改。
+                */
+                UndoManager.prototype.endObservation = function () {
+                    //console.log('endObservation');
+                    if (this._isObserving) {
+                        this.flushMutations();
+                        this._observer.disconnect();
+                        this._isObserving = false;
+                    }
+                    else
+                        console.warn('warning: not observing');
+                };
+                UndoManager.prototype._stackSizeChanged = function () {
+                    this.emit('stackSizeChanged');
+                };
+                UndoManager.prototype._okToMerge = function () {
+                    var now = Date.now();
+                    // console.log('okToMerge:now:' + now + ',last:' + this._lastCommandTime + ',start:' + this._autoMergingStartTime + ',auto:' + this._isAutoMerging);
+                    return this.undoStackSize > 0 && this.redoStackSize === 0 && this._markPointer !== this._undoPointer && (this._transDirty || this._isAutoMerging && this.autoMergingTimeout > (now - this._lastCommandTime) && this.autoMergingMaxTime > (now - this._autoMergingStartTime));
+                };
+                UndoManager.prototype._addCommand = function (cmd) {
+                    cmd.undoManager = this;
+                    var stackSizeChanged = false;
+                    if (this._okToMerge()) {
+                        this._doMerge(cmd);
+                        this._lastCommandTime = Date.now();
+                    }
+                    else {
+                        // 删除过多的条目，小心处理 _markPointer（允许负值）。
+                        if (this._undoPointer >= this.maxStackSize + 10) {
+                            var delCount = this._undoPointer - this.maxStackSize;
+                            this._undoStack.splice(0, delCount);
+                            this._undoPointer = this.maxStackSize;
+                            this._markPointer -= delCount;
+                        }
+                        this._undoStack.length = this._undoPointer;
+                        this._undoStack.push(cmd);
+                        this._undoPointer++;
+                        stackSizeChanged = true;
+                        if (this._isAutoMerging)
+                            this._autoMergingStartTime = this._lastCommandTime = Date.now();
+                    }
+                    if (this._transDepth > 0)
+                        this._transDirty = true;
+                    stackSizeChanged && this._stackSizeChanged();
+                };
+                UndoManager.prototype._doMerge = function (cmd) {
+                    var i = this._undoPointer - 1;
+                    var top = this._undoStack[i];
+                    if (!top.merge(cmd)) {
+                        var batch = new BatchCommand(top.description); //TODO merge description?
+                        batch.add(top);
+                        batch.add(cmd);
+                        top = batch;
+                        this._undoStack[i] = batch;
+                    }
+                };
+                UndoManager.prototype._fireTreeCreation = function (created) {
+                    if (this.onTreeCreation) {
+                        this.onTreeCreation(created);
+                    }
+                };
+                UndoManager.prototype._handleMutation = function (muts) {
+                    for (var j = 0; j < muts.length; j++) {
+                        var mut = muts[j];
+                        var targ = mut.target;
+                        var oldValues;
+                        switch (mut.type) {
+                            case 'attributes':
+                                oldValues = {};
+                                oldValues[mut.attributeName] = mut.oldValue;
+                                this.nodeChanged(null, targ, oldValues);
+                                break;
+                            case 'characterData':
+                                oldValues = { '#textContent': mut.oldValue };
+                                this.nodeChanged(null, targ, oldValues);
+                                break;
+                            case 'childList':
+                                var cmd = new ChildListMutationCommand(null, mut);
+                                cmd.undoManager = this;
+                                this._addCommand(cmd);
+                                break;
+                        }
+                    }
+                }; //end _handleMutation()
+                return UndoManager;
+            })(mbe_common.EventEmitter);
+            mbe_core.UndoManager = UndoManager; //end class
+            /**
+            * 可撤销命令。
+            * TODO 这个类其实不应该是export的，但似乎ts 0.8不允许export class的成员（即使是私有的）有非export类型
+            */
+            var UndoableCommand = (function () {
+                function UndoableCommand(description) {
+                    this.description = description;
+                }
+                /**
+                * @param[out] created 应用命令时发生子树创建的元素
+                */
+                UndoableCommand.prototype.apply = function (created) {
+                };
+                /**
+                * @param[out] created 撤销命令时发生子树创建的元素
+                */
+                UndoableCommand.prototype.unapply = function (created) {
+                };
+                //elements(): Element[] { throw new Error(); }
+                /**
+                 * 将 cmd 合并到本命令中。如果无法合并返回false。
+                 * 合并可以减少记录的命令数量，提高效率。
+                 * 目前 BatchCommand 总是接受合并，ChangeNodeCommand 可接受对同一节点的 ChangeNodeCommand 的合并，
+                 * 其它情形都无法合并。
+                 */
+                UndoableCommand.prototype.merge = function (cmd) {
+                    return false;
+                };
+                UndoableCommand.prototype.minimize = function () {
+                };
+                return UndoableCommand;
+            })();
+            mbe_core.UndoableCommand = UndoableCommand;
+            var ChangeNodeCommand = (function (_super) {
+                __extends(ChangeNodeCommand, _super);
+                /**
+                * @parem _node 修改后的节点（支持Element或Text）
+                * @param _attrsBefore 元素修改前的HTML/XML属性值；有几个以"#"开始的特殊属性，会被映射到同名的DOM对象的属性（去掉#）：
+                * '#innerHTML'
+                * '#textContent'
+                * svg-edit 的 ChangeElementCommand 使用 #text 而不是 #textContent，另外还支持 #href；还处理了几何变换。
+                * 注意：没有提供'#outerHTML'，因为修改outerHTML可能导致本元素被删除。
+                */
+                function ChangeNodeCommand(desc, _node, _attrsBefore) {
+                    _super.call(this, desc || 'change');
+                    this._node = _node;
+                    this._attrsBefore = _attrsBefore;
+                    this._path = null;
+                    this._attrsAfter = {};
+                    for (var aname in _attrsBefore) {
+                        this._updateAttrAfter(aname);
+                    }
+                }
+                ChangeNodeCommand.prototype.merge = function (cmd) {
+                    if (!(cmd instanceof ChangeNodeCommand))
+                        return false;
+                    var cnc = cmd;
+                    if (cnc._node != this._node)
+                        return false;
+                    // TODO 更好的描述策略？字符串拼接可能效率偏低。
+                    this.description = cnc.description;
+                    var oldBefore = this._attrsBefore, after = this._attrsAfter;
+                    var before = cnc._attrsBefore;
+                    for (var aname in before) {
+                        if (!oldBefore.hasOwnProperty(aname))
+                            oldBefore[aname] = before[aname];
+                        this._updateAttrAfter(aname);
+                    }
+                    return true;
+                };
+                ChangeNodeCommand.prototype.minimize = function () {
+                    if (!this._path)
+                        this._path = DOMUtils.getPath(this.undoManager.docRoot, this._node);
+                    this._node = null;
+                };
+                ChangeNodeCommand.prototype.apply = function (created) {
+                    this._change(this._attrsAfter, created);
+                };
+                ChangeNodeCommand.prototype.unapply = function (created) {
+                    this._change(this._attrsBefore, created);
+                };
+                ChangeNodeCommand.prototype._updateAttrAfter = function (aname) {
+                    switch (aname) {
+                        case '#innerHTML':
+                        case '#textContent':
+                            this._attrsAfter[aname] = this._node[aname.substring(1)];
+                            break;
+                        default:
+                            this._attrsAfter[aname] = this._node.getAttribute(aname);
+                    }
+                };
+                ChangeNodeCommand.prototype._change = function (attrs, created) {
+                    var el = (this._node || DOMUtils.getNodeByPath(this.undoManager.docRoot, this._path));
+                    var treeCreated = false;
+                    for (var aname in attrs) {
+                        var val = attrs[aname];
+                        switch (aname) {
+                            case '#innerHTML':
+                                //case '#outerHTML':
+                                treeCreated = true;
+                            case '#textContent':
+                                el[aname.substring(1)] = val;
+                                break;
+                            default:
+                                if (val === null)
+                                    el.removeAttribute(aname);
+                                else
+                                    el.setAttribute(aname, val);
+                        }
+                        if (treeCreated && created)
+                            created.push(el);
+                    }
+                };
+                return ChangeNodeCommand;
+            })(UndoableCommand); //end class ChangeElementCommand
+            var InsertRemoveNodeCommand = (function (_super) {
+                __extends(InsertRemoveNodeCommand, _super);
+                /**
+                * @parem _node 被插入或删除的节点（支持Element和Text）
+                * @param _insert 此命令是插入还是删除
+                * @param _path 被删除的元素在删除前的路径,被添加元素添加后的路径。
+                */
+                function InsertRemoveNodeCommand(desc, _node, _insert, _path) {
+                    _super.call(this, desc || (_insert ? 'insert' : 'remove'));
+                    this._node = _node;
+                    this._insert = _insert;
+                    this._path = _path;
+                    //private _path: number[] = null;
+                    this._html = null;
+                }
+                InsertRemoveNodeCommand.prototype.minimize = function () {
+                    //TODO:判断节点是否被剥离（dettached），如果不是就不做最小化
+                    //this._elem = null;
+                    //this._parent = null;
+                    //this._html = (<HTMLElement>this._elem).outerHTML;
+                };
+                InsertRemoveNodeCommand.prototype.apply = function (created) {
+                    if (this._insert)
+                        this._doInsert();
+                    else
+                        this._doRemove();
+                };
+                InsertRemoveNodeCommand.prototype.unapply = function (created) {
+                    if (this._insert)
+                        this._doRemove();
+                    else
+                        this._doInsert();
+                };
+                InsertRemoveNodeCommand.prototype._doRemove = function (created) {
+                    var node = DOMUtils.getNodeByPath(this.undoManager.docRoot, this._path);
+                    this._node = node;
+                    node.parentNode.removeChild(node);
+                };
+                InsertRemoveNodeCommand.prototype._doInsert = function (created) {
+                    var next = DOMUtils.getNodeByPath(this.undoManager.docRoot, this._path);
+                    //if (next === null), _elem inserted as last child
+                    if (next)
+                        next.parentNode.insertBefore(this._node, next);
+                    else {
+                        var parent = DOMUtils.getNodeByPath(this.undoManager.docRoot, this._path, 0, this._path.length - 1);
+                        parent.appendChild(this._node);
+                    }
+                };
+                return InsertRemoveNodeCommand;
+            })(UndoableCommand);
+            /**
+             * 用于处理 type === 'childList' 的 MutationRecord。
+             * 基于路径的命令，如 InsertRemoveNodeCommand 在前驱节点接下来也被立即删除的
+             * 情况下会失败（因为取不到准确的路径），所以这个命令基于双亲/后继节点。
+             * 由于双亲/后继节点必须被保持，所以可能会占用较多内存。
+             * InsertRemoveNodeCommand 现在只用于手工添加的命令。
+             */
+            var ChildListMutationCommand = (function (_super) {
+                __extends(ChildListMutationCommand, _super);
+                function ChildListMutationCommand(desc, mut) {
+                    _super.call(this, desc);
+                    var adds, rms;
+                    adds = this._added = mut.addedNodes;
+                    rms = this._removed = mut.removedNodes;
+                    var _desc;
+                    var hasAdd = adds && adds.length;
+                    var hasRm = rms && rms.length;
+                    if (!desc) {
+                        if (hasAdd && !hasRm)
+                            desc = 'insert';
+                        else if (!hasAdd && hasRm)
+                            desc = 'remove';
+                        else
+                            desc = 'replace';
+                    }
+                    _super.call(this, desc);
+                    this._parent = mut.target;
+                    this._next = mut.nextSibling;
+                }
+                ChildListMutationCommand.prototype.apply = function (created) {
+                    this._removed && this._doRemove(this._removed);
+                    this._added && this._doInsert(this._added);
+                };
+                ChildListMutationCommand.prototype.unapply = function (created) {
+                    this._added && this._doRemove(this._added);
+                    this._removed && this._doInsert(this._removed);
+                };
+                ChildListMutationCommand.prototype._doRemove = function (nodes) {
+                    for (var i = 0; i < nodes.length; i++)
+                        this._parent.removeChild(nodes[i]);
+                };
+                ChildListMutationCommand.prototype._doInsert = function (nodes) {
+                    for (var i = 0; i < nodes.length; i++)
+                        this._parent.insertBefore(nodes[i], this._next);
+                };
+                return ChildListMutationCommand;
+            })(UndoableCommand);
+            var BatchCommand = (function (_super) {
+                __extends(BatchCommand, _super);
+                function BatchCommand(desc) {
+                    _super.call(this, desc);
+                    this.commands = [];
+                }
+                BatchCommand.prototype.apply = function (created) {
+                    var cmds = this.commands;
+                    var buf = [];
+                    for (var i = 0; i < cmds.length; i++) {
+                        cmds[i].apply(buf);
+                        if (created && buf.length > 0)
+                            created = created.concat(buf);
+                    }
+                };
+                BatchCommand.prototype.unapply = function (created) {
+                    var cmds = this.commands;
+                    var buf = [];
+                    for (var i = cmds.length - 1; i >= 0; i--) {
+                        cmds[i].unapply(buf);
+                        if (created && buf.length > 0)
+                            created = created.concat(buf);
+                    }
+                };
+                BatchCommand.prototype.merge = function (cmd) {
+                    var _this = this;
+                    if (cmd instanceof BatchCommand) {
+                        cmd.commands.forEach(function (it) { return _this.merge(it); });
+                        return true;
+                    }
+                    var cmds = this.commands;
+                    for (var i = cmds.length - 1; i >= 0; i--) {
+                        if (cmds[i].merge(cmd))
+                            return true;
+                    }
+                    cmds.push(cmd);
+                    return true;
+                };
+                BatchCommand.prototype.add = function (cmd) {
+                    this.commands.push(cmd);
+                };
+                BatchCommand.prototype.minimize = function () {
+                    var cmds = this.commands;
+                    for (var i = cmds.length; i >= 0; i--) {
+                        cmds[i].minimize();
+                    }
+                };
+                return BatchCommand;
+            })(UndoableCommand);
+        })(mbe_core || (mbe_core = {}));
+
+    </script>
+</body>
+</html>

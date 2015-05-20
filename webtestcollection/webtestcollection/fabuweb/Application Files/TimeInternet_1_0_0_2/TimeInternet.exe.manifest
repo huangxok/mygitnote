@@ -1,0 +1,65 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<asmv1:assembly xsi:schemaLocation="urn:schemas-microsoft-com:asm.v1 assembly.adaptive.xsd" manifestVersion="1.0" xmlns:asmv1="urn:schemas-microsoft-com:asm.v1" xmlns="urn:schemas-microsoft-com:asm.v2" xmlns:asmv2="urn:schemas-microsoft-com:asm.v2" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:co.v1="urn:schemas-microsoft-com:clickonce.v1" xmlns:asmv3="urn:schemas-microsoft-com:asm.v3" xmlns:dsig="http://www.w3.org/2000/09/xmldsig#" xmlns:co.v2="urn:schemas-microsoft-com:clickonce.v2">
+  <asmv1:assemblyIdentity name="TimeInternet.exe" version="1.0.0.2" publicKeyToken="0c9f4afa177514b7" language="neutral" processorArchitecture="msil" type="win32" />
+  <application />
+  <entryPoint>
+    <assemblyIdentity name="TimeInternet" version="1.0.0.0" language="neutral" processorArchitecture="msil" />
+    <commandLine file="TimeInternet.exe" parameters="" />
+  </entryPoint>
+  <trustInfo>
+    <security>
+      <applicationRequestMinimum>
+        <PermissionSet Unrestricted="true" ID="Custom" SameSite="site" />
+        <defaultAssemblyRequest permissionSetReference="Custom" />
+      </applicationRequestMinimum>
+      <requestedPrivileges xmlns="urn:schemas-microsoft-com:asm.v3">
+        <!--
+          UAC 清单选项
+          如果要更改 Windows 用户帐户控制级别，请用以下节点之一替换
+          requestedExecutionLevel 节点。
+
+        <requestedExecutionLevel  level="asInvoker" uiAccess="false" />
+        <requestedExecutionLevel  level="requireAdministrator" uiAccess="false" />
+        <requestedExecutionLevel  level="highestAvailable" uiAccess="false" />
+
+          如果要利用文件和注册表虚拟化提供
+          向后兼容性，请删除 requestedExecutionLevel 节点。
+    -->
+        <requestedExecutionLevel level="asInvoker" uiAccess="false" />
+      </requestedPrivileges>
+    </security>
+  </trustInfo>
+  <dependency>
+    <dependentOS>
+      <osVersionInfo>
+        <os majorVersion="5" minorVersion="1" buildNumber="2600" servicePackMajor="0" />
+      </osVersionInfo>
+    </dependentOS>
+  </dependency>
+  <dependency>
+    <dependentAssembly dependencyType="preRequisite" allowDelayedBinding="true">
+      <assemblyIdentity name="Microsoft.Windows.CommonLanguageRuntime" version="4.0.30319.0" />
+    </dependentAssembly>
+  </dependency>
+  <dependency>
+    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="TimeInternet.exe" size="19456">
+      <assemblyIdentity name="TimeInternet" version="1.0.0.0" language="neutral" processorArchitecture="msil" />
+      <hash>
+        <dsig:Transforms>
+          <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
+        </dsig:Transforms>
+        <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha1" />
+        <dsig:DigestValue>EUPsOA9MHYa9r1Pq6hPSI4wO8D0=</dsig:DigestValue>
+      </hash>
+    </dependentAssembly>
+  </dependency>
+  <file name="num.txt" size="4">
+    <hash>
+      <dsig:Transforms>
+        <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
+      </dsig:Transforms>
+      <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha1" />
+      <dsig:DigestValue>6sPYZumRlns4Xz3SLaJeQQ2Pf0k=</dsig:DigestValue>
+    </hash>
+  </file>
+<publisherIdentity name="CN=WANGLIN\HeYanJun" issuerKeyHash="dba81ba238eb472679cd6d42cc09cec1e8286bf3" /><Signature Id="StrongNameSignature" xmlns="http://www.w3.org/2000/09/xmldsig#"><SignedInfo><CanonicalizationMethod Algorithm="http://www.w3.org/2001/10/xml-exc-c14n#" /><SignatureMethod Algorithm="http://www.w3.org/2000/09/xmldsig#rsa-sha1" /><Reference URI=""><Transforms><Transform Algorithm="http://www.w3.org/2000/09/xmldsig#enveloped-signature" /><Transform Algorithm="http://www.w3.org/2001/10/xml-exc-c14n#" /></Transforms><DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha1" /><DigestValue>koMdERVTtN5rOAsVG+SCJ52gKBc=</DigestValue></Reference></SignedInfo><SignatureValue>Xg+ZBYUgZP1wpyQc3K0IuNDNil+sbxYjcWdKcwBHGb1DjvCymFRBMqtfpZOBDDa2Xgnd4kXmcEV4uNM67xagOOWlYRtdC9tQbRkWtBV+i4lMD+WPmez5+HwMtby7ipLDB4n22o3h7DKB4PR2nLNiGQ5xglNDOMXokV/kIyiZapA=</SignatureValue><KeyInfo Id="StrongNameKeyInfo"><KeyValue><RSAKeyValue><Modulus>vg5RVfEds2xsJX8tk98psNRvJ2LtnsLSmqTgxRrAjKdkYa+g9XhYCsJei81lStUTFZBm1NNc+zvCr7nVzYABHVaLbB+fvI1bhycVC1WWMBE+cmAAPzOUSqX47lFyAoD2bBesntKzQNglL2A8FtyOtxmtzMURZamLnKSwbtHgRkk=</Modulus><Exponent>AQAB</Exponent></RSAKeyValue></KeyValue><msrel:RelData xmlns:msrel="http://schemas.microsoft.com/windows/rel/2005/reldata"><r:license xmlns:r="urn:mpeg:mpeg21:2003:01-REL-R-NS" xmlns:as="http://schemas.microsoft.com/windows/pki/2005/Authenticode"><r:grant><as:ManifestInformation Hash="1728a09d2782e41b150b386bdeb45315111d8392" Description="" Url=""><as:assemblyIdentity name="TimeInternet.exe" version="1.0.0.2" publicKeyToken="0c9f4afa177514b7" language="neutral" processorArchitecture="msil" type="win32" /></as:ManifestInformation><as:SignedBy /><as:AuthenticodePublisher><as:X509SubjectName>CN=WANGLIN\HeYanJun</as:X509SubjectName></as:AuthenticodePublisher></r:grant><r:issuer><Signature Id="AuthenticodeSignature" xmlns="http://www.w3.org/2000/09/xmldsig#"><SignedInfo><CanonicalizationMethod Algorithm="http://www.w3.org/2001/10/xml-exc-c14n#" /><SignatureMethod Algorithm="http://www.w3.org/2000/09/xmldsig#rsa-sha1" /><Reference URI=""><Transforms><Transform Algorithm="http://www.w3.org/2000/09/xmldsig#enveloped-signature" /><Transform Algorithm="http://www.w3.org/2001/10/xml-exc-c14n#" /></Transforms><DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha1" /><DigestValue>FlsQ2EWHoINA04F0h8FvMpQ2G6Y=</DigestValue></Reference></SignedInfo><SignatureValue>CfB+fKI5kJ3NdbMF945hGlgjAB0GH4y2QwF4ymBdhabmg7YJuiA08sopuwJBmfI2fETIuUIhRk4jCgAj8USrIDa/8qDzr8GEzoRtxgDEChyhiSRHDSjdT2QivpKg81EGHMHductkxZW+LDKnrMn2vsoMlhS8ffYGo/7OuUS68o0=</SignatureValue><KeyInfo><KeyValue><RSAKeyValue><Modulus>vg5RVfEds2xsJX8tk98psNRvJ2LtnsLSmqTgxRrAjKdkYa+g9XhYCsJei81lStUTFZBm1NNc+zvCr7nVzYABHVaLbB+fvI1bhycVC1WWMBE+cmAAPzOUSqX47lFyAoD2bBesntKzQNglL2A8FtyOtxmtzMURZamLnKSwbtHgRkk=</Modulus><Exponent>AQAB</Exponent></RSAKeyValue></KeyValue><X509Data><X509Certificate>MIIB2TCCAUKgAwIBAgIQW35DtlYvDYVNnMWG2OMyLjANBgkqhkiG9w0BAQUFADArMSkwJwYDVQQDHiAAVwBBAE4ARwBMAEkATgBcAEgAZQBZAGEAbgBKAHUAbjAeFw0xNDA2MjcwNjQ0MjNaFw0xNTA2MjcxMjQ0MjNaMCsxKTAnBgNVBAMeIABXAEEATgBHAEwASQBOAFwASABlAFkAYQBuAEoAdQBuMIGfMA0GCSqGSIb3DQEBAQUAA4GNADCBiQKBgQC+DlFV8R2zbGwlfy2T3ymw1G8nYu2ewtKapODFGsCMp2Rhr6D1eFgKwl6LzWVK1RMVkGbU01z7O8KvudXNgAEdVotsH5+8jVuHJxULVZYwET5yYAA/M5RKpfjuUXICgPZsF6ye0rNA2CUvYDwW3I63Ga3MxRFlqYucpLBu0eBGSQIDAQABMA0GCSqGSIb3DQEBBQUAA4GBALTOSrWKjJcBDkmdpun7kFN7GMkVm+Rfellt9fFNq7LSfEhTVoxK1iWLFQO/xFJxU4a+zuuSjDAXCjzF1n7DTdIJU5TJsnQ+ItBuUTtQNFWwik1QugFRKGwl5htLupiayp/ty47QkZ58dYGFLSG6del6R+EJolwGMNyAHNerg5Ua</X509Certificate></X509Data></KeyInfo></Signature></r:issuer></r:license></msrel:RelData></KeyInfo></Signature></asmv1:assembly>

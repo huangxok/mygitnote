@@ -1,0 +1,110 @@
+﻿<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <title></title>
+</head>
+<body>
+
+    <script>
+        //子元素变动
+        var callback = function (records) {
+            records.map(function (record) {
+                console.group("字符串");
+                console.log('Mutation type: ' + record.type);
+                console.log('Mutation target: ' + record.target.id);
+                console.log('Mutation addedNodes: ' + record.addedNodes);
+                console.log('Mutation removeNodes: ' + record.removeNodes);
+                console.log('Mutation previousSibling: ' + record.previousSibling);
+                console.log('Mutation nextSibling: ' + record.nextSibling);
+                console.log('Mutation attributeName: ' + record.attributeName);
+                console.log('Mutation oldValue: ' + record.oldValue);
+                console.groupEnd("字符串");
+            });
+        };
+        var options = {
+            childList: true,
+            attributes: true,
+            subtree: true,
+            characterData: true
+        }
+        var observer = new MutationObserver(callback);
+        observer.observe(document.body, options)
+    </script>
+    <script>
+        //属性变动
+        var callback = function (records) {
+            records.map(function (record) {
+                console.log('Previous attribute value: ' + record.oldValue);
+            });
+        };
+
+        var mo = new MutationObserver(callback);
+
+        var element = document.getElementById('#my_element');
+
+        var options = {
+            'attributes': true,
+            'attributeOldValue': true
+        }
+
+        mo.observe(element, options);
+
+    </script>
+    <script>
+        //使用MutationObserver对象封装一个监听DOM生成的函数。
+        (function (win) {
+            'use strict';
+
+            var listeners = [];
+            var doc = win.document;
+            var MutationObserver = win.MutationObserver || win.WebKitMutationObserver;
+            var observer;
+
+            function ready(selector, fn) {
+                // 储存选择器和回调函数
+                listeners.push({
+                    selector: selector,
+                    fn: fn
+                });
+                if (!observer) {
+                    // 监听document变化
+                    observer = new MutationObserver(check);
+                    observer.observe(doc.documentElement, {
+                        childList: true,
+                        subtree: true
+                    });
+                }
+                // 检查该元素是否已经在DOM中
+                check();
+            }
+
+            function check() {
+                // 检查DOM元素是否匹配已储存的元素
+                for (var i = 0; i < listeners.length; i++) {
+                    var listener = listeners[i];
+                    // 检查指定元素是否有匹配
+                    var elements = doc.querySelectorAll(listener.selector);
+                    for (var j = 0; j < elements.length; j++) {
+                        var element = elements[j];
+                        // 确保回调函数只会对该元素调用一次
+                        if (!element.ready) {
+                            element.ready = true;
+                            // 对该元素调用回调函数
+                            listener.fn.call(element, element);
+                        }
+                    }
+                }
+            }
+
+            // 对外暴露ready
+            win.ready = ready;
+
+        })(this);
+
+        ready('.foo', function (element) {
+            // ...
+        });
+
+    </script>
+</body>
+</html>

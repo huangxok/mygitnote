@@ -1,0 +1,158 @@
+﻿<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title></title>
+    <!--  <script>
+        var person = [
+            { id: "1", name: "zhangsan1", content: "I am zhangsan1" },
+            { id: "2", name: "zhangsan2", content: "I am zhangsan2" },
+            { id: "3", name: "zhangsan3", content: "I am zhangsan3" },
+            { id: "4", name: "zhangsan4", content: "I am zhangsan4" },
+            { id: "5", name: "zhangsan5", content: "I am zhangsan5" },
+            { id: "6", name: "zhangsan6", content: "I am zhangsan6" }
+        ];
+        function Init() {
+            var divleft = document.getElementById("divleft");
+            for (var i = 0; i < person.length; i++) {
+                //新建一个人的对象的个数的div
+                var _div = document.createElement("div");
+                _div.style.cssText = "width:300px; height:30px;line-height:30px; border:1px solid silver;margin:10px;";
+
+                //新建装人名的div
+                var _name = document.createElement("div");
+                _name.style.cssText = "  height:30px;line-height:30px;float:left;margin-left:10px;";
+                //_name 这个div的内容为 第i个人的名字 
+                _name.innerHTML = person[i].name;
+                //将_name 加入到 人对象这个div中
+                _div.appendChild(_name);
+
+                //新建一个content的div
+                var _ct = document.createElement("div");
+                _ct.style.cssText = " height:30px;line-height:30px;float:left;margin-left:10px;";
+                _ct.innerHTML = person[i].content;
+                _div.appendChild(_ct);
+
+                //新建一个带+号的div
+                var _x = document.createElement("div");
+                _x.style.cssText = " cursor:pointer;height:30px;line-height:30px;float:left;margin-left:10px;";
+                _x.innerHTML = "+";
+                _div.appendChild(_x);
+
+                add(_div, _x);
+
+                divleft.appendChild(_div);
+            }
+        }
+        function add(d, x) {
+            x.onclick = function () {
+                d.parent.appendChild(d);
+            }
+        }
+    </script>-->
+    <script>
+
+        function drclick() {
+            var selc = [];
+            var sel = document.getElementById("sleft");
+
+            for (var i = 0; i < sel.options.length; i++) {
+                if (sel.options[i].selected == true) {
+
+                    //document.getElementById("sright").appendChild(sel.options[i])
+                    selc.push(sel.options[i].cloneNode(true));
+                    sel.removeChild(sel.options[i]);
+                }
+            }
+            for (var i = 0; i < selc.length; i++) {
+                document.getElementById("sright").appendChild(selc[i]);
+            }
+
+
+        }
+        function dlclick() {
+            var selc = [];
+            var sel = document.getElementById("sright");
+
+            for (var i = 0; i < sel.options.length; i++) {
+                if (sel.options[i].selected == true) {
+
+                    //document.getElementById("sright").appendChild(sel.options[i])
+                    selc.push(sel.options[i].cloneNode(true));
+                    sel.removeChild(sel.options[i]);
+                }
+            }
+            for (var i = 0; i < selc.length; i++) {
+                document.getElementById("sleft").appendChild(selc[i]);
+            }
+        }
+    </script>
+    <style type="text/css">
+        #ulll {
+            list-style: none;
+            color: #FF0000;
+        }
+
+            #ulll li div:last-child {
+                margin-left: 200px;
+            }
+    </style>
+</head>
+<body>
+    <audio  autoplay="autoplay" controls="controls" >
+        <source src="刘若英 - 原来你也在这里.mp3" />
+        <source src="Hint.WAV" />
+        
+    </audio>
+    <div id="divleft" style="float: left; width: 300px; height: 800px; background-color: #ff6a00">
+        <select id="sleft" multiple="multiple" style="height: 300px;">
+            <option value="1" draggable="true">张三</option>
+            <option value="2" draggable="true">李四</option>
+            <option value="3" draggable="true">王麻子</option>
+            <option value="4" draggable="true">六七</option>
+            <option value="5" draggable="true">巴沟</option>
+            <option value="6" draggable="true">失忆</option>
+        </select>
+        <ul id="ulll">
+            <li style="width: 1000px;">
+                <div style="float: left">个人搬家</div>
+                <div style="">2012-02-02</div>
+            </li>
+            <li style="width: 1000px;">
+                <div style="float: left">个人搬家</div>
+                <div>2012-02-02</div>
+            </li>
+            <li style="width: 1000px;">
+                <div style="float: left">个人搬家</div>
+                <div>2012-02-02</div>
+            </li>
+            <li style="width: 1000px;">
+                <div style="float: left">个人搬家</div>
+                <div>2012-02-02</div>
+            </li>
+            <li style="width: 1000px;">
+                <div style="float: left">个人搬家</div>
+                <div>2012-02-02</div>
+            </li>
+        </ul>
+    </div>
+    <div style="float: left; width: 100px; height: 800px;">
+        <div id="dr" onclick="drclick();" style="width: 100px; height: 100px; background-color: #9b653f">
+            》》
+        </div>
+        <div id="dl" onclick="dlclick();" style="width: 100px; height: 100px; background-color: #00ff90">
+            《《
+        </div>
+    </div>
+    <div id="divright" style="float: left; margin: 0 0 0 5px; width: 300px; height: 800px; background-color: #ff6a00">
+        <select id="sright" multiple="multiple" style="height: 300px;">
+            <!--<option value="1">幺儿</option>
+            <option value="2">三儿</option>
+            <option value="3">死而</option>
+            <option value="4">无二</option>
+            <option value="6">可能</option>
+            <option value="7">随风倒</option>-->
+        </select>
+    </div>
+</body>
+</html>

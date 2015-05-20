@@ -1,0 +1,163 @@
+﻿<!DOCTYPE html>
+<html ng-app="myapp" xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <title></title>
+    <script src="angular.min.js"></script>
+</head>
+<body>
+
+    <div ng-sparkline ng-city="San Francisco" width='400'>
+        <h3>A custom view of the weather in San Francisco</h3>
+    </div>
+    <script>
+        var app = angular.module('myapp', []);
+        app.directive('ngSparkline', function () {
+            var url = "http://api.openweathermap.org/data/2.5/forecast/daily?mode=json&units=imperial&cnt=14&callback=JSON_CALLBACK&q=";
+            return {
+                restrict: 'A',
+                require: '^ngCity',
+                scope: {
+                    ngCity: '@'
+                },
+                template: '<div class="sparkline"><h4>Weather for {{ngCity}}</h4><div class="graph"></div></div>',
+                //template: '<div class="sparkline"><div ng-transclude></div><div class="graph"></div></div>',
+                controller: ['$scope', '$http', function ($scope, $http) {
+                    $scope.getTemp = function (city) {
+                        $http({
+                            method: 'JSONP',
+                            url: url + city
+                        }).success(function (data) {
+                            var weather = [];
+                            angular.forEach(data.list, function (value) {
+                                weather.push(value);
+                            });
+                            $scope.weather = weather;
+                        });
+                    }
+                }],
+                link: function (scope, iElement, iAttrs, ctrl) {
+                    scope.getTemp(iAttrs.ngCity);
+                    scope.$watch('weather', function (newVal) {
+                        // the `$watch` function will fire even if the
+                        // weather property is undefined, so we'll
+                        // check for it
+                        if (newVal) {
+                            var highs = [],
+                            width = iAttrs.width || 200,
+                            height = iAttrs.height || 80;
+                            angular.forEach(scope.weather, function (value) {
+                                highs.push(value.temp.max);
+                            });
+                            // chart
+                        }
+                    });
+                }
+            }
+        });
+    </script>
+    <script>
+        //restrict option
+        //'A' - <span ng-sparkline></span>
+        //'E' - <ng-sparkline></ng-sparkline>
+        //'C' - <span class="ng-sparkline"></span>
+        //'M' - <!-- directive: ng-sparkline -->
+        //restrict:'EACM';
+
+        //templateUrl  ajax
+        //templateUrl: 'templates/ng-sparkline-template.html'
+
+        //template
+        //template: '<div class="sparkline"><h4>Weather for {{ngCity}}</h4><div class="graph"></div></div>',
+
+        //require option
+        //require:'^ngModel'
+        //app.directive('ngSparkline', function () {
+        //    return {
+        //        restrict: 'A',
+        //        require: '^ngModel',
+        //        template: '<div class="sparkline"><h4>Weather for {{ngModel}}</h4></div>'
+        //    }
+        //});
+
+        //<input type="text" ng-model="city" placeholder="Enter a city" />
+        //<div ng-sparkline ng-model="city"></div>
+
+        //^ -- Look for the controller on parent elements, not just on the local scope
+        //? -- Don't raise an error if the controller isn't found
+
+        //scope
+        //local scope property   局部
+        // @ (or @attr)
+        //Bi-directional binding 双向绑定
+        // =（or =attr）
+        //Parent execution binding 父级
+        // & (or &attr)
+
+        //<input type="text" ng-model="to" />
+        //<!-- Invoke the directive -->
+        //<div scope-example ng-model="to" on-send="sendMail(email)" from-name="ari@fullstack.io" />
+
+        //scope: {
+        //        ngModel: '=',     // Bind the ngModel to the object given
+        //        onSend: '&',      // Pass a reference to the method
+        //        fromName: '@'     // Store the string associated by fromName
+        //}
+
+        //app.directive('ngSparkline', function () {
+        //    return {
+        //        restrict: 'A',
+        //        require: '^ngCity',
+        //        scope: {
+        //            ngCity: '@'
+        //        },
+        //        template: '<div class="sparkline"><h4>Weather for {{ngCity}}</h4></div>',
+        //        controller: ['$scope', '$http', function ($scope, $http) {
+        //            var url = "http://api.openweathermap.org/data/2.5/forecast/daily?mode=json&units=imperial&cnt=7&callback=JSON_CALLBACK&q="
+        //            $scope.getTemp = function (city) {
+        //            $http({
+        //                  method: 'JSONP',
+        //                  url: url + city
+        //              }).success(function (data) {
+        //                  var weather = [];
+        //                  angular.forEach(data.list, function (value) {
+        //                  weather.push(value);
+        //              });
+        //              $scope.weather = weather;
+        //            });
+        //           }
+        //        }],
+        //        link: function (scope, iElement, iAttrs, ctrl) {
+        //            scope.getTemp(iAttrs.ngCity);
+        //        }
+        //    }
+        //});
+
+
+        //require:'^ngModel'
+        //app.directive('ngSparkline', function () {
+        //    return {
+        //        restrict: 'A',
+        //        require: '^ngModel',
+        //        template: '<div class="sparkline"><h4>Weather for {{ngModel}}</h4></div>'
+        //    }
+        //});
+
+        //Transclude option
+        //Although the name sounds complex, transclusion refers to compiling the content of the element and making the source available to the directive. The transcluded function is pre-bound to the calling scope, so it has access to the current calling scope.
+        //transclude: true
+
+        //Replace option
+        //Sometimes it is better to replace the entire DOM object, rather than append the new template to it. AngularJS makes this easy to accomplish by simply adding replace option in the directive description object. Set the replace option to true,
+        //replace: true
+
+        //Priority option
+        //Directives on elements are compiled in a sorted order based on priority. Sometimes it matters what ordered directives are applied. By setting a higher priority, you can almost guarantee the order in which the directives are applied. To set a higher priority of one directive over another, simply add the priority option and set it to a numerical value higher than 0 (the default)
+        //priority: 10
+
+        //Terminal option
+        //terminal: true
+
+    </script>
+
+</body>
+</html>

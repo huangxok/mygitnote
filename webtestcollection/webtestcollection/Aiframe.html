@@ -1,0 +1,27 @@
+﻿<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta http-equiv="content-type" content="text/html; charset=utf-8" />
+    <title>exec main function </title>
+</head>
+
+<body>
+    <script type="text/javascript">
+        debugger;
+        var students = new Array();
+        students[0] = "Lanny";
+        students[1] = "dong";
+        students[2] = "I love you";
+        //var students = new Array();
+        //students.name = "Lanny";
+        //students.name1 = "dong";
+        //students.dec = "I love you";
+        var json = JSON.stringify(students, function (key, value) {
+            debugger;
+            return value.toString().toUpperCase();
+        });
+        console.log(json);
+
+    </script>
+</body>
+</html>

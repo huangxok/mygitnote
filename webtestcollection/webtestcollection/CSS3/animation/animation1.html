@@ -1,0 +1,78 @@
+﻿<!doctype html>
+<html>
+<head>
+    <title>CSS animations: Animation events</title>
+    <style type="text/css">
+        .slidein {
+            -moz-animation-duration: 3s;
+            -webkit-animation-duration: 3s;
+            -moz-animation-name: slidein;
+            -webkit-animation-name: slidein;
+            -moz-animation-iteration-count: infinite;
+            -webkit-animation-iteration-count: infinite;
+            -moz-animation-direction: alternate;
+            -webkit-animation-direction: alternate;
+        }
+
+        @-moz-keyframes slidein {
+            from {
+                margin-left: 100%;
+                width: 300%;
+            }
+
+            to {
+                margin-left: 0%;
+                width: 100%;
+            }
+        }
+
+        @-webkit-keyframes slidein {
+            from {
+                margin-left: 100%;
+                width: 300%;
+            }
+
+            to {
+                margin-left: 0%;
+                width: 100%;
+            }
+        }
+    </style>
+    <script>
+        function listener(e) {
+
+            var l = document.createElement("li");
+            switch (e.type) {
+                case "animationstart":
+                    l.innerHTML = "Started: elapsed time is " + e.elapsedTime;
+                    break;
+                case "animationend":
+                    l.innerHTML = "Ended: elapsed time is " + e.elapsedTime;
+                    break;
+                case "animationiteration":
+                    l.innerHTML = "New loop started at time " + e.elapsedTime;
+                    break;
+            }
+            document.getElementById("output").appendChild(l);
+        }
+
+        function setup() {
+            var e = document.getElementById("watchme");
+            e.addEventListener("animationstart", listener, false);
+            e.addEventListener("animationend", listener, false);
+            e.addEventListener("animationiteration", listener, false);
+
+            e.className = "slidein";
+        }
+    </script>
+</head>
+<body onload="setup()">
+    <h1 id="watchme">Watch me move</h1>
+    <p>
+        This example shows how to use CSS animations to make <code>H1</code> elements
+        move across the page.
+    </p>
+    <p>In addition, we output some text each time an animation event fires, so you can see them in action.</p>
+    <ul id="output"></ul>
+</body>
+</html>

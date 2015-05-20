@@ -1,0 +1,106 @@
+﻿<html>
+<head>
+    <title>智能拼图</title>
+    <style>
+        body {
+            text-align: center;
+        }
+
+        table {
+            margin: 100 auto;
+        }
+
+        div {
+            width: 94px;
+            height: 94px;
+            text-align: center;
+            font-size: 48;
+            background-color: red;
+            padding-top: 20;
+            display: none;
+        }
+    </style>
+    <script>
+        function starGame() {
+            document.getElementById("but").style.display = "none";
+            init();
+            for (var i = 1; i < 9; i++) {
+                document.getElementById(i).style.display = "block";
+            }
+            document.getElementById("but2").style.display = "block";
+        }
+        function changeDis(did) {
+            if (Math.abs(did - mubiao) == 1 || Math.abs(did - mubiao) == 3) {
+                var yuandiv = document.getElementById(did);
+                var mubiaodiv = document.getElementById(mubiao);
+                mubiaodiv.innerHTML = yuandiv.innerHTML;
+                yuandiv.innerHTML = "0";
+                mubiaodiv.style.display = "block";
+                yuandiv.style.display = "none";
+                mubiao = did;
+                count++;
+                if (isSuss()) {
+                    endTime = new Date();
+                    time = (endTime.getTime() - beginTime.getTime()) / 1000;
+                    window.alert("Greet!\n时间:" + time + "秒，次数：" + count + "\n重新开始！");
+                    init();
+                }
+            }
+        }
+        function isSuss() {
+            for (var i = 1; i < 9; i++) {
+                if (document.getElementById(i).innerHTML != i) {
+                    return false;
+                }
+            }
+            return true;
+        }
+        function init() {
+            do {
+                var num = [1, 2, 3, 4, 5, 6, 7, 8];
+                for (var i = 8; i > 0; i--) {
+                    var innum = Math.floor(Math.random() * i) + 1;
+                    document.getElementById(i).innerHTML = num[innum - 1];
+                    num.splice(innum - 1, 1);
+                }
+            } while (isSuss());
+            mubiao = 9;
+            count = 0;
+            beginTime = new Date();
+        }
+        function reStart() {
+            init();
+            for (var i = 1; i < 9; i++) {
+                document.getElementById(i).style.display = "block";
+            }
+            with (document.getElementById(9)) {
+                style.display = "none";
+                innerHTML = "0";
+            }
+        }
+
+    </script>
+</head>
+<body>
+    <h1>欢迎玩智能拼图游戏</h1>
+    <button id="but" onclick="starGame()">开始游戏</button>
+    <table>
+        <tr>
+            <td><div id="1" onclick="changeDis(1)">1</div></td>
+            <td><div id="2" onclick="changeDis(2)">2</div></td>
+            <td><div id="3" onclick="changeDis(3)">3</div></td>
+        <tr>
+        <tr>
+            <td><div id="4" onclick="changeDis(4)">4</div></td>
+            <td><div id="5" onclick="changeDis(5)">5</div></td>
+            <td><div id="6" onclick="changeDis(6)">6</div></td>
+        <tr>
+        <tr>
+            <td><div id="7" onclick="changeDis(7)">7</div></td>
+            <td><div id="8" onclick="changeDis(8)">8</div></td>
+            <td><div id="9" onclick="changeDis(9)">0</div></td>
+        <tr>
+    </table>
+    <button id="but2" style="display:none;" onclick="reStart()">重新开始</button>
+</body>
+</html>

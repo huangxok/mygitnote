@@ -1,0 +1,232 @@
+js 剪切板应用clipboardData详细解析
+2014-09-07 21:06　|　231人阅读　|　来源
+注意：ie7，与ie8 对网页有个复制的权限，需在“安全”中的“自定义级别”的脚本中设置
+clipboardData 对象
+提供了对剪贴板的访问。
+三个方法 
+1.clearData(sDataFormat) 删除剪贴板中指定格式的数据。 
+2.getData(sDataFormat) 从剪贴板获取指定格式的数据。 
+3.setData(sDataFormat, sData) 给剪贴板赋予指定格式的数据。返回 true 表示操作成功。
+例子
+<script language="JavaScript"> 
+<!-- 
+var text = "123"; 
+if (!window.clipboardData.setData('Text', text)) // 赋予 text 格式的数据 
+{ 
+     alert("复制失败!"); 
+} 
+text = window.clipboardData.getData('Text'); // 获取 text 格式的数据 
+alert(text); 
+window.clipboardData.clearData('Text'); // 清除 text 格式的数据 
+text = window.clipboardData.getData('Text'); 
+alert(text); 
+//--> 
+</script>
+一些方法：
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd"> 
+<html xmlns="http://www.w3.org/1999/xhtml"> 
+<head> 
+<meta http-equiv="Content-Type" content="text/html; charset=gb2312" /> 
+<title>Js复制代码</title> 
+</head> 
+<body> 
+<p> 
+<input type="button" name="anniu1" onClick='copyToClipBoard()' value="复制专题地址和url地址，传给QQ/MSN上的好友"> 
+<script language="javascript"> 
+   function copyToClipBoard(){ 
+    var clipBoardContent=""; 
+    clipBoardContent+=document.title; 
+    clipBoardContent+=""; 
+    clipBoardContent+=this.location.href; 
+    window.clipboardData.setData("Text",clipBoardContent); 
+    alert("复制成功，请粘贴到你的QQ/MSN上推荐给你的好友"); 
+} 
+</script>   
+<br /> 
+<br />
+
+直接复制url 
+<input type="button" name="anniu2" onClick='copyUrl()' value="复制URL地址"> 
+<script language="javascript"> 
+   function copyUrl() 
+   { 
+    var clipBoardContent=this.location.href; 
+    window.clipboardData.setData("Text",clipBoardContent); 
+    alert("复制成功!"); 
+   } 
+</script> 
+<br/> 
+<br/> 
+点击文本框时,复制文本框里面的内容 
+<input onclick="oCopy(this)" value="你好.要copy的内容!"> 
+<script language="javascript"> 
+function oCopy(obj){ 
+obj.select(); 
+js=obj.createTextRange(); 
+js.execCommand("Copy") 
+alert("复制成功!"); 
+} 
+</script> 
+<br /> 
+<br /> 
+复制文本框或者隐藏域中的内容 
+<script language="javascript"> 
+function CopyUrl(target){ 
+target.value=myimg.value; 
+target.select();   
+js=myimg.createTextRange();   
+js.execCommand("Copy"); 
+alert("复制成功!"); 
+} 
+function AddImg(target){ 
+target.value="[IMG]"+myimg.value+"[/ img]"; 
+target.select(); 
+js=target.createTextRange();   
+js.execCommand("Copy"); 
+alert("复制成功!"); 
+} 
+</script>
+<input name=myimg type=hidden id=myimg value="http://pmp.www.jb51.net" /> 
+<input name=imgurl type=text size=32 value="http://pmp.www.jb51.net" /> 
+<input type=button value="点击这里复制本站地址" onclick="CopyUrl(imgurl);" />
+
+<br /> 
+<br/> 
+复制span标记中的内容 
+<script type="text/javascript"> 
+</script> 
+<br /> 
+<br /> 
+<script type="text/javascript">function copyText(obj)   
+{ 
+var rng = document.body.createTextRange(); 
+rng.moveToElementText(obj); 
+rng.scrollIntoView(); 
+rng.select(); 
+rng.execCommand("Copy"); 
+rng.collapse(false); 
+alert("复制成功!"); 
+} 
+</script>
+以下是代码片段：<br /> 
+<br /> 
+<span id="tbid">http://pmp.www.jb51.net</span>   
+[<a href="#" onclick="copyText(document.all.tbid)">点击复制</a>]<br/><br/> 
+<span id="tbid2">http://www.www.jb51.net/pmp</span>   
+[<a href="#" onclick="copyText(document.all.tbid2)">点击复制</a>]<br/><br/>
+</p> 
+</body> 
+</html>
+还有一种方法：
+function copyQQ(qq){
+var obj=document.getElementById(qq);
+obj.select();
+     js=obj.createTextRange();
+     js.execCommand("Copy");
+     alert("代码已经被成功复制！");
+}
+
+//设置复制内容 附加 本网站的URL
+        function SetCopyContent() {
+            window.event.returnValue = false;
+            var content = document.title + "/r/n";
+            content += document.getElementById("txt1").value + "/r/n";
+            content += "本资源来自 " + this.location.href;
+            window.clipboardData.setData('Text', content);
+            alert("复制成功，请粘贴到你的QQ/MSN上推荐给你的好友");
+        }
+调用：
+<input id="txt1" type="text" value="Hello World!"  onclick="getTxtSelect(event)"/>
+<input type="button" value="复制文本框中的值"  onclick="SetCopyContent();" />
+代码如下:
+
+<html xmlns="http://www.w3.org/1999/xhtml"> 
+<head runat="server"> 
+    <title>Window对象的属性02</title> 
+    <script language="javascript" type="text/javascript"> 
+        /* 
+            window.screen对象：屏幕对象，包含了屏幕的相关信息。 
+            window.clipboardData对象：剪贴板对象，对剪贴板操作的对象。(在网页内只能支持复制或者设置文本格式的) 
+            clearData("Text"):清空剪贴板 
+            getData("Text"):读取剪贴板的值，在IE中只能支持Text文本格式 
+            setData("Text",value):设置剪贴板中的值 
+            案例：复制地址给好友，见备注 
+            禁止复制：body oncopy事件中 设置 return false； 
+            oncopy、onpase事件：复制、粘贴事件，可用于多数控件 
+        */ 
+
+        //屏幕分辨率 
+        function screenInfo() {
+            if (window.screen.width < 1024 || window.screen.height < 768) {
+                window.alert("您的电脑属于史前产物！");
+                return;
+            }
+            window.alert("您的分辨率是：" + window.screen.width + " " + window.screen.height);
+        }
+        //复制地址给好友
+        function operClipBoard() {
+            var divObj = document.getElementById("divClipBoard");
+            var content = divObj.innerText;
+            content = "您复制的内容是：" + content + " \r\n 资源来源：" + window.location.href;
+            window.alert('复制成功！');
+            //客户复制完之后，这个属性才会显示内容
+            window.alert(window.clipboardData.getData("text"));
+            window.clipboardData.setData("Text",content);
+        }
+        //网页禁止复制
+        function forbidCopy() {
+            window.alert("网页的内容，自能看，不能动！");
+            return false;
+        }
+    </script>
+</head>
+<body onload="screenInfo();" oncopy="forbidCopy();" >
+    <form id="form1" runat="server">
+    <div id="divClipBoard" onclick="operClipBoard();" >
+        http://www.jb51.net
+    </div>
+    <hr />
+    输入密码：
+    <input type="text" oncopy="window.alert('禁止复制!');return false;" />
+    再输入一边密码：
+    <input type="text" onpaste="window.alert('禁止粘贴!');return false;" />
+    </form>
+</body>
+</html>
+
+代码如下:
+
+<html xmlns="http://www.w3.org/1999/xhtml"> 
+<head runat="server"> 
+    <title></title> 
+
+    <script language="javascript" type="text/javascript">
+        /*
+            div 没有oncopy事件
+            body 与 文本框有这个事件
+
+        */
+
+        function OperClipBoard() {
+            window.clipboardData.setData("Text", window.clipboardData.getData("Text") + "\r\n本资源来自:" + window.location.href);
+        }
+        /*
+            流程：先oncopy触发，触发后仅仅是将内容复制到粘贴板，如果需要2次处理的话，等内容复制到粘贴板后，再进行2次操作，也就是对值进行处理后，
+            在赋值操作
+        */
+        function copyContent()
+        {
+            window.setTimeout("OperClipBoard()", 100);
+        }
+    </script>
+</head>
+<body>
+    <form id="form1" runat="server">
+    <div oncopy="copyContent();">
+        Hello MyJSWorld!
+    </div>
+    <br />
+    <input type="text" oncopy="OperClipBoard();" value="Hello MyJSWorld!" />
+    </form>
+</body>
+</html>

@@ -1,0 +1,48 @@
+﻿<!doctype html>
+<html ng-app="myApp">
+<head>
+    <title></title>
+    <!--<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.0.7/angular.min.js"></script>-->
+    <script src="../Scripts/angular.min.js"></script>
+    <script src="js/main.js"></script>
+    <script>
+        //var app = angular.module('myApp', []);
+        app.run(function ($rootScope) {
+            $rootScope.name = "Ari Lerner";
+        });
+        app.controller('MyController', function ($scope) {
+            $scope.person = { name: "Ari Lerner" };
+        });
+        app.controller('ParentController', function ($scope) {
+            $scope.person = { greeted: false };
+        });
+        app.controller('ChildController', function ($scope) {
+            $scope.sayHello = function () {
+                $scope.person.greeted = true;
+            }
+        });
+    </script>
+</head>
+<body>
+    <!--<audio controls="controls"></audio>-->
+    <h2>I am not inside an AngularJS app</h2>
+    <div ng-app="embeddedApp">
+        <h3>Inside an AngularJS app</h3>
+    </div>
+    <div ng-controller="MyController">
+        {{ person.name }}
+    </div>
+    <div ng-controller="ParentController">
+        <div ng-controller="ChildController">
+            <input type="text" ng-model="person.name" placeholder="Name" />
+            <a ng-click="sayHello()">Say hello</a>
+        </div>
+        {{ person }}
+    </div>
+    <div ng-controller="PlayerController">
+        <button ng-click="play()" class="button" ng-show="!playing">Play</button>
+        <button ng-click="stop()" class="button alert" ng-show="playing">Stop</button>
+        Playing audio: <b>{{ playing }}</b><b>{{ audio.src }}</b>
+    </div>
+</body>
+</html>

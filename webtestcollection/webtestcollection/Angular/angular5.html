@@ -1,0 +1,23 @@
+﻿<!DOCTYPE html>
+<html ng-app="myApp" xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <title></title>
+    <script src="angular.min.js"></script>
+</head>
+<body>
+    <ul ng-controller="MyController">
+        <li ng-repeat="p in roommates">{{p.name}}</li>
+    </ul>
+    <script>
+        var app = angular.module('myApp', []);
+        app.controller('MyController', function ($scope) {
+            $scope.roommates = [
+                { name: 'Ari' },
+                { name: 'Q' },
+                { name: 'Sean' },
+                { name: 'Anand' }
+            ];
+        });
+    </script>
+</body>
+</html>

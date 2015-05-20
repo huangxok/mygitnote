@@ -1,0 +1,293 @@
+﻿<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <title></title>
+</head>
+<body>
+    <img src="states1.png" />
+    <script>
+        //状态模式主要解决的是当控制一个对象状态的条件表达式过于复杂时的情况。把状态的判断逻辑转移到表示不同状态的一系列类中，可以把复杂的判断逻辑简化。 看一个例子：
+        var TrafficLight = function () {
+            var count = 0;
+            var currentState = new Red(this);
+
+            this.change = function (state) {
+                // limits number of changes
+                if (count++ >= 10)
+                    return;
+                currentState = state;
+                currentState.go();
+            };
+
+            this.start = function () {
+                currentState.go();
+            };
+        }
+        var Red = function (light) {
+            this.light = light;
+
+            this.go = function () {
+                log.add("Red --> for 1 minute");
+                light.change(new Green(light));
+            }
+        };
+        var Yellow = function (light) {
+            this.light = light;
+
+            this.go = function () {
+                log.add("Yellow --> for 10 seconds");
+                light.change(new Red(light));
+            }
+        };
+        var Green = function (light) {
+            this.light = light;
+
+            this.go = function () {
+                log.add("Green --> for 1 minute");
+                light.change(new Yellow(light));
+            }
+        };
+        var log = (function () {
+            var log = "";
+
+            return {
+                add: function (msg) { log += msg + "\n"; },
+                show: function () { alert(log); log = ""; }
+            }
+        })();
+
+        function run() {
+            var light = new TrafficLight();
+            light.start();
+
+            log.show();
+        }
+        run();
+        //在示例代码中分为三种状态：红色，黄色，绿色
+
+        //我们的例子是一个交通灯（即信号灯对象）有3种不同的状态：红色，黄色和绿色，各有自己的一套规则。规则是这样的：交通灯是红色的。延迟红状态变为绿色状态后。然后，一段时间后，绿色的状态更改为黄色的状态。
+
+        //一个非常短暂的延迟黄色状态变为红色后，等等。
+
+        //需要注意的是，它是对象状态决定下一个状态过渡的重要。这也是对象状态变化，交通灯的当前状态------没有交通灯本身。
+
+        //出于演示的目的，一个内置的计数器记录状态发生变化的数量，否则程序会运行下去。日志功能是一个帮助它收集并显示结果。
+    </script>
+    <script>
+        (function () {
+            //在状态处理类中进行后继状态的维护和转换
+            function NormalVoteState() {
+                this.vote = function (user, voteItem, voteManager) {
+                    voteManager.mapVote[user] = voteItem;
+                    console.log('恭喜你投票成功');
+                    //正常投票完毕，维护下一个状态，同一个人再投票就重复了
+                    voteManager.mapState[user] = new RepeatVoteState();
+                }
+            };
+            function RepeatVoteState() {
+                this.vote = function (user, voteItem, voteManager) {
+                    console.log('请不要重复投票');
+                    if (voteManager.mapVoteCount[user] >= 4) {
+                        voteManager.mapState[user] = new SpliteVoteState();
+                    }
+                }
+            };
+            function SpliteVoteState() {
+                this.vote = function (user, voteItem, voteManager) {
+                    var s = voteManager.mapVote[user];
+                    if (s != null) {
+                        delete voteManager.mapVote[user];
+                    }
+                    console.log('你有恶意刷票行为，取消投票资格')
+                    if (voteManager.mapVoteCount[user] >= 7) {
+                        voteManager.mapState[user] = new BlackVoteState();
+                    }
+                }
+            };
+            function BlackVoteState() {
+                this.vote = function (user, voteItem, voteManager) {
+                    console.log('进入黑名单，将禁止登录和使用本系统');
+                }
+            };
+            function VoteManager() {
+                this.mapState = {};
+                this.mapVote = {};
+                this.mapVoteCount = {};
+                this.vote = function (user, voteItem) {
+                    var oldVoteCount = this.mapVoteCount[user];
+                    if (oldVoteCount == null) {
+                        oldVoteCount = 0;
+                    }
+                    this.mapVoteCount[user] = ++oldVoteCount;
+                    var state = this.mapState[user];
+                    if (state == null) {
+                        state = new NormalVoteState();
+                    }
+                    state.vote(user, voteItem, this);
+
+                }
+            };
+            var vm = new VoteManager();
+            for (var i = 0; i < 8; i++) {
+                vm.vote('ul', 'A');
+            }
+        })()
+        //采用让状态对象来维护和转换状态的调用顺序
+
+        //1）调用上下文的方法来处理业务请求。
+
+        //2）获取State对象。
+
+        //3）委托让相应的状态对象去处理。
+
+        //4）调用方法得到下一个状态方法。
+
+        //5）设置下一个状态方法。
+
+        //6）再到5），直到结束。
+    </script>
+    <img src="states2.png" />
+    <div>
+        Context： 环境，也称上下文，通常用来定义客户感兴趣的接口，同时维护一个具体处理当前状态的实例对象。
+
+        State:状态接口，用来封装与上下文的一个特定状态所对应的行为。
+
+        ConcreteState： 具体实现状态处理的类，每个类实现一个跟上下文相关的状态的具体处理。
+    </div>
+    <script>
+        //模拟工作流中的请假流程，流程是这样的：
+
+        //当某人提出请假申请，先由项目经理审批，
+
+        //如果项目经理不同意，审批就直接结束；
+
+        //如果项目经理同意了，再看请假的天数是否超过3天，项目经理的审批权限只有3天以内，
+
+        //如果请假天数在3天以内，那么审批也直接结束，
+
+        //否则就提交给部门经理，部门经理审核过后，无论是否同意，审批都直接结束。
+        (function () {
+            // 模拟工作流
+
+            // 定义请假单的业务数据模型
+            function LeaveRequestModel() {
+                // 请假人
+                this.user = '';
+                // 请假开始时间
+                this.beginDate = '';
+                // 请假天数
+                this.leaveDays = '';
+                // 审核结果
+                this.result = '';
+            }
+
+            /*
+            请假流程，需项目经理和部门经理审批
+             */
+
+            function LeaveRequestContext2() {
+                this.state = null;
+                // 包含流程处理需要的业务数据对象
+                this.businessVO = null;
+                this.doWork = function () {
+                    if (typeof this.state == 'function') {
+                        this.state = this.state(this);
+                        this.doWork();
+                    }
+                };
+            }
+
+            function projectManagerState(request) {
+                var leaveRequestModel = request.businessVO;
+
+                console.log('项目经理审核中，请稍候。。');
+                console.log(leaveRequestModel.user + '申请从'
+                    + leaveRequestModel.beginDate + '开始请假'
+                    + leaveRequestModel.leaveDays + '天，请项目经理审核（1为同意，2为不同意）');
+
+                var answer = window.prompt('1为同意，2为不同意');
+                var result = answer == 1 ? '同意' : '不同意';
+                leaveRequestModel.result = '项目经理审核结果：' + result;
+
+                var state;
+                if (answer == 1) {
+                    if (leaveRequestModel.leaveDays > 3) {
+                        state = depManagerState;
+                    } else {
+                        state = auditOverState;
+                    }
+                } else {
+                    state = auditOverState;
+                }
+
+                return state;
+            }
+
+            function depManagerState(request) {
+                var leaveRequestModel = request.businessVO;
+
+                console.log('部门经理审核中，请稍候。。');
+                console.log(leaveRequestModel.user + '申请从'
+                    + leaveRequestModel.beginDate + '开始请假'
+                    + leaveRequestModel.leaveDays + '天，请项目经理审核（1为同意，2为不同意）');
+
+                var answer = window.prompt('1为同意，2为不同意');
+                var result = answer == 1 ? '同意' : '不同意';
+                leaveRequestModel.result = '部门经理审核结果：' + result;
+
+                return auditOverState;
+            }
+
+            function auditOverState(request) {
+                var leaveRequestModel = request.businessVO;
+                // do sth
+                console.log(leaveRequestModel.user + '，你的请假申请已经审核结束，结果是：' + leaveRequestModel.result);
+            }
+
+            var lrm = new LeaveRequestModel();
+            lrm.user = '小林';
+            lrm.beginDate = '2014-4-2';
+            lrm.leaveDays = 5;
+
+            var request = new LeaveRequestContext2();
+            request.businessVO = lrm;
+            request.state = projectManagerState;
+
+            request.doWork();
+
+        }());
+
+        //认识状态模式
+        //使用场景
+
+        //State模式在实际使用中比较多，适合"状态的切换"。因为我们经常会使用If else if else 进行状态切换，如果针对状态的这样判断切换反复出现,我们就要联想到是否可以采取State模式了。
+
+        //不只是根据状态，也有根据属性。如果某个对象的属性不同,对象的行为就不一样，这点在Database系统中出现频率比较高，我们经常会在一个数据表的尾部，加上property属性含义的字段，
+
+        //用以标识记录中一些特殊性质的记录，这种属性的改变(切换)又是随时可能发生的,就有可能要使用State。
+
+
+        //状态和行为
+
+        //所谓对象的状态，通常指的就是对象实例的属性的值；而行为指的就是对象的功能，再具体点说，行为大多可以对应到方法上。
+
+        //状态模式的功能就是分离状态的行为，通过维护状态的变化，来调用不同状态对应的不同功能。也就是说，状态和行为是相关联的，它们的关系可以描述为：状态决定行为。
+
+        //由于状态是在运行期被改变的，因此行为也会在运行期根据状态的改变而改变。
+
+        //行为的平行性
+
+        //注意平行线而不是平等性。所谓平行性指的是各个状态的行为所处的层次是一样的，相互独立的、没有关联的，是根据不同的状态来决定到底走平行线的哪一条。
+
+        //行为是不同的，当然对应的实现也是不同的，相互之间是不可替换的。
+
+        //环境和状态处理对象
+
+        //在状态模式中，环境(Context)是持有状态的对象，但是环境(Context)自身并不处理跟状态相关的行为，而是把处理状态的功能委托给了状态对应的状态处理类来处理。
+
+        //在具体的状态处理类中经常需要获取环境(Context)自身的数据，甚至在必要的时候会回调环境(Context)的方法，因此，通常将环境(Context)自身当作一个参数传递给具体的状态处理类。
+
+        //客户端一般只和环境(Context)交互。客户端可以用状态对象来配置一个环境(Context)，一旦配置完毕，就不再需要和状态对象打交道了。客户端通常不负责运行期间状态的维护，也不负责决定后续到底使用哪一个具体的状态处理对象。
+    </script>
+</body>
+</html>

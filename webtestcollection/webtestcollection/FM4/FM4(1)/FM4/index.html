@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta id="meta_viewport" name="viewport" content="width=device-width,initial-scale=1,user-scalable=no" />
+		<meta http-equiv="Expires" CONTENT="0"> 
+		<meta http-equiv="Cache-Control" CONTENT="no-cache"> 
+		<meta http-equiv="Pragma" CONTENT="no-cache"> 
+	<title>无标题文档</title>
+	<link href="css/listStyle.css" rel="stylesheet" type="text/css">
+	<script  src="./javascript/jquery-1.9.1.min.js"></script>
+	<!-- <script  src="./javascript/jquery.cookies.2.2.0.min.js"></script> -->
+	<script  src="./javascript/jpm_fm_2.js"></script>
+	
+</head>
+
+<body>
+	
+	<div class="page" >
+		<!-- 图片部分开始 -->
+		<div class="sound_img_box">
+			<div class="img_title">
+				<a href="index3.html">辑</a>
+				<h2>[金融梦想家] 第一期 许泽玮V</h2>
+			</div>
+			<img class="sound_img" src="./images/soundImg_01.jpg"/>
+			<div class="img_bottom">
+				<audio src="./mp3/Departure0.mp3" id="theAudio" style="display:none;" data-num="10" preload="auto"></audio>
+				<!-- audioNum自定义属性为当前音频存储cookie的name，是显示的期数 -->
+				<div id="audioPlayer">
+					<!-- 进度条部分开始 -->
+					
+					<div id="timer" >
+						<div id="bus" >
+							<div id="mark" >
+									<span id="min">0</span>:<span id="sec">0</span>
+									<div class="mark_icon"></div>
+							</div>
+						</div>
+						<div id="timerTouch"></div><!--2015_4_21-->
+					</div>
+					<!-- 进度条部分结束 #bus进度条，#mark游标-->
+					<!-- 控制部分开始 -->
+					<div class="audioPlayer_Control ">
+						<!-- 播放记录开始 -->
+						<div id="playRecord">
+						播放<br/>
+						记录 
+							<div class="playRecord_icon"></div>
+							<ul id="playRecord_list" style="display:none;">
+								<li>
+									<div>金融梦想家&nbsp <span class="playRecord_num">1</span></div>
+									<div class="last_play">上次播放（<span class="playRecord_min">00</span>:<span class="playRecord_sec">00</span>）</div>
+								</li>
+								<li>
+									<div>金融梦想家&nbsp <span class="playRecord_num">1</span></div>
+									<div class="last_play">上次播放（<span class="playRecord_min">00</span>:<span class="playRecord_sec">00</span>）</div>
+								</li>
+								<li>
+									<div>金融梦想家&nbsp <span class="playRecord_num">1</span></div>
+									<div class="last_play">上次播放（<span class="playRecord_min">00</span>:<span class="playRecord_sec">00</span>）</div>
+								</li>
+							</ul>
+						</div>
+						<!-- 播放记录结束 -->
+						<!-- 开关icon区域 开始 -->
+						<div id="lastAudio"><div></div></div>
+						<div id="PlayOrPause">
+							<div id="playIcon" class="playIcon"></div>
+						</div>
+						<div id="nextAudio">
+							<div></div>
+							<!-- 版本号 -->
+							<span style="display:none;position:absolute;right:5px;">Bate0.1</span>
+						</div>
+						<!-- 开关icon区域 结束 -->
+					</div>
+					<!-- 控制部分结束 -->
+				</div>
+			</div>
+		</div>
+		<!-- 图片部分结束 -->
+		<div class="content">
+			<div class="audio_title">
+				<div class="audio_logo">
+					<img id="logo_img" src="./images/JPM.png">
+				</div>
+				<div class="audio_info">
+					<h1>传媒媒</h1>
+					<h3>邀请业界大咖面对面访谈，介绍介绍介绍介绍介绍介介绍介绍介绍介绍节后介绍绍介绍介介绍介绍介绍介绍节后介绍绍介绍介介绍介绍介绍介绍节后介绍绍介绍介介绍介绍介绍介绍节后介绍绍介绍介介绍介绍介绍介绍节后介绍绍介介绍介绍介绍介绍节后介绍</h3>
+				<div style="clear:both;"></div>
+				</div>
+			<div style="clear:both;"></div>
+			</div>
+			<ul class="review">
+				<li>
+					<div class="review_content_box">
+						<div class="review_user">YDNE</div>
+						<div class="review_content">这个讲话的是不是贷帮网的尹飞</div>
+					</div>
+					<div class="review_info">
+						<span class="review_data">1<span>个月前</span></span>
+						<span class="review_num">1<span>楼</span></span>
+					</div>
+				<div style="clear:both"></div>
+				</li>
+				<li>
+					<div class="review_content_box">
+						<div class="review_user">YDNE</div>
+						<div class="review_content">这个讲话的是不是贷帮网的尹飞</div>
+					</div>
+					<div class="review_info">
+						<span class="review_data">1<span>个月前</span></span>
+						<span class="review_num">1<span>楼</span></span>
+					</div>
+					<div style="clear:both"></div>
+				</li>
+				<li>
+					<div class="review_content_box">
+						<div class="review_user">YDNE</div>
+						<div class="review_content">这个讲话的是不是贷帮网的尹飞这个讲话的是不是贷帮网的尹飞这个讲话的是不是贷帮网的尹飞</div>
+					</div>
+					<div class="review_info">
+						<span class="review_data">1<span>个月前</span></span>
+						<span class="review_num">1<span>楼</span></span>
+					</div>
+					<div style="clear:both"></div>
+				</li>
+				<li>
+					<div class="review_content_box">
+						<div class="review_user">YDNE</div>
+						<div class="review_content">我是结尾</div>
+					</div>
+					<div class="review_info">
+						<span class="review_data">12<span>个月前</span></span>
+						<span class="review_num">100<span>楼</span></span>
+					</div>
+					<div style="clear:both"></div>
+				</li>
+			</ul>
+		</div>
+		<div class="fixed_bottom">
+			<!-- 评论 -->
+			<div id="toComment">
+				<a ></a>
+				<div>评&nbsp论</div>
+			</div>
+			<!-- 分享 -->
+			<div class="shareIt">
+				<a ></a>
+				<div>分&nbsp享</div>
+			</div>
+			<div id="toComment_input_box" style="display:none;">
+				<textarea id="toComment_input" autofocus "></textarea>
+				<!-- 发送由JS切换“评论”到“确定” -->
+			</div>
+		</div>
+		
+	</div>
+</body>
+</html>

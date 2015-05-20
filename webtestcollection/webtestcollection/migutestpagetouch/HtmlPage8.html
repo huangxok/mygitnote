@@ -1,0 +1,42 @@
+﻿<!DOCTYPE html>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <title></title>
+</head>
+
+<script type="text/javascript">
+    nereidFadeObjects = new Object();
+    nereidFadeTimers = new Object();
+    function nereidFade(object, destOp, rate, delta) {
+        if (!document.all)
+            return
+        if (object != "[object]") {  //do this so I can take a string too
+            setTimeout("nereidFade(" + object + "," + destOp + "," + rate + "," + delta + ")", 0);
+            return;
+        }
+        clearTimeout(nereidFadeTimers[object.sourceIndex]);
+        diff = destOp - object.filters.alpha.opacity;
+        direction = 1;
+        if (object.filters.alpha.opacity > destOp) {
+            direction = -1;
+        }
+        delta = Math.min(direction * diff, delta);
+        object.filters.alpha.opacity += direction * delta;
+        if (object.filters.alpha.opacity != destOp) {
+            nereidFadeObjects[object.sourceIndex] = object;
+            nereidFadeTimers[object.sourceIndex] = setTimeout("nereidFade(nereidFadeObjects[" + object.sourceIndex + "]," + destOp + "," + rate + "," + delta + ")", rate);
+        }
+    }
+</script>
+<body>
+    <a href="#" onfocus="if(this.blur)this.blur()">
+        <img onload="if(this.width>600){this.width=600;this.height=this.height*(600/this.width)}"
+            src="Image/ynext.gif"
+            onmouseout="nereidFade(this,20,10,3)"
+            onmouseover="nereidFade(this,100,10,3)"
+            style="FILTER: alpha(opacity=100)" border="0" />鼠标放到图片上
+        
+    </a>
+</body>
+</html>

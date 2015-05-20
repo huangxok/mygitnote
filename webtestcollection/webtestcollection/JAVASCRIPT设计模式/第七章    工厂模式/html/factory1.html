@@ -1,0 +1,90 @@
+﻿<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <title></title>
+</head>
+<body>
+    <script>
+        var Interface = function (name, method) {
+            if (arguments.length != 2) {
+                throw new Error("Interface constructor called with" + arguments.length + "arguments,but expected exactly 2.");
+            }
+            this.name = name;
+            this.methods = [];
+            for (var i = 0, len = method.length; i < len; i++) {
+                if (typeof method[i] !== "string") {
+                    throw new Error("Interface constructor expects method names to be" + "pass in as a string");
+                }
+                this.methods.push(method[i]);
+            }
+            return this;
+        }
+        Interface.ensureImplements = function (object) {
+            if (arguments.length < 2) {
+                throw new Error("Function Interface.ensureImplements called with" + arguments.length + "arguments,but expected at least 2.");
+            }
+            for (var i = 1, len = arguments.length; i < len; i++) {
+                var interfaces = arguments[i];
+                if (interfaces.constructor !== Interface) {
+                    throw new Error("Function Interface.ensureImpments expects arguments" + "two and above to be instances of Interface");
+                }
+                for (var j = 0, methodslen = interfaces.methods.length; j < methodslen; i++) {
+                    var method = interfaces.methods[j];
+                    if (!object[method] || typeof object[method] !== "function") {
+                        throw new Error("Function Interface.ensureImplements:object"
+                            + "does not implement the"
+                            + interfaces.name + "interface.method"
+                            + method + " was not found");
+                    }
+                    console.log('接口完全继承');
+                }
+            }
+        }
+        ; function subinherit(/*子类*/subclass,/*超类或父类*/superclass) {
+            var F = function () { }
+            F.prototype = superclass.prototype;
+            subclass.prototype = new F();
+            subclass.prototype.constructor = subclass;
+            if (superclass.prototype.constructor == Object.prototype.constructor) {
+                superclass.prototype.constructor = superclass;
+            }
+        }
+    </script>
+    <script>
+        var BicycleShop = function () { };
+        BicycleShop.prototype = {
+            sellBicycle: function (model) {
+                var bicycle;
+                switch (model) {
+                    case 'The Speedster':
+                        bicycle = new Speedster();
+                        break;
+                    case 'The Lowrider':
+                        bicycle = new Lowrider();
+                        break;
+                    case 'The Comfort Cruiser':
+                        bicycle = new ComfortCruiser();
+                        break;
+                    default: break;
+                }
+                Interface.ensureImplements(bicycle, Bicycle);
+                bicycle.assemble();
+                bicycle.wash();
+                return bicycle;
+            }
+        }
+
+        var Bicycle = new Interface('Bicycle', ['assemble', 'wash', 'repair', 'ride']);
+        var Speedster = function () { };
+        subinherit(Speedster, Bicycle)
+        Speedster.prototype = {
+            assemble: function () { },
+            wash: function () { },
+            ride: function () { },
+            repair: function () { }
+        }
+        Interface.ensureImplements(Speedster.prototype);
+
+    </script>
+</body>
+</html>

@@ -1,0 +1,76 @@
+﻿<!DOCTYPE html>
+<html ng-app="myApp" xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <title></title>
+    <script src="angular.min.js"></script>
+</head>
+<body>
+    <div ng-controller="MyController">
+        <h5>{{ clock }}</h5>
+    </div>
+    <div ng-controller="DemoController">
+        <h4>The simplest adding machine ever</h4>
+        <button ng-click="add(1)" class="button">Add</button>
+        <button ng-click="subtract(1)" class="button">Subtract</button>
+        <h4>Current count: {{ counter }}</h4>
+    </div>
+    <!--ng-init-->
+    <b ng-init='name="ari lerner"'>hello!{{name}}</b>
+    <!--ng-click-->
+    <button ng-click="counter = counter + 1">Add one</button>
+    <span>Current counter: {{ counter }}</span>
+    <!--ng-show/ng-hide-->
+    <button ng-init="shouldShow = true" ng-click="shouldShow = !shouldShow">Flip the shouldShow variable</button>
+    <div ng-show="shouldShow">
+        <h3>Showing {{ shouldShow }}</h3>
+    </div>
+    <div ng-hide="shouldShow">
+        <h3>Hiding {{ shouldShow }}</h3>
+    </div>
+    <ul ng-controller="mm">
+        <li ng-repeat="p in roommates">{{p.name}}</li>
+    </ul>
+    <ul ng-controller="my">
+        <li ng-repeat="(name,color) in roommates">{{name}}'s favorite color is {{color}}</li>
+    </ul>
+    <script>
+        var app = angular.module('myApp', []);
+        app.controller('mm', function ($scope) {
+            $scope.roommates = [
+                { name: 'Ari' },
+                { name: 'Q' },
+                { name: 'Sean' },
+                { name: 'Anand' }];
+        });
+        app.controller('my', function ($scope) {
+            $scope.roommates = {
+                'Ari': 'orange',
+                'Q': 'purple',
+                'Sean': 'green'
+            };
+        });
+        app.controller('MyController', function ($scope) {
+            $scope.person = { name: "Ari Lerner" };
+            var updateClock = function () {
+                $scope.clock = new Date();
+            };
+            var timer = setInterval(function () {
+                $scope.$apply(updateClock);
+            }, 1000);
+            //updateClock();
+        });
+        app.controller('DemoController', function ($scope) {
+            $scope.counter = 0;
+            $scope.add = function (amount) {
+                $scope.counter += amount;
+            };
+            $scope.subtract = function (amount) {
+                $scope.counter -= amount;
+            };
+        });
+    </script>
+    <script>
+
+    </script>
+</body>
+</html>

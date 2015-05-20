@@ -1,0 +1,1366 @@
+<!DOCTYPE html>
+<!-- saved from url=(0050)http://javascript.ruanyifeng.com/jquery/basic.html -->
+<html class="no-js" lang="en"><!--<![endif]--><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+  <meta charset="utf-8">
+
+  <!-- Set the viewport width to device width for mobile -->
+  <meta name="viewport" content="width=device-width">
+
+  <title>jQuery概述 -- JavaScript 标准参考教程（alpha）</title>
+  
+  <!-- Included CSS Files (Uncompressed) -->
+  <!--
+  <link rel="stylesheet" href="stylesheets/foundation.css">
+  -->
+  
+  <!-- Included CSS Files (Compressed) -->
+  <link rel="stylesheet" href="http://javascript.ruanyifeng.com/css/foundation.css">
+  <link rel="stylesheet" href="http://javascript.ruanyifeng.com/css/main.css">
+
+  <!-- IE Fix for HTML5 Tags -->
+  <!--[if lt IE 9]>
+    <script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+  <![endif]-->
+
+  <script async="" src="./basic_files/analytics.js"></script><script src="./basic_files/jquery.js"></script>
+  <script src="./basic_files/toc.js"></script>
+  <script src="./basic_files/main.js"></script>
+
+<script type="text/javascript" async="" src="./basic_files/embed.js"></script></head>
+<body>
+
+<header class="top-bar" id="header">
+
+<div class="fixed">
+
+<nav class="top-bar">
+<ul>
+<!-- Title Area -->
+	<li class="name has-dropdown">
+	<h1><a href="http://javascript.ruanyifeng.com/">JavaScript 标准参考教程（alpha） </a></h1>
+		<ul class="dropdown">
+			
+			<li><a href="http://javascript.ruanyifeng.com/#introduction">导论</a></li>
+			
+			<li><a href="http://javascript.ruanyifeng.com/#grammar">基本语法</a></li>
+			
+			<li><a href="http://javascript.ruanyifeng.com/#stdlib">标准库</a></li>
+			
+			<li><a href="http://javascript.ruanyifeng.com/#oop">面向对象编程</a></li>
+			
+			<li><a href="http://javascript.ruanyifeng.com/#dom">DOM</a></li>
+			
+			<li><a href="http://javascript.ruanyifeng.com/#bom">浏览器对象</a></li>
+			
+			<li><a href="http://javascript.ruanyifeng.com/#htmlapi">HTML网页的API</a></li>
+			
+			<li><a href="http://javascript.ruanyifeng.com/#jquery">jQuery</a></li>
+			
+			<li><a href="http://javascript.ruanyifeng.com/#tool">开发工具</a></li>
+			
+			<li><a href="http://javascript.ruanyifeng.com/#advanced">高级语法</a></li>
+			
+			<li><a href="http://javascript.ruanyifeng.com/#appendix">附录</a></li>
+			
+			<li><a href="http://javascript.ruanyifeng.com/#library">草稿一：函数库</a></li>
+			
+			<li><a href="http://javascript.ruanyifeng.com/#nodejs">草稿二：Node.js</a></li>
+			
+		</ul>
+	</li>
+</ul>
+
+<section>
+
+
+<ul class="left">
+<li class="divider"></li>
+<li class="has-dropdown"><a class="active" href="http://javascript.ruanyifeng.com/jquery/basic.html#"> jQuery </a><ul class="dropdown">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<li class="active"><a href="http://javascript.ruanyifeng.com/jquery/basic.html#">jQuery概述</a></li>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<li><a href="http://javascript.ruanyifeng.com/jquery/deferred.html">jQuery.Deferred对象</a></li>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<li><a href="http://javascript.ruanyifeng.com/jquery/jquery-free.html">如何做到 jQuery-free？</a></li>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<li><a href="http://javascript.ruanyifeng.com/jquery/plugin.html">jQuery插件开发</a></li>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<li><a href="http://javascript.ruanyifeng.com/jquery/utility.html">jQuery工具方法</a></li>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</ul></li>
+<li class="divider"></li>
+<li class="has-dropdown nav-3"><a href="http://javascript.ruanyifeng.com/jquery/basic.html#"> jQuery概述</a><ul class="dropdown">
+<li class="toc-h2"><a href="http://javascript.ruanyifeng.com/jquery/basic.html#toc0">jQuery的加载</a></li><li class="toc-h2"><a href="http://javascript.ruanyifeng.com/jquery/basic.html#toc1">jQuery基础</a></li><li class="toc-h2"><a href="http://javascript.ruanyifeng.com/jquery/basic.html#toc8">jQuery实例对象的方法</a></li><li class="toc-h2"><a href="http://javascript.ruanyifeng.com/jquery/basic.html#toc14">事件处理</a></li><li class="toc-h2"><a href="http://javascript.ruanyifeng.com/jquery/basic.html#toc19">参考链接</a></li></ul></li>
+</ul>
+
+
+<ul class="right">
+	<li class="divider"></li>
+	<li>
+		<a href="https://github.com/ruanyf/jstutorial" target="_blank">GitHub <i class="foundicon-edit"></i></a>
+	</li>
+	<li class="divider"></li>
+	<li>
+		<a href="http://javascript.ruanyifeng.com/jquery/basic.html#">TOP <i class="foundicon-up-arrow"></i></a>
+	</li>
+</ul>
+
+</section>
+
+</nav>  
+</div>
+</header>
+
+
+<article class="bookPage">
+
+  <div class="row">
+    <div class="twelve columns">
+
+<h1> jQuery概述 </h1>
+
+<aside class="right"><p>来自<a href="http://javascript.ruanyifeng.com/">《JavaScript 标准参考教程（alpha）》</a>，by 阮一峰</p></aside>
+
+<h2>目录</h2><div id="toc" class="panel callout radius"><ul><li class="toc-h2"><a href="http://javascript.ruanyifeng.com/jquery/basic.html#toc0">jQuery的加载</a></li><li class="toc-h2"><a href="http://javascript.ruanyifeng.com/jquery/basic.html#toc1">jQuery基础</a></li><li class="toc-h3"><a href="http://javascript.ruanyifeng.com/jquery/basic.html#toc2">jQuery对象</a></li><li class="toc-h3 toc-active"><a href="http://javascript.ruanyifeng.com/jquery/basic.html#toc3">jQuery构造函数</a></li><li class="toc-h3"><a href="http://javascript.ruanyifeng.com/jquery/basic.html#toc4">jQuery构造函数返回的结果集</a></li><li class="toc-h3"><a href="http://javascript.ruanyifeng.com/jquery/basic.html#toc5">链式操作</a></li><li class="toc-h3"><a href="http://javascript.ruanyifeng.com/jquery/basic.html#toc6">$(document).ready()</a></li><li class="toc-h3"><a href="http://javascript.ruanyifeng.com/jquery/basic.html#toc7">$.noConflict方法</a></li><li class="toc-h2"><a href="http://javascript.ruanyifeng.com/jquery/basic.html#toc8">jQuery实例对象的方法</a></li><li class="toc-h3"><a href="http://javascript.ruanyifeng.com/jquery/basic.html#toc9">结果集的过滤方法</a></li><li class="toc-h3"><a href="http://javascript.ruanyifeng.com/jquery/basic.html#toc10">DOM相关方法</a></li><li class="toc-h3"><a href="http://javascript.ruanyifeng.com/jquery/basic.html#toc11">添加、复制和移动网页元素的方法</a></li><li class="toc-h3"><a href="http://javascript.ruanyifeng.com/jquery/basic.html#toc12">动画效果方法</a></li><li class="toc-h3"><a href="http://javascript.ruanyifeng.com/jquery/basic.html#toc13">其他方法</a></li><li class="toc-h2"><a href="http://javascript.ruanyifeng.com/jquery/basic.html#toc14">事件处理</a></li><li class="toc-h3"><a href="http://javascript.ruanyifeng.com/jquery/basic.html#toc15">事件绑定的简便方法</a></li><li class="toc-h3"><a href="http://javascript.ruanyifeng.com/jquery/basic.html#toc16">on方法，trigger方法，off方法</a></li><li class="toc-h3"><a href="http://javascript.ruanyifeng.com/jquery/basic.html#toc17">event对象</a></li><li class="toc-h3"><a href="http://javascript.ruanyifeng.com/jquery/basic.html#toc18">一次性事件</a></li><li class="toc-h2"><a href="http://javascript.ruanyifeng.com/jquery/basic.html#toc19">参考链接</a></li></ul></div>
+
+
+<p>jQuery是目前使用最广泛的JavaScript函数库。据<a href="http://w3techs.com/technologies/details/js-jquery/all/all">统计</a>，全世界57.5%的网站使用jQuery，在使用JavaScript函数库的网站中，93.0%使用jQuery。它已经成了开发者必须学会的技能。</p>
+
+<p>jQuery的最大优势有两个。首先，它基本是一个DOM操作工具，可以使操作DOM对象变得异常容易。其次，它统一了不同浏览器的API接口，使得代码在所有现代浏览器均能运行，开发者不用担心浏览器之间的差异。</p>
+
+<span id="toc0"></span><div class="chapter"><h2 id="jquery的加载">jQuery的加载</h2></div>
+
+<p>一般采用下面的写法，在网页中加载jQuery。</p>
+
+<div class="highlight"><pre><code class="language-html" data-lang="html"><span class="nt">&lt;script </span><span class="na">type=</span><span class="s">"text/javascript"</span> <span class="na">src=</span><span class="s">"//code.jquery.com/jquery-1.11.0.min.js"</span><span class="nt">&gt;&lt;/script&gt;</span>
+<span class="nt">&lt;script&gt;</span>
+<span class="nb">window</span><span class="p">.</span><span class="nx">jQuery</span> <span class="o">||</span> <span class="nb">document</span><span class="p">.</span><span class="nx">write</span><span class="p">(</span><span class="s1">'&lt;script src="js/jquery-1.11.0.min.js" type="text/javascript"&gt;&lt;\/script&gt;'</span><span class="p">)</span>
+<span class="nt">&lt;/script&gt;</span></code></pre></div>
+
+<p>上面代码有两点需要注意。一是采用<a href="http://jquery.com/download/#using-jquery-with-a-cdn">CDN</a>加载。如果CDN加载失败，则退回到本地加载。二是采用协议无关的加载网址（使用双斜线表示），同时支持http协议和https协议。</p>
+
+<p>目前常用的jQuery CDN有以下这些。</p>
+
+<ul>
+<li><a href="https://developers.google.com/speed/libraries/devguide#jquery">Google CDN</a></li>
+<li><a href="http://www.asp.net/ajax/cdn#jQuery_Releases_on_the_CDN_0">Microsoft CDN</a></li>
+<li><a href="http://jquery.com/download/#jquery-39-s-cdn-provided-by-maxcdn">jQuery CDN</a></li>
+<li><a href="http://cdnjs.com/libraries/jquery/">CDNJS CDN</a></li>
+<li><a href="http://www.jsdelivr.com/#!jquery">jsDelivr CDN</a></li>
+</ul>
+
+<p>上面这段代码最好放到网页尾部。如果需要支持IE 6/7/8，就使用jQuery 1.x版，否则使用最新版。</p>
+
+<span id="toc1"></span><div class="chapter"><h2 id="jquery基础">jQuery基础</h2></div>
+
+<span id="toc2"></span><h3 id="jquery对象">jQuery对象</h3>
+
+<p>jQuery最重要的概念，就是jQuery对象。它是一个全局对象，可以简写为美元符号$。也就是说，jQuery和$两者是等价的。</p>
+
+<p>在网页中加载jQuery函数库以后，就可以使用jQuery对象了。jQuery的全部方法，都定义在这个对象上面。</p>
+
+<div class="highlight"><pre><code class="language-javascript" data-lang="javascript"><span class="kd">var</span> <span class="nx">listItems</span> <span class="o">=</span> <span class="nx">jQuery</span><span class="p">(</span><span class="s1">'li'</span><span class="p">);</span>
+<span class="c1">// or</span>
+<span class="kd">var</span> <span class="nx">listItems</span> <span class="o">=</span> <span class="nx">$</span><span class="p">(</span><span class="s1">'li'</span><span class="p">);</span></code></pre></div>
+
+<p>上面两行代码是等价的，表示选中网页中所有的li元素。</p>
+
+<span id="toc3"></span><h3 id="jquery构造函数">jQuery构造函数</h3>
+
+<p>jQuery对象本质上是一个构造函数，主要作用是返回jQuery对象的实例。比如，上面代码表面上是选中li元素，实际上是返回对应于li元素的jQuery实例。因为只有这样，才能在DOM对象上使用jQuery提供的各种方法。</p>
+
+<div class="highlight"><pre><code class="language-javascript" data-lang="javascript"><span class="nx">$</span><span class="p">(</span><span class="s1">'body'</span><span class="p">).</span><span class="nx">nodeType</span>
+<span class="c1">// undefined</span>
+
+<span class="nx">$</span><span class="p">(</span><span class="s1">'body'</span><span class="p">)</span> <span class="k">instanceof</span> <span class="nx">jQuery</span>
+<span class="c1">// true</span></code></pre></div>
+
+<p>上面代码表示，由于jQuery返回的不是DOM对象，所以没有DOM属性nodeType。它返回的是jQuery对象的实例。 </p>
+
+<p><strong>（1）CSS选择器作为参数</strong></p>
+
+<p>jQuery构造函数的参数，主要是CSS选择器，就像上面的那个例子。下面是另外一些CSS选择器的例子。</p>
+
+<div class="highlight"><pre><code class="language-javascript" data-lang="javascript"><span class="nx">$</span><span class="p">(</span><span class="s2">"*"</span><span class="p">)</span>
+<span class="nx">$</span><span class="p">(</span><span class="s2">"#lastname"</span><span class="p">)</span>
+<span class="nx">$</span><span class="p">(</span><span class="s2">".intro"</span><span class="p">)</span>
+<span class="nx">$</span><span class="p">(</span><span class="s2">"h1,div,p"</span><span class="p">)</span>
+<span class="nx">$</span><span class="p">(</span><span class="s2">"p:last"</span><span class="p">)</span>
+<span class="nx">$</span><span class="p">(</span><span class="s2">"tr:even"</span><span class="p">)</span>
+<span class="nx">$</span><span class="p">(</span><span class="s2">"p:first-child"</span><span class="p">)</span>
+<span class="nx">$</span><span class="p">(</span><span class="s2">"p:nth-of-type(2)"</span><span class="p">)</span>
+<span class="nx">$</span><span class="p">(</span><span class="s2">"div + p"</span><span class="p">)</span>
+<span class="nx">$</span><span class="p">(</span><span class="s2">"div:has(p)"</span><span class="p">)</span>
+<span class="nx">$</span><span class="p">(</span><span class="s2">":empty"</span><span class="p">)</span>
+<span class="nx">$</span><span class="p">(</span><span class="s2">"[title^='Tom']"</span><span class="p">)</span></code></pre></div>
+
+<p>本书不讲解CSS选择器，请读者参考有关书籍和jQuery文档。</p>
+
+<p><strong>（2）DOM对象作为参数</strong></p>
+
+<p>jQuery构造函数的参数，还可以是DOM对象。它也会被转为jQuery对象的实例。</p>
+
+<div class="highlight"><pre><code class="language-javascript" data-lang="javascript"><span class="nx">$</span><span class="p">(</span><span class="nb">document</span><span class="p">.</span><span class="nx">body</span><span class="p">)</span> <span class="k">instanceof</span> <span class="nx">jQuery</span>
+<span class="c1">// true</span></code></pre></div>
+
+<p>上面代码中，jQuery的参数不是CSS选择器，而是一个DOM对象，返回的依然是jQuery对象的实例。</p>
+
+<p>如果有多个DOM元素要转为jQuery对象的实例，可以把DOM元素放在一个数组里，输入jQuery构造函数。</p>
+
+<div class="highlight"><pre><code class="language-javascript" data-lang="javascript"><span class="nx">$</span><span class="p">([</span><span class="nb">document</span><span class="p">.</span><span class="nx">body</span><span class="p">,</span> <span class="nb">document</span><span class="p">.</span><span class="nx">head</span><span class="p">])</span></code></pre></div>
+
+<p><strong>（3）HTML代码作为参数</strong></p>
+
+<p>如果直接在jQuery构造函数中输入HTML代码，返回的也是jQuery实例。</p>
+
+<div class="highlight"><pre><code class="language-javascript" data-lang="javascript"><span class="nx">$</span><span class="p">(</span><span class="s1">'&lt;li class="greet"&gt;test&lt;/lt&gt;'</span><span class="p">)</span></code></pre></div>
+
+<p>上面代码从HTML代码生成了一个jQuery实例，它与从CSS选择器生成的jQuery实例完全一样。唯一的区别就是，它对应的DOM结构不属于当前文档。</p>
+
+<p>上面代码也可以写成下面这样。</p>
+
+<div class="highlight"><pre><code class="language-javascript" data-lang="javascript"><span class="nx">$</span><span class="p">(</span> <span class="s1">'&lt;li&gt;'</span><span class="p">,</span> <span class="p">{</span>
+  <span class="nx">html</span><span class="o">:</span> <span class="s1">'test'</span><span class="p">,</span>
+  <span class="s1">'class'</span><span class="o">:</span> <span class="s1">'greet'</span>
+<span class="p">});</span></code></pre></div>
+
+<p>上面代码中，由于class是javaScript的保留字，所以只能放在引号中。</p>
+
+<p>通常来说，上面第二种写法是更好的写法。</p>
+<div class="highlight"><pre><code class="language-javascript" data-lang="javascript"><span class="nx">$</span><span class="p">(</span><span class="s1">'&lt;input class="form-control" type="hidden" name="foo" value="bar" /&gt;'</span><span class="p">)</span>
+
+<span class="c1">// 相当于</span>
+<span class="nx">$</span><span class="p">(</span><span class="s1">'&lt;input/&gt;'</span><span class="p">,</span> <span class="p">{</span>
+    <span class="kr">class</span><span class="o">:</span> <span class="s1">'form-control'</span><span class="p">,</span>
+    <span class="nx">type</span><span class="o">:</span> <span class="s1">'hidden'</span><span class="p">,</span>
+    <span class="nx">name</span><span class="o">:</span> <span class="s1">'foo'</span><span class="p">,</span>
+    <span class="nx">value</span><span class="o">:</span> <span class="s1">'bar'</span>
+<span class="p">})</span>
+
+<span class="c1">// 或者</span>
+<span class="nx">$</span><span class="p">(</span><span class="s1">'&lt;input/&gt;'</span><span class="p">)</span>
+<span class="p">.</span><span class="nx">addClass</span><span class="p">(</span><span class="s1">'form-control'</span><span class="p">)</span>
+<span class="p">.</span><span class="nx">attr</span><span class="p">(</span><span class="s1">'type'</span><span class="p">,</span> <span class="s1">'hidden'</span><span class="p">)</span>
+<span class="p">.</span><span class="nx">attr</span><span class="p">(</span><span class="s1">'name'</span><span class="p">,</span> <span class="s1">'foo'</span><span class="p">)</span>
+<span class="p">.</span><span class="nx">val</span><span class="p">(</span><span class="s1">'bar'</span><span class="p">)</span>
+</code></pre></div>
+<p><strong>（4）第二个参数</strong></p>
+
+<p>默认情况下，jQuery将文档的根元素（html）作为寻找匹配对象的起点。如果要指定某个网页元素（比如某个div元素）作为寻找的起点，可以将它放在jQuery函数的第二个参数。</p>
+
+<div class="highlight"><pre><code class="language-javascript" data-lang="javascript"><span class="nx">$</span><span class="p">(</span><span class="s1">'li'</span><span class="p">,</span> <span class="nx">someElement</span><span class="p">);</span></code></pre></div>
+
+<p>上面代码表示，只寻找属于someElement对象下属的li元素。someElement可以是jQuery对象的实例，也可以是DOM对象。</p>
+
+<span id="toc4"></span><h3 id="jquery构造函数返回的结果集">jQuery构造函数返回的结果集</h3>
+
+<p>jQuery的核心思想是“先选中某些网页元素，然后对其进行某种处理”（find something, do something），也就是说，先选择后处理，这是jQuery的基本操作模式。所以，绝大多数jQuery操作都是从选择器开始的，返回一个选中的结果集。</p>
+
+<p><strong>（1）length属性</strong></p>
+
+<p>jQuery对象返回的结果集是一个类似数组的对象，包含了所有被选中的网页元素。查看该对象的length属性，可以知道到底选中了多少个结果。</p>
+
+<div class="highlight"><pre><code class="language-javascript" data-lang="javascript"><span class="k">if</span> <span class="p">(</span> <span class="nx">$</span><span class="p">(</span><span class="s1">'li'</span><span class="p">).</span><span class="nx">length</span> <span class="o">===</span> <span class="mi">0</span> <span class="p">)</span> <span class="p">{</span>
+    <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s1">'不含li元素'</span><span class="p">);</span>
+<span class="p">}</span></code></pre></div>
+
+<p>上面代码表示，如果网页没有li元素，则返回对象的length属性等于0。这就是测试有没有选中的标准方法。</p>
+
+<p>所以，如果想知道jQuery有没有选中相应的元素，不能写成下面这样。</p>
+
+<div class="highlight"><pre><code class="language-javascript" data-lang="javascript"><span class="k">if</span> <span class="p">(</span><span class="nx">$</span><span class="p">(</span><span class="s1">'div.foo'</span><span class="p">))</span> <span class="p">{</span> <span class="p">...</span> <span class="p">}</span></code></pre></div>
+
+<p>因为不管有没有选中，jQuery构造函数总是返回一个实例对象，而对象的布尔值永远是true。使用length属性才是判断有没有选中的正确方法。</p>
+
+<div class="highlight"><pre><code class="language-javascript" data-lang="javascript"><span class="k">if</span> <span class="p">(</span><span class="nx">$</span><span class="p">(</span><span class="s1">'div.foo'</span><span class="p">).</span><span class="nx">length</span><span class="p">)</span> <span class="p">{</span> <span class="p">...</span> <span class="p">}</span></code></pre></div>
+
+<p><strong>（2）下标运算符</strong></p>
+
+<p>jQuery选择器返回的是一个类似数组的对象。但是，使用下标运算符取出的单个对象，并不是jQuery对象的实例，而是一个DOM对象。</p>
+
+<div class="highlight"><pre><code class="language-javascript" data-lang="javascript"><span class="nx">$</span><span class="p">(</span><span class="s1">'li'</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span> <span class="k">instanceof</span> <span class="nx">jQuery</span> <span class="c1">// false</span>
+<span class="nx">$</span><span class="p">(</span><span class="s1">'li'</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span> <span class="k">instanceof</span> <span class="nx">Element</span> <span class="c1">// true</span></code></pre></div>
+
+<p>上面代码表示，下标运算符取出的是Element节点的实例。所以，通常使用下标运算符将jQuery实例转回DOM对象。</p>
+
+<p><strong>（3）is方法</strong></p>
+
+<p>is方法返回一个布尔值，表示选中的结果是否符合某个条件。这个用来验证的条件，可以是CSS选择器，也可以是一个函数，或者DOM元素和jQuery实例。</p>
+
+<div class="highlight"><pre><code class="language-javascript" data-lang="javascript"><span class="nx">$</span><span class="p">(</span><span class="s1">'li'</span><span class="p">).</span><span class="nx">is</span><span class="p">(</span><span class="s1">'li'</span><span class="p">)</span> <span class="c1">// true</span>
+
+<span class="nx">$</span><span class="p">(</span><span class="s1">'li'</span><span class="p">).</span><span class="nx">is</span><span class="p">(</span><span class="nx">$</span><span class="p">(</span><span class="s1">'.item'</span><span class="p">))</span> 
+
+<span class="nx">$</span><span class="p">(</span><span class="s1">'li'</span><span class="p">).</span><span class="nx">is</span><span class="p">(</span><span class="nb">document</span><span class="p">.</span><span class="nx">querySelector</span><span class="p">(</span><span class="s1">'li'</span><span class="p">))</span>
+
+<span class="nx">$</span><span class="p">(</span><span class="s1">'li'</span><span class="p">).</span><span class="nx">is</span><span class="p">(</span><span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+      <span class="k">return</span> <span class="nx">$</span><span class="p">(</span><span class="s2">"strong"</span><span class="p">,</span> <span class="k">this</span><span class="p">).</span><span class="nx">length</span> <span class="o">===</span> <span class="mi">0</span><span class="p">;</span>
+<span class="p">});</span></code></pre></div>
+
+<p><strong>（4）get方法</strong></p>
+
+<p>jQuery实例的get方法是下标运算符的另一种写法。</p>
+
+<div class="highlight"><pre><code class="language-javascript" data-lang="javascript"><span class="nx">$</span><span class="p">(</span><span class="s1">'li'</span><span class="p">).</span><span class="nx">get</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span> <span class="k">instanceof</span> <span class="nx">Element</span> <span class="c1">// true</span></code></pre></div>
+
+<p><strong>（5）eq方法</strong></p>
+
+<p>如果想要在结果集取出一个jQuery对象的实例，不需要取出DOM对象，则使用eq方法，它的参数是实例在结果集中的位置（从0开始）。</p>
+
+<div class="highlight"><pre><code class="language-javascript" data-lang="javascript"><span class="nx">$</span><span class="p">(</span><span class="s1">'li'</span><span class="p">).</span><span class="nx">eq</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span> <span class="k">instanceof</span> <span class="nx">jQuery</span> <span class="c1">// true</span></code></pre></div>
+
+<p>由于eq方法返回的是jQuery的实例，所以可以在返回结果上使用jQuery实例对象的方法。</p>
+
+<p><strong>（6）each方法，map方法</strong></p>
+
+<p>这两个方法用于遍历结果集，对每一个成员进行某种操作。</p>
+
+<p>each方法接受一个函数作为参数，依次处理集合中的每一个元素。</p>
+
+<div class="highlight"><pre><code class="language-javascript" data-lang="javascript"><span class="nx">$</span><span class="p">(</span><span class="s1">'li'</span><span class="p">).</span><span class="nx">each</span><span class="p">(</span><span class="kd">function</span><span class="p">(</span> <span class="nx">index</span><span class="p">,</span> <span class="nx">element</span><span class="p">)</span> <span class="p">{</span>
+  <span class="nx">$</span><span class="p">(</span><span class="nx">element</span><span class="p">).</span><span class="nx">prepend</span><span class="p">(</span> <span class="s1">'&lt;em&gt;'</span> <span class="o">+</span> <span class="nx">index</span> <span class="o">+</span> <span class="s1">': &lt;/em&gt;'</span> <span class="p">);</span>
+<span class="p">});</span>
+
+<span class="c1">// &lt;li&gt;Hello&lt;/li&gt;</span>
+<span class="c1">// &lt;li&gt;World&lt;/li&gt;</span>
+<span class="c1">// 变为</span>
+<span class="c1">// &lt;li&gt;&lt;em&gt;0: &lt;/em&gt;Hello&lt;/li&gt;</span>
+<span class="c1">// &lt;li&gt;&lt;em&gt;1: &lt;/em&gt;World&lt;/li&gt;</span></code></pre></div>
+
+<p>从上面代码可以看出，作为each方法参数的函数，本身有两个参数，第一个是当前元素在集合中的位置，第二个是当前元素对应的DOM对象。</p>
+
+<p>map方法的用法与each方法完全一样，区别在于each方法没有返回值，只是对每一个元素执行某种操作，而map方法返回一个新的jQuery对象。</p>
+
+<div class="highlight"><pre><code class="language-javascript" data-lang="javascript"><span class="nx">$</span><span class="p">(</span><span class="s2">"input"</span><span class="p">).</span><span class="nx">map</span><span class="p">(</span><span class="kd">function</span> <span class="p">(</span><span class="nx">index</span><span class="p">,</span> <span class="nx">element</span><span class="p">){</span>
+    <span class="k">return</span> <span class="nx">$</span><span class="p">(</span><span class="k">this</span><span class="p">).</span><span class="nx">val</span><span class="p">();</span>
+<span class="p">})</span>
+<span class="p">.</span><span class="nx">get</span><span class="p">()</span>
+<span class="p">.</span><span class="nx">join</span><span class="p">(</span><span class="s2">", "</span><span class="p">)</span></code></pre></div>
+
+<p>上面代码表示，将所有input元素依次取出值，然后通过get方法得到一个包含这些值的数组，最后通过数组的join方法返回一个逗号分割的字符串。</p>
+
+<p><strong>（8）内置循环</strong></p>
+
+<p>jQuery默认对当前结果集进行循环处理，所以如果直接使用jQuery内置的某种方法，each和map方法是不必要的。</p>
+
+<div class="highlight"><pre><code class="language-javascript" data-lang="javascript"><span class="nx">$</span><span class="p">(</span><span class="s2">".class"</span><span class="p">).</span><span class="nx">addClass</span><span class="p">(</span><span class="s2">"highlight"</span><span class="p">);</span></code></pre></div>
+
+<p>上面代码会执行一个内部循环，对每一个选中的元素进行addClass操作。由于这个原因，对上面操作加上each方法是不必要的。</p>
+
+<div class="highlight"><pre><code class="language-javascript" data-lang="javascript"><span class="nx">$</span><span class="p">(</span><span class="s2">".class"</span><span class="p">).</span><span class="nx">each</span><span class="p">(</span><span class="kd">function</span><span class="p">(</span><span class="nx">index</span><span class="p">,</span><span class="nx">element</span><span class="p">){</span>
+     <span class="nx">$</span><span class="p">(</span><span class="nx">element</span><span class="p">).</span><span class="nx">addClass</span><span class="p">(</span><span class="s2">"highlight"</span><span class="p">);</span>
+<span class="p">});</span>
+
+<span class="c1">// 或者</span>
+
+<span class="nx">$</span><span class="p">(</span><span class="s2">".class"</span><span class="p">).</span><span class="nx">each</span><span class="p">(</span><span class="kd">function</span><span class="p">(){</span>
+    <span class="nx">$</span><span class="p">(</span><span class="k">this</span><span class="p">).</span><span class="nx">addClass</span><span class="p">(</span><span class="s2">"highlight"</span><span class="p">);</span>
+<span class="p">});</span></code></pre></div>
+
+<p>上面代码的each方法，都是没必要使用的。</p>
+
+<p>由于内置循环的存在，从性能考虑，应该尽量减少不必要的操作步骤。</p>
+
+<div class="highlight"><pre><code class="language-javascript" data-lang="javascript"><span class="nx">$</span><span class="p">(</span><span class="s2">".class"</span><span class="p">).</span><span class="nx">css</span><span class="p">(</span><span class="s2">"color"</span><span class="p">,</span> <span class="s2">"green"</span><span class="p">).</span><span class="nx">css</span><span class="p">(</span><span class="s2">"font-size"</span><span class="p">,</span> <span class="s2">"16px"</span><span class="p">);</span>
+
+<span class="c1">// 应该写成</span>
+
+<span class="nx">$</span><span class="p">(</span><span class="s2">".class"</span><span class="p">).</span><span class="nx">css</span><span class="p">({</span> 
+  <span class="s2">"color"</span><span class="o">:</span> <span class="s2">"green"</span><span class="p">,</span>
+  <span class="s2">"font-size"</span><span class="o">:</span> <span class="s2">"16px"</span>
+<span class="p">});</span></code></pre></div>
+
+<span id="toc5"></span><h3 id="链式操作">链式操作</h3>
+
+<p>jQuery最方便的一点就是，它的大部分方法返回的都是jQuery对象，因此可以链式操作。也就是说，后一个方法可以紧跟着写在前一个方法后面。</p>
+
+<div class="highlight"><pre><code class="language-javascript" data-lang="javascript"><span class="nx">$</span><span class="p">(</span><span class="s1">'li'</span><span class="p">).</span><span class="nx">click</span><span class="p">(</span><span class="kd">function</span> <span class="p">(){</span>
+    <span class="nx">$</span><span class="p">(</span><span class="k">this</span><span class="p">).</span><span class="nx">addClass</span><span class="p">(</span><span class="s1">'clicked'</span><span class="p">);</span>
+<span class="p">})</span>
+<span class="p">.</span><span class="nx">find</span><span class="p">(</span><span class="s1">'span'</span><span class="p">)</span>
+<span class="p">.</span><span class="nx">attr</span><span class="p">(</span> <span class="s1">'title'</span><span class="p">,</span> <span class="s1">'Hover over me'</span> <span class="p">);</span></code></pre></div>
+
+<span id="toc6"></span><h3 id="$(document).ready()">$(document).ready()</h3>
+
+<p>$(document).ready方法接受一个函数作为参数，将该参数作为document对象的DOMContentLoaded事件的回调函数。也就是说，当页面解析完成（即下载完&lt;/html&gt;标签）以后，在所有外部资源（图片、脚本等）完成加载之前，该函数就会立刻运行。</p>
+
+<div class="highlight"><pre><code class="language-javascript" data-lang="javascript"><span class="nx">$</span><span class="p">(</span> <span class="nb">document</span> <span class="p">).</span><span class="nx">ready</span><span class="p">(</span><span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+  <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span> <span class="s1">'ready!'</span> <span class="p">);</span>
+<span class="p">});</span></code></pre></div>
+
+<p>上面代码表示，一旦页面完成解析，就会运行ready方法指定的函数，在控制台显示“ready!”。</p>
+
+<p>该方法通常作为网页初始化手段使用，jQuery提供了一种简写法，就是直接把回调函数放在jQuery对象中。</p>
+
+<div class="highlight"><pre><code class="language-javascript" data-lang="javascript"><span class="nx">$</span><span class="p">(</span><span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+  <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span> <span class="s1">'ready!'</span> <span class="p">);</span>
+<span class="p">});</span></code></pre></div>
+
+<p>上面代码与前一段代码是等价的。</p>
+
+<span id="toc7"></span><h3 id="$.noconflict方法">$.noConflict方法</h3>
+
+<p>jQuery使用美元符号（$）指代jQuery对象。某些情况下，其他函数库也会用到美元符号，为了避免冲突，$.noConflict方法允许将美元符号与jQuery脱钩。</p>
+
+<div class="highlight"><pre><code class="language-html" data-lang="html"><span class="nt">&lt;script </span><span class="na">src=</span><span class="s">"other_lib.js"</span><span class="nt">&gt;&lt;/script&gt;</span>
+<span class="nt">&lt;script </span><span class="na">src=</span><span class="s">"jquery.js"</span><span class="nt">&gt;&lt;/script&gt;</span>
+<span class="nt">&lt;script&gt;</span><span class="nx">$</span><span class="p">.</span><span class="nx">noConflict</span><span class="p">();</span><span class="nt">&lt;/script&gt;</span></code></pre></div>
+
+<p>上面代码就是$.noConflict方法的一般用法。在加载jQuery之后，立即调用该方法，会使得美元符号还给前面一个函数库。这意味着，其后再调用jQuery，只能写成jQuery.methond的形式，而不能用$.method了。</p>
+
+<p>为了避免冲突，可以考虑从一开始就只使用jQuery代替美元符号。</p>
+
+<span id="toc8"></span><div class="chapter"><h2 id="jquery实例对象的方法">jQuery实例对象的方法</h2></div>
+
+<p>除了上一节提到的is、get、eq方法，jQuery实例还有许多其他方法。</p>
+
+<span id="toc9"></span><h3 id="结果集的过滤方法">结果集的过滤方法</h3>
+
+<p>选择器选出一组符合条件的网页元素以后，jQuery提供了许多方法，可以过滤结果集，返回更准确的目标。</p>
+
+<p><strong>（1）first方法，last方法</strong></p>
+
+<p>first方法返回结果集的第一个成员，last方法返回结果集的最后一个成员。</p>
+
+<div class="highlight"><pre><code class="language-javascript" data-lang="javascript"><span class="nx">$</span><span class="p">(</span><span class="s2">"li"</span><span class="p">).</span><span class="nx">first</span><span class="p">()</span>
+
+<span class="nx">$</span><span class="p">(</span><span class="s2">"li"</span><span class="p">).</span><span class="nx">last</span><span class="p">()</span></code></pre></div>
+
+<p><strong>（2）next方法，prev方法</strong></p>
+
+<p>next方法返回紧邻的下一个同级元素，prev方法返回紧邻的上一个同级元素。</p>
+
+<div class="highlight"><pre><code class="language-javascript" data-lang="javascript"><span class="nx">$</span><span class="p">(</span><span class="s2">"li"</span><span class="p">).</span><span class="nx">first</span><span class="p">().</span><span class="nx">next</span><span class="p">()</span>
+<span class="nx">$</span><span class="p">(</span><span class="s2">"li"</span><span class="p">).</span><span class="nx">last</span><span class="p">().</span><span class="nx">prev</span><span class="p">()</span>
+
+<span class="nx">$</span><span class="p">(</span><span class="s2">"li"</span><span class="p">).</span><span class="nx">first</span><span class="p">().</span><span class="nx">next</span><span class="p">(</span><span class="s1">'.item'</span><span class="p">)</span>
+<span class="nx">$</span><span class="p">(</span><span class="s2">"li"</span><span class="p">).</span><span class="nx">last</span><span class="p">().</span><span class="nx">prev</span><span class="p">(</span><span class="s1">'.item'</span><span class="p">)</span></code></pre></div>
+
+<p>如果next方法和prev方法带有参数，表示选择符合该参数的同级元素。</p>
+
+<p><strong>（3）parent方法，parents方法，children方法</strong></p>
+
+<p>parent方法返回当前元素的父元素，parents方法返回当前元素的所有上级元素（直到html元素）。</p>
+
+<div class="highlight"><pre><code class="language-javascript" data-lang="javascript"><span class="nx">$</span><span class="p">(</span><span class="s2">"p"</span><span class="p">).</span><span class="nx">parent</span><span class="p">()</span>
+<span class="nx">$</span><span class="p">(</span><span class="s2">"p"</span><span class="p">).</span><span class="nx">parent</span><span class="p">(</span><span class="s2">".selected"</span><span class="p">)</span>
+
+<span class="nx">$</span><span class="p">(</span><span class="s2">"p"</span><span class="p">).</span><span class="nx">parents</span><span class="p">()</span>
+<span class="nx">$</span><span class="p">(</span><span class="s2">"p"</span><span class="p">).</span><span class="nx">parents</span><span class="p">(</span><span class="s2">"div"</span><span class="p">)</span></code></pre></div>
+
+<p>children方法返回选中元素的所有子元素。</p>
+
+<div class="highlight"><pre><code class="language-javascript" data-lang="javascript"><span class="nx">$</span><span class="p">(</span><span class="s2">"div"</span><span class="p">).</span><span class="nx">children</span><span class="p">()</span>
+<span class="nx">$</span><span class="p">(</span><span class="s2">"div"</span><span class="p">).</span><span class="nx">children</span><span class="p">(</span><span class="s2">".selected"</span><span class="p">)</span>
+
+<span class="c1">// 下面的写法结果相同，但是效率较低</span>
+
+<span class="nx">$</span><span class="p">(</span><span class="s1">'div &gt; *'</span><span class="p">)</span>
+<span class="nx">$</span><span class="p">(</span><span class="s1">'div &gt; .selected'</span><span class="p">)</span></code></pre></div>
+
+<p>上面这三个方法都接受一个选择器作为参数。</p>
+
+<p><strong>（4）siblings方法，nextAll方法，prevAll方法</strong></p>
+
+<p>siblings方法返回当前元素的所有同级元素。</p>
+
+<div class="highlight"><pre><code class="language-javascript" data-lang="javascript"><span class="nx">$</span><span class="p">(</span><span class="s1">'li'</span><span class="p">).</span><span class="nx">first</span><span class="p">().</span><span class="nx">siblings</span><span class="p">()</span>
+<span class="nx">$</span><span class="p">(</span><span class="s1">'li'</span><span class="p">).</span><span class="nx">first</span><span class="p">().</span><span class="nx">siblings</span><span class="p">(</span><span class="s1">'.item'</span><span class="p">)</span></code></pre></div>
+
+<p>nextAll方法返回当前元素其后的所有同级元素，prevAll方法返回当前元素前面的所有同级元素。</p>
+
+<div class="highlight"><pre><code class="language-javascript" data-lang="javascript"><span class="nx">$</span><span class="p">(</span><span class="s1">'li'</span><span class="p">).</span><span class="nx">first</span><span class="p">().</span><span class="nx">nextAll</span><span class="p">()</span>
+<span class="nx">$</span><span class="p">(</span><span class="s1">'li'</span><span class="p">).</span><span class="nx">last</span><span class="p">().</span><span class="nx">prevAll</span><span class="p">()</span></code></pre></div>
+
+<p><strong>（5）closest方法，find方法</strong></p>
+
+<p>closest方法返回当前元素，以及当前元素的所有上级元素之中，第一个符合条件的元素。find方法返回当前元素的所有符合条件的下级元素。</p>
+<div class="highlight"><pre><code class="language-javascript" data-lang="javascript"><span class="nx">$</span><span class="p">(</span><span class="s1">'li'</span><span class="p">).</span><span class="nx">closest</span><span class="p">(</span><span class="s1">'div'</span><span class="p">)</span>
+<span class="nx">$</span><span class="p">(</span><span class="s1">'div'</span><span class="p">).</span><span class="nx">find</span><span class="p">(</span><span class="s1">'li'</span><span class="p">)</span>
+</code></pre></div>
+<p>上面代码中的find方法，选中所有div元素下面的li元素，等同于$('li', 'div')。由于这样写缩小了搜索范围，所以要优于$('div li')的写法。</p>
+
+<p><strong>（6）find方法，add方法，addBack方法，end方法</strong></p>
+
+<p>add方法用于为结果集添加元素。</p>
+
+<div class="highlight"><pre><code class="language-javascript" data-lang="javascript"><span class="nx">$</span><span class="p">(</span><span class="s1">'li'</span><span class="p">).</span><span class="nx">add</span><span class="p">(</span><span class="s1">'p'</span><span class="p">)</span></code></pre></div>
+
+<p>addBack方法将当前元素加回原始的结果集。</p>
+
+<div class="highlight"><pre><code class="language-javascript" data-lang="javascript"><span class="nx">$</span><span class="p">(</span><span class="s1">'li'</span><span class="p">).</span><span class="nx">parent</span><span class="p">().</span><span class="nx">addBack</span><span class="p">()</span></code></pre></div>
+
+<p>end方法用于返回原始的结果集。</p>
+
+<div class="highlight"><pre><code class="language-javascript" data-lang="javascript"><span class="nx">$</span><span class="p">(</span><span class="s1">'li'</span><span class="p">).</span><span class="nx">first</span><span class="p">().</span><span class="nx">end</span><span class="p">()</span></code></pre></div>
+
+<p><strong>（7）filter方法，not方法，has方法</strong></p>
+
+<p>filter方法用于过滤结果集，它可以接受多种类型的参数，只返回与参数一致的结果。</p>
+
+<div class="highlight"><pre><code class="language-javascript" data-lang="javascript"><span class="c1">// 返回符合CSS选择器的结果</span>
+<span class="nx">$</span><span class="p">(</span><span class="s1">'li'</span><span class="p">).</span><span class="nx">filter</span><span class="p">(</span><span class="s1">'.item'</span><span class="p">)</span>
+
+<span class="c1">// 返回函数返回值为true的结果</span>
+<span class="nx">$</span><span class="p">(</span><span class="s2">"li"</span><span class="p">).</span><span class="nx">filter</span><span class="p">(</span><span class="kd">function</span><span class="p">(</span><span class="nx">index</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">return</span> <span class="nx">index</span> <span class="o">%</span> <span class="mi">2</span> <span class="o">===</span> <span class="mi">1</span><span class="p">;</span>
+<span class="p">})</span>
+
+<span class="c1">// 返回符合特定DOM对象的结果</span>
+<span class="nx">$</span><span class="p">(</span><span class="s2">"li"</span><span class="p">).</span><span class="nx">filter</span><span class="p">(</span><span class="nb">document</span><span class="p">.</span><span class="nx">getElementById</span><span class="p">(</span><span class="s2">"unique"</span><span class="p">))</span>
+
+<span class="c1">// 返回符合特定jQuery实例的结果</span>
+<span class="nx">$</span><span class="p">(</span><span class="s2">"li"</span><span class="p">).</span><span class="nx">filter</span><span class="p">(</span><span class="nx">$</span><span class="p">(</span><span class="s2">"#unique"</span><span class="p">))</span></code></pre></div>
+
+<p>not方法的用法与filter方法完全一致，但是返回相反的结果，即过滤掉匹配项。</p>
+
+<div class="highlight"><pre><code class="language-javascript" data-lang="javascript"><span class="nx">$</span><span class="p">(</span><span class="s1">'li'</span><span class="p">).</span><span class="nx">not</span><span class="p">(</span><span class="s1">'.item'</span><span class="p">)</span></code></pre></div>
+
+<p>has方法与filter方法作用相同，但是只过滤出子元素符合条件的元素。</p>
+
+<div class="highlight"><pre><code class="language-javascript" data-lang="javascript"><span class="nx">$</span><span class="p">(</span><span class="s2">"li"</span><span class="p">).</span><span class="nx">has</span><span class="p">(</span><span class="s2">"ul"</span><span class="p">)</span></code></pre></div>
+
+<p>上面代码返回具有ul子元素的li元素。</p>
+
+<span id="toc10"></span><h3 id="dom相关方法">DOM相关方法</h3>
+
+<p>许多方法可以对DOM元素进行处理。</p>
+
+<p><strong>（1）html方法和text方法</strong></p>
+
+<p>html方法返回该元素包含的HTML代码，text方法返回该元素包含的文本。</p>
+
+<p>假定网页只含有一个p元素。</p>
+
+<div class="highlight"><pre><code class="language-html" data-lang="html"><span class="nt">&lt;p&gt;&lt;em&gt;</span>Hello World!<span class="nt">&lt;/em&gt;&lt;/p&gt;</span></code></pre></div>
+
+<p>html方法和text方法的返回结果分别如下。</p>
+
+<div class="highlight"><pre><code class="language-javascript" data-lang="javascript"><span class="nx">$</span><span class="p">(</span><span class="s1">'p'</span><span class="p">).</span><span class="nx">html</span><span class="p">()</span>
+<span class="c1">// &lt;em&gt;Hello World!&lt;/em&gt; </span>
+
+<span class="nx">$</span><span class="p">(</span><span class="s1">'p'</span><span class="p">).</span><span class="nx">text</span><span class="p">()</span>
+<span class="c1">// Hello World!</span></code></pre></div>
+
+<p>jQuery的许多方法都是取值器（getter）与赋值器（setter）的合一，即取值和赋值都是同一个方法，不使用参数的时候为取值器，使用参数的时候为赋值器。</p>
+
+<p>上面代码的html方法和text方法都没有参数，就会当作取值器使用，取回结果集的第一个元素所包含的内容。如果对这两个方法提供参数，就是当作赋值器使用，修改结果集所有成员的内容，并返回原来的结果集，以便进行链式操作。</p>
+
+<div class="highlight"><pre><code class="language-javascript" data-lang="javascript"><span class="nx">$</span><span class="p">(</span><span class="s1">'p'</span><span class="p">).</span><span class="nx">html</span><span class="p">(</span><span class="s1">'&lt;strong&gt;你好&lt;/strong&gt;'</span><span class="p">)</span>
+<span class="c1">// 网页代码变为&lt;p&gt;&lt;strong&gt;你好&lt;/strong&gt;&lt;/p&gt; </span>
+
+<span class="nx">$</span><span class="p">(</span><span class="s1">'p'</span><span class="p">).</span><span class="nx">text</span><span class="p">(</span><span class="s1">'你好'</span><span class="p">)</span>
+<span class="c1">// 网页代码变为&lt;p&gt;你好&lt;/p&gt;</span></code></pre></div>
+
+<p>下面要讲到的jQuery其他许多方法，都采用这种同一个方法既是取值器又是赋值器的模式。</p>
+
+<p>html方法和text方法还可以接受一个函数作为参数，函数的返回值就是网页元素所要包含的新的代码和文本。这个函数接受两个参数，第一个是网页元素在集合中的位置，第二个参数是网页元素原来的代码或文本。</p>
+
+<div class="highlight"><pre><code class="language-javascript" data-lang="javascript"><span class="nx">$</span><span class="p">(</span><span class="s1">'li'</span><span class="p">).</span><span class="nx">html</span><span class="p">(</span><span class="kd">function</span> <span class="p">(</span><span class="nx">i</span><span class="p">,</span> <span class="nx">v</span><span class="p">){</span>
+    <span class="k">return</span> <span class="p">(</span><span class="nx">i</span> <span class="o">+</span> <span class="s1">': '</span> <span class="o">+</span> <span class="nx">v</span><span class="p">);</span>       
+<span class="p">})</span>
+
+<span class="c1">// &lt;li&gt;Hello&lt;/li&gt;</span>
+<span class="c1">// &lt;li&gt;World&lt;/li&gt;</span>
+<span class="c1">// 变为</span>
+<span class="c1">// &lt;li&gt;0: Hello&lt;/li&gt;</span>
+<span class="c1">// &lt;li&gt;1: World&lt;/li&gt;</span></code></pre></div>
+
+<p><strong>（2）addClass方法，removeClass方法，toggleClass方法</strong></p>
+
+<p>addClass方法用于添加一个类，removeClass方法用于移除一个类，toggleClass方法用于折叠一个类（如果无就添加，如果有就移除）。</p>
+
+<div class="highlight"><pre><code class="language-javascript" data-lang="javascript"><span class="nx">$</span><span class="p">(</span><span class="s1">'li'</span><span class="p">).</span><span class="nx">addClass</span><span class="p">(</span><span class="s1">'special'</span><span class="p">)</span>
+<span class="nx">$</span><span class="p">(</span><span class="s1">'li'</span><span class="p">).</span><span class="nx">removeClass</span><span class="p">(</span><span class="s1">'special'</span><span class="p">)</span>
+<span class="nx">$</span><span class="p">(</span><span class="s1">'li'</span><span class="p">).</span><span class="nx">toggleClass</span><span class="p">(</span><span class="s1">'special'</span><span class="p">)</span></code></pre></div>
+
+<p><strong>（3）css方法</strong></p>
+
+<p>css方法用于改变CSS设置。</p>
+
+<p>该方法可以作为取值器使用。</p>
+
+<div class="highlight"><pre><code class="language-javascript" data-lang="javascript"><span class="nx">$</span><span class="p">(</span><span class="s1">'h1'</span><span class="p">).</span><span class="nx">css</span><span class="p">(</span><span class="s1">'fontSize'</span><span class="p">);</span></code></pre></div>
+
+<p>css方法的参数是css属性名。这里需要注意，CSS属性名的CSS写法和DOM写法，两者都可以接受，比如font-size和fontSize都行。</p>
+
+<p>css方法也可以作为赋值器使用。</p>
+
+<div class="highlight"><pre><code class="language-javascript" data-lang="javascript"><span class="nx">$</span><span class="p">(</span><span class="s1">'li'</span><span class="p">).</span><span class="nx">css</span><span class="p">(</span><span class="s1">'padding-left'</span><span class="p">,</span> <span class="s1">'20px'</span><span class="p">)</span>
+<span class="c1">// 或者</span>
+<span class="nx">$</span><span class="p">(</span><span class="s1">'li'</span><span class="p">).</span><span class="nx">css</span><span class="p">({</span>
+  <span class="s1">'padding-left'</span><span class="o">:</span> <span class="s1">'20px'</span>
+<span class="p">});</span></code></pre></div>
+
+<p>上面两种形式都可以用于赋值，jQuery赋值器基本上都是如此。</p>
+
+<p><strong>（4）val方法</strong></p>
+
+<p>val方法返回结果集第一个元素的值，或者设置当前结果集所有元素的值。</p>
+
+<div class="highlight"><pre><code class="language-javascript" data-lang="javascript"><span class="nx">$</span><span class="p">(</span><span class="s1">'input[type="text"]'</span><span class="p">).</span><span class="nx">val</span><span class="p">()</span>
+
+<span class="nx">$</span><span class="p">(</span><span class="s1">'input[type="text"]'</span><span class="p">).</span><span class="nx">val</span><span class="p">(</span><span class="s1">'new value'</span><span class="p">)</span></code></pre></div>
+
+<p><strong>（5）prop方法，attr方法</strong></p>
+
+<p>首先，这里要区分两种属性。</p>
+
+<p>一种是网页元素的属性，比如a元素的href属性、img元素的src属性。这要使用attr方法读写。</p>
+
+<div class="highlight"><pre><code class="language-javascript" data-lang="javascript"><span class="c1">// 读取属性值</span>
+<span class="nx">$</span><span class="p">(</span><span class="s1">'textarea'</span><span class="p">).</span><span class="nx">attr</span><span class="p">(</span><span class="nx">name</span><span class="p">)</span>
+
+<span class="c1">//写入属性值</span>
+<span class="nx">$</span><span class="p">(</span><span class="s1">'textarea'</span><span class="p">).</span><span class="nx">attr</span><span class="p">(</span><span class="nx">name</span><span class="p">,</span> <span class="nx">val</span><span class="p">)</span></code></pre></div>
+
+<p>另一种是DOM元素的属性，比如tagName、nodeName、nodeType等等。这要使用prop方法读写。</p>
+
+<div class="highlight"><pre><code class="language-javascript" data-lang="javascript"><span class="c1">// 读取属性值</span>
+<span class="nx">$</span><span class="p">(</span><span class="s1">'textarea'</span><span class="p">).</span><span class="nx">prop</span><span class="p">(</span><span class="nx">name</span><span class="p">)</span>
+
+<span class="c1">// 写入属性值</span>
+<span class="nx">$</span><span class="p">(</span><span class="s1">'textarea'</span><span class="p">).</span><span class="nx">prop</span><span class="p">(</span><span class="nx">name</span><span class="p">,</span> <span class="nx">val</span><span class="p">)</span></code></pre></div>
+
+<p>所以，attr方法和prop方法针对的是不同的属性。在英语中，attr是attribute的缩写，prop是property的缩写，中文很难表达出这种差异。有时，attr方法和prop方法对同一个属性会读到不一样的值。比如，网页上有一个单选框。</p>
+
+<div class="highlight"><pre><code class="language-html" data-lang="html"><span class="nt">&lt;input</span> <span class="na">type=</span><span class="s">"checkbox"</span> <span class="na">checked=</span><span class="s">"checked"</span> <span class="nt">/&gt;</span></code></pre></div>
+
+<p>对于checked属性，attr方法读到的是checked，prop方法读到的是true。</p>
+
+<div class="highlight"><pre><code class="language-javascript" data-lang="javascript"><span class="nx">$</span><span class="p">(</span><span class="nx">input</span><span class="p">[</span><span class="nx">type</span><span class="o">=</span><span class="nx">checkbox</span><span class="p">]).</span><span class="nx">attr</span><span class="p">(</span><span class="s2">"checked"</span><span class="p">)</span> <span class="c1">// "checked"</span>
+
+<span class="nx">$</span><span class="p">(</span><span class="nx">input</span><span class="p">[</span><span class="nx">type</span><span class="o">=</span><span class="nx">checkbox</span><span class="p">]).</span><span class="nx">prop</span><span class="p">(</span><span class="s2">"checked"</span><span class="p">)</span> <span class="c1">// true</span></code></pre></div>
+
+<p>可以看到，attr方法读取的是网页上该属性的值，而prop方法读取的是DOM元素的该属性的值，根据规范，element.checked应该返回一个布尔值。所以，判断单选框是否选中，要使用prop方法。事实上，不管这个单选框是否选中，attr("checked")的返回值都是checked。</p>
+
+<div class="highlight"><pre><code class="language-javascript" data-lang="javascript"><span class="k">if</span> <span class="p">(</span><span class="nx">$</span><span class="p">(</span><span class="nx">elem</span><span class="p">).</span><span class="nx">prop</span><span class="p">(</span><span class="s2">"checked"</span><span class="p">))</span> <span class="p">{</span> <span class="cm">/*... */</span> <span class="p">};</span>
+
+<span class="c1">// 下面两种方法亦可</span>
+
+<span class="k">if</span> <span class="p">(</span> <span class="nx">elem</span><span class="p">.</span><span class="nx">checked</span> <span class="p">)</span> <span class="p">{</span> <span class="cm">/*...*/</span> <span class="p">};</span>
+<span class="k">if</span> <span class="p">(</span> <span class="nx">$</span><span class="p">(</span><span class="nx">elem</span><span class="p">).</span><span class="nx">is</span><span class="p">(</span><span class="s2">":checked"</span><span class="p">)</span> <span class="p">)</span> <span class="p">{</span> <span class="cm">/*...*/</span> <span class="p">};</span></code></pre></div>
+
+<p><strong>（6）removeProp方法，removeAttr方法</strong></p>
+
+<p>removeProp方法移除某个DOM属性，removeAttr方法移除某个HTML属性。</p>
+
+<div class="highlight"><pre><code class="language-javascript" data-lang="javascript"><span class="nx">$</span><span class="p">(</span><span class="s2">"a"</span><span class="p">).</span><span class="nx">prop</span><span class="p">(</span><span class="s2">"oldValue"</span><span class="p">,</span><span class="mi">1234</span><span class="p">).</span><span class="nx">removeProp</span><span class="p">(</span><span class="s1">'oldValue'</span><span class="p">)</span>
+<span class="nx">$</span><span class="p">(</span><span class="s1">'a'</span><span class="p">).</span><span class="nx">removeAttr</span><span class="p">(</span><span class="s2">"title"</span><span class="p">)</span></code></pre></div>
+
+<p><strong>（7）data方法</strong></p>
+
+<p>data方法用于在一个DOM对象上储存数据。</p>
+
+<div class="highlight"><pre><code class="language-javascript" data-lang="javascript"><span class="c1">// 储存数据</span>
+<span class="nx">$</span><span class="p">(</span><span class="s2">"body"</span><span class="p">).</span><span class="nx">data</span><span class="p">(</span><span class="s2">"foo"</span><span class="p">,</span> <span class="mi">52</span><span class="p">);</span>
+
+<span class="c1">// 读取数据</span>
+<span class="nx">$</span><span class="p">(</span><span class="s2">"body"</span><span class="p">).</span><span class="nx">data</span><span class="p">(</span><span class="s2">"foo"</span><span class="p">);</span></code></pre></div>
+
+<p>该方法可以在DOM节点上储存各种类型的数据。</p>
+
+<span id="toc11"></span><h3 id="添加、复制和移动网页元素的方法">添加、复制和移动网页元素的方法</h3>
+
+<p>jQuery方法提供一系列方法，可以改变元素在文档中的位置。</p>
+
+<p><strong>（1）append方法，appendTo方法</strong></p>
+
+<p>append方法将参数中的元素插入当前元素的尾部。</p>
+
+<div class="highlight"><pre><code class="language-javascript" data-lang="javascript"><span class="nx">$</span><span class="p">(</span><span class="s2">"div"</span><span class="p">).</span><span class="nx">append</span><span class="p">(</span><span class="s2">"&lt;p&gt;World&lt;/p&gt;"</span><span class="p">)</span>
+
+<span class="c1">// &lt;div&gt;Hello &lt;/div&gt;</span>
+<span class="c1">// 变为</span>
+<span class="c1">// &lt;div&gt;Hello &lt;p&gt;World&lt;/p&gt;&lt;/div&gt;</span></code></pre></div>
+
+<p>appendTo方法将当前元素插入参数中的元素尾部。</p>
+
+<div class="highlight"><pre><code class="language-javascript" data-lang="javascript"><span class="nx">$</span><span class="p">(</span><span class="s2">"&lt;p&gt;World&lt;/p&gt;"</span><span class="p">).</span><span class="nx">appendTo</span><span class="p">(</span><span class="s2">"div"</span><span class="p">)</span></code></pre></div>
+
+<p>上面代码返回与前一个例子一样的结果。</p>
+
+<p><strong>（2）prepend方法，prependTo方法</strong></p>
+
+<p>prepend方法将参数中的元素，变为当前元素的第一个子元素。</p>
+
+<div class="highlight"><pre><code class="language-javascript" data-lang="javascript"><span class="nx">$</span><span class="p">(</span><span class="s2">"p"</span><span class="p">).</span><span class="nx">prepend</span><span class="p">(</span><span class="s2">"Hello "</span><span class="p">)</span>
+
+<span class="c1">// &lt;p&gt;World&lt;/p&gt;</span>
+<span class="c1">// 变为</span>
+<span class="c1">// &lt;p&gt;Hello World&lt;/p&gt;</span></code></pre></div>
+
+<p>如果prepend方法的参数不是新生成的元素，而是当前页面已存在的元素，则会产生移动元素的效果。</p>
+
+<div class="highlight"><pre><code class="language-javascript" data-lang="javascript"><span class="nx">$</span><span class="p">(</span><span class="s2">"p"</span><span class="p">).</span><span class="nx">prepend</span><span class="p">(</span><span class="s2">"strong"</span><span class="p">)</span>
+
+<span class="c1">// &lt;strong&gt;Hello &lt;/strong&gt;&lt;p&gt;World&lt;/p&gt;</span>
+<span class="c1">// 变为</span>
+<span class="c1">// &lt;p&gt;&lt;strong&gt;Hello &lt;/strong&gt;World&lt;/p&gt;</span></code></pre></div>
+
+<p>上面代码运行后，strong元素的位置将发生移动，而不是克隆一个新的strong元素。不过，如果当前结果集包含多个元素，则除了第一个以后，后面的p元素都将插入一个克隆的strong子元素。</p>
+
+<p>prependTo方法将当前元素变为参数中的元素的第一个子元素。</p>
+
+<div class="highlight"><pre><code class="language-javascript" data-lang="javascript"><span class="nx">$</span><span class="p">(</span><span class="s2">"&lt;p&gt;&lt;/p&gt;"</span><span class="p">).</span><span class="nx">prependTo</span><span class="p">(</span><span class="s2">"div"</span><span class="p">)</span>
+
+<span class="c1">// &lt;div&gt;&lt;/div&gt;</span>
+<span class="c1">// 变为</span>
+<span class="c1">// &lt;div&gt;&lt;p&gt;&lt;/p&gt;&lt;/div&gt;</span></code></pre></div>
+
+<p><strong>（3）after方法，insertAfter方法</strong></p>
+
+<p>after方法将参数中的元素插在当前元素后面。</p>
+
+<div class="highlight"><pre><code class="language-javascript" data-lang="javascript"><span class="nx">$</span><span class="p">(</span><span class="s2">"div"</span><span class="p">).</span><span class="nx">after</span><span class="p">(</span><span class="s2">"&lt;p&gt;&lt;/p&gt;"</span><span class="p">)</span>
+
+<span class="c1">// &lt;div&gt;&lt;/div&gt;</span>
+<span class="c1">// 变为</span>
+<span class="c1">// &lt;div&gt;&lt;/div&gt;&lt;p&gt;&lt;/p&gt;</span></code></pre></div>
+
+<p>insertAfter方法将当前元素插在参数中的元素后面。</p>
+
+<div class="highlight"><pre><code class="language-javascript" data-lang="javascript"><span class="nx">$</span><span class="p">(</span><span class="s2">"&lt;p&gt;&lt;/p&gt;"</span><span class="p">).</span><span class="nx">insertAfter</span><span class="p">(</span><span class="s2">"div"</span><span class="p">)</span></code></pre></div>
+
+<p>上面代码返回与前一个例子一样的结果。</p>
+
+<p><strong>（4）before方法，insertBefore方法</strong></p>
+
+<p>before方法将参数中的元素插在当前元素的前面。</p>
+
+<div class="highlight"><pre><code class="language-javascript" data-lang="javascript"><span class="nx">$</span><span class="p">(</span><span class="s2">"div"</span><span class="p">).</span><span class="nx">before</span><span class="p">(</span><span class="s2">"&lt;p&gt;&lt;/p&gt;"</span><span class="p">)</span>
+
+<span class="c1">// &lt;div&gt;&lt;/div&gt;</span>
+<span class="c1">// 变为</span>
+<span class="c1">// &lt;p&gt;&lt;/p&gt;&lt;div&gt;&lt;/div&gt;</span></code></pre></div>
+
+<p>insertBefore方法将当前元素插在参数中的元素的前面。</p>
+
+<div class="highlight"><pre><code class="language-javascript" data-lang="javascript"><span class="nx">$</span><span class="p">(</span><span class="s2">"&lt;p&gt;&lt;/p&gt;"</span><span class="p">).</span><span class="nx">insertBefore</span><span class="p">(</span><span class="s2">"div"</span><span class="p">)</span></code></pre></div>
+
+<p>上面代码返回与前一个例子一样的结果。</p>
+
+<p><strong>（5）wrap方法，wrapAll方法，unwrap方法，wrapInner方法</strong></p>
+
+<p>wrap方法将参数中的元素变成当前元素的父元素。</p>
+
+<div class="highlight"><pre><code class="language-javascript" data-lang="javascript"><span class="nx">$</span><span class="p">(</span><span class="s2">"p"</span><span class="p">).</span><span class="nx">wrap</span><span class="p">(</span><span class="s2">"&lt;div&gt;&lt;/div&gt;"</span><span class="p">)</span>
+
+<span class="c1">// &lt;p&gt;&lt;/p&gt;</span>
+<span class="c1">// 变为</span>
+<span class="c1">// &lt;div&gt;&lt;p&gt;&lt;/p&gt;&lt;/div&gt;</span></code></pre></div>
+
+<p>wrap方法的参数还可以是一个函数。</p>
+
+<div class="highlight"><pre><code class="language-javascript" data-lang="javascript"><span class="nx">$</span><span class="p">(</span><span class="s2">"p"</span><span class="p">).</span><span class="nx">wrap</span><span class="p">(</span><span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+  <span class="k">return</span> <span class="s2">"&lt;div&gt;&lt;/div&gt;"</span><span class="p">;</span>
+<span class="p">})</span></code></pre></div>
+
+<p>上面代码返回与前一个例子一样的结果。</p>
+
+<p>wrapAll方法为结果集的所有元素，添加一个共同的父元素。</p>
+
+<div class="highlight"><pre><code class="language-javascript" data-lang="javascript"><span class="nx">$</span><span class="p">(</span><span class="s2">"p"</span><span class="p">).</span><span class="nx">wrapAll</span><span class="p">(</span><span class="s2">"&lt;div&gt;&lt;/div&gt;"</span><span class="p">)</span>
+
+<span class="c1">// &lt;p&gt;&lt;/p&gt;&lt;p&gt;&lt;/p&gt;</span>
+<span class="c1">// 变为</span>
+<span class="c1">// &lt;div&gt;&lt;p&gt;&lt;/p&gt;&lt;p&gt;&lt;/p&gt;&lt;/div&gt;</span></code></pre></div>
+
+<p>unwrap方法移除当前元素的父元素。</p>
+
+<div class="highlight"><pre><code class="language-javascript" data-lang="javascript"><span class="nx">$</span><span class="p">(</span><span class="s2">"p"</span><span class="p">).</span><span class="nx">unwrap</span><span class="p">()</span>
+
+<span class="c1">// &lt;div&gt;&lt;p&gt;&lt;/p&gt;&lt;/div&gt;</span>
+<span class="c1">// 变为</span>
+<span class="c1">// &lt;p&gt;&lt;/p&gt;</span></code></pre></div>
+
+<p>wrapInner方法为当前元素的所有子元素，添加一个父元素。</p>
+
+<div class="highlight"><pre><code class="language-javascript" data-lang="javascript"><span class="nx">$</span><span class="p">(</span><span class="s2">"p"</span><span class="p">).</span><span class="nx">wrapInner</span><span class="p">(</span><span class="s1">'&lt;strong&gt;&lt;/strong&gt;'</span><span class="p">)</span>
+
+<span class="c1">// &lt;p&gt;Hello&lt;/p&gt;</span>
+<span class="c1">// 变为</span>
+<span class="c1">// &lt;p&gt;&lt;strong&gt;Hello&lt;/strong&gt;&lt;/p&gt;</span></code></pre></div>
+
+<p><strong>（6）clone方法</strong></p>
+
+<p>clone方法克隆当前元素。</p>
+
+<div class="highlight"><pre><code class="language-javascript" data-lang="javascript"><span class="kd">var</span> <span class="nx">clones</span> <span class="o">=</span> <span class="nx">$</span><span class="p">(</span><span class="s1">'li'</span><span class="p">).</span><span class="nx">clone</span><span class="p">();</span></code></pre></div>
+
+<p>对于那些有id属性的节点，clone方法会连id属性一起克隆。所以，要把克隆的节点插入文档的时候，务必要修改或移除id属性。</p>
+
+<p><strong>（7）remove方法，detach方法，replaceWith方法</strong></p>
+
+<p>remove方法移除并返回一个元素，取消该元素上所有事件的绑定。detach方法也是移除并返回一个元素，但是不取消该元素上所有事件的绑定。</p>
+
+<div class="highlight"><pre><code class="language-javascript" data-lang="javascript"><span class="nx">$</span><span class="p">(</span><span class="s1">'p'</span><span class="p">).</span><span class="nx">remove</span><span class="p">()</span>
+<span class="nx">$</span><span class="p">(</span><span class="s1">'p'</span><span class="p">).</span><span class="nx">detach</span><span class="p">()</span></code></pre></div>
+
+<p>replaceWith方法用参数中的元素，替换并返回当前元素，取消当前元素的所有事件的绑定。</p>
+
+<div class="highlight"><pre><code class="language-javascript" data-lang="javascript"><span class="nx">$</span><span class="p">(</span><span class="s1">'p'</span><span class="p">).</span><span class="nx">replaceWith</span><span class="p">(</span><span class="s1">'&lt;div&gt;&lt;/div&gt;'</span><span class="p">)</span></code></pre></div>
+
+<span id="toc12"></span><h3 id="动画效果方法">动画效果方法</h3>
+
+<p>jQuery提供一些方法，可以很容易地显示网页动画效果。但是，总体上来说，它们不如CSS动画强大和节省资源，所以应该优先考虑使用CSS动画。</p>
+
+<p>如果将jQuery.fx.off设为true，就可以将所有动画效果关闭，使得网页元素的各种变化一步到位，没有中间过渡的动画效果。</p>
+
+<p><strong>（1）动画效果的简便方法</strong></p>
+
+<p>jQuery提供以下一些动画效果方法。</p>
+
+<ul>
+<li>show：显示当前元素。</li>
+<li>hide：隐藏当前元素。</li>
+<li>toggle：显示或隐藏当前元素。</li>
+<li>fadeIn：将当前元素的不透明度（opacity）逐步提升到100%。</li>
+<li>fadeOut：将当前元素的不透明度逐步降为0%。</li>
+<li>slideDown：以从上向下滑入的方式显示当前元素。</li>
+<li>slideUp：以从下向上滑出的方式隐藏当前元素。</li>
+<li>slideToggle：以垂直滑入或滑出的方式，折叠显示当前元素。</li>
+</ul>
+
+<p>上面这些方法可以不带参数调用，也可以接受毫秒或预定义的关键字作为参数。</p>
+
+<div class="highlight"><pre><code class="language-javascript" data-lang="javascript"><span class="nx">$</span><span class="p">(</span><span class="s1">'.hidden'</span><span class="p">).</span><span class="nx">show</span><span class="p">();</span>
+<span class="nx">$</span><span class="p">(</span><span class="s1">'.hidden'</span><span class="p">).</span><span class="nx">show</span><span class="p">(</span><span class="mi">300</span><span class="p">);</span>
+<span class="nx">$</span><span class="p">(</span><span class="s1">'.hidden'</span><span class="p">).</span><span class="nx">show</span><span class="p">(</span><span class="s1">'slow'</span><span class="p">);</span></code></pre></div>
+
+<p>上面三行代码分别表示，以默认速度、300毫秒、较慢的速度隐藏一个元素。</p>
+
+<p>jQuery预定义的关键字是在jQuery.fx.speeds对象上面，可以自行改动这些值，或者创造新的值。</p>
+
+<div class="highlight"><pre><code class="language-javascript" data-lang="javascript"><span class="nx">jQuery</span><span class="p">.</span><span class="nx">fx</span><span class="p">.</span><span class="nx">speeds</span><span class="p">.</span><span class="nx">fast</span> <span class="o">=</span> <span class="mi">50</span><span class="p">;</span>
+<span class="nx">jQuery</span><span class="p">.</span><span class="nx">fx</span><span class="p">.</span><span class="nx">speeds</span><span class="p">.</span><span class="nx">slow</span> <span class="o">=</span> <span class="mi">3000</span><span class="p">;</span>
+<span class="nx">jQuery</span><span class="p">.</span><span class="nx">fx</span><span class="p">.</span><span class="nx">speeds</span><span class="p">.</span><span class="nx">normal</span> <span class="o">=</span> <span class="mi">1000</span><span class="p">;</span></code></pre></div>
+
+<p>上面三行代码重新定义fast和slow关键字对应的毫秒数，并且自定义了normal关键字，表示动画持续时间为1500毫秒。</p>
+
+<p>你可以定义自己的关键字。</p>
+
+<div class="highlight"><pre><code class="language-javascript" data-lang="javascript"><span class="nx">jQuery</span><span class="p">.</span><span class="nx">fx</span><span class="p">.</span><span class="nx">speeds</span><span class="p">.</span><span class="nx">blazing</span> <span class="o">=</span> <span class="mi">30</span><span class="p">;</span>
+
+<span class="c1">// 调用</span>
+<span class="nx">$</span><span class="p">(</span><span class="s1">'.hidden'</span><span class="p">).</span><span class="nx">show</span><span class="p">(</span><span class="s1">'blazing'</span><span class="p">);</span></code></pre></div>
+
+<p>这些方法还可以接受一个函数，作为第二个参数，表示动画结束后的回调函数。</p>
+
+<div class="highlight"><pre><code class="language-javascript" data-lang="javascript"><span class="nx">$</span><span class="p">(</span><span class="s1">'p'</span><span class="p">).</span><span class="nx">fadeOut</span><span class="p">(</span><span class="mi">300</span><span class="p">,</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+  <span class="nx">$</span><span class="p">(</span><span class="k">this</span><span class="p">).</span><span class="nx">remove</span><span class="p">();</span>
+<span class="p">});</span></code></pre></div>
+
+<p>上面代码表示，p元素以300毫秒的速度淡出，然后调用回调函数，将其从DOM中移除。</p>
+
+<p><strong>（2）animate方法</strong></p>
+
+<p>上面这些动画效果方法，实际上都是animate方法的简便写法。在幕后，jQuery都是统一使用animate方法生成各种动画效果。</p>
+
+<p>animate方法接受三个参数。</p>
+
+<div class="highlight"><pre><code class="language-javascript" data-lang="javascript"><span class="nx">$</span><span class="p">(</span><span class="s1">'div'</span><span class="p">).</span><span class="nx">animate</span><span class="p">({</span>
+    <span class="nx">left</span><span class="o">:</span> <span class="s1">'+=50'</span><span class="p">,</span> <span class="c1">// 增加50</span>
+    <span class="nx">opacity</span><span class="o">:</span> <span class="mf">0.25</span><span class="p">,</span>
+    <span class="nx">fontSize</span><span class="o">:</span> <span class="s1">'12px'</span>
+  <span class="p">},</span>
+  <span class="mi">300</span><span class="p">,</span> <span class="c1">// 持续事件</span>
+  <span class="kd">function</span><span class="p">()</span> <span class="p">{</span> <span class="c1">// 回调函数</span>
+     <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s1">'done!'</span><span class="p">);</span>
+  <span class="p">}</span>
+<span class="p">);</span></code></pre></div>
+
+<p>上面代码表示，animate方法的第一个参数是一个对象，表示动画结束时相关CSS属性的值，第二个参数是动画持续的毫秒数，第三个参数是动画结束时的回调函数。需要注意的是，第一个参数对象的成员名称，必须与CSS属性名称一致，如果CSS属性名称带有连字号，则需要用“骆驼拼写法”改写。</p>
+
+<p><strong>（3）stop方法，delay方法</strong></p>
+
+<p>stop方法表示立即停止执行当前的动画。</p>
+
+<div class="highlight"><pre><code class="language-javascript" data-lang="javascript"><span class="nx">$</span><span class="p">(</span><span class="s2">"#stop"</span><span class="p">).</span><span class="nx">click</span><span class="p">(</span><span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+  <span class="nx">$</span><span class="p">(</span><span class="s2">".block"</span><span class="p">).</span><span class="nx">stop</span><span class="p">();</span>
+<span class="p">});</span></code></pre></div>
+
+<p>上面代码表示，点击按钮后，block元素的动画效果停止。</p>
+
+<p>delay方法接受一个时间参数，表示暂停多少毫秒后继续执行。</p>
+
+<div class="highlight"><pre><code class="language-javascript" data-lang="javascript"><span class="nx">$</span><span class="p">(</span><span class="s2">"#foo"</span><span class="p">).</span><span class="nx">slideUp</span><span class="p">(</span><span class="mi">300</span><span class="p">).</span><span class="nx">delay</span><span class="p">(</span><span class="mi">800</span><span class="p">).</span><span class="nx">fadeIn</span><span class="p">(</span><span class="mi">400</span><span class="p">)</span></code></pre></div>
+
+<p>上面代码表示，slideUp动画之后，暂停800毫秒，然后继续执行fadeIn动画。</p>
+
+<span id="toc13"></span><h3 id="其他方法">其他方法</h3>
+
+<p>jQuery还提供一些供特定元素使用的方法。</p>
+
+<p>serialize方法用于将表单元素的值，转为url使用的查询字符串。</p>
+
+<div class="highlight"><pre><code class="language-javascript" data-lang="javascript"><span class="nx">$</span><span class="p">(</span> <span class="s2">"form"</span> <span class="p">).</span><span class="nx">on</span><span class="p">(</span> <span class="s2">"submit"</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span> <span class="nx">event</span> <span class="p">)</span> <span class="p">{</span>
+  <span class="nx">event</span><span class="p">.</span><span class="nx">preventDefault</span><span class="p">();</span>
+  <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span> <span class="nx">$</span><span class="p">(</span> <span class="k">this</span> <span class="p">).</span><span class="nx">serialize</span><span class="p">()</span> <span class="p">);</span>
+<span class="p">});</span>
+<span class="c1">// single=Single&amp;multiple=Multiple&amp;check=check2&amp;radio=radio1</span></code></pre></div>
+
+<p>serializeArray方法用于将表单元素的值转为数组。</p>
+
+<div class="highlight"><pre><code class="language-javascript" data-lang="javascript"><span class="nx">$</span><span class="p">(</span><span class="s2">"form"</span><span class="p">).</span><span class="nx">submit</span><span class="p">(</span><span class="kd">function</span> <span class="p">(</span><span class="nx">event</span><span class="p">){</span>
+  <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">$</span><span class="p">(</span><span class="k">this</span><span class="p">).</span><span class="nx">serializeArray</span><span class="p">());</span>
+  <span class="nx">event</span><span class="p">.</span><span class="nx">preventDefault</span><span class="p">();</span>
+<span class="p">});</span>
+<span class="c1">// [</span>
+<span class="c1">//     {name : 'field1', value : 123},</span>
+<span class="c1">//     {name : 'field2', value : 'hello world'}</span>
+<span class="c1">// ]</span></code></pre></div>
+
+<span id="toc14"></span><div class="chapter"><h2 id="事件处理">事件处理</h2></div>
+
+<span id="toc15"></span><h3 id="事件绑定的简便方法">事件绑定的简便方法</h3>
+
+<p>jQuery提供一系列方法，允许直接为常见事件绑定回调函数。比如，click方法可以为一个元素绑定click事件的回调函数。</p>
+
+<div class="highlight"><pre><code class="language-javascript" data-lang="javascript"><span class="nx">$</span><span class="p">(</span><span class="s1">'li'</span><span class="p">).</span><span class="nx">click</span><span class="p">(</span><span class="kd">function</span> <span class="p">(</span><span class="nx">e</span><span class="p">){</span>
+  <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">$</span><span class="p">(</span><span class="k">this</span><span class="p">).</span><span class="nx">text</span><span class="p">());</span>
+<span class="p">});</span></code></pre></div>
+
+<p>上面代码为li元素绑定click事件的回调函数，点击后在控制台显示li元素包含的文本。</p>
+
+<p>这样绑定事件的简便方法有如下一些：</p>
+
+<ul>
+<li>click</li>
+<li>keydown</li>
+<li>keypress</li>
+<li>keyup</li>
+<li>mouseover</li>
+<li>mouseout</li>
+<li>mouseenter</li>
+<li>mouseleave</li>
+<li>scroll</li>
+<li>focus</li>
+<li>blur</li>
+<li>resize</li>
+<li>hover</li>
+</ul>
+
+<p>如果不带参数调用这些方法，就是触发相应的事件，从而引发回调函数的运行。</p>
+
+<div class="highlight"><pre><code class="language-javascript" data-lang="javascript"><span class="nx">$</span><span class="p">(</span><span class="s1">'li'</span><span class="p">).</span><span class="nx">click</span><span class="p">()</span></code></pre></div>
+
+<p>上面代码将触发click事件的回调函数。</p>
+
+<p>需要注意的是，通过这种方法触发回调函数，将不会引发浏览器对该事件的默认行为。比如，对a元素调用click方法，将只触发事先绑定的回调函数，而不会导致浏览器将页面导向href属性指定的网址。</p>
+
+<p>下面是一个捕捉用户按下escape键的函数。</p>
+<div class="highlight"><pre><code class="language-javascript" data-lang="javascript"><span class="nx">$</span><span class="p">(</span><span class="nb">document</span><span class="p">).</span><span class="nx">keyup</span><span class="p">(</span><span class="kd">function</span><span class="p">(</span><span class="nx">e</span><span class="p">)</span> <span class="p">{</span>
+  <span class="k">if</span> <span class="p">(</span><span class="nx">e</span><span class="p">.</span><span class="nx">keyCode</span> <span class="o">==</span> <span class="mi">27</span><span class="p">)</span> <span class="p">{</span>
+    <span class="nx">$</span><span class="p">(</span><span class="s1">'body'</span><span class="p">).</span><span class="nx">toggleClass</span><span class="p">(</span><span class="s1">'show-nav'</span><span class="p">);</span>
+    <span class="c1">// $('body').removeClass('show-nav');</span>
+  <span class="p">}</span>
+<span class="p">});</span>
+</code></pre></div>
+<p>上面代码中，用户按下escape键，jQuery就会为body元素添加/去除名为show-nav的class。</p>
+
+<p>hover方法需要特别说明。它接受两个回调函数作为参数，分别代表mouseenter和mouseleave事件的回调函数。</p>
+
+<div class="highlight"><pre><code class="language-javascript" data-lang="javascript"><span class="nx">$</span><span class="p">(</span><span class="nx">selector</span><span class="p">).</span><span class="nx">hover</span><span class="p">(</span><span class="nx">handlerIn</span><span class="p">,</span> <span class="nx">handlerOut</span><span class="p">)</span>
+
+<span class="c1">// 等同于</span>
+
+<span class="nx">$</span><span class="p">(</span><span class="nx">selector</span><span class="p">).</span><span class="nx">mouseenter</span><span class="p">(</span><span class="nx">handlerIn</span><span class="p">).</span><span class="nx">mouseleave</span><span class="p">(</span><span class="nx">handlerOut</span><span class="p">)</span></code></pre></div>
+
+<span id="toc16"></span><h3 id="on方法，trigger方法，off方法">on方法，trigger方法，off方法</h3>
+
+<p>除了简便方法，jQuery还提供事件处理的通用方法。</p>
+
+<p><strong>（1）on方法</strong></p>
+
+<p>on方法是jQuery事件绑定的统一接口。事件绑定的那些简便方法，其实都是on方法的简写形式。</p>
+
+<p>on方法接受两个参数，第一个是事件名称，第二个是回调函数。</p>
+
+<div class="highlight"><pre><code class="language-javascript" data-lang="javascript"><span class="nx">$</span><span class="p">(</span><span class="s1">'li'</span><span class="p">).</span><span class="nx">on</span><span class="p">(</span><span class="s1">'click'</span><span class="p">,</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">e</span><span class="p">){</span>
+  <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">$</span><span class="p">(</span><span class="k">this</span><span class="p">).</span><span class="nx">text</span><span class="p">());</span>
+<span class="p">});</span></code></pre></div>
+
+<p>上面代码为li元素绑定click事件的回调函数。</p>
+
+<blockquote>
+<p>注意，在回调函数内部，this关键字指的是发生该事件的DOM对象。为了使用jQuery提供的方法，必须将DOM对象转为jQuery对象，因此写成$(this)。</p>
+</blockquote>
+
+<p>on方法允许一次为多个事件指定同样的回调函数。</p>
+
+<div class="highlight"><pre><code class="language-javascript" data-lang="javascript"><span class="nx">$</span><span class="p">(</span><span class="s1">'input[type="text"]'</span><span class="p">).</span><span class="nx">on</span><span class="p">(</span><span class="s1">'focus blur'</span><span class="p">,</span> <span class="kd">function</span> <span class="p">(){</span>
+  <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s1">'focus or blur'</span><span class="p">);</span>
+<span class="p">});</span></code></pre></div>
+
+<p>上面代码为文本框的focus和blur事件绑定同一个回调函数。</p>
+
+<p>on方法还可以为当前元素的某一个子元素，添加回调函数。</p>
+
+<div class="highlight"><pre><code class="language-javascript" data-lang="javascript"><span class="nx">$</span><span class="p">(</span><span class="s1">'ul'</span><span class="p">).</span><span class="nx">on</span><span class="p">(</span><span class="s1">'click'</span><span class="p">,</span> <span class="s1">'li'</span><span class="p">,</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">e</span><span class="p">){</span>
+  <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="k">this</span><span class="p">);</span>
+<span class="p">});</span></code></pre></div>
+
+<p>上面代码为ul的子元素li绑定click事件的回调函数。采用这种写法时，on方法接受三个参数，子元素选择器作为第二个参数，夹在事件名称和回调函数之间。</p>
+
+<p>这种写法有两个好处。首先，click事件还是在ul元素上触发回调函数，但是会检查event对象的target属性是否为li子元素，如果为true，再调用回调函数。这样就比为li元素一一绑定回调函数，节省了内存空间。其次，这种绑定的回调函数，对于在绑定后生成的li元素依然有效。</p>
+
+<p>on方法还允许向回调函数传入数据。</p>
+
+<div class="highlight"><pre><code class="language-javascript" data-lang="javascript"><span class="nx">$</span><span class="p">(</span><span class="s2">"ul"</span> <span class="p">).</span><span class="nx">on</span><span class="p">(</span><span class="s2">"click"</span><span class="p">,</span> <span class="p">{</span><span class="nx">name</span><span class="o">:</span> <span class="s2">"张三"</span><span class="p">},</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">event</span><span class="p">){</span>
+    <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">event</span><span class="p">.</span><span class="nx">data</span><span class="p">.</span><span class="nx">name</span><span class="p">);</span>
+<span class="p">});</span></code></pre></div>
+
+<p>上面代码在发生click事件之后，会通过event对象的data属性，在控制台打印出所传入的数据（即“张三”）。</p>
+
+<p><strong>（2）trigger方法</strong></p>
+
+<p>trigger方法用于触发回调函数，它的参数就是事件的名称。</p>
+
+<div class="highlight"><pre><code class="language-javascript" data-lang="javascript"><span class="nx">$</span><span class="p">(</span><span class="s1">'li'</span><span class="p">).</span><span class="nx">trigger</span><span class="p">(</span><span class="s1">'click'</span><span class="p">)</span></code></pre></div>
+
+<p>上面代码触发li元素的click事件回调函数。与那些简便方法一样，trigger方法只触发回调函数，而不会引发浏览器的默认行为。</p>
+
+<p><strong>（3）off方法</strong></p>
+
+<p>off方法用于移除事件的回调函数。</p>
+
+<div class="highlight"><pre><code class="language-javascript" data-lang="javascript"><span class="nx">$</span><span class="p">(</span><span class="s1">'li'</span><span class="p">).</span><span class="nx">off</span><span class="p">(</span><span class="s1">'click'</span><span class="p">)</span></code></pre></div>
+
+<p>上面代码移除li元素所有的click事件回调函数。</p>
+
+<p><strong>（4）事件的名称空间</strong></p>
+
+<p>同一个事件有时绑定了多个回调函数，这时如果想移除其中的一个回调函数，可以采用“名称空间”的方式，即为每一个回调函数指定一个二级事件名，然后再用off方法移除这个二级事件的回调函数。</p>
+
+<div class="highlight"><pre><code class="language-javascript" data-lang="javascript"><span class="nx">$</span><span class="p">(</span><span class="s1">'li'</span><span class="p">).</span><span class="nx">on</span><span class="p">(</span><span class="s1">'click.logging'</span><span class="p">,</span> <span class="kd">function</span> <span class="p">(){</span>
+  <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s1">'click.logging callback removed'</span><span class="p">);</span>
+<span class="p">});</span>
+
+<span class="nx">$</span><span class="p">(</span><span class="s1">'li'</span><span class="p">).</span><span class="nx">off</span><span class="p">(</span><span class="s1">'click.logging'</span><span class="p">);</span></code></pre></div>
+
+<p>上面代码为li元素定义了二级事件click.logging的回调函数，click.logging属于click名称空间，当发生click事件时会触发该回调函数。将click.logging作为off方法的参数，就会移除这个回调函数，但是对其他click事件的回调函数没有影响。</p>
+
+<p>trigger方法也适用带名称空间的事件。</p>
+
+<div class="highlight"><pre><code class="language-javascript" data-lang="javascript"><span class="nx">$</span><span class="p">(</span><span class="s1">'li'</span><span class="p">).</span><span class="nx">trigger</span><span class="p">(</span><span class="s1">'click.logging'</span><span class="p">)</span></code></pre></div>
+
+<span id="toc17"></span><h3 id="event对象">event对象</h3>
+
+<p>当回调函数被触发后，它们的参数通常是一个事件对象event。</p>
+
+<div class="highlight"><pre><code class="language-javascript" data-lang="javascript"><span class="nx">$</span><span class="p">(</span><span class="nb">document</span><span class="p">).</span><span class="nx">on</span><span class="p">(</span><span class="s1">'click'</span><span class="p">,</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">e</span><span class="p">){</span>
+    <span class="c1">// ...</span>
+<span class="p">});</span></code></pre></div>
+
+<p>上面代码的回调函数的参数e，就代表事件对象event。</p>
+
+<p>event对象有以下属性：</p>
+
+<ul>
+<li>type：事件类型，比如click。</li>
+<li>which：触发该事件的鼠标按钮或键盘的键。</li>
+<li>target：事件发生的初始对象。</li>
+<li>data：传入事件对象的数据。</li>
+<li>pageX：事件发生时，鼠标位置的水平坐标（相对于页面左上角）。</li>
+<li>pageY：事件发生时，鼠标位置的垂直坐标（相对于页面左上角）。</li>
+</ul>
+
+<p>event对象有以下方法：</p>
+
+<ul>
+<li>preventDefault：取消浏览器默认行为。</li>
+<li>stopPropagation：阻止事件向上层元素传播。</li>
+</ul>
+
+<span id="toc18"></span><h3 id="一次性事件">一次性事件</h3>
+
+<p>one方法指定一次性的回调函数，即这个函数只能运行一次。这对提交表单很有用。</p>
+
+<div class="highlight"><pre><code class="language-javascript" data-lang="javascript"><span class="nx">$</span><span class="p">(</span><span class="s2">"#button"</span><span class="p">).</span><span class="nx">one</span><span class="p">(</span> <span class="s2">"click"</span><span class="p">,</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span> <span class="k">return</span> <span class="kc">false</span><span class="p">;</span> <span class="p">}</span> <span class="p">);</span></code></pre></div>
+
+<p>one方法本质上是回调函数运行一次，即解除对事件的监听。</p>
+
+<div class="highlight"><pre><code class="language-javascript" data-lang="javascript"><span class="nb">document</span><span class="p">.</span><span class="nx">getElementById</span><span class="p">(</span><span class="s2">"#button"</span><span class="p">).</span><span class="nx">addEventListener</span><span class="p">(</span><span class="s2">"click"</span><span class="p">,</span> <span class="nx">handler</span><span class="p">);</span>
+
+<span class="kd">function</span> <span class="nx">handler</span><span class="p">(</span><span class="nx">e</span><span class="p">)</span> <span class="p">{</span>
+    <span class="nx">e</span><span class="p">.</span><span class="nx">target</span><span class="p">.</span><span class="nx">removeEventListener</span><span class="p">(</span><span class="nx">e</span><span class="p">.</span><span class="nx">type</span><span class="p">,</span> <span class="nx">arguments</span><span class="p">.</span><span class="nx">callee</span><span class="p">);</span>
+    <span class="k">return</span> <span class="kc">false</span><span class="p">;</span>
+<span class="p">}</span></code></pre></div>
+
+<p>上面的代码在点击一次以后，取消了对click事件的监听。如果有特殊需要，可以设定点击2次或3次之后取消监听，这都是可以的。</p>
+
+<span id="toc19"></span><div class="chapter"><h2 id="参考链接" class="reference">参考链接</h2></div>
+
+<ul class="reference-list">
+<li>Elijah Manor, <a href="http://www.elijahmanor.com/2013/01/yo-dawg-i-herd-you-like-loops-so-jquery.html">Do You Know When You Are Looping in jQuery?</a></li>
+<li>Craig Buckler, <a href="http://www.sitepoint.com/create-one-time-events-javascript/">How to Create One-Time Events in JavaScript</a></li>
+<li>jQuery Fundamentals, <a href="http://jqfundamentals.com/chapter/jquery-basics">jQuery Basics</a></li>
+<li>jQuery Fundamentals, <a href="http://jqfundamentals.com/chapter/effects">Animating Your Pages with jQuery</a></li>
+</ul>
+
+
+</div></div></article>
+
+<div class="row">
+    <div class="twelve columns">
+
+<sectioni id="feature">
+
+<h2>功能链接</h2>
+
+<ul>
+
+	<li><a href="https://github.com/ruanyf/jstutorial/issues">论坛</a></li>
+	<li><a href="https://raw.github.com/ruanyf/jstutorial/gh-pages/jquery/basic.md">Markdown源码</a></li>
+	<li><a href="https://github.com/ruanyf/jstutorial/commits/gh-pages/jquery/basic.md">修订历史</a></li>
+
+</ul>
+
+<h2>留言</h2>
+
+<div id="disqus_thread"><iframe id="dsq-2" data-disqus-uid="2" allowtransparency="true" frameborder="0" scrolling="no" tabindex="0" title="Disqus" width="100%" src="./basic_files/saved_resource.htm" style="width: 100% !important; border: none !important; overflow: hidden !important; height: 1425px !important;" horizontalscrolling="no" verticalscrolling="no"></iframe></div>
+    <script type="text/javascript">
+        /* * * CONFIGURATION VARIABLES: EDIT BEFORE PASTING INTO YOUR WEBPAGE * * */
+        var disqus_shortname = 'jstutorial'; // required: replace example with your forum shortname
+
+        /* * * DON'T EDIT BELOW THIS LINE * * */
+        (function() {
+            var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+            dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+            (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+        })();
+    </script>
+    <noscript>Please enable JavaScript to view the &lt;a href="http://disqus.com/?ref_noscript"&gt;comments powered by Disqus.&lt;/a&gt;</noscript>
+    
+
+
+
+</sectioni></div>
+</div>
+
+<footer>
+<div class="row">
+<div class="twelve columns">
+	<p><a href="http://javascript.ruanyifeng.com/introduction/license.html">版权声明</a> | last modified on 2013-12-28 </p>
+</div>
+</div>
+</footer>
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-43771063-1', 'ruanyifeng.com');
+  ga('send', 'pageview');
+</script>
+
+
+
+
+</body></html>

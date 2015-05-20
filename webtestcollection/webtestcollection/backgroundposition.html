@@ -1,0 +1,29 @@
+﻿<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <title></title>
+    <script src="Scripts/jquery-1.7.1.min.js"></script>
+    <script src="Scripts/jqBackgroundPositionAnimate.js"></script>
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $(".btn1").click(function () {
+                $("#d1").animate({ backgroundPosition: "80% 80%" }, {
+                    duration: 10, complete: function () { }
+                });//.animate({ backgroundPosition: "0% 0%" }, {
+                //    duration: 10, complete: function () { }
+                //});
+            });
+            $(".btn2").click(function () {
+                $("#d1").animate({ backgroundPosition: "0% 0%" }, 0);
+            });
+        });
+    </script>
+</head>
+<body>
+    <div id="d1" style="background-image: url(/images/2.jpg); margin: 100px auto; width: 400px; height: 400px; background-repeat: no-repeat;">
+        <p>This is a paragraph.</p>
+        <button class="btn1">Animate</button>
+        <button class="btn2">Reset</button>
+    </div>
+</body>
+</html>

@@ -1,0 +1,130 @@
+﻿<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <title></title>
+</head>
+<body>
+    <img src="mediator1.png" />
+    <script>
+        var Participant = function (name) {
+            this.name = name;
+            this.chatroom = null;
+        };
+        Participant.prototype = {
+            send: function (message, to) {
+                this.chatroom.send(message, this, to);
+            },
+            receive: function (message, from) {
+                log.add(from.name + " to " + this.name + ": " + message);
+            }
+        };
+        var Chatroom = function () {
+            var participants = {};
+
+            return {
+
+                register: function (participant) {
+                    participants[participant.name] = participant;
+                    participant.chatroom = this;
+                },
+
+                send: function (message, from, to) {
+                    if (to) {
+                        to.receive(message, from);
+                    } else {
+                        for (key in participants) {
+                            if (participants[key] !== from) {
+                                participants[key].receive(message, from);
+                            }
+                        }
+                    }
+                }
+            };
+        };
+        var log = (function () {
+            var log = "";
+
+            return {
+                add: function (msg) { log += msg + "\n"; },
+                show: function () { alert(log); log = ""; }
+            }
+        })();
+
+        function run() {
+            var yoko = new Participant("Yoko");
+            var john = new Participant("John");
+            var paul = new Participant("Paul");
+            var ringo = new Participant("Ringo");
+            var chatroom = new Chatroom();
+            chatroom.register(yoko);
+            chatroom.register(john);
+            chatroom.register(paul);
+            chatroom.register(ringo);
+            yoko.send("All you need is love.");
+            yoko.send("I love you John.");
+            john.send("Hey, no need to broadcast", yoko);
+            paul.send("Ha, I heard that!");
+            ringo.send("Paul, what do you think?", paul);
+            log.show();
+        }
+        //在示例代码中我们有四个参与者，加入聊天会话通过注册一个聊天室（中介）。每个参与者的参与对象的代表。参与者相互发送消息和聊天室的处理路由。
+        //这里的聊天室对象就起到了中介的作用，协调其他的对象，进行合理的组织，降低耦合。
+    </script>
+    <script>
+        //我们应该很熟悉MVC三层模型实体模型（Model）、视图表现层（View）还有控制层（Control / Mediator）。
+        //控制层便是位于表现层与模型层之间的中介者。笼统地说MVC也算是中介者模式在框架设计中的一个应用。
+        function View() {
+            this.el = document.createElement('div');
+            this.getEl = function () {
+                return this.el;
+            }
+        }
+        function Ctrl(view) {
+            this.view = view;
+            this.model = new Model({
+                name: '大熊',
+                memo: '大家好'
+            });
+            this.init = function () {
+                this.view.getEl().onclick = function () {
+                    this.model.save();
+                }
+            }
+        }
+        function Model(info) {
+            this.save = function () {
+                console.log('保存信息' + info);
+            }
+        }
+        function requestClient() {
+            new Ctrl(new View()).init();
+        }
+        requestClient();
+
+        //Why Mediator ?
+        //各个对象之间的交互操作非常多，每个对象的行为操作都依赖彼此对方，修改一个对象的行为，同时会涉及到修改很多其他对象的行为，
+
+        //如果使用Mediator模式，可以使各个对象间的耦合松散,只需关心和 Mediator的关系,使多对多的关系变成了一对多的关系，
+
+        //可以降低系统的复杂性，提高可修改扩展性。
+
+        //使用中介者模式的场合
+
+        //1.一组定义良好的对象，现在要进行复杂的通信。
+
+        //2.定制一个分布在多个类中的行为，而又不想生成太多的子类。
+
+        //可以看出，中介对象主要是用来封装行为的，行为的参与者就是那些对象，但是通过中介者，这些对象不用相互知道。（迪米特法则的具体实现）
+
+        //使用中介者模式的优点：
+
+        //1.降低了系统对象之间的耦合性，使得对象易于独立的被复用。
+
+        //2.提高系统的灵活性，使得系统易于扩展和维护。
+
+        //使用中介者模式的缺点：
+
+        //中介者模式的缺点是显而易见的，因为这个“中介“承担了较多的责任，所以一旦这个中介对象出现了问题，那么整个系统就会受到重大的影响。
+    </script>
+</body>
+</html>

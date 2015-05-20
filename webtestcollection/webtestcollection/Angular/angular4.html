@@ -1,0 +1,98 @@
+﻿<!DOCTYPE html>
+<html ng-app="myApp">
+<head>
+    <title></title>
+    <script src="angular.min.js"></script>
+</head>
+<body>
+    <div ng-controller="PlayerController">
+        <!-- programs -->
+        <ul id="programs_list" class="">
+            <li ng-repeat="program in programs">
+                <span npr-link  class="large-12">{{ program.title.$text }}</span>
+            </li>
+        </ul>
+    </div>
+    <div class="nprLink row" ng-click="play(ngModel)">
+        <span class="name large-8 columns">
+            <button class="large-2 small-2 playButton columns">
+                <div class="triangle"></div>
+            </button>
+            <div class="large-10 small-10 columns">
+                <div class="row">
+                    <span class="large-12">{{ ngModel.title.$text }}</span>
+                </div>
+                <div class="row">
+                    <div class="small-1 columns"></div>
+                    <div class="small-2 columns push-8">
+                        <a href="{{ ngModel.link[0].$text }}">Link</a>
+                    </div>
+                </div>
+            </div>
+        </span>
+    </div>
+    <script>
+        var app = angular.module('myApp', []);
+        var apiKey = 'MDE4Mzg0ODA2MDE0MjQ5MjA2NzA5NDZmNA001';
+        var nprUrl = 'http://api.npr.org/query?id=61&fields=relatedLink,title,byline,text,audio,image,pullQuote,all&output=JSON';
+        //$http({
+        //    method: 'JSONP',
+        //    url: 'http://api.openbeerdatabase.com/v1/beers.json?callback=JSON_CALLBACK'
+        //})
+        //.success(function (data, status, headers, config) {
+        //    // data contains the response
+        //    // status is the HTTP status
+        //    // headers is the header getter function
+        //    // config is the object that was used to create the HTTP request
+        //}).error(function (data, status, headers, config) {
+
+        //});
+        app.directive('nprLink', function () {
+            return {
+                restrict: 'EA',
+                require: ['^ngModel'],
+                replace: true,
+                scope: {
+                    ngModel: '=',
+                    play: '&'
+                },
+                templateUrl: '/views/nprListItem.html',
+                link: function (scope, ele, attr) {
+                    scope.duration = scope.ngModel.audio[0].duration.$text;
+                }
+            }
+        });
+        app.controller('PlayerController', function ($scope, $http) {
+            // Hidden our previous section's content
+            // construct our http request
+            $scope.play = false;
+            $scope.play = function () {
+                if ($scope.playing) {
+                    audio.pause();
+                }
+                var url = program.audio[0].format.mp4.$text;
+                audio.src = url;
+                audio.play(); // 储存播放器的状态为正在播放
+                $scope.playing = true;
+            }
+            $http({
+                method: 'JSONP',
+                url: nprUrl + '&apiKey=' + apiKey + '&callback=JSON_CALLBACK'
+            }).success(function (data, status) {
+                // Now we have a list of the stories (data.list.story)
+                // in the data object that the NPR API
+                // returns in JSON that looks like:
+                // data: { "list": {
+                // "title": ...
+                // "story": [
+                // { "id": ...
+                // "title": ...
+                $scope.programs = data.list.story;
+
+            }).error(function (data, status) {
+                // Some error occurred
+            });
+        });
+    </script>
+</body>
+</html>

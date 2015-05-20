@@ -1,0 +1,104 @@
+﻿<!DOCTYPE HTML PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>jquery广告制作jQuery侧面浮动图片广告或滚屏图片广告</title>
+    <meta name="description" content="jquery图片广告制作一个侧面浮动图片广告特效，类似滚屏效果的图片广告。jQuery下载。" />
+</head>
+
+<body>
+
+    <style type="text/css">
+        * {
+            margin: 0;
+            padding: 0;
+            list-style-type: none;
+        }
+
+        .fixediv {
+            position: fixed;
+            top: 140px;
+            z-index: 9999;
+            width: 140px;
+            height: 216px;
+            background: #ddd;
+        }
+
+            .fixediv img {
+                float: left;
+            }
+
+            .fixediv a.close {
+                display: block;
+                height: 30px;
+                line-height: 30px;
+                background: #fff;
+                font-size: 14px;
+                padding: 0 10px;
+                color: #5e5e5e;
+                text-decoration: none;
+                text-align: center;
+            }
+
+        .leftadv {
+            left: 0px;
+        }
+
+        .rightadv {
+            right: 0px;
+        }
+    </style>
+
+    <div class="fixediv leftadv">
+        <a href="http://www.17sucai.com/"><img src="images/180.jpg" width="140" height="186" alt="性感美女" /></a>
+        <a class="close" href="javascript:void(0);">关闭广告</a>
+    </div>
+
+    <div class="fixediv rightadv">
+        <a href="http://www.17sucai.com/"><img src="images/280.jpg" width="140" height="186" alt="清纯美女" /></a>
+        <a class="close" href="javascript:void(0);">关闭广告</a>
+    </div>
+
+    <div style="height:1200px;"></div>
+    <script src="../Scripts/jquery-1.7.1.min.js"></script>
+
+    <script type="text/javascript">
+        $(document).ready(function () {
+
+            $(".fixediv a").click(function () {
+
+                $(".fixediv").fadeOut(400);
+
+            });
+
+            $(".fixediv").floatadv();
+
+        });
+
+        jQuery.fn.floatadv = function (loaded) {
+            var obj = this;
+            body_height = parseInt($(window).height());
+            block_height = parseInt(obj.height());
+
+            top_position = parseInt((body_height / 2) - (block_height / 2) + $(window).scrollTop());
+            if (body_height < block_height) { top_position = 0 + $(window).scrollTop(); };
+
+            if (!loaded) {
+                obj.css({ 'position': 'absolute' });
+                obj.css({ 'top': top_position });
+                $(window).bind('resize', function () {
+                    obj.floatadv(!loaded);
+                });
+                $(window).bind('scroll', function () {
+                    obj.floatadv(!loaded);
+                });
+            } else {
+                obj.stop();
+                obj.css({ 'position': 'absolute' });
+                obj.animate({ 'top': top_position }, 400, 'linear');
+            }
+        }
+    </script>
+
+</body>
+</html>

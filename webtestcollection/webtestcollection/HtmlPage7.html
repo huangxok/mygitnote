@@ -1,0 +1,101 @@
+﻿<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title></title>
+    <script src="Scripts/jquery-1.7.1.min.js"></script>
+    <style type="text/css">
+        div.back {
+            text-align: center;
+            height: 50px;
+            background: -webkit-gradient(linear,50% 100%,50% 0%,from(#ace),to(#f96));
+        }
+
+        .back ul {
+            height: 50px;
+        }
+
+            .back ul > li {
+                width: 100px;
+                height: 30px;
+                line-height: 50px;
+                list-style-type: none;
+                text-align: center;
+                float: left;
+            }
+
+            .back ul li ul {
+                display: none;
+                line-height: 40px;
+            }
+
+                .back ul li ul li {
+                    width: 50px;
+                    left: 50px;
+                    background: -webkit-gradient(linear,50% 100%,50% 0%,from(#ace),to(#f96));
+                }
+
+            .back ul > li:hover ul {
+                display: block;
+                position: relative;
+                top: 0px;
+                left: 0px;
+            }
+
+            .back ul > li:hover {
+                display: block;
+                position: relative;
+                top: 10px;
+                left: 0px;
+            }
+
+        #l1 {
+            opacity: 1;
+            position: absolute;
+            top: 55px;
+            left: 80px;
+            border-style: solid;
+            width: 0;
+            height: 0;
+            border-width: 10px;
+            z-index: 100;
+            border-color: transparent transparent rgb(102, 102, 102) transparent; /* #666 */
+        }
+    </style>
+</head>
+<body>
+    <div class="back">
+        <ul>
+            <li>首页1111</li>
+            <li>首页2222
+                <ul>
+                    <li>11111</li>
+                    <li>11111</li>
+                    <li>11111</li>
+                    <li>11111</li>
+                </ul>
+            </li>
+            <li>首页3333</li>
+            <li>首页4444</li>
+            <li>首页5555</li>
+        </ul>
+        <div id="l1">
+        </div>
+
+    </div>
+    <script>
+
+        $(function () {
+            var li = $('.back > ul > li')   //获取 li 元素
+            for (var i = 0; i < li.length; i++) {  //for循环
+                li[i].onmouseover = function () {  //为某个li绑定over事件
+                    $("#l1").stop().animate({ "left": $(this).position().left + 50 }, 250);
+                  //选择div元素停止所有动画添加动画 属性left的值：这个li的位置的left属性加50像素 过渡时间250毫秒 
+                }
+            }
+
+        });
+    </script>
+</body>
+
+</html>

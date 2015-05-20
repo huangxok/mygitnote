@@ -1,0 +1,306 @@
+﻿<!DOCTYPE html>
+<!-- paulirish.com/2008/conditional-stylesheets-vs-css-hacks-answer-neither/ -->
+<!--[if lt IE 7]> <html class="no-js lt-ie9 lt-ie8 lt-ie7" lang="en"> <![endif]-->
+<!--[if IE 7]>    <html class="no-js lt-ie9 lt-ie8" lang="en"> <![endif]-->
+<!--[if IE 8]>    <html class="no-js lt-ie9" lang="en"> <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en"> <!--<![endif]-->
+<head>
+  <meta charset="utf-8" />
+
+  <!-- Set the viewport width to device width for mobile -->
+  <meta name="viewport" content="width=device-width" />
+
+  <title>JavaScript 标准参考教程（alpha）</title>
+  
+  <!-- Included CSS Files (Uncompressed) -->
+  <!--
+  <link rel="stylesheet" href="stylesheets/foundation.css">
+  -->
+  
+  <!-- Included CSS Files (Compressed) -->
+  <link rel="stylesheet" href="css/foundation.css">
+  <link rel="stylesheet" href="css/main.css">
+
+  <!-- IE Fix for HTML5 Tags -->
+  <!--[if lt IE 9]>
+    <script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+  <![endif]-->
+
+  <script src="js/jquery.js"></script>
+  <script src="js/toc.js"></script>
+  <script src="js/main.js"></script>
+
+</head>
+<body>
+
+<header class="top-bar" id="header">
+
+<div class="fixed">
+
+<nav class="top-bar">
+<ul>
+<!-- Title Area -->
+	<li class="name has-dropdown">
+	<h1><a href="">JavaScript 标准参考教程（alpha） </a></h1>
+		<ul class="dropdown">
+			
+			<li><a href="#introduction">导论</a></li>
+			
+			<li><a href="#grammar">基本语法</a></li>
+			
+			<li><a href="#stdlib">标准库</a></li>
+			
+			<li><a href="#oop">面向对象编程</a></li>
+			
+			<li><a href="#dom">DOM</a></li>
+			
+			<li><a href="#bom">浏览器对象</a></li>
+			
+			<li><a href="#htmlapi">HTML网页的API</a></li>
+			
+			<li><a href="#jquery">jQuery</a></li>
+			
+			<li><a href="#tool">开发工具</a></li>
+			
+			<li><a href="#advanced">高级语法</a></li>
+			
+			<li><a href="#appendix">附录</a></li>
+			
+			<li><a href="#library">草稿一：函数库</a></li>
+			
+			<li><a href="#nodejs">草稿二：Node.js</a></li>
+			
+		</ul>
+	</li>
+</ul>
+
+<section>
+
+
+
+<ul class="right">
+	<li class="divider"></li>
+	<li>
+		<a href="https://github.com/ruanyf/jstutorial" target="_blank">GitHub <i class="foundicon-edit"></i></a>
+	</li>
+	<li class="divider"></li>
+	<li>
+		<a href="#">TOP <i class="foundicon-up-arrow"></i></a>
+	</li>
+</ul>
+
+</section>
+
+</nav>  
+</div>
+</header>
+
+
+<article class="bookIndex">
+
+  <div class="row">
+    <div class="twelve columns">
+
+<h1>JavaScript 标准参考教程（alpha）</h1>
+
+<p>英文标题：JavaScript Standards Reference Guide</p>
+
+<p>作者：　　<a href="http://www.ruanyifeng.com">阮一峰</a></p>
+
+<p>授权方式：<a href="introduction/license.html">创意共享“署名-非商业性使用”许可证</a></p>
+
+<aside class="annoucement">
+
+<p>重要说明：本书目前只完成了50%的工作量，正式发布还需要一段时间。所有章节都没有定稿，随时可能发生变动。请勿转载，谢谢。（2013.08.25）</p>
+
+</aside> 
+
+<div id="toc" class="panel callout radius">目录</div>
+
+	
+<h2 id="introduction">导论</h2>
+
+<ul>
+<li><a href="introduction/preface.html">前言</a></li>
+<li><a href="introduction/why.html">为什么学习JavaScript？</a></li>
+<li><a href="introduction/history.html">JavaScript的历史</a></li>
+</ul>
+
+<h2 id="grammar">基本语法</h2>
+
+<ul>
+<li><a href="grammar/basic.html">概述</a></li>
+<li><a href="grammar/number.html">数值</a></li>
+<li><a href="grammar/string.html">字符串</a></li>
+<li><a href="grammar/object.html">对象</a></li>
+<li><a href="grammar/array.html">数组</a></li>
+<li><a href="grammar/function.html">函数</a></li>
+<li><a href="grammar/operator.html">运算符</a><br></li>
+<li><a href="grammar/conversion.html">数据类型转换</a>（基本完成）</li>
+<li><a href="grammar/error.html">错误处理机制</a>（基本完成）</li>
+<li><a href="grammar/style.html">编程风格</a>（基本完成）</li>
+</ul>
+
+<h2 id="stdlib">标准库</h2>
+
+<ul>
+<li><a href="stdlib/object.html">Object对象</a>（基本完成）</li>
+<li><a href="stdlib/array.html">Array 对象</a></li>
+<li><a href="stdlib/wrapper.html">包装对象和Boolean对象</a>（基本完成）</li>
+<li><a href="stdlib/number.html">Number对象</a></li>
+<li><a href="stdlib/string.html">String对象</a></li>
+<li><a href="stdlib/math.html">Math对象</a></li>
+<li><a href="stdlib/date.html">Date对象</a>（基本完成）</li>
+<li><a href="stdlib/regexp.html">RegExp对象</a></li>
+<li><a href="stdlib/json.html">JSON对象</a></li>
+<li><a href="stdlib/arraybuffer.html">ArrayBuffer：类型化数组</a></li>
+</ul>
+
+<h2 id="oop">面向对象编程</h2>
+
+<ul>
+<li><a href="oop/basic.html">概述</a></li>
+<li><a href="oop/encapsulation.html">封装</a></li>
+<li><a href="oop/inheritance.html">继承</a></li>
+<li><a href="oop/module.html">模块化编程</a></li>
+</ul>
+
+<h2 id="dom">DOM</h2>
+
+<ul>
+<li><a href="dom/document.html">document对象</a></li>
+<li><a href="dom/node.html">Node对象</a></li>
+<li><a href="dom/event.html">DOM 事件</a></li>
+<li><a href="dom/css.html">CSS操作</a></li>
+<li><a href="dom/dragndrop.html">拖放操作</a></li>
+<li><a href="dom/mutationobserver.html">Mutation Observer</a></li>
+</ul>
+
+<h2 id="bom">浏览器对象</h2>
+
+<ul>
+<li><a href="bom/engine.html">浏览器的JavaScript引擎</a></li>
+<li><a href="bom/timer.html">定时器</a></li>
+<li><a href="bom/window.html">window对象</a></li>
+<li><a href="bom/history.html">History对象</a></li>
+<li><a href="bom/ajax.html">Ajax</a></li>
+<li><a href="bom/windowpostmessage.html">window.postMessage方法</a></li>
+<li><a href="bom/webstorage.html">Web Storage：浏览器端数据储存机制</a></li>
+<li><a href="bom/indexeddb.html">IndexedDB：浏览器端数据库</a></li>
+<li><a href="bom/notification.html">Web Notification API</a></li>
+<li><a href="bom/performance.html">performance对象：高精度时间戳</a></li>
+<li><a href="bom/mobile.html">移动设备API</a></li>
+</ul>
+
+<h2 id="htmlapi">HTML网页的API</h2>
+
+<ul>
+<li><a href="htmlapi/elements.html">HTML网页元素</a></li>
+<li><a href="htmlapi/canvas.html">Canvas</a></li>
+<li><a href="htmlapi/svg.html">SVG图像</a></li>
+<li><a href="htmlapi/form.html">表单</a></li>
+<li><a href="htmlapi/file.html">文件与二进制数据的操作</a></li>
+<li><a href="htmlapi/webworker.html">Web Worker</a></li>
+<li><a href="htmlapi/eventsource.html">SSE：服务器发送事件</a>（基本完成）</li>
+<li><a href="htmlapi/pagevisibility.html">Page Visiblity</a></li>
+<li><a href="htmlapi/fullscreen.html">FullScreen</a></li>
+<li><a href="htmlapi/webspeech.html">Web Speech</a></li>
+<li><a href="htmlapi/requestanimationframe.html">requestAnimationFrame</a></li>
+<li><a href="htmlapi/websocket.html">WebSocket</a>（基本完成）</li>
+<li><a href="htmlapi/webrtc.html">WebRTC</a></li>
+<li><a href="htmlapi/webcomponents.html">Web Components</a></li>
+</ul>
+
+<h2 id="jquery">jQuery</h2>
+
+<ul>
+<li><a href="jquery/basic.html">概述</a></li>
+<li><a href="jquery/utility.html">工具方法</a></li>
+<li><a href="jquery/plugin.html">插件开发</a></li>
+<li><a href="jquery/deferred.html">deferred对象</a></li>
+<li><a href="jquery/jquery-free.html">如何做到jQuery-free？</a></li>
+</ul>
+
+<h2 id="tool">开发工具</h2>
+
+<ul>
+<li><a href="tool/console.html">console对象</a></li>
+<li><a href="tool/phantomjs.html">PhantomJS</a></li>
+<li><a href="tool/bower.html">Bower：客户端库管理工具</a></li>
+<li><a href="tool/grunt.html">Grunt：任务自动管理工具</a></li>
+<li><a href="tool/gulp.html">Gulp：任务自动管理工具</a></li>
+<li><a href="tool/browserify.html">Browserify：浏览器加载Node.js模块</a></li>
+<li><a href="tool/requirejs.html">RequireJS和AMD规范</a></li>
+<li><a href="tool/sourcemap.html">Source map</a></li>
+</ul>
+
+<h2 id="advanced">JavaScript高级语法</h2>
+
+<ul>
+<li><a href="advanced/asynchronous.html">异步编程的模式</a></li>
+<li><a href="advanced/fsm.html">有限状态机</a></li>
+<li><a href="advanced/backbonejs.html">MVC模式和Backbone.js</a></li>
+<li><a href="advanced/strict.html">严格模式</a>（基本完成）</li>
+<li><a href="advanced/ecmascript6.html">ECMAScript 6 介绍</a></li>
+</ul>
+
+<p><hr></hr></p>
+
+<h2 id="appendix">附录</h2>
+
+<ul>
+<li><a href="appendix/api.html">JavaScript API列表</a></li>
+</ul>
+
+<h2 id="library">草稿一：函数库</h2>
+
+<ul>
+<li><a href="library/underscore.html">Underscore.js</a></li>
+<li><a href="library/modernizr.html">Modernizr</a></li>
+<li><a href="library/datejs.html">Datejs</a></li>
+<li><a href="library/d3.html">D3.js</a></li>
+<li><a href="library/designpattern.html">设计模式</a></li>
+<li><a href="library/sorting.html">排序算法</a></li>
+</ul>
+
+<h2 id="nodejs">草稿二：Node.js</h2>
+
+<ul>
+<li><a href="nodejs/basic.html">概述</a></li>
+<li><a href="nodejs/commonjs.html">CommonJS规范</a></li>
+<li><a href="nodejs/packagejson.html">package.json文件</a></li>
+<li><a href="nodejs/npm.html">npm模块管理器</a></li>
+<li><a href="nodejs/process.html">process对象</a></li>
+<li><a href="nodejs/events.html">events模块</a></li>
+<li><a href="nodejs/stream.html">Stream接口</a></li>
+<li><a href="nodejs/child-process.html">Child Process模块</a></li>
+<li><a href="nodejs/express.html">Express框架</a></li>
+</ul>
+
+    </div>
+  </div>
+</article>
+
+<footer>
+<div class="row">
+<div class="twelve columns">
+	<p><a href="introduction/license.html">版权声明</a> | last modified on 2014-05-18 </p>
+</div>
+</div>
+</footer>
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','/www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-43771063-1', 'ruanyifeng.com');
+  ga('send', 'pageview');
+</script>
+</body>
+</html>
+
+
+</body>
+</html>
+

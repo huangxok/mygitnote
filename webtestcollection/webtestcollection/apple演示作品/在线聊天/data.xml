@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="utf-8"?>
+<imdata>
+
+	<setting>
+	</setting>
+
+	<usering>
+		<param name="name" value="_zhanghong" />
+	</usering>
+
+	<waiting>
+
+		<note>
+			<param name="usering-id"   value="b56255470c73800" />
+			<param name="usering-name" value="zhengke"         />
+		</note>
+
+		<note>
+			<param name="usering-id"   value="16fd03f83881ef0" />
+			<param name="usering-name" value="panyunqi"        />
+		</note>
+
+		<note>
+			<param name="usering-id"   value="5d033396a340200" />
+			<param name="usering-name" value="wangxianliang"   />
+		</note>
+
+	</waiting>
+
+	<talking>
+
+		<note>
+			<param name="usering-id"   value="b56255470c73800" />
+			<param name="usering-name" value="zhengke"         />
+		</note>
+
+	</talking>
+
+	<message>
+
+		<note>
+			<param name="usering-reader"  value="94c52085aac7380"                                                                                                />
+			<param name="usering-sender"  value="b56255470c73800"                                                                                                />
+			<param name="usering-name"    value="zhengke"                                                                                                        />
+			<param name="message-type"    value="file"                                                                                                           />
+			<param name="message-icon"    value="icon/1.png"                                                                                                     />
+			<param name="message-elapse"  value="1320653626345"                                                                                                  />
+			<param name="message-content" value="http://fileurl"                                                                                                 />
+		</note>
+
+		<note>
+			<param name="usering-reader"  value="94c52085aac7380"                                                                                                />
+			<param name="usering-sender"  value="b56255470c73800"                                                                                                />
+			<param name="usering-name"    value="zhengke"                                                                                                        />
+			<param name="message-type"    value="talk"                                                                                                           />
+			<param name="message-elapse"  value="1320653553090"                                                                                                  />
+			<param name="message-font"    value="color:#000000; font-family:Arial; font-size:14px; font-weight:normal; font-style:normal; text-decoration:none;" />
+			<param name="message-content" value="今天午饭吃了吗？"                                                                                               />
+		</note>
+
+		<note>
+			<param name="usering-reader"  value="94c52085aac7380"                                                                                                />
+			<param name="usering-sender"  value="b56255470c73800"                                                                                                />
+			<param name="usering-name"    value="zhengke"                                                                                                        />
+			<param name="message-type"    value="talk"                                                                                                           />
+			<param name="message-elapse"  value="1320653575562"                                                                                                  />
+			<param name="message-font"    value="color:#000000; font-family:Arial; font-size:14px; font-weight:normal; font-style:normal; text-decoration:none;" />
+			<param name="message-content" value="没吃？"                                                                                                         />
+		</note>
+
+		<note>
+			<param name="usering-reader"  value="94c52085aac7380"                                                                                                />
+			<param name="usering-sender"  value="b56255470c73800"                                                                                                />
+			<param name="usering-name"    value="zhengke"                                                                                                        />
+			<param name="message-type"    value="talk"                                                                                                           />
+			<param name="message-elapse"  value="1320653607450"                                                                                                  />
+			<param name="message-font"    value="color:#000000; font-family:Arial; font-size:14px; font-weight:normal; font-style:normal; text-decoration:none;" />
+			<param name="message-content" value="没吃回家吃去吧！"                                                                                               />
+		</note>
+
+	</message>
+
+</imdata>

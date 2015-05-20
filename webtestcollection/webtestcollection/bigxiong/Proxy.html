@@ -1,0 +1,138 @@
+﻿<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <title></title>
+</head>
+<body>
+    <img src="proxy1.png" />
+    <script>
+        //代理模式是比较有用途的一种模式，而且变种较多（虚代理、远程代理、copy - on - write代理、保护代理、Cache代理、防火墙代理、同步代理、智能指引）
+        function XiaoV() {
+            this.talk = function () {
+                console.log("狼猫老弟，不好意思上次的事，请多多谅解。");
+            };
+        };
+        function LangMao() {
+            this.bb = new BigBear();
+            this.talk = function () {
+                console.log("大熊君好啊，最忌忙什么那？");
+                this.bb.talk();
+            };
+        };
+        function BigBear() {
+            this.xiaov = new XiaoV();
+            this.talk = function () {
+                console.log("狼猫兄弟，中午没事一起吃顿饭聊聊天，那天我见到小v了，他优化和你说。。。。。。");
+                this.xiaov.talk();
+            };
+        };
+        function go() {
+            new LangMao().talk();
+        };
+    </script>
+    <script>
+        //三，案例引入
+
+        //注册普通用户：code为“001”
+
+        //论坛管理者   ：code为“002”
+
+        //系统管理者   ：code为“003”
+
+        //游        客    ：code为“000”
+
+        //论坛开放了四个基础功能
+
+        //1，发帖
+
+        //2，帖子审核
+
+        //3，清除帖子
+
+        //4，留言
+
+        //游客不具备任何操作权限，注册用户只能发帖，论坛管理者可以审核以及删帖操作，系统管理者具有所有功能权限。
+
+        //这些权限划分和管理是使用Proxy完成的
+
+        //用户实体类
+        function User(name, code) {
+            this.name = name;
+            this.code = code;
+        };
+        User.prototype = {
+            getName: function () {
+                return this.name;
+            },
+            getCode: function () {
+                return this.code;
+            },
+            post: function () {
+                console.log("发帖子！");
+            },
+            remove: function () {
+                console.log("删除帖子！");
+            },
+            check: function () {
+                console.log("审核帖子！");
+            },
+            comment: function () {
+                console.log("回复帖子！");
+            }
+        };
+        //论坛类
+        function Forum(user) {
+            this.user = user;
+        };
+        Forum.prototype = {
+            getUser: function () {
+                return this.user;
+            },
+            post: function () {
+                if (this.user.getCode() == "001" || this.user.getCode() == "003") {
+                    return this.user.post();
+                }
+                console.log("没权限发帖子！");
+            },
+            remove: function () {
+                if (this.user.getCode() == "002" || this.user.getCode() == "003") {
+                    return this.user.remove();
+                }
+                console.log("没权限删除帖子！");
+            },
+            check: function () {
+                if (this.user.getCode() == "002" || this.user.getCode() == "003") {
+                    return this.user.check();
+                }
+                console.log("没权限审核帖子！");
+            },
+            comment: function () {
+                if (this.user.getCode() == "003") {
+                    return this.user.comment();
+                }
+                console.log("没权限回复帖子！");
+            }
+        };
+        function ForumClient() {
+            this.run = function () {
+                new Forum(new User("bigbear", "003")).check(); // 审核帖子
+            }
+        };
+        //抽象角色：声明真实对象和代理对象的共同接口。
+        //代理角色：代理对象角色内部含有对真实对象的引用，从而可以操作真实对象，同时代理对象提供与真实对象相同的接口以便在任何时刻都能代替真实对象。同时，代理对象可以在执行真实对象操作时，附加其他的操作，相当于对真实对象进行封装。
+        //真实角色：代理角色所代表的真实对象，是我们最终要引用的对象。
+        //代理模式的一个好处就是对外部提供统一的接口方法，而代理类在接口中实现对真实类的附加操作行为，从而可以在不影响外部调用情况下，进行系统扩展。也就是说，我要修改真实角色的操作的时候，尽量不要修改他，而是在外部在“包”一层进行附加行为，即代理类。
+
+        //代理模式使用场景
+
+        //当我们需要使用的对象很复杂或者需要很长时间去构造，这时就可以使用代理模式(Proxy)。例如：如果构建一个对象很耗费时间和计算机资源，代理模式(Proxy)允许我们控制这种情况，直到我们需要使用实际的对象。一个代理(Proxy)通常包含和将要使用的对象同样的方法，一旦开始使用这个对象，这些方法将通过代理(Proxy)传递给实际的对象。 一些可以使用代理模式(Proxy)的情况：
+
+        //一个对象，比如一幅很大的图像，需要载入的时间很长。　　　　
+        //一个需要很长时间才可以完成的计算结果，并且需要在它计算过程中显示中间结果
+        //一个存在于远程计算机上的对象，需要通过网络载入这个远程对象则需要很长时间，特别是在网络传输高峰期。
+        //一个对象只有有限的访问权限，代理模式(Proxy)可以验证用户的权限
+
+
+    </script>
+</body>
+</html>

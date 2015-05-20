@@ -1,0 +1,504 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=gb2312" />
+    <title>进度条</title>
+    <style type="text/css">
+        body {
+            margin: 0px;
+            padding: 0px;
+        }
+
+        input, label {
+            vertical-align: middle;
+        }
+
+        input {
+            width: 12px;
+        }
+
+        label {
+            font-size: 8px;
+        }
+
+        .iname {
+            position: relative;
+            left: 18px;
+        }
+
+        .case {
+            margin-bottom: 25px;
+            margin-left: 100px;
+            margin-top: 30px;
+        }
+
+        .ibox {
+            line-height: 20px;
+            width: 300px;
+            height: 15px;
+            background: #ccc;
+            left: 20px;
+            text-align: center;
+            margin: 0px;
+            float: left;
+            position: relative;
+        }
+
+        .iLoading {
+            color: #fff;
+            font-size: 10px;
+            line-height: 15px;
+            width: 0px;
+            height: 15px;
+            background: red;
+            text-align: center;
+            position: absolute;
+        }
+    </style>
+    <!--<script src="new_ajax.js"></script>-->
+    <script type="text/javascript">
+        function ajax(url, fnsucc, fuFaild) {
+            //1.创建Ajax对象
+            if (window.XMLHttpRequest) {
+                var oAjax = new XMLHttpRequest();
+            }
+            else {
+                var oAjax = new ActiveXObject("Microsoft.XMLHTTP");
+            }
+
+            //2.连接服务器
+            //open（方法，文件名，异步传输）
+            oAjax.open("GET", url, true);
+            //3.发送请求
+            oAjax.send(null);
+
+            //4.接收返回
+            oAjax.onreadystatechange = function () {
+                //alert(oAjax.readyState)
+                //oAjax.readystate  //浏览器和服务器，进行到哪一步了
+                if (oAjax.readyState == 4)  //读取完成
+                {
+                    if (oAjax.status == 200)	//成功
+                    {
+                        //alert("成功")
+                        fnsucc(oAjax.responseText);
+                        ;
+                    }
+                    else {
+                        if (fuFaild) {
+                            //alert("失败")
+
+                            fuFaild(oAjax.status);
+
+                        }
+                        //alert("失败:"+);
+                    }
+
+                }
+
+
+            };
+
+        }
+        window.onload = function () {
+            var idiv = document.getElementById('iLd1');
+            var ibox = document.getElementById('ibox1');
+            var istr = 0.2;
+            var oinput = document.getElementsByTagName('input')
+
+            function getid(iid) {
+
+                return document.getElementById(iid)
+
+            };
+            ajax("b.txt?t=" + new Date().getTime(), function (str) {
+                var arr = eval(str);
+                for (var i = 0; i < arr.length; i++) {
+                    oinput[i].value = (arr[i].a);
+                    alert('a' + ':' + arr[i].a)
+                };
+                alert(oinput.length);
+            }, function (status) {
+                alert("失败");
+                alert(status);
+            });
+
+
+            var idiv = document.getElementById('iLd1');
+            var ibox = document.getElementById('ibox1');
+            var str = 0.2;
+            idiv.style.width = idiv.offsetWidth + istr * 300 + 'px';
+            var iWidth = idiv.offsetWidth / ibox.offsetWidth * 100;
+            idiv.innerHTML = iWidth.toFixed(2) + "%" + '&nbsp;（0）';
+
+        };
+    </script>
+
+</head>
+<body>
+    <div id="icounter">
+        <div class="case">
+            <div class="iname">
+                <input type="checkbox" id=" " value="" /><label>师傅1</label>
+            </div>
+            <div id="ibox1" class="ibox">
+                <div id="iLd1" class="iLoading"></div>
+            </div>
+        </div>
+
+        <div class="case">
+            <div class="iname">
+                <input type="checkbox" id="" value="" /><label>师傅2</label>
+            </div>
+            <div id="ibox2" class="ibox">
+                <div id="iLd2" class="iLoading"></div>
+            </div>
+        </div>
+
+        <div class="case">
+            <div class="iname">
+                <input type="checkbox" id="" value="" /><label>师傅3</label>
+            </div>
+            <div id="ibox3" class="ibox">
+                <div id="iLd3" class="iLoading"></div>
+            </div>
+        </div>
+
+        <div class="case">
+            <div class="iname">
+                <input type="checkbox" id="" value="" /><label>师傅4</label>
+            </div>
+            <div id="ibox4" class="ibox">
+                <div id="iLd4" class="iLoading"></div>
+            </div>
+        </div>
+
+        <div class="case">
+            <div class="iname">
+                <input type="checkbox" id="" value="" /><label>师傅5</label>
+            </div>
+            <div id="ibox5" class="ibox">
+                <div id="iLd5" class="iLoading"></div>
+            </div>
+        </div>
+
+        <div class="case">
+            <div class="iname">
+                <input type="checkbox" id="" value="" /><label>师傅6</label>
+            </div>
+            <div id="ibox6" class="ibox">
+                <div id="iLd6" class="iLoading"></div>
+            </div>
+        </div>
+
+        <div class="case">
+            <div class="iname">
+                <input type="checkbox" id="" value="" /><label>师傅7</label>
+            </div>
+            <div id="ibox7" class="ibox">
+                <div id="iLd7" class="iLoading"></div>
+            </div>
+        </div>
+
+        <div class="case">
+            <div class="iname">
+                <input type="checkbox" id="" value="" /><label>师傅8</label>
+            </div>
+            <div id="ibox8" class="ibox">
+                <div id="iLd8" class="iLoading"></div>
+            </div>
+        </div>
+
+        <div class="case">
+            <div class="iname">
+                <input type="checkbox" id="" value="" /><label>师傅9</label>
+            </div>
+            <div id="ibox9" class="ibox">
+                <div id="iLd9" class="iLoading"></div>
+            </div>
+        </div>
+
+        <div class="case">
+            <div class="iname">
+                <input type="checkbox" id="" value="" /><label>师傅10</label>
+            </div>
+            <div id="ibox10" class="ibox">
+                <div id="iLd10" class="iLoading"></div>
+            </div>
+        </div>
+
+        <div class="case">
+            <div class="iname">
+                <input type="checkbox" id="" value="" /><label>师傅11</label>
+            </div>
+            <div id="ibox11" class="ibox">
+                <div id="iLd11" class="iLoading"></div>
+            </div>
+        </div>
+
+        <div class="case">
+            <div class="iname">
+                <input type="checkbox" id="" value="" /><label>师傅12</label>
+            </div>
+            <div id="ibox12" class="ibox">
+                <div id="iLd12" class="iLoading"></div>
+            </div>
+        </div>
+
+        <div class="case">
+            <div class="iname">
+                <input type="checkbox" id="" value="" /><label>师傅13</label>
+            </div>
+            <div id="ibox13" class="ibox">
+                <div id="iLd13" class="iLoading"></div>
+            </div>
+        </div>
+
+        <div class="case">
+            <div class="iname">
+                <input type="checkbox" id="" value="" /><label>师傅14</label>
+            </div>
+            <div id="ibox14" class="ibox">
+                <div id="iLd14" class="iLoading"></div>
+            </div>
+        </div>
+
+        <div class="case">
+            <div class="iname">
+                <input type="checkbox" id="" value="" /><label>师傅15</label>
+            </div>
+            <div id="ibox15" class="ibox">
+                <div id="iLd15" class="iLoading"></div>
+            </div>
+        </div>
+
+        <div class="case">
+            <div class="iname">
+                <input type="checkbox" id="" value="" /><label>师傅16</label>
+            </div>
+            <div id="ibox16" class="ibox">
+                <div id="iLd16" class="iLoading"></div>
+            </div>
+        </div>
+
+        <div class="case">
+            <div class="iname">
+                <input type="checkbox" id="" value="" /><label>师傅17</label>
+            </div>
+            <div id="ibox17" class="ibox">
+                <div id="iLd17" class="iLoading"></div>
+            </div>
+        </div>
+
+        <div class="case">
+            <div class="iname">
+                <input type="checkbox" id="" value="" /><label>师傅18</label>
+            </div>
+            <div id="ibox18" class="ibox">
+                <div id="iLd18" class="iLoading"></div>
+            </div>
+        </div>
+
+        <div class="case">
+            <div class="iname">
+                <input type="checkbox" id="" value="" /><label>师傅19</label>
+            </div>
+            <div id="ibox19" class="ibox">
+                <div id="iLd19" class="iLoading"></div>
+            </div>
+        </div>
+
+        <div class="case">
+            <div class="iname">
+                <input type="checkbox" id="" value="" /><label>师傅20</label>
+            </div>
+            <div id="ibox20" class="ibox">
+                <div id="iLd20" class="iLoading"></div>
+            </div>
+        </div>
+
+        <div class="case">
+            <div class="iname">
+                <input type="checkbox" id="" value="" /><label>师傅21</label>
+            </div>
+            <div id="ibox21" class="ibox">
+                <div id="iLd21" class="iLoading"></div>
+            </div>
+        </div>
+
+        <div class="case">
+            <div class="iname">
+                <input type="checkbox" id="" value="" /><label>师傅22</label>
+            </div>
+            <div id="ibox22" class="ibox">
+                <div id="iLd22" class="iLoading"></div>
+            </div>
+        </div>
+
+        <div class="case">
+            <div class="iname">
+                <input type="checkbox" id="" value="" /><label>师傅23</label>
+            </div>
+            <div id="ibox23" class="ibox">
+                <div id="iLd23" class="iLoading"></div>
+            </div>
+        </div>
+
+        <div class="case">
+            <div class="iname">
+                <input type="checkbox" id="" value="" /><label>师傅24</label>
+            </div>
+            <div id="ibox24" class="ibox">
+                <div id="iLd24" class="iLoading"></div>
+            </div>
+        </div>
+
+        <div class="case">
+            <div class="iname">
+                <input type="checkbox" id="" value="" /><label>师傅25</label>
+            </div>
+            <div id="ibox25" class="ibox">
+                <div id="iLd25" class="iLoading"></div>
+            </div>
+        </div>
+
+        <div class="case">
+            <div class="iname">
+                <input type="checkbox" id="" value="" /><label>师傅26</label>
+            </div>
+            <div id="ibox26" class="ibox">
+                <div id="iLd26" class="iLoading"></div>
+            </div>
+        </div>
+
+        <div class="case">
+            <div class="iname">
+                <input type="checkbox" id="" value="" /><label>师傅27</label>
+            </div>
+            <div id="ibox27" class="ibox">
+                <div id="iLd27" class="iLoading"></div>
+            </div>
+        </div>
+
+        <div class="case">
+            <div class="iname">
+                <input type="checkbox" id="" value="" /><label>师傅28</label>
+            </div>
+            <div id="ibox28" class="ibox">
+                <div id="iLd28" class="iLoading"></div>
+            </div>
+        </div>
+
+        <div class="case">
+            <div class="iname">
+                <input type="checkbox" id="" value="" /><label>师傅29</label>
+            </div>
+            <div id="ibox29" class="ibox">
+                <div id="iLd29" class="iLoading"></div>
+            </div>
+        </div>
+
+        <div class="case">
+            <div class="iname">
+                <input type="checkbox" id="" value="" /><label>师傅30</label>
+            </div>
+            <div id="ibox30" class="ibox">
+                <div id="iLd30" class="iLoading"></div>
+            </div>
+        </div>
+
+        <div class="case">
+            <div class="iname">
+                <input type="checkbox" id="" value="" /><label>师傅31</label>
+            </div>
+            <div id="ibox31" class="ibox">
+                <div id="iLd31" class="iLoading"></div>
+            </div>
+        </div>
+
+        <div class="case">
+            <div class="iname">
+                <input type="checkbox" id="" value="" /><label>师傅32</label>
+            </div>
+            <div id="ibox32" class="ibox">
+                <div id="iLd32" class="iLoading"></div>
+            </div>
+        </div>
+
+        <div class="case">
+            <div class="iname">
+                <input type="checkbox" id="" value="" /><label>师傅33</label>
+            </div>
+            <div id="ibox33" class="ibox">
+                <div id="iLd33" class="iLoading"></div>
+            </div>
+        </div>
+
+        <div class="case">
+            <div class="iname">
+                <input type="checkbox" id="" value="" /><label>师傅34</label>
+            </div>
+            <div id="ibox34" class="ibox">
+                <div id="iLd34" class="iLoading"></div>
+            </div>
+        </div>
+
+        <div class="case">
+            <div class="iname">
+                <input type="checkbox" id="" value="" /><label>师傅35</label>
+            </div>
+            <div id="ibox35" class="ibox">
+                <div id="iLd35" class="iLoading"></div>
+            </div>
+        </div>
+
+        <div class="case">
+            <div class="iname">
+                <input type="checkbox" id="" value="" /><label>师傅36</label>
+            </div>
+            <div id="ibox36" class="ibox">
+                <div id="iLd36" class="iLoading"></div>
+            </div>
+        </div>
+
+        <div class="case">
+            <div class="iname">
+                <input type="checkbox" id="" value="" /><label>师傅37</label>
+            </div>
+            <div id="ibox37" class="ibox">
+                <div id="iLd37" class="iLoading"></div>
+            </div>
+        </div>
+
+        <div class="case">
+            <div class="iname">
+                <input type="checkbox" id="" value="" /><label>师傅38</label>
+            </div>
+            <div id="ibox38" class="ibox">
+                <div id="iLd38" class="iLoading"></div>
+            </div>
+        </div>
+
+        <div class="case">
+            <div class="iname">
+                <input type="checkbox" id="" value="" /><label>师傅39</label>
+            </div>
+            <div id="ibox29" class="ibox">
+                <div id="iLd39" class="iLoading"></div>
+            </div>
+        </div>
+
+        <div class="case">
+            <div class="iname">
+                <input type="checkbox" id="" value="" /><label>师傅40</label>
+            </div>
+            <div id="ibox40" class="ibox">
+                <div id="iLd40" class="iLoading"></div>
+            </div>
+        </div>
+
+
+
+    </div>
+</body>
+</html>
