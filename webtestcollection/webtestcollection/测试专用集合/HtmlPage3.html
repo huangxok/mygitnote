@@ -1,0 +1,71 @@
+﻿<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <title></title>
+    <style>
+        #tablediv {
+            width: 100%;
+        }
+    </style>
+</head>
+<body>
+    <div id="tablediv">
+
+    </div>
+    <input id="btnaddrow" type="button" value="addrow" />
+    <script>
+        var tablediv = document.getElementById('tablediv');
+
+        var addcell = function (that) {
+            var rowcell = document.createElement('div');
+            rowcell.setAttribute('name', that.parentElement.getAttribute('name') + 'rowcell' + that.parentElement.children.length);
+            rowcell.className = 'aaaa';
+            rowcell.style.border = '1px solid #ff00cc';
+            rowcell.style.width = '200px';
+            rowcell.style.height = '100px';
+
+            for (var i = 0; i < 4; i++) {
+                var ss = document.createElement('select');
+                ss.name = rowcell.getAttribute('name') + 'select' + i;
+                rowcell.appendChild(ss);
+            }
+            that.parentElement.insertBefore(rowcell, that);
+        }
+        
+        var addrow = function () {
+            var row = document.createElement('div');
+            row.style.width = '100%';
+            row.setAttribute('name', 'row' + tablediv.children.length)
+            tablediv.appendChild(row);
+
+            var rowcell = document.createElement('div');
+            row.appendChild(rowcell)
+            rowcell.setAttribute('name', row.getAttribute('name') + 'rowcell' + row.children.length);
+            rowcell.className = 'aaaa';
+            rowcell.style.border = '1px solid #ff00cc';
+            rowcell.style.width = '200px';
+            rowcell.style.height = '100px';
+
+
+            for (var i = 0; i < 4; i++) {
+                var ss = document.createElement('select');
+                ss.name = rowcell.getAttribute('name') + 'select' + i;
+                rowcell.appendChild(ss);
+            }
+            var btnaddcell = document.createElement('input');
+            btnaddcell.type = 'button';
+            btnaddcell.className = 'btncellclass';
+            btnaddcell.id = 'btncell' + tablediv.children.length;
+            btnaddcell.value = 'btncell';
+            btnaddcell.addEventListener('click', function () {
+                var that = this;
+                addcell(that);
+            }, true)
+            row.appendChild(btnaddcell);
+        }
+
+        document.getElementById('btnaddrow').addEventListener('click', addrow, true);
+
+    </script>
+</body>
+</html>

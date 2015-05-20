@@ -1,0 +1,205 @@
+﻿<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+
+    <style type="text/css">
+        * {
+            margin: 0;
+            padding: 0;
+        }
+
+        a {
+            text-decoration: none;
+        }
+
+        ul.pic {
+            list-style: none;
+        }
+
+        .box {
+            width: 360px;
+            height: 270px;
+            overflow: hidden;
+            position: relative;
+        }
+
+        ul.pic {
+            width: 1800px;
+        }
+
+            ul.pic li {
+                float: left;
+            }
+
+        .clear {
+            clear: both;
+            height: 0;
+            font-size: 0;
+            overflow: hidden;
+        }
+
+        a {
+            width: 31px;
+            height: 42px;
+            display: inline-block;
+            cursor: pointer;
+            position: absolute;
+            top: 140px;
+        }
+
+            a.prev {
+                background: url(prev.png) no-repeat 0 0;
+                left: 0;
+            }
+
+            a.next {
+                background: url(next.png) no-repeat 0 0;
+                right: 0;
+            }
+
+        .point {
+            position: absolute;
+            bottom: 10px;
+            left: 150px;
+        }
+
+            .point ul li {
+                float: left;
+                margin: 0 5px;
+                display: inline;
+                background: url(active-points.png) no-repeat 0 0;
+                width: 8px;
+                height: 8px;
+                cursor: pointer;
+            }
+
+                .point ul li.current {
+                    background: url(current-pints.png) no-repeat 0 0;
+                }
+    </style>
+
+    <script type="text/javascript" src="jquery.min.js"></script>
+    <script type="text/javascript">
+
+        $(function () {
+            var cel = setInterval(auto, 3000);
+            var po = $("#po li");
+            var index = 1;
+            $("#tupian").hover(function () {
+                clearInterval(cel)
+            }, function () {
+                cel = setInterval(auto, 3000);
+            })
+
+            //点击prev	
+            $(".next").click(function () {
+                clearInterval(cel)
+                $("ul.pic li:first").stop().animate({ marginLeft: "-360px" }, 300,
+                    function () {
+                        $(this).detach().appendTo("ul.pic").css("margin-left", "0px")
+                    });
+
+                index++;
+                po.eq(index - 1).addClass("current").siblings().removeClass("current")
+                if (index == 6) {
+                    index = 1;
+                }
+                cel = setInterval(auto, 3000);
+            })
+
+            //点击next
+            $(".prev").click(function () {
+                clearInterval(cel)
+                $("ul.pic li:last").stop().css("margin-left", "-360px").detach().prependTo("ul.pic").animate({ marginLeft: "0px" })
+                --index;
+                po.eq(index - 1).addClass("current").siblings().removeClass("current");
+                if (index == 1) {
+                    index = 6;
+                }
+
+            })
+
+            //自动
+            function auto() {
+                $("ul.pic li:first").stop().animate({ marginLeft: "-360px" }, 'slow',     //500代表的是  移动的速度    也可以用 'slow'						
+                        function () {
+                            $(this).detach().appendTo("ul.pic").css("margin-left", "0px");
+                        }
+                );
+
+                ++index;
+                if (index == 6) {
+                    index = 1;
+                    po.eq(0).addClass("current").siblings().removeClass("current");
+                }
+                for (var i = 0; i < index; i++) {
+                    po.eq(i).addClass("current").siblings().removeClass("current");
+                }
+            }
+
+
+            //原点
+
+            $("#po li").click(function () {
+                clearInterval(cel)
+                $(this).addClass("current").siblings().removeClass("current");
+
+                $(".pic").stop().animate({ "marginLeft": -360 * $(this).index() });
+                ++index;
+
+                cel = setInterval(auto, 3000);
+            })
+        })
+    </script>
+
+</head>
+
+<body>
+
+
+    <div class="box">
+
+        <div class="tupian">
+
+            <ul class="pic">
+                <li>
+                    <img src="content-left-sidebar-pic.jpg" /></li>
+                <li>
+                    <img src="content-left-sidebar-picA.jpg" /></li>
+                <li>
+                    <img src="content-left-sidebar-picB.jpg" /></li>
+                <li>
+                    <img src="content-left-sidebar-picC.jpg" /></li>
+                <li>
+                    <img src="content-left-sidebar-picD.jpg" /></li>
+
+            </ul>
+            <div class="clear"></div>
+        </div>
+
+        <div class="jiantou">
+
+            <a class="prev"></a>
+            <a class="next"></a>
+
+        </div>
+
+
+        <div class="point">
+
+            <ul id="po">
+                <li class="current"></li>
+                <li></li>
+                <li></li>
+                <li></li>
+                <li></li>
+            </ul>
+
+        </div>
+
+    </div>
+
+
+</body>
+</html>

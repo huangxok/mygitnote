@@ -1,0 +1,863 @@
+﻿<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <title></title>
+    <style>
+        *{
+        -ms-transform-style:
+        }
+    </style>
+</head>
+<body>
+    <div id="div1" style="width:100px;height:100px;border:1px solid #ff6a00">
+    </div>
+    <script>
+        //http://javascript.ruanyifeng.com/dom/event.html
+
+        //如果希望向监听函数传递参数，可以用匿名函数包装一下监听函数。
+        function print(x) {
+            console.log(x);
+        }
+
+        var el = document.getElementById("div1");
+        el.addEventListener("click", function () { print('Hello') }, false);
+    </script>
+    <script>
+
+        //dispatchEvent
+        //该方法返回一个布尔值，只要有一个监听函数调用了Event.preventDefault()，则返回值为false，否则为true。
+        para.addEventListener('click', hello, false);
+        var event = new Event('click');
+        para.dispatchEvent(event);
+        //如果dispatchEvent方法的参数为空，或者不是一个有效的事件对象，将报错。
+        //下面代码根据dispatchEvent方法的返回值，判断事件是否被取消了。
+        var canceled = !cb.dispatchEvent(event);
+        if (canceled) {
+            console.log('事件取消');
+        } else {
+            console.log('事件未取消');
+        }
+
+    </script>
+    <script>
+        //总结一下，以下写法的this对象都指向Element节点。
+
+        // JavaScript代码
+        element.onclick = print
+        element.addEventListener('click', print, false)
+        element.onclick = function () {console.log(this.id);}
+
+        // HTML代码
+        //<element onclick="console.log(this.id)">
+
+        //以下写法的this对象，都指向全局对象。
+
+        // JavaScript代码
+        element.onclick = function (){ doSomething() };
+        element.setAttribute('onclick', 'doSomething()');
+
+        // HTML代码
+        //<element onclick="doSomething()">
+
+    </script>
+    <script>
+        //事件传播
+        //当一个事件发生以后，它会在不同的DOM对象之间传播（propagation）。这种传播分成三个阶段：
+        //第一阶段：从文档的根元素（html元素）传导到目标元素，称为“捕获阶段”（capture phase）。
+
+        //第二阶段：在目标元素上触发，称为“目标阶段”（target phase）。
+
+        //第三阶段：从目标元素传导回文档的根元素（html元素），称为“冒泡阶段”（bubbling phase）。
+    </script>
+    <div id="abc">
+        <p id="abcp">click me</p>
+    </div>
+    <script>
+        //事件传播
+        //当一个事件发生以后，它会在不同的DOM对象之间传播（propagation）。这种传播分成三个阶段：
+        //第一阶段：从文档的根元素（html元素）传导到目标元素，称为“捕获阶段”（capture phase）。
+
+        //第二阶段：在目标元素上触发，称为“目标阶段”（target phase）。
+
+        //第三阶段：从目标元素传导回文档的根元素（html元素），称为“冒泡阶段”（bubbling phase）。
+        var phases = {
+            1: 'capture',
+            2: 'target',
+            3: 'bubble'
+        };
+
+        //var div = document.querySelector('div');
+        //var p = document.querySelector('p');
+        var div = document.getElementById('abc');
+        var p = document.getElementById('abcp');
+
+        div.addEventListener('click', callback, true);
+        p.addEventListener('click', callback, true);
+        div.addEventListener('click', callback, false);
+        p.addEventListener('click', callback, false);
+
+        function callback(event) {
+            var tag = event.currentTarget.id;
+            var phase = phases[event.eventPhase];
+            console.log("Tag: '" + tag + "'. EventPhase: '" + phase + "' '. EventPhase: '" + event.eventPhase + "'");
+        }
+        //注意，用户点击网页的时候，浏览器总是假定click事件的目标对象，就是嵌套最深的那个元素（嵌套在div元素中的p元素）。
+
+        //事件传播的最上层对象是window，接着依次是document，html（document.documentElement）和body（document.dody）。
+        //也就是说，如果body元素中有一个div元素，点击该元素。事件的传播顺序，
+        //在捕获阶段依次为window、document、html、body、div，在冒泡阶段依次为div、body、html、document、window。
+    </script>
+    <script>
+        //事件代理
+        //由于事件会在冒泡阶段向上传播到父元素，因此可以把子元素的回调函数定义在父元素上，
+        //由父元素的回调函数统一处理多个子元素的事件。这种方法叫做事件的代理（delegation）
+        var ul = document.querySelector('ul');
+
+        ul.addEventListener('click', function (event) {
+            if (event.target.tagName.toLowerCase() === 'li') {
+                // some code
+            }
+        });
+        //如果希望事件到某个节点为止，不再传播，可以使用事件对象的stopPropagation方法。
+        p.addEventListener('click', function (event) {
+            event.stopPropagation();
+            console.log('this stop' + event.currentTarget)
+        });
+        //stopImmediatePropagation 防止对事件流中当前节点中和所有后续节点中的事件侦听器进行处理。此方法会立即生效，并且会影响当前节点中的事件侦听器。
+        //stopPropagation 防止对事件流中当前节点的后续节点中的所有事件侦听器进行处理。此方法不会影响当前节点 (currentTarget) 中的任何事件侦听器。
+        p.addEventListener('click', function (event) {
+            event.stopImmediatePropagation();
+        });
+
+        p.addEventListener('click', function (event) {
+            // 不会被触发
+        });
+
+    </script>
+    <script>
+        //Event 对象
+        //浏览器原生提供一个Event对象，所有的事件对象都是这个对象的实例，或者说继承了Event.prototype对象。Event本身就是一个构造函数，可以用来生成新的事件
+        //Event本身就是一个构造函数，可以用来生成新的事件
+        event = new Event(typeArg, eventInit);
+        //Event构造函数接受两个参数。第一个参数是字符串，表示事件的名称；第二个参数是一个对象，表示事件对象的配置。该参数可以有以下两个属性。
+        //bubbles：布尔值，可选，默认为false，表示事件对象是否冒泡。
+        //cancelable：布尔值，可选，默认为false，表示事件是否可以被取消。
+        var ev = new Event("look", { "bubbles": true, "cancelable": false });
+        document.dispatchEvent(ev);
+        //IE8及以下版本，事件对象不作为参数传递，而是通过window对象的event属性读取，并且事件对象的target属性叫做srcElement属性。所以获取事件信息，往往写成下面这样
+        function myEventHandler(event) {
+            var actualEvent = event || window.event;
+            var actualTarget = actualEvent.target || actualEvent.srcElement;
+            // ...
+        }
+
+    </script>
+    <script>
+        //Event实例的属性
+        //bubbles属性返回一个布尔值，表示当前事件是否会冒泡。
+        //该属性为只读属性，只能在新建事件时改变。除非显式声明，
+        //Event构造函数生成的事件，默认是不冒泡的。
+        //bubbles
+        function goInput(e) {
+            if (!e.bubbles) {
+                passItOn(e);
+            } else {
+                doOutput(e);
+            }
+        }
+        //eventPhase属性返回一个整数值，表示事件目前所处的节点。
+        var phase = event.eventPhase;
+        //0，事件目前没有发生。
+        //1，事件目前处于捕获阶段，即处于从祖先节点向目标节点的传播过程中。该过程是从Window对象到Document节点，再到HTMLHtmlElement节点，直到目标节点的父节点为止。
+        //2，事件到达目标节点，即target属性指向的那个节点。
+        //3，事件处于冒泡阶段，即处于从目标节点向祖先节点的反向传播过程中。该过程是从父节点一直到Window对象。只有bubbles属性为true时，这个阶段才可能发生。
+
+        //cancelable
+        //cancelable属性返回一个布尔值，表示事件是否可以取消。该属性为只读属性，只能在新建事件时改变。除非显式声明，Event构造函数生成的事件，默认是不可以取消的
+        var bool = event.cancelable;
+        //如果要取消某个事件，需要在这个事件上面调用preventDefault方法，这会阻止浏览器对某种事件部署的默认行为。
+        //defaultPrevented
+        // defaultPrevented属性返回一个布尔值，表示该事件是否调用过preventDefault方法。
+        if (e.defaultPrevented) {
+            // ...
+        }
+        //currentTarget 与 target
+        //currentTarget属性返回事件当前所在的节点
+        //即正在执行的监听函数所绑定的那个节点
+        //作为比较，target属性返回事件发生的节点。
+        //如果监听函数在捕获阶段和冒泡阶段触发，
+        //那么这两个属性返回的值是不一样的
+        function hide(e) {
+            console.log(this === e.currentTarget);  // true
+            e.currentTarget.style.visibility = "hidden";
+        }
+        para.addEventListener('click', hide, false);
+        //上面代码中，点击para节点，该节点会不可见。另外，在回调函数中，currentTarget属性实际上等同于this对象
+        function hide(e) {
+            console.log(this === e.target);  // 有可能不是true
+            e.target.style.visibility = "hidden";
+        }
+        // HTML代码为
+        // <p id="para">Hello <em>World</em></p>
+        para.addEventListener('click', hide, false);
+        //上面代码中，如果在para节点的em子节点上面点击，则e.target指向em子节点，导致em子节点（即World部分）会不可见，且输出false
+        //在IE6—IE8之中，该属性的名字不是target，而是srcElement，因此经常可以看到下面这样的代码。
+        function hide(e) {
+            var target = e.target || e.srcElement;
+            target.style.visibility = 'hidden';
+        }
+    </script>
+    <script>
+        //type detail timeStamp isTrusted
+        //type属性返回一个字符串，表示事件类型，具体的值同addEventListener方法和removeEventListener方法的第一个参数一致，大小写不敏感
+        var string = event.type;
+        //detail属性返回一个数值，表示事件的某种信息。具体含义与事件类型有关，对于鼠标事件，表示鼠标按键在某个位置按下的次数，比如对于dblclick事件，detail属性的值总是2
+        function giveDetails(e) {
+            this.textContent = e.detail;
+        }
+        el.onclick = giveDetails;
+
+        //timeStamp属性返回一个毫秒时间戳，表示事件发生的时间。
+        var number = event.timeStamp;
+
+        //isTrusted
+        //isTrusted属性返回一个布尔值，表示该事件是否可以信任。
+        var bool = event.isTrusted;
+        //Firefox浏览器中，用户触发的事件会返回true，脚本触发的事件返回false；
+        //IE浏览器中，除了使用createEvent方法生成的事件，所有其他事件都返回true；
+        //Chrome浏览器不支持该属性
+    </script>
+    <script>
+        //preventDefault()
+        //preventDefault方法取消浏览器对当前事件的默认行为，比如点击链接后，浏览器跳转到指定页面，或者按一下空格键，页面向下滚动一段距离。
+        //该方法生效的前提是，事件的cancelable属性为true，如果为false，则调用该方法没有任何效果。
+        //该方法不会阻止事件的进一步传播（stopPropagation方法可用于这个目的）。只要在事件的传播过程中（捕获阶段、目标阶段、冒泡阶段皆可），
+        //使用了preventDefault方法，该事件的默认方法就不会执行。
+        // HTML代码为
+        // <input type="checkbox" id="my-checkbox" />
+
+        var cb = document.getElementById('my-checkbox');
+        cb.addEventListener(
+          'click',
+          function (e) { e.preventDefault(); },
+          false
+        );
+        //上面代码为点击单选框的事件，设置回调函数，取消默认行为。由于浏览器的默认行为是选中单选框，所以这段代码会导致无法选中单选框。
+
+        //利用这个方法，可以为文本输入框设置校验条件。如果用户的输入不符合条件，就无法将字符输入文本框。
+        function checkName(e) {
+            if (e.charCode < 97 || e.charCode > 122) {
+                e.preventDefault();
+            }
+        }
+        //上面函数设为文本框的keypress监听函数后，将只能输入小写字母，否则输入事件的默认事件（写入文本框）将被取消。
+
+        //如果监听函数最后返回布尔值false（即return false），浏览器也不会触发默认行为，与preventDefault方法有等同效果
+        //stopPropagation()
+        //stopPropagation方法阻止事件在DOM中继续传播，防止再触发定义在别的节点上的监听函数，但是不包括在当前节点上新定义的事件回调函数。
+
+        function stopEvent(e) {
+            e.stopPropagation();
+        }
+
+        el.addEventListener('click', stopEvent, false);
+
+        //stopImmediatePropagation()
+        //stopImmediatePropagation方法阻止同一个事件的其他监听函数被调用。
+
+        //如果同一个节点对于同一个事件指定了多个监听函数，这些函数会根据添加的顺序依次调用。只要其中有一个监听函数调用了stopImmediatePropagation方法，其他的监听函数就不会再执行了。
+
+        function l1(e) {
+            e.stopImmediatePropagation();
+        }
+
+        function l2(e) {
+            console.log('hello world');
+        }
+
+        el.addEventListener('click', l1, false);
+        el.addEventListener('click', l2, false);
+        //上面代码在el节点上，为click事件添加了两个监听函数l1和l2。由于l1调用了stopImmediatePropagation方法，所以l2不会被调用。
+    </script>
+    <script>
+        //UI事件（UIEvent对象）
+        //鼠标事件（MouseEvent对象）
+        //滚轮事件（WheelEvent对象）
+        //拖拉事件（DragEvent对象）
+        //触摸事件（TouchEvent对象）
+        //焦点事件（FocusEvent对象）
+        //键盘事件（KeyboardEvent对象）
+        //输入事件（InputEvent对象）
+        //作文事件（CompositionEvent对象）
+        //每一个UI事件都是一个UIEvent对象实例。UIEvent对象继承了Event对象，
+        //即所有UIEvent实例同时也是Event实例。浏览器提供一个UIEvent构造函数，用于新建一个UIEvent实例
+        //UIEvent构造函数接受两个参数，第一个参数是事件名称，
+        //第二个参数是事件的描述对象（可以设置bubbles、cancelable、detail、view等字段），该参数可省略。
+        //鼠标事件指与鼠标相关的事件，主要有以下一些。
+        //click事件：在一个节点上，按下然后放开一个鼠标键时触发。
+        //dblclick事件：在一个节点上，双击鼠标时触发。
+        //mouseup事件：在一个节点上，释放按下的鼠标键时触发。
+        //mousedown事件：在一个节点上，按下鼠标键时触发。
+        //mousemove事件：鼠标在一个节点内部移动时触发。
+        //mouseover事件：鼠标进入一个节点或其子element节点时触发。
+        //mouseout事件：鼠标离开一个节点或其子element节点时触发。
+        //mouseenter事件：鼠标进入一个节点时触发，该事件与mouseover的最大区别是，该事件不会冒泡，所以进入子节点时，不会触发父节点的监听函数。
+        //mouseleave事件：鼠标离开一个节点时触发，该事件与mouseout事件的最大区别是，该事件不会冒泡，所以离开子节点时，不会触发父节点的监听函数。
+        //contextmenu事件：在一个节点上点击鼠标右键触发（上下文菜单显示前），或者按下“上下文菜单”键时触发。
+        //下面的例子是mouseenter事件与mouseover事件的区别。
+
+        // HTML代码为
+        // <ul id="test">
+        //   <li>item 1</li>
+        //   <li>item 2</li>
+        //   <li>item 3</li>
+        // </ul>
+
+        var test = document.getElementById("test");
+
+        // 进入test节点以后，该事件只会触发一次
+        test.addEventListener("mouseenter", function (event) {
+            event.target.style.color = "purple";
+            setTimeout(function () {
+                event.target.style.color = "";
+            }, 500);
+        }, false);
+
+        // 接入test节点以后，只要在子Element节点上移动，该事件会触发多次
+        test.addEventListener("mouseover", function (event) {
+            event.target.style.color = "orange";
+            setTimeout(function () {
+                event.target.style.color = "";
+            }, 500);
+        }, false);
+        //MouseEvent构造函数的第一个参数是事件名称（可能的值包括click、mousedown、mouseup、mouseover、mousemove、mouseout），第二个参数是一个事件初始化对象。该对象可以配置以下属性。
+
+        //screenX，设置鼠标相对于屏幕的水平坐标（但不会移动鼠标），默认为0，等同于Event.screenX属性。
+        //screenY，设置鼠标相对于屏幕的垂直坐标，默认为0，等同于Event.screenY属性。
+        //clientX，设置鼠标相对于窗口的水平坐标，默认为0，等同于Event.clientX属性。
+        //clientY，设置鼠标相对于窗口的垂直坐标，默认为0，等同于Event.clientY属性。
+        //ctrlKey，设置是否按下ctrl键，默认为false，等同于Event.ctrlKey属性。
+        //shiftKey，设置是否按下shift键，默认为false，等同于Event.shiftKey属性。
+        //altKey，设置是否按下alt键，默认为false，等同于Event.altKey属性。
+        //metaKey，设置是否按下meta键，默认为false，等同于Event.metaKey属性。
+        //button，设置按下了哪一个鼠标按键，默认为0。-1表示没有按键，0表示按下主键（通常是左键），1表示按下辅助键（通常是中间的键），2表示按下次要键（通常是右键）。
+        //buttons，设置按下了鼠标哪些键，是一个3个比特位的二进制值，默认为0。1表示按下主键（通常是左键），2表示按下次要键（通常是右键），4表示按下辅助键（通常是中间的键）。
+        //relatedTarget，设置一个Element节点，在mouseenter和mouseover事件时，表示鼠标刚刚离开的那个Element节点，在mouseout和mouseleave事件时，表示鼠标正在进入的那个Element节点。默认为null，等同于event.relatedTarget属性。
+        //以下属性也是可配置的，都继承自UIEvent构造函数和Event构造函数。
+
+        //bubbles，布尔值，设置事件是否冒泡，默认为false，等同于Event.bubbles属性。
+        //cancelable，布尔值，设置事件是否可取消，默认为false，等同于Event.cancelable属性。
+        //view，设置事件的视图，一般是window或document.defaultView，等同于Event.view属性。
+        //detail，设置鼠标点击的次数，等同于Event.detail属性。
+    </script>
+    <script>
+        var dd = document.getElementById('div1')
+        var eee = new Event('click', { "bubbles": true, "cancelable": false });
+
+    </script>
+    <script>
+        //MouseEvent实例的属性
+        //altKey，ctrlKey，metaKey，shiftKey
+        //以下属性返回一个布尔值，表示鼠标事件发生时，是否按下某个键。
+
+        //altKey属性：alt键
+        //ctrlKey属性：key键
+        //metaKey属性：Meta键（Mac键盘是一个四瓣的小花，Windows键盘是Windows键）
+        //shiftKey属性：Shift键
+        // HTML代码为
+        // <body onclick="showkey(event);">
+
+        function showKey(e){
+            console.log("ALT key pressed: " + e.altKey);
+            console.log("CTRL key pressed: " + e.ctrlKey);
+            console.log("META key pressed: " + e.metaKey);
+            console.log("META key pressed: " + e.shiftKey);
+        }
+        //上面代码中，点击网页会输出是否同时按下Alt键。
+
+        //button，buttons
+        //以下属性返回事件的鼠标键信息。
+
+        //（1）button
+
+        //button属性返回一个数值，表示按下了鼠标哪个键。
+
+        //-1：没有按下键。
+        //0：按下主键（通常是左键）。
+        //1：按下辅助键（通常是中键或者滚轮键）。
+        //2：按下次键（通常是右键）。
+        // HTML代码为
+        // <button onmouseup="whichButton(event);">点击</button>
+
+        var whichButton = function (e) {
+            switch (e.button) {
+                case 0:
+                    console.log('Left button clicked.');
+                    break;
+                case 1:
+                    console.log('Middle button clicked.');
+                    break;
+                case 2:
+                    console.log('Right button clicked.');
+                    break;
+                default:
+                    console.log('Unexpected code: ' + e.button);
+            }
+        }
+        //（2）buttons
+
+        //buttons属性返回一个3个比特位的值，表示同时按下了哪些键。它用来处理同时按下多个鼠标键的情况。
+
+        //1：二进制为001，表示按下左键。
+        //2：二进制为010，表示按下右键。
+        //4：二进制为100，表示按下中键或滚轮键。
+        //同时按下多个键的时候，每个按下的键对应的比特位都会有值。比如，同时按下左键和右键，会返回3（二进制为011）。
+
+        //clientX，clientY，movementX，movementY，screenX
+        //以下属性与事件的位置相关。
+
+        //（1）clientX，clientY
+
+        //        clientX属性返回鼠标位置相对于浏览器窗口左上角的水平坐标，单位为像素，与页面是否横向滚动无关。
+
+        //        clientY属性返回鼠标位置相对于浏览器窗口左上角的垂直坐标，单位为像素，与页面是否纵向滚动无关。
+
+        // HTML代码为
+        // <body onmousedown="showCoords(event)">
+
+        function showCoords(evt){
+            console.log(
+              "clientX value: " + evt.clientX + "\n" +
+              "clientY value: " + evt.clientY + "\n"
+            );
+        }
+        //（2）movementX，movementY
+
+        //        movementX属性返回一个水平位移，单位为像素，表示当前位置与上一个mousemove事件之间的水平距离。在数值上，等于currentEvent.movementX = currentEvent.screenX - previousEvent.screenX。
+
+        //        movementY属性返回一个垂直位移，单位为像素，表示当前位置与上一个mousemove事件之间的垂直距离。在数值上，等于currentEvent.movementY = currentEvent.screenY - previousEvent.screenY。
+
+        //（3）screenX，screenY
+
+        //        screenX属性返回鼠标位置相对于屏幕左上角的水平坐标，单位为像素。
+
+        //        screenY属性返回鼠标位置相对于屏幕左上角的垂直坐标，单位为像素。
+
+        // HTML代码为
+        // <body onmousedown="showCoords(event)">
+
+        function showCoords(evt){
+            console.log(
+              "screenX value: " + evt.screenX + "\n"
+              + "screenY value: " + evt.screenY + "\n"
+            );
+        }
+        //relatedTarget
+        //relatedTarget属性返回事件的次要相关节点。对于那些没有次要相关节点的事件，该属性返回null。
+
+        //下表列出不同事件的target属性和relatedTarget属性含义。
+
+        //事件名称	target属性	relatedTarget属性
+        //focusin	接受焦点的节点	丧失焦点的节点
+        //focusout	丧失焦点的节点	接受焦点的节点
+        //mouseenter	将要进入的节点	将要离开的节点
+        //mouseleave	将要离开的节点	将要进入的节点
+        //mouseout	将要离开的节点	将要进入的节点
+        //mouseover	将要进入的节点	将要离开的节点
+        //dragenter	将要进入的节点	将要离开的节点
+        //dragexit	将要离开的节点	将要进入的节点
+        //下面是一个例子。
+
+        // HTML代码为
+        // <div id="outer" style="height:50px;width:50px;border-width:1px solid black;">
+        //   <div id="inner" style="height:25px;width:25px;border:1px solid black;"></div>
+        // </div>
+
+        var inner = document.getElementById("inner");
+
+        inner.addEventListener("mouseover", function (){
+            console.log('进入' + event.target.id + " 离开" + event.relatedTarget.id);
+        });
+        inner.addEventListener("mouseenter", function (){
+            console.log('进入' + event.target.id + " 离开" + event.relatedTarget.id);
+        });
+        inner.addEventListener("mouseout", function (){
+            console.log('离开' + event.target.id + " 进入" + event.relatedTarget.id);
+        });
+        inner.addEventListener("mouseleave", function (){
+            console.log('离开' + event.target.id + " 进入" + event.relatedTarget.id);
+        });
+
+        // 鼠标从outer进入inner，输出
+        // 进入inner 离开outer
+        // 进入inner 离开outer
+
+        // 鼠标从inner进入outer，输出
+        // 离开inner 进入outer
+        // 离开inner 进入outer
+    </script>
+    <script>
+        //触碰api touch
+        //Touch
+        //TouchList
+        //TouchEvent
+        //TouchEvent对象代表由触摸引发的事件，只有触摸屏才会引发这一类事件。
+        //触摸动作由Touch对象来描述，每一个触摸动作都包括位置、大小、形状、压力、目标元素等属性。
+        //触摸动作的集合由TouchList对象表示。
+        //很多发生触摸的时候，触摸事件和鼠标事件同时触发，
+        //即使这个时候并没有用到鼠标。这是为了让那些只定义鼠标事件、
+        //没有定义触摸事件的代码，在触摸屏的情况下仍然能用。
+        //如果想避免这种情况，可以用preventDefault方法阻止发出鼠标事件。
+
+
+        //Touch对象
+        //Touch对象代表一个触摸点。触摸点可能是一根手指，也可能是一根触摸笔。它有以下属性。
+
+        //（1）identifier
+
+        //identifier属性表示Touch实例的独一无二的识别符。它在整个触摸过程中保持不变。
+
+        //var id = touchItem.identifier;
+        //TouchList对象的identifiedTouch方法，可以根据这个属性，从一个集合里面取出对应的Touch对象。
+
+        //（2）screenX，screenY，clientX，clientY，pageX，pageY
+
+        //screenX属性和screenY属性，分别表示触摸点相对于屏幕左上角的横坐标和纵坐标，与页面是否滚动无关。
+
+        //clientX属性和clientY属性，分别表示触摸点相对于浏览器视口左上角的横坐标和纵坐标，与页面是否滚动无关。
+
+        //pageX属性和pageY属性，分别表示触摸点相对于当前页面左上角的横坐标和纵坐标，包含了页面滚动带来的位移。
+
+        //（3）radiusX，radiusY，rotationAngle
+
+        //radiusX属性和radiusY属性，分别返回触摸点周围受到影响的椭圆范围的X轴和Y轴，单位为像素。
+
+        //rotationAngle属性表示触摸区域的椭圆的旋转角度，单位为度数，在0到90度之间。
+
+        //上面这三个属性共同定义了用户与屏幕接触的区域，对于描述手指这一类非精确的触摸，很有帮助。指尖接触屏幕，触摸范围会形成一个椭圆，这三个属性就用来描述这个椭圆区域。
+
+        //（4）force
+
+        //force属性返回一个0到1之间的数值，表示触摸压力。0代表没有压力，1代表硬件所能识别的最大压力。
+
+        //（5）target
+
+        //target属性返回一个Element节点，代表触摸发生的那个节点。
+
+
+
+        /**TouchList对象
+        TouchList对象是一个类似数组的对象，成员是与某个触摸事件相关的所有触摸点。
+        比如，用户用三根手指触摸，产生的TouchList对象就有三个成员，
+        每根手指对应一个Touch对象。
+
+        TouchList实例的length属性，返回TouchList对象的成员数量。
+
+        TouchList实例的identifiedTouch方法和item方法，分别使用id属性和索引值（从0开始）作为参数，取出指定的Touch对象。
+        */
+
+
+        //TouchEvent对象
+        //TouchEvent对象继承Event对象和UIEvent对象，表示触摸引发的事件。除了被继承的属性以外，它还有一些自己的属性。
+
+        //（1）键盘相关属性
+
+        //以下属性都为只读属性，返回一个布尔值，表示触摸的同时，是否按下某个键。
+
+        //altKey 是否按下alt键
+        //ctrlKey 是否按下ctrl键
+        //metaKey 是否按下meta键
+        //shiftKey 是否按下shift键
+        //（2）changedTouches
+
+        //changedTouches属性返回一个TouchList对象，包含了由当前触摸事件引发的所有Touch对象（即相关的触摸点）。
+
+        //对于touchstart事件，它代表被激活的触摸点；对于touchmove事件，代表发生变化的触摸点；对于touchend事件，代表消失的触摸点（即不再被触碰的点）。
+
+        var touches = touchEvent.changedTouches;
+        //（3）targetTouches
+
+        //targetTouches属性返回一个TouchList对象，包含了触摸的目标Element节点内部，所有仍然处于活动状态的触摸点。
+
+        var touches = touchEvent.targetTouches;
+        //（4）touches
+
+        //touches属性返回一个TouchList对象，包含了所有仍然处于活动状态的触摸点。
+
+        var touches = touchEvent.touches;
+
+
+        //触摸引发的事件，有以下几类。可以通过TouchEvent.type属性，查看到底发生的是哪一种事件。
+
+        //touchstart：用户接触触摸屏时触发，它的target属性返回发生触摸的Element节点。
+
+        //touchend：用户不再接触触摸屏时（或者移出屏幕边缘时）触发，它的target属性与touchstart事件的target属性是一致的，它的changedTouches属性返回一个TouchList对象，包含所有不再触摸的触摸点（Touch对象）。
+        //下面是一个例子。
+
+        var el = document.getElementsByTagName("canvas")[0];
+        el.addEventListener("touchstart", handleStart, false);
+        el.addEventListener("touchmove", handleMove, false);
+
+        function handleStart(evt) {
+            // 阻止浏览器继续处理触摸事件，
+            // 也阻止发出鼠标事件
+            evt.preventDefault();
+            var touches = evt.changedTouches;
+
+            for (var i = 0; i < touches.length; i++) {
+                console.log(touches[i].pageX, touches[i].pageY);
+            }
+        }
+
+        function handleMove(evt) {
+            evt.preventDefault();
+            var touches = evt.changedTouches;
+
+            for (var i = 0; i < touches.length; i++) {
+                var id = touches[i].identifier;
+                var touch = touches.identifiedTouch(id);
+                console.log(touch.pageX, touch.pageY);
+            }
+        }
+
+
+        //touchmove：用户移动触摸点时触发，它的target属性与touchstart事件的target属性一致。如果触摸的半径、角度、力度发生变化，也会触发该事件。
+
+        //touchcancel：触摸点取消时触发，比如在触摸区域跳出一个情态窗口（modal window）、触摸点离开了文档区域（进入浏览器菜单栏区域）、用户放置更多的触摸点（自动取消早先的触摸点）。
+
+    </script>
+    <script>
+        //焦点事件
+        //由于focus和blur事件不会冒泡，只能在捕获阶段触发，所以addEventListener方法的第三个参数需要设为true。
+        //focus：Element节点获得焦点后触发，该事件不会冒泡。
+        //blur：Element节点失去焦点后触发，该事件不会冒泡。
+        //focusin：Element节点将要获得焦点时触发，该事件会冒泡，但Firefox不支持该事件。
+        //focusout：Element节点将要失去焦点时触发，该事件会冒泡，但Firefox不支持该事件。
+        //以上四个事件都会生成一个FocusEvent事件对象。该对象有以下属性。
+        //target：事件对象的目标节点。
+        //type：事件的类型，格式为字符串。
+        //bubbles：返回一个布尔值，表示该事件是否会冒泡。
+        //cancelable：返回一个布尔值，表示是否可以取消该事件。
+        //relatedTarget：返回一个Element节点。
+        //对于focusin事件，表示失去焦点的节点；
+        //对于focusout事件，表示将要接受焦点的节点；对于focus和blur事件，该属性返回null。
+        form.addEventListener("focus", function (event) {
+            event.target.style.background = "pink";
+        }, true);
+        form.addEventListener("blur", function (event) {
+            event.target.style.background = "";
+        }, true);
+        //FocusEvent对象继承Event对象和UIEvent对象。浏览器提供一个FocusEvent构造函数，可以用它生成FocusEvent实例。
+        var focusEvent = new FocusEvent(typeArg, focusEventInit);
+    </script>
+    <script>
+        //事件的类型
+        //DOM支持多种事件。
+        //UIEvent / UIEvents
+        //MouseEvent / MouseEvents
+        //MutationEvent / MutationEvents
+        //HTMLEvents
+        //TextEvent
+        //KeyboardEvent
+        //CustomEvent
+        //Event
+        //ProgressEvent
+        //AnimationEvent（webkit浏览器为WebKitAnimationEvent）
+        //TransitionEvent（webkit浏览器为WebKitTransitionEvent）
+        //有些事件类型的名称，同时存在单数形式和复数形式。这是因为DOM 2.0版采用复数形式，DOM 3.0版统一改为单数形式，浏览器为了保持兼容，就两种形式都支持
+        //用户界面事件
+        //（1）load事件，error事件
+        //浏览网页就是一个加载各种资源的过程，比如图像（image）、样式表（style sheet）、脚本（script）、视频（video）、音频（audio）、Ajax请求（XMLHttpRequest）等等
+        //如果加载成功就触发load事件，如果加载失败就触发error事件。这两个事件发生的对象，除了上面列出的各种资源，还包括文档（document）、窗口（window）、Ajax文件上传（XMLHttpRequestUpload）
+        //(2）unload事件
+        //该事件在卸载某个资源时触发。window、body、frameset等元素都可能触发该事件。
+        //如果在window对象上定义了该事件，网页就不会被浏览器缓存
+        //（3）beforeunload事件
+        //该事件在用户关闭网页时触发。它可以用来防止用户不当心关闭网页。
+        //该事件的特别之处在于，它会自动跳出一个确认对话框，让用户确认是否关闭网页。如果用户点击“取消”按钮，网页就不会关闭。beforeunload事件的回调函数所返回的字符串，会显示在确认对话框之中。
+        window.onbeforeunload = function () {
+            if (textarea.value != textarea.defaultValue) {
+                return '你确认要离开吗？';
+            }
+        };
+        //上面代码表示，当用户关闭网页，会跳出一个确认对话框，上面显示“你确认要离开吗？”。
+        //如果定义了该事件的回调函数，网页不会被浏览器缓存
+
+        //（4）resize事件
+        //改变浏览器窗口大小时会触发resize事件。能够触发它的元素包括window、body、frameset。
+
+        var resizeMethod = function(){
+            if (document.body.clientWidth < 768) {
+                console.log('移动设备');
+            }
+        };
+
+        window.addEventListener("resize", resizeMethod, true);
+        //（5）abort事件
+        //资源在加载成功前停止加载时触发该事件，主要发生在element、XMLHttpRequest、XMLHttpRequestUpload对象。
+
+        //（6）scroll事件
+        //用户滚动窗口或某个元素时触发该事件，主要发生在element、document、window对象。
+
+        //（7）contextmenu事件
+        //用户鼠标右击某个元素时触发，主要发生在element对象。
+
+    </script>
+    <script>
+        //表单事件
+        //（1）change事件
+
+        //一些特定的表单元素（比如文本框和输入框）失去焦点、并且值发生变化时触发。
+
+        //（2）reset事件
+
+        //表单重置（reset）时触发。
+
+        //（3）submit事件
+
+        //表单提交（submit）时触发。
+
+        //（4）select事件
+    </script>
+    <script>
+        //document对象的特有事件
+        //（1）readystatechange
+
+        //readystatechange事件在readyState属性发生变化时触发。它的发生对象是document和XMLHttpRequest对象。
+
+        //（2）DOMContentLoaded
+
+        //DOMContentLoaded事件在网页解析完成时触发，此时各种外部资源（resource）还没有被完全下载。也就是说，这个事件比load事件，发生时间早得多。
+
+        //注意，DOMContentLoaded事件的回调函数，应该部署在所有连接外部样式表的link元素前面。因为，抓取外部样式表的时候，页面是阻塞的，所有脚本都不会执行。如果DOMContentLoaded事件的回调函数，放在外部样式表的后面定义，就会造成所有外部样式表加载完毕之后，回调函数才执行。
+    </script>
+    <script>
+        //拖拉事件
+        //（1）drag
+
+        //drag事件在源对象被拖拉过程中触发。
+
+        //（2）dragstart，dragend
+
+        //dragstart事件在用户开始用鼠标拖拉某个对象时触发，dragend事件在结束拖拉时触发。
+
+        //（3）dragenter，dragleave
+
+        //dragenter事件在源对象拖拉进目标对象后，在目标对象上触发。dragleave事件在源对象离开目标对象后，在目标对象上触发。
+
+        //（4）dragover事件
+
+        //dragover事件在源对象拖拉过另一个对象上方时，在后者上触发。
+
+        //（5）drop事件
+
+        //当源对象被拖拉到目标对象上方，用户松开鼠标时，在目标对象上触发drop事件。
+    </script>
+    <script>
+        //CSS事件
+        //（1）transitionEnd事件
+
+        //CSS变动的过渡（transition）结束后，触发该事件。
+
+        div.addEventListener('webkitTransitionEnd', onTransitionEnd);
+        div.addEventListener('mozTransitionEnd', onTransitionEnd);
+        div.addEventListener('msTransitionEnd', onTransitionEnd);
+        div.addEventListener('transitionEnd', onTransitionEnd);
+
+        function onTransitionEnd() {
+            console.log('Transition end');
+        }
+        //目前，该事件需要添加浏览器前缀。另外，它与其他CSS事件一样，也存在向上传播的冒泡阶段。
+
+        //（2）animationstart事件，animationend事件，animationiteration事件
+
+        //animation动画开始时，触发animationstart事件；结束时，触发animationend事件。
+
+        //var anim = document.getElementById("anim");
+        //anim.addEventListener("animationstart", AnimationListener, false);
+        //当CSS动画开始新一轮循环时，就会触发animationiteration事件。也就是说，除了CSS动画的第一轮播放，其他每轮的开始时，都会触发该事件。
+
+        div.addEventListener('animationiteration', function() {
+            console.log('完成一次动画');
+        });
+        //这三个事件，除了Firefox浏览器不需要前缀，Chrome、Opera和IE都需要浏览器前缀，且大小写不一致。
+
+        //animationstart：写为animationstart、webkitAnimationStart、oanimationstart和MSAnimationStart。
+        //animationiteration：写为animationiteration、webkitAnimationIteration、oanimationiteration和MSAnimationIteration。
+        //animationend：写为animationend、webkitAnimationEnd、oanimationend和MSAnimationEnd。
+        //下面是一个解决浏览器前缀的函数。
+
+        var pfx = ["webkit", "moz", "MS", "o", ""];
+
+        function PrefixedEvent(element, type, callback) {
+            for (var p = 0; p < pfx.length; p++) {
+                if (!pfx[p]) type = type.toLowerCase();
+                element.addEventListener(pfx[p]+type, callback, false);
+            }
+        }
+
+        // 用法
+
+        PrefixedEvent(anim, "AnimationStart", AnimationListener);
+        PrefixedEvent(anim, "AnimationIteration", AnimationListener);
+        PrefixedEvent(anim, "AnimationEnd", AnimationListener);
+        //这三个事件的回调函数，接受一个事件对象作为参数。该事件对象除了标准属性以外，还有两个与动画相关的属性。
+
+        //animationName：动画的名称。
+        //elapsedTime：从动画开始播放，到事件发生时所持续的秒数。
+    </script>
+    <script>
+        //自定义事件（标准写法）
+        //除了浏览器预定义的那些事件，用户还可以自定义事件，然后手动触发。
+
+        // 新建事件实例
+        var event = new Event('build');
+
+        // 添加监听函数
+        elem.addEventListener('build', function (e) { ... }, false);
+
+        // 触发事件
+        elem.dispatchEvent(event);
+        //由于IE不支持这个API，如果在IE中自定义事件，需要使用后文的“老式方法” 老式的方法 不提倡使用了 略
+
+        //CustomEvent()
+        //Event构造函数只能指定事件名，不能在事件上绑定数据。如果需要在触发事件的同时，传入指定的数据，需要使用CustomEvent构造函数生成自定义的事件对象。
+
+        var event = new CustomEvent('build', { 'detail': 'hello' });
+        function eventHandler(e) {
+            console.log(e.detail);
+        }
+        //上面代码中，CustomEvent构造函数的第一个参数是事件名称，第二个参数是一个对象，该对象的detail属性会绑定在事件对象之上。
+
+        //下面是另一个例子。
+
+        var myEvent = new CustomEvent("myevent", {
+            detail: {
+                foo: "bar"
+            },
+            bubbles: true,
+            cancelable: false
+        });
+
+        el.addEventListener('myevent', function(event) {
+            console.log('Hello ' + event.detail.foo);
+        });
+
+        el.dispatchEvent(myEvent);
+        //IE不支持这个方法，可以用下面的垫片函数模拟。
+
+        (function () {
+            function CustomEvent ( event, params ) {
+                params = params || { bubbles: false, cancelable: false, detail: undefined };
+                var evt = document.createEvent( 'CustomEvent' );
+                evt.initCustomEvent( event, params.bubbles, params.cancelable, params.detail );
+                return evt;
+            }
+
+            CustomEvent.prototype = window.Event.prototype;
+
+            window.CustomEvent = CustomEvent;
+        })();
+    </script>
+</body>
+</html>

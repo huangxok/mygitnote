@@ -1,0 +1,330 @@
+body {background:url(beijing1.jpg) top  no-repeat; margin:0px auto;}
+div{
+	font-family:"微软雅黑";
+	font-size:14px;}
+ul{ list-style:none; margin:auto 0px;letter-spacing:0; word-spacing:0; padding:0;}
+a{text-decoration:none; font-size:12px;}
+a:link { 
+color:#F00; }
+a:active{
+	color:#F00;}
+.clear{ clear:both; font-size:0;}
+.imgall{ width:271px; flsoat:left; display:inline; margin:20px 0px 10px 35px;}
+.toubu{
+	width:1423px;
+	height:350px;
+    margin:0 auto;
+	}
+#container{
+	width:1423px;
+	height:auto;
+	display:block;
+	overflow:hidden;
+	text-align:left;
+	}
+.top{
+	width:1423px;
+	height:35px;
+	background-image:url(top.jpg);
+	margin:0px auto;
+	}
+.top p{
+	font-size:12PX;
+		color:#FFF;
+		margin-left:1030px;
+		margin-top:0px;
+		padding-top:10px;
+		}	
+.top a{
+	color:#F00;
+	}		
+.nav_bg{
+	width:1423px;
+	height:58px;
+	background-image:url(nav_bj.jpg);
+	background-attachment:scroll;
+	margin:0px auto;
+	}
+* {margin:0; padding:0;}
+.clearfix:after {content: "."; display: block; height: 0; clear: both; visibility: hidden;}
+.clearfix {zoom:1;}
+ul,li {list-style:none;}
+img {border:0;}
+
+.wrapper {width:564px; margin:0 auto; /*padding-bottom:50px;*/ margin-top:8px;}
+/* qqshop focus */
+#focus {width:564px; height:395px; overflow:hidden; position:relative;}
+#focus ul {height:380px; position:absolute;}
+#focus ul li {float:left; width:564px; height:395px; overflow:hidden; position:relative; background:#000;}
+#focus ul li div {position:absolute; overflow:hidden;}
+#focus .btnBg {position:absolute; width:564px; height:20px; left:0; bottom:0; background:#000;}
+#focus .btn {position:absolute; width:564px; height:10px; padding:5px 10px; right:0; bottom:0; text-align:right;}
+#focus .btn span {display:inline-block; _display:inline; _zoom:1; width:25px; height:10px; _font-size:0; margin-left:5px; cursor:pointer; background:#fff;}
+#focus .btn span.on {background:#fff;}
+#focus .preNext {width:45px; height:100px; position:absolute; top:152px; background:url(sprite.png) no-repeat 0 0; cursor:pointer;}
+#focus .pre {left:0;}
+#focus .next {right:0; background-position:right top;}
+.nav_1{
+	width:990px;
+	height:58px;
+	margin:0px 260px 0px 173px;
+	}
+.logo{
+	margin-top:8px;
+	float:left;
+	}
+.dh{
+	width:730px;
+	height:auto;
+	line-height:58px;
+	padding-left:80px;
+	float:left;
+	}
+.dh LI{
+	float:left;
+	display:block;}	
+#line{
+	width:1px;
+	height:58px;
+	overflow:hidden;
+	background-image:none;
+	background-color:rgb(235,235,235);}
+UL{
+	color:#333;
+	padding:0px 0px 0px 0px;
+	margin:0px 0px 0px 0px;
+	text-decoration:none;
+	list-style-position:outside;
+	list-style-type:none;
+	list-style-image:none;
+	}	
+#home{
+	width:85px;
+	height:58px;
+	background:url(121.png)  right no-repeat;
+	}
+.dh li A{
+	font-family:"微软雅黑";
+		height:58px;
+		color:#333;
+		padding:0px 29px 0px 25px;
+		font-size:14px;
+		display:block;}
+#search_box{
+	width:152px;
+	height:26px;
+	background-image:url(nav_kuang.jpg);
+	margin-top:17px;
+	float:right;
+	background-attachment:scroll;
+	background-repeat:no-repeat;
+	background-position-x:left;
+	background-position-y:center;
+	background-color:transparent;
+	}	
+#search_box #s{
+	width:120px;
+	color:#999;
+	padding:0px 0px 0px 0px;
+	font-size:12px;
+	margin:6px 0px 0px 4px;
+	border-top-width:0px;
+	border-right-width:0px;
+	border-bottom-width:0px;
+	border-left-width:0px;
+	float:left;
+	background-image:none;
+	background-attachment:scroll;
+	background-repeat:repeat;
+	background-position-x:0%;
+	background-position-y:0%;
+	background-color:transparent;}	
+#search_box #go{
+	line-height:25px;
+	margin:1px 0px 0px 0px ;
+	float:left;
+	}	
+.toubu{
+	width:1423px;
+	height:350px;
+    margin:0 auto;
+	}	
+.neirong{
+	width:1400px;
+	height:1000px;
+	float:left;
+	margin:0px auto ;
+	}
+#LeftAd{
+	width:132px;
+	height:146px;
+	background-image:url(erweima.jpg);
+	margin:0px auto;
+	}
+	
+.tj{
+	width:565px;
+	height:390px;
+	float:left;
+ 
+}
+.tj a{
+	width:565px;
+	height:390px;
+	float:left;
+	margin:60px 0px 0px 430px;
+	}
+.dakuang{
+	width:1400px;
+	height:370px;
+	float:left;
+	margin-top:70px;
+	}		
+.jlb{
+	width:530px;
+	height:340px;
+	float:left;
+	/*background-color:#FF0;*/
+	margin:40px 0px 0px 150px;
+	}
+.jlb_tu	{
+	width:269px;
+	height:228px;
+	float:left;
+	background-image:url(jlb_tu.jpg);
+	margin:10px 10px 0px 0px;
+	}
+.jlb_js{
+	width:240px;
+	height:230px;
+	float:left;
+    margin:15px 10px 0px 0px;
+	}
+.jlb_js p{
+	font-family:"微软雅黑";
+	font-size:14px;
+	color:#000;
+	line-height:20px;
+	text-indent:2em;
+	}	
+.jlb_js1{
+	width:520px;
+	height:200px;
+	float:left;
+	margin-top:10px;
+	}	
+.jlb_js1 p{
+	font-family:"微软雅黑";
+	font-size:14px;
+	color:#000;
+	line-height:20px;
+	text-indent:2em;
+	}		
+.ld{
+	width:530px;
+	height:340px;
+	float:left;
+	margin:50px 0px 0px 60px;
+	}		
+	
+.ld_tu{
+	width:187px;
+	height:187px;
+	float:left;
+	background-image:url(ld_tu.png);
+	margin:10px 10px 0px 0px;
+	
+	}	
+.ld_js{
+	width:310px;
+	height:145px;
+	float:left;
+	margin:10px 0px 0px 10px;
+	}	
+.ld_js p{
+	font-family:"微软雅黑";
+	font-size:14px;
+	color:#000;
+	line-height:20px;
+	text-indent:5em;
+	}	
+	
+.ld_js1{
+	width:217px;
+	height:165px;
+	float:right;
+	background-image:url(jingcai.png);
+	margin-right:100px;
+	}
+.ld_js1 p{
+	font-family:"微软雅黑";
+	font-size:14px;
+	float:left;
+	margin:px 0px 0px 0px;
+	}	
+.ld_js1 a{
+	font-size:16px;
+	color:#00F;
+	}	
+ a:hover{ 
+    text-decoration:underline;   
+ }	
+.ld_js a{
+	font-size:16px;
+	color:#2A3FFF;
+	
+	}	
+.bottom{
+	width:1423px;
+	height:74px;
+	float:left;
+	background-image:url(heidi.png);
+	margin:0px auto;
+	}	
+.bottom a{
+	font-family:"微软雅黑";
+	font-size:12px;
+	 color:#000;} 		
+.youlian{
+	width:990px;
+	height:30px;
+	margin:0px auto;
+	line-height:30px;
+	}
+.youlian ul{
+	list-style:none;
+	padding:0;
+	}	
+.youlian ul li{
+	float:left;
+	padding-left:10px;
+	}	
+.bot_top{
+	width:990px;
+	height:30px;
+	margin:0px auto;
+    padding-top:10px;
+	}
+.hei{
+	width:100px;
+	float:right;
+	}
+.wzdt{
+	width:165px;
+	height:20px;
+	float:right;
+    padding-top:10px;
+	}	
+.beian{
+	width:370px;
+	height:30px;
+	float:left;
+	line-height:30px;
+	margin:0px auto;
+	font-size:12px;
+	}
+.beian img{ vertical-align:middle;}
+ 
+ 
+	
+	

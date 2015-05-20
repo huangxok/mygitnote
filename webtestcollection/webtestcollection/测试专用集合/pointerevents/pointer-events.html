@@ -1,0 +1,53 @@
+﻿<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="utf-8">
+    <title>CSS:pointer-events</title>
+    <style type="text/css">
+        .overlay1 {
+            width: 80px;
+            height: 20px;
+            background: gold;
+            position: absolute;
+            top: 5px;
+            left: 5px;
+            opacity: 0.5;
+        }
+
+        .overlay2 {
+            width: 80px;
+            height: 20px;
+            background: gold;
+            position: absolute;
+            top: 40px;
+            left: 5px;
+            opacity: 0.5;
+        }
+
+        .pointer {
+            pointer-events: none;
+        }
+    </style>
+    <script type="text/javascript">
+        window.onload = function () {
+            document.getElementById('chx').onclick = function () {
+                document.getElementById('a').className
+                    = "overlay1 " + ((this.checked) ? "pointer" : "");
+                document.getElementById('b').className
+                    = "overlay2 " + ((this.checked) ? "pointer" : "");
+            }
+        }
+    </script>
+</head>
+<body>
+    <div id="a" class="overlay1"></div>
+    <div id="b" class="overlay2"></div>
+    <a href="http://mail.sina.com.cn">SinaMail</a>
+    <br /><br />
+    <span onclick="alert(3);">SinaMail</span>
+    <p>
+        <input id="chx" type="checkbox">
+        <label for="chx">开启穿透点击</label>
+    </p>
+</body>
+</html>

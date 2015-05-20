@@ -1,0 +1,239 @@
+﻿@charset "utf-8";
+/* CSS Document */
+
+* {
+    margin: 0;
+    padding: 0;
+}
+
+.box {
+    background: url(../Image/1.jpg);
+    height: 430px;
+    position: relative;
+}
+
+
+
+
+
+.A {
+    width: 100px;
+    height: 100px;
+    background: #0FF;
+    position: absolute;
+    top: 200px;
+    left: 600px;
+}
+
+
+
+
+.A {
+    -webkit-animation: 3s ease-out backwards;
+    -moz-animation: 3s ease-out backwards;
+    -ms-animation: 3s ease-out backwards;
+    animation: 3s ease-out backwards;
+}
+
+/* 弹入-从左 */
+.A {
+    -webkit-animation-name: bounceinL;
+    -moz-animation-name: bounceinL;
+    -ms-animation-name: bounceinL;
+    animation-name: bounceinL;
+}
+
+
+
+
+
+/* 弹入-从左 */
+@-webkit-keyframes bounceinL {
+    0% {
+        opacity: 0;
+        -webkit-transform: translateX(-100px);
+    }
+
+    60% {
+        opacity: 1;
+        -webkit-transform: translateX(200px);
+    }
+
+    80% {
+        -webkit-transform: translateX(100px);
+    }
+
+    100% {
+        -webkit-transform: translateX(0px);
+    }
+}
+
+@-moz-keyframes bounceinL {
+    0% {
+        opacity: 0;
+        -moz-transform: translateX(-100px);
+    }
+
+    60% {
+        opacity: 1;
+        -moz-transform: translateX(200px);
+    }
+
+    80% {
+        -moz-transform: translateX(100px);
+    }
+
+    100% {
+        -moz-transform: translateX(0px);
+    }
+}
+
+@-ms-keyframes bounceinL {
+    0% {
+        opacity: 0;
+        -ms-transform: translateX(-100px);
+    }
+
+    60% {
+        opacity: 1;
+        -ms-transform: translateX(200px);
+    }
+
+    80% {
+        -ms-transform: translateX(100px);
+    }
+
+    100% {
+        -ms-transform: translateX(0px);
+    }
+}
+
+@keyframes bounceinL {
+    0% {
+        opacity: 0;
+        transform: translateX(-100px);
+    }
+
+    60% {
+        opacity: 1;
+        transform: translateX(200px);
+    }
+
+    80% {
+        transform: translateX(100px);
+    }
+
+    100% {
+        transform: translateX(0px);
+    }
+}
+
+
+
+
+
+.B {
+    width: 300px;
+    height: 200px;
+    background: #0F0;
+    position: absolute;
+    top: 100px;
+    right: 300px;
+}
+
+/* 弹入-从右 */
+
+.B {
+    -webkit-animation: 3s ease-out backwards 5s;
+    -moz-animation: 3s ease-out backwards 5s;
+    -ms-animation: 3s ease-out backwards 5s;
+    animation: 3s ease-out backwards 5s;
+}
+
+.B {
+    -webkit-animation-name: bounceinR;
+    -moz-animation-name: bounceinR;
+    -ms-animation-name: bounceinR;
+    animation-name: bounceinR;
+}
+
+/* 弹入-从右 */
+@-webkit-keyframes bounceinR {
+    0% {
+        opacity: 0;
+        -webkit-transform: translateX(100px);
+    }
+
+    60% {
+        opacity: 1;
+        -webkit-transform: translateX(-30px);
+    }
+
+    80% {
+        -webkit-transform: translateX(10px);
+    }
+
+    100% {
+        -webkit-transform: translateX(0);
+    }
+}
+
+@-moz-keyframes bounceinR {
+    0% {
+        opacity: 0;
+        -moz-transform: translateX(100px);
+    }
+
+    60% {
+        opacity: 1;
+        -moz-transform: translateX(-30px);
+    }
+
+    80% {
+        -moz-transform: translateX(10px);
+    }
+
+    100% {
+        -moz-transform: translateX(0);
+    }
+}
+
+@-ms-keyframes bounceinR {
+    0% {
+        opacity: 0;
+        -ms-transform: translateX(100px);
+    }
+
+    60% {
+        opacity: 1;
+        -ms-transform: translateX(-30px);
+    }
+
+    80% {
+        -ms-transform: translateX(10px);
+    }
+
+    100% {
+        -ms-transform: translateX(0);
+    }
+}
+
+@keyframes bounceinR {
+    0% {
+        opacity: 0;
+        transform: translateX(100px);
+    }
+
+    60% {
+        opacity: 1;
+        transform: translateX(-30px);
+    }
+
+    80% {
+        transform: translateX(10px);
+    }
+
+    100% {
+        transform: translateX(0);
+    }
+}

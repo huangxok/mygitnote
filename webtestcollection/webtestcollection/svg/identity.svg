@@ -1,0 +1,16 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
+<svg version="1.1" xmlns="http://www.w3.org/2000/svg" x="0px" y="0px" style="width:135px;height:135px;">
+  <g id="company_mascot">
+    <!-- drawing of company mascot -->
+  </g>
+  <g id="company_logo" style="stroke: none;">
+    <polygon points="0 20, 20 0, 40 20, 20 40"
+    style="fill: #696;" />
+    <rect x="7" y="7" width="26" height="26"
+    style="fill: #c9c;" />
+  </g>
+  <g id="partner_logo">  </g>
+
+
+</svg>

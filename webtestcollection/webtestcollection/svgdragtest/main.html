@@ -1,0 +1,115 @@
+﻿<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <title></title>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <style type="text/css">
+        /** {
+            margin: 0px;
+            padding: 0px;
+        }*/
+        ul {
+            margin: 0;
+            padding: 0;
+        }
+
+        html, body {
+            font: 100% 微软雅黑, 宋体, 新宋体;
+            margin: 0; /* 最好将 body 元素的边距和填充设置为 0 以覆盖不同的浏览器默认值 */
+            padding: 0;
+            text-align: center; /* 在 IE 5* 浏览器中，这会将容器居中。文本随后将在 #container 选择器中设置为默认左对齐 */
+            color: #FFF;
+            height: 100%; /*这里将高度设置为100%是这个布局实现自适应高度的关键，只有这里设置了高度，下面div的高度设置才起作用*/
+            background-color: #000;
+        }
+
+        .layout {
+            width: 100%;
+            height: 100%;
+            margin: 0px auto;
+        }
+
+        .header {
+            width: 100%;
+            height: 10%;
+            background-color: #09F;
+        }
+
+
+            .header .k {
+                height: 100%;
+            }
+
+            .header ul li {
+                float: left;
+            }
+
+        .container {
+            height: 80%;
+            background: #cc3;
+        }
+
+            .container .left {
+                width: 20%;
+                height: 100%;
+                float: left;
+            }
+
+            .container .main {
+                width: 60%;
+                height: 100%;
+                background-color: #CFC;
+                float: left;
+            }
+
+            .container .right {
+                width: 20%;
+                height: 100%;
+                float: left;
+            }
+
+        .footer {
+            width: 100%;
+            height: 10%;
+            background-color: #930;
+        }
+
+        .clearfloat { /* 此类应当放在 div 或 break 元素上，而且该元素应当是完全包含浮动的容器关闭之前的最后一个元素 */
+            clear: both;
+            height: 0;
+            font-size: 1px;
+            line-height: 0px;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="layout">
+        <div class="header">
+            <div class="k">
+                <ul>
+                    <li><i>1111</i></li>
+                    <li><i>1111</i></li>
+                    <li><i>1111</i></li>
+                    <li><i>1111</i></li>
+                    <li><i>1111</i></li>
+                    <li><i>1111</i></li>
+                </ul>
+            </div>
+        </div>
+        <div class="container">
+            <div class="left">
+
+            </div>
+            <div class="main">
+                <iframe src="mainiframe.html" style="width:100%;height:100%;border:1px solid #b6ff00"></iframe>
+            </div>
+            <div class="right"></div>
+            <div class="clearfloat"></div>
+        </div>
+        <div class="footer">
+
+        </div>
+    </div>
+</body>
+</html>

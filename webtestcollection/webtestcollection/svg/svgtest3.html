@@ -1,0 +1,42 @@
+﻿<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <title></title>
+    <script>
+        //相对坐标与绝对坐标
+        //V v
+        //H h
+        //L l
+
+        //<path d="M 10 10 L 20 10 L 20 30 M 40 40 L 55 35"
+        //style="stroke: black;" />
+        //<path d="M 10 10 l 10 0 l 0 20 m 20 10 l 15 -5"
+        //style="stroke: black;" />
+
+        //起点坐标+相对坐标(累加)=绝对坐标
+
+        //x轴+x轴
+        //y轴+y轴
+
+    </script>
+</head>
+<body style="width:100%;height:100%">
+    <svg>
+        <!--下面等效-->
+        <path d="M 10 10 L 20 10 L 20 30 M 40 40 L 55 35"
+              style="stroke: black;" />
+        <path d="M 10 10 l 10 0 l 0 20 m 20 10 l 15 -5"
+              style="stroke: black;" />
+    </svg>
+    <svg>
+        <!--写法不同，效果相同 M和m-->
+        <path d="M 30 30 L 55 5 L 80 30 L 55 55 Z" />
+        <path d="M 30 30 L 55 5 80 30 55 55 Z" />
+        <path d="M 30 30 55 5 80 30 55 55 Z" />
+        <path d="m 30 30 l 25 -25 l 25 25 l -25 25 z" />
+        <path d="m 30 30 l 25 -25 25 25 -25 25 z" />
+        <path d="m 30 30 25 -25 25 25 -25 25 z" />
+    </svg>
+    <svg style="width: 292px; height: 300px; position: absolute; left: 543px; z-index: 999; background-color: rgba(200, 152, 125, 0.298039);"><defs><marker id="makerArrow" markerWidth="20" markerHeight="20" refX="5" refY="5" orient="auto"><path d="M 2 2 7 7 2 12 Z" style="fill: rgb(0, 0, 0);"></path></marker></defs><line x1="0" y1="60" x2="295.71875" y2="46" style="stroke: rgb(255, 0, 0); stroke-width: 2px;"></line><line x1="0" y1="138" x2="296.140625" y2="137" style="stroke: rgb(255, 0, 0); stroke-width: 2px;"></line><line x1="0" y1="138" x2="296.140625" y2="137" style="stroke: rgb(255, 0, 0); stroke-width: 2px;"></line><line x1="0" y1="216" x2="296.140625" y2="228" style="stroke: rgb(255, 0, 0); stroke-width: 2px;"></line><line x1="0" y1="216" x2="296.140625" y2="228" style="stroke: rgb(255, 0, 0); stroke-width: 2px;"></line><line x1="0" y1="216" x2="296.140625" y2="228" style="stroke: rgb(255, 0, 0); stroke-width: 2px;"></line><line x1="0" y1="216" x2="296.140625" y2="137" style="stroke: rgb(0, 128, 0); stroke-width: 2px;"></line><line x1="0" y1="543" x2="296.140625" y2="464" style="stroke: rgb(0, 128, 0); stroke-width: 2px;"></line></svg>
+</body>
+</html>

@@ -1,0 +1,751 @@
+﻿<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0, minimum-scale=1.0, maximum-scale=1.0">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <link href="images/m.css" rel="stylesheet" type="text/css" />
+    <script src="inc/jquery.min.js" type="text/javascript"></script>
+    <script src="inc/walkway.min.js" type="text/javascript"></script>
+    <script src="inc/jquery.rotate.min.js" type="text/javascript"></script>
+    <title></title>
+    <style>
+        svg {
+        }
+
+        path, line, polyline {
+            stroke: #ffffff;
+            stroke-width: 2px;
+        }
+
+        path {
+            fill: none;
+        }
+    </style>
+</head>
+<body>
+    <!--
+    <div id = "div1" style = "position:absolute;background:url(images/0.jpg) no-repeat;background-size:cover;">
+    </div>
+     -->
+
+    <div id="container" style="position:absolute;overflow:hidden;">
+        <div id="imgbar" style="position:absolute;">
+            <div class="img" id="box1">
+                <svg version="1.1" id="test1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+                     width="1080px" height="1695px" viewBox="0 0 1080 1695" enable-background="new 0 0 1080 1695" xml:space="preserve">
+                <path fill="none" stroke="#E3720E" stroke-width="25" stroke-miterlimit="10" d="M305.372,657.718
+				c24.132-27.861,130.818-128.966,148.986-154.739c29.666-42.085,141.997,121.682,149.017,147.207" />
+                <path fill="none" stroke="#E3720E" stroke-width="25" stroke-miterlimit="10" d="M459.797,810.987c0,0,85.508,45.511,88.699-24.683
+				c3.191-70.193,33.182-134.005-84.232-123.796c-117.414,10.21-105.29,12.124-105.29,61.898c0,49.773-0.355,148.682-0.355,148.682
+				s-21.979,88.061,65.444,86.146s112.309-3.191,112.309-3.191s81.68,29.992,67.003-82.318" />
+                <line fill="none" stroke="#E3720E" stroke-width="25" stroke-miterlimit="10" x1="663.922" y1="520.554" x2="663.922" y2="865.431" />
+                <path fill="none" stroke="#E3720E" stroke-width="25" stroke-miterlimit="10" d="M760.959,493.064v433.83
+				c0,0,29.004,121.041-155.82,131.573c0,0-248.99,6.04-307.451-4.579s-196.52-37.052-142.868-148.47c0,0,36.271-90.599,19.304-191.798
+				s-18.222-276.775,8.923-316.91c30.023-55.274,151.16-106.796,143.556-25.148s-136.131,10.511-142.92-156.552
+				c0,0,23.443-178.08,49.774-235.729" />
+			</svg>
+                <img id="box1Word" src="images/1_1.png" style="position:absolute;display:none;" />
+            </div>
+
+            <div class="img" id="box2">
+
+
+                <svg version="1.1" id="test2" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+                     width="1080px" height="1695px" viewBox="0 0 1080 1695" enable-background="new 0 0 1080 1695" xml:space="preserve">
+                <path fill="none" stroke="#E3720E" stroke-width="25" stroke-miterlimit="10" d="M760.959,2189.396v302.484v169.836
+				c0,0,0,90.396-184.939,94.543c-184.939,4.146-483.132,14.401-427.932-134.351C231,2398.479,72.66,2046.33,275.463,2026.648
+				c96.347-9.35,42.903,119.473-27.057,53.276c-83.934-79.419-83.954-176.289-14.947-404.312c0,0,67.24-297.732,203.236-540.833
+				c96.915-173.24,257.965-324.591,413.269-361.385" />
+                <path fill="none" stroke="#E3720E" stroke-width="25" stroke-miterlimit="10" d="M171.683,822.996
+				c0,0,340.993-16.514,289.703,261.635" />
+                <path fill="none" stroke="#E3720E" stroke-width="25" stroke-miterlimit="10" d="M551.416,503.222
+				c-22.06,4.826-169.27,59.005-48.736,293.726" />
+                <path fill="none" stroke="#E3720E" stroke-width="25" stroke-miterlimit="10" d="M291.778,599.212
+				c0,0,284.181,128.589,241.339,395.474" />
+                <path fill="none" stroke="#E3720E" stroke-width="25" stroke-miterlimit="10" d="M288.388,792.525c0,0-121.461-72.991-160.06,0.727
+				s110.991,104.094,145.04,66.61" />
+                <path fill="none" stroke="#E3720E" stroke-width="25" stroke-miterlimit="10" d="M398.163,620.17c0,0-74.655-120.445-142.687-72.528
+				c-68.031,47.917,51.125,143.321,98.544,125.549" />
+                <path fill="none" stroke="#E3720E" stroke-width="25" stroke-miterlimit="10" d="M746.619,855.394c0,0,141.705-0.219,136.69-83.28
+				c-5.015-83.061-148.802-31.822-158.602,17.861" />
+                <path fill="none" stroke="#E3720E" stroke-width="25" stroke-miterlimit="10" d="M501.861,575.695
+				c0,0,140.481-18.586,124.742-100.297c-15.74-81.71-151.672-12.264-154.948,38.27" />
+                <path fill="none" stroke="#E3720E" stroke-width="25" stroke-miterlimit="10" d="M720.418-30.404
+				c320.39,127.512,254.714,396.973,148.109,358.86c-61.982-22.16,52.806-94.071,72.58,19.735
+				c31.643,182.125-349.83,248.992-337.622,561.805" />
+                <path fill="none" stroke="#E3720E" stroke-width="25" stroke-miterlimit="10" d="M631.007,1169.714" />
+			</svg>
+
+                <img id="box2_1Word" src="images/2_1.png" style="position:absolute;display:none;" />
+                <img id="box2_2Word" src="images/2_2.png" style="position:absolute;display:none;" />
+                <img id="box2_3Word" src="images/2_3.png" style="position:absolute;display:none;" />
+                <img id="box2_4Word" src="images/2_4.png" style="position:absolute;display:none;" />
+
+                <img id="box2_5Word" src="images/2_5.png" style="position:absolute;display:none;" />
+                <img id="box2_6Word" src="images/2_6.png" style="position:absolute;display:none;" />
+                <img id="box2_7Word" src="images/2_7.png" style="position:absolute;display:none;" />
+                <img id="box2_8Word" src="images/2_8.png" style="position:absolute;display:none;" />
+
+            </div>
+
+            <div class="img" id="box3">
+                <svg version="1.1" id="test3" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+                     width="1080px" height="1695px" viewBox="0 0 1080 1695" enable-background="new 0 0 1080 1695" xml:space="preserve">
+                <path fill="none" stroke="#E3720E" stroke-width="25" stroke-miterlimit="10" d="M746.687,1708.617
+				c-8.762-3.983-17.849-7.855-27.269-11.605c0,0-1045.939-225.016-407.18-663.971c0,0,126.762-65.041,64.762-124.976
+				c-93.797-90.673-196.612,160.867,52.155,103.136c33.487-7.771,66.099-18.098,97.464-30.151
+				c201.644-77.487,326.167-197.745,326.167-197.745L553,889.139L616,586c-168,261.5-121.167,303.139-154,514
+				c-19.216,123.408,98.684,127.309,124.298,43C604.031,1084.631,485,1038.872,463,1113.78" />
+                <path fill="none" stroke="#E3720E" stroke-width="25" stroke-miterlimit="10" d="M677.08,508.608
+				c0,0,221.54-269.226,105.693-538.452" />
+			</svg>
+
+                <img id="box3_1Word" src="images/3_1.png" style="position:absolute;display:none;" />
+                <img id="box3_2Word" src="images/3_2.png" style="position:absolute;display:none;" />
+                <img id="box3_3Word" src="images/3_3.png" style="position:absolute;display:none;" />
+            </div>
+
+            <div class="img" id="box4">
+
+                <svg version="1.1" id="test4" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+                     width="1080px" height="1695px" viewBox="0 0 1080 1695" enable-background="new 0 0 1080 1695" xml:space="preserve">
+                <g>
+                <path fill="none" stroke="#E3720E" stroke-width="25" stroke-miterlimit="10" d="M857.709,560.784
+					c0,0,125.674-154.217-140.716-265.13S657.576-1.435,680.353-18.27" />
+			</g>
+                <path fill="none" stroke="#E3720E" stroke-width="25" stroke-miterlimit="10" d="M804.034,1730.727
+				c-5.201-20.933-12.199-41.995-21.262-63.057c0,0-103.756-287.038-342.61-306.942c-82.587-6.882-53.742,167.197,177.15-45.78
+				c0,0,92.584-89.202-27.422-43.102c-109.761,31.465-95.109-10.348-4.39-33.66c113.42-29.146,122.201-72.443,7.317-41.709
+				c-90.736,34.392-161.715-5.122-9.513-37.319l69.516-17.562l19.831-108.4c0,0,128.713-61.365,133.103-206.25
+				c8.781-245.866-403.702-284.919-407.695,0c0,0-3.012,149.397,114.266,205.62l11.708,87.077c0,0,52.686,5.122,66.589-13.903
+				c13.903-19.025,5.312-142.575,10.976-201.229c5.582-57.808,30.733-68.784,53.417-70.247c22.684-1.463,18.294-46.832-31.465-26.343
+				c0,0-55.612,26.343-54.149,62.198c0,0,4.39-71.711-51.954-49.758" />
+			</svg>
+
+                <img id="box4_1Word" src="images/4_1.png" style="position:absolute;display:none;" />
+                <img id="box4_2Word" src="images/4_2.png" style="position:absolute;display:none;" />
+                <img id="box4_3Word" src="images/4_3.png" style="position:absolute;display:none;" />
+                <img id="box4_4Word" src="images/4_4.png" style="position:absolute;display:none;" />
+                <img id="box4_5Word" src="images/4_5.png" style="position:absolute;display:none;" />
+                <img id="box4_6Word" src="images/4_6.png" style="position:absolute;display:none;" />
+                <img id="box4_7Word" src="images/4_7.png" style="position:absolute;display:none;" />
+            </div>
+
+            <div class="img" id="box5">
+
+                <svg version="1.1" id="test5" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+                     width="1080px" height="1695px" viewBox="0 0 1080 1695" enable-background="new 0 0 1080 1695" xml:space="preserve">
+                <path fill="none" stroke="#E3720E" stroke-width="25" stroke-miterlimit="10" d="M858.08,2253.595
+				c0,0,125.674-154.216-140.715-265.13c-266.389-110.913-59.844-293.833-36.641-313.923
+				c18.122-15.691,157.799-143.189,215.112-149.523c44.401-4.907,54.651,36.096,26.983,59.803
+				c-32.7,28.018-151.943-14.156-19.411-115.356c146.773-112.076,26.958-113.161-130.298-112.618
+				c-157.256,0.543-362.438,34.99-308.522-56.369s182.717-289.052,182.717-289.052l-3.224-331.982c0,0,94.626,2.955,117.069-11.57
+				c10.227-6.619,15.876-28.466-108.759-20.137c-54.741,5.34-47.425-74.525,2.402-48.648c55.414-2.52,139.284,0,139.284,0
+				s47.646-29.181,43.079,22.458c-1.47,15.92-39.783,16.098-39.1,38.268c0.684,22.17,10.997,347.118,10.997,347.118l184.214,277.071
+				c0,0,65.233,78.795-31.451,59.907c-6.677,0.871-117.662-240.52-116.819-197.694c1.09,55.375-79.609,45.661-77.277,10.807
+				c2.506-37.458-56.808-31.232-57.235-0.475c-0.474,34.138-62.112,36.508-64.957,1.422c-2.913-35.929-55-21.192-55.136,6.217" />
+                <path fill="none" stroke="#E3720E" stroke-width="25" stroke-miterlimit="10" d="M732.113,539.244c0,0-64.042-68.849,57.348-177.859
+				S616.674,215.433,650.272-6.768" />
+			</svg>
+                <img id="box5_1Word" src="images/5_1.png" style="position:absolute;display:none;" />
+                <img id="box5_2Word" src="images/5_2.png" style="position:absolute;display:none;" />
+                <img id="box5_3Word" src="images/5_3.png" style="position:absolute;display:none;" />
+                <img id="box5_4Word" src="images/5_4.png" style="position:absolute;display:none;" />
+                <img id="box5_5Word" src="images/5_5.png" style="position:absolute;display:none;" />
+                <img id="box5_6Word" src="images/5_6.png" style="position:absolute;display:none;" />
+                <img id="box5_7Word" src="images/5_7.png" style="position:absolute;display:none;" />
+                <img id="box5_8Word" src="images/5_8.png" style="position:absolute;display:none;" />
+                <img id="box5_9Word" src="images/5_9.png" style="position:absolute;display:none;" />
+                <img id="box5_10Word" src="images/5_10.png" style="position:absolute;display:none;" />
+                <img id="box5_11Word" src="images/5_11.png" style="position:absolute;display:none;" />
+            </div>
+
+            <div class="img" id="box6">
+                <svg version="1.1" id="test6" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+                     width="1080px" height="1695px" viewBox="0 0 1080 1695" enable-background="new 0 0 1080 1695" xml:space="preserve">
+                <path fill="none" stroke="#E3720E" stroke-width="25" stroke-miterlimit="10" d="M731.742,2234.096
+				c0,0-64.042-68.849,57.348-177.859c121.39-109.01-172.786-145.952-139.189-368.152c0,0,50.025-249.678-207.691-285.171
+				l-320.937,1.234l-2.557-832.567" />
+                <polyline fill="none" stroke="#E3720E" stroke-width="25" stroke-miterlimit="10" points="66.489,619.239 119.73,569.085
+				176.057,619.239 " />
+                <polyline fill="none" stroke="#E3720E" stroke-width="25" stroke-miterlimit="10" points="958.761,1345.511 1008.915,1398.752
+				958.761,1455.079 " />
+                <polyline fill="none" stroke="#E3720E" stroke-width="25" stroke-miterlimit="10" points="692.301,869.892 765.257,875.125
+				766.475,950.535 " />
+                <line fill="none" stroke="#E3720E" stroke-width="25" stroke-miterlimit="10" x1="111" y1="1408" x2="1005" y2="1400.295" />
+                <g display="none">
+				
+                <text transform="matrix(1 0 0 1 218.1699 526.5533)" display="inline" fill="#828282" font-family="'MicrosoftYaHei'" font-size="36">Google、Facebook投资布局 </text>
+			</g>
+                <g>
+                <path fill="none" stroke="#E3720E" stroke-width="25" stroke-miterlimit="10" d="M121.273,493.486
+					c0,0-120.749-179.307,91.083-227.248s797.026-56.609,606.271-297.129" />
+			</g>
+                <polyline fill="none" stroke="#E3720E" stroke-width="25" stroke-miterlimit="10" points="129.153,1345.511 451.35,1060.871
+				516.736,1119.95 756.668,886.046 " />
+			</svg>
+
+                <img id="box6_1Word" src="images/6_1.png" style="position:absolute;display:none;" />
+                <img id="box6_2Word" src="images/6_2.png" style="position:absolute;display:none;" />
+                <img id="box6_3Word" src="images/6_3.png" style="position:absolute;display:none;" />
+                <img id="box6_4Word" src="images/6_4.png" style="position:absolute;display:none;" />
+                <img id="box6_5Word" src="images/6_5.png" style="position:absolute;display:none;" />
+                <img id="box6_6Word" src="images/6_6.png" style="position:absolute;display:none;" />
+                <img id="box6_7Word" src="images/6_7.png" style="position:absolute;display:none;" />
+
+            </div>
+
+            <div class="img" id="box7">
+
+                <svg version="1.1" id="test7" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+                     width="1080px" height="1695px" viewBox="0 0 1080 1695" enable-background="new 0 0 1080 1695" xml:space="preserve">
+                <path fill="none" stroke="#E3720E" stroke-width="25" stroke-miterlimit="10" d="M119.273,2188.441
+				c0,0-120.749-179.307,91.083-227.248c211.833-47.941,797.025-56.609,606.271-297.129c0,0-44.009-51.39-99.934-89.209
+				c-138.01-93.329-381.849-292.648-439.849-461.648c0,0-61.216-150.629-26.108-252.315s89.108-216.059,287.108-237.372
+				c198-21.313,308.876,172.687,313.438,313.687c4.562,141-193.438,464-523.438,190c0,0-72.016-103.016-48.206-201.23
+				c23.81-98.214,45.635-168.041,89.286-120.727c43.651,47.314,22.425,85.012,77.681,71.123c55.256-13.889,43.351-19.841,74.105-19.841
+				s42.659,15.967,46.627,24.849c3.968,8.882,15.873,46.58,0,46.58c-15.873,0-11.905,11.905-37.698,0.992s-25.936-16.865-34.794-12.897
+				c-8.857,3.968-52.508,34.782-52.508,34.782s-2.976,3.908-5.952,4.9s-21.825,35.714-10.913,51.587
+				c10.913,15.873-82.341-6.339-82.341-6.339s-2.976,21.22,0,33.125c2.976,11.905,65.476,47.619,68.452,47.619
+				s60.516-2.357,64.484-20.524c3.968-18.167,9.778-31.064,18.778-29.079s68.524,0.992,75.468,6.944s25.794,6.837,29.762,33.676
+				c3.968,26.84,8.929,55.266,8.929,63.374c0,8.108-48.611,31.918-16.865,44.815s53.571,15.873,37.698,26.786" />
+                <path fill="none" stroke="#E3720E" stroke-width="25" stroke-miterlimit="10" d="M626.418,651.175
+				c-8.929,19.841,14.881,71.429-17.857,73.413c-32.738,1.984,0.992,19.841,13.889,23.81c12.897,3.968,66.468-10.913,66.468-10.913
+				s7.936,21.825,14.881,28.77s22.817-6.944,39.683-5.952c16.865,0.992,16.865,17.857,21.825,0" />
+			</svg>
+
+                <img id="box7_1Word" src="images/7_1.png" style="position:absolute;display:none;" />
+                <img id="box7_2Word" src="images/7_2.png" style="position:absolute;display:none;" />
+                <img id="box7_3Word" src="images/7_3.png" style="position:absolute;display:none;" />
+                <img id="box7_4Word" src="images/7_4.png" style="position:absolute;display:none;" />
+                <img id="box7_5Word" src="images/7_5.png" style="position:absolute;display:none;" />
+                <img id="box7_6Word" src="images/7_6.png" style="position:absolute;display:none;" />
+                <img id="box7_7Word" src="images/7_7.png" style="position:absolute;display:none;" />
+            </div>
+
+            <div class="img" id="box8" style="background:url(images/8.jpg) no-repeat; background-size:cover;">
+                <div id="myClick" style="position:absolute;">
+
+                </div>
+            </div>
+
+            <div class="img" id="box9" style="background:url(images/9.jpg) no-repeat; background-size:cover;">
+
+                <form name="input" action="ra.php" method="get">
+                    <input id="myName" class="myform" type="text" name="name" value="" />
+                    <input id="company" class="myform" type="text" name="firm" value="" />
+                    <input id="work" class="myform" type="text" name="posit" value="" />
+                    <input id="tel" class="myform" type="text" name="contact" value="" />
+                    <input type="submit" class="myform" value="" />
+                </form>
+
+            </div>
+
+        </div>
+
+    </div>
+
+
+
+    <script>
+        /*
+            var svg = new Walkway('#test');
+         
+        svg.draw(function() {
+          console.log('Animation finished');
+        });
+        */
+        var x = parseInt(window.innerWidth);
+        var y = parseInt(window.innerHeight);
+        var startX, startY, endX, endY;
+        var count = 0;
+        p = 1080 / x;
+        (function () {
+
+            getWidth();
+            animate1();
+
+            //注册事件
+            document.getElementById("imgbar").addEventListener("touchstart", touchStart, false);
+            document.getElementById("imgbar").addEventListener("touchmove", touchMove, false);
+            document.getElementById("imgbar").addEventListener("touchend", touchEnd, false);
+
+            //count++;
+
+
+            //定义监听方法
+
+            function touchStart(event) {
+                startY = event.touches[0].clientY;
+            }
+            function touchMove(event) {
+                event.preventDefault();
+            }
+            function touchEnd(event) {
+
+                endY = event.changedTouches[0].clientY;
+
+                //上右
+                if (endY - startY > 30 && count < 8 && count >= 0) {
+                    count++;
+                    //$("#imgbar").animate({top:"+="+y+"px"},100,animate1());
+                    switch (count) {
+                        //case 0 : $("#imgbar").animate({marginLeft:-y*count},100,animate1()); break;
+                        case 1: $("#imgbar").animate({ top: "+=" + y + "px" }, 100, animate2()); break;
+                        case 2: $("#imgbar").animate({ top: "+=" + y + "px" }, 100, animate3()); break;
+                        case 3: $("#imgbar").animate({ top: "+=" + y + "px" }, 100, animate4()); break;
+                        case 4: $("#imgbar").animate({ top: "+=" + y + "px" }, 100, animate5()); break;
+                        case 5: $("#imgbar").animate({ top: "+=" + y + "px" }, 100, animate6()); break;
+                        case 6: $("#imgbar").animate({ top: "+=" + y + "px" }, 100, animate7()); break;
+                        case 7: $("#imgbar").animate({ top: "+=" + y + "px" }, 100); break;
+                        case 8: $("#imgbar").animate({ top: "+=" + y + "px" }, 100); break;
+
+                            //case 3 : window.location.href="index_qing.html"; break;
+                            //$("#imgbar").animate({left:"+="+y+"px"},100,animate5()); break;
+                    }
+
+                    //下左
+                } else if (startY - endY > 30 && count > 0 && count < 9) {
+                    count--;
+                    //$("#imgbar").animate({top:"-="+y+"px"},100);
+                    switch (count) {
+                        case 0: $("#imgbar").animate({ top: "-=" + y + "px" }, 100, animate1()); break;
+                        case 1: $("#imgbar").animate({ top: "-=" + y + "px" }, 100, animate2()); break;
+                        case 2: $("#imgbar").animate({ top: "-=" + y + "px" }, 100, animate3()); break;
+                        case 3: $("#imgbar").animate({ top: "-=" + y + "px" }, 100, animate4()); break;
+                        case 4: $("#imgbar").animate({ top: "-=" + y + "px" }, 100, animate5()); break;
+                        case 5: $("#imgbar").animate({ top: "-=" + y + "px" }, 100, animate6()); break;
+                        case 6: $("#imgbar").animate({ top: "-=" + y + "px" }, 100, animate7()); break;
+                        case 7: $("#imgbar").animate({ top: "-=" + y + "px" }, 100); break;
+
+                    }
+
+                }
+            }
+
+        })();
+
+        $("#myClick").click(function () {
+            count++;
+            $("#imgbar").animate({ top: "+=" + y + "px" }, 100);
+
+        });
+
+        function animate1() {
+            $('#box3_1Word').hide();
+            $('#box3_2Word').hide();
+            $('#box2_1Word').hide();
+            $('#box2_2Word').hide();
+            $('#box2_3Word').hide();
+            $('#box2_4Word').hide();
+            $('#box2_5Word').hide();
+            $('#box2_6Word').hide();
+            $('#box2_7Word').hide();
+            $('#box2_8Word').hide();
+            $('#box3_3Word').hide();
+
+            var svg = new Walkway({
+                selector: '#test1',
+                duration: '3000',
+                // can pass in a function or a string like 'easeOutQuint' box3_1Word
+                easing: function (t) {
+                    return t * t;
+                }
+            });
+
+            svg.draw();
+            setTimeout("$('#box1Word').fadeIn(1000)", 2000);
+
+        }
+
+
+        function animate2() {
+            $('#box1Word').hide();
+            $('#box3_1Word').hide();
+            $('#box3_2Word').hide();
+            $('#box3_3Word').hide();
+
+            setTimeout("$('#box2_4Word').fadeIn(1000)", 2000);
+            setTimeout("$('#box2_8Word').fadeIn(1000)", 2300);
+
+            setTimeout("$('#box2_3Word').fadeIn(1000)", 2500);
+            setTimeout("$('#box2_7Word').fadeIn(1000)", 2800);
+
+            setTimeout("$('#box2_1Word').fadeIn(1000)", 3000);
+            setTimeout("$('#box2_5Word').fadeIn(1000)", 3300);
+
+            setTimeout("$('#box2_2Word').fadeIn(1000)", 3500);
+            setTimeout("$('#box2_6Word').fadeIn(1000)", 3800);
+
+            var svg = new Walkway({
+                selector: '#test2',
+                duration: '3000',
+                // can pass in a function or a string like 'easeOutQuint' box2_1Word
+                easing: function (t) {
+                    return t * t;
+                }
+            });
+
+            svg.draw();
+        }
+
+
+        function animate3() {
+            $('#box1Word').hide();
+            $('#box2_1Word').hide();
+            $('#box2_2Word').hide();
+            $('#box2_3Word').hide();
+            $('#box2_4Word').hide();
+            $('#box2_5Word').hide();
+            $('#box2_6Word').hide();
+            $('#box2_7Word').hide();
+            $('#box2_8Word').hide();
+            $('#box4_1Word').hide();
+            $('#box4_2Word').hide();
+            $('#box4_3Word').hide();
+            $('#box4_4Word').hide();
+            $('#box4_5Word').hide();
+            $('#box4_6Word').hide();
+
+            setTimeout("$('#box3_3Word').fadeIn(1000)", 2500);
+            setTimeout("$('#box3_1Word').fadeIn(1000)", 3000);
+            setTimeout("$('#box3_2Word').fadeIn(1000)", 3500);
+
+            var svg = new Walkway({
+                selector: '#test3',
+                duration: '3000',
+                // can pass in a function or a string like 'easeOutQuint'
+                easing: function (t) {
+                    return t * t;
+                }
+            });
+
+            svg.draw();
+        }
+
+
+        function animate4() {
+            $('#box1Word').hide();
+            $('#box3_1Word').hide();
+            $('#box3_2Word').hide();
+            $('#box2_1Word').hide();
+            $('#box2_2Word').hide();
+            $('#box2_3Word').hide();
+            $('#box2_4Word').hide();
+            $('#box2_5Word').hide();
+            $('#box2_6Word').hide();
+            $('#box2_7Word').hide();
+            $('#box2_8Word').hide();
+            $('#box3_3Word').hide();
+
+            $('#box5_11Word').hide();
+            $('#box5_1Word').hide();
+            $('#box5_2Word').hide();
+            $('#box5_3Word').hide();
+            $('#box5_4Word').hide();
+            $('#box5_5Word').hide();
+            $('#box5_6Word').hide();
+            $('#box5_7Word').hide();
+            $('#box5_8Word').hide();
+            $('#box5_9Word').hide();
+            $('#box5_10Word').hide();
+
+            setTimeout("$('#box4_7Word').fadeIn(100)", 2000);
+
+            setTimeout("$('#box4_3Word').fadeIn(1000)", 2000);
+            setTimeout("$('#box4_3Word').fadeOut(1000)", 4000);
+
+            setTimeout("$('#box4_4Word').fadeIn(1000)", 2500);
+            setTimeout("$('#box4_4Word').fadeOut(1000)", 5000);
+
+            setTimeout("$('#box4_5Word').fadeIn(1000)", 3000);
+            setTimeout("$('#box4_5Word').fadeOut(1000)", 6000);
+
+            setTimeout("$('#box4_6Word').fadeIn(1000)", 3500);
+            setTimeout("$('#box4_6Word').fadeOut(1000)", 7000);
+
+            setTimeout("$('#box4_1Word').fadeIn(1000)", 5000);
+            setTimeout("$('#box4_2Word').fadeIn(1000)", 5500);
+
+
+            var svg = new Walkway({
+                selector: '#test4',
+                duration: '3000',
+                // can pass in a function or a string like 'easeOutQuint' box4_1Word
+                easing: function (t) {
+                    return t * t;
+                }
+            });
+
+            svg.draw();
+        }
+
+
+        function animate5() {
+            $('#box1Word').hide();
+            $('#box3_1Word').hide();
+            $('#box3_2Word').hide();
+            $('#box2_1Word').hide();
+            $('#box2_2Word').hide();
+            $('#box2_3Word').hide();
+            $('#box2_4Word').hide();
+            $('#box2_5Word').hide();
+            $('#box2_6Word').hide();
+            $('#box2_7Word').hide();
+            $('#box2_8Word').hide();
+            $('#box3_3Word').hide();
+
+            $('#box4_1Word').hide();
+            $('#box4_2Word').hide();
+            $('#box4_3Word').hide();
+            $('#box4_4Word').hide();
+            $('#box4_5Word').hide();
+            $('#box4_6Word').hide();
+
+            $('#box6_1Word').hide();
+            $('#box6_2Word').hide();
+            $('#box6_3Word').hide();
+            $('#box6_4Word').hide();
+            $('#box6_5Word').hide();
+            $('#box6_6Word').hide();
+            $('#box6_7Word').hide();
+
+
+            setTimeout("$('#box5_11Word').fadeIn(1000)", 2000);
+            setTimeout("$('#box5_1Word').fadeIn(1000)", 2500);
+            setTimeout("$('#box5_2Word').fadeIn(1000)", 3000);
+            setTimeout("$('#box5_3Word').fadeIn(1000)", 3500);
+            setTimeout("$('#box5_4Word').fadeIn(1000)", 4000);
+            setTimeout("$('#box5_5Word').fadeIn(1000)", 4500);
+            setTimeout("$('#box5_6Word').fadeIn(1000)", 5000);
+            setTimeout("$('#box5_7Word').fadeIn(1000)", 5500);
+            setTimeout("$('#box5_8Word').fadeIn(1000)", 6000);
+            setTimeout("$('#box5_9Word').fadeIn(1000)", 6500);
+            setTimeout("$('#box5_10Word').fadeIn(1000)", 7000);
+
+            var svg = new Walkway({
+                selector: '#test5',
+                duration: '3000',
+                // can pass in a function or a string like 'easeOutQuint'
+                easing: function (t) {
+                    return t * t;
+                }
+            });
+
+            svg.draw();
+        }
+
+
+        function animate6() {
+            $('#box1Word').hide();
+            $('#box3_1Word').hide();
+            $('#box3_2Word').hide();
+            $('#box2_1Word').hide();
+            $('#box2_2Word').hide();
+            $('#box2_3Word').hide();
+            $('#box2_4Word').hide();
+            $('#box2_5Word').hide();
+            $('#box2_6Word').hide();
+            $('#box2_7Word').hide();
+            $('#box2_8Word').hide();
+            $('#box3_3Word').hide();
+
+            $('#box5_11Word').hide();
+            $('#box5_1Word').hide();
+            $('#box5_2Word').hide();
+            $('#box5_3Word').hide();
+            $('#box5_4Word').hide();
+            $('#box5_5Word').hide();
+            $('#box5_6Word').hide();
+            $('#box5_7Word').hide();
+            $('#box5_8Word').hide();
+            $('#box5_9Word').hide();
+            $('#box5_10Word').hide();
+
+            setTimeout("$('#box6_1Word').fadeIn(1000)", 2000);
+            setTimeout("$('#box6_2Word').fadeIn(1000)", 2500);
+            setTimeout("$('#box6_3Word').fadeIn(1000)", 3000);
+            setTimeout("$('#box6_4Word').fadeIn(1000)", 3500);
+            setTimeout("$('#box6_5Word').fadeIn(1000)", 4000);
+            setTimeout("$('#box6_6Word').fadeIn(1000)", 4500);
+            setTimeout("$('#box6_7Word').fadeIn(1000)", 5000);
+
+
+
+            var svg = new Walkway({
+                selector: '#test6',
+                duration: '3000',
+                // can pass in a function or a string like 'easeOutQuint'
+                easing: function (t) {
+                    return t * t;
+                }
+            });
+
+            svg.draw();
+        }
+
+        function animate7() {
+            $('#box1Word').hide();
+            $('#box3_1Word').hide();
+            $('#box3_2Word').hide();
+            $('#box2_1Word').hide();
+            $('#box2_2Word').hide();
+            $('#box2_3Word').hide();
+            $('#box2_4Word').hide();
+            $('#box2_5Word').hide();
+            $('#box2_6Word').hide();
+            $('#box2_7Word').hide();
+            $('#box2_8Word').hide();
+            $('#box3_3Word').hide();
+
+
+            $('#box6_1Word').hide();
+            $('#box6_2Word').hide();
+            $('#box6_3Word').hide();
+            $('#box6_4Word').hide();
+            $('#box6_5Word').hide();
+            $('#box6_6Word').hide();
+            $('#box6_7Word').hide();
+
+            setTimeout("$('#box7_7Word').fadeIn(1000)", 2000);
+            setTimeout("rotation();", 2000);
+            setTimeout("$('#box7_1Word').fadeIn(1000)", 2500);
+            setTimeout("$('#box7_2Word').fadeIn(1000)", 2800);
+            setTimeout("$('#box7_3Word').fadeIn(1000)", 3000);
+            setTimeout("$('#box7_4Word').fadeIn(1000)", 3300);
+            setTimeout("$('#box7_5Word').fadeIn(1000)", 3500);
+            setTimeout("$('#box7_6Word').fadeIn(1000)", 4000);
+
+
+            var svg = new Walkway({
+                selector: '#test7',
+                duration: '3000',
+                // can pass in a function or a string like 'easeOutQuint'
+                easing: function (t) {
+                    return t * t;
+                }
+            });
+
+            svg.draw();
+        }
+
+
+        function rotation() {
+
+
+            //$('#box7_7Word').animate({width : 418/p, height : 398/p, left : 151/p, top :234/p },1000);
+
+            $("#box7_7Word").rotate({
+                angle: 0,
+                duration: 5000,
+                animateTo: 185,
+                //callback: function(){rotation(i);}
+            });
+        }
+
+        function getWidth() {
+
+            //五个主界面视图
+            //$("#div1").width(x); $("#div1").height(y);
+            $("#container").width(x); $("#container").height(y);
+            $("#imgbar").width(x); $("#imgbar").height(9 * y); $("#imgbar").css("left", 0); $("#imgbar").css("top", (-8 * y) + 'px');
+
+            $("#box1").width(x); $("#box1").height(y); $("#box1").css("left", 0); $("#box1").css("top", (8 * y) + "px");
+            $("#box2").width(x); $("#box2").height(y); $("#box2").css("left", 0); $("#box2").css("top", (7 * y) + "px");
+
+            $("#box3").width(x); $("#box3").height(y); $("#box3").css("left", 0); $("#box3").css("top", (6 * y) + "px");
+            $("#box4").width(x); $("#box4").height(y); $("#box4").css("left", 0); $("#box4").css("top", (5 * y) + "px");
+            $("#box5").width(x); $("#box5").height(y); $("#box5").css("left", 0); $("#box5").css("top", (4 * y) + "px");
+            $("#box6").width(x); $("#box6").height(y); $("#box6").css("left", 0); $("#box6").css("top", (3 * y) + "px");
+            $("#box7").width(x); $("#box7").height(y); $("#box7").css("left", 0); $("#box7").css("top", (2 * y) + "px");
+            $("#box8").width(x); $("#box8").height(y); $("#box8").css("left", 0); $("#box8").css("top", y + "px");
+            $("#box9").width(x); $("#box9").height(y); $("#box9").css("left", 0); $("#box9").css("top", 0);
+            for (var i = 1; i <= 9; i++) {
+                $("#test" + i).width(x); $("#test" + i).height(y);
+
+            }
+            //myClick formContainer box1Word
+            $("#myClick").width(200 / p); $("#myClick").height(200 / p); $("#myClick").css("left", (x - 200 / p) / 2 + "px"); $("#myClick").css("top", (1278 / p) + "px");
+            $("#formContainer").width(336 / p); $("#formContainer").height(340 / p); $("#formContainer").css("left", 50 / p); $("#formContainer").css("top", 100 / p);
+            /*
+            $("#myName").width(x); $("#myName").height(y); $("#myName").css("left",0);$("#myName").css("top",0);
+            $("#box9").width(x); $("#box9").height(y); $("#box9").css("left",0);$("#box9").css("top",0);
+            $("#box9").width(x); $("#box9").height(y); $("#box9").css("left",0);$("#box9").css("top",0);
+            $("#box9").width(x); $("#box9").height(y); $("#box9").css("left",0);$("#box9").css("top",0);
+            */
+
+            $("#box1Word").width(746 / p); $("#box1Word").height(58 / p); $("#box1Word").css("left", 170 / p + "px"); $("#box1Word").css("top", 1100 / p + "px");
+            $("#box2_1Word").width(121 / p); $("#box2_1Word").height(38 / p); $("#box2_1Word").css("left", 94 / p + "px"); $("#box2_1Word").css("top", 330 / p + "px");
+            $("#box2_2Word").width(121 / p); $("#box2_2Word").height(38 / p); $("#box2_2Word").css("left", 423 / p + "px"); $("#box2_2Word").css("top", 240 / p + "px");
+            $("#box2_3Word").width(121 / p); $("#box2_3Word").height(38 / p); $("#box2_3Word").css("left", 808 / p + "px"); $("#box2_3Word").css("top", 865 / p + "px");
+            $("#box2_4Word").width(121 / p); $("#box2_4Word").height(38 / p); $("#box2_4Word").css("left", 94 / p + "px"); $("#box2_4Word").css("top", 923 / p + "px");
+
+            $("#box2_5Word").width(318 / p); $("#box2_5Word").height(78 / p); $("#box2_5Word").css("left", 94 / p + "px"); $("#box2_5Word").css("top", 390 / p + "px");
+            $("#box2_6Word").width(248 / p); $("#box2_6Word").height(77 / p); $("#box2_6Word").css("left", 423 / p + "px"); $("#box2_6Word").css("top", 300 / p + "px");
+            $("#box2_7Word").width(216 / p); $("#box2_7Word").height(80 / p); $("#box2_7Word").css("left", 808 / p + "px"); $("#box2_7Word").css("top", 924 / p + "px");
+            $("#box2_8Word").width(247 / p); $("#box2_8Word").height(78 / p); $("#box2_8Word").css("left", 94 / p + "px"); $("#box2_8Word").css("top", 990 / p + "px");
+
+            $("#box3_1Word").width(480 / p); $("#box3_1Word").height(142 / p); $("#box3_1Word").css("left", 77 / p + "px"); $("#box3_1Word").css("top", 437 / p + "px");
+            $("#box3_2Word").width(396 / p); $("#box3_2Word").height(88 / p); $("#box3_2Word").css("left", 77 / p + "px"); $("#box3_2Word").css("top", 604 / p + "px");
+            $("#box3_3Word").width(203 / p); $("#box3_3Word").height(139 / p); $("#box3_3Word").css("left", 833 / p + "px"); $("#box3_3Word").css("top", 518 / p + "px");
+
+
+            $("#box4_1Word").width(537 / p); $("#box4_1Word").height(59 / p); $("#box4_1Word").css("left", 110 / p + "px"); $("#box4_1Word").css("top", 344 / p + "px");
+            $("#box4_2Word").width(624 / p); $("#box4_2Word").height(36 / p); $("#box4_2Word").css("left", 110 / p + "px"); $("#box4_2Word").css("top", 420 / p + "px");
+            $("#box4_3Word").width(173 / p); $("#box4_3Word").height(154 / p); $("#box4_3Word").css("left", 135 / p + "px"); $("#box4_3Word").css("top", 110 / p + "px");
+            $("#box4_4Word").width(184 / p); $("#box4_4Word").height(221 / p); $("#box4_4Word").css("left", 840 / p + "px"); $("#box4_4Word").css("top", 112 / p + "px");
+            $("#box4_5Word").width(206 / p); $("#box4_5Word").height(161 / p); $("#box4_5Word").css("left", 806 / p + "px"); $("#box4_5Word").css("top", 1079 / p + "px");
+            $("#box4_6Word").width(204 / p); $("#box4_6Word").height(318 / p); $("#box4_6Word").css("left", 103 / p + "px"); $("#box4_6Word").css("top", 1138 / p + "px");
+            $("#box4_7Word").width(691 / p); $("#box4_7Word").height(460 / p); $("#box4_7Word").css("left", 243 / p + "px"); $("#box4_7Word").css("top", 506 / p + "px");
+
+
+            $("#box5_1Word").width(122 / p); $("#box5_1Word").height(122 / p); $("#box5_1Word").css("left", 853 / p + "px"); $("#box5_1Word").css("top", 128 / p + "px");
+            $("#box5_2Word").width(94 / p); $("#box5_2Word").height(94 / p); $("#box5_2Word").css("left", 438 / p + "px"); $("#box5_2Word").css("top", 466 / p + "px");
+            $("#box5_3Word").width(60 / p); $("#box5_3Word").height(59 / p); $("#box5_3Word").css("left", 867 / p + "px"); $("#box5_3Word").css("top", 896 / p + "px");
+            $("#box5_4Word").width(237 / p); $("#box5_4Word").height(140 / p); $("#box5_4Word").css("left", 143 / p + "px"); $("#box5_4Word").css("top", 577 / p + "px");
+            $("#box5_5Word").width(144 / p); $("#box5_5Word").height(34 / p); $("#box5_5Word").css("left", 143 / p + "px"); $("#box5_5Word").css("top", 747 / p + "px");
+            $("#box5_6Word").width(159 / p); $("#box5_6Word").height(35 / p); $("#box5_6Word").css("left", 143 / p + "px"); $("#box5_6Word").css("top", 799 / p + "px");
+            $("#box5_7Word").width(246 / p); $("#box5_7Word").height(36 / p); $("#box5_7Word").css("left", 143 / p + "px"); $("#box5_7Word").css("top", 851 / p + "px");
+            $("#box5_8Word").width(293 / p); $("#box5_8Word").height(35 / p); $("#box5_8Word").css("left", 143 / p + "px"); $("#box5_8Word").css("top", 903 / p + "px");
+            $("#box5_9Word").width(108 / p); $("#box5_9Word").height(35 / p); $("#box5_9Word").css("left", 143 / p + "px"); $("#box5_9Word").css("top", 955 / p + "px");
+            $("#box5_10Word").width(108 / p); $("#box5_10Word").height(35 / p); $("#box5_10Word").css("left", 143 / p + "px"); $("#box5_10Word").css("top", 1007 / p + "px");
+            $("#box5_11Word").width(203 / p); $("#box5_11Word").height(139 / p); $("#box5_11Word").css("left", 818 / p + "px"); $("#box5_11Word").css("top", 414 / p + "px");
+
+            $("#box6_1Word").width(240 / p); $("#box6_1Word").height(58 / p); $("#box6_1Word").css("left", 214 / p + "px"); $("#box6_1Word").css("top", 412 / p + "px");
+            $("#box6_2Word").width(59 / p); $("#box6_2Word").height(35 / p); $("#box6_2Word").css("left", 871 / p + "px"); $("#box6_2Word").css("top", 706 / p + "px");
+            $("#box6_3Word").width(59 / p); $("#box6_3Word").height(35 / p); $("#box6_3Word").css("left", 871 / p + "px"); $("#box6_3Word").css("top", 811 / p + "px");
+            $("#box6_4Word").width(8 / p); $("#box6_4Word").height(41 / p); $("#box6_4Word").css("left", 897 / p + "px"); $("#box6_4Word").css("top", 905 / p + "px");
+            $("#box6_5Word").width(61 / p); $("#box6_5Word").height(28 / p); $("#box6_5Word").css("left", 869 / p + "px"); $("#box6_5Word").css("top", 1005 / p + "px");
+            $("#box6_6Word").width(72 / p); $("#box6_6Word").height(35 / p); $("#box6_6Word").css("left", 865 / p + "px"); $("#box6_6Word").css("top", 1109 / p + "px");
+            $("#box6_7Word").width(72 / p); $("#box6_7Word").height(35 / p); $("#box6_7Word").css("left", 865 / p + "px"); $("#box6_7Word").css("top", 1215 / p + "px");
+
+            $("#box7_1Word").width(420 / p); $("#box7_1Word").height(59 / p); $("#box7_1Word").css("left", 155 / p + "px"); $("#box7_1Word").css("top", 396 / p + "px");
+            $("#box7_2Word").width(52 / p); $("#box7_2Word").height(159 / p); $("#box7_2Word").css("left", 170 / p + "px"); $("#box7_2Word").css("top", 890 / p + "px");
+            $("#box7_3Word").width(76 / p); $("#box7_3Word").height(118 / p); $("#box7_3Word").css("left", 171 / p + "px"); $("#box7_3Word").css("top", 700 / p + "px");
+            $("#box7_4Word").width(74 / p); $("#box7_4Word").height(64 / p); $("#box7_4Word").css("left", 288 / p + "px"); $("#box7_4Word").css("top", 560 / p + "px");
+            $("#box7_5Word").width(168 / p); $("#box7_5Word").height(47 / p); $("#box7_5Word").css("left", 436 / p + "px"); $("#box7_5Word").css("top", 500 / p + "px");
+            $("#box7_6Word").width(178 / p); $("#box7_6Word").height(184 / p); $("#box7_6Word").css("left", 710 / p + "px"); $("#box7_6Word").css("top", 540 / p + "px");
+            $("#box7_7Word").width(828 / p); $("#box7_7Word").height(828 / p); $("#box7_7Word").css("left", 132 / p + "px"); $("#box7_7Word").css("top", 470 / p + "px");
+            /*
+                <form name="input" action="ra.php" method="get">
+                        <input id = "myName" class = "myform" type="text" name="" value = ""/>
+                        <input id = "company" class = "myform" type="text" name="" value = ""/>
+                        <input id = "work" class = "myform" type="text" name="" value = ""/>
+                        <input id = "tel" class = "myform" type="text" name="" value = ""/>
+                        <input type="submit" class = "myform" value="Submit" value = "" />
+                </form>
+
+            */
+            $(".myform").width(900 / p); $(".myform").height(100 / p); $(".myform").css("font-size", 60 / p + "px"); $(".myform").css("line-height", 60 / p + "px");
+            $("#myName").css("left", 93 / p + "px"); $("#myName").css("top", 483 / p + "px");
+            $("#company").css("left", 93 / p + "px"); $("#company").css("top", 685 / p + "px");
+            $("#work").css("left", 93 / p + "px"); $("#work").css("top", 888 / p + "px");
+            $("#tel").css("left", 93 / p + "px"); $("#tel").css("top", 1091 / p + "px");
+            $(":submit").width(200 / p); $(":submit").height(200 / p); $(":submit").css("left", (x - 200 / p) / 2 + "px"); $(":submit").css("top", (1278 / p) + "px");
+        }
+
+    </script>
+
+</body>
+</html>

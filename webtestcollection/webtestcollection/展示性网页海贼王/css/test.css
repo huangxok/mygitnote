@@ -1,0 +1,27 @@
+/*选择器*/
+.doudong
+{display: inline-block;}
+.doudong.doudongxg:hover
+{animation-name:test;
+ animation-duration:1.6s;
+ }
+
+/*#run:active
+{animation-play-state:running;}*/
+
+/*动画过程*/
+@keyframes test
+{
+0%{transform: translate(0px, 0px);}
+10%{transform: translate(0px, -6px);}/*负数为上移、正数为下移*/
+20%{transform: translate(0px, 7px);}
+30%{transform: translate(0px, -4px);}
+40%{transform: translate(0px, 5px);}
+50%{transform: translate(0px, -1px);}
+60%{transform: translate(0px, 1px);}
+70%{transform: translate(0px, -0.2px);}
+80%{transform: translate(0px, 0.2px);}
+90%{transform: translate(0px,-1px;)}
+100%{transform: translate(0px,0;)}
+}
+.img{width:300px; height:300px;}

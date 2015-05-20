@@ -1,0 +1,153 @@
+﻿<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <title></title>
+    <style>
+        .mbe-SelectionControl {
+            font-size: 16px;
+            position: absolute;
+            border: dashed 0.1em black;
+            padding: 0.2em;
+            margin: -0.3em;
+            pointer-events: none;
+            z-index: 100;
+        }
+
+        .mbe-dragresize {
+            position: absolute;
+            pointer-events: auto;
+            width: 5px;
+            height: 5px;
+            font-size: 1px;
+            background: #EEE;
+            border: 1px solid #333;
+        }
+
+        .mbe-dragresize {
+            position: absolute;
+            pointer-events: auto;
+            width: 5px;
+            height: 5px;
+            font-size: 1px;
+            background: #EEE;
+            border: 1px solid #333;
+        }
+
+        .mbe-dragresize-tl {
+            top: -8px;
+            left: -8px;
+            cursor: nw-resize;
+        }
+
+        .mbe-dragresize-tm {
+            top: -8px;
+            left: 50%;
+            margin-left: -4px;
+            cursor: n-resize;
+        }
+
+        .mbe-dragresize-tr {
+            top: -8px;
+            right: -8px;
+            cursor: ne-resize;
+        }
+
+        .mbe-dragresize-ml {
+            top: 50%;
+            margin-top: -4px;
+            left: -8px;
+            cursor: w-resize;
+        }
+
+        .mbe-dragresize-mr {
+            top: 50%;
+            margin-top: -4px;
+            right: -8px;
+            cursor: e-resize;
+        }
+
+        .mbe-dragresize-bl {
+            bottom: -8px;
+            left: -8px;
+            cursor: sw-resize;
+        }
+
+        .mbe-dragresize-bm {
+            bottom: -8px;
+            left: 50%;
+            margin-left: -4px;
+            cursor: s-resize;
+        }
+
+        .mbe-dragresize-br {
+            bottom: -8px;
+            right: -8px;
+            cursor: se-resize;
+        }
+    </style>
+</head>
+<body>
+    <img id="a" src="../Images/3.jpg" style="position:absolute;left:100px;top:10px;width:233px;height:109px;" />
+    <img id="b" src="../Images/5.jpg" style="position:absolute;left:500px;top:500px;width:233px;height:109px;" />
+    <div id="mbes" class="mbe-SelectionControl" style="width: 233px; height: 109px; left: 236px; top: 249px; display: block;">
+        <div class="mbe-dragresize mbe-dragresize-tl" style="visibility: inherit;">
+        </div>
+        <div class="mbe-dragresize mbe-dragresize-tm" style="visibility: inherit;">
+        </div>
+        <div class="mbe-dragresize mbe-dragresize-tr" style="visibility: inherit;">
+        </div>
+        <div class="mbe-dragresize mbe-dragresize-ml" style="visibility: inherit;">
+        </div>
+        <div class="mbe-dragresize mbe-dragresize-mr" style="visibility: inherit;">
+        </div>
+        <div class="mbe-dragresize mbe-dragresize-bl" style="visibility: inherit;">
+        </div>
+        <div class="mbe-dragresize mbe-dragresize-bm" style="visibility: inherit;">
+        </div>
+        <div class="mbe-dragresize mbe-dragresize-br" style="visibility: inherit;">
+        </div>
+    </div>
+    <script>
+        function _mouseHandler(ev) {
+            //TODO ff 控制台会忽略掉_mouseHandler0抛出的异常，所以自行捕获显示。
+            try {
+                _mouseHandler0(ev);
+            } catch (e) {
+                console.error(e + '\n' + e.stack);
+                console.error('target: ' + ev.target);
+            }
+        }
+        function _mouseHandler0(ev) {
+            var event = getEvent(ev);
+            switch (event.type) {
+                case 'focus': break;
+                case 'click': break;
+                case 'mousedown': break;
+                case 'mousemove': break;
+                case 'mouseup': break;
+            }
+
+        }
+        function getEvent(event) { //获取事件
+            return event ? event : window.event;
+        }
+        _mouseHandler.bind(document.getElementById('mbes'));
+        document.addEventListener('mousedown', function (ev) {
+            console.log(window.getSelection().getRangeAt(0));
+        }, false)
+        //document.getElementById('a').addEventListener('click', function (ev) {
+        //    console.log(ev.target.id + ':img-a click-----')
+        //}, false);
+        //document.getElementById('a').addEventListener('mousedown', function (ev) {
+        //    console.log(ev.target.id + ':img-a mousedown-----')
+        //}, false);
+        //document.getElementById('a').addEventListener('mousemove', function (ev) {
+        //    console.log(ev.target.id + ':img-a mousemove----')
+        //}, false);
+        //document.getElementById('a').addEventListener('mouseup', function (ev) {
+        //    console.log(ev.target.id + ':img-a mouseup----')
+        //}, false);
+        //console.log(window.getComputedStyle(document.getElementById('a')).boxShadow);
+    </script>
+</body>
+</html>

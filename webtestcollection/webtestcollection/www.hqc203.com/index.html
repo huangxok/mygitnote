@@ -1,0 +1,401 @@
+﻿<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1_DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>艺源酷</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="css/index.css" type="text/css" />
+    <link rel="stylesheet" href="css/animate.css" type="text/css" />
+    <link rel="stylesheet" href="css/jquery.minicolors.css">
+    <script type="text/javascript" src="js/jquery-1.11.0.min.js"></script>
+    <script type="text/javascript" src="js/jquery.minicolors.js"></script>
+    <script type="text/javascript">
+        var browser = {
+            versions: function () {
+                var u = navigator.userAgent, app = navigator.appVersion;
+                return {
+                    trident: u.indexOf('Trident') > -1, //IE内核
+                    presto: u.indexOf('Presto') > -1, //opera内核
+                    webKit: u.indexOf('AppleWebKit') > -1, //苹果、谷歌内核
+                    gecko: u.indexOf('Gecko') > -1 && u.indexOf('KHTML') == -1,//火狐内核
+                    mobile: !!u.match(/AppleWebKit.*Mobile.*/), //是否为移动终端
+                    ios: !!u.match(/\(i[^;]+;( U;)? CPU.+Mac OS X/), //ios终端
+                    android: u.indexOf('Android') > -1 || u.indexOf('Linux') > -1, //android终端或者uc浏览器
+                    iPhone: u.indexOf('iPhone') > -1, //是否为iPhone或者QQHD浏览器
+                    iPad: u.indexOf('iPad') > -1, //是否iPad
+                    webApp: u.indexOf('Safari') == -1 //是否web应该程序，没有头部与底部
+                };
+            }(),
+            language: (navigator.browserLanguage || navigator.language).toLowerCase()
+        }
+
+        if (browser.versions.mobile || browser.versions.iPhone || browser.versions.android) {
+            //document.write("<script src=\"js/phoneIndex.js\">"+"</scr"+"ipt>");
+            //document.write("<script src=\"js/bootstrap.js\">"+"</scr"+"ipt>");
+            //document.write("<link  href='css/bootstrap.css.css' rel='stylesheet' type='text/css' />");
+            window.location.href = "indexPhone";
+        }
+        else {
+            document.write("<script src=\"js/index.js\">" + "</scr" + "ipt>");
+        }
+    </script>
+</head>
+
+<body>
+    <div id="jiazai">
+        <div class="jiazai_logo">
+            <div class="logoBg"></div>
+            <img src="http://eyuanku.qiniudn.com/jiazai.png" width="100%" style="z-index: 2; position: relative;" />
+        </div>
+    </div>
+    <div id="index_pageChose">
+        <div id="1pageChose" class="page1 pageChose adjustAuto active"></div>
+        <div id="2pageChose" class="page2 pageChose adjustAuto"></div>
+        <div id="3pageChose" class="page3 pageChose adjustAuto"></div>
+        <div id="4pageChose" class="page4 pageChose adjustAuto"></div>
+        <div id="5pageChose" class="page5 pageChose adjustAuto"></div>
+        <div id="6pageChose" class="page6 pageChose adjustAuto"></div>
+        <div id="7pageChose" class="page7 pageChose adjustAuto"></div>
+        <div id="8pageChose" class="page8 pageChose adjustAuto"></div>
+        <div id="9pageChose" class="page9 pageChose adjustAuto"></div>
+    </div>
+    <div id="navigation">
+        <div class="navigationSelect">
+            <div class="img">
+                <img src="http://eyuanku.qiniudn.com/1_5.png" /></div>
+        </div>
+        <div class="navigationSelect">
+            <a href="http://115.28.153.238:8084/login" target="_blank">
+                <div class="text">登录</div>
+            </a>
+            <div class="img">
+                <img src="http://eyuanku.qiniudn.com/1_5.png" /></div>
+        </div>
+        <div class="navigationSelect">
+            <a href="http://115.28.153.238:8084/home/discover.html" target="_blank">
+                <div class="text">发现</div>
+            </a>
+            <div class="img">
+                <img src="http://eyuanku.qiniudn.com/1_5.png" /></div>
+        </div>
+        <div class="navigationSelect">
+            <a href="http://115.28.153.238:8084/home/discover.html" target="_blank">
+                <div class="text">设计</div>
+            </a>
+            <div class="img">
+                <img src="http://eyuanku.qiniudn.com/1_5.png" /></div>
+        </div>
+        <div class="navigationSelect">
+            <a href="http://http://115.28.153.238:8084/home/about_us" target="_blank">
+                <div class="text">关于我们</div>
+            </a>
+            <div class="img">
+                <img src="http://eyuanku.qiniudn.com/1_5.png" /></div>
+        </div>
+    </div>
+    <div id="indexDiv">
+        <div id="page1" class="indexPage row">
+            <img id="img" src="http://eyuanku.qiniudn.com/1_1.jpg" />
+            <div class="page1top adjustAuto"></div>
+            <div class="page1img1 page1img adjustAuto">
+                <img src="http://eyuanku.qiniudn.com/1_1.png" /></div>
+            <div class="page1img2 page1img adjustAuto">
+                <img src="http://eyuanku.qiniudn.com/1_2.png" /></div>
+            <div class="page1img3 page1img adjustAuto">
+                <img src="http://eyuanku.qiniudn.com/1_3.png" /></div>
+            <div class="page1img4 page1img adjustAuto">
+                <img src="http://eyuanku.qiniudn.com/1_4.png" /></div>
+            <div class="page1Right adjustAuto">
+                <div class="logo adjustAuto">
+                    <img src="http://eyuanku.qiniudn.com/1_logo.png" /></div>
+                <div class="page1text1 adjustAutoText">亲自动手，简单几步做出好看设计</div>
+                <div class="page1text2 adjustAutoText">不让复杂的设计软件拘束你的创意，随时开启设计，用最简单有趣的方式制作海报、演示文稿、名片、社交图片，节省昂贵的设计支出。</div>
+                <a href="http://115.28.153.238:8084/login" target="_blank">
+                    <div class="sign adjustAutoText">注册<div class="sign2"></div>
+                    </div>
+                </a>
+            </div>
+            <div class="page1bottom adjustAuto"></div>
+        </div>
+        <div id="page2" class="indexPage row">
+            <div class="page2bg adjustAuto">
+                <div class="page2text1 adjustAutoText">创造丰富的作品</div>
+                <div class="page2text2 adjustAutoText">不让复杂的设计软件拘束你的创意，随时开启设计，用最简单有趣的方式制作海报、演示文稿、名片、社交图片，节省昂贵的设计支出。	</div>
+                <div class="page2img1 pageImg adjustAuto">
+                    <img src="http://eyuanku.qiniudn.com/page2_1.png" /></div>
+                <!---
+            <div class="page2img1 pageImg adjustAuto"><img src="http://eyuanku.qiniudn.com/2_2.png" /></div>
+            <div class="page2img2 pageImg adjustAuto"><img src="http://eyuanku.qiniudn.com/2_3.png" /></div>
+            <div class="page2img3 pageImg adjustAuto"><img src="http://eyuanku.qiniudn.com/2_4.png" /></div>
+            <div class="page2img4 pageImg adjustAuto"><img src="http://eyuanku.qiniudn.com/2_5.png" /></div>
+            <div class="page2img5 pageImg adjustAuto"><img src="http://eyuanku.qiniudn.com/2_6.png" /></div>
+            <div class="page2img6 pageImg adjustAuto"><img src="http://eyuanku.qiniudn.com/2_7.png" /></div>
+            <div class="page2img7 pageImg adjustAuto"><img src="http://eyuanku.qiniudn.com/2_8.png" /></div>
+            <div class="page2img8 pageImg adjustAuto"><img src="http://eyuanku.qiniudn.com/2_1.png" /></div>
+            <div class="page2imgDiv1 pageImgDiv adjustAuto"></div>
+            <div class="page2imgDiv2 pageImgDiv adjustAuto"></div>
+            <div class="page2imgDiv3 pageImgDiv adjustAuto"></div>
+            <div class="page2imgDiv4 pageImgDiv adjustAuto"></div>
+            <div class="page2imgDiv5 pageImgDiv adjustAuto"></div>
+            <div class="page2imgDiv6 pageImgDiv adjustAuto"></div>
+            <div class="page2imgDiv7 pageImgDiv adjustAuto"></div>---->
+            </div>
+        </div>
+
+        <!--第3页-->
+        <div id="page3" class="indexPage row">
+            <div class="page3bg adjustAuto">
+                <div class="page3text1 adjustAutoText">简单的拖拉拽</div>
+                <div class="page3text2 adjustAutoText">搜索你需要的素材，通过托拉拽即可完成素材的挑选与使用，这一切不需要下载任何插件或文件，让你更专注于自己的创意。</div>
+                <div class="page3img1 pageImg adjustAuto">
+                    <img src="http://eyuanku.qiniudn.com/3_1.png" /></div>
+                <div class="page3img2 pageImg adjustAuto">
+                    <img src="http://eyuanku.qiniudn.com/3_2.png" /></div>
+                <div class="page3img3 pageImg adjustAuto">
+                    <img src="http://eyuanku.qiniudn.com/3_3.png" /></div>
+                <div class="page3img4 pageImg adjustAuto">
+                    <img src="http://eyuanku.qiniudn.com/3_4.png" /></div>
+                <div class="page3img5 pageImg adjustAuto">
+                    <img src="http://eyuanku.qiniudn.com/3_5.png" /></div>
+                <div class="page3img6 pageImg adjustAuto">
+                    <img src="http://eyuanku.qiniudn.com/3_6.png" /></div>
+            </div>
+        </div>
+
+        <!--第4页-->
+        <div id="page4" class="indexPage row">
+            <div class="page4bg adjustAuto">
+                <div class="page4text1 adjustAutoText">免费与尽情</div>
+                <div class="page4text2 adjustAutoText">艺源酷为你提供大量免费的无背景图片、高质量的摄影图片、网络字体、背景、模板等素材，方便你自由创意。上传自己的素材到云端，无论何时何地都能使用，再也不用担心找不到素材。</div>
+                <div class="page4img1 pageImg adjustAuto">
+                    <img src="http://eyuanku.qiniudn.com/4_1.png" /></div>
+                <div class="page4img2 pageImg adjustAuto">
+                    <img src="http://eyuanku.qiniudn.com/4_2.png" /></div>
+                <div class="page4img5 pageImg adjustAuto">
+                    <img src="http://eyuanku.qiniudn.com/4_5.png" /></div>
+                <div class="page4img6 pageImg adjustAuto">
+                    <img src="http://eyuanku.qiniudn.com/4_6.png" /></div>
+                <div class="page4img7 pageImg adjustAuto">
+                    <img src="http://eyuanku.qiniudn.com/4_7.png" /></div>
+                <div class="page4img8 pageImg adjustAuto">
+                    <img src="http://eyuanku.qiniudn.com/4_8.png" /></div>
+                <div class="page4img9 pageImg adjustAuto">
+                    <img src="http://eyuanku.qiniudn.com/4_9.png" /></div>
+                <div class="page4img10 pageImg adjustAuto">
+                    <img src="http://eyuanku.qiniudn.com/4_10.png" /></div>
+            </div>
+        </div>
+
+        <div id="page5" class="indexPage row">
+            <div class="page5bg adjustAuto">
+                <div class="page5text1 adjustAutoText">有趣的矢量元素</div>
+                <div class="page5text2 adjustAutoText">艺源酷帮你把绘图软件才能打开的矢量元素放到线上。放大缩小、变换颜色、更改文字，不要惊讶于它的简单。快来体验一下！</div>
+                <div class="page5div1 page5Div adjustAuto">
+                    <div class="adjustAuto"></div>
+                </div>
+                <div class="page5div2 page5Div adjustAuto">
+                    <div class="adjustAuto"></div>
+                </div>
+                <div class="page5div3 page5Div adjustAuto">
+                    <div class="adjustAuto"></div>
+                </div>
+                <div class="page5div4 page5Div adjustAuto">
+                    <div class="adjustAuto"></div>
+                </div>
+                <div class="page5div5 page5Div adjustAuto">
+                    <div class="adjustAuto"></div>
+                </div>
+                <div class="page5svg pageImg adjustAuto">
+                    <svg version="1.1" id="" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+                        viewBox="0 0 327.9 418.5" enable-background="new 0 0 327.9 418.5" xml:space="preserve">
+                        <g id="db">
+                            <path fill="#04657D" class="color-1" data-color="#04657D" d="M318.9,387.4c0,8.2-0.1,17.7,0.1,27.2c0,2.7-0.6,3.8-3.6,3.7c-14-0.1-28-0.1-42,0c-2.1,0-3.1-0.4-3.7-2.7
+                        c-10.4-40.3-37.9-62.1-77.5-69.5c-44.3-8.2-90.2,19.4-104.4,61.8c-1.1,3.3-1,8.4-3.1,9.6c-3.1,1.7-7.7,0.7-11.7,0.7
+                        c-10.8,0-21.7-0.1-32.5,0.1c-2.9,0-4.1-0.5-4-3.8c0.6-17.1-0.3-34.3,0.5-51.4c1.1-22.7,7.7-43.8,18.3-63.7c3-5.5,6.1-6.7,11.4-3.7
+                        c38.6,21.1,80.5,25.2,123.3,24.8c26.4-0.3,52-5,76.1-16.1c6.7-3.1,12.8-7.1,18.6-11.5c5.8-4.3,8.8-3.8,12.6,2.4
+                        c11.8,19.4,18.5,40.4,20.6,63C318.9,367.5,319.1,376.8,318.9,387.4z">
+                                <path fill="#04657D" class="color-1" data-color="#04657D" d="M37,169.9c0-5.7,1.1-11.2,2.8-16.6c7.8-24.8,33.9-26.4,49-10.5c1.9,2,3.6,4.4,5.1,6.8
+                        c8,13.3,6.3,24.5-5.2,34.8c-7.5,6.7-16.2,11-26.6,11C45.7,195.4,36.8,186.4,37,169.9z">
+                                    <path fill="#04657D" class="color-1" data-color="#04657D" d="M290.5,195.4c-26,0-42.5-23.3-33.4-47.3c2.4-6.3,6.5-10.7,12.9-13c5.9-2.1,11.9-3,18.1-2.6
+                        c8,0.6,14.2,4.4,17.8,11.8c4.7,9.6,9,19.4,7.8,30.5C312,189.9,305.7,195.4,290.5,195.4z">
+                                        <path fill="#04657D" class="color-1" data-color="#04657D" d="M297.1,0c20.6,0,33.7,14.5,30.1,32.3c-1.9,9.7-8.7,15.5-17.4,19c-4,1.6-7.9,0.4-11.2-2.4
+                        c-4.9-4.3-10.5-7.6-16.1-10.9c-10-5.9-13.4-11.3-11.7-18.7c2.2-10,10.8-17.8,20.7-18.9C293.8,0.1,296,0.1,297.1,0z">
+                                            <path fill="#04657D" class="color-1" data-color="#04657D" d="M0.1,33.7C-1.6,16.8,15.7,1.1,35.9,8c7.5,2.6,13.5,7.1,18.4,13.3c4.3,5.4,4.1,10.1-1.3,14.4
+                        c-8.7,7-17.5,13.8-25,22.2c-2.4,2.7-5.8,2.9-9.3,1.9C6.7,56.5,0.1,47.4,0.1,33.7z">
+                                                <path fill="#06657E" class="color-1" d="M182.6,210.1c-2.8-0.8-5.2,0.2-7.5,1.6c-5.9,3.7-14.6,2.1-18.8-3.3c-0.8-1-1.3-1.9-0.5-3.1
+                        c0.8-1.2,2-1.3,3.1-0.9c2.3,0.9,4.6,1.9,6.8,3c3.6,1.8,5.6,0.2,7-3.1c1.9-4.8,0.6-9.1-3.8-12.1c-4.1-2.9-7.6-6.1-6.2-11.9
+                        c1.4-5.5,5.5-8.6,12.2-9.3c4.3-0.4,8.3,0.5,11.7,3.2c5.8,4.5,5.7,12.2-0.3,16.5c-1.1,0.8-2.2,1.4-3.4,2.1c-3.3,2-3.9,4.7-2.2,8.1
+                        c1.7,3.3,4.3,3.8,7.5,2.4c1.7-0.8,3.3-1.6,4.9-2.4c1.3-0.7,2.6-0.8,3.5,0.6c1,1.5,0.6,2.9-0.8,3.9
+                        C191.9,208.2,187.8,210.7,182.6,210.1z">
+                                                    <path fill="#FEFFFF" d="M76.5,178.3c-5.7-0.1-10.4-4.9-10.3-10.6c0.1-5.7,4.9-10.4,10.6-10.3c5.7,0.1,10.4,4.9,10.3,10.6
+                        C87,173.7,82.2,178.4,76.5,178.3z">
+                                                        <path fill="#FEFFFF" d="M263.1,167.8c0-5.7,4.8-10.5,10.5-10.5c5.7,0,10.5,4.8,10.5,10.5c0,5.7-4.8,10.5-10.5,10.5
+                        S263.1,173.6,263.1,167.8z">
+                        </g>
+                    </svg>
+                </div>
+            </div>
+        </div>
+
+
+        <div id="page6" class="indexPage row">
+            <div class="page6bottom adjustAuto"></div>
+            <div class="page6text1 adjustAutoText">
+                PRINT & SHARE<br />
+                输出分享
+            </div>
+            <div class="page6text2 adjustAutoText">
+                <p>
+                    你可以将作品以JPG或者PDF格式输出。<br />
+                    jpg格式可以让你的图片在网络中更好地传播；<br />
+                    PDF格式让你的作品方便打印印刷。<br />
+                </p>
+                <p>
+                    分享你的设计到平台的发现页，与其他用户进行交流；<br />
+                    或者分享给自己的朋友或者粉丝，获得更多关注。<br />
+                </p>
+                <p>
+                    发布你的照片流让其他用户查看评论，<br />
+                    或者发布为设计流，让其他用户借鉴使用你的设计进行个性化修改，让你的创意帮助更多的人。<br />
+                </p>
+            </div>
+            <div class="page6img1 pageImg adjustAuto">
+                <img src="http://eyuanku.qiniudn.com/6_1.png" /></div>
+            <div class="page6img3 pageImg adjustAuto">
+                <img src="http://eyuanku.qiniudn.com/6_3.png" /></div>
+            <div class="page6img2 pageImg adjustAuto">
+                <img src="http://eyuanku.qiniudn.com/6_2.png" /></div>
+            <div class="page6img4 pageImg adjustAuto">
+                <img src="http://eyuanku.qiniudn.com/6_4.png" /></div>
+            <div class="page6img5 pageImg adjustAuto">
+                <img src="http://eyuanku.qiniudn.com/6_5.png" /></div>
+        </div>
+        <!--第七页-->
+        <div id="page7" class="indexPage row">
+            <div class="page7text1 adjustAutoText">不要惊讶于你的创作力</div>
+            <div class="page7text2 adjustAutoText">无论是一个橱窗海报还是一个精美文档，艺源酷都可以帮你完成。每时每刻都有成千上万精美的设计在艺源酷产生。</div>
+            <div class="pge7imgAll adjustAuto">
+                <div class="page7imga page7imga1 adjustAuto">
+                    <img class="page7imgContent1" src="http://eyuanku.qiniudn.com/7_frame.png">
+                    <div class="page7imgCotentC adjustAuto">
+                        <img class="page7imgContent2" src="http://eyuanku.qiniudn.com/page7_1.jpg" />
+                        <img class="page7imgContent4" src="http://eyuanku.qiniudn.com/page7_2.jpg" />
+                        <img class="page7imgContent3" src="http://eyuanku.qiniudn.com/7_glass.png" />
+                    </div>
+                </div>
+                <div class="page7imga page7imga2 adjustAuto">
+                    <img class="page7imgContent1" src="http://eyuanku.qiniudn.com/7_frame.png">
+                    <div class="page7imgCotentC adjustAuto">
+                        <img class="page7imgContent2" src="http://eyuanku.qiniudn.com/page7_3.jpg" />
+                        <img class="page7imgContent4" src="http://eyuanku.qiniudn.com/page7_4.jpg" />
+                        <img class="page7imgContent3" src="http://eyuanku.qiniudn.com/7_glass.png" />
+                    </div>
+                </div>
+                <div class="page7imga page7imga3 adjustAuto">
+                    <img class="page7imgContent1" src="http://eyuanku.qiniudn.com/7_frame.png">
+                    <div class="page7imgCotentC adjustAuto">
+                        <img class="page7imgContent2" src="http://eyuanku.qiniudn.com/page7_5.jpg" />
+                        <img class="page7imgContent4" src="http://eyuanku.qiniudn.com/page7_6.jpg" />
+                        <img class="page7imgContent3" src="http://eyuanku.qiniudn.com/7_glass.png" />
+                    </div>
+                </div>
+                <div class="page7imga page7imga4 adjustAuto">
+                    <img class="page7imgContent1" src="http://eyuanku.qiniudn.com/7_frame.png">
+                    <div class="page7imgCotentC adjustAuto">
+                        <img class="page7imgContent2" src="http://eyuanku.qiniudn.com/page7_7.jpg" />
+                        <img class="page7imgContent4" src="http://eyuanku.qiniudn.com/page7_8.jpg" />
+                        <img class="page7imgContent3" src="http://eyuanku.qiniudn.com/7_glass.png" />
+                    </div>
+                </div>
+                <div class="page7imga page7imga5 adjustAuto">
+                    <img class="page7imgContent1" src="http://eyuanku.qiniudn.com/7_frame.png">
+                    <div class="page7imgCotentC adjustAuto">
+                        <img class="page7imgContent2" src="http://eyuanku.qiniudn.com/page7_9.jpg" />
+                        <img class="page7imgContent4" src="http://eyuanku.qiniudn.com/page7_10.jpg" />
+                        <img class="page7imgContent3" src="http://eyuanku.qiniudn.com/7_glass.png" />
+                    </div>
+                </div>
+            </div>
+            <div class="page7img1 pageImg">
+                <img src="http://eyuanku.qiniudn.com/7_1.png" /></div>
+        </div>
+
+
+        <div id="page8" class="indexPage row">
+            <div class="page8bg adjustAuto">
+                <div class="page8text1 page8text activeText adjustAutoText">个人用户</div>
+                <div class="page8text2 page8text adjustAutoText">企业用户</div>
+                <div class="page8text3 page8text adjustAutoText">设计师</div>
+                <div class="page8text4 page8text adjustAutoText">自由创意者</div>
+                <div class="page8textContent adjustAuto">
+                    <div class="page8text5 page8text51 page8Content adjustAutoText" style="display: block">轻松做出精美设计</div>
+                    <div class="page8text6 page8text61 page8Content adjustAutoText" style="display: block">
+                        <p>制作精美的空间背景，和你的朋友分享生活写照，亲手制作精美的贺卡发给朋友和爱人，生活变得更美好。</p>
+                        <p>制作精美的简历，富有创意的PPT，给客户展示最好的项目，赢得认可和欣赏。</p>
+                        <p>可以浏览所有用户的设计，在成千上万的模板中寻找创意，让你的灵感不再枯竭。</p>
+                    </div>
+                    <div class="page8text5 page8text52 page8Content adjustAutoText">企业用户</div>
+                    <div class="page8text6 page8text62 page8Content adjustAutoText">
+                        <p>根据自己宣传推广的需要，制作并打印个性化的海报、传单或卡片，不再需要强大的设计技能。</p>
+                        <p>利用网络、社交平台快速塑造品牌形象积累大量关注，将自己的产品图片快速分享到各大社交平台。</p>
+                        <p>专注于企业的发展与产品的制作，通过图形快速的描述想法和原型草稿。</p>
+                    </div>
+                    <div class="page8text5 page8text53 page8Content adjustAutoText">设计师</div>
+                    <div class="page8text6 page8text63 page8Content adjustAutoText">
+                        <p>快速制作草图，更方便与客户交流。参考大量模板，不用担心没有灵感。</p>
+                        <p>在平台与其他设计师交流分享，并可以通过平台与其他设计师协作完成设计，这一切都不需要任何上传下载。</p>
+                        <p>制作模板，让更多的人使用，帮助更多人完成设计并且获得收益。</p>
+                    </div>
+                    <div class="page8text5 page8text54 page8Content adjustAutoText">自由创意者</div>
+                    <div class="page8text6 page8text64 page8Content adjustAutoText">
+                        <p>你可以创建无限数量的设计，并不占用自己的空间。无论何时何地，都能开启自己的设计。</p>
+                        <p>把你的创意、恶搞、摄影分享给更多人，让朋友和你一起欢乐。</p>
+                    </div>
+                </div>
+                <div class="page8img1 adjustAuto">
+                    <img src="http://eyuanku.qiniudn.com/8_3.png" style="display: block" />
+                    <img src="http://eyuanku.qiniudn.com/8_4.png" />
+                    <img src="http://eyuanku.qiniudn.com/8_5.png" />
+                    <img src="http://eyuanku.qiniudn.com/8_6.png" />
+                </div>
+            </div>
+        </div>
+        <div id="page9" class="indexPage row">
+            <div class="page9top adjustAuto"></div>
+            <div class="page9bottom adjustAuto"></div>
+            <div class="page9bgAll adjustAuto"></div>
+            <div class="page9img5 page9img page9img11 adjustAuto">
+                <img src="http://eyuanku.qiniudn.com/9_5.png" /></div>
+            <div class="page9img6 page9img adjustAuto">
+                <img src="http://eyuanku.qiniudn.com/9_6.png" /></div>
+            <div class="page9img7 page9img adjustAuto">
+                <img src="http://eyuanku.qiniudn.com/9_7.png" /></div>
+            <div class="page9img1 page9img adjustAuto">
+                <img src="http://eyuanku.qiniudn.com/9_1.png" /></div>
+            <div class="page9img2 page9img adjustAuto">
+                <img src="http://eyuanku.qiniudn.com/9_2.png" /></div>
+            <div class="page9img3 page9img adjustAuto">
+                <img src="http://eyuanku.qiniudn.com/9_3.png" /></div>
+            <div class="page9img4 page9img adjustAuto">
+                <img src="http://eyuanku.qiniudn.com/9_4.png" /></div>
+            <div class="page9img5 page9img adjustAuto">
+                <img src="http://eyuanku.qiniudn.com/9_5.png" /></div>
+            <a href="http://115.28.153.238:8084/home/discover.html" target="_blank">
+                <div class="page9img6 page9img adjustAuto">
+                    <img src="http://eyuanku.qiniudn.com/9_6.png" /></div>
+            </a>
+            <a href="http://115.28.153.238:8084/home/discover.html" target="_blank">
+                <div class="page9img7 page9img adjustAuto">
+                    <img src="http://eyuanku.qiniudn.com/9_7.png" /></div>
+            </a>
+
+        </div>
+    </div>
+    <!-- hqc203.com Baidu tongji analytics -->
+    <script type="text/javascript">
+        var _bdhmProtocol = (("https:" == document.location.protocol) ? " https://" : " http://");
+        document.write(unescape("%3Cscript src='" + _bdhmProtocol + "hm.baidu.com/h.js%3F575b936b47e0abd47736627fc210d38b' type='text/javascript'%3E%3C/script%3E"));
+    </script>
+</body>
+</html>
+

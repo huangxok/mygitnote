@@ -1,0 +1,39 @@
+﻿<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <title></title>
+
+</head>
+<body>
+    <script>
+        var mapResult1 = [1, 2, 3, 4].map(function (item, index, arr) {
+            if (item === 1) {
+                item = item * 2;
+            }
+            if (item === 2) {
+                item = item * 3;
+            }
+            if (item === 4) {
+                item = item * 5;
+            }
+            return item;
+        });
+        var b = [];
+        var array1 = [1, 5, 3];
+        var array2 = [1, 2, 3, 4];
+        for (var i = 0; i < array1.length; i++) {
+
+            if (array1[i] === array2[i]) {
+                b.push(true);
+            }
+            else {
+                b.push(false);
+            }
+
+        }
+        var mark = b.every(function (item, index, arr) {
+            return item === true;
+        })
+    </script>
+</body>
+</html>

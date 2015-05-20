@@ -1,0 +1,40 @@
+﻿<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <title></title>
+    <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+    <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport" />
+    <script type="text/javascript">
+        function a() {
+            var mdiv = document.getElementById("mdiv");
+            var mdiv2 = document.getElementById("mdiv2");
+            var mdiv3 = document.getElementById("mdiv3");
+            var m = Math,
+            isTouchPad = (/hp-tablet/gi).test(navigator.appVersion),
+            hasTouch = 'ontouchstart' in window && !isTouchPad,
+            START_EV = hasTouch ? 'touchstart' : 'mousedown',
+            MOVE_EV = hasTouch ? 'touchmove' : 'mousemove',
+            END_EV = hasTouch ? 'touchend' : 'mouseup',
+            CANCEL_EV = hasTouch ? 'touchcancel' : 'mouseup';
+            mdiv.addEventListener(MOVE_EV, function (e) {
+                var point = hasTouch ? e.touches[0] : e;
+                mdiv3.innerHTML = "X:" + point.pageX + ";Y:" + point.pageY + "";
+            }, false);
+            mdiv.addEventListener(START_EV, function (e) {
+                var point = hasTouch ? e.touches[0] : e;
+                mdiv2.innerHTML = "BeginX:" + point.pageX + ";BeginY:" + point.pageY + "<br/>";
+            }, false);
+            mdiv.addEventListener(END_EV, function (e) {
+                var point = hasTouch ? e.changedTouches[0] : e;
+                mdiv2.innerHTML += ("EndX:" + point.pageX + ";EndY:" + point.pageY + "");
+            }, false);
+        }
+    </script>
+</head>
+<body onload="a()">
+    <div style="border: solid 1px #000000; background: #ffcaaa; width: 100%; height: 299px; margin: auto" id="mdiv">
+        <div id="mdiv3" style="background: #f00"></div>
+        <div id="mdiv2" style="background: #00ff90"></div>
+    </div>
+</body>
+</html>

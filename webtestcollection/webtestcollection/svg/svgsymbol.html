@@ -1,0 +1,35 @@
+﻿<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <title></title>
+</head>
+<body>
+    <svg width="200px" height="200px" viewBox="0 0 200 200">
+        <title>Symbols vs. groups</title>
+        <desc>Use</desc>
+        <defs>
+            <symbol id="octagon" style="stroke: black;">
+                <desc>Octagon as group</desc>
+                <polygon points="
+36 25, 25 36, 11 36, 0 25,
+0 11, 11 0, 25 0, 36 11" />
+            </symbol>
+            <symbol id="sym-octagon" style="stroke: black;"
+                    preserveAspectRatio="xMidYMid slice" viewBox="0 0 40 40">
+                <desc>Octagon as symbol</desc>
+                <polygon points="
+36 25, 25 36, 11 36, 0 25,
+0 11, 11 0, 25 0, 36 11" />
+            </symbol>
+        </defs>
+        <use xlink:href="#octagon" x="40" y="40" width="30" height="30"
+             style="fill: #c00;" />
+        <use xlink:href="#octagon" x="80" y="40" width="40" height="60"
+             style="fill: #cc0;" />
+        <use xlink:href="#sym-octagon" x="40" y="80" width="30" height="30"
+             style="fill: #cfc;" />
+        <use xlink:href="#sym-octagon" x="80" y="80" width="40" height="60"
+             style="fill: #699;" />
+    </svg>
+</body>
+</html>

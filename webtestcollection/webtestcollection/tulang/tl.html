@@ -1,0 +1,249 @@
+﻿<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta name="keywords" content="背包客户外网,户外活动,户外论坛,户外俱乐部,自驾游" />
+    <meta name="description" content="背包客户外网以全民健身为宗旨是目前中国最优秀最稳定的驴友互动交流平台，致力于推动户外运动在中国的发展壮大做中国最优秀的户外门户网站。" />
+    <title>途狼户外联盟俱乐部</title>
+    <style type="text/css" id="__360se_success_css"></style>
+    <link href="tl/tl.css" rel="stylesheet" type="text/css">
+    <script type="text/javascript" src="tl/jquery.min.js"></script>
+    <script>
+        var a = 1; b = 2; c; d;
+        function a() {
+            return c = a + b, d = c + a;
+        }
+    </script>
+    <script type="text/javascript">
+        $(function () {
+            var sWidth = $("#focus").width(); //获取焦点图的宽度（显示面积）
+            var len = $("#focus ul li").length; //获取焦点图个数
+            var index = 0;
+            var picTimer;
+
+            //以下代码添加数字按钮和按钮后的半透明条，还有上一页、下一页两个按钮
+            var btn = "<div class='btnBg'></div><div class='btn'>";
+            for (var i = 0; i < len; i++) {
+                btn += "<span></span>";
+            }
+            btn += "</div><div class='preNext pre'></div><div class='preNext next'></div>";
+            $("#focus").append(btn);
+            $("#focus .btnBg").css("opacity", 0.5);
+
+            //为小按钮添加鼠标滑入事件，以显示相应的内容
+            $("#focus .btn span").css("opacity", 0.4).mouseenter(function () {
+                index = $("#focus .btn span").index(this);
+                showPics(index);
+            }).eq(0).trigger("mouseenter");
+
+            //上一页、下一页按钮透明度处理
+            $("#focus .preNext").css("opacity", 0.2).hover(function () {
+                $(this).stop(true, false).animate({ "opacity": "0.5" }, 300);
+            }, function () {
+                $(this).stop(true, false).animate({ "opacity": "0.2" }, 300);
+            });
+
+            //上一页按钮
+            $("#focus .pre").click(function () {
+                index -= 1;
+                if (index == -1) { index = len - 1; }
+                showPics(index);
+            });
+
+            //下一页按钮
+            $("#focus .next").click(function () {
+                index += 1;
+                if (index == len) { index = 0; }
+                showPics(index);
+            });
+
+            //本例为左右滚动，即所有li元素都是在同一排向左浮动，所以这里需要计算出外围ul元素的宽度
+            $("#focus ul").css("width", sWidth * (len));
+
+            //鼠标滑上焦点图时停止自动播放，滑出时开始自动播放
+            $("#focus").hover(function () {
+                clearInterval(picTimer);
+            }, function () {
+                picTimer = setInterval(function () {
+                    showPics(index);
+                    index++;
+                    if (index == len) { index = 0; }
+                }, 4000); //此4000代表自动播放的间隔，单位：毫秒
+            }).trigger("mouseleave");
+
+            //显示图片函数，根据接收的index值显示相应的内容
+            function showPics(index) { //普通切换
+                var nowLeft = -index * sWidth; //根据index值计算ul元素的left值
+                $("#focus ul").stop(true, false).animate({ "left": nowLeft }, 300); //通过animate()调整ul元素滚动到计算出的position
+                //$("#focus .btn span").removeClass("on").eq(index).addClass("on"); //为当前的按钮切换到选中的效果
+                $("#focus .btn span").stop(true, false).animate({ "opacity": "0.4" }, 300).eq(index).stop(true, false).animate({ "opacity": "1" }, 300); //为当前的按钮切换到选中的效果
+            }
+        });
+
+    </script>
+    <script>
+        $(function () {
+            alert($("#dd").remove("abc").hasClass("top"));
+
+
+        });
+
+    </script>
+</head>
+<body>
+    <div id="dd" class="top">
+        <p>您好，您现在访问的是由<a href="http://www.backpacker.net.cn/"><strong>背包客户外网</strong></a>隆重推荐的精英俱乐部<strong>!</strong></p>
+    </div>
+    <div class="nav_bg" sizset="false" sizcache0987753311198903="3.0.0">
+        <div class="nav_1" sizset="false" sizcache0987753311198903="3.0.0">
+            <div class="logo">
+                <a href="http://www.backpacker.net.cn/">
+                    <img src="tl/lg.png" border="0"></a>
+            </div>
+            <div class="dh" sizset="false" sizcache0987753311198903="3.0.0">
+                <ul sizset="false" sizcache0987753311198903="3.0.0">
+                    <li id="line"></li>
+                    <li id="home"><a href="http://www.backpacker.net.cn/" target="_blank">首页</a> </li>
+                    <li id="line"></li>
+                    <li><a href="http://www.backpacker.net.cn/lyzj.html" target="_blank">驴友之家</a> </li>
+                    <li id="line"></li>
+                    <li><a href="http://www.backpacker.net.cn/shop.html" target="_blank">积分商城</a> </li>
+                    <li id="line"></li>
+                    <li><a href="http://bbs.backpacker.net.cn/" target="_blank">驴友论坛</a> </li>
+                    <li id="line"></li>
+                    <li><a href="http://www.backpacker.net.cn/ask/" target="_blank">驴友问答</a> </li>
+                    <li id="line"></li>
+                    <li><a href="http://www.backpacker.net.cn/html/news/" target="_blank">新闻资讯</a> </li>
+                    <li id="line"></li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    <div class="toubu"></div>
+    <div class="neirong">
+        <!--滚动的二维码-->
+
+        <div class="wrapper">
+
+            <div id="focus">
+                <ul>
+                    <li><a href="http://www.lanrentuku.com/" target="_blank">
+                        <img src="tl/tl1.jpg"></a></li>
+                    <li><a href="http://www.lanrentuku.com/" target="_blank">
+                        <img src="tl/tl2.jpg"></a></li>
+                    <li><a href="http://www.lanrentuku.com/" target="_blank">
+                        <img src="tl/tl3.jpg"></a></li>
+                    <li><a href="http://www.lanrentuku.com/" target="_blank">
+                        <img src="tl/tl2.jpg"></a></li>
+                    <li><a href="http://www.lanrentuku.com/" target="_blank">
+                        <img src="tl/tl3.jpg"></a></li>
+                </ul>
+            </div>
+
+        </div>
+        <div class="dakuang">
+            <div class="jlb">
+                <div class="jlb_tu"></div>
+                <div class="jlb_js">
+                    <p>
+                        途狼户外联盟俱乐部,意欲弘扬狼的文化精神，
+团结一心，追求人与自然关系的和谐，融入户外，天人合一！
+                    </p>
+                    <p>
+                        俱乐部主要以户外健身运动、野营及自助旅行为主要活动内容的非盈利性户外组织。
+     我们积极倡导健康文明的生活方式，发扬亲近自然、强健体魄、磨练意志的进取精神，宣扬乐观积极、与自然和谐相处的生活态度，
+     追求户外生活中回归自然、融入自然和享受自然的生活方式。
+                    </p>
+                </div>
+                <div class="jlb_js1">
+                    <p>
+                        我们以"走出户外，亲近自然"为宗旨，提倡融入自然、追求健康、自助环保、团结友爱的运动理念，
+旨在为广大乡友和户外运动爱好者提供一个友好、方便、快乐的互动交流平台。同时，我们并不是盲目的去追求挑战自我、挑战自然的活动。
+尊重生命，珍爱生命，是我们的最高理念，同时这也是自然最崇高的法则。
+                    </p>
+                </div>
+            </div>
+            <div class="ld">
+                <div class="ld_tu"></div>
+                <div class="ld_js">
+                    个人介绍： 网名途狼、内蒙古呼和浩特人。
+                    <p>获得河北省登山协会户外领队资格.</p>
+                    户外经历： 组织及参与，库不齐沙漠穿越九峰山
+                    <p>自然保护区穿越,北京香山至八达岭徒</p>
+                    <p>步穿越,河南嵩山攀爬等活动。有多年</p>
+                    <p>领队经验，曾带队东北雪乡、长白山、</p>
+                    <p>箭扣长城、壶口瀑布、西藏、等等。</p>
+                </div>
+                <div class="ld_js1">
+                    <!--<p>更多精彩尽在
+<a href="http://www.backpacker.net.cn/julebu/4924.html" target="_blank" > 途狼户外联盟俱乐部</a>
+</p>-->
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="bottom">
+        <div class="bot_top">
+            <div class="beian">
+                Copyright&copy;背包客版权所有鲁ICP备12028928号-1
+                <a href="http://new.cnzz.com/v1/login.php?siteid=1252898947" target="_blank">站长统计</a>
+                <a href="http://tongji.baidu.com/web/welcome/login" target="_blank">
+                    <img src="tl/21.gif" border="0"></a>
+            </div>
+            <div class="wzdt"><a href="http://www.backpacker.net.cn/sitemap.html" target="_blank">网站地图</a>| <a href="http://www.backpacker.net.cn/html/jfshop/sitetk/bqsm/" target="_blank">版权声明</a>| <a href="http://www.backpacker.net.cn/html/about_us/contact_us/" target="_blank">联系我们</a></div>
+        </div>
+        <div class="youlian">
+            <ul>
+                <li><a href="http://www.backpacker.net.cn/" title="背包客" target="_blank">背包客</a></li>
+                <li><a href="http://bbs.backpacker.net.cn/" title="背包客论坛" target="_blank">背包客论坛</a></li>
+                <li><a href="http://www.517hiking.com/" title="我要去旅行" target="_blank">我要去旅行</a></li>
+                <li><a href="http://lvyou.youbian.com/ " title="旅游线路" target="_blank">旅游线路</a></li>
+                <li><a href="http://www.8264.com" title="8264户外资料网" target="_blank">8264户外资料网</a></li>
+                <li><a href="http://www.btglvyou.com/" title="北京神舟国旅" target="_blank">北京神舟国旅</a></li>
+                <li><a href="http://www.lvye.com/" title="户外旅游" target="_blank">户外旅游</a></li>
+                <li><a href="http://www.0755cctcct.cn/" title="深圳康辉旅行社" target="_blank">深圳康辉旅行社</a></li>
+                <li><a href="http://www.cheeravel.com/" title="旅游论坛" target="_blank">旅游论坛</a></li>
+                <li><a href="http://www.fdcdjc.com/" title="温都水城官网" target="_blank">温都水城官网</a></li>
+                <li><a href="http://wsh.517tez.com/" title="微山湖旅游网" target="_blank">微山湖旅游网</a></li>
+                <li><a href="http://www.trip5151.com/" title="承德旅游网" target="_blank">承德旅游网</a></li>
+                <li><a href="http://bbs.iqilu.com" title="齐鲁网" target="_blank">齐鲁网</a></li>
+                <li><a href="http://www.duoquyou.com/" title="自助旅游" target="_blank">自助旅游</a></li>
+            </ul>
+        </div>
+    </div>
+    <script language="JavaScript" type="text/javascript">
+
+        function heartBeat() {
+            var diffY;
+            if (document.documentElement && document.documentElement.scrollTop)
+                diffY = document.documentElement.scrollTop;
+            else if (document.body)
+                diffY = document.body.scrollTop
+            else
+            {/*Netscape stuff*/ }
+            //alert(diffY);
+            //percent = .1 * (diffY - lastScrollY);
+            //if (percent > 0) percent = Math.ceil(percent);
+            //else percent = Math.floor(percent);
+            document.getElementById("LeftAd").style.top = 390 + diffY + "px";
+            //document.getElementById("RightAd").style.top = parseInt(document.getElementById("LeftAd").style.top) + percent + "px";
+            //lastScrollY = lastScrollY + percent;
+            //alert(lastScrollY);
+        }
+        suspendcode12 = "<DIV id=LeftAd style='left:5px;POSITION:absolute;TOP:390px;'></div>"
+        suspendcode14 = "<DIV id=RightAd style='right:10px;POSITION:absolute;TOP:310px;' ></div>"
+        document.write(suspendcode12);
+        document.write(suspendcode14);
+        window.onscroll = function () {
+            heartBeat();
+        }
+        function ClosedivLeft() {
+            LeftAd.style.visibility = "hidden";
+        }
+        function ClosedivRight() {
+            RightAd.style.visibility = "hidden";
+        }
+    </script>
+</body>
+</html>

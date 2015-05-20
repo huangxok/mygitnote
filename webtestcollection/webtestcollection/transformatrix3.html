@@ -1,0 +1,57 @@
+﻿<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title></title>
+</head>
+<body>
+    <div>
+        <p id="matrixDetail">目前属性值为：matrix(1,0,0,1,0,0)</p>
+        <div class="matrix_image">
+            <div id="matrixLine" class="matrix_line"></div>
+            <input type="text" id="matrixInput" class="matrix_input" autocomplete="off" placeholder="输入角度确定镜像对称轴" />
+            <img id="matrixImage" src="Images/2.jpg" width="256" height="191" />
+        </div>
+    </div>
+    <script>
+        (function () {
+            var $ = function (selector) {
+                return document.querySelector(selector);
+            };
+            var $css3Transform = function (element, value) {
+                var arrPriex = ["O", "Ms", "Moz", "Webkit", ""], length = arrPriex.length;
+                for (var i = 0; i < length; i += 1) {
+                    element.style[arrPriex[i] + "Transform"] = value;
+                    element.style[arrPriex[i] + "Transition"] = "all 2s";
+                }
+            };
+            var eleDetail = $("#matrixDetail"), eleInput = $("#matrixInput"),
+               eleLine = $("#matrixLine"), eleImage = $("#matrixImage");
+
+            if (eleDetail && eleInput && eleImage) {
+                eleInput.addEventListener("change", function () {
+                    var value = parseInt(this.value, 10);
+                    if (value) {
+                        $css3Transform(eleLine, "rotate(" + value + "deg)");
+                        // 确认对称线
+                        var k = Math.tan(-1 * value * Math.PI / 180),
+                           ux = 1 / Math.sqrt(1 + k * k), uy = k / Math.sqrt(1 + k * k);
+
+                        if (k > 1000000) {
+                            ux = 0, uy = 1;
+                        } else if (k < -1000000) {
+                            ux = 0, uy = -1;
+                        }
+
+                        var valTransform = "matrix(" + (2 * ux * ux - 1).toFixed(6) + "," + (2 * ux * uy).toFixed(6) + "," + (2 * ux * uy).toFixed(6) + "," + (2 * uy * uy - 1).toFixed(6) + ",0,0)";
+                        eleDetail.innerHTML = '目前属性值为：' + valTransform;
+                        $css3Transform(eleImage, valTransform);
+                    } else {
+                        this.value = "";
+                    }
+                });
+            }
+        })();
+    </script>
+</body>
+</html>

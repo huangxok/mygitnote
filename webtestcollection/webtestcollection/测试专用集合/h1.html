@@ -1,0 +1,43 @@
+﻿<!DOCTYPE html>
+<html ng- xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <title></title>
+    <style>
+        .ab {
+        }
+    </style>
+</head>
+<body>
+    <div style="width:700px;height:100px;border:1px solid #ecc;border-bottom-color: #fff;position:relative;top: 1px;z-index:9999">
+
+    </div>
+    <div style="width:800px;height:100px;border:1px solid #ecc;position:relative;z-index:-1">
+    </div>
+    <select id="a">
+        <option value="0">请选择</option>
+        <option value="2">北京</option>
+        <option value="3">上海</option>
+        <option value="4">天津</option>
+        <option value="5">河北</option>
+    </select>
+    <select id="b">
+        <option value="0">请选择</option>
+        <option value="2">北京</option>
+        <option value="3">上海</option>
+        <option value="4">天津</option>
+        <option value="5">河北</option>
+    </select>
+    <a href="h44444.html">onclic</a>
+    <script>
+        (function () {
+            document.getElementById('a').onchange = function () {
+                if (this.value == 0) {
+                    document.getElementById('b').setAttribute('disabled', 'disabled');
+                } else {
+                    document.getElementById('b').removeAttribute('disabled');
+                }
+            }
+        })()
+    </script>
+</body>
+</html>

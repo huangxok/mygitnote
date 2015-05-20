@@ -1,0 +1,226 @@
+﻿<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <title></title>
+    <script src="../Scripts/jquery-1.7.1.js"></script>
+    <script src="../JAVASCRIPT设计模式/第一章    概要/html/jsbase.js"></script>
+</head>
+<body>
+    <div id="abc" style="height:100px;width:100px;background:#ff6a00"></div>
+    <script>
+        //setInterval('function (){return 1}',1000)
+        //typeClassOf.get_typeof('abc')
+        //$('#abc').click(function () { });
+        //(function () {
+        //    debugger;
+        //    document.getElementById('abc').addEventListener('click', function () {
+        //        debugger;
+        //    }, false)
+        //})()
+        //var counter = 999;
+
+        //var uniqueinteger = (
+        //    function () {   //定义函数并立即调用
+        //        var counter = 0;                   //函数私有变量
+        //        return function () { return counter++ };
+        //    }()
+        //)
+        //uniqueinteger = null;
+        //var o = { name: 'a' };
+        //if (o && o.name && o.name.length > 1) {
+        //    console.log(true);
+        //}
+        //else {
+        //    console.log(false);
+        //}
+        //var target = window.event || 'e';
+        //console.log(target);
+
+        //var ff = function () {
+        //    var a = 1;
+        //    console.log(a);
+        //    (function f() {
+        //        var a = 0;
+        //        alert(function () { console.log(a) })
+        //    })();
+        //}
+        //callee 表示当前执行的函数
+        //caller 表示调用的函数
+        //var o = {
+        //    x: function (x) {
+        //        if (x <= 1) {
+        //            return 1;
+        //        }
+        //        return x + arguments.callee(x - 1);
+        //    },
+        //    y: function te(x) {
+        //        alert(x);
+        //        if (te.caller) {
+        //            alert(te.caller)
+        //        }
+        //        else {
+        //            alert('top function');
+        //        }
+        //    },
+        //    z: function (x) {
+        //        this.y(x);
+        //    }
+        //};
+        //var b = o.x(100);
+        //console.log(b)
+        //o.z(1);//弹出  function (x) {this.y(1);}
+
+
+        //function Person() {
+        //    for (p in arguments) {
+        //        console.log(p)
+        //    }
+        //    //this.name = arguments[0];
+        //    //this.age = arguments[1];
+        //    //this.height = arguments[2];
+        //}
+
+        //var add1 = new Function("x", "y", "return (x+y)");
+        //var add2 = function (x, y) {
+        //    return x + y;
+        //}
+        //var Person = function () {
+
+        //    this.name = arguments[0];
+        //    this.age = arguments[1];
+        //    this.height = arguments[2];
+        //}
+        //Person.prototype.getName = function () {
+        //    return this.name
+        //}
+        //Person.prototype.getage = function () {
+        //    return this.age
+        //}
+        //Person.prototype.geth = function () {
+        //    return this.height
+        //}
+        //Person.prototype = {
+        //    getName: function () {
+        //        return this.name;
+        //    },
+        //    getage: function () {
+        //        return this.age;
+        //    },
+        //    geth: function () {
+        //        return this.height + "yintt";
+        //    }
+        //}
+
+        //var p = new Person('yintt', '24', '159cm');
+        //console.log(p.name + "," + p.age + "," + p.height);
+    </script>
+    <script>
+        //function 1  返回的是具体的值
+        var scope1 = "global scope";
+        function checkscope1() {
+            var scope1 = "local scope";
+            function fn() { return scope1 };
+            return fn();
+        }
+        checkscope1();
+        //function 2   闭包  注意与function1的区别 这个是返回的函数
+        var scope2 = "global scope";
+        function checkscope2() {
+            var scope2 = "local scope";
+            function fn() { return scope2 }
+            return fn;
+        }
+        console.log(checkscope2()());
+
+        function a() {
+            console.log("0");
+        }
+        a();
+        (function () {
+            console.log("1");
+        })()
+
+        var counter = 99;
+        var uniqueinteger =
+            (function () {                         //定义函数并立即调用
+                var counter = 0;                   //函数私有变量
+                return function () {
+                    return counter++
+                };
+            })()
+    </script>
+    <script>
+        function Person() {
+            this.name = 'zhangxuan';
+            this.age = 19;
+            this.height = 170;
+            //this.eat = function () {
+            //    console.log('eat rice');
+            //}
+            this.eat = eat;
+            function eat() {
+                console.log('eat rice');
+            }
+        }
+        function child() {
+
+        }
+        Person.prototype.play = function () {
+            console.log('play parent ball');
+        }
+        var p = new Person();
+        p.eat();
+        p.play = function () {
+            console.log("play myself")
+        };
+        p.play();
+
+        var c = Object.create(p);
+        c.name = 'zhangxuan1';
+        var d = Object.create(c);
+        d.name = 'zhuangxuan2';
+        var e = Object.create(d);
+        e.name = 'zhuangxuan3';
+        var f = Object.create(e);
+        f.name = 'zhuangxuan4';
+
+
+        //p.name
+        //p.age
+        //p.height
+
+        function Person1() {
+            var p = {};
+            var name = 'zhangxuan';
+            var age = 19;
+            var height = 170;
+            p.name = name;
+            p.age = age;
+            p.height = height;
+            return p;
+        }
+        Person1();
+    </script>
+    <script>
+        function inherit(p) {
+            debugger;
+            if (p == null) {
+                throw TypeError();
+            };
+            if (Object.create) {
+                return Object.create(p)
+            };
+            var t = typeof p;
+            if (t !== "object" && t !== "function") {
+                throw TypeError();
+            }
+            function f() { };
+            f.prototype = p;
+            return new f();
+        }
+        var pe = inherit(p)
+
+
+    </script>
+</body>
+</html>

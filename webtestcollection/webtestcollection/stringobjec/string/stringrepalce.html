@@ -1,0 +1,86 @@
+﻿<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <title></title>
+</head>
+<body>
+    <script type="text/javascript">
+        var url = "http://www.baidu.com/abc.jsp?method=method&name=abc&age=12";
+
+        //第一参数为字符串
+        console.group("字符串");
+        var newUrl1 = url.replace("www.baidu.com", function () {
+            debugger;
+            console.log("replace输入参数：%o", arguments);
+            var val = /www.baidu.com/.exec(url);
+            console.log("exec输出参数：%o", val);
+
+            console.assert(arguments[0] === val[0]);
+            console.assert(arguments[1] === val["index"]);
+            console.assert(arguments[2] === val["input"]);
+            return "123";
+        });
+        console.log("replace返回字符串：" + newUrl1);
+        console.groupEnd("字符串");
+
+        //第一参数为正则表达式
+        console.group("正则表达式");
+        var regexp_global = /[?&](\w+)=([^&]*)/g;
+        var count = 0;
+        var newUrl2 = url.replace(regexp_global, function () {
+            debugger;
+            console.log("第" + (count++) + "次运行");
+            console.log("replace输入参数：%o", arguments);
+            var val = regexp_global.exec(url);
+            console.log("exec输出参数：%o", val);
+
+            console.assert(arguments[0] === val[0]);
+            console.assert(arguments[1] === val[1]);
+            console.assert(arguments[2] === val[2]);
+            console.assert(arguments[3] === val["index"]);
+            console.assert(arguments[4] === val["input"]);
+            return count;
+        });
+        console.log("replace返回字符串：" + newUrl2);
+        console.groupEnd("正则表达式");
+    </script>
+    <script>
+        console.group('字符串');
+        var newUrl3 = url.replace('www.baidu.com', '1234');
+        console.log("replace返回字符串：" + newUrl3);
+        console.groupEnd("字符串");
+
+        console.group("正则表达式");
+        //var regexp_global = /[?&](\w+)=([^&]*)/g;
+        var regexp_global = /www.baidu.com/;
+        var newUrl4 = url.replace(regexp_global, '1234');
+        console.log("replace返回字符串：" + newUrl4);
+        console.groupEnd("正则表达式");
+
+    </script>
+    <script>
+        var arr = "";
+        function ffddd(o) {
+            for (prop in o) {
+                if (typeof o[prop] === 'object') {
+                    ffddd(o[prop])
+                }
+                else {
+                    arr += prop + '=' + O[prop];
+                }
+            }
+        }
+    </script>
+    <script>
+        var b = 123;
+
+        function abc(b) {
+            return function (b) {
+                console.log(123 + b);
+            }
+        }
+
+        document.body.addEventListener('click', abc(123), true);
+    </script>
+</body>
+</html>

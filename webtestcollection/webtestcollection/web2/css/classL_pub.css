@@ -1,0 +1,9 @@
+/*×ó±ß°à¼¶*/
+#left{float:left;width:132px;height:290px;margin-left:5px;margin-top:5px;}
+#left .title{background:url(../img/title.png) no-repeat; width:133;height:43px; font-size:20px;color:white;text-align:center;line-height:43px;}
+#left .title2{background:url(../img/title2.png) no-repeat}
+#left li{height:60px;width:132px;line-height:60px;text-indent:60px;font-size:12px;}
+#left .none{background:url(../img/un_selected.png) no-repeat 5px 16px;color:#3b5564;}
+#left .selected,#left  li:hover{color:white;background:url(../img/selected.png)no-repeat 5px 16px;background-color:RGB(92,162,167);}
+
+

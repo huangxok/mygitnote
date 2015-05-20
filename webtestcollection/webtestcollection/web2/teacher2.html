@@ -1,0 +1,283 @@
+<!doctype html>
+<meta http-equiv="content-type" content="text/html;charset=GB2312">
+<meta  name="keywords" content="">
+<meta http-equiv="Access-Control-Allow-Origin" content="http://www.baidu.com:80">
+<head>
+<title>教师端批改</title>
+<style>
+			.auto{width:400px;height:210px;background:#FFF;display:none;}
+			.auto div{line-height:30px;}
+			.auto div:hover{background:#EBEBEB;}
+</style>
+<link href="button.html">
+<link rel="stylesheet" type = "text/css" href="css/global.css">
+<link rel="stylesheet" type = "text/css" href="css/teacher.css">
+<link rel="stylesheet" type = "text/css" href="css/classL_pub.css">
+<script type="text/javascript" src="js/jquery.js"></script>
+</head>
+<body>
+
+
+<div id = "banner">
+	<ul class="back">
+		<li><a href=""><img src="img/back.png" alt="返回"></a></li>
+		<li><a href="#"><img src="img/home.png" alt="主页"></a></li>
+		<li><a href="#"><img src="img/control.png" alt="控制"></a></li>
+	</ul>
+	<ul class ="time">
+		<li><span class ="date">2014-2-26</span></li>
+		<li><span>周四</span></li>
+		<li><span>源朝</span></li>
+	</ul>
+	<a href="#"><img class ="icons" src="img/icon.png" alt="源朝"></a></div>
+
+<div id ="wrap">
+	<div id="right">
+		<div id="innerRight">
+			<h1>题目列表</h1>
+			<div class ="form" style="margin:0px 0px; height:20px;">
+				<ul>
+					<li class="notes_1">待批</li>
+					<li id="send1"><img onClick="scr='img/sel_y.png'" src="img/tick_black.png"></li>
+					<li class="notes_2">已批</li>
+					<li id="send2"><img src="img/tick_black.png"></li>	
+					<li >	
+					<input type ="text" id="word"  class="word" value ="请输入创建日期" style="margin:0px 0px 10px 20px;" >
+					<a class="search" id="send" style="width:40px; height:40px;"><img src="img/search.png" align="top" style=""/></a>
+					<div class="auto" id="auto"></div>
+					</li>
+					<li style="width:40px; height:40px;">时间:</li>
+					<li>
+					<select id="single">
+						<option>2014-01</option>
+						<option>2014-02</option>
+						<option>2014-03</option>
+						<option>2014-04</option>
+						<option>2014-05</option>
+						<option>2014-06</option>
+						<option>2014-07</option>
+						<option>2014-08</option>
+					</select>
+					</li>
+					<li>-</li>
+					<li>
+					<select id="selected" >
+						<option>2014-02</option>
+						<option>2014-03</option>
+						<option>2014-04</option>
+						<option>2014-05</option>
+						<option>2014-06</option>
+						<option>2014-07</option>
+						<option>2014-08</option>
+						<option>2014-09</option>
+					</select>
+					</li>	
+				</ul>
+			</div>
+			
+			<div id="resText" class="resText" style="margin:20px;"></div>
+		<p>注：红色表示待批改、绿色表示完成批改</p>
+		</div>
+	</div>
+	
+	<div id="left">
+		<div class="title">班级</div>
+		<div class="title2">
+		<ul id="ulId">
+			<li id="li1" class ="none"  onClick="ff('1')"><span><a href="teacher1.html">高三(1)班</a></span></li>
+			<li id="li2" class ="none" onClick="ff('2')"><span><a href="teacher2.html">高三(2)班</a></span></li>
+			<li id="li3" class ="none" onClick="ff('3')"><span><a href="teacher3.html">高三(3)班</a></span></li>
+		</ul>
+		</div>
+	</div>
+</div>
+
+<script type="text/javascript">
+  $('#resText').empty();
+$('#send').click(function () {
+	
+            var Value = $(".word").val();
+            if (Value == "" || Value == "请输入创建日期") {
+                alert("请输入创建日期");
+            } else {
+                var url = "data.html?keyword=2014-07-16";
+                $.ajax({
+                    url: url,
+                    type: 'get',
+                    success: function (dataText) {
+                        var data = eval("(" + dataText + ")");
+                        var total = data.total;
+                        var success = data.success;
+                        var start = data.statrt;
+                        var limit = data.limit;
+                        var dataArr = data.row;
+                        var lis = "";
+						
+							$(dataArr).each(function (i, da) { //遍历JSON数据得到所需形式
+								lis += '<div class="read"><span class="time">' 
+									+ da.CreatDt + '</span><br/><span class="class_name">' 
+									+ da.KlName + '</span></div> ';
+							});
+
+                        $(".resText").html(lis);//5555
+
+                    }
+                });
+            }
+
+        });
+
+$("#word").focus(function(){
+		var txt_value= $(this).val();
+		if(txt_value=="请输入创建日期"){
+			$(this).val("");
+		}
+});
+$("#word").blur(function(){
+		var txt_value= $(this).val();
+		if(txt_value==""){
+			$(this).val("请输入创建日期");
+		}
+});
+   var lightIndex=-1;
+$(document).ready(function(){
+ var wordInput = $("#word");
+ $("#auto").hide().css("background-color","white").css("width","151px");//每次刷新页面都将div隐藏掉
+ wordInput.keyup(function(event){
+			 var value = $(this).val();
+            var _this = $(this);
+            var url = "data.html?keyword=2014-07-16";
+            // 按下键盘 弹起式显示出自动补全的内容区域
+            $(".auto").empty().show();
+            $.ajax({
+                type: "get",
+                url: url,
+                success: function (dataText) {
+                    //alert(data);
+                    var data = eval("(" + dataText + ")");
+                    var total = data.total;
+                    var success = data.success;
+                    var start = data.statrt;
+                    var limit = data.limit;
+                    var dataArr = data.row;
+                    // 把字符转换成数组
+                    // 迭代数据
+                    for (var i = 0; i < dataArr.length; i++) {
+                        $(".auto").append("<div>" + dataArr[i].CreatDt + "</div>");
+                    }
+
+                    // 关键词的搜索匹配
+                    $(".auto").prepend($(".auto").find("div:contains(" + value + ")")
+                            .each(function () {
+                                $(this).html($(this).text());
+                            }).css("color", "red"));
+
+
+                    // 给文本框赋值
+                    $(".auto").find("div").click(function () {
+                        var selVal = $(this).text();
+                        _this.val(selVal);
+                        //location.href = "教师端批改.html?wd="+selVal;
+                        $(".auto").hide();
+                    });
+				}
+           });
+  var myEvent = event||window.event;
+  var keyCode = myEvent.keyCode;
+  if(keyCode >= 65 && keyCode <= 90 || keyCode == 8 || keyCode == 46){
+   var wordText = $("#word").val();//获取输入框的内容
+   var auto = $("#auto");
+   if(wordText!=""){//若不为空，将数据传到后台进行自动补全
+    $.post(path+'/AutoComplete',{word:wordText},function(backData){
+     var jqueryObj = $(backData);
+     var wordNodes = jqueryObj.find("word");
+     auto.html("");
+     wordNodes.each(function(i){
+       var wordNode = $(this);
+       var div = $("<div>").html(wordNode.text());
+       div.appendTo(auto);
+       //鼠标移上去
+       div.mouseover(function(){
+        if(lightIndex!=-1){
+         $("#auto").children("div").eq(lightIndex).css("background-color","white");
+        }
+        $("#auto").children("div").eq(i).css("background-color","gray");
+        lightIndex=i;
+       });
+       //鼠标移开
+       div.mouseout(function(){
+        $("#auto").children("div").eq(i).css("background-color","white");
+        lightIndex=-1;//当设置被鼠标访问过的记录显示为跟访问前颜色不一致的时候，这句必须有，否则（想本例），可以省略
+       });
+       //鼠标点击的时候
+       div.click(function(){
+        var temValue = $("#auto").children("div").eq(i).text();//鼠标点击后，获取被鼠标点击的div中的内容
+        $("#word").val(temValue);
+        lightIndex=-1;//当设置被鼠标访问过的记录显示为跟访问前颜色不一致的时候，这句必须有，否则（想本例），可以省略
+        auto.hide();
+       });
+      }
+     );
+     $("#auto").show();
+    },"xml");    
+   }else{
+    lightIndex=-1;
+    $("#auto").hide();
+   }
+  }else if(keyCode == 38 || keyCode == 40){
+   var autoNodes=$("#auto").children("div");
+   if(keyCode == 38){//向上键
+    if(lightIndex==0){
+     autoNodes.eq(lightIndex).css("background-color","white");
+     lightIndex=autoNodes.length;
+    }
+    if(lightIndex!=-1){
+     autoNodes.eq(lightIndex).css("background-color","white");
+     lightIndex--;
+    }else{
+     lightIndex=autoNodes.length-1;
+    }
+    autoNodes.eq(lightIndex).css("background-color","gray");
+   }
+   if(keyCode == 40){//向下键
+    if(lightIndex!=-1){
+     autoNodes.eq(lightIndex).css("background-color","white");
+    }
+    lightIndex++;
+    if(lightIndex==autoNodes.length){
+     lightIndex=0;
+    }
+    autoNodes.eq(lightIndex).css("background-color","gray");
+   }
+  }else if(keyCode == 13){//按下回车键
+   var aquValue = $("#auto").children("div").eq(lightIndex).text();
+   $("#word").val(aquValue);//当按下回车键时将被选中的div内容复制到输入框中，并将自动补全框隐藏
+   $("#auto").hide();
+  }
+ });
+});
+$(document).ready(function(){ 
+	$("#send1").click(function(){
+		$("#resText").load("homework2.html .no_read1");
+	});
+});
+$(document).ready(function(){ 
+	$("#send2").click(function(){
+		$("#resText").load("homework2.html .readed1");
+	});
+});
+
+
+function ff(id){
+	for(var i=1;i<4;i++){
+		if(i!=id){
+			document.getElementById('li'+i).className="none";
+			}
+		}
+	document.getElementById('li'+id).className="selected";
+}
+
+</script>
+
+</body>
+</html>

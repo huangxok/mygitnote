@@ -1,0 +1,124 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html>
+<head>
+    <!--声明当前页面的编码集charset=gbk中文编码gb2312,charset=utf-8 国际编码-->
+    <meta http-equiv="Content-Type" content="text/html; charset=gbk"/>
+    <!--当前页面的三要素-->
+    <title>标题</title>
+    <meta name="Keywords" content="关键词,关键词"/>
+    <meta name="description" content="描述" />
+    <!--css , js-->
+    <style type="text/css">
+        * {
+            margin: 0px;
+            padding: 0px;
+        }
+
+        .Main {
+            width: 790px;
+            height: 600px;
+            margin: 50px auto;
+            position: relative;
+        }
+
+            .Main ul {
+                height: 30px;
+                border-bottom: 2px solid #ddd;
+            }
+
+                .Main ul li {
+                    width: 155px;
+                    height: 30px;
+                    line-height: 30px;
+                    color: #000;
+                    text-align: center;
+                    font-size: 14px;
+                    float: left;
+                    list-style-type: none;
+                    font-weight: bold;
+                }
+
+            .Main p {
+                width: 155px;
+                height: 2px;
+                background: red;
+                position: absolute;
+                top: 30px;
+                left: 0px;
+            }
+
+                .Main p span {
+                    border: 5px solid red;
+                    border-color: transparent transparent red;
+                    position: absolute;
+                    left: 68px;
+                    top: -10px;
+                }
+
+        .Con {
+            border: 1px solid #ddd;
+            border-top: 0px;
+        }
+
+            .Con .content {
+                display: none;
+            }
+    </style>
+
+</head>
+<body>
+    <h3 style="text-align: center; font-size: 30px; line-height: 50px; color: red;">要素材和软件的加助理老师QQ：960780018</h3>
+    <h3 style="text-align: center; font-size: 30px; line-height: 50px; color: red;">8:10开课，效果如下: </h3>
+    <div class="Main">
+        <ul>
+            <li>特价商品</li>
+            <li>家居家纺</li>
+            <li>厨具餐具</li>
+            <li>家具家装</li>
+            <li>机票酒店</li>
+        </ul>
+        <p class="but"><span></span></p>
+
+        <div class="Con">
+            <div class="content" style="display: block;">
+                <img src="images/1.png" />
+            </div>
+            <div class="content">
+                <img src="images/2.png" />
+            </div>
+            <div class="content">
+                <img src="images/3.png" />
+            </div>
+            <div class="content">
+                <img src="images/4.png" />
+            </div>
+            <div class="content">
+                <img src="images/5.png" />
+            </div>
+        </div>
+
+    </div>
+
+    <script type="text/javascript" src="js/jquery.js"></script>
+    <script type="text/javascript">
+        $(function () {
+            $(".Main ul li").hover(function () {
+                var auto_left = ($(window).width() - 790) / 2;  //获取div .main的左边距离可视区域左边的距离
+                var ddd = $(this).offset().left;                //获取li的左边距离可视区域左边的距离
+                var _left = $(this).offset().left - auto_left;  //相减得到相对于div .main的左边距离
+                $(".Main p.but").stop().animate({ left: _left }, 200);
+                var div = $(".Con .content");
+                for (var i = 0; i < 5; i++) {
+                    if ($(this).index() == i) {
+                        div.eq(i).slideDown();
+                    } else {
+                        div.eq(i).slideUp();
+
+                    }
+                }
+            });
+        });
+    </script>
+
+</body>
+</html>

@@ -1,0 +1,48 @@
+﻿<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <title></title>
+</head>
+<body>
+    <div class="mainbo_imatch_mask">
+        <svg xmlns="http://www.w3.org/2000/svg" style="display:block;height:105px;width:105px;">
+            <path fill="red" d="M 89 0 L 51 38 L 13 0 C 8 4 4 8 0 13 l 38 38 L 0 90 c 4 5 8 9 13 13 L 50 65 L 90 100 c 5 -4 9 -8 13 -13 L 65 50 L 100 13 C 98 8 94 4 90 0z" />
+        </svg>
+        <svg xmlns="http://www.w3.org/2000/svg" style="width:105px;height:105px;">
+            <path fill="green" d="M 3 68 c 0 0 10 -11 22 -12 c 0 0 7 11 15 10 C 40 64 52 5 98 0 c 0 0 -38 22 -42 82 c -0.8 1.6 -19 12 -21 12 C 32 93 12 65 3 68z" />
+        </svg>
+    </div>
+    <script>
+        function createCorrectMark(el) {
+            var svg = document.createElementNS('http://www.w3.org/2000/svg', 'svg'),
+              path = document.createElementNS('http://www.w3.org/2000/svg', 'path');
+            svg.setAttribute('xmlns', 'http://www.w3.org/2000/svg');
+            svg.setAttribute('class', 'svgmask imatch_svgright');
+            path.setAttribute('stroke', 'green');
+            path.setAttribute('fill', 'green');
+            path.setAttribute('d', 'M 3 68 c 0 0 10 -11 22 -12 c 0 0 7 11 15 10 C 40 64 52 5 98 0 c 0 0 -38 22 -42 82 c -0.8 1.6 -19 12 -21 12 C 32 93 12 65 3 68z');
+            svg.appendChild(path);
+            return svg;
+        }
+        //false mark
+        function createErrorMark(el) {
+            var svg = document.createElementNS('http://www.w3.org/2000/svg', 'svg'),
+              path = document.createElementNS('http://www.w3.org/2000/svg', 'path');
+            svg.setAttribute('xmlns', 'http://www.w3.org/2000/svg');
+            svg.setAttribute('class', 'svgmask imatch_svgmistake')
+            path.setAttribute('stroke', 'red');
+            path.setAttribute('fill', 'red');
+            path.setAttribute('d', 'M 89 0 L 51 38 L 13 0 C 8 4 4 8 0 13 l 38 38 L 0 90 c 4 5 8 9 13 13 L 50 65 L 90 100 c 5 -4 9 -8 13 -13 L 65 50 L 100 13 C 98 8 94 4 90 0z');
+            svg.appendChild(path);
+            return svg;
+        }
+    </script>
+    <script>
+        var uniqueinteger = (function () {   //定义函数并立即调用
+            var counter = 0;                   //函数私有变量
+            return function () { console.log(counter++) };
+        }())
+        setTimeout(uniqueinteger, 10000);
+    </script>
+</body>
+</html>

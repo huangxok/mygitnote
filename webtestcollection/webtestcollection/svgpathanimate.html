@@ -1,0 +1,42 @@
+﻿<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <title></title>
+    <style>
+        line {
+            stroke-dasharray: 9px;
+            stroke-dashoffset: 800;
+            animation: dash 1s linear infinite;
+        }
+
+        @keyframes dash {
+            from {
+                stroke-dashoffset: 800;
+            }
+
+            to {
+                stroke-dashoffset: 0;
+            }
+        }
+    </style>
+</head>
+<body>
+    <svg width="1000px" height="1000px" viewBox="0 0 1000 1000">
+        <!-- nine-pixel dash, five-pixel gap -->
+        <line x1="10" y1="10" x2="800" y2="10"
+              style="stroke: black; stroke-width: 2px;" />
+        <!-- five-pixel dash, three-pixel gap, nine-pixel dash,
+            stroke-dasharray:9px 5px;
+        two-pixel gap -->
+
+        <line x1="10" y1="20" x2="800" y2="20"
+              style="stroke: black; stroke-width: 2px;" />
+        <!-- Odd number of entries is duplicated; this is equivalent
+        to: stroke-dasharray: 5px 3px 9px 2px;
+        nine-pixel dash, three-pixel gap, five-pixel dash,
+        nine-pixel gap, three-pixel dash, five-pixel gap -->
+        <line x1="10" y1="30" x2="800" y2="30" style="stroke: black; stroke-width: 2px;" />
+        <line fill="none" stroke="#000000" stroke-width="5" stroke-dasharray="12" stroke-linejoin="null" stroke-linecap="round" x1="90" y1="90" x2="330" y2="90" stroke-dashoffset="188"></line>
+    </svg>
+</body>
+</html>

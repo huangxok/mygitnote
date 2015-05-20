@@ -1,0 +1,229 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta http-equiv="content-type" content="text/html;charset=gb2312">
+    <meta name="keywords" content="站长,网页特效,网页特效代码,js特效,js脚本,脚本,广告代码,zzjs,zzjs.net,www.zzjs.net,站长特效 网" />
+    <meta name="description" content="www.zzjs.net,站长特效网，站长必备js特效及广告代码。大量高质量js特效，提供高质量广告代码下载,尽在站长特效网" />
+    <title>网页特效 全屏遮罩锁屏效果 站长特效网</title>
+    <style type="text/css">
+        #www_zzjs_net {
+            /*visibility: hidden;*/
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            z-index: 1987;
+            width: 100%;
+            height: 100%;
+            background: #000;
+            filter: alpha(opacity=70);
+            opacity: 0.3;
+        }
+        /*IE6 fixed*/
+        * html {
+            background: url(*) fixed;
+        }
+
+        * html body {
+            margin: 0;
+            height: 100%;
+        }
+
+        * html #www_zzjs_net {
+            position: absolute;
+            left: expression(documentElement.scrollLeft+documentElement.clientWidth-this.offsetWidth);
+            top: expression(documentElement.scrollTop+documentElement.clientHeight-this.offsetHeight);
+        }
+    </style>
+    <script language="javascript">
+        (function () {
+            // 获取对象
+            var $ = function (id) {
+                return document.getElementById(id);
+            };
+            // 遍历
+            var each = function (a, b) {
+                for (var i = 0, len = a.length; i < len; i++)
+                    b(a[i], i);
+            };
+            // 事件绑定
+            var bind = function (obj, type, fn) {
+                if (obj.attachEvent) {
+                    obj['e' + type + fn] = fn;
+                    obj[type + fn] = function () {
+                        obj['e' + type + fn](window.event);
+                    }
+                    obj.attachEvent('on' + type, obj[type + fn]);
+                } else {
+                    obj.addEventListener(type, fn, false);
+                };
+            };
+            // 移除事件
+            var unbind = function (obj, type, fn) {
+                if (obj.detachEvent) {
+                    try {
+                        obj.detachEvent('on' + type, obj[type + fn]);
+                        obj[type + fn] = null;
+                    } catch (_) { };
+                } else {
+                    obj.removeEventListener(type, fn, false);
+                };
+            };
+            // 阻止浏览器默认行为
+            var stopDefault = function (e) {
+                e.preventDefault ? e.preventDefault() : e.returnValue = false;
+            };
+            // 获取页面滚动条位置
+            var getPage = function () {
+                var dd = document.documentElement,
+                 db = document.body;
+                return {
+                    left: Math.max(dd.scrollLeft, db.scrollLeft),
+                    top: Math.max(dd.scrollTop, db.scrollTop)
+                };
+            };
+            // 锁屏
+            var lock = {
+                show: function () {
+                    $('www_zzjs_net').style.display = 'block';
+                    //$('www_zzjs_net').style.visibility = 'visible';
+                    var p = getPage(),
+                     left = p.left,
+                     top = p.top;
+                    // 页面鼠标操作限制
+                    this.mouse = function (evt) {
+                        var e = evt || window.event;
+                        stopDefault(e);
+                        window.scroll(left, top);
+                    };
+                    each(['DOMMouseScroll', 'mousewheel', 'scroll', 'contextmenu'], function (o, i) {
+                        bind(document, o, lock.mouse);
+                    });
+                    // 屏蔽特定按键: F5, Ctrl + R, Ctrl + A, Tab, Up, Down
+                    this.key = function (evt) {
+                        var e = evt || window.event,
+                         key = e.keyCode;
+                        if ((key == 116) || (e.ctrlKey && key == 82) || (e.ctrlKey && key == 65) || (key == 9) || (key == 38) || (key == 40)) {
+                            try {
+                                e.keyCode = 0;
+                            } catch (_) { };
+                            stopDefault(e);
+                        };
+                    };
+                    bind(document, 'keydown', lock.key);
+                },
+                close: function () {
+                    $('www_zzjs_net').style.display = 'none';
+                    //$('www_zzjs_net').style.visibility = 'hidden';
+                    each(['DOMMouseScroll', 'mousewheel', 'scroll', 'contextmenu'], function (o, i) {
+                        unbind(document, o, lock.mouse);
+                    });
+                    unbind(document, 'keydown', lock.key);
+                }
+            };
+            bind(window, 'load', function () {
+                $('zzjs_net').onclick = function () {
+                    lock.show();
+                };
+                $('www_zzjs_net').onclick = function () {
+                    lock.close();
+                };
+            });
+        })();
+
+    </script>
+</head>
+<body>
+    <a href="http://www.zzjs.net/">站长特效网</a>,站长必备的高质量网页特效和广告代码。zzjs.net，站长js特效。<hr>
+    <!--欢迎来到站长特效网，我们网站收集大量高质量js特效，提供许多广告代码下载，网址：www.zzjs.net，zzjs@msn.com,用.net打造靓站-->
+    <button id="zzjs_net" style="position: absolute; left: 50%; top: 40%;">开启锁屏</button>
+    <ol id="test">
+        <li>站长特效网，打造国内最帅的网页特效站！</li>
+    </ol>
+    <div id="www_zzjs_net">
+        <div style="background: #f00; width: 300px; height: 300px; position: absolute; top: 30%; left: 40%;">
+        </div>
+    </div>
+    <br />
+    <br />
+    <br />
+    <br />
+    <br />
+    <br />
+    <br />
+    <br />
+    <br />
+    <br />
+    <br />
+    <br />
+    <br />
+    <br />
+    <br />
+    <br />
+    <br />
+    <br />
+    <br />
+    <br />
+    <br />
+    <br />
+    <br />
+    <br />
+    <br />
+    <br />
+    <br />
+    <br />
+    <br />
+    <br />
+    <br />
+    <br />
+    <br />
+    <br />
+    <br />
+    <br />
+    <br />
+    <br />
+    <br />
+    <br />
+    <br />
+    <br />
+    <br />
+    <br />
+    <br />
+    <br />
+    <br />
+    <br />
+    <br />
+    <br />
+    <br />
+    <br />
+    <br />
+    <br />
+    <br />
+    <br />
+    <br />
+    <br />
+    <br />
+    <br />
+    <br />
+    <br />
+    <br />
+    <br />
+    <br />
+    <br />
+    <br />
+    <br />
+    <br />
+    <br />
+    <br />
+    <br />
+    <br />
+    <br />
+    <br />
+    <br />
+    <br />
+    <br />
+    <br />
+    <br />
+    <br />
+</body>
+</html>

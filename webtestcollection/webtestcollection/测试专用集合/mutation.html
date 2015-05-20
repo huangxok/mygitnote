@@ -1,0 +1,94 @@
+﻿<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <title></title>
+</head>
+<body>
+    <div style="position:absolute;;width:100px;height:100px;background:#ff0000; transform-origin:50% 50%; "></div>
+    <div style="position:absolute;width:100px;height:100px;background:#ff0000;transform-origin:50% 50%; transform:matrix(0.866025,0.500000,-0.500000,0.866025,0,0) "></div>
+    <div style="position:absolute;width:100px;height:100px;background:#ff0000;transform-origin:50% 50%; transform:matrix(1,0,0,1,100,0) matrix(0.866025,0.500000,-0.500000,0.866025,0,0) "></div>
+    <script>
+        //判断是否支持mutation
+        var MutationObserver = window.MutationObserver ||
+        window.WebKitMutationObserver ||
+        window.MozMutationObserver;
+
+        var observeMutationSupport = !!MutationObserver;
+    </script>
+    <script>
+        //子元素变动
+        var callback = function (records) {
+            records.map(function (record) {
+                console.log('Mutation type: ' + record.type);
+                console.log('Mutation target: ' + record.target);
+            });
+        };
+        var options = {
+            //变动属性
+            'childList': true,    //子元素的变动
+            'attributes': true,   //属性的变动
+            //'characterData': true,//节点内容或节点文本的变动
+            //'subtree': true,       //所有下属节点（包括子节点和子节点的子节点）的变动
+
+            //
+            //'attributeOldValue': true,    //表示需要记录变动前的属性值
+            //'characterDataOldValue': true,//表示需要记录变动的数据值
+            //'attributeFilter': true       //表示需要观察的特定属性（比如['class','src']）
+
+        };
+        //Observer()
+        //Mutation Observer所观察的DOM变动（即上面代码的option对象），包含以下类型：
+        //childList：子元素的变动。
+        //attributes：属性的变动。
+        //characterData：节点内容或节点文本的变动。
+        //subtree：所有下属节点（包括子节点和子节点的子节点）的变动。
+        //想要观察哪一种变动类型，就在option对象中指定它的值为true。
+        //需要注意的是，不能单独观察subtree变动，
+        //必须同时指定childlist、attributes和characterdata中的一种或多种。
+        //除了变动类型，option对象还可以设定以下属性：
+        //attributeOldValue：值为true或者false。如果为true，则表示需要记录变动前的属性值。
+        //characterDataOldValue：值为true或者false。如果为true，则表示需要记录变动的数据值。
+        //attributeFilter：值为一个数组，表示需要观察的特定属性（比如['class','src']）。
+        var observer = new MutationObserver(callback);
+        observer.observe(document.body, options);
+
+        //disconnect方法和takeRecords方法
+        //observer.disconnect();  //disconnect方法用来停止观察。发生相应变动时，不再调用回调函数
+        //observer.takeRecords(); //takeRecords方法用来清除变动记录，即不再处理未处理的变动。
+
+        //MutationRecord对象
+        //DOM对象每次发生变化，就会生成一条变动记录。这个变动记录对应一个MutationRecord对象，该对象包含了与变动相关的所有信息。Mutation Observer处理的是一个个MutationRecord对象所组成的数组。
+
+        //MutationRecord对象包含了DOM的相关信息，有如下属性：
+
+        //type：观察的变动类型（attribute、characterData或者childList）。
+        //target：发生变动的DOM对象。
+        //addedNodes：新增的DOM对象。
+        //removedNodes：删除的DOM对象。
+        //previousSibling：前一个同级DOM对象，如果没有则返回null。
+        //nextSibling：下一个同级DOM对象，如果没有则返回null。
+        //attributeName：发生变动的属性。如果设置了attributeFilter，则只返回预先指定的属性。
+        //oldValue：变动前的值。这个属性只对attribute和characterData变动有效，如果发生childList变动，则返回null
+
+    </script>
+    <script>
+        //属性变动
+        var callback = function (records) {
+            records.map(function (record) {
+                console.log('Previous attribute value: ' + record.oldValue);
+            });
+        };
+
+        var mo = new MutationObserver(callback);
+
+        var element = document.getElementById('#my_element');
+
+        var options = {
+            'attributes': true,
+            'attributeOldValue': true
+        }
+
+        mo.observe(element, options);
+    </script>
+</body>
+</html>

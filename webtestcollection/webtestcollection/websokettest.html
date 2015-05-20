@@ -1,0 +1,25 @@
+﻿<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title></title>
+    <script>
+        if (WebSocket != undefined) {
+            var connection = new WebSocket('ws://localhost:17400');
+            connection.addEventListener('open', wsOpen, false);
+            function wsOpen(event) {
+                console.log('Connected to: ' + event.currentTarget.URL);
+            }
+            connection.onclose = wsClose;
+
+            function wsClose() {
+                console.log("Closed");
+            }
+
+            connection.close();
+        }
+    </script>
+</head>
+<body>
+</body>
+</html>

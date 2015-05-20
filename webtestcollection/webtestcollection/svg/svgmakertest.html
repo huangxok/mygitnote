@@ -1,0 +1,43 @@
+﻿<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <title></title>
+</head>
+<body>
+    <svg>
+        <defs>
+            <marker id="mCircle" markerWidth="20" markerHeight="20" refX="20" refY="10">
+                <circle cx="10" cy="10" r="8" style="fill: red; stroke: black;" />
+            </marker>
+            <marker id="mArrow" markerWidth="6" markerHeight="10"
+                    refX="0" refY="4" orient="auto">
+                <path d="M 0 0 4 4 0 8" style="fill: none; stroke: black;" />
+            </marker>
+
+            <marker id="mTriangle" markerWidth="5" markerHeight="10"
+                    refX="5" refY="5" orient="auto">
+                <path d="M 0 0 5 5 0 10 Z" style="fill: black;" />
+            </marker>
+        </defs>
+        <path d="M 40 20 140 20 A 40 30 0 0 1 160 50 L 160 110" style="marker-start: url(#mTriangle);marker-mid: url(#mArrow);marker-end: url(#mTriangle);fill: none; stroke: black;" />
+        <line x1="40" y1="40" x2="140" y2="40" style="stroke:blue" marker-start="url(#mCircle)" marker-mid="url(#mCircle)" marker-end="url(#mTriangle)"></line>
+        <line x1="0" y1="0" x2="100" y2="50" stroke="red" stroke-width="1" marker-start="url(#mTriangle)"></line>
+    </svg>
+    <script>
+        //maker 属性介绍
+        //markerWidth:maker的宽度
+        //markerHeight:maker的高度
+        //refX:用来连接线在maker上的位置 x坐标
+        //refY: 用来连接线在maker上的位置 y坐标
+        //如下面代码：
+        //<marker id="mCircle" markerWidth="20" markerHeight="20" refX="20" refY="10">
+        //        <circle cx="10" cy="10" r="8" style="fill: red; stroke: black;" />
+        //</marker>
+        //marker与circle共享坐标系  类似与在svg中画园 svg与circle的关系
+        //marker的宽度(markerWidth)和高度(markerHeight) 类似与 svg的高度和宽度
+        //这里就是marker的宽高为20px
+        //refX 和refY  这个是将线的的端点连接在 marker上的位置（x,y）
+
+    </script>
+</body>
+</html>

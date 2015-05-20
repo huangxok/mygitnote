@@ -1,0 +1,496 @@
+﻿<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <title></title>
+</head>
+<body>
+    <script>
+        var mbe_shell;
+        (function (mbe_shell) {
+            var __ = mbe_common.i18n.text;
+            var UIDomer = mbe_ui.UIDomer;
+            var MasterEditorApp = (function () {
+                function MasterEditorApp(_root) {
+                    var _this = this;
+                    this._root = _root;
+                    this._isEditing = false;
+                    this._materialLoader = new MasterMaterialLoader();
+                    this._activeMaterialCategory = 'interaction';
+                    this._editor = null;
+                    this._clipboard = null;
+                    this._docFrame = null;
+                    this._docWindow = null;
+                    this._doc = null;
+                    this._toBeRemovedDoc = null;
+                    this._scale = 1;
+                    this._notifications = [];
+                    this._isSaving = false;
+                    this._isExporting = false;
+                    this._isCreating = false;
+                    this._shouldPropertyPanelOpen = true;
+                    this._shouldPropertyPanelUpdate = false;
+                    this._errorMap = {
+                        'import': '导入文档失败',
+                        'open': '加载文档失败',
+                        'playback': '放映文档失败',
+                    };
+                    this._domer = new UIDomer({ doc: _root.ownerDocument });
+                    this._materialLoader.updateLists().then(function () { return _this._rootView.updateMaterialParts() || null; });
+                    _root.innerHTML = '';
+                    this._domer.render({ Class: MasterEditorShell, _app: this }, _root);
+                    this._rootView = _root.Component;
+                    this._docFrame = this._rootView.docFrame;
+                    _root.ownerDocument.defaultView.addEventListener('beforeunload', this._onBeforeUnload.bind(this));
+                    _root.ownerDocument.defaultView.addEventListener('resize', this._onLayoutChange.bind(this));
+                    this._clipboard = new mbe_common.ClipBoard(document);
+                    this._openDocumentManager().then(function () { return _this._openDocument(); });
+                    this._docFrame.addEventListener('load', this._initDocument.bind(this));
+                }
+                Object.defineProperty(MasterEditorApp.prototype, "isEditing", {
+                    get: function () {
+                        return this._isEditing;
+                    },
+                    set: function (v) {
+                        var old = this._isEditing;
+                        this._isEditing = v;
+                        if (old != v)
+                            this._rootView.updateLater();
+                    },
+                    enumerable: true,
+                    configurable: true
+                });
+                Object.defineProperty(MasterEditorApp.prototype, "isSaving", {
+                    set: function (s) {
+                        this._isSaving = s;
+                        this._rootView.updateFileOps();
+                    },
+                    enumerable: true,
+                    configurable: true
+                });
+                Object.defineProperty(MasterEditorApp.prototype, "isCreating", {
+                    set: function (c) {
+                        this._isCreating = c;
+                        this._rootView.updateFileOps();
+                    },
+                    enumerable: true,
+                    configurable: true
+                });
+                Object.defineProperty(MasterEditorApp.prototype, "isExporting", {
+                    set: function (ex) {
+                        this._isExporting = ex;
+                        this._rootView.updateFileOps();
+                    },
+                    enumerable: true,
+                    configurable: true
+                });
+                Object.defineProperty(MasterEditorApp.prototype, "isBusy", {
+                    get: function () {
+                        return this._isSaving || this._isExporting || this._isCreating;
+                    },
+                    enumerable: true,
+                    configurable: true
+                });
+                Object.defineProperty(MasterEditorApp.prototype, "allowSave", {
+                    get: function () {
+                        return !this._isSaving && !this._isCreating && this._editor && this._editor.hasUnsavedModification;
+                    },
+                    enumerable: true,
+                    configurable: true
+                });
+                Object.defineProperty(MasterEditorApp.prototype, "allowExport", {
+                    get: function () {
+                        return !this.isBusy && !!this._editor;
+                    },
+                    enumerable: true,
+                    configurable: true
+                });
+                Object.defineProperty(MasterEditorApp.prototype, "allowCreate", {
+                    get: function () {
+                        return !this.isBusy;
+                    },
+                    enumerable: true,
+                    configurable: true
+                });
+                Object.defineProperty(MasterEditorApp.prototype, "allowEdit", {
+                    get: function () {
+                        return this._editor && this._editor.isEditing;
+                    },
+                    enumerable: true,
+                    configurable: true
+                });
+                Object.defineProperty(MasterEditorApp.prototype, "allowUndo", {
+                    get: function () {
+                        return this.allowEdit && this._editor.undoManager.undoStackSize > 0;
+                    },
+                    enumerable: true,
+                    configurable: true
+                });
+                Object.defineProperty(MasterEditorApp.prototype, "allowRedo", {
+                    get: function () {
+                        return this.allowEdit && this._editor.undoManager.redoStackSize > 0;
+                    },
+                    enumerable: true,
+                    configurable: true
+                });
+                Object.defineProperty(MasterEditorApp.prototype, "materialLoader", {
+                    get: function () {
+                        return this._materialLoader;
+                    },
+                    enumerable: true,
+                    configurable: true
+                });
+                Object.defineProperty(MasterEditorApp.prototype, "coreEditor", {
+                    get: function () {
+                        return this._editor;
+                    },
+                    enumerable: true,
+                    configurable: true
+                });
+                Object.defineProperty(MasterEditorApp.prototype, "scale", {
+                    get: function () {
+                        return this._scale;
+                    },
+                    set: function (s) {
+                        this._scale = s;
+                        this._onLayoutChange();
+                    },
+                    enumerable: true,
+                    configurable: true
+                });
+                Object.defineProperty(MasterEditorApp.prototype, "notifications", {
+                    get: function () {
+                        return this._notifications;
+                    },
+                    enumerable: true,
+                    configurable: true
+                });
+                Object.defineProperty(MasterEditorApp.prototype, "shouldPropertyPanelOpen", {
+                    get: function () {
+                        return this._shouldPropertyPanelOpen;
+                    },
+                    set: function (s) {
+                        this._shouldPropertyPanelOpen = s;
+                        this._rootView.updatePropertyPanel();
+                    },
+                    enumerable: true,
+                    configurable: true
+                });
+                MasterEditorApp.prototype.newDocument = function () {
+                    var _this = this;
+                    this.isCreating = true;
+                    this._removeDocLater();
+                    this._storageManager.createDocument().then(function (etbd) { return _this._loadDocument(etbd.editorFileUrl) || null; }, function (err) {
+                        _this.isCreating = false;
+                        loge(err); //TODO: 处理错误
+                        _this.notify('新建文档失败');
+                        alert('新建文档失败');
+                        return null;
+                    });
+                };
+                MasterEditorApp.prototype.importDocument = function (file) {
+                    var _this = this;
+                    this.isCreating = true;
+                    this._removeDocLater();
+                    this.notify('正在解析：' + file.name);
+                    this._storageManager.createDocumentFromArchive(file).then(function (etbd) {
+                        _this.notify('解析完成：' + file.name);
+                        _this._loadDocument(etbd.editorFileUrl);
+                        return null;
+                    }, function (err) {
+                        _this.isCreating = false;
+                        _this.notify('解析失败：' + file.name); //TODO: 处理错误
+                        //logw('docDir: ' + this._storageManager.editingDocument.docDir);
+                        _this._loadDocument('about:blank');
+                        loge(err, err.stack);
+                        return null;
+                    });
+                };
+                MasterEditorApp.prototype.save = function () {
+                    var _this = this;
+                    if (this._editor && this._editor.hasUnsavedModification) {
+                        this.isSaving = true;
+                        this.notify('正在保存');
+                        this._editor.save().then(function () {
+                            _this.isSaving = false;
+                            _this.notify('保存完毕');
+                            return null;
+                        }, function (err) {
+                            _this.isSaving = false;
+                            alert('保存失败');
+                            _this.notify('保存失败');
+                        });
+                    }
+                };
+                MasterEditorApp.prototype.exportDocument = function () {
+                    var _this = this;
+                    this.notify('正在导出');
+                    this._editor.archive().then(function (blob) {
+                        _this.notify('导出成功');
+                        var a = document.createElement('a');
+                        if (typeof blob === 'string')
+                            a.href = _this._storageManager.storage.pathToUrl(blob);
+                        else
+                            a.href = URL.createObjectURL(blob);
+                        a['download'] = 'book.epub';
+                        document.body.appendChild(a);
+                        a.click();
+                        document.body.removeChild(a);
+                        if (typeof blob !== 'string')
+                            URL.revokeObjectURL(a.href);
+                        return null;
+                    }, function (err) {
+                        logw(err.stack || err);
+                        _this.notify('导出失败');
+                        return null;
+                    }).then(function () { return _this.isExporting = false; });
+                };
+                MasterEditorApp.prototype.notify = function (noti) {
+                    // TODO allow multiple
+                    this._notifications[0] = noti;
+                    this._notifications.length = 1;
+                    this._rootView.updateNotification();
+                };
+                MasterEditorApp.prototype.insertMaterial = function (href) {
+                    var m = this._materialLoader.load(href);
+                    if (!m) {
+                        this._reportError('无此数据：' + href, 'insertMaterial');
+                        return;
+                    }
+                    var elt;
+                    if (m.data) {
+                        if (m.dataType === 'node') {
+                            elt = m.data.cloneNode(true);
+                            m.description && elt.setAttribute('title', m.description);
+                            if (elt.localName === 'math') {
+                                var p = document.createElement('p');
+                                p.appendChild(elt);
+                                elt = p;
+                            }
+                        }
+                    }
+                    else if (m.contentType) {
+                        var url = mbe_common.IOUtils.toAbsoluteUrl(m.href);
+                        var elt = etb_book.createControlElementFromBlob({ src: url, type: m.contentType });
+                        m.description && elt.setAttribute('title', m.description);
+                    }
+                    if (!elt) {
+                        this._reportError('不支持的数据：' + href, 'insertMaterial');
+                        return;
+                    }
+                    this._editor.beginInteractiveInserting([elt]);
+                };
+                MasterEditorApp.prototype.insertFiles = function (files, asAttachment) {
+                    if (asAttachment === void 0) { asAttachment = false; }
+                    this._editor && this._editor.beginInteractiveInsertingFiles(files, asAttachment);
+                };
+                Object.defineProperty(MasterEditorApp.prototype, "activeMaterialCategory", {
+                    /**
+                    * 选中的资源面板分类
+                    */
+                    get: function () {
+                        return this._activeMaterialCategory;
+                    },
+                    set: function (category) {
+                        this._activeMaterialCategory = category;
+                        this._rootView.updateCategorySelection();
+                    },
+                    enumerable: true,
+                    configurable: true
+                });
+                MasterEditorApp.prototype.showPage = function (pageNo) {
+                    var ed = this._editor;
+                    ed.showPage(pageNo);
+                    var rect = ed.getPageRect(pageNo);
+                    var margin = ed.getPageMargin(pageNo);
+                    this._docFrame.parentNode.scrollTop = (rect.top - margin.top) * this._scale;
+                };
+                MasterEditorApp.prototype.playback = function () {
+                    var _this = this;
+                    var etb = this._storageManager.editingDocument;
+                    this._editor.generatePlaybackFile().then(function () {
+                        if (mbe_config.embed)
+                            mbe_embed.router.emitPlayback(etb.playbackFile);
+                        else
+                            window.open("doc/reader-embed.xhtml#docUrl=" + etb.playbackFileUrl);
+                        return null;
+                    }, function (err) { return _this._reportError(err, 'playback', true) || null; });
+                };
+                MasterEditorApp.prototype._openDocument = function () {
+                    var _this = this;
+                    this.isCreating = true;
+                    var arf = mbe_config.archiveFile, rel = mbe_config.archiveFileIsRelative;
+                    if (arf) {
+                        mbe_run.archiveFile = arf;
+                        mbe_run.archiveFileIsRelative = rel;
+                        (rel ? this._storageManager.storage.getBlob(arf) : mc.IOUtils.getFile(arf)).then(function (blob) { return _this._storageManager.createDocumentFromArchive(blob, mbe_config.docDir); }).then(function (etbd) { return _this._loadDocument(etbd.editorFileUrl) || null; }, function (err) {
+                            _this.isCreating = false;
+                            _this._reportError(err, 'init import', true);
+                            return null;
+                        });
+                    }
+                    else {
+                        this._storageManager.resumeOrCreateDocument().then(null, function (err) {
+                            // embed 条件下，不自动尝试新建文档。TODO 作为选项？
+                            if (mbe_config.embed)
+                                throw err;
+                            loge(err, err.stack); //TODO: 恢复失败，是否报告给用户？
+                            return _this._storageManager.createDocument();
+                        }).then(function (etbd) { return _this._loadDocument(etbd.editorFileUrl) || null; }, function (err) {
+                            _this._reportError(err, 'init open', true);
+                            if (mbe_config.embed)
+                                throw err;
+                            return _this._storageManager.createDummyDocument();
+                        }).then(function (etbd) { return etbd && (_this._loadDocument(etbd.editorFileUrl) || null); }, function (err) {
+                            _this.isCreating = false;
+                            var msg = '加载文档失败：' + err + '\n' + err['stack'];
+                            loge(msg);
+                        }).fail(function (err) {
+                            _this.isCreating = false;
+                            var msg = '加载文档失败：' + err + '\n' + err['stack'];
+                            loge(msg);
+                        });
+                    }
+                };
+                MasterEditorApp.prototype._initDocument = function () {
+                    var _this = this;
+                    try {
+                        this._docWindow = this._docFrame.contentWindow;
+                        this._doc = this._docWindow.document;
+                        mbe_common.DOMExtension.fixBrowserBugs(this._docWindow);
+                        mbe_common.DOMExtension.extendsCollection(this._docWindow);
+                        //TODO 这个确认会引起新建、导入等问题
+                        //this._docWindow.addEventListener('beforeunload', ev => ev.returnValue = '将离开编辑器，请确认已经保存');
+                        this._removeOldDoc();
+                        // 在这里才返回是为了允许通过设置 'about:blank' 来关闭当前文档。
+                        // console.log('_initDocument:', this._docFrame.src, this._doc.URL);
+                        if (this._doc.URL === 'about:blank')
+                            return;
+                        var rootView = this._rootView;
+                        var editor = new mbe_core.CoreEditor(this._doc, this._storageManager.editingDocument);
+                        this._editor = this._doc.mbeEditor = editor;
+                        this._editor.addListener('layout', this._onLayoutChange.bind(this));
+                        // 侦听stackSizeChanged事件
+                        this._editor.undoManager.addListener('stackSizeChanged', function () { return rootView.updateFileOps(); });
+                        this._editor.addListener('pages', function () { return rootView.updatePages(); });
+                        this._editor.addListener('load', function () {
+                            editor.isEditing = true;
+                            //确保新建文档后界面更新
+                            //this.emit('coreEditorLoaded');
+                            rootView.updateLater();
+                        });
+                        this._editor.addListener('selectionChanged', this._onSelectionChanged.bind(this));
+                        this._editor.addListener('selectionListChanged', function () { return _this.shouldPropertyPanelOpen = true; });
+                        this._clipboard.bindEditor(this._editor);
+                        //this._initConnectTools();
+                        //this._initMergeSplitTools();
+                        this._trackResourceLoader();
+                        this.isCreating = false;
+                        if (mbe_config.embed)
+                            mbe_embed.router.emitInitResult();
+                        mbe_run.init = false;
+                    }
+                    catch (e) {
+                        this.isCreating = false;
+                        this._reportError(e, 'init open initDocument');
+                    }
+                };
+                MasterEditorApp.prototype._openDocumentManager = function () {
+                    var _this = this;
+                    return mbe_core.DocumentManager.newInstance().then(function (sm) { return _this._storageManager = sm; }, function (err) {
+                        _this._reportError(err, 'open DocumentManager', true);
+                        throw err;
+                    });
+                };
+                MasterEditorApp.prototype._loadDocument = function (url) {
+                    //TODO 先屏蔽界面功能
+                    //logi('>>>>_loadDocument:' + url);
+                    this._docFrame.src = 'about:blank';
+                    this._docFrame.src = url;
+                };
+                MasterEditorApp.prototype._removeDocLater = function () {
+                    this._toBeRemovedDoc = this._storageManager.editingDocument;
+                    if (!this._toBeRemovedDoc)
+                        return;
+                    this._toBeRemovedDoc.contentDocument = this._doc;
+                    console.log('_removeDocLater:' + (this._doc ? this._doc.URL : null));
+                };
+                MasterEditorApp.prototype._removeOldDoc = function () {
+                    if (this._toBeRemovedDoc) {
+                        var doc = this._toBeRemovedDoc.contentDocument;
+                        // 这对于 FF (32-) 是必要的，否则媒体文件仍处于打开状态一段时间，会无法删除。
+                        // 见 https://bugzilla.mozilla.org/show_bug.cgi?id=1068596
+                        // TODO 对于 detached 媒体元素，仍然无法关闭相应的文件。
+                        doc && doc.querySelectorAll('video, audio').forEach(function (m) {
+                            m.src = '';
+                            m.load();
+                        });
+                        var removedDir = this._toBeRemovedDoc.containerDir;
+                        this._toBeRemovedDoc.remove().then(function () {
+                            console.log('已删除 ' + removedDir);
+                            return null;
+                        }, function (err) {
+                            console.log('删除失败 ' + removedDir);
+                            return null;
+                        });
+                        this._toBeRemovedDoc = null;
+                    }
+                };
+                MasterEditorApp.prototype._onLayoutChange = function () {
+                    this._rootView.updateDocLayout();
+                };
+                MasterEditorApp.prototype._onSelectionChanged = function () {
+                    var _this = this;
+                    if (this._shouldPropertyPanelUpdate)
+                        return;
+                    else {
+                        this._shouldPropertyPanelUpdate = true;
+                        setTimeout(function () {
+                            _this._shouldPropertyPanelUpdate = false;
+                            _this._rootView.updatePropertyPanel();
+                        }, 300);
+                    }
+                };
+                MasterEditorApp.prototype._trackResourceLoader = function () {
+                    var _this = this;
+                    var rl = this._editor.resourceLoader;
+                    rl.addListener('start', function (task) { return _this.notify('加载资源：' + task.name); });
+                    rl.addListener('clear', function (task) { return setTimeout(function () { return _this.notify('就绪'); }, 5000); });
+                    rl.addListener('done', function (task) { return _this.notify('加载完毕： ' + task.name + '，大小：' + task.size + ' 字节'); });
+                    rl.addListener('progress', function (task) { return _this.notify('加载资源：' + task.name + '，进度：' + (task.progress / task.size).toFixed(1) + '%，大小：' + task.size + ' 字节'); });
+                    rl.addListener('fail', function (task) { return _this.notify('加载失败：' + task.name); });
+                };
+                MasterEditorApp.prototype._reportError = function (err, context, showDialog) {
+                    var _this = this;
+                    if (showDialog === void 0) { showDialog = false; }
+                    //console.log('_reportError:context:' + context);
+                    var msg;
+                    context.split(' ').forEach(function (t) { return !msg && (t in _this._errorMap) && (msg = t); });
+                    msg = this._errorMap[msg] + ': ' + err;
+                    loge(msg, err['stack']); //TODO: 处理错误
+                    this.notify(msg);
+                    if (mbe_config.embed)
+                        mbe_embed.router.emitError(err, context);
+                    if (!mbe_config.silent && showDialog)
+                        alert(msg);
+                };
+                MasterEditorApp.prototype._onBeforeUnload = function (ev) {
+                    if (!mbe_config.embed && this._editor.hasUnsavedModification)
+                        ev.returnValue = '将关闭编辑器，但是文件未保存，请确认。';
+                };
+                MasterEditorApp.main = function () {
+                    mbe_common.DOMExtension.extendsAll(window);
+                    // 防止被拖放的文档替换掉
+                    mbe_common.BrowserUtils.preventDefaultDnD(document);
+                    mbe_common.BrowserUtils.preventContextMenu(document);
+                    var app = new MasterEditorApp(document.body);
+                    mbe_run.app = app;
+                };
+                return MasterEditorApp;
+            })();
+            mbe_shell.MasterEditorApp = MasterEditorApp;
+        })(mbe_shell || (mbe_shell = {}));
+
+
+    </script>
+</body>
+</html>

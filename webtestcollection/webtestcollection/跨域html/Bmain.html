@@ -1,0 +1,39 @@
+﻿<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta http-equiv="content-type" content="text/html; charset=utf-8" />
+    <title>iframe window </title>
+
+    <script type="text/javascript">
+        // iframe js function   
+        // 为Amain提供调用
+        function fIframe() {
+            alert('Bmain中 fIframe方法');
+        }
+
+        // exec main function  
+        // Bmain.html通过关系链接调用Amain.html中的方法   Aiframe.html和Amain.html 同域
+        // parent.parent.fIframe();
+        function exec_main() {
+            if (typeof (exec_obj) == 'undefined') {
+                exec_obj = document.createElement('iframe');
+                exec_obj.name = 'tmp_frame';
+                exec_obj.src = 'http://192.168.1.72:80/Aiframe.html';
+                //exec_obj.style.display = 'none';
+                document.body.appendChild(exec_obj);
+            } else {
+                exec_obj.src = 'http://192.168.1.72:80/Aiframe.html?' + Math.random();
+            }
+        }
+    </script>
+
+</head>
+
+<body>
+    <p>B.html iframe</p>
+    <p>
+        <input type="button" value="exec main function" onclick="exec_main()" />
+        <input type="button" value="exec main function" onclick="fIframe()" />
+    </p>
+</body>
+</html>

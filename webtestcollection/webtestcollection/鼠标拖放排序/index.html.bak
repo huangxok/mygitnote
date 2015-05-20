@@ -1,0 +1,228 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+
+	<meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+	<title>纯js实现拖拽排序特效Sortable插件 - xw素材网</title>
+	<meta name="viewport" content="width=device-width, initial-scale=1"/>
+	<link rel="stylesheet" href="css/zzsc.css">
+	<link href='http://fonts.googleapis.com/css?family=Roboto:300' rel='stylesheet' type='text/css'/>
+
+	<style>
+		.box{width:300px;height:10px;background:red;}
+	</style>
+</head>
+<body>
+	<div class="container">
+		<div style="padding: 80px 150px 0; height: 160px;">
+			<a class="logo" href="http://sc.chinaz.com">
+				<img src="images/logo.png"/>
+			</a>
+			<h1 data-force="40" data-force-y="2.5">
+			现代浏览器的JavaScript库和触摸设备。No jQuery。
+			</h1>
+		</div>
+	</div>
+
+
+	<div class="container" style="height: 520px">
+		<div data-force="30" class="layer block" style="left: 14.5%; top: 0; width: 37%">
+			<div class="layer title">List A</div>
+			<ul id="foo" class="block__list block__list_words">
+				<li>бегемот
+					<div class="box">
+					</div>
+				</li>
+				<li>корм</li>
+				<li>антон</li>
+				<li>сало</li>
+				<li>железосталь</li>
+				<li>валик</li>
+				<li>кровать</li>
+				<li>краб</li>
+			</ul>
+		</div>
+<!-- 
+		<div data-force="18" class="layer block" style="left: 58%; top: 143px; width: 40%;">
+			<div class="layer title">List B</div>
+			<ul id="bar" class="block__list block__list_tags">
+				<li>казнить</li>
+				<li>,</li>
+				<li>нельзя</li>
+				<li>помиловать</li>
+			</ul>
+		</div> -->
+	</div>
+
+
+<!-- 	<div class="container">
+		<div id="multi" style="margin-left: 30px"> -->
+			<!-- <div>
+				<div data-force="5" class="layer title title_xl">Multi</div>
+			</div>
+			
+			<div class="layer tile" data-force="30">
+				<div class="tile__name">Group A</div>
+				<div class="tile__list">
+					<img src="images/59436_1391411357920_1388516_s.jpg"/>
+					
+					<img src="images/941190_10151608397684663_1532692251_s.jpg"/>
+					
+					<img src="images/382696_10150378364701671_1792621129_a.jpg"/>
+					
+					<img src="images/552948_430685950285752_1435082176_a.jpg"/>
+				</div>
+			</div> -->
+
+			<!-- <div class="layer tile" data-force="25">
+				<div class="tile__name">Group B</div>
+				<div class="tile__list">
+					<img src="images/558916_4874661741992_448469446_s.jpg"/>
+					
+					<img src="images/68347_385372304875713_1358705380_a.jpg"/><img src="images/424349_465457316812937_2106915541_s.jpg"/>
+				</div>
+			</div> -->
+
+			<!-- <div class="layer tile" data-force="20">
+				<div class="tile__name">Group C</div>
+				<div class="tile__list">
+					<img src="images/303317_320632284665935_15996162_a.jpg"/><img src="images/484507_4207733265938_1693034881_s.jpg"/>
+				</div>
+			</div> -->
+
+	<!-- 	</div>
+			</div> -->
+
+<!-- 
+	<div class="container" style="margin-top: 100px">
+		<p>&nbsp;</p>
+		<p>&nbsp;</p>
+		<p>&nbsp;</p>
+	</div> -->
+
+
+
+	<script src="js/Sortable.js"></script>
+
+	<script>
+		(function (){
+			var console = window.console;
+
+			if( !console.log ){
+				console.log = function (){
+					alert([].join.apply(arguments, ' '));
+				};
+			}
+
+
+			new Sortable(foo, {
+				group: "words",
+				onAdd: function (evt){ console.log('onAdd.foo:', evt.detail); },
+				onUpdate: function (evt){ console.log('onUpdate.foo:', evt.detail); },
+				onRemove: function (evt){ console.log('onRemove.foo:', evt.detail); }
+			});
+/*
+			new Sortable(bar, {
+				group: "words",
+				onAdd: function (evt){ console.log('onAdd.bar:', evt.detail); },
+				onUpdate: function (evt){ console.log('onUpdate.bar:', evt.detail); },
+				onRemove: function (evt){ console.log('onRemove.bar:', evt.detail); }
+			});*/
+
+/*
+			new Sortable(multi, {
+				draggable: '.tile',
+				handle: '.tile__name'
+			});
+
+			[].forEach.call(multi.getElementsByClassName('tile__list'), function (el){
+				new Sortable(el, { group: 'photo' });
+			});*/
+		})();
+
+
+
+		// Background
+		/*
+		document.addEventListener( "DOMContentLoaded", function (){
+			function setNoiseBackground(el, width, height, opacity){
+				var canvas = document.createElement("canvas");
+				var context = canvas.getContext("2d");
+
+				canvas.width = width;
+				canvas.height = height;
+
+				for( var i = 0; i < width; i++ ){
+					for( var j = 0; j < height; j++ ){
+						var val = Math.floor(Math.random() * 255);
+						context.fillStyle = "rgba(" + val + "," + val + "," + val + "," + opacity + ")";
+						context.fillRect(i, j, 1, 1);
+					}
+				}
+
+				el.style.background = "url(" + canvas.toDataURL("image/png") + ")";
+			}
+
+			setNoiseBackground(document.getElementsByTagName('body')[0], 50, 50, 0.02);
+		}, false );
+		*/
+	</script>
+
+
+
+	<!-- Parallax -->
+	<script>/*
+		(function (){
+			var x, y;
+
+			var items = [].slice.call(document.querySelectorAll('.layer')).map(function (el){
+				var rect = el.getBoundingClientRect();
+				el.x = rect.left;
+				el.y = rect.top;
+				el.w = rect.right - rect.left;
+				el.h = rect.bottom - rect.top;
+				el.fX = el.getAttribute('data-force-x') || el.getAttribute('data-force') || 10;
+				el.fY = el.getAttribute('data-force-y') || el.getAttribute('data-force') || 10;
+				return el;
+			});
+
+
+			document.addEventListener('dragover', function (evt){
+				x = evt.clientX;
+				y = evt.clientY;
+			}, false);
+
+
+			document.addEventListener('mousemove', function (evt){
+				x = evt.clientX;
+				y = evt.clientY;
+			}, false);
+
+
+			(function _loop(){
+				if( x && y ){
+					var winWidth = window.innerWidth;
+					var winHeight = window.innerHeight;
+					var halfWidth = winWidth / 2;
+					var halfHeight = winHeight / 2;
+
+					var rx = x - winWidth/2;
+					var ry = winHeight/2 - y;
+
+					items.forEach(function (el){
+						var dx = el.w/el.fX * (rx / -halfWidth);
+						var dy = el.h/el.fY * (ry / halfHeight);
+						el.style['transform'] =
+						el.style['-webkit-transform'] = 'translate('+dx+'px,'+dy+'px)';
+					});
+				}
+
+				requestAnimationFrame(_loop);
+			})();
+		})();
+		*/
+	</script>
+
+</body>
+</html>

@@ -1,0 +1,121 @@
+﻿<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <title></title>
+    <style>
+        /*[data-control=mainbo_imatch] {
+            -webkit-user-select: none;
+            -moz-user-select: none;
+            -ms-user-select: none;
+            user-select: none;
+        }*/
+
+
+        .mainbo_imatch_question {
+            width: 100%;
+            height: 80%;
+            position: relative;
+            border: 1px solid #739cc3;
+            text-align: center;
+        }
+
+        .questioncolleciton {
+            padding: 0;
+            margin: 0;
+            width: 100%;
+            height: 45%;
+            position: relative;
+        }
+
+        .questionitemp {
+            margin: 0;
+            padding: 0;
+            position: absolute;
+            width: 80px;
+            height: 50px;
+            overflow: hidden;
+        }
+
+            .questionitemp:empty::before {
+                content: "输入文字";
+                font-style: italic;
+                color: rgb(100, 100, 100);
+            }
+
+        .answer {
+            width: 100%;
+            height: 55%;
+            position: relative;
+        }
+
+            .answer p {
+                position: absolute;
+            }
+
+        .mainbo_imatch_question p {
+            margin: 0;
+            padding: 0;
+            border: 1px solid #739cc3;
+            overflow: hidden;
+        }
+
+        .imatch_bor {
+            width: 100px;
+            height: 60px;
+            position: absolute;
+            border: 1px solid rgba(14, 154, 42,0.5);
+            display: none;
+        }
+
+        .mainbo_imatch_mask {
+            /*pointer-events: none;*/
+            display: none;
+            position: absolute;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(120,120,120,0.5);
+            opacity: 0.5;
+        }
+
+        .mainbo_imatch_ibrmask {
+            display: block;
+            position: absolute;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(120,120,120,0.5);
+            opacity: 0.5;
+        }
+
+        .mainbo_imatch_button {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            width: 100%;
+            height: 16%;
+            position: absolute;
+            bottom: 0%;
+            text-align: center;
+        }
+
+        .svgmask {
+            position: relative;
+            left: calc(50%-52px);
+            top: 25%;
+            height: 105px;
+            width: 105px;
+            /*display: none;*/
+        }
+    </style>
+</head>
+<body>
+    <div data-control="mainbo_imatch" data-_type="result" class="mainbo_imatch" style="width: 500px;height:500px;top:0; left:0;">
+        <div class="mainbo_imatch_content">
+            <p xmlns="http://www.w3.org/1999/xhtml" contenteditable="" class="questionitemp all_p" style="width: 153.333px; height: 108px; left: 10px; top: 36px;">ppppp</p>
+        </div>
+    </div>
+</body>
+</html>

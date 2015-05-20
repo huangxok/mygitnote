@@ -1,0 +1,52 @@
+﻿<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <title>CSS背景透明文字不透明-柯乐义</title>
+    <style type="text/css">
+        .item {
+            width: 600px;
+            font: 17px '微软雅黑';
+            height: 300px;
+            margin: 0 auto;
+            position: relative;
+        }
+
+        .hi, h3 {
+            position: absolute;
+            left: 0;
+            bottom: 0;
+            width: 100%;
+            height: 36px;
+        }
+
+        h3 {
+            line-height: 30px;
+            color: #fff;
+            margin: 0;
+            z-index: 1;
+        }
+        /*加入z-index值，文字就不会透明了*/
+        .hi {
+            background: blue;
+            opacity: 0.3;
+        }
+        /*背景透明*/
+    </style>
+</head>
+<body>
+    <h1>Div背景透明文字不透明</h1>
+    <div class="item">
+        <p>
+            <a href="http://keleyi.com/menu/webqd/">
+                <img width="500" height="500" alt="美女柯乐义" src="Images/3.jpg" />
+                        </a>
+        </p>
+        <h3>你看！这行文字下面的背景透明了，而文字没有透明。</h3>
+        <div class="hi"></div>
+    </div>
+    <div>
+        <br />
+        支持Chrome，火狐，Opera等浏览器。<a href="http://keleyi.com/a/bjad/y6ppyl4w.htm">原文</a>
+    </div>
+</body>
+</html>

@@ -1,0 +1,141 @@
+﻿<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>Untitled Document</title>
+
+    <style type="text/css">
+        * {
+            margin: 0;
+            padding: 0;
+        }
+
+        ul {
+            list-style: none;
+        }
+
+        .box {
+            width: 200px;
+            margin: 30px auto;
+        }
+
+            .box ul li {
+                line-height: 32px;
+                border-bottom: 1px solid #999;
+            }
+
+                .box ul li a {
+                    display: block;
+                    background: url(jian.png) no-repeat right center;
+                    cursor: pointer;
+                }
+
+                .box ul li div {
+                    line-height: 28px;
+                    background: #0FF;
+                    margin: 4px 0;
+                    display: none;
+                }
+
+                .box ul li a.active {
+                    background: url(jian.png) no-repeat right center;
+                }
+
+                .box ul li a.current {
+                    background: url(jianes.png) no-repeat right center;
+                    color: #09f;
+                }
+
+                .box ul li a.another {
+                    background: url(jia.png) no-repeat right center;
+                    color: #09f;
+                }
+
+                .box ul li a.aa {
+                    color: #09f;
+                }
+    </style>
+
+
+
+    <script type="text/javascript" src="jquery.min.js"></script>
+    <script type="text/javascript">
+
+        $().ready(function () {
+
+
+
+            $(".box ul li a").toggle(function () {
+                debugger;
+                var a = $(this).siblings("div").show();
+                if (a.show) {
+                    alert(111)
+                }
+                $(this).addClass("current");
+                $(".box ul li a").unbind("mouseover");
+
+
+            }, function () {
+                debugger;
+                var a = $(this).siblings("div").hide();
+
+                $(this).addClass("active").removeClass("current");
+
+                $(".box ul li a").mouseover(function () {
+                    $(this).addClass("another")
+                })
+
+                $(".box ul li a").mouseout(function () {
+                    $(this).removeClass("another")
+                })
+            })
+
+
+
+            $(".box ul li a").mouseover(function () {
+                $(this).addClass("another")
+            })
+
+            $(".box ul li a").mouseout(function () {
+                $(this).removeClass("another")
+            })
+        })
+
+
+    </script>
+
+</head>
+
+<body>
+
+
+    <div class="box">
+
+        <ul>
+
+            <li>
+                <a>我是第一名</a>
+                <div>弄回家发松岛枫欧式发佛山的发货搜房我诶饿哦日算法哦私服哦萨福偶尔哦松岛枫松岛枫</div>
+            </li>
+
+            <li>
+                <a>我是第二名</a>
+                <div>弄回家发松岛枫欧式发佛山的发货搜房我诶饿哦日算法哦私服哦萨福偶尔哦松岛枫松岛枫</div>
+            </li>
+
+            <li>
+                <a>我是第三名</a>
+                <div>弄回家发松岛枫欧式发佛山的发货搜房我诶饿哦日算法哦私服哦萨福偶尔哦松岛枫松岛枫</div>
+            </li>
+
+            <li>
+                <a>我是第四名</a>
+                <div>弄回家发松岛枫欧式发佛山的发货搜房我诶饿哦日算法哦私服哦萨福偶尔哦松岛枫松岛枫</div>
+            </li>
+
+        </ul>
+
+    </div>
+
+</body>
+</html>

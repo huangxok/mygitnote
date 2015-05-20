@@ -1,0 +1,333 @@
+﻿<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <title></title>
+    <script>
+        //var svglib;
+        //(function () {
+        //    var Line = function (x1, y1, x2, y2) {
+        //        this.x1 = x1;
+        //        this.y1 = y1;
+        //        this.x2 = x2;
+        //        this.y2 = y2;
+        //    }
+        //    Line.Style = function (o) {
+        //        for (p in o) {
+        //            Line
+        //        }
+        //    }
+        //    Line.Create = function () {
+        //        var createElement = SVGElement(Line);
+        //    }
+        //})(svglib || (svglib = {}))
+    </script>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+        }
+
+        html, body {
+            height: 100%;
+        }
+    </style>
+    <script src="jscolor/jscolor.js"></script>
+</head>
+<body>
+
+    <div id="box" style="width:100%;height:100%">
+        <!--<svg id="dragBox" style="width:100px;height:100px;background-color:#ff6a00; position: absolute;">
+            <rect x="0" y="0" width="100" height="100" style="fill:#ff6a00"></rect>
+            <text x="0" y="80" style="font-size:10px;">elll</text>
+        </svg>
+        <svg id="dragBox" style="width:100px;height:100px;position:absolute;">
+            <polygon points="0,40 70,40 70,0 100,50 70,100 70,60 0,60 0,40" style="fill:#4cff00"></polygon>
+        </svg>
+        <img src="kiwi.svg" />-->
+        <svg width="20" height="20" style="width:20px;height:20px;">
+            <polygon points="0,8 14,8 14,0 20,10 14,20 14,12 0,12 0,8" style="fill:#4cff00"></polygon>
+        </svg>
+        <!--<input type="text" onclick="a()" />-->
+        <input id="but" type="button" value="addattribute" />
+    </div>
+
+
+    <script>
+        var $11 = function (name, namespace) {
+            return new DocElement.Element(name, namespace)
+        }
+        //操作DOM
+        var createElementsvg;
+        (function (createElementsvg) {
+            function svgelement(name, props) {
+                this.name = name;
+                this.xmls = 'http://www.w3.org/2000/svg';
+                this.prop = props;
+            }
+            svgelement.CreateElement = function (name, props) {
+                var el = new svgelement(name, props);
+                if (el.prop) {
+                    svgelement.Addattribute(el, el.props)
+                }
+                return document.createElementNS(el.xmls, el.name)
+            }
+            svgelement.Setattribute = function (el, props) {
+                for (p in props) {
+                    if (typeof props[p] === 'object' && p.toLowerCase() === 'style') {
+                        var s = "";
+                        for (pp in props[p]) {
+                            s += pp + ":" + props[p][pp];
+                            s += ";"
+                        }
+                        el.setAttribute(p, s);
+                    }
+                    else {
+                        el.setAttribute(p, props[p]);
+                    }
+                }
+            }
+            svgelement.Appendstyle = function (el, props) {
+                if (el.style != "") {
+                    var style = el.getAttribute('style')
+                    for (p in props) {
+                        style += p + ":" + props[p] + ";"
+                        el.setAttribute('style', style);
+                    }
+                    alert(style);
+                }
+            }
+            createElementsvg.svg = svgelement;
+        })(createElementsvg || (createElementsvg = {}))
+        //获取元素
+
+        var DocElement;
+        (function (DocElement) {
+            function Element(name, namespace) {
+                this.name = name;
+                this.namespase = namespace;
+                this.elements = [];
+                //this.getElementbyId = function (id) {
+                //    this.elements.push(document.getElementById(id));
+                //    return this;
+                //}
+                //this.getElementsByClassName = function (classname) {
+                //    this.elements.push(document.getElementsByClassName(classname));
+                //    return this;
+                //}
+                //this.getElementsByName = function (name) {
+                //    this.elements.push(document.getElementsByName(name));
+                //    return this;
+                //};
+                //this.getElementsByTagName = function (tagname) {
+                //    this.elements.push(document.getElementsByTagName(tagname));
+                //    return this;
+                //};
+                //this.getElementsByTagNameNS = function (tagname, namespace) {
+                //    this.elements.push(document.getElementsByTagNameNS(namespace, tagname));
+                //    return this;
+                //};
+            }
+            Element.prototype.ById = function (id) {
+                this.elements.push(document.getElementsByClassName(classname));
+                return this;
+            };
+            Element.prototype.ByClassName = function (classname) {
+                this.elements.push(document.getElementsByClassName(el.name));
+                return this;
+            };
+            Element.prototype.ByName = function (name) {
+                this.elements.push(document.getElementsByName(el.name));
+                return this
+            };
+            Element.prototype.ByTagName = function (tagname) {
+                this.elements.push(document.getElementsByTagName(el.name))
+                return this;
+            }
+            Element.prototype.ByTagNameNS = function (tagname, namespace/*http://www.w3.org/2000/svg is expect*/) {
+                var el = new Elment(tagname);
+                var ns = el.namespase ? el.namespase : 'http://www.w3.org/2000/svg';
+                this.elements.push(document.getElementsByTagNameNS(namespace, ns));
+                return this;
+            };
+            Element.prototype.create = function (tagname, namespace) {
+                var el = new Element(tagname, namespace);
+                var ns = el.namespase ? el.namespase : 'http://www.w3.org/2000/svg';
+                if (ns) {
+                    this.elements.push(document.createAttributeNS(namespace, el.name));
+                    return this;
+                }
+                this.elements.push(document.createElement(el.name));
+                return this;
+            }
+            Element.setAttribute = function (o) {
+
+            }
+            DocElement.Element = Element;
+        })(DocElement || (DocElement = {}))
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        var DocAttribute;
+        (function (DocAttribute) {
+            function Attribute() {
+                this.name = name;
+            }
+            Attribute.getAttribute = function () {
+
+            }
+        })(DocAttribute || (DocAttribute = {}))
+        var createElement;
+        (function (createElement) {
+            function Element(name, namespace) {
+                this.name = name;
+                this.namespace = namespace;
+            };
+            createElement.create = function (tagname, namespace) {
+                var el = new Element(name, namespace);
+                if (el.namespace) {
+                    return document.createElementNS(namespace, tagname);
+                }
+                return document.createElement(tagname);
+            }
+        })(createElement || (createElement = {}))
+
+
+        var svg = createElementsvg.svg.CreateElement('svg');
+        createElementsvg.svg.Setattribute(svg, { id: "dragBox", style: { "fill": "#4cff00", width: "100px", height: "100px", "position": "absolute" } })
+        var polygon = createElementsvg.svg.CreateElement('polygon');
+        createElementsvg.svg.Setattribute(polygon, { 'points': '0,40 70,40 70,0 100,50 70,100 70,60 0,60 0,40' })
+        svg.appendChild(polygon);
+        document.getElementById('box').appendChild(svg);
+
+        //var polygon = document.createElementNS('http://www.w3.org/2000/svg', 'polygon');
+        //polygon.setAttribute('points', '0,40 70,40 70,0 100,50 70,100 70,60 0,60 0,40');
+        //polygon.setAttribute('style', 'fill:#4cff00;');
+
+        //var svg = document.createElementNS('http://www.w3.org/2000/svg', "svg");
+        //svg.setAttribute('id', 'dragBox');
+        //svg.setAttribute('style', 'width:100px;height:100px;position:absolute;left:100px;top:100px;background:#ff0');
+        //svg.appendChild(polygon);
+
+        //document.getElementById("box").appendChild(svg);
+
+    </script>
+    <!--<script>
+        var svg = document.createElementNS('http://www.w3.org/2000/svg', 'svg');
+        svg.setAttribute("height", '100%');
+        svg.setAttribute("width", '100%');
+        var rect = document.createElementNS('http://www.w3.org/2000/svg', 'rect');
+        rect.setAttribute("id", "rect");
+        rect.setAttribute("x", 0);
+        rect.setAttribute("y", 0);
+        rect.setAttribute("width", 200);
+        rect.setAttribute("height", 200);
+        rect.setAttribute("fill", 'red');
+        svg.appendChild(rect);
+        var body = document.getElementsByTagName('body')[0];
+        body.appendChild(svg);
+    </script>-->
+    <script type="text/javascript">
+        var VVG = {}; //命名空间
+        VVG.DOM = {
+            $: function (id) { //创建方便的选择符
+                return typeof id == "string" ? document.getElementById(id) : id;
+            },
+            bindEvent: function (node, type, func) { //事件绑定方法
+                if (node.addEventListener) {
+                    node.addEventListener(type, func, false);
+                } else if (node.attachEvent) {
+                    node.attachEvent("on" + type, func);
+                } else {
+                    node["on" + type] = func;
+                }
+            },
+            getEvent: function (event) { //获取事件
+                return event ? event : window.event;
+            },
+            getTarget: function (event) { //获取事件目标
+                return event.target || event.srcElement;
+            }
+        }
+        var DragDrop = function () { //新建一个返回对象的函数
+            var box = VVG.DOM.$("box"); //获取外围BOX
+            var dragBox = VVG.DOM.$("dragBox");//获取需要拖动的BOX
+            var dragging = null; //初始化对象
+            function drag(event) { //事件执行函数
+                event = VVG.DOM.getEvent(event);
+                var target = VVG.DOM.getTarget(event);
+                switch (event.type) {//判断事件类型
+                    case "mousedown":
+
+                        if (target.id) { //当事件对象的ID等于要拖动的BOX的ID时
+                            dragging = target; //赋值到拖动目标
+                        }
+                        else {
+                            dragging = target.parentNode;
+                            console.log(target);
+                            console.log(event);
+                        }
+                        break;
+                    case "mousemove":
+
+                        if (dragging) { //当有拖动目标时执行
+                            sTop = document.documentElement.scrollTop || document.body.scrollTop; //当有滚动条的时候卷去页面的高度
+                            dragging.style.left = (event.clientX - box.offsetLeft - dragBox.offsetWidth / 2) + "px";
+                            dragging.style.top = (event.clientY + sTop - box.offsetTop - dragBox.offsetHeight / 2) + "px";
+                            var left = parseInt(dragging.style.left);
+                            var top = parseInt(dragging.style.top);
+                            //console.log("left:"+left+"-----top:"+top + "-------sTop:"+sTop);
+                            // 比较坐标是否超出外围的BOX
+                            if (left < 0) {
+                                dragging.style.left = 0 + "px";
+                            }
+                            if (top < 0) {
+                                dragging.style.top = 0 + "px";
+                            }
+                            if (left > box.offsetWidth - dragBox.offsetWidth) {
+                                dragging.style.left = (box.offsetWidth - dragBox.offsetWidth - 2) + "px";
+                            }
+                            if (top > box.offsetHeight - dragBox.offsetHeight) {
+                                dragging.style.top = (box.offsetHeight - dragBox.offsetHeight - 2) + "px";
+                            }
+                        }
+                        break;
+                    case "mouseup":
+                        // 清空拖动目标
+                        dragging = null;
+                        break;
+                }
+            };
+            return {
+                dragStart: function () {
+                    // 绑定事件
+                    VVG.DOM.bindEvent(document, "mousedown", drag);
+                    VVG.DOM.bindEvent(document, "mousemove", drag);
+                    VVG.DOM.bindEvent(document, "mouseup", drag);
+                }
+            }
+        }();
+        DragDrop.dragStart();
+    </script>
+
+    <script>
+        document.getElementById('but').onclick = function () {
+            createElementsvg.svg.Appendstyle(document.getElementsByTagNameNS('http://www.w3.org/2000/svg', 'svg')[0], { "background": "#ff6a00" })
+        }
+    </script>
+</body>
+</html>

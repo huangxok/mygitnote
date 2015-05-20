@@ -1,0 +1,733 @@
+﻿<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link href="images/m.css" rel="stylesheet" type="text/css" />
+<script src="inc/jquery.min.js" type="text/javascript"></script>
+<script src="inc/walkway.min.js" type="text/javascript"></script>
+<style>
+
+</style>
+
+<title>无标题文档</title>
+
+    <style>
+        html, body {
+            -moz-user-select: none;
+            -khtml-user-select: none;
+            user-select: none;
+            -webkit-user-select: none;
+        }
+        path {
+            stroke-dasharray: 200;
+            stroke-dashoffset: 200;
+            -webkit-animation: dash 2s linear infinite;
+            animation: dash 5s linear infinite;
+        }
+
+        @-webkit-keyframes dash {
+            to {
+                stroke-dashoffset: 0;
+            }
+        }
+
+        @keyframes dash {
+            to {
+                stroke-dashoffset: 0;
+            }
+        }
+    </style>
+
+</head>
+
+<body>
+
+<div id = "backimg" style = "background:url(images/back2.jpg); background-size:cover;background-repeat:no-repeat;">
+
+	<div id = "guideLines">
+			<img  src = "images/menu_01.png"/>
+			<a href="#"><img  src = "images/menu_02.png" /></a>
+			<img src = "images/menu_03.png"  /></a>
+			<a href="index.html"><img src = "images/menu_04.png"/></a>
+	</div>
+
+
+	<!--input框和滑块-->
+	<div id = "slider" style = "width:12px;height:12px;background:url(images/slider.png); background-size:cover;background-repeat:no-repeat;"> </div>
+	
+	
+	<img id = "login0" class = "myButton" src = "images/v1pop5confirm.png"/>
+	<!--点上传弹出的隐藏的-->
+	<img id = "login1" src = "images/v1pop5.png"/>
+	<img id = "login2" src = "images/v1popd5.png"/>
+	<img id = "progress1" src = "images/v1pop5loading.png"/>
+	<img id = "progress2" src = "images/v1pop5loading.png"/>
+	
+	<!--点长链和大环列表弹出的路径图-->
+	<img id = "line4" src = "images/v1line4.png"/>
+	<img id = "line5" src = "images/v1line5.png"/>
+
+	<!--点流量分析弹出的图片-->
+	<img id = "v1pop1" class = "myButton" src = "images/v1pop1.png" />
+	<!--点右侧弹第一个框里的三个透明框-->
+	<div class = "v1pop1Box">
+		<div id = "transparentBox1" class = "myButton pop1List" ></div>
+		<div id = "transparentBox2" class = "myButton pop1List" ></div>
+		<div id = "transparentBox3" class = "myButton pop1List" ></div>
+	</div>
+	
+	<!--点透明框弹出的三个粗线-->
+	<svg version="1.1" id="line1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="875px" y="380px"
+		 width="140px" height="120px" viewBox="0 0 140 120" enable-background="new 0 0 140 120" xml:space="preserve">
+	<path fill="none" stroke="#DC350B" stroke-width="9" stroke-miterlimit="10" d="M9.398,111.555c0,0,15.2-108.473,121.14-100.412"/>
+	</svg>
+	
+	<svg version="1.1" id="line3" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+		 width="100px" height="80px" viewBox="0 0 100 80" enable-background="new 0 0 100 80" xml:space="preserve">
+	<path fill="none" stroke="#FF9C00" stroke-width="9" stroke-miterlimit="10" d="M7.268,75.592c0,0,40.005-27.276,87.157-69.766"/>
+	</svg>
+	
+	<svg version="1.1" id="line2" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="680px" y="655px"
+		 width="40px" height="30px" viewBox="0 0 40 30" enable-background="new 0 0 40 30" xml:space="preserve">
+	<path fill="none" stroke="#DC350B" stroke-width="9" stroke-miterlimit="10" d="M32.864,20.795c0,0-17.053-4.435-24.599-11.216"/>
+	</svg>
+	
+	<img id = "line11" src = "images/v1line1.png"/>
+	<img id = "line22" src = "images/v1line2.png"/>
+	<img id = "line33" src = "images/v1line3.png"/>
+	
+	<!--右侧大透明框弹pop3 pop4-->
+	<div id = "v1pop4Container">
+		<img id = "v1pop4" class = "myButton" src = "images/v1pop4.png" />
+		<!--透明框弹出的最后一个图的复选框v1circle.png-->
+		<li class = "myButton" id = "libox5">
+		
+			<img class = "myButton box5"  id = "checkbox5" src = "images/v1pop3yh.png"/>
+			<img class = "myButton box5"  id = "box5" src = "images/v1pop3y.png"/>	
+			
+		</li>
+	</div>
+	
+	<!-- 点pop4的复选框弹下-->
+	<img id = "line6" src = "images/v1circle.png"/>
+	
+	<div class = "v1pop3Containner">
+		<img id = "v1pop3Img" class = "myButton" src = "images/v1pop3.png"/>
+		<div id = "v1pop3Box" class = "myButton">
+			<li class = "boxLi" style = "width:186px;">
+				<div class = "myButton" id = "checkbox1">
+					<img class = "checkImg" id = "box1" src = "images/v1pop3y.png"/>
+				</div>
+				<div class = "myButton" id = "checkbox3">
+					<img class = "checkImg" id = "box3" src = "images/v1pop3y.png"/>
+				</div>
+			</li>
+			<li class = "boxLi" style = "width:186px;">
+				<div class = "myButton" id = "checkbox2" >
+					<img class = "checkImg" id = "box2" src = "images/v1pop3y.png"/>
+				</div>
+				<div class = "myButton" id = "checkbox4">
+					<img class = "checkImg" id = "box4" src = "images/v1pop3y.png"/>
+				</div>
+			</li>
+		
+		</div>
+	</div>
+	<!--点业务路径下的问题链路弹出的图片v1pop3.png-->
+	<img id = "v1pop2" class = "myButton" src = "images/v1pop2.png"/>
+
+	<div id = "bodyLeft">
+	
+		<img id = "button1" class = "myButton" src = "images/v1bt1.png" style = "float:left;"/>
+		<img id = "button2" class = "myButton" src = "images/v1bt2.png" style = "float:left;margin-top:20px"/>
+		<div  style = "float:left;margin-top:80px">
+			<img id = "button3" class = "myButton" src = "images/v1bt3.png"/>
+			<img id = "button4" class = "myButton" src = "images/v1bt4.png"/>
+			<img id = "button5" class = "myButton" src = "images/v1bt5.png"/>
+		</div>
+		<div id = "myList">
+			<div id = "listBar">
+				<script >
+					for(var i = 1;i <= 34;i++){
+					
+						document.write("<img border='0' id = 'imgList"+i+"' class = 'imgList' src='images/bt2/bt"+i+".png' style='cursor:hand;float:left;'>");
+		
+					}
+					$(".imgList").click(function(){
+						for(var j = 1;j <= 34;j++){
+							var id = $(this).attr("id");
+							//$("#img"+j).css("background","url(images/core_h_asg.png)");
+							/*
+							if($(this).attr("id") == "imgList"+j){
+							
+								$(this).attr("src","images/bt/bth"+i+".png");
+							
+							}
+							*/
+							if(id == "imgList"+j &&(j >= 1 && j <= 15)){
+								
+								for( var a = 1;a <= 34; a++){
+								if(a >= 1 && a <= 15){
+									if(a == 7 || a == 8){
+										$("#img"+a).css("background","url(images/core_csg_left.png)");
+									}else{ 
+										$("#img"+a).css("background","url(images/core_csg.png)");
+									}
+										
+									}else if(a >= 16 && a <= 28){
+										$("#img"+a).css("background","url(images/core_asg.png)");
+									
+									}else if(a >= 29 && a <= 32){
+										$("#img"+a).css("background","url(images/core_rsg.png)");
+									}else if(a == 33 || a == 34){
+										$("#img"+a).css("background","url(images/core_vb.png)");
+									}
+								}
+								//换图片
+								if(j == 8 || j == 7){
+									$("#img"+j).css("background","url(images/core_h_csg_left.png)");
+								}else{
+									$("#img"+j).css("background","url(images/core_h_csg.png)");
+								}
+								
+							} 
+							else if(id == "imgList"+j &&(j >= 16 && j <= 28)){
+							
+								for( var b = 1;b <= 34; b++){
+									if(b >= 1 && b <= 15){
+										if(b == 7 || b == 8){
+											$("#img"+b).css("background","url(images/core_csg_left.png)");
+										}else{
+										
+											$("#img"+b).css("background","url(images/core_csg.png)");
+										}
+										
+									}else if(b >= 16 && b <= 28){
+										$("#img"+b).css("background","url(images/core_asg.png)");
+									
+									}else if(b >= 29 && b <= 32){
+										$("#img"+b).css("background","url(images/core_rsg.png)");
+									}else if(b == 33 || b == 34){
+										$("#img"+b).css("background","url(images/core_vb.png)");
+									}
+								}
+								//换图片
+								$("#img"+j).css("background","url(images/core_h_asg.png)");
+							
+							}else if(id == "imgList"+j &&(j >= 29 && j <= 32)){
+								
+								for( var c = 1;c <= 34; c++){
+									if(c >= 1 && c <= 15){
+										if(c == 7 || c == 8){
+											$("#img"+c).css("background","url(images/core_csg_left.png)");
+										}else{
+										
+											$("#img"+c).css("background","url(images/core_csg.png)");
+										}
+									}else if(c >= 16 && c <= 28){
+										$("#img"+c).css("background","url(images/core_asg.png)");
+									
+									}else if(c >= 29 && c <= 32){
+										$("#img"+c).css("background","url(images/core_rsg.png)");
+									}else if(c == 33 || c == 34){
+										$("#img"+c).css("background","url(images/core_vb.png)");
+									}
+								}
+								
+								//换图片
+								$("#img"+j).css("background","url(images/core_h_rsg.png)");
+							}
+							else if(id == "imgList"+j && (j == 33 || j == 34)){
+								$("#img"+j).css("background","url(images/core_h_vb.png)");
+								for( var c = 1;c <= 32; c++){
+									if(c >= 1 && c <= 15){
+										if(c == 7 || c == 8){
+											$("#img"+c).css("background","url(images/core_csg_left.png)");
+										}else{
+										
+											$("#img"+c).css("background","url(images/core_csg.png)");
+										}
+									}else if(c >= 16 && c <= 28){
+										$("#img"+c).css("background","url(images/core_asg.png)");
+									
+									}else if(c >= 29 && c <= 32){
+										$("#img"+c).css("background","url(images/core_rsg.png)");
+									}
+								}
+								
+							}
+							
+						}
+					});
+					
+				</script>
+			
+			</div>
+		</div>
+		
+		<div style = "float:left;margin-top:78px">
+			<img id = "button6" class = "myButton" src = "images/v1bt6.png"/>
+			<img id = "button7" class = "myButton" src = "images/v1bt7.png"/>
+			<img id = "button8" class = "myButton" src = "images/v1bt8.png"/>
+		</div>
+			
+		<div style = "float:left;margin-top:38px;margin-left:9px;">
+			<img id = "button7_1" class = "myButton" src = "images/long.png" style = "display:none;"/>
+			<img id = "button8_1" class = "myButton" src = "images/big.png" style = "display:none;"/>
+		</div>
+		
+		
+		
+	</div>
+
+	<div id = "bodyMain" >
+
+		
+		<div class="navbar">
+			<div class="navbar" style = "height:35px;">
+				<img id = "button9" class = "myButton" src = "images/v1bt9.png"/>
+				<img id = "button10" class = "myButton" src = "images/v1bt10.png"/>
+				<img id = "button11" class = "myButton" src = "images/v1bt11.png"/>
+			</div>
+			<!--问题链路-->
+			<img id = "button12" class = "myButton" src = "images/v1bt12.png" style = "float:left;display:none;margin-top:10px;margin-left:190px;"/>
+		
+		</div>
+		
+		
+		<div id = "bodyMain_map">
+		
+				<!--左区的透明框-->
+			<div id = "transparent" class = "myButton" style = "position:absolute;background:url(images/ssbt2.png);left:125px;top:101px;width:378px;height:255px;">
+				<img id = "a1" class = "aa" src = "images/a1_1.png" style = "position:absolute;left:0:top:0;"/>
+				<img id = "a2" class = "aa" src = "images/a1_2.png" style = "position:absolute;left:0:top:0;"/>
+				<img id = "a3" class = "aa" src = "images/a1_3.png" style = "position:absolute;left:0:top:0;"/>
+				<img id = "a4" class = "aa" src = "images/a1_4.png" style = "position:absolute;left:0:top:0;"/>
+				<img id = "b1" class = "bb" src = "images/a2_1.png" style = "position:absolute;left:0:top:0;"/>
+				<img id = "b2" class = "bb" src = "images/a2_2.png" style = "position:absolute;left:0:top:0;"/>
+				<img id = "b3" class = "bb" src = "images/a2_3.png" style = "position:absolute;left:0:top:0;"/>
+				<img id = "b4" class = "bb" src = "images/a2_4.png" style = "position:absolute;left:0:top:0;"/>
+				<img id = "c1" class = "cc" src = "images/a3_1.png" style = "position:absolute;left:0:top:0;"/>
+				<img id = "c2" class = "cc" src = "images/a3_2.png" style = "position:absolute;left:0:top:0;"/>
+				<img id = "c3" class = "cc" src = "images/a3_3.png" style = "position:absolute;left:0:top:0;"/>
+				<img id = "d1" class = "dd" src = "images/a4_1.png" style = "position:absolute;left:0:top:0;"/>
+				<img id = "d2" class = "dd" src = "images/a4_2.png" style = "position:absolute;left:0:top:0;"/>
+				<img id = "d3" class = "dd" src = "images/a4_3.png" style = "position:absolute;left:0:top:0;"/>	
+			</div>
+			
+			<!--  csg-->
+			<div id = "img1" class = "imgCSG imgMap"></div>
+			<div id = "img2" class = "imgCSG imgMap"></div>
+			<div id = "img3" class = "imgCSG imgMap"></div>
+			<div id = "img4" class = "imgCSG imgMap"></div>
+			<div id = "img5" class = "imgCSG imgMap"></div>
+			<div id = "img6" class = "imgCSG imgMap"></div>
+			<div id = "img7" class = "imgCSG imgMap" style = "background:url(images/core_csg_left.png );no-repeat;z-index:88;"></div>
+			<div id = "img8" class = "imgCSG imgMap" style = "background:url(images/core_csg_left.png );no-repeat;z-index:88;"></div>
+			<div id = "img9" class = "imgCSG imgMap"></div>
+			<div id = "img10" class = "imgCSG imgMap"></div>
+			<div id = "img11" class = "imgCSG imgMap"></div>
+			<div id = "img12" class = "imgCSG imgMap"></div>
+			<div id = "img13" class = "imgCSG imgMap"></div>
+			<div id = "img14" class = "imgCSG imgMap"></div>
+			<div id = "img15" class = "imgCSG imgMap"></div>
+			<!--  asg-->
+			<div id = "img16" class = "imgASG imgMap"></div>
+			<div id = "img17" class = "imgASG imgMap"></div>
+			<div id = "img18" class = "imgASG imgMap"></div>
+			<div id = "img19" class = "imgASG imgMap"></div>
+			<div id = "img20" class = "imgASG imgMap"></div>
+			<div id = "img21" class = "imgASG imgMap"></div>
+			<div id = "img22" class = "imgASG imgMap"></div>
+			<div id = "img23" class = "imgASG imgMap"></div>
+			<div id = "img24" class = "imgASG imgMap"></div>
+			<div id = "img25" class = "imgASG imgMap"></div>
+			<div id = "img26" class = "imgASG imgMap"></div>
+			<div id = "img27" class = "imgASG imgMap"></div>
+			<div id = "img28" class = "imgASG imgMap"></div>
+			<!-- rsg-->
+			<div id = "img29" class = "imgRSG imgMap"></div>
+			<div id = "img30" class = "imgRSG imgMap"></div>
+			<div id = "img31" class = "imgRSG imgMap"></div>
+			<div id = "img32" class = "imgRSG imgMap"></div>
+			<div id = "img33" class = "weibo imgMap" ></div>
+			<div id = "img34" class = "weibo imgMap" ></div>
+		</div>
+		
+	</div>
+</div>
+
+<script>
+(function(){
+
+	var tag = false;
+	var start = false;
+	var myline1 = false;
+	var myline2 = false;
+	var myline3 = false;
+	var line1;
+	var line2;
+	var line3;
+	
+	$("#slider").on("mousedown mouseup",function(e){
+		//alert();
+		switch(e.type){
+			case "mousedown":
+				start = true;
+				break;
+			case "mouseup":
+				start = false;
+				break;
+		}
+	});
+	
+	$(document).on("mouseup",function(e){
+		if(start){
+			start = false;
+		}
+	});
+	//滑块
+	$(document).on("mousemove",function(e){
+		if(start){
+			//$("#slider").css("position","");
+			if(e.pageY>455&&e.pageY<822){
+			
+				var obj = $("#slider");
+				obj.css("top", e.pageY + "px")
+				$("#listBar").css("top",-(e.pageY-460)*1.7+"px")
+			
+			}
+	
+		}
+	});
+	
+	//上传事件
+	/*
+	$("#inputStyle").on("change",function(){
+		//var name = this.value;progress1
+		$("#login1").css("display","block");
+		$("#progress1").css("display","block");
+		$("#progress2").css("display","block");
+		$('#progress1').animate({width:"110px"},3000,function(){
+			//$("#login2").css("display","block");
+		});
+		//进度条
+		$('#progress2').animate({width:"110px"},3000,function(){
+			
+			$("#login2").css("display","block");
+			$("#progress1").css("display","none");
+			$("#progress2").css("display","none");
+			$("#login1").css("display","none");
+		});
+		//点击关闭上传框
+		$("#login2").click(function(){
+			$("#login2").css("display","none");
+			
+		});
+	
+		
+	});
+	
+	*/
+	$("#button1").click(function(){
+		$("#login0").show();
+	
+	
+	});
+	
+	$("#login0").click(function(){
+		$("#login0").hide();
+		$("#login1").css("display","block");
+		$("#progress1").css("display","block");
+		$("#progress2").css("display","block");
+		$('#progress1').animate({width:"110px"},3000,function(){
+			//$("#login2").css("display","block");
+		});
+		//进度条
+		$('#progress2').animate({width:"110px"},3000,function(){
+			
+			$("#login2").css("display","block");
+			$("#progress1").css("display","none");
+			$("#progress2").css("display","none");
+			$("#login1").css("display","none");
+		});
+	
+	});
+	
+	$("#login2").click(function(){
+		$("#login2").css("display","none");
+			
+	});
+	
+	//鼠标点击事件
+	$(".myButton").on("mousedown",function(e){
+	
+		
+		//if($(this).attr("id") == "inputStyle") $("#button1").attr("src","images/v1bth1.png");
+		for(var i = 1;i < 12;i++){
+			if($(this).attr("id") == "button"+i) $("#button"+i).attr("src","images/v1bth"+i+".png");
+		
+		}
+	
+	});
+	
+		//鼠标抬起事件1
+	$(".myButton").on("mouseup",function(e){
+	
+		//if($(this).attr("id") == "inputStyle") $("#button1").attr("src","images/v1bt1.png");
+		for(var i = 1;i < 12;i++){
+			if($(this).attr("id") == "button"+i) $("#button"+i).attr("src","images/v1bt"+i+".png");
+		
+		}
+		
+	});
+	
+	$(".myButton").click(function(event){
+		
+			var id = $(this).attr("id");
+			
+			//switch(id){
+			
+			//}
+			if(id == "button2"){
+				window.location.href = "111.html";
+			}
+			else if(id == "button7"){
+				$("#button7_1").css("display","block");
+				$("#button8_1").css("display","none");
+			}
+			else if(id == "button8"){
+				$("#button8_1").css("display","block");
+				$("#button7_1").css("display","none");
+			}
+			else if(id == "button7_1"){
+			
+				$("#line4").css("display","block");
+				$("#line1").css("display","none");
+				$("#line2").css("display","none");
+				$("#line3").css("display","none");
+				$("#line5").css("display","none");
+				$("#line6").css("display","none");
+				//显示小点高亮///
+				for(var i = 1;i < 22;i++){
+					if(i >= 6 && i <= 9){
+						$("#img"+i).css("background","url(images/core_h_csg.png)");
+					}else if(i==21){
+						$("#img"+i).css("background","url(images/core_h_asg.png)");
+					
+					}
+				}
+				
+				for(var a = 1;a < 19;a++){
+					if(a >= 1 && a <= 5){
+						$("#img"+a).css("background","url(images/core_csg.png)");
+					}else if(a==16 || a==18){
+						$("#img"+a).css("background","url(images/core_asg.png)");
+					
+					}
+				}
+				
+				
+				
+			}	
+			else if(id == "button8_1"){
+				$("#line5").css("display","block");
+				$("#line4").css("display","none");
+				$("#line1").css("display","none");
+				$("#line2").css("display","none");
+				$("#line3").css("display","none");
+				$("#line6").css("display","none");
+				//显示小点高亮
+				for(var i = 6;i < 22;i++){
+					if(i >= 6 && i <= 9){
+						$("#img"+i).css("background","url(images/core_csg.png)");
+					}else if(i==21){
+						$("#img"+i).css("background","url(images/core_asg.png)");
+					
+					}
+				}
+				
+				for(var a = 1;a < 19;a++){
+					if(a >= 1 && a <= 5){
+						$("#img"+a).css("background","url(images/core_h_csg.png)");
+					}else if(a==16 || a==18){
+						$("#img"+a).css("background","url(images/core_h_asg.png)");
+					
+					}
+				}
+				
+				
+			}	
+			else if(id == "button9"){
+
+				$("#v1pop1").css("display","block");
+				$("#line1").show();
+				$("#line2").show();
+				$("#line3").show();
+				
+				//svg动画
+				
+				//line3();
+				//setInterval(function(){line3();},300);
+				/*
+				line1();
+				
+				line1 = setInterval(function(){line1();},500);
+				line2 = setInterval(function(){line2();},500);
+				line3 = setInterval(function(){line3();},500);
+				*/
+				
+				
+			}	
+			else if(id == "transparentBox1"){
+				/*
+				clearInterval(line1);
+				myline1 = true;
+				if(myline2 == true){
+					myline2 = setInterval(function(){line2();},500);
+				
+					myline2 = false;
+					
+				} 
+				if(myline3 == true){
+					myline3 = setInterval(function(){line3();},500);
+					myline3 = false;
+				}
+				*/
+				$("#line2").show();
+				$("#line3").show();
+				$("#line1").hide();
+				$("#line11").css("display","block");
+				
+				$("#line4").css("display","none");
+				$("#line5").css("display","none");
+				$("#line22").css("display","none");
+				$("#line33").css("display","none");
+				$("#line6").css("display","none");
+				
+				
+				
+			}
+			//else if(id == "v1pop1"){
+				//$("#v1pop1").css("display","none");
+			
+			//}
+			else if(id == "transparentBox2"){
+				/*
+				clearInterval(line2);
+				myline2 = true;
+				if(myline1 == true){
+					 line1 = setInterval(function(){line1();},500);
+					 myline1 = false;
+				}
+				if(myline3 == true){
+					line3 = setInterval(function(){line3();},500);
+					myline3 = false;
+				}
+				*/
+				$("#line1").show();
+				$("#line3").show();
+				$("#line2").hide();
+				$("#line22").css("display","block");
+				$("#line33").css("display","none");
+				$("#line4").css("display","none");
+				$("#line5").css("display","none");
+				$("#line6").css("display","none");
+				$("#line11").css("display","none");
+			}	
+			else if(id == "transparentBox3"){
+				/*
+				clearInterval(line3);
+				myline3 = true;
+				if(myline2 == true){
+					 line2 = setInterval(function(){line2();},500);
+					 myline2 = false;
+				
+				}
+				if(myline1 == true){
+					line1  = setInterval(function(){line1();},500);
+					myline1 = false;
+				}
+				*/
+				$("#line2").show();
+				$("#line1").show();
+				$("#line3").hide();
+				$("#line33").css("display","block");
+				$("#line22").css("display","none");
+				$("#line4").css("display","none");
+				$("#line5").css("display","none");
+				$("#line6").css("display","none");
+				$("#line11").css("display","none");
+			}
+			else if(id == "button10") {
+				window.location.href='222.html';
+				//$("#button12").css("display","block");
+			}
+		
+		});
+
+	
+	/*
+	//复选框
+	$("#checkbox5").click(function(){
+		if(!tag){
+			$("#box1").css("display","block");
+			alert("block");
+			tag = true;
+			inter = setInterval(function(){animateB();},500);
+			
+		}
+		else{
+			clearInterval(inter);
+			$("#box1").css("display","none");
+			tag = false;
+		}
+		
+		
+	});
+	*/
+	
+	function line1(){
+		var svg = new Walkway({
+				  selector: '#line1',
+				  duration: '5000',
+				  // can pass in a function or a string like 'easeOutQuint' box2_1Word
+				  easing: function (t) {
+				    return t * t;
+				  }
+				});
+	 
+		svg.draw();
+	
+	}
+
+	function line2(){
+		var svg = new Walkway({
+				  selector: '#line2',
+				  duration: '5000',
+				  // can pass in a function or a string like 'easeOutQuint' box2_1Word
+				  easing: function (t) {
+				    return t * t;
+				  }
+				});
+	 
+		svg.draw();
+	
+	}
+	
+	function line3(){
+		var svg = new Walkway({
+				  selector: '#line3',
+				  duration: '5000',
+				 
+				});
+	 
+		svg.draw();
+	
+	}
+
+})();
+		
+</script>
+</body>
+</html>

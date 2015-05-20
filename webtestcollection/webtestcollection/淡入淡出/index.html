@@ -1,0 +1,94 @@
+﻿<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title></title>
+    <script src="js/jquery.min.js"></script>
+    <script src="js/jquery.diagonalFade.min.js"></script>
+    <link href="css/style.css" rel="stylesheet" />
+    <link href="css/gs.css" rel="stylesheet" />
+    <script>
+        function slideshow(selector, _f) {
+
+            var x = parseInt(Math.random() * 2); //  从左到右
+            var y = parseInt(Math.random() * 2); //从上到下
+            var f = _f; //  淡出或者淡入
+
+            if (x > 0) x = 'left-right';
+            else x = 'right-left';
+
+            if (y > 0) y = 'top-bottom';
+            else y = 'bottom-top';
+
+            var s = 'out';
+
+            if (f) {
+                s = 'in';
+                f = false;
+            } else {
+                s = 'out';
+                f = true;
+            }
+
+            $(selector).diagonalFade({
+                time: 500,
+                fadeDirection_x: x,
+                fadeDirection_y: y,
+                fade: s,
+                complete: function () {
+                    slideshow(selector, f);
+                }
+            });
+        }
+        $(function () {
+            slideshow("#image_cascade", false);
+
+        })
+
+
+    </script>
+</head>
+
+<body>
+    <div id="image_cascade" class="container">
+
+        <img src="images/1.jpg" height="125" class="grid_1" alt="Shoes" />
+        <img src="images/2.jpg" height="125" class="grid_1" alt="Shoes" />
+        <img src="images/3.jpg" height="125" class="grid_1" alt="Shoes" />
+        <img src="images/4.jpg" height="125" class="grid_1" alt="Shoes" />
+        <img src="images/5.jpg" height="125" class="grid_1" alt="Shoes" />
+        <img src="images/6.jpg" height="125" class="grid_1" alt="Shoes" />
+        <img src="images/7.jpg" height="125" class="grid_1" alt="Shoes" />
+        <img src="images/8.jpg" height="125" class="grid_1" alt="Shoes" />
+        <img src="images/9.jpg" height="125" class="grid_1" alt="Shoes" />
+        <img src="images/10.jpg" height="125" class="grid_1" alt="Shoes" />
+        <img src="images/11.jpg" height="125" class="grid_1" alt="Shoes" />
+        <img src="images/12.jpg" height="125" class="grid_1" alt="Shoes" />
+        <img src="images/13.jpg" height="125" class="grid_1" alt="Shoes" />
+        <img src="images/14.jpg" height="125" class="grid_1" alt="Shoes" />
+        <img src="images/15.jpg" height="125" class="grid_1" alt="Shoes" />
+        <img src="images/16.jpg" height="125" class="grid_1" alt="Shoes" />
+        <img src="images/17.jpg" height="125" class="grid_1" alt="Shoes" />
+        <img src="images/18.jpg" height="125" class="grid_1" alt="Shoes" />
+        <img src="images/19.jpg" height="125" class="grid_1" alt="Shoes" />
+        <img src="images/20.jpg" height="125" class="grid_1" alt="Shoes" />
+        <img src="images/21.jpg" height="125" class="grid_1" alt="Shoes" />
+        <img src="images/22.jpg" height="125" class="grid_1" alt="Shoes" />
+        <img src="images/23.jpg" height="125" class="grid_1" alt="Shoes" />
+        <img src="images/24.jpg" height="125" class="grid_1" alt="Shoes" />
+        <img src="images/25.jpg" height="125" class="grid_1" alt="Shoes" />
+        <img src="images/26.jpg" height="125" class="grid_1" alt="Shoes" />
+        <img src="images/27.jpg" height="125" class="grid_1" alt="Shoes" />
+        <img src="images/28.jpg" height="125" class="grid_1" alt="Shoes" />
+        <img src="images/29.jpg" height="125" class="grid_1" alt="Shoes" />
+        <img src="images/30.jpg" height="125" class="grid_1" alt="Shoes" />
+        <img src="images/31.jpg" height="125" class="grid_1" alt="Shoes" />
+        <img src="images/32.jpg" height="125" class="grid_1" alt="Shoes" />
+        <img src="images/33.jpg" height="125" class="grid_1" alt="Shoes" />
+        <img src="images/34.jpg" height="125" class="grid_1" alt="Shoes" />
+        <img src="images/35.jpg" height="125" class="grid_1" alt="Shoes" />
+        <img src="images/36.jpg" height="125" class="grid_1" alt="Shoes" />
+        <div class="clear"></div>
+    </div>
+</body>
+</html>

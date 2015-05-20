@@ -1,0 +1,60 @@
+﻿<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title></title>
+    <!-- <script>
+        function f(oo) {
+            alert(oo.files.length);
+        }
+    </script>-->
+    <script>
+        window.onload = function () {
+            var oDropBox = document.getElementById('dropBox');
+            oDropBox.addEventListener('dragover', function (e) {
+                e.stopPropagation();
+                e.preventDefault();
+            }, false);
+            oDropBox.addEventListener('drop', handleDrop, false);
+            function handleDrop(e) {
+                e.stopPropagation();
+                e.preventDefault();
+                var fileList = e.dataTransfer.files,　　//获取拖拽文件
+                    fileType = fileList[0].type,
+                    oImg = document.createElement('img'),
+                    reader = new FileReader();
+
+                if (fileType.indexOf('image') == -1) {
+                    alert('请拖拽图片~');
+                    return;
+                }
+
+                reader.onload = function (e) {
+                    alert(this);
+                    oImg.src = this.result;
+                    oDropBox.innerHTML = '';
+                    oDropBox.appendChild(oImg);
+                    oImgInfo.innerHTML = this.result;
+                }
+                reader.readAsDataURL(fileList[0])
+            }
+        }
+
+    </script>
+</head>
+<body>
+    <div id="dropBox" style="width: 500px; height: 500px; background: #808080; margin: 0 auto">
+    </div>
+
+    <label for="fff">ｄｉａｎｊｉ</label>
+    <input id="fff" type="file" onchange="f(this)" />
+    <script>
+        var f = document.getElementById('fff');
+        for(var i=0; f.files.length;i++){
+            alert(f.files[i].name);
+            alert(f.files[i].size);
+            alert(f.files[i].type);
+        }
+    </script>
+</body>
+</html>

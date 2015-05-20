@@ -1,0 +1,331 @@
+<?xml version="1.0" encoding="utf-8"?>
+<wsdl:definitions xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" xmlns:mime="http://schemas.xmlsoap.org/wsdl/mime/" xmlns:tns="http://10628106.com/bus" xmlns:s="http://www.w3.org/2001/XMLSchema" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:tm="http://microsoft.com/wsdl/mime/textMatching/" xmlns:http="http://schemas.xmlsoap.org/wsdl/http/" xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/" targetNamespace="http://10628106.com/bus" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+  <wsdl:types>
+    <s:schema elementFormDefault="qualified" targetNamespace="http://10628106.com/bus">
+      <s:element name="getBusLocation">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="busLine" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="stationName" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="lineType" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="channelNumber" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="channelEncodedKey" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="getBusLocationResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="getBusLocationResult" type="tns:StandardDataListOfBusLocationModel" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="StandardDataListOfBusLocationModel">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="code" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="msg" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="list" type="tns:ArrayOfBusLocationModel" />
+          <s:element minOccurs="0" maxOccurs="1" name="timeStamp" type="s:string" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="ArrayOfBusLocationModel">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="BusLocationModel" nillable="true" type="tns:BusLocationModel" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="BusLocationModel">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="lineType" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="distance" type="s:string" />
+        </s:sequence>
+      </s:complexType>
+      <s:element name="getTodayLineInfo">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="busLine" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="channelNumber" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="channelEncodedKey" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="getTodayLineInfoResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="getTodayLineInfoResult" type="tns:StandardDataListOfLineModel" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="StandardDataListOfLineModel">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="code" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="msg" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="list" type="tns:ArrayOfLineModel" />
+          <s:element minOccurs="0" maxOccurs="1" name="timeStamp" type="s:string" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="ArrayOfLineModel">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="LineModel" nillable="true" type="tns:LineModel" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="LineModel">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="departureTime" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="offRunningTime" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="lineType" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="stations" type="tns:ArrayOfStationModel" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="ArrayOfStationModel">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="StationModel" nillable="true" type="tns:StationModel" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="StationModel">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="station" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="stationNumber" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="gpsPoint" type="tns:GPSPoint" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="GPSPoint">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="longitude" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="latitude" type="s:string" />
+        </s:sequence>
+      </s:complexType>
+      <s:element name="getBusDepartureSchedule">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="busLine" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="channelNumber" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="channelEncodedKey" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="getBusDepartureScheduleResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="getBusDepartureScheduleResult" type="tns:StandardDataListOfBusDepartureModelLine" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="StandardDataListOfBusDepartureModelLine">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="code" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="msg" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="list" type="tns:ArrayOfBusDepartureModelLine" />
+          <s:element minOccurs="0" maxOccurs="1" name="timeStamp" type="s:string" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="ArrayOfBusDepartureModelLine">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="BusDepartureModelLine" nillable="true" type="tns:BusDepartureModelLine" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="BusDepartureModelLine">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="finalStation" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="departureTime" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="offRunningTime" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="interval" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="lineType" type="s:string" />
+        </s:sequence>
+      </s:complexType>
+      <s:element name="GetAllBusLocation">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="channelNumber" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="channelEncodedKey" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetAllBusLocationResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetAllBusLocationResult" type="tns:StandardData" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="StandardData">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="code" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="msg" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="result" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="timeStamp" type="s:string" />
+        </s:sequence>
+      </s:complexType>
+      <s:element name="GetAllBusLine">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="channelNumber" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="channelEncodedKey" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetAllBusLineResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetAllBusLineResult" type="tns:StandardData" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+    </s:schema>
+  </wsdl:types>
+  <wsdl:message name="getBusLocationSoapIn">
+    <wsdl:part name="parameters" element="tns:getBusLocation" />
+  </wsdl:message>
+  <wsdl:message name="getBusLocationSoapOut">
+    <wsdl:part name="parameters" element="tns:getBusLocationResponse" />
+  </wsdl:message>
+  <wsdl:message name="getTodayLineInfoSoapIn">
+    <wsdl:part name="parameters" element="tns:getTodayLineInfo" />
+  </wsdl:message>
+  <wsdl:message name="getTodayLineInfoSoapOut">
+    <wsdl:part name="parameters" element="tns:getTodayLineInfoResponse" />
+  </wsdl:message>
+  <wsdl:message name="getBusDepartureScheduleSoapIn">
+    <wsdl:part name="parameters" element="tns:getBusDepartureSchedule" />
+  </wsdl:message>
+  <wsdl:message name="getBusDepartureScheduleSoapOut">
+    <wsdl:part name="parameters" element="tns:getBusDepartureScheduleResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetAllBusLocationSoapIn">
+    <wsdl:part name="parameters" element="tns:GetAllBusLocation" />
+  </wsdl:message>
+  <wsdl:message name="GetAllBusLocationSoapOut">
+    <wsdl:part name="parameters" element="tns:GetAllBusLocationResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetAllBusLineSoapIn">
+    <wsdl:part name="parameters" element="tns:GetAllBusLine" />
+  </wsdl:message>
+  <wsdl:message name="GetAllBusLineSoapOut">
+    <wsdl:part name="parameters" element="tns:GetAllBusLineResponse" />
+  </wsdl:message>
+  <wsdl:portType name="ServiceSoap">
+    <wsdl:operation name="getBusLocation">
+      <wsdl:input message="tns:getBusLocationSoapIn" />
+      <wsdl:output message="tns:getBusLocationSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="getTodayLineInfo">
+      <wsdl:input message="tns:getTodayLineInfoSoapIn" />
+      <wsdl:output message="tns:getTodayLineInfoSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="getBusDepartureSchedule">
+      <wsdl:input message="tns:getBusDepartureScheduleSoapIn" />
+      <wsdl:output message="tns:getBusDepartureScheduleSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetAllBusLocation">
+      <wsdl:input message="tns:GetAllBusLocationSoapIn" />
+      <wsdl:output message="tns:GetAllBusLocationSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetAllBusLine">
+      <wsdl:input message="tns:GetAllBusLineSoapIn" />
+      <wsdl:output message="tns:GetAllBusLineSoapOut" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="ServiceSoap" type="tns:ServiceSoap">
+    <soap:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="getBusLocation">
+      <soap:operation soapAction="http://10628106.com/bus/getBusLocation" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="getTodayLineInfo">
+      <soap:operation soapAction="http://10628106.com/bus/getTodayLineInfo" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="getBusDepartureSchedule">
+      <soap:operation soapAction="http://10628106.com/bus/getBusDepartureSchedule" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetAllBusLocation">
+      <soap:operation soapAction="http://10628106.com/bus/GetAllBusLocation" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetAllBusLine">
+      <soap:operation soapAction="http://10628106.com/bus/GetAllBusLine" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:binding name="ServiceSoap12" type="tns:ServiceSoap">
+    <soap12:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="getBusLocation">
+      <soap12:operation soapAction="http://10628106.com/bus/getBusLocation" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="getTodayLineInfo">
+      <soap12:operation soapAction="http://10628106.com/bus/getTodayLineInfo" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="getBusDepartureSchedule">
+      <soap12:operation soapAction="http://10628106.com/bus/getBusDepartureSchedule" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetAllBusLocation">
+      <soap12:operation soapAction="http://10628106.com/bus/GetAllBusLocation" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetAllBusLine">
+      <soap12:operation soapAction="http://10628106.com/bus/GetAllBusLine" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="Service">
+    <wsdl:port name="ServiceSoap" binding="tns:ServiceSoap">
+      <soap:address location="http://125.70.9.134:4804/service.asmx" />
+    </wsdl:port>
+    <wsdl:port name="ServiceSoap12" binding="tns:ServiceSoap12">
+      <soap12:address location="http://125.70.9.134:4804/service.asmx" />
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>

@@ -1,0 +1,61 @@
+﻿<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>无标题文档</title>
+<style>
+*{margin:0;padding:0;list-style:none;}
+body{font-size:14px;}
+.box{width:200px;height:300px;border:1px solid #000;margin:0 auto;position:relative;overflow:hidden;}
+.box ul{position:absolute;top:0;left:0;}
+.box ul li{line-height:24px;}
+
+
+/*下面两行样式必不可少，背景颜色可以随意更改，其他看情况*/
+.scroll_bg{background:#0F0;position:absolute; z-index:999;right:0;display:none;}
+.scroll_bg .scroll_tiao{height:10px;background:#F00; z-index:1000;width:100%;position:absolute;left:0;top:0;}
+</style>
+<script src="jquery-1.7.2.js"></script>
+<script src="customScroll.js"></script>
+<script>
+$(function(){
+ 	
+	$('#box').scrolls($('#box')[0],$('#oul')[0],
+	{
+		direction:'right',
+		bgWidth:5,
+		axle:'top'
+	});
+	/*
+		scrolls(参数1，参数2,可选参数)
+		参数1:需要把滚动条插入哪个容器里面(该容器必须是限定宽高有overflow:hidden)
+		参数2：需要滚动的元素
+		可选参数:
+		{
+			bgHeight:滚动条父级的高度(在bottom下可以设置这个属性)
+			bgWidth:滚动条父级的宽度(在right下可以设置这个属性)
+			direction:滚动条的位置(right或者bottom)
+			distance:滚动的距离
+			axle:滚动的方向(left,top)
+		}
+	*/
+	
+})	
+</script>
+</head>
+
+<body>
+<div class="box" id="box">
+        	<ul id="oul" style="width:290px;">
+                <li style="padding-bottom:20px;">因为滚动条采用的是相绝对定位，为容器元素的子元素，内容元素的兄弟元素，因而，父容器需要是相对定位(position:relative)或是绝对定位(position:absolute)；而滚动的属性值是top，因而容器元素也应该是相对定位(position:relative)或是绝对定位(position:absolute)，否则就会像没气的轮胎——滚不起来。
+               	因为滚动条采用的是相绝对定位，为容器元素的子元素，内容元素的兄弟元素，因而，父容器需要是相对定位(position:relative)或是绝对定位(position:absolute)；而滚动的属性值是top，因而容器元素也应该是相对定位(position:relative)或是绝对定位(position:absolute)，否则就会像没气的轮胎
+                因为滚动条采用的是相绝对定位，为容器元素的子元素，内容元素的兄弟元素，因而，父容器需要是相对定位(position:relative)或是绝对定位(position:absolute)；而滚动的属性值是top，因而容器元素也应该是相对定位(position:relative)或是绝对定位(position:absolute)，否则就会像没气的轮胎
+                因为滚动条采用的是相绝对定位，为容器元素的子元素，内容元素的兄弟元素，因而，父容器需要是相对定位(position:relative)或是绝对定位(position:absolute)；而滚动的属性值是top，因而容器元素也应该是相对定位(position:relative)或是绝对定位(position:absolute)，否则就会像没气的轮胎
+                因为滚动条采用的是相绝对定位，为容器元素的子元素，内容元素的兄弟元素，因而，父容器需要是相对定位(position:relative)或是绝对定位(position:absolute)；而滚动的属性值是top，因而容器元素也应该是相对定位(position:relative)或是绝对定位(position:absolute)，否则就会像没气的轮胎
+                因为滚动条采用的是相绝对定位，为容器元素的子元素，内容元素的兄弟元素，因而，父容器需要是相对定位(position:relative)或是绝对定位(position:absolute)；而滚动的属性值是top，因而容器元素也应该是相对定位(position:relative)或是绝对定位(position:absolute)，否则就会像没气的轮胎
+                因为滚动条采用的是相绝对定位，为容器元素的子元素，内容元素的兄弟元素，因而，父容器需要是相对定位(position:relative)或是绝对定位(position:absolute)；而滚动的属性值是top，因而容器元素也应该是相对定位(position:relative)或是绝对定位(position:absolute)，否则就会像没气的轮胎气的轮胎
+               </li>
+            </ul>
+</div>
+</body>
+</html>

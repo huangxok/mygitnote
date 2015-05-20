@@ -1,0 +1,184 @@
+﻿<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <title></title>
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            background: black;
+        }
+
+        span {
+            margin: 0;
+            padding: 0;
+        }
+
+        .end-left {
+            margin-left: -235px;
+        }
+
+        .end-right {
+            margin-right: -117.5px;
+        }
+
+        .outline {
+            position: absolute;
+            top: 20px;
+        }
+
+        .outline {
+            /* Will override color (regardless of order) */
+            color: black;
+            -webkit-text-fill-color: transparent;
+            -webkit-text-stroke-width: 2px;
+            -webkit-text-stroke-color: orange;
+            font-size: 64px;
+            font-family: 'Arvo', serif;
+        }
+
+        .orbs {
+            font-family: 'Raleway', sans-serif;
+            font-weight: 100;
+            display: block;
+            font-size: 128px;
+        }
+
+            .orbs span {
+                color: red;
+                display: inline-block;
+                text-align: center;
+                border-radius: 50%;
+                text-shadow: 0 0 20px orange, 1px 1px 20px orange, 2px 2px 20px orange, -1px -1px 20px orange, -2px -2px 20px orange;
+                position: absolute;
+                left: 50%;
+            }
+
+                .orbs span:first-child {
+                    margin-left: -210px;
+                }
+
+                .orbs span:not(:first-child) {
+                    margin-left: -35px;
+                }
+
+        .glow {
+            opacity: 0;
+            font-family: 'Arvo', serif;
+            font-weight: 300;
+            color: orange;
+            margin-left: -222.5px;
+            font-size: 105px;
+            position: absolute;
+            top: 220px;
+            left: 50%;
+        }
+    </style>
+    <style>
+        /* latin */
+        @font-face {
+            font-family: 'Raleway';
+            font-style: normal;
+            font-weight: 100;
+            src: local('Raleway Thin'), local('Raleway-Thin'), url(http://fontstatic.useso.com/s/raleway/v9/RJMlAoFXXQEzZoMSUteGWFtXRa8TVwTICgirnJhmVJw.woff2) format('woff2');
+            unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02C6, U+02DA, U+02DC, U+2000-206F, U+2074, U+20AC, U+2212, U+2215, U+E0FF, U+EFFD, U+F000;
+        }
+        /* latin */
+        @font-face {
+            font-family: 'Raleway';
+            font-style: normal;
+            font-weight: 300;
+            src: local('Raleway Light'), local('Raleway-Light'), url(http://fontstatic.useso.com/s/raleway/v9/-_Ctzj9b56b8RgXW8FArifk_vArhqVIZ0nv9q090hN8.woff2) format('woff2');
+            unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02C6, U+02DA, U+02DC, U+2000-206F, U+2074, U+20AC, U+2212, U+2215, U+E0FF, U+EFFD, U+F000;
+        }
+    </style>
+    <style>
+        /* latin */
+        @font-face {
+            font-family: 'Arvo';
+            font-style: normal;
+            font-weight: 700;
+            src: local('Arvo Bold'), local('Arvo-Bold'), url(http://fontstatic.useso.com/s/arvo/v8/Ya11CJGBCnKoJHvb8B2EOw.woff2) format('woff2');
+            unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02C6, U+02DA, U+02DC, U+2000-206F, U+2074, U+20AC, U+2212, U+2215, U+E0FF, U+EFFD, U+F000;
+        }
+    </style>
+    <script src="../Scripts/jquery-1.7.1.min.js"></script>
+    <script src="jquery.velocity.min.js"></script>
+    <script>
+        var person = [[{ name: 'xx', age: 18 }, { name: 'yy', age: 19 }], [{ name: 'xx', age: 18 }, { name: 'yy', age: 19 }]]
+        var aa = [{ "id": "1", "username": "\u674e\u56db", "content": "\u7559\u8a00\u5185\u5bb9", "datetime": "23184823", "state": "1" }, { "id": "2", "username": "\u5f20\u4e09", "content": "\u7f8e\u7c4d\u4e86", "datetime": "63726421", "state": "2" }]
+    </script>
+</head>
+<body>
+    <link href='http://fonts.useso.com/css?family=Arvo:700' rel='stylesheet' type='text/css'>
+    <link href='http://fonts.useso.com/css?family=Raleway:300,100' rel='stylesheet' type='text/css'>
+
+    <span class="outline end-right">
+        BROOD
+    </span>
+    <span class="outline end-left">
+        TECH
+    </span>
+
+    <span class="orbs">
+        <span>b</span>
+        <span>u</span>
+        <span>r</span>
+        <span>n</span>
+        <span>i</span>
+        <span>n</span>
+        <span>g</span>
+    </span>
+    <br />
+    <span class="glow">
+        HTML5
+    </span>
+    <script>
+        var $orbs = $('.orbs span');
+        $('.end-right').css('left', '-10%');
+        $('.end-left').css('left', '110%');
+        $orbs.velocity({
+            'top': '-300px',
+            scaleX: '.2',
+            scaleY: '.2',
+            color: '#990000'
+        }, 0);
+        var orb = 0;
+        var numOrbs = $orbs.length;
+
+        $('.end-right').velocity({
+            left: '50%'
+        }, 'easeOutExpo', 1200);
+        $('.end-left').velocity({
+            left: '50%'
+        }, 'easeOutExpo', 1200);
+
+
+        dropOrbs = function () {
+            $orbs.eq(orb).velocity({
+                top: '70px'
+            }, 400).velocity({
+                scaleX: 1,
+                scaleY: 1,
+                color: '#fff'
+            }, 1000).css('position', 'relative');
+            orb = orb + 1;
+            if (orb < numOrbs) {
+                setTimeout(dropOrbs, 100);
+            } else {
+                setTimeout(function () {
+                    $('.glow').velocity({
+                        opacity: 1
+                    }, 1200);
+                }, 1200);
+
+            }
+
+        }
+
+        setTimeout(dropOrbs, 400);
+    </script>
+</body>
+</html>

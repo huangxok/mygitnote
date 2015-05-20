@@ -1,0 +1,174 @@
+﻿<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <title></title>
+    <!--This sets the baseUrl to the "scripts" directory, and
+    loads a script that will have a module ID of 'main'-->
+    <script data-main="Script/main" src="Script/require.js"></script>
+</head>
+<body>
+    <script>
+        require.config({
+            //baseUrl亦可通过RequireJS config手动设置。
+            //如果没有显式指定config及data-main，
+            //则默认的baseUrl为包含RequireJS的那个HTML页面的所属目录。
+            //baseUrl + paths
+            baseUrl: 'Script',
+            paths: {
+                jquery: [
+                    '//cdnjs.cloudflare.com/ajax/libs/jquery/2.0.0/jquery.min.js',
+                    'jquery-1.7.1' //本地文件路径可以省略js后缀名
+                ]
+            }
+        });
+    </script>
+    <script>
+        //若不存在依赖  可以定义个键值对对象
+        define({
+            color: 'black',
+            size: 'unisize'
+        });
+        //如果一个模块没有任何依赖，但需要一个做setup工作的函数
+        define(function () {
+            return {
+                color: 'black',
+                size: 'unisize'
+            }
+        })
+
+    </script>
+    <script>
+        //my/shirt.js now has some dependencies, a cart and inventory
+        //module in the same directory as shirt.js
+        //my / cart.js
+        //my / inventory.js
+        //my / shirt.js
+        define(["./cart", "./inventory"], function (cart, inventory) {
+            //return an object to define the "my/shirt" module.
+            return {
+                color: "blue",
+                size: "large",
+                addToCart: function () {
+                    inventory.decrement(this);
+                    cart.add(this);
+                }
+            }
+        });
+    </script>
+    <script>
+        //A module definition inside foo/title.js. It uses
+        //my/cart and my/inventory modules from before,
+        //but since foo/title.js is in a different directory than
+        //the "my" modules, it uses the "my" in the module dependency
+        //name to find them. The "my" part of the name can be mapped
+        //to any directory, but by default, it is assumed to be a
+        //sibling to the "foo" directory.
+        define(["my/cart", "my/inventory"],
+            function (cart, inventory) {
+                //return a function to define "foo/title".
+                //It gets or sets the window title.
+                return function (title) {
+                    return title ? (window.title = title) :
+                           inventory.storeName + ' ' + cart.name;
+                }
+            }
+        );
+        //简单commonjs定义模块
+        define(function (require, exports, module) {
+            var a = require('a'),
+                b = require('b');
+            //Return the module value
+            return function () { };
+        });
+
+        //定义一个命名模块
+        //一个文件一个模块: 每个Javascript文件应该只定义一个模块，
+        //这是模块名 - 至 - 文件名查找机制的自然要求。
+        //多个模块会被优化工具组织优化，
+        //但你在使用优化工具时应将多个模块放置到一个文件中。
+        //Explicitly defines the "foo/title" module:
+        define("foo/title",  //建议省略第一个参数由工具自动生成
+            ["my/cart", "my/inventory"],
+            function (cart, inventory) {
+                //Define foo/title object in here.
+            }
+        );
+        //define()中的相对模块名: 为了可以在define()
+        //内部使用诸如require("./relative/name")的
+        //调用以正确解析相对名称，记得将"require"本身作为一个依赖注入到模块中：
+        define(["require", "./relative/name"], function (require) {
+            var mod = require("./relative/name");
+        });
+        //commonjs模块语法
+        define(function (require) {
+            var mod = require("./relative/name");
+        });
+    </script>
+    <script>
+
+    </script>
+    <script>
+        define(["require", "./relative/name"], function (require) {
+            var mod = require("./relative/name");
+        });
+        define(function (require) {
+            var mod = require("./relative/name");
+        });
+
+        //生成相对于模块的URL地址
+        //可能需要生成一个相对于模块的URL地址。
+        //你可以将"require"作为一个依赖注入进来，
+        //然后调用require.toUrl()以生成该URL
+        define(["require"], function (require) {
+            var cssUrl = require.toUrl("./style.css");
+        });
+    </script>
+    <script>
+        //控制台调试
+        require("module/name").callSomeFunction()
+    </script>
+    <script>
+        //循环依赖
+        //Inside b.js:
+        define(["require", "a"],
+            function (require, a) {
+                //"a" in this case will be null if a also asked for b,
+                //a circular dependency.
+                return function (title) {
+                    return require("a").doSomething();
+                }
+            }
+        );
+        //Inside b.js:
+        define(function (require, exports, module) {
+            //If "a" has used exports, then we have a real
+            //object reference here. However, we cannot use
+            //any of a's properties until after b returns a value.
+            var a = require("a");
+
+            exports.foo = function () {
+                return a.bar();
+            };
+        });
+        //Inside b.js:
+        define(['a', 'exports'], function (a, exports) {
+            //If "a" has used exports, then we have a real
+            //object reference here. However, we cannot use
+            //any of a's properties until after b returns a value.
+
+            exports.foo = function () {
+                return a.bar();
+            };
+        });
+    </script>
+    <script>
+        //jsonp 服务依赖
+        require(["http://example.com/api/data.json?callback=define"],
+                function (data) {
+                    //The data object will be the API response for the
+                    //JSONP data call.
+                    console.log(data);
+                });
+    </script>
+</body>
+</html>

@@ -1,0 +1,33 @@
+/*banner中的老师头像*/
+#banner .teacher{line-height:46px;position:absolute;left:40%;width:150px;}
+.teacher .teacher_image{width:50px;height:46px;margin-top:4px;}
+#banner  .teacher a{ color:#f5f9fa;}
+
+
+/*左边自适应区*/
+.left{ float:left;margin-bottom:50px; width:100%; height:650px; position:relative;right:68px;margin-top:5px;}
+.leftL{margin-left:74px;height:647px; background-color:white;height:650px;background:url(../img/bgL2.png) no-repeat;background-size:100% 100%;}
+.sub_banner{height:40px; }
+.sub_banner h2{float:left;font-weight:normal;font-size:14px;line-height:40px;text-indent:15px;font-family:"黑体";color:#6e6e6e;}
+.sub_banner ul{position:relative;right:20px;padding-top:2px;}
+.sub_banner li{float:right;cursor:pointer;width:65px;margin-top:3px;}
+.sub_banner .btn_all{width:41px;height:24px;background:url(../img/btn_all.png)no-repeat;border:none;cursor:pointer;}
+.sub_banner .btn_publish{width:41px;height:24px;background:url(../img/btn_publish.png)no-repeat;border:none;cursor:pointer;}
+.sub_banner .btn_cancel{width:63px;height:24px;background:url(../img/btn_cancel.png)no-repeat;border:none;cursor:pointer;}
+
+.list{margin-top:37px;}
+.list li{float:left;width:24%;height:204px;text-align:center;cursor:pointer;}
+.selected_y, .selected_n{background:url(../img/material_b.png) no-repeat;background-position:center 25px;}
+.list .class_file{position:relative;top:90px;font-size:14px;color:#545555;}
+.list .class_time{color:#adaeae;font-size:10px;}
+.list .broad_statue{color:#ff0000;font-size:12px;}
+.list img{position:relative;left:15%;cursor:pointer; }
+
+
+
+
+
+
+
+
+

@@ -1,0 +1,521 @@
+﻿<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title></title>
+    <script type="text/javascript" src="../Script/jquery-easyui-1.3.5/jquery-1.8.0.min.js"></script>
+    <!--<link href="../Script/jquery-easyui-1.3.2/themes/default/easyui.css" rel="stylesheet" />
+    <link href="../Script/jquery-easyui-1.3.2/themes/icon.css" rel="stylesheet" />-->
+    <link href="../Script/jquery-easyui-1.3.5/themes/default/easyui.css" rel="stylesheet" />
+    <link href="../Script/jquery-easyui-1.3.5/themes/icon.css" rel="stylesheet" />
+    <script src="Scripts/jquery-1.7.1.min.js"></script>
+    <script type="text/javascript" src="../Script/common_fn.js"></script>
+    <script type="text/javascript" src="../Script/init.js"></script>
+    <script type="text/javascript" src="../Script/jquery-easyui-1.3.5/jquery.easyui.min.js"></script>
+    <script type="text/javascript" src="../Script/jquery-easyui-1.3.5/locale/easyui-lang-zh_CN.js"></script>
+    <script type="text/javascript" src="../Script/jquery-easyui-1.3.5/datagrid-detailview.js"></script>
+    <script language="javascript" type="text/javascript">
+
+        function fileSelected() {
+            if (document.all) {
+
+                if (navigator.appVersion.match(/6./i) == '6.') {
+                    alert("IE 6");
+                }
+
+                if (navigator.appVersion.match(/7./i) == '7.') {
+                    alert("IE 7");
+                }
+
+                if (navigator.appVersion.match(/8./i) == '8.') {
+                    alert("IE 8");
+                }
+            }
+            else {
+                alert("other brower!");
+            }
+            return false;
+
+            xmlHttp = null;
+            if (window.XMLHttpRequest) {// code for all new browsers
+                xmlHttp = new XMLHttpRequest();
+                alert("eeee");
+            }
+            else if (window.ActiveXObject) {// code for IE5 and IE6
+                xmlHttp = new ActiveXObject("Microsoft.XMLHTTP");
+                alert("sdfsdfsdfsd");
+            }
+            try {
+
+                xmlHttp.upload.addEventListener("progress", uploadProgress, false);
+
+            } catch (e) {
+                alert(e.message)
+            }
+
+
+            //if (xmlHttp.upload==null) {
+            //    alert("no");
+            //}
+            //else {
+            //    alert("yes");
+
+            //}
+
+            //if (document.all)//判断是否是IE浏览器
+            //{
+            //    var fileName = document.getElementById('fileToUpload');
+            //    fileName.select();
+            //    var realpath = document.selection.createRange().text;
+            //    window.oldOnError = window.onerror;
+            //    window.onerror = function (err) {
+            //        if (err.indexOf('Automation') != -1) {
+            //            alert('没有访问文件的权限');
+            //            return true;
+            //        }
+            //        else {
+            //            return false;
+            //        }
+            //    }
+            //    var fso = new ActiveXObject('Scripting.FileSystemObject');
+            //    file = fso.GetFile(realpath);
+            //    // window.onerror = window.oldOnError;
+            //    //alert(file.Size);
+            //}
+            //else {
+
+            //}
+            //var fileName = file.name;
+
+
+            //        var fileSize = 0;
+            //        if (file.size > 1024 * 1024)
+            //            fileSize = (Math.round(file.size * 100 / (1024 * 1024)) / 100).toString() + 'MB';
+            //        else
+            //            fileSize = (Math.round(file.size * 100 / 1024) / 100).toString() + 'KB';
+
+            //        document.getElementById('fileName').innerHTML = '文件名: ' + file.name;
+            //        document.getElementById('fileSize').innerHTML = '大小: ' + fileSize;
+            //        document.getElementById('fileType').innerHTML = '类型: ' + file.type;
+
+
+            //    }
+
+
+
+        }
+
+
+        function uploadFile() {
+
+            var fd = new FormData();
+            fd.append("SmallImageFile", document.getElementById('SmallImageFile').files[0]);
+            fd.append("BigImageFile", document.getElementById('BigImageFile').files[0]);
+            fd.append("SmallVideoFile", document.getElementById('SmallVideoFile').files[0]);
+            fd.append("BigVideoFile", document.getElementById('BigVideoFile').files[0]);
+            fd.append("RO_Name", $("#RO_Name").val());
+            fd.append("RO_URL", $("#RO_URL").val());
+            fd.append("RO_Remarks", $("#RO_Remarks").val());
+
+            var xmlHttp = null;
+            try {
+                // Firefox, Opera 8.0+, Safari
+                xmlHttp = new XMLHttpRequest();
+                alert("eeeeq");
+            }
+            catch (e) {
+                // Internet Explorer
+
+                try {
+                    xmlHttp = new ActiveXObject("Msxml2.XMLHTTP");
+                    alert("eeeeq1");
+                }
+                catch (e) {
+                    xmlHttp = new ActiveXObject("Microsoft.XMLHTTP");
+                    alert("eeeeq2");
+                }
+            }
+
+
+            
+            xmlHttp.upload.addEventListener("progress", uploadProgress, false);
+            xmlHttp.addEventListener("load", uploadComplete, false);
+            xmlHttp.addEventListener("error", uploadFailed, false);
+            xmlHttp.addEventListener("abort", uploadCanceled, false);
+            xmlHttp.open("POST", "/Manager/CustomerResourceManager/ashx/UploadResource.ashx?action=upload&c_id=10");
+            xmlHttp.send(fd);
+            $.messager.progress({
+                title: '请稍后',
+                msg: '正在发送短信......',
+                interval: 0
+            });
+            //$("<div id=\"loadW\" class=\"datagrid-mask\"></div>").css({ display: "block", width: "100%", zIndex: $.fn.window.defaults.zIndex++, height: $(window).height() }).appendTo("body");
+            //$("<div id=\"loadM\" class=\"datagrid-mask-msg\"></div>").html("数据上传中<span id=\"progressNumber\"></span>，请稍候。。。").appendTo("body").css({ display: "block", zIndex: $.fn.window.defaults.zIndex++, left: ($(document.body).outerWidth(true) - 190) / 2, top: ($(window).height() - 45) / 2 });
+
+        }
+
+        function uploadProgress(evt) {
+
+            if (evt.lengthComputable) {
+                var percentComplete = Math.round(evt.loaded * 100 / evt.total);
+                //   $('#progressNumber').progressbar('setValue', percentComplete);
+                //  $('#progressNumber').html(percentComplete.toString() + "%");
+                //  alert($.messager.progress());
+                $.messager.progress('bar').progressbar('setValue', percentComplete);
+            }
+            else {
+                document.getElementById('progressNumber').innerHTML = '无法计算';
+            }
+        }
+
+        function uploadComplete(evt) {
+            //$("#loadW").detach();
+            //$("#loadM").detach();
+            $.messager.progress('close');
+            /* 服务器返回数据*/
+            var message = evt.target.responseText;
+            if (evt.target.status == "200") {
+
+                if (evt.target.responseText == "nosession") {
+
+                    alert('错误 , 您未登录 ');
+                }
+                else if (evt.target.responseText == "ok") {
+                    alert("提示 操作成功");
+                }
+                else {
+                    alert(evt.target.responseText);
+                }
+            }
+
+            else {
+                alert("上传出错.");
+            }
+
+        }
+
+        function uploadFailed(evt) {
+            alert("上传出错.");
+        }
+
+        function uploadCanceled(evt) {
+            alert("上传已由用户或浏览器取消删除连接.");
+        }
+    </script>
+
+    <script type="text/javascript">
+        function checkFileSize(fileobject, filesize) {
+            var file = null;
+            if (document.all)//判断是否是IE浏览器
+            {
+
+                if (navigator.userAgent.indexOf("MSIE 10.0") > 0 || navigator.userAgent.indexOf("MSIE 11.0") > 0) {
+                    alert("IE 10 11");
+                    file = document.getElementById(fileobject).files[0];
+                    alert(file.size);
+                }
+                else {
+                    var fileName = document.getElementById(fileobject);
+                    fileName.select();
+                    var realpath = document.selection.createRange().text;
+                    window.oldOnError = window.onerror;
+                    window.onerror = function (err) {
+                        if (err.indexOf('Automation') != -1) {
+                            alert('没有访问文件的权限');
+                            return true;
+                        }
+                        else {
+                            return false;
+                        }
+                    }
+                    var fso = new ActiveXObject('Scripting.FileSystemObject');
+                    file = fso.GetFile(realpath);
+                    window.onerror = window.oldOnError;
+                }
+
+
+
+            }
+            else {
+
+                file = document.getElementById(fileobject).files[0];
+
+            }
+
+            if (file) {
+
+                if (file.size > 1024 * 1024 * 30) {
+
+                    return true;
+                }
+                else {
+                    return false;
+                }
+            }
+
+            return false;
+        }
+
+        var funcbvf = function () {
+
+            var filepath = $("#BigVideoFile").val();
+
+            var extStart = filepath.lastIndexOf(".");
+
+            var ext = filepath.substring(extStart, filepath.length).toLowerCase();
+
+            if (ext != ".flv" && ext != ".f4v") {
+                $.messager.alert('错误', ' 支持文件类型:视频(.flv,.f4v) ');
+                if (document.all) {
+                    $("#BigVideoFile").remove();
+                    var str = "<input id=\"BigVideoFile\" name=\"BigVideoFile\" type=\"file\" style=\"width: 300px;\" class=\"easyui-validatebox\" data-options=\"required:true\" />";
+                    var o = $("#bvf").append(str);
+                    $.parser.parse(o);
+                    $("#BigVideoFile").change(funcbvf);
+                }
+                else {
+                    $("#BigVideoFile").val("");
+                }
+                return false;
+            }
+
+            if (checkFileSize("BigVideoFile", 1024 * 1024 * 30)) {
+
+
+                $.messager.alert('错误', '文件最大不能超过30M！');
+
+                if (document.all) {
+                    $("#BigVideoFile").remove();
+                    var str = "<input id=\"BigVideoFile\" name=\"BigVideoFile\" type=\"file\" style=\"width: 300px;\" class=\"easyui-validatebox\" data-options=\"required:true\" />";
+                    var o = $("#bvf").append(str);
+                    $.parser.parse(o);
+                    $("#BigVideoFile").change(funcbvf);
+                }
+                else {
+                    $("#BigVideoFile").val("");
+                }
+                return false;
+            }
+
+        };
+        var funcsvf = function () {
+
+            var filepath = $("#SmallVideoFile").val();
+
+            var extStart = filepath.lastIndexOf(".");
+
+            var ext = filepath.substring(extStart, filepath.length).toLowerCase();
+
+            if (ext != ".flv" && ext != ".f4v") {
+
+                $.messager.alert('错误', ' 支持文件类型:视频(.flv,.f4v) ');
+
+                if (document.all) {
+                    $("#SmallVideoFile").remove();
+                    var str = "<input id=\"SmallVideoFile\" name=\"SmallVideoFile\" type=\"file\" style=\"width: 300px;\" class=\"easyui-validatebox\" data-options=\"required:true\" />";
+                    var o = $("#svf").append(str);
+                    $.parser.parse(o);
+                    $("#SmallVideoFile").change(funcsvf);
+                }
+                else {
+                    $("#SmallVideoFile").val("");
+                }
+
+                return false;
+            }
+
+            if (checkFileSize("SmallVideoFile", 1024 * 1024 * 30)) {
+
+
+                $.messager.alert('错误', '文件最大不能超过30M！');
+
+                if (document.all) {
+                    $("#SmallVideoFile").remove();
+                    var str = "<input id=\"SmallVideoFile\" name=\"SmallVideoFile\" type=\"file\" style=\"width: 300px;\" class=\"easyui-validatebox\" data-options=\"required:true\" />";
+                    var o = $("#svf").append(str);
+                    $.parser.parse(o);
+                    $("#SmallVideoFile").change(funcsvf);
+                }
+                else {
+                    $("#SmallVideoFile").val("");
+                }
+                return false;
+            }
+
+        };
+        var funcbif = function () {
+
+            var filepath = $("#BigImageFile").val();
+
+            var extStart = filepath.lastIndexOf(".");
+
+            var ext = filepath.substring(extStart, filepath.length).toLowerCase();
+
+            if (ext != ".png" && ext != ".jpg") {
+
+                $.messager.alert('错误', ' 支持文件类型:图片（.jpg,.png）');
+
+                if (document.all) {
+                    $("#BigImageFile").remove();
+                    var str = "<input id=\"BigImageFile\" name=\"BigImageFile\" type=\"file\" style=\"width: 300px;\" class=\"easyui-validatebox\" data-options=\"required:true\" />";
+                    var o = $("#bif").append(str);
+                    $.parser.parse(o);
+                    $("#BigImageFile").change(funcbif);
+                }
+                else {
+                    $("#BigImageFile").val("");
+                }
+                return false;
+            }
+
+            if (checkFileSize("BigImageFile", 1024 * 1024 * 30)) {
+
+
+                $.messager.alert('错误', '文件最大不能超过30M！');
+
+                if (document.all) {
+                    $("#BigImageFile").remove();
+                    var str = "<input id=\"BigImageFile\" name=\"BigImageFile\" type=\"file\" style=\"width: 300px;\" class=\"easyui-validatebox\" data-options=\"required:true\" />";
+                    var o = $("#bif").append(str);
+                    $.parser.parse(o);
+                    $("#BigImageFile").change(funcbif);
+                }
+                else {
+                    $("#BigImageFile").val("");
+                }
+                return false;
+            }
+
+        };
+        var funcsif = function () {
+
+            var filepath = $("#SmallImageFile").val();
+
+            var extStart = filepath.lastIndexOf(".");
+
+            var ext = filepath.substring(extStart, filepath.length).toLowerCase();
+
+            if (ext != ".png" && ext != ".jpg") {
+
+                $.messager.alert('错误', ' 支持文件类型: 图片（.jpg,.png）');
+
+                if (document.all) {
+                    $("#SmallImageFile").remove();
+                    var str = "<input id=\"SmallImageFile\" name=\"SmallImageFile\" type=\"file\" style=\"width: 300px;\" class=\"easyui-validatebox\" data-options=\"required:true\" />";
+                    var o = $("#sif").append(str);
+                    $.parser.parse(o);
+                    $("#SmallImageFile").change(funcsif);
+                }
+                else {
+                    $("#SmallImageFile").val("");
+                }
+                return false;
+            }
+            if (checkFileSize("SmallImageFile", 1024 * 1024 * 30)) {
+
+
+                $.messager.alert('错误', '文件最大不能超过30M');
+
+                if (document.all) {
+                    $("#SmallImageFile").remove();
+                    var str = "<input id=\"SmallImageFile\" name=\"SmallImageFile\" type=\"file\" style=\"width: 300px;\" class=\"easyui-validatebox\" data-options=\"required:true\" />";
+                    var o = $("#sif").append(str);
+                    $.parser.parse(o);
+                    $("#SmallImageFile").change(funcsif);
+                }
+                else {
+                    $("#SmallImageFile").val("");
+                }
+                return false;
+            }
+
+        };
+        $(function () {
+            $("#SmallImageFile").change(funcsif);
+            $("#BigImageFile").change(funcbif);
+            $("#SmallVideoFile").change(funcsvf);
+            $("#BigVideoFile").change(funcbvf);
+        });
+
+    </script>
+</head>
+<body>
+    <div data-options="region:'center',title:'货品管理',iconCls:'icon-ok'">
+        <div style="margin: 70px;">
+            <form id="form_uploadresource" enctype="multipart/form-data" method="post">
+
+
+                <table style="width: 100%;" class="tableForm">
+                    <tr>
+                        <td style="width: 120px;">资源名称：
+                        </td>
+                        <td>
+                            <input name="RO_Name" maxlength="250" style="width: 230px;" id="RO_Name" type="text" class="easyui-validatebox" data-options="required:true" />
+                        </td>
+                    </tr>
+                    <tr>
+                        <td style="width: 120px;">链接地址：
+                        </td>
+                        <td>
+                            <input name="RO_URL" maxlength="250" style="width: 230px;" id="RO_URL" type="text" value="http://" class="easyui-validatebox" data-options="required:true,validType:'url'" />
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>视频截图（小）：
+                        </td>
+                        <td id="sif">
+                            <input id="SmallImageFile" name="SmallImageFile" type="file" style="width: 300px;" class="easyui-validatebox" data-options="required:true" />
+
+                        </td>
+                    </tr>
+
+                    <tr>
+                        <td>视频（小）：
+                        </td>
+                        <td id="svf">
+                            <input id="SmallVideoFile" name="SmallVideoFile" type="file" style="width: 300px;" class="easyui-validatebox" data-options="required:true" />
+
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>视频截图（大）：
+                        </td>
+                        <td id="bif">
+                            <input id="BigImageFile" name="BigImageFile" type="file" style="width: 300px;" class="easyui-validatebox" data-options="required:true" />
+
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>视频（大）：
+                        </td>
+                        <td id="bvf">
+                            <input id="BigVideoFile" name="BigVideoFile" type="file" style="width: 300px;" class="easyui-validatebox" data-options="required:true" />
+                        </td>
+                    </tr>
+                    <tr>
+                        <td colspan="2" style="font-weight: bold; text-indent: 5px;">
+                            <font color="red">【注】</font>：当前支持上传的文件类型：【图像】：JPG , PNG  【视频】：FLV , F4V
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>备注信息：</td>
+                        <td>
+                            <textarea name="RO_Remarks" id="RO_Remarks" maxlength="250" style="width: 100%;" cols="80" rows="4"></textarea>
+                        </td>
+                    </tr>
+
+
+
+                </table>
+
+
+
+                <!--   <div id="progressNumber" class="easyui-progressbar" style="width: 400px;"></div>-->
+                <a id="uploadFile" href="#" class="easyui-linkbutton" data-options="iconCls:'icon-save'" onclick="uploadFile()">上传并导入</a>
+
+            </form>
+        </div>
+
+    </div>
+</body>
+</html>

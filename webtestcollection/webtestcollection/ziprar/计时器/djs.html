@@ -1,0 +1,127 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>dafds</title>
+    <script src="jquery-1.10.2.js"></script>
+    <script>
+        $(function () {
+            $("#startBtn").bind('click', function () {
+                var d = $("#min").val();
+                d = d.replace(/\s+/g, "");
+                if (0 == d.length) {
+                    return;
+                }
+                timePlug.init("main_time", d);
+            });
+        });
+
+        var timePlug = {
+            /**
+             * 初始化。
+             * @param {Object} id => 要放计时器的容器id，建议用div
+             * @param {Object} dateString => 指定日期字符串，标准格式{2015-05-07},或者数字，数字默认单位为分钟
+             */
+            init: function (id, dateString) {
+
+                if (/\d{4}-\d{2}-\d{2}/g.test(dateString)) {
+                    this.date = new Date(dateString);
+                } else if (/^\d+$/g.test(dateString)) {
+                    this.date = new Date(new Date().getTime() + (parseInt(dateString) + 8) * 1000 * 60 * 60);
+                } else {
+                    $("#min").val("格式不正确");
+                    return;
+                }
+                if (this.date.getTime() <= new Date().getTime()) {
+                    dateString = 2;//默认2小时
+                    this.date = new Date(new Date().getTime() + (parseInt(dateString) + 8) * 1000 * 60 * 60);
+                }
+                this.div = $("#" + id);
+                this.start();
+            },
+            start: function () {
+                var tt = this;
+                var dt = parseInt(tt.date.getTime()) - parseInt(new Date().getTime());
+                dt = dt - 1000 * 60 * 60 * 8;//减去正8区的时区误差
+                setTimeout(function () {
+                    if (dt > 0) {
+                        tt.createElement(dt);
+                    } else {
+                        $("#min").val("时间已过期，请重新设置");
+                        tt.div.empty();
+                    }
+                }, 1000);
+            },
+            setStyle: function () {
+                var tt = this;
+                tt.div.find("li").css({
+                    display: 'inline',
+                    fontSize: '26px',
+                    paddingLeft: '5px',
+                    paddingRight: '5px'
+                });
+                tt.div.find("li.number").css({
+                    background: '#000000',
+                    color: '#F3F3F3',
+                    borderRadius: '3px',
+                    marginLeft: '5px'
+                });
+            },
+            createElement: function (l) {
+                var tt = this;
+                var dt = l;
+
+                var hour = Math.floor(dt / (1000 * 3600));
+                var ms = dt - (1000 * 3600 * hour);
+                var min = Math.floor(ms / (1000 * 60));
+                var ss = dt - (1000 * 3600 * hour) - (1000 * 60 * min);
+                var sec = Math.floor(ss / 1000);
+
+                var h = hour + "", m = min + "", s = sec + "";
+
+                var str = "<ul><li>剩余</li>";
+                if (1 == h.length) {
+                    str += "<li class='number'>0</li>";
+                }
+                for (var i = 0 ; i < h.length; i++) {
+                    str += "<li class='number'>";
+                    str += h[i];
+                    str += "</li>";
+                }
+                str += "<li>:</li>";
+                if (1 == m.length) {
+                    str += "<li class='number'>0</li>";
+                }
+                for (var i = 0; i < m.length; i++) {
+                    str += "<li class='number'>";
+                    str += m[i];
+                    str += "</li>";
+                }
+                str += "<li>:</li>";
+                if (1 == s.length) {
+                    str += "<li class='number'>0</li>";
+                }
+                for (var i = 0; i < s.length; i++) {
+                    str += "<li class='number'>";
+                    str += s[i];
+                    str += "</li>";
+                }
+                str += "</ul>";
+                tt.div.empty().append(str);
+                tt.setStyle();
+                tt.start();
+            }
+        }
+    </script>
+</head>
+<body>
+    <div>
+        <font style="color:#698B22">格式:数字(以小时为单位)/日期格式(2015-05-10)</font>
+        </br>
+        <input type="text" name="min" id="min" value="" />
+        <input type="button" name="startBtn" id="startBtn" value="设置" />
+    </div>
+    <div id="main_time" class="main_time">
+    </div>
+</body>
+</html>

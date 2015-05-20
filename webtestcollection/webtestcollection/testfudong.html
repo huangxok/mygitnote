@@ -1,0 +1,39 @@
+﻿<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title></title>
+    <style>
+        .add {
+            -webkit-border-radius: 40px;
+            -webkit-box-shadow: 0 0 1px #fff, 0 0 3px #000, 0 0 3px #000;
+            -moz-border-radius: 40px;
+            -moz-box-shadow: 0 0 1px #fff, 0 0 3px #000, 0 0 3px #000, inset 0 1px #fff, inset 0 12px rgba(255,255,255,0.15), inset 0 4px 10px #cef, inset 0 22px 5px #0773b4, inset 0 -5px 10px #0df;
+            height: 34px;
+            width: 80px;
+            border-radius: 40px;
+            background: #034a76;
+            box-shadow: 0 0 1px #fff, 0 0 3px #000, 0 0 3px #000, inset 0 1px #fff, inset 0 12px rgba(255,255,255,0.15), inset 0 4px 10px #cef, inset 0 22px 5px #0773b4, inset 0 -5px 10px #0df;
+        }
+    </style>
+</head>
+<body>
+    <div class="add"></div>
+    <div style="background: #ffd800; height: 3000px;"></div>
+    <div id="abc" style="position: absolute; left: 10px; top: 100px; width: 100px; height: 100px; background: #f00;"></div>
+    <script>
+        function $(id) {
+            return document.getElementById(id);
+        }
+        window.onscroll = function () {
+            var scrolltop;
+
+            scrolltop = document.body.scrollTop | document.documentElement.scrollTop;
+
+
+            $("abc").style.top = 90 + scrolltop + "px";
+            $("abc").innerHTML = scrolltop + 90;
+        }
+    </script>
+</body>
+</html>

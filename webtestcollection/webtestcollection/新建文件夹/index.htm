@@ -1,0 +1,594 @@
+﻿<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>XXX</title>
+    <link rel="stylesheet" href="css/common.css">
+<!--    <script src="js/jquery.js"></script>
+    <script src="js/jquery-1.js"></script>
+    <script src="js/jquery_002.js"></script>
+    <script src="js/jquery_003.js"></script>
+    <script src="js/home-common.js"></script>-->
+    <style>
+        .firebugResetStyles {
+            z-index: 2147483646 !important;
+            top: 0 !important;
+            left: 0 !important;
+            display: block !important;
+            border: 0 none !important;
+            margin: 0 !important;
+            padding: 0 !important;
+            outline: 0 !important;
+            min-width: 0 !important;
+            max-width: none !important;
+            min-height: 0 !important;
+            max-height: none !important;
+            position: fixed !important;
+            transform: rotate(0deg) !important;
+            transform-origin: 50% 50% !important;
+            border-radius: 0 !important;
+            box-shadow: none !important;
+            background: transparent none !important;
+            pointer-events: none !important;
+            white-space: normal !important;
+        }
+
+        .firebugBlockBackgroundColor {
+            background-color: transparent !important;
+        }
+
+        .firebugResetStyles:before, .firebugResetStyles:after {
+            content: "" !important;
+        }
+
+        .firebugCanvas {
+            display: none !important;
+        }
+
+        .firebugLayoutBox {
+            width: auto !important;
+            position: static !important;
+        }
+
+        .firebugLayoutBoxOffset {
+            opacity: 0.8 !important;
+            position: fixed !important;
+        }
+
+        .firebugLayoutLine {
+            opacity: 0.4 !important;
+            background-color: #000000 !important;
+        }
+
+        .firebugLayoutLineLeft, .firebugLayoutLineRight {
+            width: 1px !important;
+            height: 100% !important;
+        }
+
+        .firebugLayoutLineTop, .firebugLayoutLineBottom {
+            width: 100% !important;
+            height: 1px !important;
+        }
+
+        .firebugLayoutLineTop {
+            margin-top: -1px !important;
+            border-top: 1px solid #999999 !important;
+        }
+
+        .firebugLayoutLineRight {
+            border-right: 1px solid #999999 !important;
+        }
+
+        .firebugLayoutLineBottom {
+            border-bottom: 1px solid #999999 !important;
+        }
+
+        .firebugLayoutLineLeft {
+            margin-left: -1px !important;
+            border-left: 1px solid #999999 !important;
+        }
+
+        .firebugLayoutBoxParent {
+            border-top: 0 none !important;
+            border-right: 1px dashed #E00 !important;
+            border-bottom: 1px dashed #E00 !important;
+            border-left: 0 none !important;
+            position: fixed !important;
+            width: auto !important;
+        }
+
+        .firebugRuler {
+            position: absolute !important;
+        }
+
+        .firebugRulerH {
+            top: -15px !important;
+            left: 0 !important;
+            width: 100% !important;
+            height: 14px !important;
+            border-top: 1px solid #BBBBBB !important;
+            border-right: 1px dashed #BBBBBB !important;
+            border-bottom: 1px solid #000000 !important;
+        }
+
+        .firebugRulerV {
+            top: 0 !important;
+            left: -15px !important;
+            width: 14px !important;
+            height: 100% !important;
+            border-left: 1px solid #BBBBBB !important;
+            border-right: 1px solid #000000 !important;
+            border-bottom: 1px dashed #BBBBBB !important;
+        }
+
+        .overflowRulerX > .firebugRulerV {
+            left: 0 !important;
+        }
+
+        .overflowRulerY > .firebugRulerH {
+            top: 0 !important;
+        }
+
+        .fbProxyElement {
+            position: fixed !important;
+            pointer-events: auto !important;
+        }
+
+        .firebugResetStyles {
+            z-index: 2147483646 !important;
+            top: 0 !important;
+            left: 0 !important;
+            display: block !important;
+            border: 0 none !important;
+            margin: 0 !important;
+            padding: 0 !important;
+            outline: 0 !important;
+            min-width: 0 !important;
+            max-width: none !important;
+            min-height: 0 !important;
+            max-height: none !important;
+            position: fixed !important;
+            transform: rotate(0deg) !important;
+            transform-origin: 50% 50% !important;
+            border-radius: 0 !important;
+            box-shadow: none !important;
+            background: transparent none !important;
+            pointer-events: none !important;
+            white-space: normal !important;
+        }
+
+        .firebugBlockBackgroundColor {
+            background-color: transparent !important;
+        }
+
+        .firebugResetStyles:before, .firebugResetStyles:after {
+            content: "" !important;
+        }
+
+        .firebugCanvas {
+            display: none !important;
+        }
+
+        /* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
+        .firebugLayoutBox {
+            width: auto !important;
+            position: static !important;
+        }
+
+        .firebugLayoutBoxOffset {
+            opacity: 0.8 !important;
+            position: fixed !important;
+        }
+
+        .firebugLayoutLine {
+            opacity: 0.4 !important;
+            background-color: #000000 !important;
+        }
+
+        .firebugLayoutLineLeft, .firebugLayoutLineRight {
+            width: 1px !important;
+            height: 100% !important;
+        }
+
+        .firebugLayoutLineTop, .firebugLayoutLineBottom {
+            width: 100% !important;
+            height: 1px !important;
+        }
+
+        .firebugLayoutLineTop {
+            margin-top: -1px !important;
+            border-top: 1px solid #999999 !important;
+        }
+
+        .firebugLayoutLineRight {
+            border-right: 1px solid #999999 !important;
+        }
+
+        .firebugLayoutLineBottom {
+            border-bottom: 1px solid #999999 !important;
+        }
+
+        .firebugLayoutLineLeft {
+            margin-left: -1px !important;
+            border-left: 1px solid #999999 !important;
+        }
+
+        /* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
+        .firebugLayoutBoxParent {
+            border-top: 0 none !important;
+            border-right: 1px dashed #E00 !important;
+            border-bottom: 1px dashed #E00 !important;
+            border-left: 0 none !important;
+            position: fixed !important;
+            width: auto !important;
+        }
+
+        .firebugRuler {
+            position: absolute !important;
+        }
+
+        .firebugRulerH {
+            top: -15px !important;
+            left: 0 !important;
+            width: 100% !important;
+            height: 14px !important;
+            border-top: 1px solid #BBBBBB !important;
+            border-right: 1px dashed #BBBBBB !important;
+            border-bottom: 1px solid #000000 !important;
+        }
+
+        .firebugRulerV {
+            top: 0 !important;
+            left: -15px !important;
+            width: 14px !important;
+            height: 100% !important;
+            border-left: 1px solid #BBBBBB !important;
+            border-right: 1px solid #000000 !important;
+            border-bottom: 1px dashed #BBBBBB !important;
+        }
+
+        .overflowRulerX > .firebugRulerV {
+            left: 0 !important;
+        }
+
+        .overflowRulerY > .firebugRulerH {
+            top: 0 !important;
+        }
+
+        /* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
+        .fbProxyElement {
+            position: fixed !important;
+            pointer-events: auto !important;
+        }
+    </style>
+    <style type="text/css" charset="utf-8">
+        /* See license.txt for terms of usage */
+        /** reset styling **/
+        .firebugResetStyles {
+            z-index: 2147483646 !important;
+            top: 0 !important;
+            left: 0 !important;
+            display: block !important;
+            border: 0 none !important;
+            margin: 0 !important;
+            padding: 0 !important;
+            outline: 0 !important;
+            min-width: 0 !important;
+            max-width: none !important;
+            min-height: 0 !important;
+            max-height: none !important;
+            position: fixed !important;
+            transform: rotate(0deg) !important;
+            transform-origin: 50% 50% !important;
+            border-radius: 0 !important;
+            box-shadow: none !important;
+            background: transparent none !important;
+            pointer-events: none !important;
+            white-space: normal !important;
+        }
+
+        .firebugBlockBackgroundColor {
+            background-color: transparent !important;
+        }
+
+        .firebugResetStyles:before, .firebugResetStyles:after {
+            content: "" !important;
+        }
+        /**actual styling to be modified by firebug theme**/
+        .firebugCanvas {
+            display: none !important;
+        }
+
+        /* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
+        .firebugLayoutBox {
+            width: auto !important;
+            position: static !important;
+        }
+
+        .firebugLayoutBoxOffset {
+            opacity: 0.8 !important;
+            position: fixed !important;
+        }
+
+        .firebugLayoutLine {
+            opacity: 0.4 !important;
+            background-color: #000000 !important;
+        }
+
+        .firebugLayoutLineLeft, .firebugLayoutLineRight {
+            width: 1px !important;
+            height: 100% !important;
+        }
+
+        .firebugLayoutLineTop, .firebugLayoutLineBottom {
+            width: 100% !important;
+            height: 1px !important;
+        }
+
+        .firebugLayoutLineTop {
+            margin-top: -1px !important;
+            border-top: 1px solid #999999 !important;
+        }
+
+        .firebugLayoutLineRight {
+            border-right: 1px solid #999999 !important;
+        }
+
+        .firebugLayoutLineBottom {
+            border-bottom: 1px solid #999999 !important;
+        }
+
+        .firebugLayoutLineLeft {
+            margin-left: -1px !important;
+            border-left: 1px solid #999999 !important;
+        }
+
+        /* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
+        .firebugLayoutBoxParent {
+            border-top: 0 none !important;
+            border-right: 1px dashed #E00 !important;
+            border-bottom: 1px dashed #E00 !important;
+            border-left: 0 none !important;
+            position: fixed !important;
+            width: auto !important;
+        }
+
+        .firebugRuler {
+            position: absolute !important;
+        }
+
+        .firebugRulerH {
+            top: -15px !important;
+            left: 0 !important;
+            width: 100% !important;
+            height: 14px !important;
+            !important;
+            border-top: 1px solid #BBBBBB !important;
+            border-right: 1px dashed #BBBBBB !important;
+            border-bottom: 1px solid #000000 !important;
+        }
+
+        .firebugRulerV {
+            top: 0 !important;
+            left: -15px !important;
+            width: 14px !important;
+            height: 100% !important;
+            repeat-y !important;
+            border-left: 1px solid #BBBBBB !important;
+            border-right: 1px solid #000000 !important;
+            border-bottom: 1px dashed #BBBBBB !important;
+        }
+
+        .overflowRulerX > .firebugRulerV {
+            left: 0 !important;
+        }
+
+        .overflowRulerY > .firebugRulerH {
+            top: 0 !important;
+        }
+
+        /* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
+        .fbProxyElement {
+            position: fixed !important;
+            pointer-events: auto !important;
+        }
+    </style>
+</head>
+<body class="bg-gray body-pt60" id="homebody" data-index="3">
+    <!--[if lt IE 8]>
+<div class="upgrade-browser clearfix" id="ie6Upgrade"><a class="fr" href="javascript:;" title="关闭提示" onclick="document.getElementById('ie6Upgrade').parentNode.removeChild(document.getElementById('ie6Upgrade'));">×</a>还在用ie6、ie7? 是时候升级到更加安全，高速的浏览器了。 推荐升级到<a href="http://www.microsoft.com/zh-cn/download/internet-explorer-8-details.aspx" target="_blank">Internet Explorer 8</a>，或使用更加高级的<a href="www.google.cn/Chrome‎
+" target="_blank">Chrome</a>、<a href="http://firefox.com.cn/download/" target="_blank">火狐</a>浏览器</div>
+<![endif]-->
+
+    <div id="index-content">
+        <header id="home-header" class="home-header">
+            <div class="wrap clearfix">
+                <h1 class="headline"><a href="http://www.adtime.com/">AdTime</a></h1>
+                <nav class="home-nav" id="home-nav">
+                    <a class="current" data-id="m-index" href="javascript:;">首   页</a>
+                    <a class="" data-id="m-intro" href="javascript:;">公司介绍</a>
+                    <a class="" data-id="m-service" href="javascript:;">产品及服务</a>
+                    <a class="" data-id="m-platform" href="javascript:;">核心技术平台</a>
+                    <a class="" data-id="m-research" href="javascript:;">创新研究院</a>
+                    <a class="" data-id="m-resolve" href="javascript:;">解决方案</a>
+                    <a class="" data-id="m-case" href="javascript:;">成功案例</a>
+                    <a class="" data-id="m-partners" href="javascript:;">合作伙伴</a>
+                    <a href="http://www.adtime.com/news" class="nav-news">新闻资讯</a>
+                </nav>
+            </div>
+        </header>
+        <div class="home-main bg-index-w" id="home-main">
+            <div id="m-index" class="m-index m-block">
+                <div class="wrap">
+                    <div class="posr">
+                        <div class="mi-x"></div>
+                        <div style="background-position: 50% 382px;" class="mi-sq" id="mi-sq"></div>
+                        <div style="background-position: 50% 534px;" class="mi-text" id="mi-text"></div>
+                        <div class="down-arrow"></div>
+                    </div>
+                </div>
+            </div>
+            <div id="m-intro" class="m-intro m-block">
+                <div class="wrap">
+                    <div class="posr mi-bg">
+                        <span class="dsj"><a title="大事记" href="http://www.adtime.com/about#J_3">大事记</a></span>
+                        <span class="gszx"><a title="公司资讯" href="http://www.adtime.com/news">公司资讯</a></span>
+                        <span class="gsjj"><a title="公司简介" href="http://www.adtime.com/about#J_0">公司简介</a></span>
+                        <span class="gsln"><a title="公司理念" href="http://www.adtime.com/about#J_1">公司理念</a></span>
+                        <span class="jrwm"><a title="加入我们" href="http://www.adtime.com/about#J_5">加入我们</a></span>
+
+                        <span class="lxwm"><a title="联系我们" href="http://www.adtime.com/about#J_6">联系我们</a></span>
+                    </div>
+                </div>
+            </div>
+            <div id="m-service" class="m-service m-block">
+                <div class="wrap">
+                    <div class="posr">
+                        <div class="ms-logo">
+                            <a href="http://www.adtime.com/service/xad" title="XAD" class="msl-xad">XAD</a>
+                            <a href="http://www.adtime.com/service" title="CCM" class="msl-ccm">CCM</a>
+                            <a href="http://www.adtime.com/service/admonitor" title="ADMonitor" class="msl-adm">ADMonitor</a>
+                            <a href="http://www.adtime.com/service/sns" title="SNS+" class="msl-sns">SNS+</a>
+                            <a href="http://www.adtime.com/service/szk" title="手指客" class="msl-szk">手指客</a>
+                            <a href="http://www.adtime.com/service/dsp" title="DSP" class="msl-dsp">DSP</a>
+                        </div>
+                        <div class="ms-text"><a href="http://www.adtime.com/service" title="进入产品中心"></a></div>
+                        <div class="ms-text-dsp"><a href="http://www.adtime.com/service/dsp" title="进入多屏DSP平台"></a></div>
+                    </div>
+                </div>
+            </div>
+            <div id="m-platform" class="m-platform m-block">
+                <div class="wrap">
+                    <div class="posr">
+                        <div style="background-position: 50% -37px;" class="mp-cloud" id="mp-cloud"></div>
+                        <div style="background-position: 50% 19px;" class="mp-logo" id="mp-logo"></div>
+                        <div class="mp-link"><a href="http://www.adtime.com/platform"></a></div>
+                    </div>
+                </div>
+            </div>
+            <div id="m-research" class="m-research m-block">
+                <div class="wrap">
+                    <div class="posr">
+                        <div style="background-position: 50% 308px;" class="mre-ufo" id="mre-ufo"></div>
+                        <div style="background-position: 50% 185px;" class="mre-cloud" id="mre-cloud"></div>
+                        <div class="mre-rocket"></div>
+                        <div class="mre-link"><a href="http://tech.adtime.com/" target="_blank"></a></div>
+                    </div>
+                </div>
+            </div>
+            <div id="m-resolve" class="m-resolve m-block">
+                <div class="wrap">
+                    <div class="posr">
+                        <div style="background-position: 50% -308px;" class="mres-logo" id="mres-logo"></div>
+                        <div style="background-position: 50% 432px;" class="mres-gar" id="mres-gar"></div>
+                        <div style="background-position: 50% 309px;" class="mres-glass" id="mres-glass"></div>
+                        <div class="mres-link1"><a href="http://www.adtime.com/plan"></a></div>
+                        <div class="mres-link2"><a href="http://www.adtime.com/plan#res-b2c"></a></div>
+                        <div class="mres-link3"><a href="http://www.adtime.com/plan#res-game"></a></div>
+                    </div>
+                </div>
+            </div>
+            <div id="m-case" class="m-case m-block">
+                <div class="wrap">
+                    <div class="posr">
+                        <div style="background-position: 40% 186px;" class="mc-logo-tv" id="mc-logo-tv"></div>
+                        <div style="background-position: 50% 310px;" class="mc-logo-pc" id="mc-logo-pc"></div>
+                        <div style="background-position: 50% 248px;" class="mc-logo-pad" id="mc-logo-pad"></div>
+                        <div class="mc-link"><a href="http://www.adtime.com/cases"></a></div>
+                    </div>
+                </div>
+            </div>
+            <div id="m-partners" class="m-partners m-block">
+                <div class="wrap">
+                    <div class="posr">
+                        <div class="mpa-text"></div>
+                        <div class="mpa-nav mn-0" id="mpaNav">
+                            <a href="javascript:;" title="广告客户"></a>
+                            <a href="javascript:;" title="第三方机构"></a>
+                            <a href="javascript:;" title="媒体合作"></a>
+                            <a href="javascript:;" title="战略合作"></a>
+                        </div>
+                        <div class="mpa-block-side">
+                            <div class="mpa-bs">
+                                <div class="mp-c" id="mpcA">
+                                    <ul id="mpc" class="adt-slide">
+                                        <li style="display: none;" class="mpc-7"></li>
+                                        <li style="display: none;" class="mpc-0"></li>
+                                        <li style="display: none;" class="mpc-1"></li>
+                                        <li style="display: none;" class="mpc-2"></li>
+                                        <li style="display: list-item;" class="mpc-3"></li>
+                                        <li style="display: none;" class="mpc-4"></li>
+                                        <li style="display: none;" class="mpc-5"></li>
+                                        <li style="display: none;" class="mpc-6"></li>
+                                    </ul>
+                                    <div class="mpa-pointer"><a href="javascript:;" class=""></a><a class="" href="javascript:;"></a><a class="" href="javascript:;"></a><a class="" href="javascript:;"></a><a class="current" href="javascript:;"></a><a class="" href="javascript:;"></a><a class="" href="javascript:;"></a><a class="" href="javascript:;"></a></div>
+                                    <div class="mpa-tip"><span class="mpa-kh"></span></div>
+                                </div>
+                            </div>
+                            <div class="mpa-bs disn">
+                                <div class="mp-c">
+                                    <ul class="adt-slide">
+
+                                        <li class="mpcs-s"></li>
+                                    </ul>
+
+                                </div>
+                            </div>
+                            <div class="mpa-bs disn">
+                                <div class="mp-c" id="mpcS">
+                                    <ul id="mps" class="adt-slide">
+                                        <li style="display: none;" class="mpcs-1"></li>
+                                        <li style="display: none;" class="mpcs-2"></li>
+                                        <li style="display: list-item;" class="mpcs-3"></li>
+                                        <li style="display: none;" class="mpcs-4"></li>
+                                        <li style="display: none;" class="mpcs-5"></li>
+                                        <li style="display: none;" class="mpcs-6"></li>
+                                    </ul>
+                                    <div class="mpa-pointer"><a href="javascript:;" class=""></a><a class="" href="javascript:;"></a><a class="current" href="javascript:;"></a><a class="" href="javascript:;"></a><a class="" href="javascript:;"></a><a class="" href="javascript:;"></a></div>
+                                    <div class="mpa-tip"><span class="mpa-mt"></span></div>
+                                </div>
+                            </div>
+
+                            <div class="mpa-bs disn">
+                                <div class="mpa-bs-logo"></div>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+        <footer id="home-footer" class="home-footer">
+            <div style="display: none">netass002.adt100.net</div>
+            <div class="wrap">
+                <div class="share">
+                    <a class="s-weibo" target="_blank" href="http://e.weibo.com/adtimenetwork"></a>
+                    <a data-img-url="http://cdn.adt100.com/apps/official/6553/images/weixin-box.png" href="javascript:;" class="s-weixin"></a>
+                    <a class="s-restart" href="javascript:;"></a>
+                    <a class="s-qzone" target="_blank" href="http://t.qq.com/taiyizhishang"></a>
+                    <a class="s-ttweibo" target="_blank" href="http://user.qzone.qq.com/1613836101"></a>
+                </div>
+                <div class="footer-text">
+                    泰一指尚科技有限公司 Copyright © 2005-2013 AdTime Corporation All Right Reserved 浙ICP备12035509号-1
+                </div>
+            </div>
+        </footer>
+        <div class="side-nav" id="side-nav">
+            <a class="back-top a-btn" data-type="top" href="javascript:;"></a>
+            <a class="to-prev a-btn" data-type="prev" href="javascript:;"></a>
+            <a class="to-next a-btn" data-type="next" href="javascript:;"></a>
+            <a class="to-share a-btn" data-type="share" href="javascript:;"></a>
+            <div style="display: none;" class="side-share-box" id="side-share-box">
+                <div class="as-box"><a href="http://e.weibo.com/adtimenetwork" target="_blank" title="新浪微博"></a><a href="http://t.qq.com/taiyizhishang" target="_blank" title="腾讯微博"></a><a href="http://user.qzone.qq.com/1613836101" target="_blank" title="QZone"></a></div>
+            </div>
+        </div>
+
+    </div>
+    <script type="text/javascript" language="javascript" src="js/jquery-1.js"></script>
+    <script type="text/javascript" language="javascript" src="js/jquery.js"></script>
+    <script type="text/javascript" language="javascript" src="js/jquery_002.js"></script>
+    <script type="text/javascript" language="javascript" src="js/jquery_003.js"></script>
+    <script type="text/javascript" language="javascript" src="js/home-common.js"></script>
+
+</body>
+</html>

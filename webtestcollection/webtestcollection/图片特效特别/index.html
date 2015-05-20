@@ -1,0 +1,152 @@
+﻿<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>2</title>
+
+    <style type="text/css">
+        html {
+            overflow: hidden;
+        }
+
+        body {
+            background: #222;
+            width: 100%;
+            height: 100%;
+            cursor: crosshair;
+        }
+
+        .spanSlide {
+            position: absolute;
+            background: #000;
+            font-size: 1px;
+            overflow: hidden;
+        }
+
+        .imgSlide {
+            position: absolute;
+            left: 5%;
+            top: 5%;
+            width: 90%;
+            height: 90%;
+            overflow: hidden;
+        }
+
+        .txtSlide {
+            position: absolute;
+            top: 5%;
+            left: 50px;
+            width: 100%;
+            color: #FFF;
+            font-family: arial, helvetica, verdana, sans-serif;
+            font-weight: bold;
+            font-size: 96px;
+            letter-spacing: 12px;
+            filter: alpha(opacity=70);
+            -moz-opacity: 0.7;
+            opacity: 0.7;
+        }
+    </style>
+
+    <script type="text/javascript">
+
+        var ym = 0;
+        var ny = 0;
+
+        var createElement = function (container, type, param) { //父容器  类型  参数（属性键值对）
+            f = document.createElement(type);                   //创建一个标签对象  作用域的问题
+            for (var i in param) {                              //遍历参数对象的属性
+                f[i] = param[i];                                //并将参数对象的属性复制给元素的属性
+            }
+            container.appendChild(f);                           //添加元素
+            return f;                                           //返回元素
+        }
+
+        mooz = {
+            O: [],      //空数组
+            /////////
+            mult: 6,    //
+            nbI: 5,     //隐藏图片的个数
+            /////////
+            rwh: 0,     //图片的宽高百分比
+            imgsrc: 0,  //隐藏的图片集合
+            W: 0,       //screen的width
+            H: 0,       //screen的height
+
+            Xoom: function (N) {  //参数N为图片索引  this为mooz.xoom  
+                this.o = createElement(document.getElementById("screen"), "span", { 'className': 'spanSlide' }); //在screen中创建span元素 设置className 为spanSlide  this为mooz.Xoom
+                img = createElement(this.o, "img", { 'className': "imgSlide", 'src': mooz.imgsrc[N].src });  //在span元素中添加img元素 className为imgSlide src=imgsrc[i]中的src属性
+                spa = createElement(this.o, "span", { 'className': "imgSlide" });//创建一个span用来装文字
+                txt = createElement(spa, "span", { 'className': "txtSlide", 'innerHTML': mooz.imgsrc[N].title });
+                this.N = 10000 + N;
+            },
+
+            mainloop: function () {
+                with (this) {                                 //this是Mooz
+                    for (i = 0; i < mooz.nbI; i++) {          //循环5个图片对象
+                        O[i].N = O[i].N + (ym - ny) / 8000;   //第一次O[i].N 默认  50/8000  100/8000 150/8000 200/8000 250/8000 300/8000 
+                        N = O[i].N % nbI;                     //全局变量 
+                        ti = Math.pow(mult, N);
+                        with (O[i].o.style) {                 //
+                            left = Math.round((W - (ti * rwh)) / (W + ti) * (W * .5)) + "px"; //动画渐变 左
+                            top = Math.round((H - ti) / (H + ti) * (H * .5)) + "px";          //动画渐变 上
+                            zIndex = Math.round(10000 - ti * .1);                             //动画渐变 深度
+                            width = Math.round(ti * rwh) + "px";                              //动画渐变 宽
+                            height = Math.round(ti) + "px";                                   //动画渐变 高
+                        }
+                    }
+                }
+                setTimeout("mooz.mainloop();", 10);//递归调用 实现类似jq的animate函数
+            },
+
+            oigres: function () {
+                //调用函数 
+                var _this = this;   //this为mooz对象 取代with(this)调用对象
+                _this.W = parseInt(document.getElementById("screen").style.width);  //screen的width
+                _this.H = parseInt(document.getElementById("screen").style.height); //screen的height
+                _this.imgsrc = document.getElementById("images").getElementsByTagName("img"); //获取隐藏的img
+                _this.rwh = _this.imgsrc[0].width / _this.imgsrc[0].height;         //宽高百分比
+                for (var i = 0; i < _this.nbI; i++) {
+                    _this.O[i] = new _this.Xoom(i);                                 //创建5个Xoom 对象 并复制给数组O 
+                }
+                _this.mainloop();                                                   //执行效果函数
+            }
+
+        }
+
+        document.onmousemove = function (e) {  //获取鼠标移动事件
+            if (window.event) {
+                e = window.event;
+            }
+            ym = e.y || e.clientY;             //获取鼠标的移动时y坐标
+            if (ym / 2 > ny) {
+                ny = ym / 2;
+            }
+        }
+
+        window.onload = function () {
+            ym = ny + 50;
+            mooz.oigres();
+        }
+
+    </script>
+</head>
+
+<body>
+
+    <div style="position: absolute; left: 50%; top: 50%">
+        <div style="position: absolute; width: 720px; height: 560px; left: -360px; top: -280px; background: #fff"></div>
+        <div style="position: absolute; left: -40px; top: -6px; color: #000; font-family: arial; font-size: 0.9em">Loading...</div>
+        <div id="screen" style="position: absolute; width: 640px; height: 480px; left: -320px; top: -240px; overflow: hidden"></div>
+    </div>
+
+    <div id="images" style="visibility: visible">
+        <img title="infinite" src="pil.jpg" alt="" />
+        <img title="yellow" src="cit.jpg" alt="" />
+        <img title="earth" src="earth.jpg" alt="" />
+        <img title="dream" src="draps.jpg" alt="" />
+        <img title="flowers" src="flo.jpg" alt="" />
+    </div>
+
+</body>
+</html>

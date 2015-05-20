@@ -1,0 +1,21 @@
+﻿<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <title></title>
+    <script src="Scripts/jquery-1.7.1.min.js"></script>
+</head>
+<body>
+    <button onclick="aff()">stop</button>
+    <button onclick="addd()">star</button>
+    <div id="addd" style="background:#ff6a00;height:100px;width:100px;position:absolute;left:100px;top:100px;"></div>
+    <script>
+        function aff() {
+            $('#addd').stop(true, false);
+        }
+        function addd() {
+            $('#addd').animate({ 'left': '1000px' }, 100, function () { });
+        }
+
+    </script>
+</body>
+</html>

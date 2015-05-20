@@ -1,0 +1,77 @@
+﻿<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <title></title>
+</head>
+<body>
+    <svg style="width:1000px;height:600px;">
+        <defs>
+            <pattern id="tile" x="0" y="0" width="20%" height="20%"
+                     patternUnits="objectBoundingBox">
+                <path d="M 0 0 Q 5 20 10 10 T 20 20"
+                      style="stroke: black; fill: none;" />
+                <path d="M 0 0 h 20 v 20 h -20 z"
+                      style="stroke: gray; fill: none;" />
+            </pattern>
+        </defs>
+        <rect x="20" y="20" width="100" height="100"
+              style="fill: url(#tile); stroke: black;" />
+        <rect x="135" y="20" width="70" height="80"
+              style="fill: url(#tile); stroke: black;" />
+        <rect x="220" y="20" width="150" height="130"
+              style="fill: url(#tile); stroke: black;" />
+    </svg>
+    <svg style="width:1000px;height:600px;">
+        <defs>
+            <pattern id="tile" x="0" y="0" width="20" height="20"
+                     patternUnits="userSpaceOnUse">
+                <path d="M 0 0 Q 5 20 10 10 T 20 20"
+                      style="stroke: black; fill: none;" />
+                <path d="M 0 0 h 20 v 20 h -20 z"
+                      style="stroke: gray; fill: none;" />
+            </pattern>
+        </defs>
+        <rect x="20" y="20" width="100" height="100"
+              style="fill: url(#tile); stroke: black;" />
+        <rect x="135" y="20" width="70" height="80"
+              style="fill: url(#tile); stroke: black;" />
+        <rect x="220" y="20" width="150" height="130"
+              style="fill: url(#tile); stroke: black;" />
+    </svg>
+    <svg style="width:1000px;height:600px;">
+        <defs>
+            <pattern id="tile" x="0" y="0" width="20" height="20"
+                     patternUnits="userSpaceOnUse"
+                     viewBox="0 0 150 150">
+                <path d="M30 100 C 50 50, 70 20, 100 100, 110, 130, 45, 150, 65, 100"
+                      style="stroke: black; stroke-width: 5; fill: none;" />
+            </pattern>
+        </defs>
+        <rect x="20" y="20" width="100" height="100"
+              style="fill: url(#tile); stroke: black;" />
+    </svg>
+    <svg style="width:1000px;height:600px;">
+        <defs>
+            <pattern id="stripe"
+                     patternUnits="userSpaceOnUse"
+                     x="0" y="0" width="6" height="6">
+                <path d="M 0 0 6 0"
+                      style="stroke: black; fill: none;" />
+            </pattern>
+            <pattern id="polkadot"
+                     patternUnits="userSpaceOnUse"
+                     x="0" y="0" width="36" height="36">
+                <circle cx="12" cy="12" r="12"
+                        style="fill: url(#stripe); stroke: black;" />
+            </pattern>
+        </defs>
+
+        <rect x="36" y="36" width="100" height="100"
+              style="fill: url(#polkadot); stroke: black;" />
+        <circle cx="12" cy="12" r="12"
+                style="fill: url(#stripe); stroke: black;" />
+        <path d="M 0 0 6 0"
+              style="stroke: black; fill: none;" />
+    </svg>
+</body>
+</html>

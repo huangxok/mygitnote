@@ -1,0 +1,120 @@
+﻿<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <title></title>
+</head>
+<body>
+    <div class="btns"><input type="button" value="插入元素" id="creatbtn" /></div>
+    <div id="box-one">
+        <p class="con2" id="p1">1</p>
+        <p class="con2">2</p>
+        <p class="con2">3</p>
+    </div>
+    <script>
+        //function insertEle() {
+        //    var oTest = document.getElementById("box-one");
+        //    var newNode = document.createElement("div");
+        //    newNode.innerHTML = " This is a newcon ";
+        //    //oTest.appendChild(newNode);
+        //    oTest.insertBefore(newNode, null); // 这两种方法均可实现
+        //}
+        //insertEle();
+    </script>
+    <script>
+        //function insertEle() {
+        //    var oTest = document.getElementById("box-one");
+        //    var newNode = document.createElement("div");
+        //    var reforeNode = document.getElementById("p1");
+        //    newNode.innerHTML = " This is a newcon ";
+        //    //oTest.insertBefore(newNode, reforeNode);
+        //    oTest.insertBefore(newNode, reforeNode.nextSibling); // 新建的元素节点插入到 id为p1的元素前面
+        //}
+        //insertEle();
+    </script>
+    <script>
+        var newNode = document.createElement("div");
+        document.getElementById('p1').parentElement.appendChild(newNode);
+    </script>
+    <script>
+        //原生js--insertAdjacentHTML
+
+        //insertAdjacentHTML是IE浏览器提供向DOM中插入html字符串的方法，字符串会自动生成在DOM树中。
+
+        //其调用方式为elem.insertAdjacentHTML( position, htmlStr )
+
+        //elem 向哪个DOM的标签出插入字符串
+
+        //position 有四个选项 "beforeBegin" "afterEnd" "afterBegin" "beforeEnd"分别指在elem的开始标签之前、结束标签之后、开始标签之后、结束标签之前插入htmlStr
+
+        //htmlStr 字符串（不是DOM元素）
+
+        //以下是在《javascript权威指南》中摘抄的，重新封装并重命名了该功能的Insert对象。并同时解决insertAdjacentHTML的浏览器兼容性问题
+
+        /**
+         * 在开始或结束标签的前后插入html字符串
+         * before 在开始标签之前插入html字符串
+         * after 在结束标签之后插入html字符串
+         * atStart 在开始标签之后插入字符串
+         * atEnd 在结束标签之前插入字符串
+         */
+        Insert = (function () {
+            if (document.createElement("div").insertAdjacentHTML) {
+                return {
+                    // e element, h html
+                    before: function (e, h) {
+                        // beforebegin大小写均可， h {string} html字符串或text均可
+                        e.insertAdjacentHTML("beforebegin", h);
+                    },
+                    after: function (e, h) {
+                        e.insertAdjacentHTML("afterend", h);
+                    },
+                    atStart: function (e, h) {
+                        e.insertAdjacentHTML("afterbegin", h);
+                    },
+                    atEnd: function (e, h) {
+                        e.insertAdjacentHTML("beforeEnd", h);
+                    }
+                };
+            }
+
+            function fragment(html) {
+                var tmpDiv = document.createElement("div"),
+                    frag = document.createDocumentFragment();
+                tmpDiv.innerHTML = html;
+                while (tmpDiv.firstChild) {
+                    frag.appendChild(tmpDiv.firstChild);
+                }
+                return frag;
+            }
+
+            var Insert = {
+                before: function (e, h) {
+                    e.parentNode.insertBefore(fragment(h), e);
+                },
+                after: function (e, h) {
+                    // 当e.nextSibling为空时，insertBefore方法会将frament(h)插入到最后
+                    e.parentNode.insertBefore(fragment(h), e.nextSibling);
+                },
+                atStart: function (e, h) {
+                    e.insertBefore(fragment(h), e.firstChild);
+                },
+                atEnd: function () {
+                    e.appendChild(fragment(h));
+                }
+            };
+
+            // 同时解决insertAdjacentHTML的兼容性问题
+            Element.prototype.insertAdjacentHTML = function (pos, html) {
+                switch (pos.toLowerCase()) {
+                    case "beforebegin": return Insert.before(this, html);
+                    case "afterend": return Insert.after(this, html);
+                    case "afterbegin": return Insert.atStart(this, html);
+                    case "beforeend": return Insert.atEnd(this, html);
+                }
+            };
+
+            return Insert;
+        }());
+    </script>
+</body>
+</html>

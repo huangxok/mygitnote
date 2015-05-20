@@ -1,0 +1,44 @@
+﻿<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <title></title>
+</head>
+<body>
+    <div style="width:100px;height:100px;background:#eff"></div>
+    <script>
+        /*绑定事件*/
+        function addEvent(obj, sType, fn) {
+            if (obj.addEventListener) {
+                obj.addEventListener(sType, fn, false);
+            } else {
+                obj.attachEvent('on' + sType, fn);
+            }
+        };
+        /*添加滑轮事件*/
+        function addWheelEvent(obj, callback) {
+            if (window.navigator.userAgent.toLowerCase().indexOf('firefox') != -1) {
+                addEvent(obj, 'DOMMouseScroll', wheel);
+            } else {
+                addEvent(obj, 'mousewheel', wheel);
+            }
+            function wheel(ev) {
+                var oEvent = prEvent(ev),
+                delta = oEvent.detail ? oEvent.detail > 0 : oEvent.wheelDelta < 0;
+                callback && callback.call(oEvent, delta);
+                return false;
+            }
+        };
+        function prEvent(ev) {
+            var oEvent = ev || window.event;
+            if (oEvent.preventDefault) {
+                oEvent.preventDefault();
+            }
+            return oEvent;
+        }
+        var oImg = document.getElementsByTagName("div")[0]
+        addWheelEvent(oImg, function (delta) {
+         
+        });
+    </script>
+</body>
+</html>

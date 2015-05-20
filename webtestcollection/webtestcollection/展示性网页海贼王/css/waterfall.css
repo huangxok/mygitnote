@@ -1,0 +1,81 @@
+body{
+	margin:0;
+	padding:0;
+	background:url(../images/bg.gif) 0 0 repeat #f7f5f5;/*背景图片、BODY属性*/
+	color:#333;
+	font-family:Cambria, Georgia, serif;
+	font-size:15px;
+	overflow-x:hidden;
+}
+header, section, footer, hgroup{
+	display:block;
+}
+
+
+/*整体位置*/
+#wrapper{
+	margin-top:10px;
+	width:100%;
+}
+
+
+
+#container{/*初始化时的宽度*/
+	position:relative;
+	width:1100px;
+	margin:0 auto 25px;
+	padding-bottom: 10px;
+	
+}
+.grid{/*块样式*/
+	width:188px;
+	min-height:100px;
+	padding: 15px;
+	background:#fff;
+	margin:8px;
+	font-size:12px;
+	float:left;
+	box-shadow: 0 3px 15px rgba(34,25,25,0.4);/*块底部阴影*/
+	
+	
+	-ms-transition: top 0.5s ease, left 0.5s ease;/*块移动动画延时*/
+}
+
+.grid strong {/*分割线(可选)*/
+	border-bottom:1px solid #ccc;
+	margin:10px 0;
+	display:block;
+	padding:0 0 5px;
+	font-size:17px;
+}
+.grid .meta{/*块右下标(可选)*/
+	text-align:right;
+	color:#777;
+	font-style:italic;
+}
+
+
+*.grid .imgholder img{width: expression(this.width > 175 ? '175px': true); max-width: 175px;/*块内元素属性*/
+	background:#ccc;
+	display:block;}
+
+@media screen and (max-width : 1240px) {
+	body{
+		overflow:auto;
+	}
+}
+@media screen and (max-width : 900px) {
+	#backlinks{
+		float:none;
+		clear:both;
+	}
+	#backlinks a{
+		display:inline-block;
+		padding-right:20px;
+	}
+	/*窗口大小改变后位置控制*/
+	#wrapper{
+		margin-top:10px;
+	}
+}
+p,p a{font-size:12px;color:#666;}/*块元素下的文字描述*/

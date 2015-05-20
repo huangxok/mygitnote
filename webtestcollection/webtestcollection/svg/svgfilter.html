@@ -1,0 +1,89 @@
+﻿<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <title></title>
+</head>
+<body>
+    <svg height="120" width="120">
+        <defs>
+            <filter id="f1" x="0" y="0" width="200%" height="200%">
+                <feOffset result="offOut" in="SourceGraphic" dx="20" dy="20" />
+                <feBlend in="SourceGraphic" in2="offOut" mode="normal" />
+            </filter>
+        </defs>
+        <rect width="90" height="90" stroke="green" stroke-width="3"
+              fill="yellow" filter="url(#f1)" />
+    </svg>
+    <svg height="140" width="140">
+        <defs>
+            <filter id="f2" x="0" y="0" width="200%" height="200%">
+                <feOffset result="offOut" in="SourceGraphic" dx="20" dy="20" />
+                <feGaussianBlur result="blurOut" in="offOut" stdDeviation="10" />
+                <feBlend in="SourceGraphic" in2="blurOut" mode="normal" />
+            </filter>
+        </defs>
+        <rect width="90" height="90" stroke="green" stroke-width="3"
+              fill="yellow" filter="url(#f2)" />
+    </svg>
+    <svg height="140" width="140">
+        <defs>
+            <filter id="f3" x="0" y="0" width="200%" height="200%">
+                <feOffset result="offOut" in="SourceAlpha" dx="20" dy="20" />
+                <feGaussianBlur result="blurOut" in="offOut" stdDeviation="10" />
+                <feBlend in="SourceGraphic" in2="blurOut" mode="normal" />
+            </filter>
+        </defs>
+        <rect width="90" height="90" stroke="green" stroke-width="3"
+              fill="yellow" filter="url(#f3)" />
+    </svg>
+    <svg height="140" width="140">
+        <defs>
+            <filter id="f4" x="0" y="0" width="110%" height="110%">
+                <feOffset result="offOut" in="SourceGraphic" dx="20" dy="20" />
+                <feColorMatrix result="matrixOut" in="offOut" type="matrix"
+                               values="0.2 0 0 0 0 0 0.2 0 0 0 0 0 0.2 0 0 0 0 0 1 0" />
+                <feGaussianBlur result="blurOut" in="matrixOut" stdDeviation="10" />
+                <feBlend in="SourceGraphic" in2="blurOut" mode="normal" />
+            </filter>
+        </defs>
+        <rect width="90" height="90" stroke="green" stroke-width="3"
+              fill="yellow" filter="url(#f4)" />
+    </svg>
+    <svg>
+        <defs>
+            <filter id="drop-shadow">
+                <feGaussianBlur in="SourceAlpha" stdDeviation="5" />
+            </filter>
+        </defs>
+        <g id="flower" filter="url(#drop-shadow)">
+            <!-- drawing here -->
+            <rect width="90" height="90" stroke="green" stroke-width="3"
+                  fill="yellow" filter="url(#drop-shadow)" />
+        </g>
+    </svg>
+    <svg>
+        <defs>
+            <filter id="glow">
+                <feColorMatrix type="matrix"
+                               values="0 0 0 0 0
+                                       0 0 0 0.9 0
+                                       0 0 0 0.9 0
+                                       0 0 0 1 0" />
+                <feGaussianBlur stdDeviation="2.5"
+                                result="coloredBlur" />
+                <feMerge>
+                    <feMergeNode in="coloredBlur" />
+                    <feMergeNode in="SourceGraphic" />
+                </feMerge>
+            </filter>
+        </defs>
+        <text x="120" y="50"
+              style="filter: url(#glow); fill: #003333; font-size:18px;">
+            Spring
+            <tspan x=" 120" y="70">
+                Flower
+            </tspan>
+        </text>
+    </svg>
+</body>
+</html>

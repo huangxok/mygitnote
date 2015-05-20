@@ -1,0 +1,19 @@
+﻿<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <title></title>
+
+
+</head>
+<body>
+    <a href="beLoaded.html" id="test" title="点击查看大图">
+        <img src="Images/3.jpg" width="100" height="100" />
+    </a>
+    <script src="./Scripts/seajs/sea.js"></script>
+    <script>
+        seajs.use("main", function (test) {
+            test.bind(document.getElementById("test"));
+        });
+    </script>
+</body>
+</html>

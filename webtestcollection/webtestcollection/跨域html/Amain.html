@@ -1,0 +1,41 @@
+﻿<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <title>main window </title>
+
+    <script type="text/javascript">
+
+        // main js function  为Bmain.html提供调用 
+        function fMain() {
+            //this.window.myframe.fIframe();
+            alert('Amain.html中的fMain方法');
+
+        }
+        //新建一个隐藏的临时的iframe Biframe.html  在Biframe.html与Bmain.html同域  所以可以调用
+        // Biframe.html通过关系链接调用Bmain.html中的方法  parent.window.myframe.fIframe(); 
+        // exec iframe function  
+        function exec_iframe() {
+            if (typeof (exec_obj) == 'undefined') {
+                exec_obj = document.createElement('iframe');
+                exec_obj.name = 'tmp_frame';
+                //exec_obj.style.display = "none";
+                exec_obj.src = 'http://192.168.1.72:8080/Biframe.html';
+
+                document.body.appendChild(exec_obj);
+            } else {
+                exec_obj.src = 'http://192.168.1.72:8080/Biframe.html?' + Math.random();
+            }
+        }
+    </script>
+
+</head>
+
+<body>
+    <p>A.html main</p>
+    <p>
+        <input type="button" value="exec iframe function" onclick="exec_iframe()" />
+        <input type="button" value="exec main function" onclick="fMain()" />
+    </p>
+    <iframe src="http://192.168.1.72:8080/Bmain.html" name="myframe" width="500" height="500"></iframe>
+</body>
+</html>

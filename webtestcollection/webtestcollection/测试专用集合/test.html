@@ -1,0 +1,184 @@
+﻿<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <title></title>
+    <style>
+        .abc {
+            width: 100px;
+            height: 100px;
+            background: #ffd800;
+        }
+
+        .dbc {
+            width: 100px;
+            height: 100px;
+            background: #ffd800;
+        }
+    </style>
+    <script src="../Scripts/jquery-1.7.1.min.js"></script>
+</head>
+<body>
+    <div style="font-size:20px;height:3em;width:2em">
+    </div>
+    <a href="" target="_blank"></a>
+    <div class="abc">1</div>
+    <div class="abc" style="background:#b6ff00">2</div>
+    <div class="abc" style="background:#00ff90">3</div>
+    <div class="abc" style="background:#0094ff">4</div>
+    <div class="dbc" style="background:#0094ff">5</div>
+    <div class="dbc" style="background:#b6ff00">6</div>
+    <div class="dbc" style="background:#00ff90">7</div>
+    <script>
+        document.getElementsByTagName('div')[0].kk = [1, 2];
+        //第一题
+        var a = 1;
+        var obj = { b: 2 };
+        var fn = function (x, y, z) { };
+        fn.c = 3;
+        function test(x, y, z, a) {
+            debugger;
+            x = 4;   //局部变量
+            y.b = 5; //对象
+            z.c = 6; //对象静态属性
+        }
+        var object = { x: 1 };
+        var object1 = object;
+
+        test(a, obj, fn);
+
+        fn.length //=>3 x y z  参数
+        alert(a + obj.b + fn.c); //=>12
+
+        //第二题
+        var b;
+        function test() {
+            //先执行 1
+            var a = 1;
+            setTimeout(function () {
+                //3
+                alert(a); //=>2
+                //4
+                b = a = 3; //a=>3
+            }, 1000);
+            //然后执行 2
+            a = 2;
+            setTimeout(function () {
+                //5
+                alert(a);
+                //6
+                b = a = 4;
+            }, 4000);
+        }
+        test();
+        b //=>4
+
+        //第三题
+        var a = 1
+        var abc = {
+            a: 2,
+            b: function () {
+                alert(this.a);
+            },
+            c: {
+                a: 3,
+                b: function () {
+                    alert(this.a)
+                }
+            }
+        }
+        a;
+        abc;
+        abc.a
+        abc.b
+        abc.c.b
+        abc.b();
+        abc.c.b();
+        var dd = abc.b;
+        dd;
+        var dddf = abc.c.b;
+        dddf();
+        window.dd;
+        dd();
+        abc.y = abc.c.b;
+        abc.y();
+
+        //第四题
+        var foo = 1;
+        function main() {
+            alert(foo);
+            var foo = 2;
+            alert(this.foo);
+            this.foo = 3;
+        }
+        var m1 = main();
+        var m2 = new main();
+
+
+
+    </script>
+
+    <script>
+        //function R() {
+
+        //}
+        //R.prototype.toString = function () {
+        //    debugger;
+        //    alert("aa");
+        //}
+        //var p = new R();
+        //for (prop in p) {
+        //    alert(p[prop]);
+        //}
+        //document.getElementsByTagName('div')[0].style.cssText = 'background:black;width:200px;'
+        //function abc() {
+
+        //    cba();
+        //    var a = 1;
+        //}
+        //function cba() {
+        //    alert();
+        //}
+        //abc();
+        var a = 1;
+        var b;
+        if (b) {
+            var a = 2;
+        } else {
+            var a = 3
+        }
+        var cc = 2;
+        function ccc() {
+            alert(cc);
+            cc = 3;
+            alert(cc);
+        }
+        ccc();
+    </script>
+    <script>
+
+        function Person(name, age) {
+            alert(arguments.length);
+            this.name = name;
+            this.age = age;
+            this.sayHello = function () {
+                alert(this.ttt);
+                alert('i am' + this.name + ',' + this.age + ' year\'s old');
+            }
+
+        }
+        Person.aa = '123';
+        Person.prototype.sayHello = function () {
+            alert('i am' + this.name + ',' + this.age + ' year\'s old');
+        }
+
+        function Boy(aa, bb, cc) {
+            this.ttt = aa;
+            Person.call(this, bb, cc);
+        }
+
+        var p = new Person('maotao', 19)
+        var b = new Boy('dds', 'apple', 18);
+
+    </script>
+</body>
+</html>

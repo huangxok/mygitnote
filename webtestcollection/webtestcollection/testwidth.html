@@ -1,0 +1,25 @@
+﻿<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+
+    <title>testwidth</title>
+    <script>
+        function add(te) {
+            alert('scrollWidth:' + te.scrollWidth + '\n clientWidth:' + te.clientWidth + '\n offsetHeight:' + te.offsetHeight + '\n offsetWidth:' + te.offsetWidth + ' \n scrollLeft:' + te.scrollLeft + '\n clietnLeft:' + te.clientLeft + '\n offsettop:' + te.offsetTop);
+        }
+    </script>
+</head>
+<body>
+    <div style="height: 800px; width: 800px; margin: 100px auto; background: #00ff21">
+        <div style="width: auto; height: 20px;"></div>
+        <div style="width: auto; height: 500px; height: 500px; background: #b6ff00; margin: 100px auto">
+            <div style="width: auto; height: 20px; padding-top: 0"></div>
+            <div onclick="add(this);" style="margin: 100px auto; border: 15px solid #808080; background-color: #ffd800; padding: 20px; overflow: auto; height: 200px; width: 200px;">
+                ddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd
+            </div>
+        </div>
+    </div>
+
+</body>
+</html>

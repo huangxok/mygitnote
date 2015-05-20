@@ -1,0 +1,316 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>自定义滚动条</title>
+    <style type="text/css">
+        body, ul, dl, dd {
+            margin: 0;
+            padding: 0;
+            font-size: 12px;
+            font-family: '微软雅黑';
+        }
+
+        .clear {
+            zoom: 1;
+        }
+
+            .clear:after {
+                display: block;
+                content: "";
+                clear: both;
+            }
+
+        .box {
+            margin: 28px auto;
+            width: 164px;
+            height: 440px;
+            background: #000;
+            padding: 8px;
+        }
+
+        #wrap {
+            width: 170px;
+            height: 386px;
+            background: #1c1c1d;
+            overflow: hidden;
+            position: relative;
+        }
+
+        #listbox {
+            float: left;
+            width: 160px;
+            position: absolute;
+            left: 0;
+            top: 0;
+        }
+
+        #scrollbox {
+            float: right;
+            width: 3px;
+            height: 386px;
+            background: #333;
+            position: relative;
+        }
+
+        #scrollbar {
+            width: 3px;
+            height: 30px;
+            background: #cc3f2e;
+            position: absolute;
+            left: 0;
+            top: 0;
+        }
+
+        li {
+            height: 80px;
+            margin-bottom: 8px;
+            list-style: none;
+        }
+
+        .picbox, .div {
+            float: left;
+        }
+
+        .picbox {
+            width: 150px;
+            position: relative;
+        }
+
+            .picbox span {
+                position: absolute;
+                left: 0px;
+                bottom: 0px;
+                width: 90px;
+                height: 22px;
+            }
+
+        dl {
+            width: 139px;
+            height: 76px;
+            color: #fff;
+            padding: 4px 0 0 10px;
+            line-height: 18px;
+            position: absolute;
+            left: 0;
+            top: 0;
+            opacity: 0.2;
+            filter: alpha(opacity=20);
+        }
+
+        .div {
+            width: 149px;
+            height: 80px;
+            position: relative;
+        }
+
+        .mark {
+            width: 149px;
+            height: 80px;
+            position: absolute;
+            top: 0;
+            left: 0;
+            background: #fff;
+            opacity: 0.1;
+            filter: alpha(opacity=10);
+        }
+
+        .nav {
+            width: 160px;
+            height: 35px;
+            font-family: '微软雅黑';
+            background: #1c1c1d;
+            padding-top: 5px;
+        }
+
+        .a, .b {
+            width: 152px;
+            height: 24px;
+            line-height: 24px;
+            background: #666;
+            text-align: center;
+            float: left;
+            color: #fff;
+            cursor: pointer;
+        }
+
+        .a {
+            margin-right: 5px;
+            display: inline;
+            background: #333;
+            color: #666;
+        }
+
+        li.active .mark {
+            opacity: 0.2;
+            filter: alpha(opacity=20);
+        }
+
+        li.active dl {
+            opacity: 0.7;
+            filter: alpha(opacity=70);
+        }
+    </style>
+</head>
+<body>
+    <div class="box">
+        <div class="nav">
+            <div class="a">猜你喜欢</div>
+        </div>
+        <div id="wrap">
+            <ul id="listbox">
+                <li class="active">
+                    <div class="picbox">
+                        <span class="a1"></span>
+                    </div>
+                    <div class="div">
+                        <div class="mark"></div>
+                        <dl class="textbox">
+                            <dt>飞狐外传</dt>
+                            <dd>主演：方力申 周秀娜 谈莉娜 周秀娜施展媚术</dd>
+                            <dd>史上身材最棒狐仙</dd>
+                        </dl>
+                    </div>
+                </li>
+                <li>
+                    <div class="picbox">
+                        <span class="a2"></span>
+                    </div>
+                    <div class="div">
+                        <div class="mark"></div>
+                        <dl class="textbox">
+                            <dt>飞狐外传</dt>
+                            <dd>主演：方力申 周秀娜 谈莉娜 周秀娜施展媚术</dd>
+                            <dd>史上身材最棒狐仙</dd>
+                        </dl>
+                    </div>
+                </li>
+                <li>
+                    <div class="picbox">
+                        <span class="a2"></span>
+                    </div>
+                    <div class="div">
+                        <div class="mark"></div>
+                        <dl class="textbox">
+                            <dt>飞狐外传</dt>
+                            <dd>主演：方力申 周秀娜 谈莉娜 周秀娜施展媚术</dd>
+                            <dd>史上身材最棒狐仙</dd>
+                        </dl>
+                    </div>
+                </li>
+                <li>
+                    <div class="picbox">
+                        <span></span>
+                    </div>
+                    <div class="div">
+                        <div class="mark"></div>
+                        <dl class="textbox">
+                            <dt>飞狐外传</dt>
+                            <dd>主演：方力申 周秀娜 谈莉娜 周秀娜施展媚术</dd>
+                            <dd>史上身材最棒狐仙</dd>
+                        </dl>
+                    </div>
+                </li>
+                <li>
+                    <div class="picbox">
+                    </div>
+                    <div class="div">
+                        <div class="mark"></div>
+                        <dl class="textbox">
+                            <dt>飞狐外传</dt>
+                            <dd>主演：方力申 周秀娜 谈莉娜 周秀娜施展媚术</dd>
+                            <dd>史上身材最棒狐仙</dd>
+                        </dl>
+                    </div>
+                </li>
+                <li>
+                    <div class="picbox">
+                    </div>
+                    <div class="div">
+                        <div class="mark"></div>
+                        <dl class="textbox">
+                            <dt>飞狐外传</dt>
+                            <dd>主演：方力申 周秀娜 谈莉娜 周秀娜施展媚术</dd>
+                            <dd>史上身材最棒狐仙</dd>
+                        </dl>
+                    </div>
+                </li>
+                <li>
+                    <div class="picbox">
+                    </div>
+                    <div class="div">
+                        <div class="mark"></div>
+                        <dl class="textbox">
+                            <dt>飞狐外传</dt>
+                            <dd>主演：方力申 周秀娜 谈莉娜 周秀娜施展媚术</dd>
+                            <dd>史上身材最棒狐仙</dd>
+                        </dl>
+                    </div>
+                </li>
+                <li>
+                    <div class="picbox">
+                    </div>
+                    <div class="div">
+                        <div class="mark"></div>
+                        <dl class="textbox">
+                            <dt>飞狐外传</dt>
+                            <dd>主演：方力申 周秀娜 谈莉娜 周秀娜施展媚术</dd>
+                            <dd>史上身材最棒狐仙</dd>
+                        </dl>
+                    </div>
+                </li>
+                <li>
+                    <div class="picbox">
+                    </div>
+                    <div class="div">
+                        <div class="mark"></div>
+                        <dl class="textbox">
+                            <dt>飞狐外传</dt>
+                            <dd>主演：方力申 周秀娜 谈莉娜 周秀娜施展媚术</dd>
+                            <dd>史上身材最棒狐仙</dd>
+                        </dl>
+                    </div>
+                </li>
+                <li>
+                    <div class="picbox">
+                    </div>
+                    <div class="div">
+                        <div class="mark"></div>
+                        <dl class="textbox">
+                            <dt>飞狐外传</dt>
+                            <dd>主演：方力申 周秀娜 谈莉娜 周秀娜施展媚术</dd>
+                            <dd>史上身材最棒狐仙</dd>
+                        </dl>
+                    </div>
+                </li>
+                <li>
+                    <div class="picbox">
+                    </div>
+                    <div class="div">
+                        <div class="mark"></div>
+                        <dl class="textbox">
+                            <dt>飞狐外传</dt>
+                            <dd>主演：方力申 周秀娜 谈莉娜 周秀娜施展媚术</dd>
+                            <dd>史上身材最棒狐仙</dd>
+                        </dl>
+                    </div>
+                </li>
+            </ul>
+            <div id="scrollbox">
+                <div id="scrollbar"></div>
+            </div>
+        </div>
+    </div>
+
+    <script src="tinyScroll.js"></script>
+    <script>
+        new tinyScroll({
+            wrapBox: document.getElementById('wrap'),
+            wrapList: document.getElementById('listbox'),
+            scrollBox: document.getElementById('scrollbox'),
+            scrollBar: document.getElementById('scrollbar')
+        })
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,224 @@
+﻿<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <title></title>
+</head>
+<body>
+    <svg width="140" height="170">
+        <title>Cat</title>
+        <desc>Stick Figure of a Cat</desc>
+        <symbol id="cat">
+            <circle cx="70" cy="95" r="50" style="stroke: black; fill: none;" />
+            <circle cx="55" cy="80" r="5" stroke="black" fill="#339933" />
+            <circle cx="85" cy="80" r="5" stroke="black" fill="#339933" />
+            <g id="whiskers">
+                <line x1="75" y1="95" x2="135" y2="85" style="stroke: black;" />
+                <line x1="75" y1="95" x2="135" y2="105" style="stroke: black;" />
+            </g>
+            <use xlink:href="#whiskers" transform="scale(-1 1) translate(-140 0)" />
+            <!-- ears -->
+            <polyline points="108 62, 90 10, 70 45, 50, 10, 32, 62"
+                      style="stroke: black; fill: none;" />
+            <!-- mouth -->
+            <polyline points="35 110, 45 120, 95 120, 105, 110"
+                      style="stroke: black; fill: none;" />
+            <!-- nose -->
+            <path d="M 75 90 L 65 90 A 5 10 0 0 0 75 90"
+                  style="stroke: black; fill: #ffcccc" />
+        </symbol>
+    </svg>
+    <svg>
+        <defs>
+            <clipPath id="rectClip">
+                <rect id="rect1" x="15" y="15"
+                      width="40" height="45"
+                      style="stroke: gray; fill: none;" />
+            </clipPath>
+        </defs>
+        <!-- clip to rectangle -->
+        <use xlink:href="#cat" style="clip-path: url(#rectClip);" />
+        <!--
+        for reference, show entire picture with clipping area outlined -->
+        <g transform="translate(100,0)">
+            <use xlink:href="#rect1" /> <!-- show clip rectangle -->
+            <use xlink:href="#cat" />
+        </g>
+    </svg>
+    <svg width="400" height="400">
+        <defs>
+            <clipPath id="curveClip">
+                <path id="curve1"
+                      d="M5 55 C 25 5, 45 -25, 75 55, 85 85, 20 105, 40 55 Z"
+                      style="stroke: black; fill: none;" />
+            </clipPath>
+            <clipPath id="textClip">
+                <text id="text1" x="20" y="20" transform="rotate(60)"
+                      style="font-size: 48pt; stroke: black; fill: none;">
+                    CLIP
+                </text>
+            </clipPath>
+            <g id="shapes">
+                <rect x="0" y="50" width="90" height="60" style="fill: #999;" />
+                <circle cx="25" cy="25" r="25" style="fill: #666;" />
+                <polygon points="30 0 80 0 80 100" style="fill: #ccc;" />
+            </g>
+        </defs>1
+        <!-- draw with curved clip-path -->
+        <use xlink:href="#shapes" style="clip-path: url(#curveClip);" />
+        <g transform="translate(100,0)">
+            <use xlink:href="#shapes" />
+            <use xlink:href="#curve1" /> <!-- show clip path -->
+        </g>
+        <!-- draw with text as clip-path -->
+        <g transform="translate(0,150)">
+            <use xlink:href="#shapes" style="clip-path: url(#textClip);" />
+        </g>
+        <g transform="translate(100,150)">
+            <use xlink:href="#shapes" />
+            <use xlink:href="#text1" />
+        </g>
+    </svg>
+    <svg width="400" height="400">
+        <defs>
+            <mask id="redmask" x="0" y="0" width="1" height="1"
+                  maskContentUnits="objectBoundingBox">
+                <rect x="0" y="0" width="1" height="1" style="fill: #f00;" />
+            </mask>
+            <mask id="greenmask" x="0" y="0" width="1" height="1"
+                  maskContentUnits="objectBoundingBox">
+                <rect x="0" y="0" width="1" height="1" style="fill: #0f0;" />
+            </mask>
+            <mask id="bluemask" x="0" y="0" width="1" height="1"
+                  maskContentUnits="objectBoundingBox">
+                <rect x="0" y="0" width="1" height="1" style="fill: #00f;" />
+            </mask>
+            <mask id="whitemask" x="0" y="0" width="1" height="1"
+                  maskContentUnits="objectBoundingBox">
+                <rect x="0" y="0" width="1" height="1" style="fill: #fff;" />
+            </mask>
+        </defs>
+        <!-- display the colors to show relative brightness (luminance) -->
+        <rect x="10" y="10" width="50" height="50" style="fill: #f00;" />
+        TEAM FLY PRESENTS
+        136
+        <rect x="70" y="10" width="50" height="50" style="fill: #0f0;" />
+        <rect x="130" y="10" width="50" height="50" style="fill: #00f;" />
+        <rect x="190" y="10" width="50" height="50"
+              style="fill: #fff; stroke: black;" />
+        <g style="mask: url(#redmask);
+font-size: 14pt; text-anchor: middle;">
+            <circle cx="35" cy="115" r="25" style="fill: black;" />
+            <text x="35" y="80">Red</text>
+        </g>
+        <g style="mask: url(#greenmask);
+font-size: 14pt; text-anchor: middle;">
+            <circle cx="95" cy="115" r="25" style="fill: black;" />
+            <text x="95" y="80">Green</text>
+        </g>
+        <g style="mask: url(#bluemask);
+font-size: 14pt; text-anchor: middle;">
+            <circle cx="155" cy="115" r="25" style="fill: black;" />
+            <text x="155" y="80">Blue</text>
+        </g>
+        <g style="mask: url(#whitemask);
+font-size: 14pt; text-anchor: middle;">
+            <circle cx="215" cy="115" r="25" style="fill: black;" />
+            <text x="215" y="80">White</text>
+        </g>
+    </svg>
+    <svg>
+        <defs>
+            <mask id="fullmask" x="0" y="0" width="100" height="100"
+                  maskContentUnits="objectBoundingBox">
+                <rect x="0" y="0" width="100" height="100"
+                      style="fill-opacity: 1.0; fill: white;" />
+            </mask>
+            <mask id="three-fourths" x="0" y="0" width="1" height="1"
+                  maskContentUnits="objectBoundingBox">
+                <rect x="0" y="0" width="1" height="1"
+                      style="fill-opacity: 0.75; fill: white;" />
+            </mask>
+            <mask id="one-half" x="0" y="0" width="1" height="1"
+                  maskContentUnits="objectBoundingBox">
+                <rect x="0" y="0" width="1" height="1"
+                      style="fill-opacity: 0.5; fill: white;" />
+            </mask>
+            <mask id="one-fourth" x="0" y="0" width="1" height="1"
+                  maskContentUnits="objectBoundingBox">
+                <rect x="0" y="0" width="1" height="1"
+                      style="fill-opacity: 0.25; fill: white;" />
+            </mask>
+        </defs>
+        <g style="font-size: 14pt; text-anchor:middle; fill:black;">
+            <g style="mask: url(#fullmask);">
+                <circle cx="35" cy="35" r="25" />
+                <text x="35" y="80">100%</text>
+            </g>
+            <g style="mask: url(#three-fourths);">
+                <circle cx="95" cy="35" r="25" />
+                <text x="95" y="80">75%</text>
+            </g>
+            <g style="mask: url(#one-half);">
+                <circle cx="155" cy="35" r="25" />
+                <text x="155" y="80">50%</text>
+            </g>
+            <g style="mask: url(#one-fourth);">
+                <circle cx="215" cy="35" r="25" />
+                <text x="215" y="80">25%</text>
+            </g>
+        </g>
+    </svg>
+    <svg width="8cm" height="3cm" viewBox="0 0 800 300" version="1.1"
+         xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+        <defs>
+            <linearGradient id="Gradient" gradientUnits="userSpaceOnUse"
+                            x1="0" y1="0" x2="800" y2="0">
+                <stop offset="0" stop-color="white" stop-opacity="0" />
+                <stop offset="1" stop-color="white" stop-opacity="1" />
+            </linearGradient>
+            <mask id="Mask" maskUnits="userSpaceOnUse"
+                  x="0" y="0" width="800" height="300">
+                <rect x="0" y="0" width="800" height="300" fill="url(#Gradient)" />
+            </mask>
+            <text id="Text" x="400" y="200"
+                  font-family="Verdana" font-size="100" text-anchor="middle">
+                Masked text
+            </text>
+        </defs>
+        <!-- 视窗的背景 -->
+        <rect x="0" y="0" width="800" height="300" fill="#FF8080" />
+
+        <!-- 第一步绘制一个带有蒙板的Text，可以看到蒙板的透明度效果已经应用到字上了.
+        第二步是绘制一个不带蒙板的Text，来作为第一步Text的轮廓 -->
+        <use xlink:href="#Text" fill="blue" mask="url(#Mask)" />
+        <use xlink:href="#Text" fill="none" stroke="black" stroke-width="2" />
+    </svg>
+    <svg width="1000" height="600">
+        <defs>
+            <font-face font-family="bakbatn">
+                <font-face-src>
+                    <font-face-uri xlink:href="kfont.svg#kfont-defn" />
+                </font-face-src>
+            </font-face>
+        </defs>
+        <!-- draws ellipse and text -->
+        <use xlink:href="ksymbol.svg#ksymbol" />
+        <image xlink:href="2.jpg" x="72" y="92"
+               width="160" height="120" />
+    </svg>
+    <svg width="300" height="300">
+        <radialGradient id="fade">
+            <stop offset="0%" style="stop-color: white; stop-opacity: 1.0;" />
+            <stop offset="85%" style="stop-color: white; stop-opacity: 0.5;" />
+            <stop offset="100%" style="stop-color: white; stop-opacity: 0.0;" />
+        </radialGradient>
+        <mask id="fademask">
+            <rect x="72" y="92" width="160" height="120"
+                  style="fill: url(#fade);" />
+        </mask>
+        <image xlink:href="2.jpg" x="72" y="92"
+               width="160" height="120"
+               style="mask: url(#fademask);" />
+    </svg>
+</body>
+</html>

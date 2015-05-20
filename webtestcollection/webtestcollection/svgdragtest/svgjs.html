@@ -1,0 +1,71 @@
+﻿<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <title></title>
+</head>
+<body>
+    <script type="text/javascript"></script>
+
+    <svg>
+        <g onclick="operate_Dom()" id="g5" transform="translate(0 80)">
+            <text id="txt1" x="6px" y="30px" style="font-size:15px">operate DOM</text>
+            <text id="txt2" x="6px" y="50px" style="font-size:15px">operate DOM</text>
+        </g>
+
+        <!--<script type="text/javascript">
+            <![CDATA[
+                        function operate_Dom(){
+                            //通过document环境变量获取id值为"g5"的节点
+                            var g5=SVGGElement("g5");
+                            //将g5节点下所有text节点删除
+                            var txts=g5.getElementsByTagName("text");
+                            for(var i=txts.length-1;i>=0;i--){
+                                g5.removeChild(txts.item(i));
+                            }
+                            //将g5节点的onclick事件删除
+                            g5.removeAttribute("onclick");
+
+                            //创造一个文本节点对象
+                            var text = SVGAElement("text");
+                            text.setAttribute("x", 100);
+                            text.setAttribute("y", 100);
+                            //将文本内容添加到text节点对象中
+                            var t =(document.createTextNode("new text"))
+                            text.nodeValue=t;
+
+                            //创造一个链接节点,注意在这里给设置节点和属性时必须指定命名空间
+                            var a=document.createElementNS("http://www.w3.org/2000/svg","a");
+                            a.setAttributeNS(
+                              "http://www.w3.org/2000/xlink/namespace/",
+                              "xlink:href",
+                              "http://www.sina.com");
+                            //将text节点添加到链接节点中
+                            a.appendChild(text);
+
+                            //将链接节点添加到g5节点中
+                            g5.appendChild(a);
+
+                            //获取视图范围
+                            var bBox=(document.getDocumentElement().getBBox());
+                            //创建一个矩形节点
+                            var shape = document.createElement("rect ");
+                            //配置属性
+                            shape.setAttribute("x", bBox.x);
+                            shape.setAttribute("y", bBox.y);
+                            shape.setAttribute("width",  bBox.width);
+                            shape.setAttribute("height",   bBox.height);
+                            shape.setAttribute("style", "fill: #eeeeee");
+                            shape.getStyle().setProperty("stroke","red");
+                            shape.getStyle().setProperty("stroke-width","1");
+                            //将矩形节点添加到SVG根节点子节点队列的最前边
+                            document.getDocumentElement().insertBefore(shape,document.getDocumentElement().firstChild);
+                        }
+            ]]>
+        </script>-->
+
+    </svg>
+    <script>
+        var a = new SVGElement();
+    </script>
+</body>
+</html>

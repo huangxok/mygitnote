@@ -1,0 +1,34 @@
+﻿<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <title></title>
+    <style>
+        html {
+            padding: 0;
+            margin: 0;
+            height: 100%; /* Required for liquidity. */
+        }
+
+        body {
+            padding: 0;
+            margin: 0;
+            height: 100%; /* Required for liquidity. */
+        }
+    </style>
+</head>
+<body>
+    <svg id="svgElement" width="100%" height="98%" viewBox="0 0 800 800">
+        <circle cx="400" cy="400" r="400" style="stroke:black;fill:#4cff00"></circle>
+    </svg>
+    <script>
+        function coordinateTransform(screenPoint, someSvgObject) {
+            var CTMa = someSvgObject.getScreenCTM();
+            return CTMa;
+            //return screenPoint.matrixTransform(CTM.inverse());
+        }
+        var svg = document.getElementById('svgElement');
+        var a = coordinateTransform('', svg);
+        console.log(a);
+    </script>
+</body>
+</html>

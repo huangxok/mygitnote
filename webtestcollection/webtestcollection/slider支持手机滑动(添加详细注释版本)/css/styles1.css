@@ -1,0 +1,26 @@
+﻿html, body, div, span, ul, li, img {
+    border: none;
+    padding: 0;
+    margin: 0;
+}
+
+ul {
+    list-style: none;
+}
+/*-------插件已包含关键性样式以下只用于设置焦点按钮的样式可自定义------*/
+.slider {
+    background: #f00 url("http://localhost:10803/slider%E6%94%AF%E6%8C%81%E6%89%8B%E6%9C%BA%E6%BB%91%E5%8A%A8(%E6%B7%BB%E5%8A%A0%E8%AF%A6%E7%BB%86%E6%B3%A8%E9%87%8A%E7%89%88%E6%9C%AC)\/uploads/banner01.jpg");
+}
+/*用于获取更加体验  position: relative;overflow: hidden; margin: 0 auto 在js中已设置*/
+.focus span {
+    width: 10px;
+    height: 10px;
+    margin-right: 10px;
+    border-radius: 50%;
+    background: #666;
+    font-size: 0;
+}
+
+    .focus span.current {
+        background: #fff;
+    }
