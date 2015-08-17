@@ -2,9 +2,10 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
     <title></title>
-
+    <script src="../Scripts/jquery-1.7.1.js"></script>
 </head>
 <body>
+    <div id="kid" style="width:100px;height:100px;border:1px solid #eee"></div>
     <script>
         var mapResult1 = [1, 2, 3, 4].map(function (item, index, arr) {
             if (item === 1) {
@@ -35,5 +36,16 @@
             return item === true;
         })
     </script>
+    <script>
+        var flag = 'abc';
+        $(function () {
+            var flag = 'cba';
+            $('#kid').click(function () {
+                console.log(flag);
+            })
+        });
+        console.log(flag);
+    </script>
+
 </body>
 </html>

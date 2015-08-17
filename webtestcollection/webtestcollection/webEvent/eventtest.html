@@ -3,14 +3,37 @@
 <head>
     <title></title>
     <style>
-        *{
-        -ms-transform-style:
+        * {
+            -ms-transform-style:;
         }
     </style>
 </head>
 <body>
     <div id="div1" style="width:100px;height:100px;border:1px solid #ff6a00">
     </div>
+    <script>
+        var Storage = {
+            setItem : function(k,v){
+                localStorage.setItem(k,v);
+                //......
+            },
+            removeItem : function(k){
+                localStorage.removeItem(k);
+                //.......
+            },
+            getItem :function(){
+                //...
+            }
+        }
+        var se = document.createEvent("StorageEvent");
+        se.initStorageEvent('storage', false, false, key, oldval, newval, url, storage);
+        window.dispatchEvent(se);
+        window.addEventListener("storage",function(e){
+            console.log(e);
+        },false);
+
+        Storage.addItem('test','小朋友爱吃糖');
+    </script>
     <script>
         //http://javascript.ruanyifeng.com/dom/event.html
 

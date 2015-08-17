@@ -37,5 +37,22 @@
         //x 弧度的终点x
         //y 弧度的终点y
     </script>
+    <!--
+    rx, 弧的半长轴长度
+    ry 弧的半短轴长度
+    x-axis-rotation 是此段弧所在的x轴与水平方向的夹角，即x轴的逆时针旋转角度，负数代表顺时针转动的角度。
+    large-arc-flag 为1 表示大角度弧线，0 代表小角度弧线。
+    sweep-flag 为1代表从起点到终点弧线绕中心顺时针方向，0 代表逆时针方向。
+    x,y 是弧终端坐标。
+    x-axis-rotation代表旋转的角度，体会下面例子中圆弧的不同：-->
+
+    <svg width="320px" height="320px">
+        <path d="M10 315
+           L 110 215
+           A 30 50 0 0 1 162.55 162.45
+           L 172.55 152.45
+           A 30 50 -45 0 1 215.1 109.9
+           L 315 10" stroke="black" fill="green" stroke-width="2" fill-opacity="0.5" />
+    </svg>
 </body>
 </html>

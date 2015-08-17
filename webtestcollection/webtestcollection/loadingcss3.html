@@ -4,6 +4,7 @@
     <title></title>
     <style>
         .circle {
+            -moz-transform:
             /* absolute position with 3d animation = render layer */
             position: absolute;
             border: 3px solid transparent;
@@ -60,36 +61,36 @@
             }
         }
 
-        @-webkit-keyframes rotate {
+        @-webkit-keyframes rotateq {
             /* rotate on 3d transform for best perf, it ensures GPU accelerated animation */
             from {
-                transform: rotateZ(360deg);
+                -webkit-transform: rotateZ(360deg);
             }
 
             to {
-                transform: rotateZ(0deg);
+                -webkit-transform: rotateZ(0deg);
             }
         }
 
         @-o-keyframes rotate {
             /* rotate on 3d transform for best perf, it ensures GPU accelerated animation */
             from {
-                transform: rotateZ(360deg);
+                -o-transform: rotateZ(360deg);
             }
 
             to {
-                transform: rotateZ(0deg);
+                -o-transform: rotateZ(0deg);
             }
         }
 
         @-moz-keyframes rotate {
             /* rotate on 3d transform for best perf, it ensures GPU accelerated animation */
             from {
-                transform: rotateZ(360deg);
+                -moz-transform: rotateZ(360deg);
             }
 
             to {
-                transform: rotateZ(0deg);
+                -moz-transform: rotateZ(0deg);
             }
         }
 
@@ -113,6 +114,17 @@
         <div class="circle two"></div>
         <div class="circle three"></div>
     </div>
+    <script>
+        var Shaka = function (age) { this.age = age; };
 
+        Shaka.prototype = {
+            getage: function () {
+                return this.age;
+            },
+            init: function (age) { this.age = age; return this; },
+            sayHello: function () { alert('I am a little baby, my age is ' + this.age + ' years old.'); }
+        };
+        var o = new Shaka(20);
+    </script>
 </body>
 </html>

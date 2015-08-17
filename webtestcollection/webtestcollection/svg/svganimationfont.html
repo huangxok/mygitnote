@@ -6,8 +6,8 @@
         path {
             stroke-dasharray: 1000;
             stroke-dashoffset: 1000;
-            -webkit-animation: dash 5s ease 0 step-start(1) step-end(5s));
-            animation: dash 5s ease 0 step-start;
+            -webkit-animation: dash 5s linear infinite;
+            animation: dash 5s linear infinite;
         }
 
         @-webkit-keyframes dash {
@@ -22,6 +22,27 @@
             }
         }
     </style>
+    <!--
+    <style>
+            path {
+                stroke-dasharray: 1000;
+                stroke-dashoffset: 1000;
+                -webkit-animation: dash 5s ease 1;
+                animation: dash 5s ease 0 1;
+            }
+
+            @-webkit-keyframes dash {
+                to {
+                    stroke-dashoffset: 0;
+                }
+            }
+
+            @keyframes dash {
+                to {
+                    stroke-dashoffset: 0;
+                }
+            }
+        <!--</style>-->
     <script>
         document.createElementNS('svg',http://www.w3.org/2000/svg)
     </script>

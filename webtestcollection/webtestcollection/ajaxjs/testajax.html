@@ -36,13 +36,7 @@
         });
     </script>
     <input id="testbtn" type="button" value="click" />
-    <div id="abc" class="aa cc"></div>
-    <img id="img1d" onload="abc()" src="../Images/3.jpg" style="width:100px;" />
     <script>
-        function abc() {
-            alert('ytt');
-        }
-
 
         $(function () {
             //$('#div').load(
@@ -80,23 +74,13 @@
             //});
             $('#testbtn').click(function () {
                 $.ajax({
-                    global: true,
-                    url: 'testajax.ashxd',
-                    type: 'post',
+                    url: 'user.json',
+                    type: 'POST',
                     dataType: 'json', //script/text/html/xml/ jsonp
-                    data: { 'username': 'panzhaozhao1' },
+                    //data: { 'username': 'panzhaozhao1' },
                     async: true, //default:true
-                    beforeSend: function (XMLHttpRequest) {
-                        alert(XMLHttpRequest.state)
-                    },
-                    complete: function (XMLHttpRequest) {
-                        alert('ddd')
-                    },
                     success: function (data, textstatus) {
-                        alert(textstatus);
-                        alert(data);
-                    },
-                    error: function (XMLHttpRequest, textStatus, errorThrown) {
+                        document.write(JSON.parse(data));
 
                     }
                 })
