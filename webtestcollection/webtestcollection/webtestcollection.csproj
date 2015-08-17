@@ -197,6 +197,7 @@
     <Content Include="ajaxjs\ajax.html" />
     <Content Include="ajaxjs\Ajaxtest.html" />
     <Content Include="ajaxjs\b.txt" />
+    <None Include="ajaxjs\fontjson.json" />
     <Content Include="ajaxjs\HtmlPage1.html" />
     <Content Include="ajaxjs\jqajax.js" />
     <Content Include="ajaxjs\new_ajax.js" />
@@ -204,10 +205,20 @@
     <Content Include="ajaxjs\postjaj.html" />
     <Content Include="ajaxjs\test.html" />
     <Content Include="ajaxjs\testajax.html" />
+    <Content Include="ajaxjs\testfontreq.html" />
     <Content Include="ajaxjs\xmlhttp1a2.html" />
+    <Content Include="bigxiong\publish.html" />
+    <Content Include="bigxiong\youxianzhuangtaiji.html" />
+    <Content Include="canvas\HtmlPage1.html" />
+    <Content Include="CSS3\css3gradient渐变\css3渐变.png" />
+    <Content Include="CSS3\css3gradient渐变\css3渐变2.png" />
+    <Content Include="CSS3\css3gradient渐变\HtmlPage1.html" />
+    <Content Include="CSS3\css3gradient渐变\再说CSS3渐变——线性渐变 _ css3教程-css3实例-css3动画 _ W3CPlus.html" />
     <Content Include="Doc\linkku.html" />
     <Content Include="Doc\arraybuffer.md" />
+    <Content Include="Doc\git常用命令解释.doc" />
     <None Include="DOMTYPE\node.md" />
+    <Content Include="DOMTYPE\classList.html" />
     <Content Include="DOMTYPE\textafrag.html" />
     <Content Include="FM4\FM4%281%29\FM4\css\listStyle.css" />
     <Content Include="FM4\FM4%281%29\FM4\images\bg_0.png" />
@@ -231,6 +242,8 @@
     <Content Include="FM4\musipp\styles.css" />
     <Content Include="FM4\musipp\xw素材.htm" />
     <Content Include="FM4\musipp\说明.txt" />
+    <Content Include="css3icon.html" />
+    <Content Include="jcorp裁剪\HtmlPage1.html" />
     <Content Include="jquery-qrcode\.gitignore" />
     <Content Include="jquery-qrcode\examples\basic.html" />
     <Content Include="jquery-qrcode\examples\demo.html" />
@@ -240,10 +253,70 @@
     <Content Include="jquery-qrcode\src\jquery.qrcode.js" />
     <Content Include="jquery-qrcode\src\qrcode.js" />
     <Content Include="jquery-qrcode\test.html" />
+    <Content Include="jquery-qrcode\识别中文.js" />
+    <Content Include="loading100%25.html" />
+    <Content Include="mbeelecron.html" />
+    <Content Include="nodejs\project\nodedebugger\nodedebug.html" />
+    <Content Include="nodejs\project\project1\gulpfile.js" />
+    <Content Include="nodejs\project\project1\script\example.js" />
+    <Content Include="nodejs\project\project1\script\server1.js" />
+    <Content Include="nodejs\project\project1\script\testpath.js" />
+    <Content Include="nodejs\project\project1\script\命令note.txt" />
+    <Content Include="nodejs\project\project2\index.js" />
+    <Content Include="nodejs\project\project2\querystring.js" />
+    <Content Include="nodejs\project\project2\requestHandlers.js" />
+    <Content Include="nodejs\project\project2\router.js" />
+    <Content Include="nodejs\project\project2\server.js" />
     <Content Include="promise\async.html" />
     <Content Include="promise\mutation.html" />
     <Content Include="promise\mutationtest.html" />
+    <Content Include="pubuliuzhoujiao\zhoujiao\css\zzsc.css" />
+    <Content Include="pubuliuzhoujiao\zhoujiao\images\00.jpg" />
+    <Content Include="pubuliuzhoujiao\zhoujiao\images\01.jpg" />
+    <Content Include="pubuliuzhoujiao\zhoujiao\images\02.jpg" />
+    <Content Include="pubuliuzhoujiao\zhoujiao\images\03.jpg" />
+    <Content Include="pubuliuzhoujiao\zhoujiao\images\04.jpg" />
+    <Content Include="pubuliuzhoujiao\zhoujiao\images\05.jpg" />
+    <Content Include="pubuliuzhoujiao\zhoujiao\images\06.jpg" />
+    <Content Include="pubuliuzhoujiao\zhoujiao\images\07.jpg" />
+    <Content Include="pubuliuzhoujiao\zhoujiao\images\08.jpg" />
+    <Content Include="pubuliuzhoujiao\zhoujiao\images\09.jpg" />
+    <Content Include="pubuliuzhoujiao\zhoujiao\images\10.jpg" />
+    <Content Include="pubuliuzhoujiao\zhoujiao\images\11.jpg" />
+    <Content Include="pubuliuzhoujiao\zhoujiao\images\12.jpg" />
+    <Content Include="pubuliuzhoujiao\zhoujiao\images\13.jpg" />
+    <Content Include="pubuliuzhoujiao\zhoujiao\images\14.jpg" />
+    <Content Include="pubuliuzhoujiao\zhoujiao\images\15.jpg" />
+    <Content Include="pubuliuzhoujiao\zhoujiao\images\16.jpg" />
+    <Content Include="pubuliuzhoujiao\zhoujiao\images\17.jpg" />
+    <Content Include="pubuliuzhoujiao\zhoujiao\images\18.jpg" />
+    <Content Include="pubuliuzhoujiao\zhoujiao\images\19.jpg" />
+    <Content Include="pubuliuzhoujiao\zhoujiao\index.html" />
+    <Content Include="pubuliuzhoujiao\zhoujiao\js\jquery.min.js" />
+    <Content Include="shijuecha.html" />
+    <Content Include="squirrelupdate.html" />
+    <Content Include="svg\FZKTJW-GB1-0.svg">
+      <SubType>Designer</SubType>
+    </Content>
+    <Content Include="svg\HtmlPage2.html" />
+    <Content Include="svg\HtmlPage3.html" />
+    <Content Include="svg\HtmlPage4.html" />
+    <Content Include="svg\HtmlPage5.html" />
+    <Content Include="svg\HtmlPage6.html" />
+    <Content Include="svg\HtmlPage7.html" />
+    <Content Include="svg\mySVGFont.svg" />
+    <Content Include="svg\sftest.html" />
+    <Content Include="svg\simkai-webfont.svg">
+      <SubType>Designer</SubType>
+    </Content>
+    <Content Include="svg\svgfont.html" />
+    <Content Include="svg\svgreac矩阵matrix.html" />
+    <Content Include="svg\svg路径处理\HtmlPage1.html" />
+    <Content Include="Tom\single单一职责.html" />
+    <Content Include="webEvent\event.md.txt" />
     <Content Include="webEvent\eventtest.html" />
+    <Content Include="webNotification\Notiification.html" />
+    <Content Include="xml\jsxml.html" />
     <Content Include="ziprar\计时器\djs.html" />
     <Content Include="ziprar\计时器\jquery-1.10.2.js" />
     <Content Include="拖动布局排序\css\zzsc.css" />
@@ -299,8 +372,10 @@
     <Content Include="拖动布局排序\Sortable-master\st\logo.png" />
     <Content Include="拖动布局排序\Sortable-master\st\og-image.png" />
     <Content Include="拖动布局排序\xw素材.htm" />
+    <Content Include="测试专用集合\testfontbuffer.html" />
     <Content Include="测试专用集合\testmbecode\HtmlPage1.html" />
     <Content Include="测试专用集合\blognavaddress.html" />
+    <Content Include="测试专用集合\移动端mobile.html" />
     <Content Include="鼠标拖放排序\css\zzsc.css" />
     <Content Include="鼠标拖放排序\images\303317_320632284665935_15996162_a.jpg" />
     <Content Include="鼠标拖放排序\images\382696_10150378364701671_1792621129_a.jpg" />
@@ -2519,6 +2594,7 @@
     <Content Include="jquery-qrcode\README.md" />
     <Content Include="DOMTYPE\windowpostmessage.md" />
     <None Include="Properties\PublishProfiles\mygit.pubxml" />
+    <Content Include="pubuliuzhoujiao\zhoujiao\images\Thumbs.db" />
     <None Include="svgdragtest\tesjq.xhtml" />
     <Content Include="svgdragtest\testlayout.html" />
     <Content Include="svgdragtest\jslocation.svg" />
@@ -4407,6 +4483,7 @@
     <Content Include="ziprar\计时器.rar" />
     <Content Include="ziprar\ColorSchemerStudio.zip" />
     <Content Include="ziprar\Promise-master.zip" />
+    <Content Include="测试专用集合\FZKTJW_CRO.TTF" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="ajaxjs\testajax.ashx.cs">
@@ -4473,6 +4550,7 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="jcorp裁剪\Class1.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Service References\ServiceReference1\Reference.cs">
       <AutoGen>True</AutoGen>

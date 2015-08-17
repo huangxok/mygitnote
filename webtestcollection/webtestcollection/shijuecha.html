@@ -1,0 +1,153 @@
+﻿<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>html5视差滚动</title>
+    <!--<script type="text/javascript" src="js/jquery1.11.1.min.js"></script>-->
+    <script src="Scripts/jquery-1.7.1.min.js"></script>
+    <style type="text/css">
+        html, body, div, span, object, iframe,
+        h1, h2, h3, h4, h5, h6, p, blockquote, pre,
+        abbr, address, cite, code, del, dfn, em, img, ins, kbd, q, samp,
+        small, strong, sub, sup, var, b, i, dl, dt, dd, ol, ul, li,
+        fieldset, form, label, legend,
+        table, caption, tbody, tfoot, thead, tr, th, td,
+        article, aside, canvas, details, figcaption, figure,
+        footer, header, menu, nav, section, summary,
+        time, mark, audio, video {
+            margin: 0;
+            padding: 0;
+            border: 0;
+            font-size: 100%;
+            font: inherit;
+            vertical-align: baseline;
+        }
+
+        .div1 {
+            background: url(img/1.png) 50% 0 no-repeat fixed;
+        }
+
+        .div2 {
+            background: url(img/2.jpg) 50% 0 no-repeat fixed;
+        }
+
+        .div3 {
+            background: url(img/3.jpg) 50% 0 no-repeat fixed;
+        }
+
+        .div4 {
+            background: url(img/4.jpg) 50% 0 no-repeat fixed;
+        }
+
+        .h {
+            height: 1000px;
+        }
+
+        .div5 {
+            background: url(img/box_bg.png) 50% 0 fixed;
+        }
+
+        .logo {
+            background: url(img/logo.png) 50% 100px no-repeat fixed;
+            padding: 0;
+            margin: 0;
+            width: 100%;
+            max-width: 1920px;
+            position: relative;
+            margin: 0 auto;
+            min-height: 1000px;
+        }
+
+        .title {
+            width: 100%;
+            top: 400px;
+            position: absolute;
+            text-align: center;
+        }
+
+        .box {
+            background-image: url(img/box_bg.png);
+            color: #FFF;
+            border-radius: 5px;
+            padding: 20px;
+        }
+
+        .box2 {
+            width: 300px;
+            margin: 0 auto;
+        }
+
+        .byebye {
+            background: url(img/theend.png) 40% 100px no-repeat fixed;
+            padding: 0;
+            margin: 0;
+            width: 100%;
+            max-width: 1920px;
+            position: relative;
+            margin: 0 auto;
+            min-height: 1000px;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="div1 h" data-speed="4" data-type="background" style="background-position: 50% -147.75px;">
+        <div class="logo" data-type="sprite" data-offsety="100" data-xposition="50%" data-speed="-2" style="background-position: 50% 395.5px;"></div>
+        <div class="title"><img src="img/title.png"></div>
+    </div>
+    <div class="div2 h" data-speed="8" data-type="background" style="background-position: 50% -73.875px;">
+        <div class="box box2">
+            <h1>Background Only</h1>
+            <p>In this section we are sliding the background at a different speed to the rest of the page.</p>
+            <p>As this text box is scrolling at the same speed as the page, and faster than the background, it creates this lovely parallax effect.</p>
+            <p>You can find all the HTML, CSS and the all important JavaScript files over at GitHub - so why don't you drop by for some hardcore forking action?</p>
+            <p>Backgrounds for this article were taken from the May/June 2011 Smashing Magazine Desktop backgrounds.</p>
+        </div>
+    </div>
+    <div class="div3 h" data-speed="4" data-type="background" style="background-position: 50% -372.75px;"></div>
+    <div class="div4 h" data-speed="8" data-type="background" style="background-position: 50% -311.375px;"></div>
+    <div class="div5 h" data-speed="6" data-type="background" style="background-position: 50% -581.833333333333px;">
+        <div class="byebye" data-type="sprite" data-offsety="-1600" data-xposition="50%" data-speed="-2" style="background-position: 50% 145.5px;"></div>
+    </div>
+    <script type="text/javascript">
+        $(function () {
+            var win = $(window);
+            // $('.h').height(win.height() + 300);
+            // $('.logo').height(win.height() + 300);
+            // $('.byebye').height(win.height() + 300);
+            $('[data-type]').each(function () {
+                $(this).data('offsetY', parseInt($(this).attr('data-offsetY')));
+                $(this).data('Xposition', $(this).attr('data-Xposition'));
+                $(this).data('speed', $(this).attr('data-speed'));
+            });
+            $('div[data-type="background"]').each(function () {
+                var self = $(this),
+                offsetCoords = self.offset(),
+                topOffset = offsetCoords.top;
+                win.scroll(function () {
+                    if ((win.scrollTop() + win.height()) > topOffset
+                        && (topOffset + self.height()) > win.scrollTop()) {
+                        var yPos = -(win.scrollTop() / self.data('speed'));
+
+                        if (self.data('offsetY')) {
+                            yPos += self.data('offsetY');
+                        };
+                        var coords = '50%' + yPos + 'px';
+                        self.css({ backgroundPosition: coords });
+                        $('[data-type="sprite"]', self).each(function () {
+                            var sprite = $(this);
+                            var yPos = -(win.scrollTop() / sprite.data('speed'));
+                            var coords = sprite.data('Xposition') + ' ' + (yPos + sprite.data('offsetY')) + 'px';
+                            sprite.css({ backgroundPosition: coords });
+                        });
+                    }
+                });
+            });
+        });
+    </script>
+
+
+</body>
+</html>

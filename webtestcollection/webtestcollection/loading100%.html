@@ -1,0 +1,135 @@
+﻿<!DOCTYPE html>
+<!-- saved from url=(0041)http://demo.imochen.com/code/loading.html -->
+<html lang="en">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <meta charset="UTF-8">
+    <title>loading</title>
+    <style>
+        .loading {
+            width: 100px;
+            height: 100px;
+            overflow: hidden;
+            position: absolute;
+            left: 50%;
+            top: 100px;
+            margin-left: -50px;
+        }
+
+            .loading:after {
+                box-sizing: border-box;
+                content: '';
+                width: 100px;
+                height: 100px;
+                border-radius: 50%;
+                border: 5px solid #f5608b;
+                position: absolute;
+                left: 0;
+                top: 0;
+                z-index: 1;
+            }
+
+            .loading .cricle {
+                -webkit-animation: rotate 1s linear infinite;
+                box-sizing: border-box;
+                width: 100px;
+                height: 100px;
+                border-radius: 50%;
+                overflow: hidden;
+                background: -webkit-linear-gradient( top, #f5608b, #c7204f);
+                position: absolute;
+                left: 0;
+                top: 0;
+                z-index: 2;
+            }
+
+                .loading .cricle:before {
+                    content: '';
+                    width: 50px;
+                    height: 100px;
+                    background: #f5608b;
+                    position: absolute;
+                    left: 50px;
+                    top: 0;
+                }
+
+                .loading .cricle:after {
+                    content: '';
+                    width: 90px;
+                    height: 90px;
+                    border-radius: 50%;
+                    position: absolute;
+                    background: #fff;
+                    left: 5px;
+                    top: 5px;
+                    z-index: 2;
+                }
+
+        #progress {
+            width: 100px;
+            height: 100px;
+            position: absolute;
+            left: 0;
+            top: 0;
+            text-align: center;
+            line-height: 100px;
+            z-index: 10;
+            font-size: 28px;
+            color: #f6608b;
+        }
+
+        @-webkit-keyframes rotate {
+            0% {
+                -webkit-transform: rotateZ(0deg);
+            }
+
+            100% {
+                -webkit-transform: rotateZ(-360deg);
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="loading">
+        <div class="cricle"></div>
+        <div id="progress">100%</div>
+    </div>
+    <script>
+
+        function loading(fn1, fn2, prcent) {
+            if (!prcent) {
+                var prcent = 0;
+            }
+            prcent++;
+            fn1(prcent);
+            if (prcent === 100) {
+                fn2();
+                return false;
+            }
+            setTimeout(function () {
+                loading(fn1, fn2, prcent);
+            }, Math.random() * 120);
+        }
+
+        var oPro = document.getElementById('progress');
+
+        loading(function (prcent) {
+            oPro.innerHTML = prcent + '%';
+        }, function () {
+            alert('加载完成!');
+        })
+
+    </script>
+    <script>
+        var argarr = [];
+        function box() {
+            for (var i = 0; i <= arguments.length; i++) {
+
+                argarr.push(arguments[i]);
+                console.log(arguments[i]);
+            }
+        }
+        
+    </script>
+</body>
+</html>
