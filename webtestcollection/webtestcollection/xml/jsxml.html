@@ -1,0 +1,174 @@
+﻿<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <title></title>
+</head>
+<body>
+    <script>
+        //通过JS读取XML文件，主要是判断各个浏览器
+        // 加载xml文档
+        var loadXML = function (xmlFile) {
+            var xmlDoc;
+            if (window.ActiveXObject) {
+                xmlDoc = new ActiveXObject('Microsoft.XMLDOM');//IE浏览器
+                xmlDoc.async = false;
+                xmlDoc.load(xmlFile);
+            }
+            else if (isFirefox = navigator.userAgent.indexOf("Firefox") > 0) { //火狐浏览器
+                //else if (document.implementation && document.implementation.createDocument) {//这里主要是对谷歌浏览器进行处理
+                xmlDoc = document.implementation.createDocument('', '', null);
+                xmlDoc.load(xmlFile);
+            }
+            else { //谷歌浏览器
+                var xmlhttp = new window.XMLHttpRequest();
+                xmlhttp.open("GET", xmlFile, false);
+                xmlhttp.send(null);
+                if (xmlhttp.readyState == 4) {
+                    xmlDoc = xmlhttp.responseXML.documentElement;
+                }
+            }
+
+            return xmlDoc;
+        }
+
+        // 首先对xml对象进行判断
+        var checkXMLDocObj = function (xmlFile) {
+            var xmlDoc = loadXML(xmlFile);
+            if (xmlDoc == null) {
+                alert('您的浏览器不支持xml文件读取,于是本页面禁止您的操作,推荐使用IE5.0以上可以解决此问题!');
+                window.location.href = '../err.html';
+
+            }
+            return xmlDoc;
+        }
+    </script>
+    <script>
+        var xmlDoc = checkXMLDocObj('../openClass.xml');//读取到xml文件中的数据
+        var a = document.getElementsByTagName("a");//获取所有的A标签
+        $(document).ready(function () {
+            var nodes;
+            if ($.browser.msie) { // 注意各个浏览器之间的区别
+                nodes = xmlDoc.getElementsByTagName('collage')[0].childNodes; //读取XML文件中需要显示的数据
+            }
+            else if (isFirefox = navigator.userAgent.indexOf("Firefox") > 0) {
+                nodes = xmlDoc.getElementsByTagName('collage')[0].children; //读取XML文件中需要显示的数据
+            }
+            else {
+                nodes = xmlDoc.getElementsByTagName('resource');
+            }
+
+            for (var i = 0; i < a.length; i++) {
+                if (a[i].parentNode.nodeName == "SPAN") {
+                    for (var j = 0; j < nodes.length; j++) {
+                        var resource = nodes[j];
+                        var url = resource.getAttribute('url');
+                        var href = $(a[i]).attr("href");
+                        if (href == url) {
+                            var count = resource.getAttribute('click');
+                            var span = document.createElement("div");
+                            var str = document.createTextNode("点击率：" + count);
+                            span.appendChild(str);
+                            var div = a[i].parentNode.parentNode;
+                            div.appendChild(span);
+                            break;
+                        }
+                    }
+                }
+            }
+        });
+        $(function () { //通过get请求，将点击率增加
+            $(a).mousedown(function () {
+                var href = $(this).attr("href");
+                $.get("../receive.ashx", { url: href, rd: Math.random() }, function (msg) {
+
+                });
+            })
+        })
+    </script>
+    <script>
+        //一般处理文件
+        //public void ProcessRequest(HttpContext context)
+        //{
+        //context.Response.ContentType = "text/plain";
+        //string src = context.Request.QueryString["url"];
+        //string path = context.Server.MapPath("openClass.xml"); //打开xml文件
+        //XmlDocument xmlDoc = new XmlDocument();
+        //xmlDoc.Load(path); //注意不能用Xmlload()方法
+        //XmlNodeList nodeslist = xmlDoc.SelectNodes("/collage/resource"); //找到对应的节点
+        //foreach (XmlNode node in nodeslist)
+        //{
+        //    XmlElement xe = (XmlElement)node;
+        //if (xe.GetAttribute("url") == src)
+        //{
+        //    int count = int.Parse(xe.GetAttribute("click"));
+        //    count = count + 1;
+        //    xe.SetAttribute("click", count.ToString()); //更新内容
+        //}
+        //}
+        //xmlDoc.Save(path); //保存
+       
+        //}
+    </script>
+    <script>
+        //xml文件的生成
+        var xmlDoc = new ActiveXObject("Microsoft.XMLDOM");
+
+        //创建两条处理指令     
+        var newPI = xmlDoc.createProcessingInstruction("xml", "version=\"1.0\" encoding=\"utf-8\"");
+        xmlDoc.appendChild(newPI);
+        //创建根元素     
+        var documentElement = xmlDoc.createElement("req");
+        xmlDoc.appendChild(documentElement);
+        //创建CDATA     
+        //var newCD=xmlDoc.createCDATASection("This is a CDATASection node");     
+        //xmlDoc.documentElement.appendChild(newCD);     
+
+        //创建元素invoice,其子元素customer，再为customer加上属性，     
+        var chatRoom = xmlDoc.createElement("chatRoom");
+        var id = xmlDoc.createElement("id");
+        var cname = xmlDoc.createElement("cname");
+        var ctype = xmlDoc.createElement("ctype");
+        var maxUsers = xmlDoc.createElement("maxUsers");
+        var welcomes = xmlDoc.createElement("welcomes");
+        var description = xmlDoc.createElement("description");
+        var status = xmlDoc.createElement("status");
+        var startTime = xmlDoc.createElement("startTime");
+        var closeTime = xmlDoc.createElement("closeTime");
+        var createTime = xmlDoc.createElement("createTime");
+
+        chatRoom.appendChild(id);
+        chatRoom.appendChild(cname);
+        chatRoom.appendChild(ctype);
+        chatRoom.appendChild(maxUsers);
+        chatRoom.appendChild(welcomes);
+        chatRoom.appendChild(description);
+        chatRoom.appendChild(status);
+        chatRoom.appendChild(startTime);
+        chatRoom.appendChild(closeTime);
+        chatRoom.appendChild(createTime);
+
+        //创建text节点，作为id元素的内容     
+        var idtext = xmlDoc.createTextNode('wwww');
+        var nametext = xmlDoc.createTextNode('ddddd');
+        var welcomestext = xmlDoc.createTextNode('ssss');
+        var descriptiontext = xmlDoc.createTextNode('qqqq');
+        var startTimetext = xmlDoc.createTextNode('tttt');
+        var closeTimetext = xmlDoc.createTextNode('rrrrrr');
+
+        id.appendChild(idtext);
+        cname.appendChild(nametext);
+        ctype.appendChild(xmlDoc.createTextNode("1"));
+        maxUsers.appendChild(xmlDoc.createTextNode("500"));
+        welcomes.appendChild(welcomestext);
+        description.appendChild(descriptiontext);
+
+        status.appendChild(xmlDoc.createTextNode("1"));
+        createTime.appendChild(xmlDoc.createTextNode(new Date()));
+        startTime.appendChild(startTimetext);
+        closeTime.appendChild(closeTimetext);
+
+        xmlDoc.documentElement.appendChild(chatRoom);
+        alert(xmlDoc.xml);
+    </script>
+</body>
+</html>

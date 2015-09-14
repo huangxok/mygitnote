@@ -1,0 +1,146 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link  href="../../../../css/common.css" rel="stylesheet" type="text/css" />
+<script type="text/javascript">STC_RELATIVE_PATH='../../../../';</script>
+
+<script type="text/javascript" src="../../../../third-party/jquery-1.11.0.min.js"></script>
+<script type="text/javascript" src="../../base.js"></script>
+<script type="text/javascript"  src="../../../stc.js"></script>
+
+<title>表格演示</title>
+</head>
+<body>
+<div style="margin-left:20px;padding-top:20px;">
+	<input id='selectAll' style='margin-left:20px' type='button' value='全选(仅多选模式有效)'/>
+	<input id='reload_data' type='button' value='重新装入数据'/>
+	<input id='empty' type='button' value='空数据'/>
+	<input id='set_wait' type='button' value='设置等待状态'/>
+	<div id="content" style="margin-left:20px"></div>
+</div>
+
+</body>
+</html>
+<style type='text/css'> .demo-class { background-color:#309ee1;}</style>
+<script type="text/javascript">
+	function xx(d, w){
+		var x = document.createElement('div');
+		$(x).html(d);
+		$(x).css('height', '100%');
+		$(x).css('text-align', 'center');
+		$(x).css('width', w+'px');
+		$(x).addClass('demo-class');
+		$(x).click(function(){
+			event.stopPropagation();
+		});
+		return x;
+	}
+
+	function ooo(d, w) {
+		var x = document.createElement('div');
+		$(x).css('height', '32px');
+		$(x).css('line-height', '32px');
+		$(x).css('text-align', 'center');
+		$(x).css('width', w+'px');
+		$(x).css('background-color', 'white');
+		$(x).html(d);
+		return x;
+	}
+
+	var data1 = [
+		[{data:'全行合并', render:ooo, col_num:7}],
+		['lijh',{data:'局部合并', render:ooo, col_num:3},'汗','本科',110],
+		['lijh','男', 18, {data:'局部合并', render:ooo, col_num:4}],
+		[{data:'局部合并1', render:ooo, col_num:3},{data:'局部合并2', render:ooo, col_num:4}],
+		[[['lijh','男',18,],
+		  ['lijh','男',18,],
+		['lijh','男',18,]],'js', '汗', [[ '本科',110],
+					        [ '本科',110],
+					        ['本科',110] ]],
+		['lijh','男',18,'js','汗','本科',110],
+		['lijh','男',18,'js','汗','本科',110],
+		['lijh','男',18,'js','汗','本科',110]
+	];
+	var data = [
+		['lijh', [['男',[[18,'js','汗'],
+        		         [18,'js','汗',],
+				 [18, '除了台球','汗']], '本科'],
+			   ['男',18,'js','汗','本科']], 110 ],
+		['lijh','男',18,'js','汗','本科',110],
+		['lijh','男',18,'js','汗','本科',110],
+		['lijh','男',18,'js','汗','本科',110],
+		['lijh','男',18,'js','汗','本科',110]
+	];
+
+	function emptyData(d,w){
+		var x = document.createElement('div');
+		$(x).html(d);
+		$(x).css('height', '264px');
+		$(x).css('line-height', '264px');
+		$(x).css('text-align', 'center');
+		$(x).css('background-color', 'white');
+		return x;
+	};
+var ed = [[{data:'无数据，请查询', render:emptyData, col_num:7}]];
+
+	/*
+	   不进行头部渲染的建议写法
+	   var t = new stc.component.Table({
+			head:[{'name':'姓名', width:80},
+				{'name':'性别', width:30},
+				{'name':'年龄', width:30},
+				{'name':'爱好', width:120, render:xx},
+				{'name':'民族', width:120 },
+				{'name':'学历', width:80},
+				{'name':'电话', width:120}]
+	   });
+  	   不用调用reflushHead方法
+	   如果内部有render，数据部分render内部的click事件一定要阻止事件冒泡，在click函数中最后增加event.stopPropagation();
+	   t.getSelected()可以获取单选或多选的行div。
+	 */
+	var t = new stc.component.Table({
+			select_model:0,	//0:不支持行选择（缺省) 1 单选， 2 多选
+			over_model:true,	//在行间移动是否变色, 缺省为false
+			empty_text:'未找到指定条件的用户数据!'
+			});
+	function hr(d, w){
+		var x = document.createElement('div');
+		$(x).html(d);
+		$(x).css('text-align', 'center');
+		$(x).css('cursor', 'pointer');
+		$(x).css('width', w+'px');
+		$(x).css('background-color', 'red');
+		$(x).html(d.name);
+		$(x).click(function(){
+			t.reflushData(data1);
+		});
+		return x;
+	}
+
+	var head =[{'name':'姓名', width:80},
+			{'name':'性别', width:30},
+			{'name':'年龄', width:30},
+			{'name':'爱好', width:120, render:xx},
+			{data:{'name':'民族(点我)'}, width:120, head_render:hr},
+			{'name':'学历', width:80},
+			{'name':'电话', width:120}];
+	t.reflushHead(head);
+	t.renderTo($('#content')[0]);
+	//t.reflushData(data);
+	t.reflushData(ed);
+
+	//定义按钮行为
+	$('#set_wait').click(function(){
+		t.setLoading();
+	});
+	$('#empty').click(function(){
+		t.reflushData([]);
+	});
+	$('#selectAll').click(function(){
+		t.selectAll();
+	});
+	$('#reload_data').click(function(){
+		t.reflushData(data);
+	});
+</script>

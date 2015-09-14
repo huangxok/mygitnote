@@ -1,0 +1,143 @@
+body {
+	margin:0;
+	color:#4e4e4e;
+	font-size:12px;
+	font-family:"宋体";
+}
+
+.stc_display_inline {
+	display:inline-block;
+	zoom:1;
+	*display:inline;
+	vertical-align:top;
+}
+
+.stc_page_setting {
+	width:990px;
+	margin:auto;
+}
+
+.stc_translucency {
+	filter:alpha(opacity=50);
+	-moz-opacity:0.5;
+	-khtml-opacity: 0.5;
+	opacity: 0.5;
+}
+
+.hrefshow_title {
+	cursor:pointer;
+	color: #ff6600;
+}
+
+.hrefshow {
+	cursor:pointer;
+}
+
+.hrefshow_underline:hover {
+	text-decoration:underline;
+	cursor:pointer;
+}
+
+.hrefshow:hover {
+	color: #f60;
+}
+.regist {
+	color: blue;
+	cursor:pointer;
+}
+.regist:hover{
+	color: #f60;
+}
+.hrefshow_show {
+	cursor:pointer;
+}
+
+.button_save {
+	background-color: #6fba2c;
+    color: #fff;
+    cursor: pointer;
+    font-size: 14px;
+    font-weight: 700;
+    height: 26px;
+    line-height: 26px;
+    overflow: hidden;
+    text-align: center;
+    width: 84px;
+}
+.button_back {
+	font-size: 15px;
+	margin-left: 20px;
+	background-color: #CFCECE;
+	cursor:pointer;
+	color:#fff;
+	font-weight:700;
+	width: 84px;
+	height: 26px;
+    line-height: 26px;
+}
+
+.button {
+	background-color: #6fba2c;
+    color: #fff;
+    cursor: pointer;
+    float: right;
+    font-size: 14px;
+    font-weight: 700;
+    height: 26px;
+    line-height: 26px;
+    overflow: hidden;
+    text-align: center;
+    width: 84px;
+}
+
+.curr_position{
+	width: 798px;
+	height: 34px;
+	line-height: 34px;
+	text-indent: 10px;
+	border-bottom: 1px solid #fa7900;
+	color: #fa5d00;
+	font-size: 18px;
+	font-family: "????";
+	font-weight: bold;
+	margin-bottom: 10px;
+	_margin-left: -10px\9;
+}
+.upload_button_div{
+	position: relative; 
+	width: 70px; 
+	height: 20px; 
+	background: #eee; 
+	border: 1px solid #ccc; 
+	text-align: center; 
+	cursor: pointer; 
+}
+.upload_button_span{
+	display: inline-block; 
+	margin-top: 1px; 
+	color: #666; 
+	font-family: "SimHei"; 
+	font-size: 14px;
+}
+.upload_button_file{
+	display: block; 
+	position: absolute; 
+	top: 0; 
+	left: 0; 
+	width: 70px; 
+	height: 20px; 
+	opacity: 0; 
+	-moz-opacity: 0;
+	filter: alpha(opacity=0); 
+}
+.areaselect{
+	width:120px;
+}
+.areaselect option{
+	width:120px;
+}
+.title-5{background: url(images/themes/default/bg_title5.png) 0 0 no-repeat;color: #666;font: 14px/39px "Microsoft YaHei";height: 39px;cursor: pointer;}
+.title-5 h3.authorizeMe{background-position: 12px 8px;}
+.title-5 h3{background: url(images/themes/default/icon-tt5.png) 0 0 no-repeat;padding-left: 65px;position: relative;}
+.title-5.on h3 .icon{background-position: 0 0;}
+.title-5 h3 .icon{background: url(images/themes/default/icons_title5.png) 0 -60px no-repeat;width: 16px;height: 16px;display: block;position: absolute;top: 12px;right: 11px;}
