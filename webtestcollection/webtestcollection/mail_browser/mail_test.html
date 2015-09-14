@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+
+<button onclick="sendMail()">send mail</button>
+
+<script>
+	window.nodeRequire = window.require;
+</script>
+<script src="axe.js"></script>
+<script src="tcp-socket.js"></script>
+<script src="smtpclient-response-parser.js"></script>
+<script src="smtpclient.js"></script>
+
+<script>
+function sendMail() {
+	var client = new SmtpClient('smtp.qiye.163.com', 25, {
+		auth: {
+			user: 'duanyao@mainbo.com',
+			pass: '***',
+		},
+		//ignoreTLS: true // smtp.qiye.163.com 使用 tls 或不使用都可以
+	});
+  
+	var alreadySending = false;
+
+	client.onidle = function(){
+		if(alreadySending){
+			return;
+		}
+		alreadySending = true;
+		client.useEnvelope({
+			from: "duanyao@mainbo.com",
+			to: ["duanyao@ustc.edu"]
+		});
+	}
+	
+	client.onready = function(failedRecipients){
+		if(failedRecipients.length){
+			console.log("The following addresses were rejected: ", failedRecipients);
+		}
+		client.send("Subject: test html client2\r\n");
+		client.send("\r\n");
+		client.send("test html client body2");
+		client.end();
+	}
+	
+	client.ondone = function(success){
+		if(success){
+			console.log("The message was transmitted successfully");
+		}
+	}
+	
+	client.onerror = function(err){
+		console.error(err);
+	}
+	
+	client.connect();
+}
+</script>
