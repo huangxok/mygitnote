@@ -1,0 +1,47 @@
+命令格式:copy /b 文件1+文件2+...文件N 合并后的文件名命令讲解:使用"+"将多个相同或不同格式的文件合并为一个文件。
+         copy /b nw.exe+app.nw
+查看端口号被占用信息  netstat -ano
+
+node-inspector
+
+node --debug NodeApp.js
+node --debug-brk=8080 MyTest.js
+debug 和 debug-brk参数的区别在于，前者会直接运行脚本，而后者则会暂停在脚本开头处，等待调试器连接后，由调试器的指令来决定运行。=port是可选参数，紧随在–debug或者–debug-brk之后（中间没有空格），用于指定Node开启的调试端口，如果不指定该参数，则Node.js默认会使用5858端口。App.js则是你要调试的脚本文件名
+
+node --debug 文件名.后缀名
+
+node-inspector 或 node-inspector &
+
+然后在命令行中运行：node-inspector ，如图一所所示。若提示warn  – error raised: Error: listen EADDRINUSE 则表明node-inspector默认使用的8080端口已经被别的程序占用了，你可以通过node-inspector –web-port=新端口号 来指定一个未被占用的端口
+
+然后我们在浏览器中打开http://127.0.0.1:8080/debug?port=5858 （别管命令提示符中的那个http://0.0.0.0:8080/debug?port=5858 地址，那是逗你玩的）。URL中的port=5858指定了Node.js的调试端口，如果你在运行Node.js时指定了调试端口，则这里的5858要修改成指定端口。
+
+PS：可以修改node-inspector安装目录下的config.json指定node-inspector的Web端口和调试端口 如88888端口 实际没有这个端口 88888 - 2^16
+
+node-inspector --web-port=88888
+
+npm
+node有一个模块叫n（这名字可够短的。。。），是专门用来管理node.js的版本的。
+首先安装n模块：
+npm install -g n
+升级node.js到最新稳定版
+
+n stable
+
+npm -v          #显示版本，检查npm 是否正确安装。
+ 
+npm install express   #安装express模块
+ 
+npm install -g express  #全局安装express模块
+ 
+npm list         #列出已安装模块
+ 
+npm show express     #显示模块详情
+ 
+npm update        #升级当前目录下的项目的所有模块
+ 
+npm update express    #升级当前目录下的项目的指定模块
+ 
+npm update -g express  #升级全局安装的express模块
+ 
+npm uninstall express  #删除指定的模块
