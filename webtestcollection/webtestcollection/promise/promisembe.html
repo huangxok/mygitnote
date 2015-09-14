@@ -5,19 +5,112 @@
 </head>
 <body>
     <script>
+        /*
+        Promise表示一个异步操作的最终结果。与Promise最主要的交互方法是通过将函数传入它的then方法从而获取得Promise最终的值或Promise最终最拒绝（reject）的原因。
+
+        1. 术语
+
+        promise是一个包含了兼容promise规范then方法的对象或函数，
+        thenable 是一个包含了then方法的对象或函数。
+        value 是任何Javascript值。 (包括 undefined, thenable, promise等).
+        exception 是由throw表达式抛出来的值。
+        reason 是一个用于描述Promise被拒绝原因的值。
+
+        2. 要求
+
+        2.1 Promise状态
+
+        一个Promise必须处在其中之一的状态：pending, fulfilled 或 rejected.
+
+        如果是pending状态,则promise：
+
+        可以转换到fulfilled或rejected状态。
+        如果是fulfilled状态,则promise：
+
+        不能转换成任何其它状态。
+        必须有一个值，且这个值不能被改变。
+        如果是rejected状态,则promise可以：
+
+        不能转换成任何其它状态。
+        必须有一个原因，且这个值不能被改变。
+        ”值不能被改变”指的是其identity不能被改变，而不是指其成员内容不能被改变。
+
+        2.2 then 方法
+
+        一个Promise必须提供一个then方法来获取其值或原因。
+        Promise的then方法接受两个参数：
+
+        promise.then(onFulfilled, onRejected)
+        onFulfilled 和 onRejected 都是可选参数：
+
+        如果onFulfilled不是一个函数，则忽略之。
+        如果onRejected不是一个函数，则忽略之。
+        如果onFulfilled是一个函数:
+
+        它必须在promise fulfilled后调用， 且promise的value为其第一个参数。
+        它不能在promise fulfilled前调用。
+        不能被多次调用。
+        如果onRejected是一个函数,
+
+        它必须在promise rejected后调用， 且promise的reason为其第一个参数。
+        它不能在promise rejected前调用。
+        不能被多次调用。
+        onFulfilled 和 onRejected 只允许在 execution context 栈仅包含平台代码时运行. [3.1].
+        onFulfilled 和 onRejected 必须被当做函数调用 (i.e. 即函数体内的 this 为undefined). [3.2]
+        对于一个promise，它的then方法可以调用多次.
+
+        当promise fulfilled后，所有onFulfilled都必须按照其注册顺序执行。
+        当promise rejected后，所有OnRejected都必须按照其注册顺序执行。
+        then 必须返回一个promise [3.3].
+        promise2 = promise1.then(onFulfilled, onRejected);
+        如果onFulfilled 或 onRejected 返回了值x, 则执行Promise 解析流程[[Resolve]](promise2, x).
+        如果onFulfilled 或 onRejected抛出了异常e, 则promise2应当以e为reason被拒绝。
+        如果 onFulfilled 不是一个函数且promise1已经fulfilled，则promise2必须以promise1的值fulfilled.
+        如果 OnReject 不是一个函数且promise1已经rejected, 则promise2必须以相同的reason被拒绝.
+        2.3 Promise解析过程
+
+        Promise解析过程 是以一个promise和一个值做为参数的抽象过程，可表示为[[Resolve]](promise, x). 过程如下；
+
+        如果promise 和 x 指向相同的值, 使用 TypeError做为原因将promise拒绝。
+        如果 x 是一个promise, 采用其状态 [3.4]:
+
+        如果x是pending状态，promise必须保持pending走到x fulfilled或rejected.
+        如果x是fulfilled状态，将x的值用于fulfill promise.
+        如果x是rejected状态, 将x的原因用于reject promise..
+        如果x是一个对象或一个函数：
+
+        将 then 赋为 x.then. [3.5]
+        如果在取x.then值时抛出了异常，则以这个异常做为原因将promise拒绝。
+        如果 then 是一个函数， 以x为this调用then函数， 且第一个参数是resolvePromise，第二个参数是rejectPromise，且：
+
+        当 resolvePromise 被以 y为参数调用, 执行 [[Resolve]](promise, y).
+        当 rejectPromise 被以 r 为参数调用, 则以r为原因将promise拒绝。
+        如果 resolvePromise 和 rejectPromise 都被调用了，或者被调用了多次，则只第一次有效，后面的忽略。
+        如果在调用then时抛出了异常，则：
+
+        如果 resolvePromise 或 rejectPromise 已经被调用了，则忽略它。
+        否则, 以e为reason将 promise 拒绝。
+        如果 then不是一个函数，则 以x为值fulfill promise。
+        如果 x 不是对象也不是函数，则以x为值 fulfill promise。
+        */
+    </script>
+    <script>
+        /*
+        * 原型链拓展
+        */
+        var __extends = (this && this.__extends) || function (d, b) {
+            for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p];
+            function __() { this.constructor = d; }
+            d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
+        };
         //参考：
         //  Promises / A + 规范 http://promises-aplus.github.io/promises-spec/
         //  Promises/A 规范 http://wiki.commonjs.org/wiki/Promises/A
         //  Q https://github.com/kriskowal/q/wiki/API-Reference
         //  Promise.TypeScript https://github.com/pragmatrix/Promise
-        var __extends = this.__extends || function (d, b) {
-            for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p];
-            function __() { this.constructor = d; }
-            __.prototype = b.prototype;
-            d.prototype = new __();
-        };
         var mbe_common;
         (function (mbe_common) {
+            //Promise接口 具体的实现在 Deferred中
             var Promise = (function () {
                 function Promise() {
                 }
@@ -25,32 +118,41 @@
                 * onDone/onFail 应该返回值（或抛出异常），即不应返回 undefined，忘记返回值通常是 Bug，因此会在控制台给出警告。
                 * 如果确实不需要返回值，可返回 null。
                 */
-                Promise.prototype.then = function (onDone, onFail) {
-                    return null;
-                };
+                Promise.prototype.then = function (onDone, onFail) { return null; };
+                /*
+                * Promise的状态值 根据status来判断 Promise目前处于什么状态 即0 1 2 分别代表：未完成  完成  拒绝
+                * 这三种的状态的变化途径只有两个，且只能发生一次：从“未完成”到“已完成”，或者从“未完成”到“失败”。
+                * 即：0->1 或 0->2
+                * 一旦当前状态变为“已完成”或“失败”，就意味着不会再发生状态变化了
+                */
                 Object.defineProperty(Promise.prototype, "status", {
-                    get: function () {
-                        return 0;
-                    },
+                    get: function () { return 0; },
                     enumerable: true,
                     configurable: true
                 });
+                /*
+                * 请求完成时的数据 即如果status为1时,获取正常的数据 如果状态为2则为默认值undefined(PS：状态2,开发者可以自己处理,其实就是请求拒绝or失败时的返回值)
+                */
                 Object.defineProperty(Promise.prototype, "result", {
-                    get: function () {
-                        return undefined;
-                    },
+                    get: function () { return undefined; },
                     enumerable: true,
                     configurable: true
                 });
-                Promise.prototype.done = function (onDone) {
-                    return this;
-                };
-                Promise.prototype.fail = function (onFail) {
-                    return this;
-                };
-                Promise.prototype.progress = function (onProgress) {
-                    return this;
-                };
+                /**
+                * 用于完成的函数(异步请求成功时，用这个方法处理：成功的定义(请求成功就行))
+                */
+                Promise.prototype.done = function (onDone) { return this; };
+                /*
+                * 用于失败的函数(异步请求失败时，用这个方法处理)
+                */
+                Promise.prototype.fail = function (onFail) { return this; };
+                /*
+                * 用于过程的函数(异步大文件时需要)
+                */
+                Promise.prototype.progress = function (onProgress) { return this; };
+                /*
+                * 用于Promise队列（异步并行执行多个Promise请求)
+                */
                 Promise.when = function (promises) {
                     var allDone = new Deferred();
                     if (!promises.length) {
@@ -59,20 +161,23 @@
                     }
                     var resolved = 0;
                     for (var i = 0; i < promises.length; i++) {
-                        promises[i].done(function (v) {
-                            ++resolved;
-                            if (resolved === promises.length && allDone.status === Promise.UNFULFILLED) {
-                                var results = promises.map(function (p) { return p.result; });
-                                allDone.resolve(results);
-                            }
-                        }).fail(function (e) {
-                            if (allDone.status === Promise.UNFULFILLED)
-                                allDone.reject(e); //TODO 此处i是无用的，怎么指示是哪一个promise的信息？
-                        }).progress(function (v) {
-                            if (allDone.status === Promise.UNFULFILLED) {
-                                allDone.notify(v); //TODO 此处i是无用的，怎么指示是哪一个promise的信息？
-                            }
-                        });
+                        promises[i]
+                            .done(function (v) {
+                                ++resolved;
+                                if (resolved === promises.length && allDone.status === Promise.UNFULFILLED) {
+                                    var results = promises.map(function (p) { return p.result; });
+                                    allDone.resolve(results);
+                                }
+                            })
+                            .fail(function (e) {
+                                if (allDone.status === Promise.UNFULFILLED)
+                                    allDone.reject(e); //TODO 此处i是无用的，怎么指示是哪一个promise的信息？
+                            })
+                            .progress(function (v) {
+                                if (allDone.status === Promise.UNFULFILLED) {
+                                    allDone.notify(v); //TODO 此处i是无用的，怎么指示是哪一个promise的信息？
+                                }
+                            });
                     }
                     return allDone;
                 };
@@ -88,21 +193,62 @@
                     });
                     return ret;
                 };
+                /*
+                * Promise 的状态 0表示未完成 即异步请求的过程没有完成
+                * 如果Promise为这个状态那么它必须进入状态1或2
+                */
                 Promise.UNFULFILLED = 0;
+                /**
+                * Promise 的状态 0表示未完成 即异步请求的过程完成
+                */
                 Promise.RESOLVED = 1;
+                /*
+                * Promise 的状态 2表示拒绝 即请求失败
+                */
                 Promise.REJECTED = 2;
                 return Promise;
             })();
+            /*
+            * 将Promise接口公开
+            */
             mbe_common.Promise = Promise;
+
+            /*
+            * Deferred接口继承Promise接口 即我们能够用到的实际中实现Promise异步功能的构造函数
+            */
             var Deferred = (function (_super) {
+                /*
+                * js中的继承函数 连接 Deferred和Promise
+                */
                 __extends(Deferred, _super);
                 function Deferred() {
+                    /*
+                    * call调用父类方法
+                    */
                     _super.call(this);
+                    /*
+                    * 异步已完成函数的一个集合 为数组
+                    */
                     this._onDones = null;
+                    /*
+                    * 异步失败函数的一个集合 为数组
+                    */
                     this._onFails = null;
+                    /*
+                    * 异步请求过程函数的一个集合 为数组(大数据or大文件)
+                    */
                     this._onProgresses = null;
+                    /*
+                    * 默认状态为0 即未完成
+                    */
                     this._status = Promise.UNFULFILLED;
-                    this._result = undefined;
+                    /*
+                    * 默认结果为undefined 避免undefined被污染用 void 0 代替
+                    */
+                    this._result = void 0;
+                    /*
+                    * 此功能用于调试使用 控制台将Deferred._DEBUG设置为true
+                    */
                     if (Deferred._DEBUG) {
                         try {
                             throw new Error('Deferred constructor calling stack');
@@ -112,29 +258,56 @@
                         }
                     }
                 }
+                /*
+                * Promise的状态值 根据status来判断 Promise目前处于什么状态 即0 1 2 分别代表：未完成  完成  拒绝
+                * 这三种的状态的变化途径只有两个，且只能发生一次：从“未完成”到“已完成”，或者从“未完成”到“失败”。
+                * 即：0->1 或 0->2
+                * 一旦当前状态变为“已完成”或“失败”，就意味着不会再发生状态变化了 此种方式学名：存取器 不懂的百度 js存取器
+                */
                 Object.defineProperty(Deferred.prototype, "status", {
-                    get: function () {
-                        return this._status;
-                    },
+                    get: function () { return this._status; },
                     enumerable: true,
                     configurable: true
                 });
+                /*
+               * 请求完成时的数据 即如果status为1时,获取正常的数据 如果状态为2则为默认值undefined(PS：状态2,开发者可以自己处理,其实就是请求拒绝or失败时的返回值)
+               */
                 Object.defineProperty(Deferred.prototype, "result", {
-                    get: function () {
-                        return this._result;
-                    },
+                    get: function () { return this._result; },
                     enumerable: true,
                     configurable: true
                 });
+                /*
+                * 处理异步请求状态的完成函数 即将status 由0->1
+                * 或 status为1 的情况
+                * 可能在then方法中调用Promise的done方法 或 单独调用
+                */
                 Deferred.prototype.done = function (onDone) {
+                    /*
+                    * 如果状态status为0 则将函数ondone放到_onDones中
+                    */
                     if (this._status == Promise.UNFULFILLED) {
                         this._onDones = this._onDones || [];
                         this._onDones.push(onDone);
                     }
-                    else if (this._status == Promise.RESOLVED)
+                        /* 如果状态status为0 则直接调用函数
+                        * _emitEventDirectly
+                        */
+                    else if (this._status == Promise.RESOLVED) {
+                        /*
+                        * 回调处理_result 即处理Promise返回都结果
+                        * 独立处理调用done函数时,处理Promise的结果
+                        */
                         this._emitEventDirectly(onDone);
+                    }
                     return this;
                 };
+                /*
+                * 处理异步请求状态的完成函数 即将status 由0->2
+                * 或 status为2 的情况
+                * 独立调用promise的done方法
+                * 方式与done方法一致
+                */
                 Deferred.prototype.fail = function (onFail) {
                     if (this._status == Promise.UNFULFILLED) {
                         this._onFails = this._onFails || [];
@@ -144,6 +317,10 @@
                         this._emitEventDirectly(onFail);
                     return this;
                 };
+                /*
+                * 处理异步请求状态的完成函数 即将status = 0
+                * 这个主要用处理大数据时，显示进度需要用到
+                */
                 Deferred.prototype.progress = function (onProgress) {
                     if (this._status == Promise.UNFULFILLED) {
                         this._onProgresses = this._onProgresses || [];
@@ -151,6 +328,14 @@
                     }
                     return this;
                 };
+                /*
+                * then 方法为Promise的核心方法
+                * Promise必须提供一个then方法来获取其值或原因
+                * 参数1为完成函数  参数2为拒绝失败函数
+                * 中文说明可以参考                *
+                * http://segmentfault.com/a/1190000002452115
+                * 或github上的一些文章 关于Promise的实现。
+                */
                 Deferred.prototype.then = function (onDone, onFail) {
                     var _this = this;
                     var def = new Deferred();
@@ -196,28 +381,45 @@
                     });
                     return def;
                 };
+                /*
+                * 异步请求完成时对数据进行处理的函数
+                */
                 Deferred.prototype.resolve = function (data) {
                     if (typeof data === 'undefined')
                         console.warn('>>>> Deferred.resolve() received undefined, likely a bug');
                     return this._emitEvent(data, Promise.RESOLVED);
                 };
+                /*
+                * 异步请求拒绝失败时进行处理的函数
+                */
                 Deferred.prototype.reject = function (err) {
                     if (Deferred._DEBUG) {
                         try {
                             throw new Error('Deferred.reject calling stack');
                         }
                         catch (e) {
-                            logw('rejected: Defered.constructor stack:\n' + (this._stack['stack'] || this._stack) + '\nrejected: Defered.rejected stack:\n' + (e['stack'] || e) + '\nrejected: reason stack:\n' + (err['stack'] || err));
+                            logw('rejected: Defered.constructor stack:\n' + (this._stack['stack'] || this._stack)
+                                + '\nrejected: Defered.rejected stack:\n' + (e['stack'] || e)
+                                + '\nrejected: reason stack:\n' + (err['stack'] || err));
                         }
                     }
                     return this._emitEvent(err, Promise.REJECTED);
                 };
+                /*
+                * 显示通知
+                */
                 Deferred.prototype.notify = function (data) {
                     return this._emitEvent(data);
                 };
+                /*
+                * 显示处理结果的函数
+                */
                 Deferred.prototype._emitEvent = function (data, status) {
-                    if (this._status != Promise.UNFULFILLED) {
-                        throw Error('fulfilled');
+                    if (this._status != Promise.UNFULFILLED && Deferred._DEBUG) {
+                        // ES6 Promise 在重复完成 promise 的时候并不会出错，所以此处也只在 DEBUG 模式给出警告
+                        // throw Error('fulfilled');
+                        console.warn('Promise: try to fulfil a fulfilled.');
+                        return this;
                     }
                     var callbacks;
                     if (status === Promise.RESOLVED)
@@ -243,9 +445,17 @@
                     }
                     return this;
                 };
+                /*
+                * 绑定函数,将传入的对象绑定 Promise的一些方法
+                */
                 Deferred.prototype._bindTo = function (p) {
-                    p.done(this.resolve.bind(this)).fail(this.reject.bind(this)).progress(this.notify.bind(this));
+                    p.done(this.resolve.bind(this))
+                        .fail(this.reject.bind(this))
+                        .progress(this.notify.bind(this));
                 };
+                /*
+                * Promise异步请求完成或失败时的回调函数
+                */
                 Deferred.prototype._emitEventDirectly = function (callback) {
                     var _this = this;
                     if (!callback)
@@ -259,9 +469,11 @@
                         }
                     }, 0);
                 };
+                /*弹出警告信息*/
                 Deferred.prototype._log = function (err) {
                     console.warn(err.stack || err);
                 };
+                /*请求信息*/
                 Deferred.prototype._warnReturnValue = function (value) {
                     if (typeof value === 'undefined')
                         console.warn('>>>> Promise.then(): onDone/onFail returns undefined, likely a bug');
@@ -276,7 +488,6 @@
             })(Promise);
             mbe_common.Deferred = Deferred;
         })(mbe_common || (mbe_common = {}));
-
     </script>
 </body>
 </html>
