@@ -187,5 +187,32 @@
                 productController = new ProductController(eventAggregator, productRepository);
         })();
     </script>
+    <script>
+        //Function.prototype.bind = function (context) {
+        //    var self = this;
+        //    return function () {
+        //        self.apply(context, arguments)
+        //    }
+        //}
+        var obj = {
+            name: 'tom'
+        }
+        var func = function () {
+            alert(this.name);
+        }.bind(obj);
+       
+        func();
+        /*
+            入口:func
+            执行过程：
+            func - > bind
+                     bind(obj)   传入的实参为obj context为就是obj
+                     self = this 因为是间接调用this指向调用的对象，bind的调用对象是func 即 function(){alert(this.name)}
+                     self.apply(context,arguments)  -> 将context即obj传入其中,arguments为 return function (这里没有值所以这个函数里面的arguments没有) { self.apply(context, arguments) }所在函数 因为没有值 length为0
+                     bind 函数返回值 是间接调用func函数 这样的写法在这里没有什么意义，为什么这么说
+                     因为Function的bind方法默认的this值就是指向调用的函数，所以在这里的self没有什么意义，尽量不要去重写js的原始对象                            
+        */
+
+    </script>
 </body>
 </html>

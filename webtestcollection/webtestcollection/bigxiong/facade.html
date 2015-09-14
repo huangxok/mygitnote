@@ -5,6 +5,41 @@
 </head>
 <body>
     <script>
+        //二，门面与迪米特法则
+
+        //迪米特法则（Law of Demeter）又叫作最少知识原则（Least Knowledge Principle 简写LKP），就是说一个对象应当对其他对象有尽可能少的了解,不和陌生人说话。英文简写为: LoD.
+
+        //迪米特法则的核心观念就是类间解耦，弱耦合，只有弱耦合了以后，类的复用性才可以提高。
+
+        //其实二者的关系很好理解，门面模式就是基于此法则衍生出来的解决方案，适用于特定场景的同一类问题的解决方案。下面再来看个例子，如下
+
+        //现在有这么个场景------监狱内的犯人是不应该跟外面的人接触的，当然或许会有探亲的。这里的监狱就是类，里面的犯人就是类内部的信息，而监狱里的狱警就相当于迪米特法则的执行者
+
+        //复制代码
+        function Inmates() {
+            this.say = function () {
+                console.log('狱友说：我们是狱友...');
+            };
+        };
+        function Prisoners() {
+            this.inmates = new Inmates();
+            this.helpEachOther = function () {
+                this.inmates.say();
+                console.log("家人说：你和狱友之间应该互相帮助...");
+            };
+        };
+        function Family() {
+            this.prisoners = new Prisoners();
+            this.visit = function (inmates, prisoners) {
+                this.prisoners.helpEachOther();
+            };
+        };
+        //复制代码
+        //看到这样的结果，是不是有些别扭，家人告诉犯人要与狱友好好相处，而狱友确冒出来说话。这显然越界了，因为监狱只允许家人探望犯人，而不是随便谁都可以见的
+
+        //这里的家人和狱友有了沟通是违背迪米特法则的，所以我们需要将家人和狱友隔离开，对其进行重构
+    </script>
+    <script>
         //层与层调用(3层)
         //家人类
         function Family() {

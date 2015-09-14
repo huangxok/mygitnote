@@ -69,6 +69,7 @@
                 layer(ctx);
 
                 ctx.globalCompositeOperation = 'destination-out';
+                //ctx.globalCompositeOperation = 'lighter';
 
                 canvas.addEventListener('touchstart', eventDown);
                 canvas.addEventListener('touchend', eventUp);
@@ -89,7 +90,7 @@
         function printx() {
             console.log(x);
         }
-        
+
 
         function show(f) {
             var x = 2;
