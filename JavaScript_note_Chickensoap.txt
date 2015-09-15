@@ -1,0 +1,6 @@
+http://blog.letitialew.com/post/30425074101/repaints-and-reflows-manipulating-the-dom
+一篇关于如果高效的操作DOM以避免频繁触发reflow的文章。
+https://speakerdeck.com/pedronauck/reactjs-keep-simple-everything-can-be-a-component
+介绍什么是repaint以及什么是reflow。其引用的文章也值得一读。
+https://developers.google.com/speed/articles/javascript-dom
+介绍React诸多好处的，非常精美的演示。
