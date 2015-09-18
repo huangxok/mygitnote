@@ -1,0 +1,31 @@
+﻿<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <title></title>
+</head>
+<body>
+    <div id="teste" style="width:100px;height:110px;background:#ffd800"></div>
+    <script>
+        var kk = [];
+        var o = { name: 'agst', tt: 'dfb' };
+        var d = document.getElementById('teste');
+
+        d.addEventListener('click', function (o) {
+            for (var i = 0, len = arguments.length; i < len; i++) {
+                var props = {};
+                console.log('------------------------' + arguments[i]);
+                for (p in arguments[i]) {
+                    props[p] = arguments[i][p];
+                    kk.push(props)
+                    console.log(p + ':' + arguments[i][p]);
+                }
+            }
+        })
+        window.onbeforeunload = function () {
+            //if (textarea.value != textarea.defaultValue) {
+            confirm('Do you want to leave the page and discard changes?');
+            //}
+        };
+    </script>
+</body>
+</html>
