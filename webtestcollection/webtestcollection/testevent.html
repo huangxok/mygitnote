@@ -5,27 +5,264 @@
 </head>
 <body>
     <div id="teste" style="width:100px;height:110px;background:#ffd800"></div>
+    <input type="checkbox" id="my-checkbox" />
+    <input type="text" id="testone" />
     <script>
         var kk = [];
         var o = { name: 'agst', tt: 'dfb' };
-        var d = document.getElementById('teste');
+        var div = document.getElementById('teste');
 
-        d.addEventListener('click', function (o) {
-            for (var i = 0, len = arguments.length; i < len; i++) {
-                var props = {};
-                console.log('------------------------' + arguments[i]);
-                for (p in arguments[i]) {
-                    props[p] = arguments[i][p];
-                    kk.push(props)
-                    console.log(p + ':' + arguments[i][p]);
-                }
+        //div.addEventListener('click', function (o) {
+        //    for (var i = 0, len = arguments.length; i < len; i++) {
+        //        var props = {};
+        //        console.log('------------------------' + arguments[i]);
+        //        for (p in arguments[i]) {
+        //            props[p] = arguments[i][p];
+        //            kk.push(props)
+        //            console.log(p + ':' + arguments[i][p]);
+        //        }
+        //    }
+        //})
+        //function md1(ev) {
+        //    console.log('down1')
+        //    ev.preventDefault();
+
+        //}
+        //function md2() {
+
+        //    console.log('down2')
+        //}
+        //function md3() {
+
+        //    console.log('down3');
+        //}
+        //function body1() {
+        //    console.log('body1');
+        //}
+        //var phases = {
+        //    1: 'capture',
+        //    2: 'target',
+        //    3: 'bubble'
+        //};
+        //div.addEventListener('click', callback, true);
+        //document.body.addEventListener('click', callback, true);
+
+        //div.addEventListener('click', callback, false);
+        //div.addEventListener('click', callback1, false);
+        //div.addEventListener('click', callback2, false);
+        //document.body.addEventListener('click', callback, false);
+
+        //function callback(event) {
+        //    var tag = event.currentTarget.tagName;
+        //    var phase = phases[event.eventPhase];
+        //    console.log("Tag: '" + tag + "'. EventPhase: '" + phase + "'");
+        //}
+        //function callback1(event) {
+        //    event.stopImmediatePropagation();//不仅阻止冒泡，还阻止当前节点的此类事件还没有执行的其他事件 如给某个对象绑定多个click事件，当第一个click事件滴啊用此方法，那么后面的click事件就不会执行，也不会向上冒泡
+        //    //event.stopPropagation();
+        //    console.log('stop')
+        //}
+        //function callback2(event) {
+        //    console.log(123)
+        //}
+        //d.addEventListener('mousedown', md1, false)
+        //d.addEventListener('mousedown', md2, false)
+        ////d.addEventListener('mousedown', md3, false)
+        //d.addEventListener('mousedown', function () { console.log(this.namespaceURI); md3(); }, false)
+        //window.onbeforeunload = function () {
+        //    //if (textarea.value != textarea.defaultValue) {
+        //    confirm('Do you want to leave the page and discard changes?');
+        //    //}
+        //};
+        //var myElement = d;
+        //var myEvt = new CustomEvent('myevt',
+        //    {
+        //        detail: { name: 'will' },
+        //        bubbles: true,
+        //        cancelable: false
+        //    });
+        //d.addEventListener('myevt', function (event) {
+        //    alert('name:' + event.detail.name);
+        //});
+        //d.dispatchEvent(myEvt);
+
+        //var myEvent = new Event("myevent", {
+        //    detail: {
+        //        name: "Wilson"
+        //    },
+        //    bubbles: true,
+        //    cancelable: false
+        //});
+
+        //// Listen for 'myevent' on an element
+        //myElement.addEventListener('myevent', function (event) {
+        //    alert('Hello ' + event.detail.name);
+        //});
+
+        //// Trigger the 'myevent'
+        //myElement.dispatchEvent(myEvent);
+
+        //var cb = document.getElementById('my-checkbox');
+        //cb.addEventListener(
+        //  'click',
+        //  function (e) {
+        //      e.preventDefault();
+        //  },
+        //  false
+        //);
+        ////preventDefault 阻止默认行为
+        //var cb = document.getElementById('testone');
+        //cb.addEventListener(
+        //  'keypress',
+        //function checkName(e) {
+        //    if (e.charCode < 97 || e.charCode > 122) {
+        //        e.preventDefault();
+        //    }
+        //}, false)
+
+        div.addEventListener("click", function (event) {
+            event.stopPropagation
+            // 显示在该节点，鼠标连续点击的次数
+            event.target.innerHTML = "click count: " + event.detail;
+        }, false);
+    </script>
+
+    <!-- 下面的代码是利用click事件进行CSRF攻击（Cross-site request forgery）的一个例子。 -->
+    <a href="http://javascript.ruanyifeng.com/dom/event.html" onclick="
+    var f = document.createElement('form');
+    f.style.display = 'none';
+    this.parentNode.appendChild(f);
+    f.method = 'POST';
+    f.action = 'http://www.baidu.com/';
+    f.submit();
+    return false;">伪装的链接</a>
+    <div id="outer" style="height:50px;width:50px;border:1px solid black;">
+        <div id="inner" style="height:25px;width:25px;border:1px solid black;"></div>
+    </div>
+    <script>
+        var inner = document.getElementById("inner");
+
+        inner.addEventListener("mouseover", function () {
+            console.log('进入' + event.target.id + " 离开" + event.relatedTarget.id);
+        });
+        inner.addEventListener("mouseenter", function () {
+            console.log('进入' + event.target.id + " 离开" + event.relatedTarget.id);
+        });
+        inner.addEventListener("mouseout", function () {
+            console.log('离开' + event.target.id + " 进入" + event.relatedTarget.id);
+        });
+        inner.addEventListener("mouseleave", function () {
+            console.log('离开' + event.target.id + " 进入" + event.relatedTarget.id);
+        });
+    </script>
+
+
+    <input type="text" name="myInput"
+           onkeypress="return numbersOnly(this, event);"
+           onpaste="return false;" />
+    <script>
+        function numbersOnly(oToCheckField, oKeyEvent) {
+            return oKeyEvent.charCode === 0
+            || /\d/.test(String.fromCharCode(oKeyEvent.charCode));
+        }
+    </script>
+    <input type="text" name="myInput2"
+           onkeydown="numbersOnly2(this);"
+           onkeypress="numbersonly3();"
+           onkeyup="numbersOnly4();" />
+    <script>
+        function numbersOnly2(ev) {
+            console.log('istrusted:' + ev.isTrusted)
+            console.log(1)
+        }
+        function numbersonly3() {
+            console.log(2)
+        }
+        function numbersOnly4() {
+            console.log(3)
+        }
+    </script>
+    <div id="drag-with-image" class="dragdemo" draggable="true">
+        drag me
+    </div>
+    <script>
+        var div = document.getElementById("drag-with-image");
+        div.addEventListener("dragstart", function (e) {
+            var img = document.createElement("img");
+            img.src = "http://img0.imgtn.bdimg.com/it/u=1070902365,2619384777&fm=206&gp=0.jpg";
+            e.dataTransfer.setDragImage(img, -200, 0);
+        }, false);
+    </script>
+    <textarea id="ttarea">dd</textarea>
+    <script>
+        window.onbeforeunload = function (ev) {
+            //ev.preventDefault();
+            var tt = document.getElementById('ttarea');
+            console.log('v:' + tt.value);
+            console.log('dv:' + tt.defaultValue);
+            if (tt.value != tt.defaultValue) {
+                return '你确认要离开吗？';
             }
-        })
-        window.onbeforeunload = function () {
-            //if (textarea.value != textarea.defaultValue) {
-            confirm('Do you want to leave the page and discard changes?');
-            //}
         };
+    </script>
+    <script>
+        function abc1(a, b) {
+            return a = a + b
+        }
+        function abc2(a, b) {
+            abc1(a, b);
+        }
+        var c = abc2(2, 3);
+    </script>
+    <div id="reu" reu="{required:'请输入登录名！',minlength:'4'}"></div>
+    <script src="Scripts/jquery-1.7.1.js"></script>
+    <script>
+        var ddd = document.getElementById('reu').getAttribute('reu');
+        var dmsg = new Function('return ' + ddd);
+        console.log(dmsg);
+        //function parseOptions(target, properties) {
+        //    var t = $(target);
+        //    var options = {};
+
+        //    var s = $.trim(t.attr('data-options'));
+        //    if (s) {
+        //        if (s.substring(0, 1) != '{') {
+        //            s = '{' + s + '}';
+        //        }
+        //        options = (new Function('return ' + s))();
+        //    }
+        //    $.map(['width', 'height', 'left', 'top', 'minWidth', 'maxWidth', 'minHeight', 'maxHeight'], function (p) {
+        //        var pv = $.trim(target.style[p] || '');
+        //        if (pv) {
+        //            if (pv.indexOf('%') == -1) {
+        //                pv = parseInt(pv) || undefined;
+        //            }
+        //            options[p] = pv;
+        //        }
+        //    });
+
+        //    if (properties) {
+        //        var opts = {};
+        //        for (var i = 0; i < properties.length; i++) {
+        //            var pp = properties[i];
+        //            if (typeof pp == 'string') {
+        //                opts[pp] = t.attr(pp);
+        //            } else {
+        //                for (var name in pp) {
+        //                    var type = pp[name];
+        //                    if (type == 'boolean') {
+        //                        opts[name] = t.attr(name) ? (t.attr(name) == 'true') : undefined;
+        //                    } else if (type == 'number') {
+        //                        opts[name] = t.attr(name) == '0' ? 0 : parseFloat(t.attr(name)) || undefined;
+        //                    }
+        //                }
+        //            }
+        //        }
+        //        $.extend(options, opts);
+        //    }
+        //    return options;
+        //}
+        //var valueddd = parseOptions(document.getElementById('reu'), ddd)
     </script>
 </body>
 </html>

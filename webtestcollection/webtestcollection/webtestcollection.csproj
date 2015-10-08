@@ -216,6 +216,10 @@
     <Content Include="CSS3\css3gradient渐变\css3渐变2.png" />
     <Content Include="CSS3\css3gradient渐变\HtmlPage1.html" />
     <Content Include="CSS3\css3gradient渐变\再说CSS3渐变——线性渐变 _ css3教程-css3实例-css3动画 _ W3CPlus.html" />
+    <Content Include="developertoos\phantomjs\add.js" />
+    <Content Include="developertoos\phantomjs\doc\phantomjs.md.txt" />
+    <Content Include="developertoos\phantomjs\doc\readme.txt" />
+    <Content Include="developertoos\phantomjs\webpage1.js" />
     <Content Include="Doc\linkku.html" />
     <Content Include="Doc\arraybuffer.md" />
     <Content Include="Doc\git常用命令解释.doc" />
@@ -224,6 +228,7 @@
     <None Include="DOMTYPE\node.md" />
     <Content Include="DOMTYPE\classList.html" />
     <Content Include="DOMTYPE\textafrag.html" />
+    <Content Include="fanzhuan-1.html" />
     <Content Include="FM4\FM4%281%29\FM4\css\listStyle.css" />
     <Content Include="FM4\FM4%281%29\FM4\images\bg_0.png" />
     <Content Include="FM4\FM4%281%29\FM4\images\icon.png" />
@@ -273,6 +278,11 @@
     <Content Include="MathML\mathmlxhtml.html" />
     <Content Include="MathML\XMLFile1.xml" />
     <Content Include="mbeelecron.html" />
+    <Content Include="nodejs\npm\npm.md.txt" />
+    <Content Include="nodejs\projecttest\fsmodule\fscwr.js" />
+    <Content Include="nodejs\projecttest\fsmodule\fsexits.js" />
+    <Content Include="nodejs\projecttest\fsmodule\fsreadFileSync.js" />
+    <Content Include="nodejs\projecttest\fsmodule\fswriteFileSync.js" />
     <Content Include="nodejs\project\nodedebugger\nodedebug.html" />
     <Content Include="nodejs\project\project1\gulpfile.js" />
     <Content Include="nodejs\project\project1\script\example.js" />
@@ -336,6 +346,7 @@
     <Content Include="tableplugins\stc.js" />
     <Content Include="tableplugins\table.js" />
     <Content Include="tableplugins\table_sample.html" />
+    <Content Include="testevent.html" />
     <Content Include="Tom\lsp里氏替换.html" />
     <Content Include="Tom\opencloseprincipal开闭原则.html" />
     <Content Include="Tom\single单一职责.html" />
@@ -402,6 +413,7 @@
     <Content Include="测试专用集合\testmbecode\HtmlPage1.html" />
     <Content Include="测试专用集合\blognavaddress.html" />
     <Content Include="测试专用集合\移动端mobile.html" />
+    <Content Include="源生js滚动条.html" />
     <Content Include="鼠标拖放排序\css\zzsc.css" />
     <Content Include="鼠标拖放排序\images\303317_320632284665935_15996162_a.jpg" />
     <Content Include="鼠标拖放排序\images\382696_10150378364701671_1792621129_a.jpg" />
@@ -2620,8 +2632,15 @@
     <Content Include="jquery-qrcode\README.md" />
     <Content Include="DOMTYPE\windowpostmessage.md" />
     <Content Include="mail_browser\package.json" />
+    <Content Include="fanzhuan.rar" />
+    <Content Include="fangzhanxgjxz.zip" />
+    <Content Include="javascript高效图形编程.pdf" />
+    <Content Include="nodejs\json1.json" />
+    <Content Include="nodejs\json2.json" />
+    <Content Include="nodejs\json3.json" />
     <None Include="Properties\PublishProfiles\mygit.pubxml" />
     <Content Include="pubuliuzhoujiao\zhoujiao\images\Thumbs.db" />
+    <Content Include="SQLiteSpy.rar" />
     <None Include="svgdragtest\tesjq.xhtml" />
     <Content Include="svgdragtest\testlayout.html" />
     <Content Include="svgdragtest\jslocation.svg" />
@@ -4511,6 +4530,9 @@
     <Content Include="ziprar\ColorSchemerStudio.zip" />
     <Content Include="ziprar\Promise-master.zip" />
     <Content Include="测试专用集合\FZKTJW_CRO.TTF" />
+    <Content Include="网页视频代码干货1.7z" />
+    <Content Include="计算机图形学%2528第三版%2529清晰中文版.pdf" />
+    <Content Include="鸟哥的Linux私房菜.pdf" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="ajaxjs\testajax.ashx.cs">

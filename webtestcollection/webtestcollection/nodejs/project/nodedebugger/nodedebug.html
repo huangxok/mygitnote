@@ -8,20 +8,20 @@
         //1.基于node内建调试
         /*执行命令
         node debug *.js  星号代表文件路径
-        
+
         help commands：
-        Commands: run (r),    
+        Commands: run (r),
                   cont (c),    继续执行
                   next (n),    n - step next
                   step (s),    s - step in
                   out (o),     o - step out
                   backtrace (bt) ,  显示当前执行框架的回溯
-                  setBreakpoint (sb), 
+                  setBreakpoint (sb),
                       setBreakpoint() or sb() 在当前行设置断点
                       setBreakpoint(1) or sb(1) 在指定行设置断点
                       setBreakpoint('fn()') or sb(...) 在函数第一句设置断点
                       setBreakpoint('script.js',1) or sb(..)  在 script.js 的第一行设置断点
-              
+
                   clearBreakpoint (cb),   清除断点
                   watch,       watch("my_expressin") 开始监视一个表达式
                   unwatch,     watch("my_expressin") 移除一个监视器
@@ -29,10 +29,10 @@
                   repl,    在所调试的脚本的上下文中打开调试器的 repl 执行代码
                   restart,     重新运行脚本
                   kill,        终止脚本
-                  list,        list(5) 显示脚本源代码的5行上下文 前五后五 
+                  list,        list(5) 显示脚本源代码的5行上下文 前五后五
                   scripts,     列出所有已加载的脚本
                   breakOnException,
-                  breakpoints, 
+                  breakpoints,
                   version      显示v8版本
                   pause,       暂停执行代码（类似开发者工具中的暂停按钮）
 
@@ -63,11 +63,11 @@
         既然我们可以通过V8的调试插件来调试，那是否也可以借用Chrome浏览器的JavaScript调试器来调试呢？node-inspector模块提供了这样一种可能。我们需要先通过npm来安装node-inspector
         npm install -g node-inspector
         node-inspector是通过websocket方式来转向debug输入输出的。因此，我们在调试前要先启动node-inspector来监听Nodejs的debug调试端口
-        
+
         默认情况下node-inspector的端口是8080，可以通过参数--web-port=[port]来设置端口。在启动node-inpspector之后，我们可以通过--debug或--debug-brk来启动nodejs程序。通过在浏览器输入http://[ip address]:8080/debug?port=5858
         步骤：
         1-> 打开目录 输入cmd 进入控制台dos
-         输入 node --debug-brk=56666 example.js 
+         输入 node --debug-brk=56666 example.js
          表示监听 通过56666端口监听 example.js
         2-> 同1操作一直
             命令换成
@@ -75,7 +75,6 @@
          采用新的端口监听 对应56666端口
          用这个命令
          node-inspector -web-port 56666
-         
     </script>
 </body>
 </html>
