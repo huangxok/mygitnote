@@ -1,0 +1,4427 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+	<head>
+		<meta http-equiv="content-type" content="text/html; charset=utf-8" />
+		<meta name="generator" content="JsDoc Toolkit" />
+         <link rel="stylesheet" type="text/css" href="../static/jsxgraph.css" />
+         <script type="text/javascript" src="../static/jquery.min.js"></script>
+         <script type="text/javascript" src="../static/jsxgraphcore.js"></script>
+		
+		<title>JsDoc Reference - JXG.Math.Geometry</title>
+
+		<style type="text/css">
+			/* default.css */
+body
+{
+	font: 12px "Lucida Grande", Tahoma, Arial, Helvetica, sans-serif;
+	width: 800px;
+}
+
+.header
+{
+	clear: both;
+	background-color: #ccc;
+	padding: 8px;
+}
+
+h1
+{
+	font-size: 150%;
+	font-weight: bold;
+	padding: 0;
+	margin: 1em 0 0 .3em;
+}
+
+hr
+{
+	border: none 0;
+	border-top: 1px solid #7F8FB1;
+	height: 1px;
+}
+
+pre.code
+{
+	display: block;
+	padding: 8px;
+	border: 1px dashed #ccc;
+}
+
+#index
+{
+	margin-top: 24px;
+	float: left;
+	width: 220px;
+	position: absolute;
+	left: 8px;
+	background-color: #F3F3F3;
+	padding: 8px;
+}
+
+#content
+{
+	margin-left: 250px;
+	width: 600px;
+}
+
+.classList
+{
+	list-style-type: none;
+	padding: 0;
+	margin: 0 0 0 8px;
+	font-family: arial, sans-serif;
+	font-size: 1em;
+	overflow: auto;
+}
+
+.classList li
+{
+	padding: 0;
+	margin: 0 0 8px 0;
+}
+
+.summaryTable { width: 100%; }
+
+h1.classTitle
+{
+	font-size:170%;
+	line-height:130%;
+}
+
+h2 { font-size: 110%; }
+caption, div.sectionTitle
+{
+	background-color: #7F8FB1;
+	color: #fff;
+	font-size:130%;
+	text-align: left;
+	padding: 2px 6px 2px 6px;
+	border: 1px #7F8FB1 solid;
+}
+
+div.sectionTitle { margin-bottom: 8px; }
+.summaryTable thead { display: none; }
+
+.summaryTable td
+{
+	vertical-align: top;
+	padding: 4px;
+	border-bottom: 1px #7F8FB1 solid;
+	border-right: 1px #7F8FB1 solid;
+}
+
+/*col#summaryAttributes {}*/
+.summaryTable td.attributes
+{
+	border-left: 1px #7F8FB1 solid;
+	width: 140px;
+	text-align: right;
+}
+
+td.attributes, .fixedFont
+{
+	line-height: 15px;
+	color: #002EBE;
+	font-family: "Courier New",Courier,monospace;
+	font-size: 13px;
+}
+
+.summaryTable td.nameDescription
+{
+	text-align: left;
+	font-size: 13px;
+	line-height: 15px;
+}
+
+.summaryTable td.nameDescription, .description
+{
+	line-height: 15px;
+	padding: 4px;
+	padding-left: 4px;
+}
+
+.summaryTable { margin-bottom: 8px; }
+
+ul.inheritsList
+{
+	list-style: square;
+	margin-left: 20px;
+	padding-left: 0;
+}
+
+.detailList {
+	margin-left: 20px; 
+	line-height: 15px;
+}
+.detailList dt { margin-left: 20px; }
+
+.detailList .heading
+{
+	font-weight: bold;
+	padding-bottom: 6px;
+	margin-left: 0;
+}
+
+.light, td.attributes, .light a:link, .light a:visited
+{
+	color: #777;
+	font-style: italic;
+}
+
+.fineprint
+{
+	text-align: right;
+	font-size: 10px;
+}
+		</style>
+	</head>
+
+	<body>
+<!-- ============================== header ================================= -->	
+		<!-- begin static/header.html -->
+		<div id="header">
+<h1 style="font-size: 2.5em"><img src="static/logo.gif" />JSXGraph Reference</h1>
+</div>
+<div id="jsdeactivated_hint" style="background-color: #fcc; border: solid 1px red; padding: 3px">
+<h2>JavaScript must be enabled in order for you to use JSXGraph and JSXGraph reference.
+However, it seems JavaScript is either disabled or not supported by your browser.</h2>
+</div>
+<script type="text/javascript">
+ /* <![CDATA[ */
+   document.getElementById("jsdeactivated_hint").style.display = 'none';
+ /* ]]> */
+</script>
+		<!-- end static/header.html -->
+
+<!-- ============================== classes index ============================ -->
+		<div id="index">
+			<!-- begin publish.classesIndex -->
+			<div align="center"><a href="../index.html">Class Index</a>
+| <a href="../files.html">File Index</a></div>
+<hr />
+<h2 onclick="switchList('myElList');" style="cursor: pointer"><img src="static/expandable.gif"/> Elements</h2>
+<ul class="classList" id="myElList" style="display: block;">
+	
+	<li></li>
+	
+	<li><a href="../symbols/Angle.html">Angle</a></li>
+	
+	<li><a href="../symbols/Arc.html">Arc</a></li>
+	
+	<li><a href="../symbols/Arrow.html">Arrow</a></li>
+	
+	<li><a href="../symbols/Arrowparallel.html">Arrowparallel</a></li>
+	
+	<li><a href="../symbols/Axis.html">Axis</a></li>
+	
+	<li><a href="../symbols/Bisector.html">Bisector</a></li>
+	
+	<li><a href="../symbols/Bisectorlines.html">Bisectorlines</a></li>
+	
+	<li><a href="../symbols/Button.html">Button</a></li>
+	
+	<li><a href="../symbols/Checkbox.html">Checkbox</a></li>
+	
+	<li><a href="../symbols/Circle.html">Circle</a></li>
+	
+	<li><a href="../symbols/Circumcenter.html">Circumcenter</a></li>
+	
+	<li><a href="../symbols/Circumcircle.html">Circumcircle</a></li>
+	
+	<li><a href="../symbols/CircumcircleArc.html">CircumcircleArc</a></li>
+	
+	<li><a href="../symbols/CircumcircleSector.html">CircumcircleSector</a></li>
+	
+	<li><a href="../symbols/Conic.html">Conic</a></li>
+	
+	<li><a href="../symbols/Curve.html">Curve</a></li>
+	
+	<li><a href="../symbols/Ellipse.html">Ellipse</a></li>
+	
+	<li><a href="../symbols/Functiongraph.html">Functiongraph</a></li>
+	
+	<li><a href="../symbols/Glider.html">Glider</a></li>
+	
+	<li><a href="../symbols/Grid.html">Grid</a></li>
+	
+	<li><a href="../symbols/Group.html">Group</a></li>
+	
+	<li><a href="../symbols/Hatch.html">Hatch</a></li>
+	
+	<li><a href="../symbols/Hyperbola.html">Hyperbola</a></li>
+	
+	<li><a href="../symbols/Image.html">Image</a></li>
+	
+	<li><a href="../symbols/Incenter.html">Incenter</a></li>
+	
+	<li><a href="../symbols/Incircle.html">Incircle</a></li>
+	
+	<li><a href="../symbols/Inequality.html">Inequality</a></li>
+	
+	<li><a href="../symbols/Input.html">Input</a></li>
+	
+	<li><a href="../symbols/Integral.html">Integral</a></li>
+	
+	<li><a href="../symbols/Intersection.html">Intersection</a></li>
+	
+	<li></li>
+	
+	<li></li>
+	
+	<li></li>
+	
+	<li></li>
+	
+	<li></li>
+	
+	<li></li>
+	
+	<li></li>
+	
+	<li></li>
+	
+	<li></li>
+	
+	<li></li>
+	
+	<li></li>
+	
+	<li></li>
+	
+	<li></li>
+	
+	<li></li>
+	
+	<li></li>
+	
+	<li></li>
+	
+	<li></li>
+	
+	<li></li>
+	
+	<li></li>
+	
+	<li></li>
+	
+	<li></li>
+	
+	<li></li>
+	
+	<li></li>
+	
+	<li></li>
+	
+	<li></li>
+	
+	<li></li>
+	
+	<li></li>
+	
+	<li></li>
+	
+	<li></li>
+	
+	<li></li>
+	
+	<li></li>
+	
+	<li></li>
+	
+	<li></li>
+	
+	<li></li>
+	
+	<li></li>
+	
+	<li></li>
+	
+	<li></li>
+	
+	<li></li>
+	
+	<li></li>
+	
+	<li></li>
+	
+	<li></li>
+	
+	<li></li>
+	
+	<li></li>
+	
+	<li></li>
+	
+	<li></li>
+	
+	<li><a href="../symbols/Line.html">Line</a></li>
+	
+	<li><a href="../symbols/Locus.html">Locus</a></li>
+	
+	<li><a href="../symbols/MajorArc.html">MajorArc</a></li>
+	
+	<li><a href="../symbols/MajorSector.html">MajorSector</a></li>
+	
+	<li><a href="../symbols/Midpoint.html">Midpoint</a></li>
+	
+	<li><a href="../symbols/MinorArc.html">MinorArc</a></li>
+	
+	<li><a href="../symbols/MinorSector.html">MinorSector</a></li>
+	
+	<li><a href="../symbols/Mirrorpoint.html">Mirrorpoint</a></li>
+	
+	<li><a href="../symbols/NonReflexAngle.html">NonReflexAngle</a></li>
+	
+	<li><a href="../symbols/Normal.html">Normal</a></li>
+	
+	<li><a href="../symbols/Orthogonalprojection.html">Orthogonalprojection</a></li>
+	
+	<li><a href="../symbols/OtherIntersection.html">OtherIntersection</a></li>
+	
+	<li><a href="../symbols/Parabola.html">Parabola</a></li>
+	
+	<li><a href="../symbols/Parallel.html">Parallel</a></li>
+	
+	<li><a href="../symbols/Parallelpoint.html">Parallelpoint</a></li>
+	
+	<li><a href="../symbols/Perpendicular.html">Perpendicular</a></li>
+	
+	<li><a href="../symbols/PerpendicularPoint.html">PerpendicularPoint</a></li>
+	
+	<li><a href="../symbols/PerpendicularSegment.html">PerpendicularSegment</a></li>
+	
+	<li><a href="../symbols/Point.html">Point</a></li>
+	
+	<li><a href="../symbols/PolarLine.html">PolarLine</a></li>
+	
+	<li><a href="../symbols/PolePoint.html">PolePoint</a></li>
+	
+	<li><a href="../symbols/Polygon.html">Polygon</a></li>
+	
+	<li></li>
+	
+	<li><a href="../symbols/RadicalAxis.html">RadicalAxis</a></li>
+	
+	<li><a href="../symbols/Reflection.html">Reflection</a></li>
+	
+	<li><a href="../symbols/ReflexAngle.html">ReflexAngle</a></li>
+	
+	<li><a href="../symbols/RegularPolygon.html">RegularPolygon</a></li>
+	
+	<li><a href="../symbols/Riemannsum.html">Riemannsum</a></li>
+	
+	<li><a href="../symbols/Sector.html">Sector</a></li>
+	
+	<li><a href="../symbols/Segment.html">Segment</a></li>
+	
+	<li><a href="../symbols/Semicircle.html">Semicircle</a></li>
+	
+	<li><a href="../symbols/Slider.html">Slider</a></li>
+	
+	<li><a href="../symbols/Slopetriangle.html">Slopetriangle</a></li>
+	
+	<li><a href="../symbols/Stepfunction.html">Stepfunction</a></li>
+	
+	<li><a href="../symbols/Tangent.html">Tangent</a></li>
+	
+	<li><a href="../symbols/Tapemeasure.html">Tapemeasure</a></li>
+	
+	<li><a href="../symbols/Text.html">Text</a></li>
+	
+	<li><a href="../symbols/Ticks.html">Ticks</a></li>
+	
+	<li><a href="../symbols/Tracecurve.html">Tracecurve</a></li>
+	
+</ul>
+<h2 onclick="switchList('myClList');" style="cursor: pointer"><img src="static/expandable.gif"/> Classes</h2>
+<ul class="classList" id="myClList" style="display: block;">
+	
+	<li><i><a href="../symbols/_global_.html">_global_</a></i></li>
+	
+	<li></li>
+	
+	<li></li>
+	
+	<li></li>
+	
+	<li></li>
+	
+	<li></li>
+	
+	<li></li>
+	
+	<li></li>
+	
+	<li></li>
+	
+	<li></li>
+	
+	<li></li>
+	
+	<li></li>
+	
+	<li></li>
+	
+	<li></li>
+	
+	<li></li>
+	
+	<li></li>
+	
+	<li></li>
+	
+	<li></li>
+	
+	<li></li>
+	
+	<li></li>
+	
+	<li></li>
+	
+	<li></li>
+	
+	<li></li>
+	
+	<li></li>
+	
+	<li></li>
+	
+	<li></li>
+	
+	<li></li>
+	
+	<li></li>
+	
+	<li></li>
+	
+	<li></li>
+	
+	<li></li>
+	
+	<li><a href="../symbols/JXG.html">JXG</a></li>
+	
+	<li><a href="../symbols/JXG.AbstractRenderer.html">JXG.AbstractRenderer</a></li>
+	
+	<li><a href="../symbols/JXG.Board.html">JXG.Board</a></li>
+	
+	<li><a href="../symbols/JXG.C.html">JXG.C</a></li>
+	
+	<li><a href="../symbols/JXG.CanvasRenderer.html">JXG.CanvasRenderer</a></li>
+	
+	<li><a href="../symbols/JXG.Circle.html">JXG.Circle</a></li>
+	
+	<li><a href="../symbols/JXG.Complex.html">JXG.Complex</a></li>
+	
+	<li><a href="../symbols/JXG.Composition.html">JXG.Composition</a></li>
+	
+	<li><a href="../symbols/JXG.Coords.html">JXG.Coords</a></li>
+	
+	<li><a href="../symbols/JXG.CoordsElement.html">JXG.CoordsElement</a></li>
+	
+	<li><a href="../symbols/JXG.Curve.html">JXG.Curve</a></li>
+	
+	<li><a href="../symbols/JXG.Dump.html">JXG.Dump</a></li>
+	
+	<li><a href="../symbols/JXG.EventEmitter.html">JXG.EventEmitter</a></li>
+	
+	<li><a href="../symbols/JXG.GeometryElement.html">JXG.GeometryElement</a></li>
+	
+	<li><a href="../symbols/JXG.GeonextParser.html">JXG.GeonextParser</a></li>
+	
+	<li><a href="../symbols/JXG.Group.html">JXG.Group</a></li>
+	
+	<li><a href="../symbols/JXG.Image.html">JXG.Image</a></li>
+	
+	<li><a href="../symbols/JXG.JessieCode.html">JXG.JessieCode</a></li>
+	
+	<li><a href="../symbols/JXG.JSXGraph.html">JXG.JSXGraph</a></li>
+	
+	<li><a href="../symbols/JXG.Line.html">JXG.Line</a></li>
+	
+	<li><a href="../symbols/JXG.Math.html">JXG.Math</a></li>
+	
+	<li><a href="../symbols/JXG.Math.Geometry.html">JXG.Math.Geometry</a></li>
+	
+	<li><a href="../symbols/JXG.Math.Numerics.html">JXG.Math.Numerics</a></li>
+	
+	<li><a href="../symbols/JXG.Math.Poly.html">JXG.Math.Poly</a></li>
+	
+	<li><a href="../symbols/JXG.Math.Poly.Monomial.html">JXG.Math.Poly.Monomial</a></li>
+	
+	<li><a href="../symbols/JXG.Math.Poly.Polynomial.html">JXG.Math.Poly.Polynomial</a></li>
+	
+	<li><a href="../symbols/JXG.Math.Poly.Ring.html">JXG.Math.Poly.Ring</a></li>
+	
+	<li><a href="../symbols/JXG.Math.Statistics.html">JXG.Math.Statistics</a></li>
+	
+	<li><a href="../symbols/JXG.Math.Symbolic.html">JXG.Math.Symbolic</a></li>
+	
+	<li><a href="../symbols/JXG.NoRenderer.html">JXG.NoRenderer</a></li>
+	
+	<li><a href="../symbols/JXG.Options.html">JXG.Options</a></li>
+	
+	<li><a href="../symbols/JXG.Point.html">JXG.Point</a></li>
+	
+	<li><a href="../symbols/JXG.Polygon.html">JXG.Polygon</a></li>
+	
+	<li><a href="../symbols/JXG.Server.html">JXG.Server</a></li>
+	
+	<li><a href="../symbols/JXG.Server.modules.html">JXG.Server.modules</a></li>
+	
+	<li><a href="../symbols/JXG.SVGRenderer.html">JXG.SVGRenderer</a></li>
+	
+	<li><a href="../symbols/JXG.Text.html">JXG.Text</a></li>
+	
+	<li><a href="../symbols/JXG.Ticks.html">JXG.Ticks</a></li>
+	
+	<li><a href="../symbols/JXG.Turtle.html">JXG.Turtle</a></li>
+	
+	<li><a href="../symbols/JXG.Util.html">JXG.Util</a></li>
+	
+	<li><a href="../symbols/JXG.Util.Base64.html">JXG.Util.Base64</a></li>
+	
+	<li><a href="../symbols/JXG.Util.Unzip.html">JXG.Util.Unzip</a></li>
+	
+	<li><a href="../symbols/JXG.Util.UTF8.html">JXG.Util.UTF8</a></li>
+	
+	<li><a href="../symbols/JXG.VMLRenderer.html">JXG.VMLRenderer</a></li>
+	
+	<li><a href="../symbols/JXG.XML.html">JXG.XML</a></li>
+	
+	<li></li>
+	
+	<li></li>
+	
+	<li></li>
+	
+	<li></li>
+	
+	<li></li>
+	
+	<li></li>
+	
+	<li></li>
+	
+	<li></li>
+	
+	<li></li>
+	
+	<li></li>
+	
+	<li></li>
+	
+	<li></li>
+	
+	<li></li>
+	
+	<li></li>
+	
+	<li></li>
+	
+	<li></li>
+	
+	<li></li>
+	
+	<li></li>
+	
+	<li></li>
+	
+	<li></li>
+	
+	<li></li>
+	
+	<li></li>
+	
+	<li><a href="../symbols/Quadtree.html">Quadtree</a></li>
+	
+	<li></li>
+	
+	<li></li>
+	
+	<li></li>
+	
+	<li></li>
+	
+	<li></li>
+	
+	<li></li>
+	
+	<li></li>
+	
+	<li></li>
+	
+	<li></li>
+	
+	<li></li>
+	
+	<li></li>
+	
+	<li></li>
+	
+	<li></li>
+	
+	<li></li>
+	
+	<li></li>
+	
+	<li></li>
+	
+</ul>
+<hr />
+
+<script type="text/javascript">
+  /* <![CDATA[ */
+   	function switchList(id) {
+      document.getElementById(id).style.display = ( document.getElementById(id).style.display == 'block' ? 'none' : 'block' );
+      document.cookie = id.toLowerCase() + 'status=' + document.getElementById(id).style.display + ';';
+  	};
+  	
+	function initList(id) {
+      var cookieList = document.cookie.split(';');
+      for(var c=0; c<cookieList.length; c++) {
+        if(cookieList[c].indexOf(id.toLowerCase() + 'status') != -1) {
+          document.getElementById(id).style.display = cookieList[c].split('=')[1];
+        }
+      }
+  	};
+  	
+  	initList('myElList');
+    initList('myClList');
+  /* ]]> */
+</script>
+			<!-- end publish.classesIndex -->
+		</div>
+		
+		<div id="content">
+<!-- ============================== class title ============================ -->
+			<h1 class="classTitle">
+				
+				Namespace JXG.Math.Geometry
+			</h1>
+
+<!-- ============================== Inheritance tree ========================== -->
+
+<p>
+ <strong></strong><br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&#x21b3; <strong>JXG.Math.Geometry</strong><br /><br /></p>
+
+
+<!-- ============================== class summary ========================== -->
+			<p class="description">
+				
+				
+				
+					<br /><br /><i>Defined in: </i> <a href="../symbols/src/src_math_geometry.js.html">geometry.js</a>.
+				
+
+                
+			</p>
+
+<!-- ============================== constructor summary ==================== -->			
+			
+			<table class="summaryTable" cellspacing="0" summary="A summary of the constructor documented in the class JXG.Math.Geometry.">
+				<caption>Namespace Summary</caption>
+				<thead>
+					<tr>
+						<th scope="col">Constructor Attributes</th>
+						<th scope="col">Constructor Name and Description</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr>
+						<td class="attributes">&nbsp;</td>
+						<td class="nameDescription" >
+							<div class="fixedFont">
+								<b><a href="../symbols/JXG.Math.Geometry.html#constructor">JXG.Math.Geometry</a></b>
+							</div>
+							<div class="description">Math.Geometry namespace definition</div>
+						</td>
+					</tr>
+				</tbody>
+			</table>
+			
+
+<!-- ============================== attributes summary ===================== -->
+			
+				
+				
+
+				
+			
+
+<!-- ============================== properties summary ===================== -->
+			
+				
+				
+				<table class="summaryTable" cellspacing="0" summary="A summary of the fields documented in the class JXG.Math.Geometry.">
+					<caption>Field Summary</caption>
+					<thead>
+						<tr>
+							<th scope="col">Field Attributes</th>
+							<th scope="col">Field Name and Description</th>
+						</tr>
+					</thead>
+					<tbody>
+					
+						<tr>
+							<td class="attributes">&lt;static&gt; &lt;deprecated&gt; &nbsp;</td>
+							<td class="nameDescription">
+								<div class="fixedFont">
+								JXG.Math.Geometry.<b><a href="../symbols/JXG.Math.Geometry.html#.circumcenterMidpoint">circumcenterMidpoint</a></b>
+								</div>
+								<div class="description"></div>
+							</td>
+						</tr>
+					
+					</tbody>
+				</table>
+				
+				
+				
+			
+
+<!-- ============================== methods summary ======================== -->
+			
+				
+				
+				<table class="summaryTable" cellspacing="0" summary="A summary of the methods documented in the class JXG.Math.Geometry.">
+					<caption>Method Summary</caption>
+					<thead>
+						<tr>
+							<th scope="col">Method Attributes</th>
+							<th scope="col">Method Name and Description</th>
+						</tr>
+					</thead>
+					<tbody>
+					
+						<tr>
+							<td class="attributes">&lt;private&gt; &lt;static&gt; &nbsp;</td>
+							<td class="nameDescription">
+								<div class="fixedFont">JXG.Math.Geometry.<b><a href="../symbols/JXG.Math.Geometry.html#._bezierBbox">_bezierBbox</a></b>(curve)
+								</div>
+								<div class="description">Computes the bounding box [minX, maxY, maxX, minY] of a Bezier curve segment
+from its control points.</div>
+							</td>
+						</tr>
+					
+						<tr>
+							<td class="attributes">&lt;private&gt; &lt;static&gt; &nbsp;</td>
+							<td class="nameDescription">
+								<div class="fixedFont">JXG.Math.Geometry.<b><a href="../symbols/JXG.Math.Geometry.html#._bezierLineMeetSubdivision">_bezierLineMeetSubdivision</a></b>(testSegment, blue, level, testSegment)
+								</div>
+								<div class="description"></div>
+							</td>
+						</tr>
+					
+						<tr>
+							<td class="attributes">&lt;private&gt; &lt;static&gt; &nbsp;</td>
+							<td class="nameDescription">
+								<div class="fixedFont">JXG.Math.Geometry.<b><a href="../symbols/JXG.Math.Geometry.html#._bezierListConcat">_bezierListConcat</a></b>(L, Lnew, t1, t2)
+								</div>
+								<div class="description">Append list of intersection points to a list.</div>
+							</td>
+						</tr>
+					
+						<tr>
+							<td class="attributes">&lt;private&gt; &lt;static&gt; &nbsp;</td>
+							<td class="nameDescription">
+								<div class="fixedFont">JXG.Math.Geometry.<b><a href="../symbols/JXG.Math.Geometry.html#._bezierMeetSubdivision">_bezierMeetSubdivision</a></b>(red, blue, level)
+								</div>
+								<div class="description">Find intersections of two Bezier curve segments by recursive subdivision.</div>
+							</td>
+						</tr>
+					
+						<tr>
+							<td class="attributes">&lt;private&gt; &lt;static&gt; &nbsp;</td>
+							<td class="nameDescription">
+								<div class="fixedFont">JXG.Math.Geometry.<b><a href="../symbols/JXG.Math.Geometry.html#._bezierOverlap">_bezierOverlap</a></b>(bb1, bb2)
+								</div>
+								<div class="description">Decide if two Bezier curve segments overlap by comparing their bounding boxes.</div>
+							</td>
+						</tr>
+					
+						<tr>
+							<td class="attributes">&lt;private&gt; &lt;static&gt; &nbsp;</td>
+							<td class="nameDescription">
+								<div class="fixedFont">JXG.Math.Geometry.<b><a href="../symbols/JXG.Math.Geometry.html#._bezierSplit">_bezierSplit</a></b>(curve)
+								</div>
+								<div class="description">Splits a Bezier curve segment defined by four points into
+two Bezier curve segments.</div>
+							</td>
+						</tr>
+					
+						<tr>
+							<td class="attributes">&lt;static&gt; &nbsp;</td>
+							<td class="nameDescription">
+								<div class="fixedFont">JXG.Math.Geometry.<b><a href="../symbols/JXG.Math.Geometry.html#.affineDistance">affineDistance</a></b>(array1, array2, n)
+								</div>
+								<div class="description">Calculates euclidean distance for two given arrays of the same length.</div>
+							</td>
+						</tr>
+					
+						<tr>
+							<td class="attributes">&lt;static&gt; &lt;deprecated&gt; &nbsp;</td>
+							<td class="nameDescription">
+								<div class="fixedFont">JXG.Math.Geometry.<b><a href="../symbols/JXG.Math.Geometry.html#.angle">angle</a></b>(A, B, C)
+								</div>
+								<div class="description">Calculates the angle defined by the points A, B, C.</div>
+							</td>
+						</tr>
+					
+						<tr>
+							<td class="attributes">&lt;static&gt; &nbsp;</td>
+							<td class="nameDescription">
+								<div class="fixedFont">JXG.Math.Geometry.<b><a href="../symbols/JXG.Math.Geometry.html#.angleBisector">angleBisector</a></b>(A, B, C, board)
+								</div>
+								<div class="description">Calculates a point on the bisection line between the three points A, B, C.</div>
+							</td>
+						</tr>
+					
+						<tr>
+							<td class="attributes">&lt;static&gt; &nbsp;</td>
+							<td class="nameDescription">
+								<div class="fixedFont">JXG.Math.Geometry.<b><a href="../symbols/JXG.Math.Geometry.html#.bezierArc">bezierArc</a></b>(A, B, C, withLegs, sgn)
+								</div>
+								<div class="description">Generate the defining points of a 3rd degree bezier curve that approximates
+a cricle sector defined by three arrays A, B,C, each of length three.</div>
+							</td>
+						</tr>
+					
+						<tr>
+							<td class="attributes">&lt;static&gt; &nbsp;</td>
+							<td class="nameDescription">
+								<div class="fixedFont">JXG.Math.Geometry.<b><a href="../symbols/JXG.Math.Geometry.html#.calcLineDelimitingPoints">calcLineDelimitingPoints</a></b>(el, point1, point2)
+								</div>
+								<div class="description">A line can be a segment, a straight, or a ray.</div>
+							</td>
+						</tr>
+					
+						<tr>
+							<td class="attributes">&lt;static&gt; &nbsp;</td>
+							<td class="nameDescription">
+								<div class="fixedFont">JXG.Math.Geometry.<b><a href="../symbols/JXG.Math.Geometry.html#.calcStraight">calcStraight</a></b>(el, point1, point2, margin)
+								</div>
+								<div class="description">A line can be a segment, a straight, or a ray.</div>
+							</td>
+						</tr>
+					
+						<tr>
+							<td class="attributes">&lt;static&gt; &nbsp;</td>
+							<td class="nameDescription">
+								<div class="fixedFont">JXG.Math.Geometry.<b><a href="../symbols/JXG.Math.Geometry.html#.circumcenter">circumcenter</a></b>(point1, point2, point3, board)
+								</div>
+								<div class="description">Calculates the center of the circumcircle of the three given points.</div>
+							</td>
+						</tr>
+					
+						<tr>
+							<td class="attributes">&lt;static&gt; &nbsp;</td>
+							<td class="nameDescription">
+								<div class="fixedFont">JXG.Math.Geometry.<b><a href="../symbols/JXG.Math.Geometry.html#.distance">distance</a></b>(array1, array2, n)
+								</div>
+								<div class="description">Calculates the euclidean norm for two given arrays of the same length.</div>
+							</td>
+						</tr>
+					
+						<tr>
+							<td class="attributes">&lt;static&gt; &nbsp;</td>
+							<td class="nameDescription">
+								<div class="fixedFont">JXG.Math.Geometry.<b><a href="../symbols/JXG.Math.Geometry.html#.distPointLine">distPointLine</a></b>(point, line)
+								</div>
+								<div class="description">Calculates the distance of a point to a line.</div>
+							</td>
+						</tr>
+					
+						<tr>
+							<td class="attributes">&lt;static&gt; &nbsp;</td>
+							<td class="nameDescription">
+								<div class="fixedFont">JXG.Math.Geometry.<b><a href="../symbols/JXG.Math.Geometry.html#.GrahamScan">GrahamScan</a></b>(points)
+								</div>
+								<div class="description">Calculate the complex hull of a point cloud.</div>
+							</td>
+						</tr>
+					
+						<tr>
+							<td class="attributes">&lt;static&gt; &nbsp;</td>
+							<td class="nameDescription">
+								<div class="fixedFont">JXG.Math.Geometry.<b><a href="../symbols/JXG.Math.Geometry.html#.intersectionFunction">intersectionFunction</a></b>(board, el1,el2,i, i, j, alwaysintersect)
+								</div>
+								<div class="description">Generate the function which computes the coordinates of the intersection point.</div>
+							</td>
+						</tr>
+					
+						<tr>
+							<td class="attributes">&lt;static&gt; &nbsp;</td>
+							<td class="nameDescription">
+								<div class="fixedFont">JXG.Math.Geometry.<b><a href="../symbols/JXG.Math.Geometry.html#.isSameDir">isSameDir</a></b>(p1, p2, i1, i2)
+								</div>
+								<div class="description">The vectors <tt>p2-p1</tt> and <tt>i2-i1</tt> are supposed to be collinear.</div>
+							</td>
+						</tr>
+					
+						<tr>
+							<td class="attributes">&lt;static&gt; &nbsp;</td>
+							<td class="nameDescription">
+								<div class="fixedFont">JXG.Math.Geometry.<b><a href="../symbols/JXG.Math.Geometry.html#.isSameDirection">isSameDirection</a></b>(start, p, s)
+								</div>
+								<div class="description">If you're looking from point "start" towards point "s" and can see the point "p", true is returned.</div>
+							</td>
+						</tr>
+					
+						<tr>
+							<td class="attributes">&lt;static&gt; &nbsp;</td>
+							<td class="nameDescription">
+								<div class="fixedFont">JXG.Math.Geometry.<b><a href="../symbols/JXG.Math.Geometry.html#.meet">meet</a></b>(el1, el2, i, board)
+								</div>
+								<div class="description">Computes the intersection of a pair of lines, circles or both.</div>
+							</td>
+						</tr>
+					
+						<tr>
+							<td class="attributes">&lt;static&gt; &nbsp;</td>
+							<td class="nameDescription">
+								<div class="fixedFont">JXG.Math.Geometry.<b><a href="../symbols/JXG.Math.Geometry.html#.meetBezierCurveRedBlueSegments">meetBezierCurveRedBlueSegments</a></b>(red, blue, nr)
+								</div>
+								<div class="description">Find the nr-th intersection point of two Bezier curves, i.e.</div>
+							</td>
+						</tr>
+					
+						<tr>
+							<td class="attributes">&lt;static&gt; &nbsp;</td>
+							<td class="nameDescription">
+								<div class="fixedFont">JXG.Math.Geometry.<b><a href="../symbols/JXG.Math.Geometry.html#.meetBeziersegmentBeziersegment">meetBeziersegmentBeziersegment</a></b>(red, blue, testSegment)
+								</div>
+								<div class="description">Find the nr-th intersection point of two Bezier curve segments.</div>
+							</td>
+						</tr>
+					
+						<tr>
+							<td class="attributes">&lt;static&gt; &nbsp;</td>
+							<td class="nameDescription">
+								<div class="fixedFont">JXG.Math.Geometry.<b><a href="../symbols/JXG.Math.Geometry.html#.meetCircleCircle">meetCircleCircle</a></b>(circ1, circ2, i, board)
+								</div>
+								<div class="description">Intersection of two circles.</div>
+							</td>
+						</tr>
+					
+						<tr>
+							<td class="attributes">&lt;static&gt; &nbsp;</td>
+							<td class="nameDescription">
+								<div class="fixedFont">JXG.Math.Geometry.<b><a href="../symbols/JXG.Math.Geometry.html#.meetCurveCurve">meetCurveCurve</a></b>(c1, c2, nr, t2ini, board, method)
+								</div>
+								<div class="description">Compute an intersection of the curves c1 and c2.</div>
+							</td>
+						</tr>
+					
+						<tr>
+							<td class="attributes">&lt;static&gt; &nbsp;</td>
+							<td class="nameDescription">
+								<div class="fixedFont">JXG.Math.Geometry.<b><a href="../symbols/JXG.Math.Geometry.html#.meetCurveLine">meetCurveLine</a></b>(el1, el2, nr, board, alwaysIntersect)
+								</div>
+								<div class="description">Intersection of curve with line,
+Order of input does not matter for el1 and el2.</div>
+							</td>
+						</tr>
+					
+						<tr>
+							<td class="attributes">&lt;static&gt; &nbsp;</td>
+							<td class="nameDescription">
+								<div class="fixedFont">JXG.Math.Geometry.<b><a href="../symbols/JXG.Math.Geometry.html#.meetCurveLineContinuous">meetCurveLineContinuous</a></b>(cu, li, nr, board, testSegment)
+								</div>
+								<div class="description">Intersection of line and curve, continuous case.</div>
+							</td>
+						</tr>
+					
+						<tr>
+							<td class="attributes">&lt;private&gt; &lt;static&gt; &nbsp;</td>
+							<td class="nameDescription">
+								<div class="fixedFont">JXG.Math.Geometry.<b><a href="../symbols/JXG.Math.Geometry.html#.meetCurveLineContinuousOld">meetCurveLineContinuousOld</a></b>(cu, li, nr, board)
+								</div>
+								<div class="description">Intersection of line and curve, continuous case.</div>
+							</td>
+						</tr>
+					
+						<tr>
+							<td class="attributes">&lt;static&gt; &nbsp;</td>
+							<td class="nameDescription">
+								<div class="fixedFont">JXG.Math.Geometry.<b><a href="../symbols/JXG.Math.Geometry.html#.meetCurveLineDiscrete">meetCurveLineDiscrete</a></b>(cu, li, nr, board, testSegment)
+								</div>
+								<div class="description">Intersection of line and curve, discrete case.</div>
+							</td>
+						</tr>
+					
+						<tr>
+							<td class="attributes">&lt;static&gt; &nbsp;</td>
+							<td class="nameDescription">
+								<div class="fixedFont">JXG.Math.Geometry.<b><a href="../symbols/JXG.Math.Geometry.html#.meetCurveRedBlueSegments">meetCurveRedBlueSegments</a></b>(red, blue, nr)
+								</div>
+								<div class="description">Find the n-th intersection point of two curves named red (first parameter) and blue (second parameter).</div>
+							</td>
+						</tr>
+					
+						<tr>
+							<td class="attributes">&lt;static&gt; &nbsp;</td>
+							<td class="nameDescription">
+								<div class="fixedFont">JXG.Math.Geometry.<b><a href="../symbols/JXG.Math.Geometry.html#.meetLineBoard">meetLineBoard</a></b>(line, board, margin)
+								</div>
+								<div class="description">Intersection of the line with the board</div>
+							</td>
+						</tr>
+					
+						<tr>
+							<td class="attributes">&lt;static&gt; &nbsp;</td>
+							<td class="nameDescription">
+								<div class="fixedFont">JXG.Math.Geometry.<b><a href="../symbols/JXG.Math.Geometry.html#.meetLineCircle">meetLineCircle</a></b>(lin, circ, i, board)
+								</div>
+								<div class="description">Intersection of line and circle.</div>
+							</td>
+						</tr>
+					
+						<tr>
+							<td class="attributes">&lt;static&gt; &nbsp;</td>
+							<td class="nameDescription">
+								<div class="fixedFont">JXG.Math.Geometry.<b><a href="../symbols/JXG.Math.Geometry.html#.meetLineLine">meetLineLine</a></b>(l1, l2, i, board)
+								</div>
+								<div class="description">Intersection of two lines.</div>
+							</td>
+						</tr>
+					
+						<tr>
+							<td class="attributes">&lt;static&gt; &nbsp;</td>
+							<td class="nameDescription">
+								<div class="fixedFont">JXG.Math.Geometry.<b><a href="../symbols/JXG.Math.Geometry.html#.meetSegmentSegment">meetSegmentSegment</a></b>(p1, p2, q1, q2)
+								</div>
+								<div class="description">Intersection of two segments.</div>
+							</td>
+						</tr>
+					
+						<tr>
+							<td class="attributes">&lt;static&gt; &nbsp;</td>
+							<td class="nameDescription">
+								<div class="fixedFont">JXG.Math.Geometry.<b><a href="../symbols/JXG.Math.Geometry.html#.perpendicular">perpendicular</a></b>(line, point, board)
+								</div>
+								<div class="description">Calculates the coordinates of a point on the perpendicular to the given line through
+the given point.</div>
+							</td>
+						</tr>
+					
+						<tr>
+							<td class="attributes">&lt;static&gt; &nbsp;</td>
+							<td class="nameDescription">
+								<div class="fixedFont">JXG.Math.Geometry.<b><a href="../symbols/JXG.Math.Geometry.html#.projectCoordsToBeziersegment">projectCoordsToBeziersegment</a></b>(pos, curve, start)
+								</div>
+								<div class="description">Finds the coordinates of the closest point on a Bezier segment of a
+<a href="../symbols/JXG.Curve.html">JXG.Curve</a> to a given coordinate array.</div>
+							</td>
+						</tr>
+					
+						<tr>
+							<td class="attributes">&lt;static&gt; &nbsp;</td>
+							<td class="nameDescription">
+								<div class="fixedFont">JXG.Math.Geometry.<b><a href="../symbols/JXG.Math.Geometry.html#.projectCoordsToCurve">projectCoordsToCurve</a></b>(x, y, t, curve, board)
+								</div>
+								<div class="description">Calculates the coordinates of the projection of a coordinates pair on a given curve.</div>
+							</td>
+						</tr>
+					
+						<tr>
+							<td class="attributes">&lt;static&gt; &nbsp;</td>
+							<td class="nameDescription">
+								<div class="fixedFont">JXG.Math.Geometry.<b><a href="../symbols/JXG.Math.Geometry.html#.projectCoordsToPolygon">projectCoordsToPolygon</a></b>(p, pol)
+								</div>
+								<div class="description">Calculates the coordinates of the closest orthogonal projection of a given coordinate array onto the
+border of a polygon.</div>
+							</td>
+						</tr>
+					
+						<tr>
+							<td class="attributes">&lt;static&gt; &nbsp;</td>
+							<td class="nameDescription">
+								<div class="fixedFont">JXG.Math.Geometry.<b><a href="../symbols/JXG.Math.Geometry.html#.projectCoordsToSegment">projectCoordsToSegment</a></b>(p, q1, q2)
+								</div>
+								<div class="description">Calculates the coordinates of the orthogonal projection of a given coordinate array on a given line
+segment defined by two coordinate arrays.</div>
+							</td>
+						</tr>
+					
+						<tr>
+							<td class="attributes">&lt;static&gt; &nbsp;</td>
+							<td class="nameDescription">
+								<div class="fixedFont">JXG.Math.Geometry.<b><a href="../symbols/JXG.Math.Geometry.html#.projectPointToBoard">projectPointToBoard</a></b>(point, board)
+								</div>
+								<div class="description"></div>
+							</td>
+						</tr>
+					
+						<tr>
+							<td class="attributes">&lt;static&gt; &nbsp;</td>
+							<td class="nameDescription">
+								<div class="fixedFont">JXG.Math.Geometry.<b><a href="../symbols/JXG.Math.Geometry.html#.projectPointToCircle">projectPointToCircle</a></b>(point, circle, board)
+								</div>
+								<div class="description">Calculates the coordinates of the projection of a given point on a given circle.</div>
+							</td>
+						</tr>
+					
+						<tr>
+							<td class="attributes">&lt;static&gt; &nbsp;</td>
+							<td class="nameDescription">
+								<div class="fixedFont">JXG.Math.Geometry.<b><a href="../symbols/JXG.Math.Geometry.html#.projectPointToCurve">projectPointToCurve</a></b>(point, curve, board)
+								</div>
+								<div class="description">Calculates the coordinates of the projection of a given point on a given curve.</div>
+							</td>
+						</tr>
+					
+						<tr>
+							<td class="attributes">&lt;static&gt; &nbsp;</td>
+							<td class="nameDescription">
+								<div class="fixedFont">JXG.Math.Geometry.<b><a href="../symbols/JXG.Math.Geometry.html#.projectPointToLine">projectPointToLine</a></b>(point, line, board)
+								</div>
+								<div class="description">Calculates the coordinates of the orthogonal projection of a given point on a given line.</div>
+							</td>
+						</tr>
+					
+						<tr>
+							<td class="attributes">&lt;static&gt; &nbsp;</td>
+							<td class="nameDescription">
+								<div class="fixedFont">JXG.Math.Geometry.<b><a href="../symbols/JXG.Math.Geometry.html#.projectPointToPoint">projectPointToPoint</a></b>(point, dest)
+								</div>
+								<div class="description">Trivial projection of a point to another point.</div>
+							</td>
+						</tr>
+					
+						<tr>
+							<td class="attributes">&lt;static&gt; &nbsp;</td>
+							<td class="nameDescription">
+								<div class="fixedFont">JXG.Math.Geometry.<b><a href="../symbols/JXG.Math.Geometry.html#.projectPointToTurtle">projectPointToTurtle</a></b>(point, turtle, board)
+								</div>
+								<div class="description">Calculates the coordinates of the projection of a given point on a given turtle.</div>
+							</td>
+						</tr>
+					
+						<tr>
+							<td class="attributes">&lt;static&gt; &nbsp;</td>
+							<td class="nameDescription">
+								<div class="fixedFont">JXG.Math.Geometry.<b><a href="../symbols/JXG.Math.Geometry.html#.rad">rad</a></b>(A, B, C)
+								</div>
+								<div class="description">Calculates the internal angle defined by the three points A, B, C if you're going from A to C around B counterclockwise.</div>
+							</td>
+						</tr>
+					
+						<tr>
+							<td class="attributes">&lt;static&gt; &nbsp;</td>
+							<td class="nameDescription">
+								<div class="fixedFont">JXG.Math.Geometry.<b><a href="../symbols/JXG.Math.Geometry.html#.reflection">reflection</a></b>(line, point, board)
+								</div>
+								<div class="description">Reflects the point along the line.</div>
+							</td>
+						</tr>
+					
+						<tr>
+							<td class="attributes">&lt;static&gt; &nbsp;</td>
+							<td class="nameDescription">
+								<div class="fixedFont">JXG.Math.Geometry.<b><a href="../symbols/JXG.Math.Geometry.html#.reuleauxPolygon">reuleauxPolygon</a></b>(points, nr)
+								</div>
+								<div class="description">Helper function to create curve which displays a Reuleaux polygons.</div>
+							</td>
+						</tr>
+					
+						<tr>
+							<td class="attributes">&lt;static&gt; &nbsp;</td>
+							<td class="nameDescription">
+								<div class="fixedFont">JXG.Math.Geometry.<b><a href="../symbols/JXG.Math.Geometry.html#.rotation">rotation</a></b>(rotpoint, point, phi, board)
+								</div>
+								<div class="description">Computes the new position of a point which is rotated
+around a second point (called rotpoint) by the angle phi.</div>
+							</td>
+						</tr>
+					
+						<tr>
+							<td class="attributes">&lt;static&gt; &nbsp;</td>
+							<td class="nameDescription">
+								<div class="fixedFont">JXG.Math.Geometry.<b><a href="../symbols/JXG.Math.Geometry.html#.signedPolygon">signedPolygon</a></b>(p, sort)
+								</div>
+								<div class="description">Determine the signed area of a non-intersecting polygon.</div>
+							</td>
+						</tr>
+					
+						<tr>
+							<td class="attributes">&lt;static&gt; &nbsp;</td>
+							<td class="nameDescription">
+								<div class="fixedFont">JXG.Math.Geometry.<b><a href="../symbols/JXG.Math.Geometry.html#.signedTriangle">signedTriangle</a></b>(p1, p2, p3)
+								</div>
+								<div class="description">Signed triangle area of the three points given.</div>
+							</td>
+						</tr>
+					
+						<tr>
+							<td class="attributes">&lt;static&gt; &nbsp;</td>
+							<td class="nameDescription">
+								<div class="fixedFont">JXG.Math.Geometry.<b><a href="../symbols/JXG.Math.Geometry.html#.sortVertices">sortVertices</a></b>(p)
+								</div>
+								<div class="description">Sort vertices counter clockwise starting with the point with the lowest y coordinate.</div>
+							</td>
+						</tr>
+					
+						<tr>
+							<td class="attributes">&lt;static&gt; &nbsp;</td>
+							<td class="nameDescription">
+								<div class="fixedFont">JXG.Math.Geometry.<b><a href="../symbols/JXG.Math.Geometry.html#.trueAngle">trueAngle</a></b>(A, B, C)
+								</div>
+								<div class="description">Calculates the angle defined by the three points A, B, C if you're going from A to C around B counterclockwise.</div>
+							</td>
+						</tr>
+					
+					</tbody>
+				</table>
+				
+				
+				
+			
+<!-- ============================== events summary ======================== -->
+			
+
+<!-- ============================== constructor details ==================== -->
+			
+			<div class="details"><a name="constructor"> </a>
+				<div class="sectionTitle">
+					Namespace Detail
+				</div>
+				
+				<div class="fixedFont">
+						<b>JXG.Math.Geometry</b>
+				</div>
+				
+				<div class="description">
+					Math.Geometry namespace definition
+					
+				</div>
+				
+				
+					
+					
+					
+					
+					
+					
+					
+
+				
+				
+
+			</div>
+			
+
+<!-- ============================== attributes details ========================== -->
+			
+
+<!-- ============================== field details ========================== -->
+			
+				<div class="sectionTitle">
+                     Field Detail
+				</div>
+				
+					<a name=".circumcenterMidpoint"> </a>
+					<div class="fixedFont">&lt;static&gt; 
+					
+					
+					<span class="light">JXG.Math.Geometry.</span><b>circumcenterMidpoint</b>
+					
+					</div>
+					<div class="description">
+						
+						
+						
+					</div>
+					
+					
+
+						
+							<dl class="detailList">
+							<dt class="heading">Deprecated:</dt>
+							<dt>
+								Please use JXG.Math.Geometry#circumcenter instead.
+							</dt>
+							</dl>
+						
+						
+						
+						
+
+					
+				
+			
+
+<!-- ============================== method details ========================= -->		
+			
+				<div class="sectionTitle">
+					Method Detail
+				</div>
+				
+					<a name="._bezierBbox"> </a>
+					<div class="fixedFont">&lt;private&gt; &lt;static&gt; 
+					
+					<span class="light">{Array}</span>
+					<span class="light">JXG.Math.Geometry.</span><b>_bezierBbox</b>(curve)
+					
+					</div>
+					<div class="description">
+						Computes the bounding box [minX, maxY, maxX, minY] of a Bezier curve segment
+from its control points.
+						
+						
+					</div>
+					
+						
+							<dl class="detailList">
+							<dt class="heading">Parameters:</dt>
+							
+								<dt>
+									<span class="light fixedFont">{Array}</span> <b>curve</b>
+									
+								</dt>
+								<dd>Array of four coordinate arrays of length 2 defining a
+Bezier curve segment, i.e. [[x0,y0], [x1,y1], [x2,y2], [x3,y3]].</dd>
+							
+							</dl>
+						
+						
+						
+						
+						
+							<dl class="detailList">
+							<dt class="heading">Returns:</dt>
+							
+								<dd><span class="light fixedFont">{Array}</span> Bounding box [minX, maxY, maxX, minY]</dd>
+							
+							</dl>
+						
+						
+						
+
+					
+					
+					<hr />
+				
+					<a name="._bezierLineMeetSubdivision"> </a>
+					<div class="fixedFont">&lt;private&gt; &lt;static&gt; 
+					
+					
+					<span class="light">JXG.Math.Geometry.</span><b>_bezierLineMeetSubdivision</b>(testSegment, blue, level, testSegment)
+					
+					</div>
+					<div class="description">
+						
+						
+						
+					</div>
+					
+						
+							<dl class="detailList">
+							<dt class="heading">Parameters:</dt>
+							
+								<dt>
+									<span class="light fixedFont">{Boolean}</span> <b>testSegment</b>
+									
+								</dt>
+								<dd>Test if intersection has to be inside of the segment or somewhere on the line defined by the segment</dd>
+							
+								<dt>
+									<b>blue</b>
+									
+								</dt>
+								<dd></dd>
+							
+								<dt>
+									<b>level</b>
+									
+								</dt>
+								<dd></dd>
+							
+								<dt>
+									<b>testSegment</b>
+									
+								</dt>
+								<dd></dd>
+							
+							</dl>
+						
+						
+						
+						
+						
+						
+						
+
+					
+					
+					<hr />
+				
+					<a name="._bezierListConcat"> </a>
+					<div class="fixedFont">&lt;private&gt; &lt;static&gt; 
+					
+					
+					<span class="light">JXG.Math.Geometry.</span><b>_bezierListConcat</b>(L, Lnew, t1, t2)
+					
+					</div>
+					<div class="description">
+						Append list of intersection points to a list.
+						
+						
+					</div>
+					
+						
+							<dl class="detailList">
+							<dt class="heading">Parameters:</dt>
+							
+								<dt>
+									<b>L</b>
+									
+								</dt>
+								<dd></dd>
+							
+								<dt>
+									<b>Lnew</b>
+									
+								</dt>
+								<dd></dd>
+							
+								<dt>
+									<b>t1</b>
+									
+								</dt>
+								<dd></dd>
+							
+								<dt>
+									<b>t2</b>
+									
+								</dt>
+								<dd></dd>
+							
+							</dl>
+						
+						
+						
+						
+						
+						
+						
+
+					
+					
+					<hr />
+				
+					<a name="._bezierMeetSubdivision"> </a>
+					<div class="fixedFont">&lt;private&gt; &lt;static&gt; 
+					
+					<span class="light">{Array}</span>
+					<span class="light">JXG.Math.Geometry.</span><b>_bezierMeetSubdivision</b>(red, blue, level)
+					
+					</div>
+					<div class="description">
+						Find intersections of two Bezier curve segments by recursive subdivision.
+Below maxlevel determine intersections by intersection line segments.
+						
+						
+					</div>
+					
+						
+							<dl class="detailList">
+							<dt class="heading">Parameters:</dt>
+							
+								<dt>
+									<span class="light fixedFont">{Array}</span> <b>red</b>
+									
+								</dt>
+								<dd>Array of four coordinate arrays of length 2 defining the first
+Bezier curve segment, i.e. [[x0,y0], [x1,y1], [x2,y2], [x3,y3]].</dd>
+							
+								<dt>
+									<span class="light fixedFont">{Array}</span> <b>blue</b>
+									
+								</dt>
+								<dd>Array of four coordinate arrays of length 2 defining the second
+Bezier curve segment, i.e. [[x0,y0], [x1,y1], [x2,y2], [x3,y3]].</dd>
+							
+								<dt>
+									<span class="light fixedFont">{Number}</span> <b>level</b>
+									
+								</dt>
+								<dd>Recursion level</dd>
+							
+							</dl>
+						
+						
+						
+						
+						
+							<dl class="detailList">
+							<dt class="heading">Returns:</dt>
+							
+								<dd><span class="light fixedFont">{Array}</span> List of intersection points (up to nine). Each intersction point is an
+array of length three (homogeneous coordinates) plus preimages.</dd>
+							
+							</dl>
+						
+						
+						
+
+					
+					
+					<hr />
+				
+					<a name="._bezierOverlap"> </a>
+					<div class="fixedFont">&lt;private&gt; &lt;static&gt; 
+					
+					<span class="light">{Boolean}</span>
+					<span class="light">JXG.Math.Geometry.</span><b>_bezierOverlap</b>(bb1, bb2)
+					
+					</div>
+					<div class="description">
+						Decide if two Bezier curve segments overlap by comparing their bounding boxes.
+						
+						
+					</div>
+					
+						
+							<dl class="detailList">
+							<dt class="heading">Parameters:</dt>
+							
+								<dt>
+									<span class="light fixedFont">{Array}</span> <b>bb1</b>
+									
+								</dt>
+								<dd>Bounding box of the first Bezier curve segment</dd>
+							
+								<dt>
+									<span class="light fixedFont">{Array}</span> <b>bb2</b>
+									
+								</dt>
+								<dd>Bounding box of the second Bezier curve segment</dd>
+							
+							</dl>
+						
+						
+						
+						
+						
+							<dl class="detailList">
+							<dt class="heading">Returns:</dt>
+							
+								<dd><span class="light fixedFont">{Boolean}</span> true if the bounding boxes overlap, false otherwise.</dd>
+							
+							</dl>
+						
+						
+						
+
+					
+					
+					<hr />
+				
+					<a name="._bezierSplit"> </a>
+					<div class="fixedFont">&lt;private&gt; &lt;static&gt; 
+					
+					<span class="light">{Array}</span>
+					<span class="light">JXG.Math.Geometry.</span><b>_bezierSplit</b>(curve)
+					
+					</div>
+					<div class="description">
+						Splits a Bezier curve segment defined by four points into
+two Bezier curve segments. Dissection point is t=1/2.
+						
+						
+					</div>
+					
+						
+							<dl class="detailList">
+							<dt class="heading">Parameters:</dt>
+							
+								<dt>
+									<span class="light fixedFont">{Array}</span> <b>curve</b>
+									
+								</dt>
+								<dd>Array of four coordinate arrays of length 2 defining a
+Bezier curve segment, i.e. [[x0,y0], [x1,y1], [x2,y2], [x3,y3]].</dd>
+							
+							</dl>
+						
+						
+						
+						
+						
+							<dl class="detailList">
+							<dt class="heading">Returns:</dt>
+							
+								<dd><span class="light fixedFont">{Array}</span> Array consisting of two coordinate arrays for Bezier curves.</dd>
+							
+							</dl>
+						
+						
+						
+
+					
+					
+					<hr />
+				
+					<a name=".affineDistance"> </a>
+					<div class="fixedFont">&lt;static&gt; 
+					
+					<span class="light">{Number}</span>
+					<span class="light">JXG.Math.Geometry.</span><b>affineDistance</b>(array1, array2, n)
+					
+					</div>
+					<div class="description">
+						Calculates euclidean distance for two given arrays of the same length.
+If one of the arrays contains a zero in the first coordinate, and the euclidean distance
+is different from zero it is a point at infinity and we return Infinity.
+						
+						
+					</div>
+					
+						
+							<dl class="detailList">
+							<dt class="heading">Parameters:</dt>
+							
+								<dt>
+									<span class="light fixedFont">{Array}</span> <b>array1</b>
+									
+								</dt>
+								<dd>Array containing elements of type number.</dd>
+							
+								<dt>
+									<span class="light fixedFont">{Array}</span> <b>array2</b>
+									
+								</dt>
+								<dd>Array containing elements of type number.</dd>
+							
+								<dt>
+									<span class="light fixedFont">{Number}</span> <b>n</b>
+									<i>Optional</i>
+								</dt>
+								<dd>Length of the arrays. Default is the minimum length of the given arrays.</dd>
+							
+							</dl>
+						
+						
+						
+						
+						
+							<dl class="detailList">
+							<dt class="heading">Returns:</dt>
+							
+								<dd><span class="light fixedFont">{Number}</span> Euclidean (affine) distance of the given vectors.</dd>
+							
+							</dl>
+						
+						
+						
+
+					
+					
+					<hr />
+				
+					<a name=".angle"> </a>
+					<div class="fixedFont">&lt;static&gt; 
+					
+					<span class="light">{Number}</span>
+					<span class="light">JXG.Math.Geometry.</span><b>angle</b>(A, B, C)
+					
+					</div>
+					<div class="description">
+						Calculates the angle defined by the points A, B, C.
+						
+						
+					</div>
+					
+						
+							<dl class="detailList">
+							<dt class="heading">Parameters:</dt>
+							
+								<dt>
+									<span class="light fixedFont">{<a href="../symbols/JXG.Point.html">JXG.Point</a>|Array}</span> <b>A</b>
+									
+								</dt>
+								<dd>A point  or [x,y] array.</dd>
+							
+								<dt>
+									<span class="light fixedFont">{<a href="../symbols/JXG.Point.html">JXG.Point</a>|Array}</span> <b>B</b>
+									
+								</dt>
+								<dd>Another point or [x,y] array.</dd>
+							
+								<dt>
+									<span class="light fixedFont">{<a href="../symbols/JXG.Point.html">JXG.Point</a>|Array}</span> <b>C</b>
+									
+								</dt>
+								<dd>A circle - no, of course the third point or [x,y] array.</dd>
+							
+							</dl>
+						
+						
+							<dl class="detailList">
+							<dt class="heading">Deprecated:</dt>
+							<dt>
+								Use JXG.Math.Geometry#rad instead.
+							</dt>
+							</dl>
+						
+						
+						
+						
+							<dl class="detailList">
+							<dt class="heading">Returns:</dt>
+							
+								<dd><span class="light fixedFont">{Number}</span> The angle in radian measure.</dd>
+							
+							</dl>
+						
+						
+						
+							<dl class="detailList">
+							<dt class="heading">See:</dt>
+							
+								<dd>#rad</dd>
+							
+								<dd>#trueAngle</dd>
+							
+							</dl>
+						
+
+					
+					
+					<hr />
+				
+					<a name=".angleBisector"> </a>
+					<div class="fixedFont">&lt;static&gt; 
+					
+					<span class="light">{<a href="../symbols/JXG.Coords.html">JXG.Coords</a>}</span>
+					<span class="light">JXG.Math.Geometry.</span><b>angleBisector</b>(A, B, C, board)
+					
+					</div>
+					<div class="description">
+						Calculates a point on the bisection line between the three points A, B, C.
+As a result, the bisection line is defined by two points:
+Parameter B and the point with the coordinates calculated in this function.
+Does not work for ideal points.
+						
+						
+					</div>
+					
+						
+							<dl class="detailList">
+							<dt class="heading">Parameters:</dt>
+							
+								<dt>
+									<span class="light fixedFont">{<a href="../symbols/JXG.Point.html">JXG.Point</a>}</span> <b>A</b>
+									
+								</dt>
+								<dd>Point</dd>
+							
+								<dt>
+									<span class="light fixedFont">{<a href="../symbols/JXG.Point.html">JXG.Point</a>}</span> <b>B</b>
+									
+								</dt>
+								<dd>Point</dd>
+							
+								<dt>
+									<span class="light fixedFont">{<a href="../symbols/JXG.Point.html">JXG.Point</a>}</span> <b>C</b>
+									
+								</dt>
+								<dd>Point</dd>
+							
+								<dt>
+									<b>board</b>
+									<i>Optional, Default: A.board</i>
+								</dt>
+								<dd>Reference to the board</dd>
+							
+							</dl>
+						
+						
+						
+						
+						
+							<dl class="detailList">
+							<dt class="heading">Returns:</dt>
+							
+								<dd><span class="light fixedFont">{<a href="../symbols/JXG.Coords.html">JXG.Coords</a>}</span> Coordinates of the second point defining the bisection.</dd>
+							
+							</dl>
+						
+						
+						
+
+					
+					
+					<hr />
+				
+					<a name=".bezierArc"> </a>
+					<div class="fixedFont">&lt;static&gt; 
+					
+					
+					<span class="light">JXG.Math.Geometry.</span><b>bezierArc</b>(A, B, C, withLegs, sgn)
+					
+					</div>
+					<div class="description">
+						Generate the defining points of a 3rd degree bezier curve that approximates
+a cricle sector defined by three arrays A, B,C, each of length three.
+The coordinate arrays are given in homogeneous coordinates.
+						
+						
+					</div>
+					
+						
+							<dl class="detailList">
+							<dt class="heading">Parameters:</dt>
+							
+								<dt>
+									<span class="light fixedFont">{Array}</span> <b>A</b>
+									
+								</dt>
+								<dd>First point</dd>
+							
+								<dt>
+									<span class="light fixedFont">{Array}</span> <b>B</b>
+									
+								</dt>
+								<dd>Second point (intersection point)</dd>
+							
+								<dt>
+									<span class="light fixedFont">{Array}</span> <b>C</b>
+									
+								</dt>
+								<dd>Third point</dd>
+							
+								<dt>
+									<span class="light fixedFont">{Boolean}</span> <b>withLegs</b>
+									
+								</dt>
+								<dd>Flag. If true the legs to the intersection point are part of the curve.</dd>
+							
+								<dt>
+									<span class="light fixedFont">{Number}</span> <b>sgn</b>
+									
+								</dt>
+								<dd>Wither 1 or -1. Needed for minor and major arcs. In case of doubt, use 1.</dd>
+							
+							</dl>
+						
+						
+						
+						
+						
+						
+						
+
+					
+					
+					<hr />
+				
+					<a name=".calcLineDelimitingPoints"> </a>
+					<div class="fixedFont">&lt;static&gt; 
+					
+					
+					<span class="light">JXG.Math.Geometry.</span><b>calcLineDelimitingPoints</b>(el, point1, point2)
+					
+					</div>
+					<div class="description">
+						A line can be a segment, a straight, or a ray. so it is not always delimited by point1 and point2.
+
+This method adjusts the line's delimiting points taking into account its nature, the viewport defined
+by the board.
+
+A segment is delimited by start and end point, a straight line or ray is delimited until it meets the
+boards boundaries. However, if the line has infinite ticks, it will be delimited by the projection of
+the boards vertices onto itself.
+						
+						
+					</div>
+					
+						
+							<dl class="detailList">
+							<dt class="heading">Parameters:</dt>
+							
+								<dt>
+									<span class="light fixedFont">{<a href="../symbols/JXG.Line.html">JXG.Line</a>}</span> <b>el</b>
+									
+								</dt>
+								<dd>Reference to a line object, that needs calculation of start and end point.</dd>
+							
+								<dt>
+									<span class="light fixedFont">{<a href="../symbols/JXG.Coords.html">JXG.Coords</a>}</span> <b>point1</b>
+									
+								</dt>
+								<dd>Coordinates of the point where line drawing begins. This value is calculated and
+set by this method.</dd>
+							
+								<dt>
+									<span class="light fixedFont">{<a href="../symbols/JXG.Coords.html">JXG.Coords</a>}</span> <b>point2</b>
+									
+								</dt>
+								<dd>Coordinates of the point where line drawing ends. This value is calculated and set
+by this method.</dd>
+							
+							</dl>
+						
+						
+						
+						
+						
+						
+						
+							<dl class="detailList">
+							<dt class="heading">See:</dt>
+							
+								<dd><a href="../symbols/Line.html">Line</a></dd>
+							
+								<dd><a href="../symbols/JXG.Line.html">JXG.Line</a></dd>
+							
+							</dl>
+						
+
+					
+					
+					<hr />
+				
+					<a name=".calcStraight"> </a>
+					<div class="fixedFont">&lt;static&gt; 
+					
+					
+					<span class="light">JXG.Math.Geometry.</span><b>calcStraight</b>(el, point1, point2, margin)
+					
+					</div>
+					<div class="description">
+						A line can be a segment, a straight, or a ray. so it is not always delimited by point1 and point2
+calcStraight determines the visual start point and end point of the line. A segment is only drawn
+from start to end point, a straight line is drawn until it meets the boards boundaries.
+						
+						
+					</div>
+					
+						
+							<dl class="detailList">
+							<dt class="heading">Parameters:</dt>
+							
+								<dt>
+									<span class="light fixedFont">{<a href="../symbols/JXG.Line.html">JXG.Line</a>}</span> <b>el</b>
+									
+								</dt>
+								<dd>Reference to a line object, that needs calculation of start and end point.</dd>
+							
+								<dt>
+									<span class="light fixedFont">{<a href="../symbols/JXG.Coords.html">JXG.Coords</a>}</span> <b>point1</b>
+									
+								</dt>
+								<dd>Coordinates of the point where line drawing begins. This value is calculated and
+set by this method.</dd>
+							
+								<dt>
+									<span class="light fixedFont">{<a href="../symbols/JXG.Coords.html">JXG.Coords</a>}</span> <b>point2</b>
+									
+								</dt>
+								<dd>Coordinates of the point where line drawing ends. This value is calculated and set
+by this method.</dd>
+							
+								<dt>
+									<span class="light fixedFont">{Number}</span> <b>margin</b>
+									
+								</dt>
+								<dd>Optional margin, to avoid the display of the small sides of lines.</dd>
+							
+							</dl>
+						
+						
+						
+						
+						
+						
+						
+							<dl class="detailList">
+							<dt class="heading">See:</dt>
+							
+								<dd><a href="../symbols/Line.html">Line</a></dd>
+							
+								<dd><a href="../symbols/JXG.Line.html">JXG.Line</a></dd>
+							
+							</dl>
+						
+
+					
+					
+					<hr />
+				
+					<a name=".circumcenter"> </a>
+					<div class="fixedFont">&lt;static&gt; 
+					
+					<span class="light">{<a href="../symbols/JXG.Coords.html">JXG.Coords</a>}</span>
+					<span class="light">JXG.Math.Geometry.</span><b>circumcenter</b>(point1, point2, point3, board)
+					
+					</div>
+					<div class="description">
+						Calculates the center of the circumcircle of the three given points.
+						
+						
+					</div>
+					
+						
+							<dl class="detailList">
+							<dt class="heading">Parameters:</dt>
+							
+								<dt>
+									<span class="light fixedFont">{<a href="../symbols/JXG.Point.html">JXG.Point</a>}</span> <b>point1</b>
+									
+								</dt>
+								<dd>Point</dd>
+							
+								<dt>
+									<span class="light fixedFont">{<a href="../symbols/JXG.Point.html">JXG.Point</a>}</span> <b>point2</b>
+									
+								</dt>
+								<dd>Point</dd>
+							
+								<dt>
+									<span class="light fixedFont">{<a href="../symbols/JXG.Point.html">JXG.Point</a>}</span> <b>point3</b>
+									
+								</dt>
+								<dd>Point</dd>
+							
+								<dt>
+									<span class="light fixedFont">{<a href="../symbols/JXG.Board.html">JXG.Board</a>}</span> <b>board</b>
+									<i>Optional, Default: point1.board</i>
+								</dt>
+								<dd>Reference to the board</dd>
+							
+							</dl>
+						
+						
+						
+						
+						
+							<dl class="detailList">
+							<dt class="heading">Returns:</dt>
+							
+								<dd><span class="light fixedFont">{<a href="../symbols/JXG.Coords.html">JXG.Coords</a>}</span> Coordinates of the center of the circumcircle of the given points.</dd>
+							
+							</dl>
+						
+						
+						
+
+					
+					
+					<hr />
+				
+					<a name=".distance"> </a>
+					<div class="fixedFont">&lt;static&gt; 
+					
+					<span class="light">{Number}</span>
+					<span class="light">JXG.Math.Geometry.</span><b>distance</b>(array1, array2, n)
+					
+					</div>
+					<div class="description">
+						Calculates the euclidean norm for two given arrays of the same length.
+						
+						
+					</div>
+					
+						
+							<dl class="detailList">
+							<dt class="heading">Parameters:</dt>
+							
+								<dt>
+									<span class="light fixedFont">{Array}</span> <b>array1</b>
+									
+								</dt>
+								<dd>Array of Number</dd>
+							
+								<dt>
+									<span class="light fixedFont">{Array}</span> <b>array2</b>
+									
+								</dt>
+								<dd>Array of Number</dd>
+							
+								<dt>
+									<span class="light fixedFont">{Number}</span> <b>n</b>
+									<i>Optional</i>
+								</dt>
+								<dd>Length of the arrays. Default is the minimum length of the given arrays.</dd>
+							
+							</dl>
+						
+						
+						
+						
+						
+							<dl class="detailList">
+							<dt class="heading">Returns:</dt>
+							
+								<dd><span class="light fixedFont">{Number}</span> Euclidean distance of the given vectors.</dd>
+							
+							</dl>
+						
+						
+						
+
+					
+					
+					<hr />
+				
+					<a name=".distPointLine"> </a>
+					<div class="fixedFont">&lt;static&gt; 
+					
+					<span class="light">{Number}</span>
+					<span class="light">JXG.Math.Geometry.</span><b>distPointLine</b>(point, line)
+					
+					</div>
+					<div class="description">
+						Calculates the distance of a point to a line. The point and the line are given by homogeneous
+coordinates. For lines this can be line.stdform.
+						
+						
+					</div>
+					
+						
+							<dl class="detailList">
+							<dt class="heading">Parameters:</dt>
+							
+								<dt>
+									<span class="light fixedFont">{Array}</span> <b>point</b>
+									
+								</dt>
+								<dd>Homogeneous coordinates of a point.</dd>
+							
+								<dt>
+									<span class="light fixedFont">{Array}</span> <b>line</b>
+									
+								</dt>
+								<dd>Homogeneous coordinates of a line ([C,A,B] where A*x+B*y+C*z=0).</dd>
+							
+							</dl>
+						
+						
+						
+						
+						
+							<dl class="detailList">
+							<dt class="heading">Returns:</dt>
+							
+								<dd><span class="light fixedFont">{Number}</span> Distance of the point to the line.</dd>
+							
+							</dl>
+						
+						
+						
+
+					
+					
+					<hr />
+				
+					<a name=".GrahamScan"> </a>
+					<div class="fixedFont">&lt;static&gt; 
+					
+					<span class="light">{Array}</span>
+					<span class="light">JXG.Math.Geometry.</span><b>GrahamScan</b>(points)
+					
+					</div>
+					<div class="description">
+						Calculate the complex hull of a point cloud.
+						
+						
+					</div>
+					
+						
+							<dl class="detailList">
+							<dt class="heading">Parameters:</dt>
+							
+								<dt>
+									<span class="light fixedFont">{Array}</span> <b>points</b>
+									
+								</dt>
+								<dd>An array containing <a href="../symbols/JXG.Point.html">JXG.Point</a>, <a href="../symbols/JXG.Coords.html">JXG.Coords</a>, and/or arrays.</dd>
+							
+							</dl>
+						
+						
+						
+						
+						
+							<dl class="detailList">
+							<dt class="heading">Returns:</dt>
+							
+								<dd><span class="light fixedFont">{Array}</span> </dd>
+							
+							</dl>
+						
+						
+						
+
+					
+					
+					<hr />
+				
+					<a name=".intersectionFunction"> </a>
+					<div class="fixedFont">&lt;static&gt; 
+					
+					<span class="light">{Function}</span>
+					<span class="light">JXG.Math.Geometry.</span><b>intersectionFunction</b>(board, el1,el2,i, i, j, alwaysintersect)
+					
+					</div>
+					<div class="description">
+						Generate the function which computes the coordinates of the intersection point. 
+Primarily used in JXG.Point#createIntersectionPoint.
+						
+						
+					</div>
+					
+						
+							<dl class="detailList">
+							<dt class="heading">Parameters:</dt>
+							
+								<dt>
+									<span class="light fixedFont">{<a href="../symbols/JXG.Board.html">JXG.Board</a>}</span> <b>board</b>
+									
+								</dt>
+								<dd>object</dd>
+							
+								<dt>
+									<span class="light fixedFont">{<a href="../symbols/JXG.Line.html">JXG.Line</a>|JXG.Circle_JXG.Line|JXG.Circle_Number}</span> <b>el1,el2,i</b>
+									
+								</dt>
+								<dd>The result will be a intersection point on el1 and el2. 
+i determines the intersection point if two points are available: <ul>
+  <li>i==0: use the positive square root,</li>
+  <li>i==1: use the negative square root.</li></ul>
+See further {@see JXG.Point#createIntersectionPoint}.</dd>
+							
+								<dt>
+									<span class="light fixedFont">{Boolean}</span> <b>alwaysintersect.</b>
+									
+								</dt>
+								<dd>Flag that determines if segements and arc can have an outer intersection point 
+on their defining line or circle.</dd>
+							
+								<dt>
+									<b>i</b>
+									
+								</dt>
+								<dd></dd>
+							
+								<dt>
+									<b>j</b>
+									
+								</dt>
+								<dd></dd>
+							
+								<dt>
+									<b>alwaysintersect</b>
+									
+								</dt>
+								<dd></dd>
+							
+							</dl>
+						
+						
+						
+						
+						
+							<dl class="detailList">
+							<dt class="heading">Returns:</dt>
+							
+								<dd><span class="light fixedFont">{Function}</span> Function returning a {@see JXG.Coords} object that determines the intersection point.</dd>
+							
+							</dl>
+						
+						
+						
+
+					
+					
+					<hr />
+				
+					<a name=".isSameDir"> </a>
+					<div class="fixedFont">&lt;static&gt; 
+					
+					<span class="light">{Boolean}</span>
+					<span class="light">JXG.Math.Geometry.</span><b>isSameDir</b>(p1, p2, i1, i2)
+					
+					</div>
+					<div class="description">
+						The vectors <tt>p2-p1</tt> and <tt>i2-i1</tt> are supposed to be collinear. If their cosine is positive
+they point into the same direction otherwise they point in opposite direction.
+						
+						
+					</div>
+					
+						
+							<dl class="detailList">
+							<dt class="heading">Parameters:</dt>
+							
+								<dt>
+									<span class="light fixedFont">{<a href="../symbols/JXG.Coords.html">JXG.Coords</a>}</span> <b>p1</b>
+									
+								</dt>
+								<dd></dd>
+							
+								<dt>
+									<span class="light fixedFont">{<a href="../symbols/JXG.Coords.html">JXG.Coords</a>}</span> <b>p2</b>
+									
+								</dt>
+								<dd></dd>
+							
+								<dt>
+									<span class="light fixedFont">{<a href="../symbols/JXG.Coords.html">JXG.Coords</a>}</span> <b>i1</b>
+									
+								</dt>
+								<dd></dd>
+							
+								<dt>
+									<span class="light fixedFont">{<a href="../symbols/JXG.Coords.html">JXG.Coords</a>}</span> <b>i2</b>
+									
+								</dt>
+								<dd></dd>
+							
+							</dl>
+						
+						
+						
+						
+						
+							<dl class="detailList">
+							<dt class="heading">Returns:</dt>
+							
+								<dd><span class="light fixedFont">{Boolean}</span> True, if <tt>p2-p1</tt> and <tt>i2-i1</tt> point into the same direction</dd>
+							
+							</dl>
+						
+						
+						
+
+					
+					
+					<hr />
+				
+					<a name=".isSameDirection"> </a>
+					<div class="fixedFont">&lt;static&gt; 
+					
+					<span class="light">{Boolean}</span>
+					<span class="light">JXG.Math.Geometry.</span><b>isSameDirection</b>(start, p, s)
+					
+					</div>
+					<div class="description">
+						If you're looking from point "start" towards point "s" and can see the point "p", true is returned. Otherwise false.
+						
+						
+					</div>
+					
+						
+							<dl class="detailList">
+							<dt class="heading">Parameters:</dt>
+							
+								<dt>
+									<span class="light fixedFont">{<a href="../symbols/JXG.Coords.html">JXG.Coords</a>}</span> <b>start</b>
+									
+								</dt>
+								<dd>The point you're standing on.</dd>
+							
+								<dt>
+									<span class="light fixedFont">{<a href="../symbols/JXG.Coords.html">JXG.Coords</a>}</span> <b>p</b>
+									
+								</dt>
+								<dd>The point in which direction you're looking.</dd>
+							
+								<dt>
+									<span class="light fixedFont">{<a href="../symbols/JXG.Coords.html">JXG.Coords</a>}</span> <b>s</b>
+									
+								</dt>
+								<dd>The point that should be visible.</dd>
+							
+							</dl>
+						
+						
+						
+						
+						
+							<dl class="detailList">
+							<dt class="heading">Returns:</dt>
+							
+								<dd><span class="light fixedFont">{Boolean}</span> True, if from start the point p is in the same direction as s is, that means s-start = k*(p-start) with k>=0.</dd>
+							
+							</dl>
+						
+						
+						
+
+					
+					
+					<hr />
+				
+					<a name=".meet"> </a>
+					<div class="fixedFont">&lt;static&gt; 
+					
+					<span class="light">{<a href="../symbols/JXG.Coords.html">JXG.Coords</a>}</span>
+					<span class="light">JXG.Math.Geometry.</span><b>meet</b>(el1, el2, i, board)
+					
+					</div>
+					<div class="description">
+						Computes the intersection of a pair of lines, circles or both.
+It uses the internal data array stdform of these elements.
+						
+						
+					</div>
+					
+						
+							<dl class="detailList">
+							<dt class="heading">Parameters:</dt>
+							
+								<dt>
+									<span class="light fixedFont">{Array}</span> <b>el1</b>
+									
+								</dt>
+								<dd>stdform of the first element (line or circle)</dd>
+							
+								<dt>
+									<span class="light fixedFont">{Array}</span> <b>el2</b>
+									
+								</dt>
+								<dd>stdform of the second element (line or circle)</dd>
+							
+								<dt>
+									<span class="light fixedFont">{Number}</span> <b>i</b>
+									
+								</dt>
+								<dd>Index of the intersection point that should be returned.</dd>
+							
+								<dt>
+									<b>board</b>
+									
+								</dt>
+								<dd>Reference to the board.</dd>
+							
+							</dl>
+						
+						
+						
+						
+						
+							<dl class="detailList">
+							<dt class="heading">Returns:</dt>
+							
+								<dd><span class="light fixedFont">{<a href="../symbols/JXG.Coords.html">JXG.Coords</a>}</span> Coordinates of one of the possible two or more intersection points.
+Which point will be returned is determined by i.</dd>
+							
+							</dl>
+						
+						
+						
+
+					
+					
+					<hr />
+				
+					<a name=".meetBezierCurveRedBlueSegments"> </a>
+					<div class="fixedFont">&lt;static&gt; 
+					
+					<span class="light">{Array}</span>
+					<span class="light">JXG.Math.Geometry.</span><b>meetBezierCurveRedBlueSegments</b>(red, blue, nr)
+					
+					</div>
+					<div class="description">
+						Find the nr-th intersection point of two Bezier curves, i.e. curves with bezierDegree == 3.
+						
+						
+					</div>
+					
+						
+							<dl class="detailList">
+							<dt class="heading">Parameters:</dt>
+							
+								<dt>
+									<span class="light fixedFont">{<a href="../symbols/JXG.Curve.html">JXG.Curve</a>}</span> <b>red</b>
+									
+								</dt>
+								<dd>Curve with bezierDegree == 3</dd>
+							
+								<dt>
+									<span class="light fixedFont">{<a href="../symbols/JXG.Curve.html">JXG.Curve</a>}</span> <b>blue</b>
+									
+								</dt>
+								<dd>Curve with bezierDegree == 3</dd>
+							
+								<dt>
+									<span class="light fixedFont">{Number}</span> <b>nr</b>
+									
+								</dt>
+								<dd>The number of the intersection point which should be returned.</dd>
+							
+							</dl>
+						
+						
+						
+						
+						
+							<dl class="detailList">
+							<dt class="heading">Returns:</dt>
+							
+								<dd><span class="light fixedFont">{Array}</span> The homogeneous coordinates of the nr-th intersection point.</dd>
+							
+							</dl>
+						
+						
+						
+
+					
+					
+					<hr />
+				
+					<a name=".meetBeziersegmentBeziersegment"> </a>
+					<div class="fixedFont">&lt;static&gt; 
+					
+					<span class="light">{Array}</span>
+					<span class="light">JXG.Math.Geometry.</span><b>meetBeziersegmentBeziersegment</b>(red, blue, testSegment)
+					
+					</div>
+					<div class="description">
+						Find the nr-th intersection point of two Bezier curve segments.
+						
+						
+					</div>
+					
+						
+							<dl class="detailList">
+							<dt class="heading">Parameters:</dt>
+							
+								<dt>
+									<span class="light fixedFont">{Array}</span> <b>red</b>
+									
+								</dt>
+								<dd>Array of four coordinate arrays of length 2 defining the first
+Bezier curve segment, i.e. [[x0,y0], [x1,y1], [x2,y2], [x3,y3]].</dd>
+							
+								<dt>
+									<span class="light fixedFont">{Array}</span> <b>blue</b>
+									
+								</dt>
+								<dd>Array of four coordinate arrays of length 2 defining the second
+Bezier curve segment, i.e. [[x0,y0], [x1,y1], [x2,y2], [x3,y3]].</dd>
+							
+								<dt>
+									<span class="light fixedFont">{Boolean}</span> <b>testSegment</b>
+									
+								</dt>
+								<dd>Test if intersection has to be inside of the segment or somewhere on the line defined by the segment</dd>
+							
+							</dl>
+						
+						
+						
+						
+						
+							<dl class="detailList">
+							<dt class="heading">Returns:</dt>
+							
+								<dd><span class="light fixedFont">{Array}</span> Array containing the list of all intersection points as homogeneous coordinate arrays plus
+preimages [x,y], t_1, t_2] of the two Bezier curve segments.</dd>
+							
+							</dl>
+						
+						
+						
+
+					
+					
+					<hr />
+				
+					<a name=".meetCircleCircle"> </a>
+					<div class="fixedFont">&lt;static&gt; 
+					
+					<span class="light">{<a href="../symbols/JXG.Coords.html">JXG.Coords</a>}</span>
+					<span class="light">JXG.Math.Geometry.</span><b>meetCircleCircle</b>(circ1, circ2, i, board)
+					
+					</div>
+					<div class="description">
+						Intersection of two circles.
+						
+						
+					</div>
+					
+						
+							<dl class="detailList">
+							<dt class="heading">Parameters:</dt>
+							
+								<dt>
+									<span class="light fixedFont">{Array}</span> <b>circ1</b>
+									
+								</dt>
+								<dd>stdform of the first circle</dd>
+							
+								<dt>
+									<span class="light fixedFont">{Array}</span> <b>circ2</b>
+									
+								</dt>
+								<dd>stdform of the second circle</dd>
+							
+								<dt>
+									<span class="light fixedFont">{number}</span> <b>i</b>
+									
+								</dt>
+								<dd>number of the returned intersection point.
+  i==0: use the positive square root,
+  i==1: use the negative square root.</dd>
+							
+								<dt>
+									<span class="light fixedFont">{<a href="../symbols/JXG.Board.html">JXG.Board</a>}</span> <b>board</b>
+									
+								</dt>
+								<dd>Reference to the board.</dd>
+							
+							</dl>
+						
+						
+						
+						
+						
+							<dl class="detailList">
+							<dt class="heading">Returns:</dt>
+							
+								<dd><span class="light fixedFont">{<a href="../symbols/JXG.Coords.html">JXG.Coords</a>}</span> Coordinates of the intersection point</dd>
+							
+							</dl>
+						
+						
+						
+
+					
+					
+					<hr />
+				
+					<a name=".meetCurveCurve"> </a>
+					<div class="fixedFont">&lt;static&gt; 
+					
+					<span class="light">{<a href="../symbols/JXG.Coords.html">JXG.Coords</a>}</span>
+					<span class="light">JXG.Math.Geometry.</span><b>meetCurveCurve</b>(c1, c2, nr, t2ini, board, method)
+					
+					</div>
+					<div class="description">
+						Compute an intersection of the curves c1 and c2.
+We want to find values t1, t2 such that
+c1(t1) = c2(t2), i.e. (c1_x(t1)-c2_x(t2),c1_y(t1)-c2_y(t2)) = (0,0).
+
+Methods: segment-wise intersections (default) or generalized Newton method.
+						
+						
+					</div>
+					
+						
+							<dl class="detailList">
+							<dt class="heading">Parameters:</dt>
+							
+								<dt>
+									<span class="light fixedFont">{<a href="../symbols/JXG.Curve.html">JXG.Curve</a>}</span> <b>c1</b>
+									
+								</dt>
+								<dd>Curve, Line or Circle</dd>
+							
+								<dt>
+									<span class="light fixedFont">{<a href="../symbols/JXG.Curve.html">JXG.Curve</a>}</span> <b>c2</b>
+									
+								</dt>
+								<dd>Curve, Line or Circle</dd>
+							
+								<dt>
+									<span class="light fixedFont">{Number}</span> <b>nr</b>
+									
+								</dt>
+								<dd>the nr-th intersection point will be returned.</dd>
+							
+								<dt>
+									<span class="light fixedFont">{Number}</span> <b>t2ini</b>
+									
+								</dt>
+								<dd>not longer used.</dd>
+							
+								<dt>
+									<span class="light fixedFont">{<a href="../symbols/JXG.Board.html">JXG.Board</a>}</span> <b>board</b>
+									<i>Optional, Default: c1.board</i>
+								</dt>
+								<dd>Reference to a board object.</dd>
+							
+								<dt>
+									<span class="light fixedFont">{String}</span> <b>method</b>
+									<i>Optional, Default: 'segment'</i>
+								</dt>
+								<dd>Intersection method, possible values are 'newton' and 'segment'.</dd>
+							
+							</dl>
+						
+						
+						
+						
+						
+							<dl class="detailList">
+							<dt class="heading">Returns:</dt>
+							
+								<dd><span class="light fixedFont">{<a href="../symbols/JXG.Coords.html">JXG.Coords</a>}</span> intersection point</dd>
+							
+							</dl>
+						
+						
+						
+
+					
+					
+					<hr />
+				
+					<a name=".meetCurveLine"> </a>
+					<div class="fixedFont">&lt;static&gt; 
+					
+					<span class="light">{<a href="../symbols/JXG.Coords.html">JXG.Coords</a>}</span>
+					<span class="light">JXG.Math.Geometry.</span><b>meetCurveLine</b>(el1, el2, nr, board, alwaysIntersect)
+					
+					</div>
+					<div class="description">
+						Intersection of curve with line,
+Order of input does not matter for el1 and el2.
+						
+						
+					</div>
+					
+						
+							<dl class="detailList">
+							<dt class="heading">Parameters:</dt>
+							
+								<dt>
+									<span class="light fixedFont">{<a href="../symbols/JXG.Curve.html">JXG.Curve</a>|<a href="../symbols/JXG.Line.html">JXG.Line</a>}</span> <b>el1</b>
+									
+								</dt>
+								<dd>Curve or Line</dd>
+							
+								<dt>
+									<span class="light fixedFont">{<a href="../symbols/JXG.Curve.html">JXG.Curve</a>|<a href="../symbols/JXG.Line.html">JXG.Line</a>}</span> <b>el2</b>
+									
+								</dt>
+								<dd>Curve or Line</dd>
+							
+								<dt>
+									<span class="light fixedFont">{Number}</span> <b>nr</b>
+									
+								</dt>
+								<dd>the nr-th intersection point will be returned.</dd>
+							
+								<dt>
+									<span class="light fixedFont">{<a href="../symbols/JXG.Board.html">JXG.Board</a>}</span> <b>board</b>
+									<i>Optional, Default: el1.board</i>
+								</dt>
+								<dd>Reference to a board object.</dd>
+							
+								<dt>
+									<span class="light fixedFont">{Boolean}</span> <b>alwaysIntersect</b>
+									
+								</dt>
+								<dd>If false just the segment between the two defining points are tested for intersection</dd>
+							
+							</dl>
+						
+						
+						
+						
+						
+							<dl class="detailList">
+							<dt class="heading">Returns:</dt>
+							
+								<dd><span class="light fixedFont">{<a href="../symbols/JXG.Coords.html">JXG.Coords</a>}</span> Intersection point. In case no intersection point is detected,
+the ideal point [0,1,0] is returned.</dd>
+							
+							</dl>
+						
+						
+						
+
+					
+					
+					<hr />
+				
+					<a name=".meetCurveLineContinuous"> </a>
+					<div class="fixedFont">&lt;static&gt; 
+					
+					
+					<span class="light">JXG.Math.Geometry.</span><b>meetCurveLineContinuous</b>(cu, li, nr, board, testSegment)
+					
+					</div>
+					<div class="description">
+						Intersection of line and curve, continuous case.
+Finds the nr-the intersection point
+Uses JXG.Math.Geometry#meetCurveLineDiscrete as a first approximation.
+A more exact solution is then found with JXG.Math.Numerics#meetCurveLineDiscrete.
+						
+						
+					</div>
+					
+						
+							<dl class="detailList">
+							<dt class="heading">Parameters:</dt>
+							
+								<dt>
+									<span class="light fixedFont">{<a href="../symbols/JXG.Curve.html">JXG.Curve</a>}</span> <b>cu</b>
+									
+								</dt>
+								<dd>Curve</dd>
+							
+								<dt>
+									<span class="light fixedFont">{<a href="../symbols/JXG.Line.html">JXG.Line</a>}</span> <b>li</b>
+									
+								</dt>
+								<dd>Line</dd>
+							
+								<dt>
+									<span class="light fixedFont">{Number}</span> <b>nr</b>
+									
+								</dt>
+								<dd>Will return the nr-th intersection point.</dd>
+							
+								<dt>
+									<span class="light fixedFont">{<a href="../symbols/JXG.Board.html">JXG.Board</a>}</span> <b>board</b>
+									
+								</dt>
+								<dd></dd>
+							
+								<dt>
+									<b>testSegment</b>
+									
+								</dt>
+								<dd></dd>
+							
+							</dl>
+						
+						
+						
+						
+						
+						
+						
+
+					
+					
+					<hr />
+				
+					<a name=".meetCurveLineContinuousOld"> </a>
+					<div class="fixedFont">&lt;private&gt; &lt;static&gt; 
+					
+					
+					<span class="light">JXG.Math.Geometry.</span><b>meetCurveLineContinuousOld</b>(cu, li, nr, board)
+					
+					</div>
+					<div class="description">
+						Intersection of line and curve, continuous case.
+Segments are treated as lines. Finding the nr-the intersection point
+works for nr=0,1 only.
+						
+						
+					</div>
+					
+						
+							<dl class="detailList">
+							<dt class="heading">Parameters:</dt>
+							
+								<dt>
+									<span class="light fixedFont">{<a href="../symbols/JXG.Curve.html">JXG.Curve</a>}</span> <b>cu</b>
+									
+								</dt>
+								<dd>Curve</dd>
+							
+								<dt>
+									<span class="light fixedFont">{<a href="../symbols/JXG.Line.html">JXG.Line</a>}</span> <b>li</b>
+									
+								</dt>
+								<dd>Line</dd>
+							
+								<dt>
+									<span class="light fixedFont">{Number}</span> <b>nr</b>
+									
+								</dt>
+								<dd>Will return the nr-th intersection point.</dd>
+							
+								<dt>
+									<span class="light fixedFont">{<a href="../symbols/JXG.Board.html">JXG.Board</a>}</span> <b>board</b>
+									
+								</dt>
+								<dd>BUG: does not respect cu.minX() and cu.maxX()</dd>
+							
+							</dl>
+						
+						
+						
+						
+						
+						
+						
+
+					
+					
+					<hr />
+				
+					<a name=".meetCurveLineDiscrete"> </a>
+					<div class="fixedFont">&lt;static&gt; 
+					
+					<span class="light">{<a href="../symbols/JXG.Coords.html">JXG.Coords</a>}</span>
+					<span class="light">JXG.Math.Geometry.</span><b>meetCurveLineDiscrete</b>(cu, li, nr, board, testSegment)
+					
+					</div>
+					<div class="description">
+						Intersection of line and curve, discrete case.
+Segments are treated as lines.
+Finding the nr-th intersection point should work for all nr.
+						
+						
+					</div>
+					
+						
+							<dl class="detailList">
+							<dt class="heading">Parameters:</dt>
+							
+								<dt>
+									<span class="light fixedFont">{<a href="../symbols/JXG.Curve.html">JXG.Curve</a>}</span> <b>cu</b>
+									
+								</dt>
+								<dd></dd>
+							
+								<dt>
+									<span class="light fixedFont">{<a href="../symbols/JXG.Line.html">JXG.Line</a>}</span> <b>li</b>
+									
+								</dt>
+								<dd></dd>
+							
+								<dt>
+									<span class="light fixedFont">{Number}</span> <b>nr</b>
+									
+								</dt>
+								<dd></dd>
+							
+								<dt>
+									<span class="light fixedFont">{<a href="../symbols/JXG.Board.html">JXG.Board</a>}</span> <b>board</b>
+									
+								</dt>
+								<dd></dd>
+							
+								<dt>
+									<span class="light fixedFont">{Boolean}</span> <b>testSegment</b>
+									
+								</dt>
+								<dd>Test if intersection has to be inside of the segment or somewhere on the
+line defined by the segment</dd>
+							
+							</dl>
+						
+						
+						
+						
+						
+							<dl class="detailList">
+							<dt class="heading">Returns:</dt>
+							
+								<dd><span class="light fixedFont">{<a href="../symbols/JXG.Coords.html">JXG.Coords</a>}</span> Intersection point. In case no intersection point is detected,
+the ideal point [0,1,0] is returned.</dd>
+							
+							</dl>
+						
+						
+						
+
+					
+					
+					<hr />
+				
+					<a name=".meetCurveRedBlueSegments"> </a>
+					<div class="fixedFont">&lt;static&gt; 
+					
+					
+					<span class="light">JXG.Math.Geometry.</span><b>meetCurveRedBlueSegments</b>(red, blue, nr)
+					
+					</div>
+					<div class="description">
+						Find the n-th intersection point of two curves named red (first parameter) and blue (second parameter).
+We go through each segment of the red curve and search if there is an intersection with a segemnt of the blue curve.
+This double loop, i.e. the outer loop runs along the red curve and the inner loop runs along the blue curve, defines
+the n-th intersection point. The segments are either line segments or Bezier curves of degree 3. This depends on
+the property bezierDegree of the curves.
+						
+						
+					</div>
+					
+						
+							<dl class="detailList">
+							<dt class="heading">Parameters:</dt>
+							
+								<dt>
+									<span class="light fixedFont">{<a href="../symbols/JXG.Curve.html">JXG.Curve</a>}</span> <b>red</b>
+									
+								</dt>
+								<dd></dd>
+							
+								<dt>
+									<span class="light fixedFont">{<a href="../symbols/JXG.Curve.html">JXG.Curve</a>}</span> <b>blue</b>
+									
+								</dt>
+								<dd></dd>
+							
+								<dt>
+									<span class="light fixedFont">{Number}</span> <b>nr</b>
+									
+								</dt>
+								<dd></dd>
+							
+							</dl>
+						
+						
+						
+						
+						
+						
+						
+
+					
+					
+					<hr />
+				
+					<a name=".meetLineBoard"> </a>
+					<div class="fixedFont">&lt;static&gt; 
+					
+					<span class="light">{Array}</span>
+					<span class="light">JXG.Math.Geometry.</span><b>meetLineBoard</b>(line, board, margin)
+					
+					</div>
+					<div class="description">
+						Intersection of the line with the board
+						
+						
+					</div>
+					
+						
+							<dl class="detailList">
+							<dt class="heading">Parameters:</dt>
+							
+								<dt>
+									<span class="light fixedFont">{Array}</span> <b>line</b>
+									
+								</dt>
+								<dd>stdform of the line</dd>
+							
+								<dt>
+									<span class="light fixedFont">{<a href="../symbols/JXG.Board.html">JXG.Board</a>}</span> <b>board</b>
+									
+								</dt>
+								<dd>reference to a board.</dd>
+							
+								<dt>
+									<span class="light fixedFont">{Number}</span> <b>margin</b>
+									
+								</dt>
+								<dd>optional margin, to avoid the display of the small sides of lines.</dd>
+							
+							</dl>
+						
+						
+						
+						
+						
+							<dl class="detailList">
+							<dt class="heading">Returns:</dt>
+							
+								<dd><span class="light fixedFont">{Array}</span> [intersection coords 1, intersection coords 2]</dd>
+							
+							</dl>
+						
+						
+						
+
+					
+					
+					<hr />
+				
+					<a name=".meetLineCircle"> </a>
+					<div class="fixedFont">&lt;static&gt; 
+					
+					<span class="light">{<a href="../symbols/JXG.Coords.html">JXG.Coords</a>}</span>
+					<span class="light">JXG.Math.Geometry.</span><b>meetLineCircle</b>(lin, circ, i, board)
+					
+					</div>
+					<div class="description">
+						Intersection of line and circle.
+						
+						
+					</div>
+					
+						
+							<dl class="detailList">
+							<dt class="heading">Parameters:</dt>
+							
+								<dt>
+									<span class="light fixedFont">{Array}</span> <b>lin</b>
+									
+								</dt>
+								<dd>stdform of the line</dd>
+							
+								<dt>
+									<span class="light fixedFont">{Array}</span> <b>circ</b>
+									
+								</dt>
+								<dd>stdform of the circle</dd>
+							
+								<dt>
+									<span class="light fixedFont">{number}</span> <b>i</b>
+									
+								</dt>
+								<dd>number of the returned intersection point.
+  i==0: use the positive square root,
+  i==1: use the negative square root.</dd>
+							
+								<dt>
+									<span class="light fixedFont">{<a href="../symbols/JXG.Board.html">JXG.Board</a>}</span> <b>board</b>
+									
+								</dt>
+								<dd>Reference to a board.</dd>
+							
+							</dl>
+						
+						
+						
+						
+						
+							<dl class="detailList">
+							<dt class="heading">Returns:</dt>
+							
+								<dd><span class="light fixedFont">{<a href="../symbols/JXG.Coords.html">JXG.Coords</a>}</span> Coordinates of the intersection point</dd>
+							
+							</dl>
+						
+						
+						
+
+					
+					
+					<hr />
+				
+					<a name=".meetLineLine"> </a>
+					<div class="fixedFont">&lt;static&gt; 
+					
+					<span class="light">{<a href="../symbols/JXG.Coords.html">JXG.Coords</a>}</span>
+					<span class="light">JXG.Math.Geometry.</span><b>meetLineLine</b>(l1, l2, i, board)
+					
+					</div>
+					<div class="description">
+						Intersection of two lines.
+						
+						
+					</div>
+					
+						
+							<dl class="detailList">
+							<dt class="heading">Parameters:</dt>
+							
+								<dt>
+									<span class="light fixedFont">{Array}</span> <b>l1</b>
+									
+								</dt>
+								<dd>stdform of the first line</dd>
+							
+								<dt>
+									<span class="light fixedFont">{Array}</span> <b>l2</b>
+									
+								</dt>
+								<dd>stdform of the second line</dd>
+							
+								<dt>
+									<span class="light fixedFont">{number}</span> <b>i</b>
+									
+								</dt>
+								<dd>unused</dd>
+							
+								<dt>
+									<span class="light fixedFont">{<a href="../symbols/JXG.Board.html">JXG.Board</a>}</span> <b>board</b>
+									
+								</dt>
+								<dd>Reference to the board.</dd>
+							
+							</dl>
+						
+						
+						
+						
+						
+							<dl class="detailList">
+							<dt class="heading">Returns:</dt>
+							
+								<dd><span class="light fixedFont">{<a href="../symbols/JXG.Coords.html">JXG.Coords</a>}</span> Coordinates of the intersection point.</dd>
+							
+							</dl>
+						
+						
+						
+
+					
+					
+					<hr />
+				
+					<a name=".meetSegmentSegment"> </a>
+					<div class="fixedFont">&lt;static&gt; 
+					
+					<span class="light">{Array}</span>
+					<span class="light">JXG.Math.Geometry.</span><b>meetSegmentSegment</b>(p1, p2, q1, q2)
+					
+					</div>
+					<div class="description">
+						Intersection of two segments.
+						
+						
+					</div>
+					
+						
+							<dl class="detailList">
+							<dt class="heading">Parameters:</dt>
+							
+								<dt>
+									<span class="light fixedFont">{Array}</span> <b>p1</b>
+									
+								</dt>
+								<dd>First point of segment 1 using homogeneous coordinates [z,x,y]</dd>
+							
+								<dt>
+									<span class="light fixedFont">{Array}</span> <b>p2</b>
+									
+								</dt>
+								<dd>Second point of segment 1 using homogeneous coordinates [z,x,y]</dd>
+							
+								<dt>
+									<span class="light fixedFont">{Array}</span> <b>q1</b>
+									
+								</dt>
+								<dd>First point of segment 2 using homogeneous coordinates [z,x,y]</dd>
+							
+								<dt>
+									<span class="light fixedFont">{Array}</span> <b>q2</b>
+									
+								</dt>
+								<dd>Second point of segment 2 using homogeneous coordinates [z,x,y]</dd>
+							
+							</dl>
+						
+						
+						
+						
+						
+							<dl class="detailList">
+							<dt class="heading">Returns:</dt>
+							
+								<dd><span class="light fixedFont">{Array}</span> [Intersection point, t, u] The first entry contains the homogeneous coordinates
+of the intersection point. The second and third entry gives the position of the intersection between the
+two defining points. For example, the second entry t is defined by: intersection point = t*p1 + (1-t)*p2.</dd>
+							
+							</dl>
+						
+						
+						
+
+					
+					
+					<hr />
+				
+					<a name=".perpendicular"> </a>
+					<div class="fixedFont">&lt;static&gt; 
+					
+					<span class="light">{Array}</span>
+					<span class="light">JXG.Math.Geometry.</span><b>perpendicular</b>(line, point, board)
+					
+					</div>
+					<div class="description">
+						Calculates the coordinates of a point on the perpendicular to the given line through
+the given point.
+						
+						
+					</div>
+					
+						
+							<dl class="detailList">
+							<dt class="heading">Parameters:</dt>
+							
+								<dt>
+									<span class="light fixedFont">{<a href="../symbols/JXG.Line.html">JXG.Line</a>}</span> <b>line</b>
+									
+								</dt>
+								<dd>A line.</dd>
+							
+								<dt>
+									<span class="light fixedFont">{<a href="../symbols/JXG.Point.html">JXG.Point</a>}</span> <b>point</b>
+									
+								</dt>
+								<dd>Point which is projected to the line.</dd>
+							
+								<dt>
+									<span class="light fixedFont">{<a href="../symbols/JXG.Board.html">JXG.Board</a>}</span> <b>board</b>
+									<i>Optional, Default: point.board</i>
+								</dt>
+								<dd>Reference to the board</dd>
+							
+							</dl>
+						
+						
+						
+						
+						
+							<dl class="detailList">
+							<dt class="heading">Returns:</dt>
+							
+								<dd><span class="light fixedFont">{Array}</span> Array of length two containing coordinates of a point on the perpendicular to the given line
+                 through the given point and boolean flag "change".</dd>
+							
+							</dl>
+						
+						
+						
+
+					
+					
+					<hr />
+				
+					<a name=".projectCoordsToBeziersegment"> </a>
+					<div class="fixedFont">&lt;static&gt; 
+					
+					<span class="light">{Array}</span>
+					<span class="light">JXG.Math.Geometry.</span><b>projectCoordsToBeziersegment</b>(pos, curve, start)
+					
+					</div>
+					<div class="description">
+						Finds the coordinates of the closest point on a Bezier segment of a
+<a href="../symbols/JXG.Curve.html">JXG.Curve</a> to a given coordinate array.
+						
+						
+					</div>
+					
+						
+							<dl class="detailList">
+							<dt class="heading">Parameters:</dt>
+							
+								<dt>
+									<span class="light fixedFont">{Array}</span> <b>pos</b>
+									
+								</dt>
+								<dd>Point to project in homogeneous coordinates.</dd>
+							
+								<dt>
+									<span class="light fixedFont">{<a href="../symbols/JXG.Curve.html">JXG.Curve</a>}</span> <b>curve</b>
+									
+								</dt>
+								<dd>Curve of type "plot" having Bezier degree 3.</dd>
+							
+								<dt>
+									<span class="light fixedFont">{Number}</span> <b>start</b>
+									
+								</dt>
+								<dd>Number of the Bezier segment of the curve.</dd>
+							
+							</dl>
+						
+						
+						
+						
+						
+							<dl class="detailList">
+							<dt class="heading">Returns:</dt>
+							
+								<dd><span class="light fixedFont">{Array}</span> The coordinates of the projection of the given point
+on the given Bezier segment and the preimage of the curve which
+determines the closest point.</dd>
+							
+							</dl>
+						
+						
+						
+
+					
+					
+					<hr />
+				
+					<a name=".projectCoordsToCurve"> </a>
+					<div class="fixedFont">&lt;static&gt; 
+					
+					<span class="light">{<a href="../symbols/JXG.Coords.html">JXG.Coords</a>}</span>
+					<span class="light">JXG.Math.Geometry.</span><b>projectCoordsToCurve</b>(x, y, t, curve, board)
+					
+					</div>
+					<div class="description">
+						Calculates the coordinates of the projection of a coordinates pair on a given curve. In case of
+function graphs this is the
+intersection point of the curve and the parallel to y-axis through the given point.
+						
+						
+					</div>
+					
+						
+							<dl class="detailList">
+							<dt class="heading">Parameters:</dt>
+							
+								<dt>
+									<span class="light fixedFont">{Number}</span> <b>x</b>
+									
+								</dt>
+								<dd>coordinate to project.</dd>
+							
+								<dt>
+									<span class="light fixedFont">{Number}</span> <b>y</b>
+									
+								</dt>
+								<dd>coordinate to project.</dd>
+							
+								<dt>
+									<span class="light fixedFont">{Number}</span> <b>t</b>
+									
+								</dt>
+								<dd>start value for newtons method</dd>
+							
+								<dt>
+									<span class="light fixedFont">{<a href="../symbols/JXG.Curve.html">JXG.Curve</a>}</span> <b>curve</b>
+									
+								</dt>
+								<dd>Curve on that the point is projected.</dd>
+							
+								<dt>
+									<span class="light fixedFont">{<a href="../symbols/JXG.Board.html">JXG.Board</a>}</span> <b>board</b>
+									<i>Optional, Default: curve.board</i>
+								</dt>
+								<dd>Reference to a board.</dd>
+							
+							</dl>
+						
+						
+						
+						
+						
+							<dl class="detailList">
+							<dt class="heading">Returns:</dt>
+							
+								<dd><span class="light fixedFont">{<a href="../symbols/JXG.Coords.html">JXG.Coords</a>}</span> Array containing the coordinates of the projection of the given point on the given graph and
+the position on the curve.</dd>
+							
+							</dl>
+						
+						
+						
+							<dl class="detailList">
+							<dt class="heading">See:</dt>
+							
+								<dd>#projectPointToCurve</dd>
+							
+							</dl>
+						
+
+					
+					
+					<hr />
+				
+					<a name=".projectCoordsToPolygon"> </a>
+					<div class="fixedFont">&lt;static&gt; 
+					
+					<span class="light">{Array}</span>
+					<span class="light">JXG.Math.Geometry.</span><b>projectCoordsToPolygon</b>(p, pol)
+					
+					</div>
+					<div class="description">
+						Calculates the coordinates of the closest orthogonal projection of a given coordinate array onto the
+border of a polygon.
+						
+						
+					</div>
+					
+						
+							<dl class="detailList">
+							<dt class="heading">Parameters:</dt>
+							
+								<dt>
+									<span class="light fixedFont">{Array}</span> <b>p</b>
+									
+								</dt>
+								<dd>Point to project.</dd>
+							
+								<dt>
+									<span class="light fixedFont">{<a href="../symbols/JXG.Polygon.html">JXG.Polygon</a>}</span> <b>pol</b>
+									
+								</dt>
+								<dd>Polygon element</dd>
+							
+							</dl>
+						
+						
+						
+						
+						
+							<dl class="detailList">
+							<dt class="heading">Returns:</dt>
+							
+								<dd><span class="light fixedFont">{Array}</span> The coordinates of the closest projection of the given point to the border of the polygon.</dd>
+							
+							</dl>
+						
+						
+						
+
+					
+					
+					<hr />
+				
+					<a name=".projectCoordsToSegment"> </a>
+					<div class="fixedFont">&lt;static&gt; 
+					
+					<span class="light">{Array}</span>
+					<span class="light">JXG.Math.Geometry.</span><b>projectCoordsToSegment</b>(p, q1, q2)
+					
+					</div>
+					<div class="description">
+						Calculates the coordinates of the orthogonal projection of a given coordinate array on a given line
+segment defined by two coordinate arrays.
+						
+						
+					</div>
+					
+						
+							<dl class="detailList">
+							<dt class="heading">Parameters:</dt>
+							
+								<dt>
+									<span class="light fixedFont">{Array}</span> <b>p</b>
+									
+								</dt>
+								<dd>Point to project.</dd>
+							
+								<dt>
+									<span class="light fixedFont">{Array}</span> <b>q1</b>
+									
+								</dt>
+								<dd>Start point of the line segment on that the point is projected.</dd>
+							
+								<dt>
+									<span class="light fixedFont">{Array}</span> <b>q2</b>
+									
+								</dt>
+								<dd>End point of the line segment on that the point is projected.</dd>
+							
+							</dl>
+						
+						
+						
+						
+						
+							<dl class="detailList">
+							<dt class="heading">Returns:</dt>
+							
+								<dd><span class="light fixedFont">{Array}</span> The coordinates of the projection of the given point on the given segment
+and the factor that determines the projected point as a convex combination of the
+two endpoints q1 and q2 of the segment.</dd>
+							
+							</dl>
+						
+						
+						
+
+					
+					
+					<hr />
+				
+					<a name=".projectPointToBoard"> </a>
+					<div class="fixedFont">&lt;static&gt; 
+					
+					
+					<span class="light">JXG.Math.Geometry.</span><b>projectPointToBoard</b>(point, board)
+					
+					</div>
+					<div class="description">
+						
+						
+						
+					</div>
+					
+						
+							<dl class="detailList">
+							<dt class="heading">Parameters:</dt>
+							
+								<dt>
+									<span class="light fixedFont">{<a href="../symbols/JXG.Point.html">JXG.Point</a>|<a href="../symbols/JXG.Coords.html">JXG.Coords</a>}</span> <b>point</b>
+									
+								</dt>
+								<dd></dd>
+							
+								<dt>
+									<span class="light fixedFont">{<a href="../symbols/JXG.Board.html">JXG.Board</a>}</span> <b>board</b>
+									<i>Optional</i>
+								</dt>
+								<dd></dd>
+							
+							</dl>
+						
+						
+						
+						
+						
+						
+						
+
+					
+					
+					<hr />
+				
+					<a name=".projectPointToCircle"> </a>
+					<div class="fixedFont">&lt;static&gt; 
+					
+					<span class="light">{<a href="../symbols/JXG.Coords.html">JXG.Coords</a>}</span>
+					<span class="light">JXG.Math.Geometry.</span><b>projectPointToCircle</b>(point, circle, board)
+					
+					</div>
+					<div class="description">
+						Calculates the coordinates of the projection of a given point on a given circle. I.o.w. the
+nearest one of the two intersection points of the line through the given point and the circles
+center.
+						
+						
+					</div>
+					
+						
+							<dl class="detailList">
+							<dt class="heading">Parameters:</dt>
+							
+								<dt>
+									<span class="light fixedFont">{<a href="../symbols/JXG.Point.html">JXG.Point</a>|<a href="../symbols/JXG.Coords.html">JXG.Coords</a>}</span> <b>point</b>
+									
+								</dt>
+								<dd>Point to project or coords object to project.</dd>
+							
+								<dt>
+									<span class="light fixedFont">{<a href="../symbols/JXG.Circle.html">JXG.Circle</a>}</span> <b>circle</b>
+									
+								</dt>
+								<dd>Circle on that the point is projected.</dd>
+							
+								<dt>
+									<span class="light fixedFont">{<a href="../symbols/JXG.Board.html">JXG.Board</a>}</span> <b>board</b>
+									<i>Optional, Default: point.board</i>
+								</dt>
+								<dd>Reference to the board</dd>
+							
+							</dl>
+						
+						
+						
+						
+						
+							<dl class="detailList">
+							<dt class="heading">Returns:</dt>
+							
+								<dd><span class="light fixedFont">{<a href="../symbols/JXG.Coords.html">JXG.Coords</a>}</span> The coordinates of the projection of the given point on the given circle.</dd>
+							
+							</dl>
+						
+						
+						
+
+					
+					
+					<hr />
+				
+					<a name=".projectPointToCurve"> </a>
+					<div class="fixedFont">&lt;static&gt; 
+					
+					<span class="light">{<a href="../symbols/JXG.Coords.html">JXG.Coords</a>}</span>
+					<span class="light">JXG.Math.Geometry.</span><b>projectPointToCurve</b>(point, curve, board)
+					
+					</div>
+					<div class="description">
+						Calculates the coordinates of the projection of a given point on a given curve.
+Uses #projectCoordsToCurve.
+						
+						
+					</div>
+					
+						
+							<dl class="detailList">
+							<dt class="heading">Parameters:</dt>
+							
+								<dt>
+									<span class="light fixedFont">{<a href="../symbols/JXG.Point.html">JXG.Point</a>}</span> <b>point</b>
+									
+								</dt>
+								<dd>Point to project.</dd>
+							
+								<dt>
+									<span class="light fixedFont">{<a href="../symbols/JXG.Curve.html">JXG.Curve</a>}</span> <b>curve</b>
+									
+								</dt>
+								<dd>Curve on that the point is projected.</dd>
+							
+								<dt>
+									<span class="light fixedFont">{<a href="../symbols/JXG.Board.html">JXG.Board</a>}</span> <b>board</b>
+									<i>Optional, Default: point.board</i>
+								</dt>
+								<dd>Reference to a board.</dd>
+							
+							</dl>
+						
+						
+						
+						
+						
+							<dl class="detailList">
+							<dt class="heading">Returns:</dt>
+							
+								<dd><span class="light fixedFont">{<a href="../symbols/JXG.Coords.html">JXG.Coords</a>}</span> The coordinates of the projection of the given point on the given graph.</dd>
+							
+							</dl>
+						
+						
+						
+							<dl class="detailList">
+							<dt class="heading">See:</dt>
+							
+								<dd>#projectCoordsToCurve</dd>
+							
+							</dl>
+						
+
+					
+					
+					<hr />
+				
+					<a name=".projectPointToLine"> </a>
+					<div class="fixedFont">&lt;static&gt; 
+					
+					<span class="light">{<a href="../symbols/JXG.Coords.html">JXG.Coords</a>}</span>
+					<span class="light">JXG.Math.Geometry.</span><b>projectPointToLine</b>(point, line, board)
+					
+					</div>
+					<div class="description">
+						Calculates the coordinates of the orthogonal projection of a given point on a given line. I.o.w. the
+intersection point of the given line and its perpendicular through the given point.
+						
+						
+					</div>
+					
+						
+							<dl class="detailList">
+							<dt class="heading">Parameters:</dt>
+							
+								<dt>
+									<span class="light fixedFont">{<a href="../symbols/JXG.Point.html">JXG.Point</a>}</span> <b>point</b>
+									
+								</dt>
+								<dd>Point to project.</dd>
+							
+								<dt>
+									<span class="light fixedFont">{<a href="../symbols/JXG.Line.html">JXG.Line</a>}</span> <b>line</b>
+									
+								</dt>
+								<dd>Line on that the point is projected.</dd>
+							
+								<dt>
+									<span class="light fixedFont">{<a href="../symbols/JXG.Board.html">JXG.Board</a>}</span> <b>board</b>
+									<i>Optional, Default: point.board</i>
+								</dt>
+								<dd>Reference to a board.</dd>
+							
+							</dl>
+						
+						
+						
+						
+						
+							<dl class="detailList">
+							<dt class="heading">Returns:</dt>
+							
+								<dd><span class="light fixedFont">{<a href="../symbols/JXG.Coords.html">JXG.Coords</a>}</span> The coordinates of the projection of the given point on the given line.</dd>
+							
+							</dl>
+						
+						
+						
+
+					
+					
+					<hr />
+				
+					<a name=".projectPointToPoint"> </a>
+					<div class="fixedFont">&lt;static&gt; 
+					
+					<span class="light">{<a href="../symbols/JXG.Coords.html">JXG.Coords</a>}</span>
+					<span class="light">JXG.Math.Geometry.</span><b>projectPointToPoint</b>(point, dest)
+					
+					</div>
+					<div class="description">
+						Trivial projection of a point to another point.
+						
+						
+					</div>
+					
+						
+							<dl class="detailList">
+							<dt class="heading">Parameters:</dt>
+							
+								<dt>
+									<span class="light fixedFont">{<a href="../symbols/JXG.Point.html">JXG.Point</a>}</span> <b>point</b>
+									
+								</dt>
+								<dd>Point to project (not used).</dd>
+							
+								<dt>
+									<span class="light fixedFont">{<a href="../symbols/JXG.Point.html">JXG.Point</a>}</span> <b>dest</b>
+									
+								</dt>
+								<dd>Point on that the point is projected.</dd>
+							
+							</dl>
+						
+						
+						
+						
+						
+							<dl class="detailList">
+							<dt class="heading">Returns:</dt>
+							
+								<dd><span class="light fixedFont">{<a href="../symbols/JXG.Coords.html">JXG.Coords</a>}</span> The coordinates of the projection of the given point on the given circle.</dd>
+							
+							</dl>
+						
+						
+						
+
+					
+					
+					<hr />
+				
+					<a name=".projectPointToTurtle"> </a>
+					<div class="fixedFont">&lt;static&gt; 
+					
+					<span class="light">{<a href="../symbols/JXG.Coords.html">JXG.Coords</a>}</span>
+					<span class="light">JXG.Math.Geometry.</span><b>projectPointToTurtle</b>(point, turtle, board)
+					
+					</div>
+					<div class="description">
+						Calculates the coordinates of the projection of a given point on a given turtle. A turtle consists of
+one or more curves of curveType 'plot'. Uses #projectPointToCurve.
+						
+						
+					</div>
+					
+						
+							<dl class="detailList">
+							<dt class="heading">Parameters:</dt>
+							
+								<dt>
+									<span class="light fixedFont">{<a href="../symbols/JXG.Point.html">JXG.Point</a>}</span> <b>point</b>
+									
+								</dt>
+								<dd>Point to project.</dd>
+							
+								<dt>
+									<span class="light fixedFont">{<a href="../symbols/JXG.Turtle.html">JXG.Turtle</a>}</span> <b>turtle</b>
+									
+								</dt>
+								<dd>on that the point is projected.</dd>
+							
+								<dt>
+									<span class="light fixedFont">{<a href="../symbols/JXG.Board.html">JXG.Board</a>}</span> <b>board</b>
+									<i>Optional, Default: point.board</i>
+								</dt>
+								<dd>Reference to a board.</dd>
+							
+							</dl>
+						
+						
+						
+						
+						
+							<dl class="detailList">
+							<dt class="heading">Returns:</dt>
+							
+								<dd><span class="light fixedFont">{<a href="../symbols/JXG.Coords.html">JXG.Coords</a>}</span> The coordinates of the projection of the given point on the given turtle.</dd>
+							
+							</dl>
+						
+						
+						
+
+					
+					
+					<hr />
+				
+					<a name=".rad"> </a>
+					<div class="fixedFont">&lt;static&gt; 
+					
+					<span class="light">{Number}</span>
+					<span class="light">JXG.Math.Geometry.</span><b>rad</b>(A, B, C)
+					
+					</div>
+					<div class="description">
+						Calculates the internal angle defined by the three points A, B, C if you're going from A to C around B counterclockwise.
+						
+						
+					</div>
+					
+						
+							<dl class="detailList">
+							<dt class="heading">Parameters:</dt>
+							
+								<dt>
+									<span class="light fixedFont">{<a href="../symbols/JXG.Point.html">JXG.Point</a>|Array}</span> <b>A</b>
+									
+								</dt>
+								<dd>Point or [x,y] array</dd>
+							
+								<dt>
+									<span class="light fixedFont">{<a href="../symbols/JXG.Point.html">JXG.Point</a>|Array}</span> <b>B</b>
+									
+								</dt>
+								<dd>Point or [x,y] array</dd>
+							
+								<dt>
+									<span class="light fixedFont">{<a href="../symbols/JXG.Point.html">JXG.Point</a>|Array}</span> <b>C</b>
+									
+								</dt>
+								<dd>Point or [x,y] array</dd>
+							
+							</dl>
+						
+						
+						
+						
+						
+							<dl class="detailList">
+							<dt class="heading">Returns:</dt>
+							
+								<dd><span class="light fixedFont">{Number}</span> Angle in radians.</dd>
+							
+							</dl>
+						
+						
+						
+							<dl class="detailList">
+							<dt class="heading">See:</dt>
+							
+								<dd>#trueAngle</dd>
+							
+							</dl>
+						
+
+					
+					
+					<hr />
+				
+					<a name=".reflection"> </a>
+					<div class="fixedFont">&lt;static&gt; 
+					
+					<span class="light">{<a href="../symbols/JXG.Coords.html">JXG.Coords</a>}</span>
+					<span class="light">JXG.Math.Geometry.</span><b>reflection</b>(line, point, board)
+					
+					</div>
+					<div class="description">
+						Reflects the point along the line.
+						
+						
+					</div>
+					
+						
+							<dl class="detailList">
+							<dt class="heading">Parameters:</dt>
+							
+								<dt>
+									<span class="light fixedFont">{<a href="../symbols/JXG.Line.html">JXG.Line</a>}</span> <b>line</b>
+									
+								</dt>
+								<dd>Axis of reflection.</dd>
+							
+								<dt>
+									<span class="light fixedFont">{<a href="../symbols/JXG.Point.html">JXG.Point</a>}</span> <b>point</b>
+									
+								</dt>
+								<dd>Point to reflect.</dd>
+							
+								<dt>
+									<b>board</b>
+									<i>Optional, Default: point.board</i>
+								</dt>
+								<dd>Reference to the board</dd>
+							
+							</dl>
+						
+						
+						
+						
+						
+							<dl class="detailList">
+							<dt class="heading">Returns:</dt>
+							
+								<dd><span class="light fixedFont">{<a href="../symbols/JXG.Coords.html">JXG.Coords</a>}</span> Coordinates of the reflected point.</dd>
+							
+							</dl>
+						
+						
+						
+
+					
+					
+					<hr />
+				
+					<a name=".reuleauxPolygon"> </a>
+					<div class="fixedFont">&lt;static&gt; 
+					
+					<span class="light">{Array}</span>
+					<span class="light">JXG.Math.Geometry.</span><b>reuleauxPolygon</b>(points, nr)
+					
+					</div>
+					<div class="description">
+						Helper function to create curve which displays a Reuleaux polygons.
+						
+						
+					</div>
+					
+						
+							<dl class="detailList">
+							<dt class="heading">Parameters:</dt>
+							
+								<dt>
+									<span class="light fixedFont">{Array}</span> <b>points</b>
+									
+								</dt>
+								<dd>Array of points which should be the vertices of the Reuleaux polygon. Typically,
+these point list is the array vrtices of a regular polygon.</dd>
+							
+								<dt>
+									<span class="light fixedFont">{Number}</span> <b>nr</b>
+									
+								</dt>
+								<dd>Number of vertices</dd>
+							
+							</dl>
+						
+						
+						
+						
+						
+							<dl class="detailList">
+							<dt class="heading">Returns:</dt>
+							
+								<dd><span class="light fixedFont">{Array}</span> An array containing the two functions defining the Reuleaux polygon and the two values
+for the start and the end of the paramtric curve. array may be used as parent array of a <a href="../symbols/JXG.Curve.html">JXG.Curve</a>.</dd>
+							
+							</dl>
+						
+						
+						
+
+					
+					<dl class="detailList">
+					<dt class="heading">Examples:</dt>
+					
+					<pre class="code">var A = brd.create('point',[-2,-2]);
+var B = brd.create('point',[0,1]);
+var pol = brd.create('regularpolygon',[A,B,3], {withLines:false, fillColor:'none', highlightFillColor:'none', fillOpacity:0.0});
+var reuleauxTriangle = brd.create('curve', JXG.Math.Geometry.reuleauxPolygon(pol.vertices, 3),
+                         {strokeWidth:6, strokeColor:'#d66d55', fillColor:'#ad5544', highlightFillColor:'#ad5544'});
+
+</pre><div id="2543a843-46a9-4372-abc1-94d9ad2db7ac" style="width: 300px; height: 300px;"></div>
+<script type="text/javascript">
+var brd = JXG.JSXGraph.initBoard('2543a843-46a9-4372-abc1-94d9ad2db7ac', {boundingbox: [-5, 5, 5, -5], axis: true, showcopyright:false, shownavigation: false});
+var A = brd.create('point',[-2,-2]);
+var B = brd.create('point',[0,1]);
+var pol = brd.create('regularpolygon',[A,B,3], {withLines:false, fillColor:'none', highlightFillColor:'none', fillOpacity:0.0});
+var reuleauxTriangle = brd.create('curve', JXG.Math.Geometry.reuleauxPolygon(pol.vertices, 3),
+                         {strokeWidth:6, strokeColor:'#d66d55', fillColor:'#ad5544', highlightFillColor:'#ad5544'});
+</script><pre></pre>
+					
+					</dl>
+					
+					
+					<hr />
+				
+					<a name=".rotation"> </a>
+					<div class="fixedFont">&lt;static&gt; 
+					
+					<span class="light">{<a href="../symbols/JXG.Coords.html">JXG.Coords</a>}</span>
+					<span class="light">JXG.Math.Geometry.</span><b>rotation</b>(rotpoint, point, phi, board)
+					
+					</div>
+					<div class="description">
+						Computes the new position of a point which is rotated
+around a second point (called rotpoint) by the angle phi.
+						
+						
+					</div>
+					
+						
+							<dl class="detailList">
+							<dt class="heading">Parameters:</dt>
+							
+								<dt>
+									<span class="light fixedFont">{<a href="../symbols/JXG.Point.html">JXG.Point</a>}</span> <b>rotpoint</b>
+									
+								</dt>
+								<dd>Center of the rotation</dd>
+							
+								<dt>
+									<span class="light fixedFont">{<a href="../symbols/JXG.Point.html">JXG.Point</a>}</span> <b>point</b>
+									
+								</dt>
+								<dd>point to be rotated</dd>
+							
+								<dt>
+									<span class="light fixedFont">{Number}</span> <b>phi</b>
+									
+								</dt>
+								<dd>rotation angle in arc length</dd>
+							
+								<dt>
+									<span class="light fixedFont">{<a href="../symbols/JXG.Board.html">JXG.Board</a>}</span> <b>board</b>
+									<i>Optional, Default: point.board</i>
+								</dt>
+								<dd>Reference to the board</dd>
+							
+							</dl>
+						
+						
+						
+						
+						
+							<dl class="detailList">
+							<dt class="heading">Returns:</dt>
+							
+								<dd><span class="light fixedFont">{<a href="../symbols/JXG.Coords.html">JXG.Coords</a>}</span> Coordinates of the new position.</dd>
+							
+							</dl>
+						
+						
+						
+
+					
+					
+					<hr />
+				
+					<a name=".signedPolygon"> </a>
+					<div class="fixedFont">&lt;static&gt; 
+					
+					<span class="light">{Number}</span>
+					<span class="light">JXG.Math.Geometry.</span><b>signedPolygon</b>(p, sort)
+					
+					</div>
+					<div class="description">
+						Determine the signed area of a non-intersecting polygon.
+						
+						
+					</div>
+					
+						
+							<dl class="detailList">
+							<dt class="heading">Parameters:</dt>
+							
+								<dt>
+									<span class="light fixedFont">{Array}</span> <b>p</b>
+									
+								</dt>
+								<dd>An array containing <a href="../symbols/JXG.Point.html">JXG.Point</a>, <a href="../symbols/JXG.Coords.html">JXG.Coords</a>, and/or arrays.</dd>
+							
+								<dt>
+									<span class="light fixedFont">{Boolean}</span> <b>sort</b>
+									<i>Optional, Default: true</i>
+								</dt>
+								<dd></dd>
+							
+							</dl>
+						
+						
+						
+						
+						
+							<dl class="detailList">
+							<dt class="heading">Returns:</dt>
+							
+								<dd><span class="light fixedFont">{Number}</span> </dd>
+							
+							</dl>
+						
+						
+						
+
+					
+					
+					<hr />
+				
+					<a name=".signedTriangle"> </a>
+					<div class="fixedFont">&lt;static&gt; 
+					
+					<span class="light">{Number}</span>
+					<span class="light">JXG.Math.Geometry.</span><b>signedTriangle</b>(p1, p2, p3)
+					
+					</div>
+					<div class="description">
+						Signed triangle area of the three points given.
+						
+						
+					</div>
+					
+						
+							<dl class="detailList">
+							<dt class="heading">Parameters:</dt>
+							
+								<dt>
+									<span class="light fixedFont">{<a href="../symbols/JXG.Point.html">JXG.Point</a>|<a href="../symbols/JXG.Coords.html">JXG.Coords</a>|Array}</span> <b>p1</b>
+									
+								</dt>
+								<dd></dd>
+							
+								<dt>
+									<span class="light fixedFont">{<a href="../symbols/JXG.Point.html">JXG.Point</a>|<a href="../symbols/JXG.Coords.html">JXG.Coords</a>|Array}</span> <b>p2</b>
+									
+								</dt>
+								<dd></dd>
+							
+								<dt>
+									<span class="light fixedFont">{<a href="../symbols/JXG.Point.html">JXG.Point</a>|<a href="../symbols/JXG.Coords.html">JXG.Coords</a>|Array}</span> <b>p3</b>
+									
+								</dt>
+								<dd></dd>
+							
+							</dl>
+						
+						
+						
+						
+						
+							<dl class="detailList">
+							<dt class="heading">Returns:</dt>
+							
+								<dd><span class="light fixedFont">{Number}</span> </dd>
+							
+							</dl>
+						
+						
+						
+
+					
+					
+					<hr />
+				
+					<a name=".sortVertices"> </a>
+					<div class="fixedFont">&lt;static&gt; 
+					
+					<span class="light">{Array}</span>
+					<span class="light">JXG.Math.Geometry.</span><b>sortVertices</b>(p)
+					
+					</div>
+					<div class="description">
+						Sort vertices counter clockwise starting with the point with the lowest y coordinate.
+						
+						
+					</div>
+					
+						
+							<dl class="detailList">
+							<dt class="heading">Parameters:</dt>
+							
+								<dt>
+									<span class="light fixedFont">{Array}</span> <b>p</b>
+									
+								</dt>
+								<dd>An array containing <a href="../symbols/JXG.Point.html">JXG.Point</a>, <a href="../symbols/JXG.Coords.html">JXG.Coords</a>, and/or arrays.</dd>
+							
+							</dl>
+						
+						
+						
+						
+						
+							<dl class="detailList">
+							<dt class="heading">Returns:</dt>
+							
+								<dd><span class="light fixedFont">{Array}</span> </dd>
+							
+							</dl>
+						
+						
+						
+
+					
+					
+					<hr />
+				
+					<a name=".trueAngle"> </a>
+					<div class="fixedFont">&lt;static&gt; 
+					
+					<span class="light">{Number}</span>
+					<span class="light">JXG.Math.Geometry.</span><b>trueAngle</b>(A, B, C)
+					
+					</div>
+					<div class="description">
+						Calculates the angle defined by the three points A, B, C if you're going from A to C around B counterclockwise.
+						
+						
+					</div>
+					
+						
+							<dl class="detailList">
+							<dt class="heading">Parameters:</dt>
+							
+								<dt>
+									<span class="light fixedFont">{<a href="../symbols/JXG.Point.html">JXG.Point</a>|Array}</span> <b>A</b>
+									
+								</dt>
+								<dd>Point or [x,y] array</dd>
+							
+								<dt>
+									<span class="light fixedFont">{<a href="../symbols/JXG.Point.html">JXG.Point</a>|Array}</span> <b>B</b>
+									
+								</dt>
+								<dd>Point or [x,y] array</dd>
+							
+								<dt>
+									<span class="light fixedFont">{<a href="../symbols/JXG.Point.html">JXG.Point</a>|Array}</span> <b>C</b>
+									
+								</dt>
+								<dd>Point or [x,y] array</dd>
+							
+							</dl>
+						
+						
+						
+						
+						
+							<dl class="detailList">
+							<dt class="heading">Returns:</dt>
+							
+								<dd><span class="light fixedFont">{Number}</span> The angle in degrees.</dd>
+							
+							</dl>
+						
+						
+						
+							<dl class="detailList">
+							<dt class="heading">See:</dt>
+							
+								<dd>#rad</dd>
+							
+							</dl>
+						
+
+					
+					
+					
+				
+			
+			
+<!-- ============================== event details ========================= -->		
+			
+			
+			<hr />
+			
+			
+
+		</div>
+
+		
+<!-- ============================== footer ================================= -->
+		<div class="fineprint" style="clear:both">
+			
+			Documentation generated by <a href="http://code.google.com/p/jsdoc-toolkit/" target="_blank">JsDoc Toolkit</a> 2.4.0 on Thu Jan 15 2015 14:24:27 GMT+0100 (CET)
+		</div>
+	</body>
+</html>

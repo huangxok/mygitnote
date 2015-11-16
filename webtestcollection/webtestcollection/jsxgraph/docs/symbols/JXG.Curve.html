@@ -1,0 +1,2473 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+	<head>
+		<meta http-equiv="content-type" content="text/html; charset=utf-8" />
+		<meta name="generator" content="JsDoc Toolkit" />
+         <link rel="stylesheet" type="text/css" href="../static/jsxgraph.css" />
+         <script type="text/javascript" src="../static/jquery.min.js"></script>
+         <script type="text/javascript" src="../static/jsxgraphcore.js"></script>
+		
+		<title>JsDoc Reference - JXG.Curve</title>
+
+		<style type="text/css">
+			/* default.css */
+body
+{
+	font: 12px "Lucida Grande", Tahoma, Arial, Helvetica, sans-serif;
+	width: 800px;
+}
+
+.header
+{
+	clear: both;
+	background-color: #ccc;
+	padding: 8px;
+}
+
+h1
+{
+	font-size: 150%;
+	font-weight: bold;
+	padding: 0;
+	margin: 1em 0 0 .3em;
+}
+
+hr
+{
+	border: none 0;
+	border-top: 1px solid #7F8FB1;
+	height: 1px;
+}
+
+pre.code
+{
+	display: block;
+	padding: 8px;
+	border: 1px dashed #ccc;
+}
+
+#index
+{
+	margin-top: 24px;
+	float: left;
+	width: 220px;
+	position: absolute;
+	left: 8px;
+	background-color: #F3F3F3;
+	padding: 8px;
+}
+
+#content
+{
+	margin-left: 250px;
+	width: 600px;
+}
+
+.classList
+{
+	list-style-type: none;
+	padding: 0;
+	margin: 0 0 0 8px;
+	font-family: arial, sans-serif;
+	font-size: 1em;
+	overflow: auto;
+}
+
+.classList li
+{
+	padding: 0;
+	margin: 0 0 8px 0;
+}
+
+.summaryTable { width: 100%; }
+
+h1.classTitle
+{
+	font-size:170%;
+	line-height:130%;
+}
+
+h2 { font-size: 110%; }
+caption, div.sectionTitle
+{
+	background-color: #7F8FB1;
+	color: #fff;
+	font-size:130%;
+	text-align: left;
+	padding: 2px 6px 2px 6px;
+	border: 1px #7F8FB1 solid;
+}
+
+div.sectionTitle { margin-bottom: 8px; }
+.summaryTable thead { display: none; }
+
+.summaryTable td
+{
+	vertical-align: top;
+	padding: 4px;
+	border-bottom: 1px #7F8FB1 solid;
+	border-right: 1px #7F8FB1 solid;
+}
+
+/*col#summaryAttributes {}*/
+.summaryTable td.attributes
+{
+	border-left: 1px #7F8FB1 solid;
+	width: 140px;
+	text-align: right;
+}
+
+td.attributes, .fixedFont
+{
+	line-height: 15px;
+	color: #002EBE;
+	font-family: "Courier New",Courier,monospace;
+	font-size: 13px;
+}
+
+.summaryTable td.nameDescription
+{
+	text-align: left;
+	font-size: 13px;
+	line-height: 15px;
+}
+
+.summaryTable td.nameDescription, .description
+{
+	line-height: 15px;
+	padding: 4px;
+	padding-left: 4px;
+}
+
+.summaryTable { margin-bottom: 8px; }
+
+ul.inheritsList
+{
+	list-style: square;
+	margin-left: 20px;
+	padding-left: 0;
+}
+
+.detailList {
+	margin-left: 20px; 
+	line-height: 15px;
+}
+.detailList dt { margin-left: 20px; }
+
+.detailList .heading
+{
+	font-weight: bold;
+	padding-bottom: 6px;
+	margin-left: 0;
+}
+
+.light, td.attributes, .light a:link, .light a:visited
+{
+	color: #777;
+	font-style: italic;
+}
+
+.fineprint
+{
+	text-align: right;
+	font-size: 10px;
+}
+		</style>
+	</head>
+
+	<body>
+<!-- ============================== header ================================= -->	
+		<!-- begin static/header.html -->
+		<div id="header">
+<h1 style="font-size: 2.5em"><img src="static/logo.gif" />JSXGraph Reference</h1>
+</div>
+<div id="jsdeactivated_hint" style="background-color: #fcc; border: solid 1px red; padding: 3px">
+<h2>JavaScript must be enabled in order for you to use JSXGraph and JSXGraph reference.
+However, it seems JavaScript is either disabled or not supported by your browser.</h2>
+</div>
+<script type="text/javascript">
+ /* <![CDATA[ */
+   document.getElementById("jsdeactivated_hint").style.display = 'none';
+ /* ]]> */
+</script>
+		<!-- end static/header.html -->
+
+<!-- ============================== classes index ============================ -->
+		<div id="index">
+			<!-- begin publish.classesIndex -->
+			<div align="center"><a href="../index.html">Class Index</a>
+| <a href="../files.html">File Index</a></div>
+<hr />
+<h2 onclick="switchList('myElList');" style="cursor: pointer"><img src="static/expandable.gif"/> Elements</h2>
+<ul class="classList" id="myElList" style="display: block;">
+	
+	<li></li>
+	
+	<li><a href="../symbols/Angle.html">Angle</a></li>
+	
+	<li><a href="../symbols/Arc.html">Arc</a></li>
+	
+	<li><a href="../symbols/Arrow.html">Arrow</a></li>
+	
+	<li><a href="../symbols/Arrowparallel.html">Arrowparallel</a></li>
+	
+	<li><a href="../symbols/Axis.html">Axis</a></li>
+	
+	<li><a href="../symbols/Bisector.html">Bisector</a></li>
+	
+	<li><a href="../symbols/Bisectorlines.html">Bisectorlines</a></li>
+	
+	<li><a href="../symbols/Button.html">Button</a></li>
+	
+	<li><a href="../symbols/Checkbox.html">Checkbox</a></li>
+	
+	<li><a href="../symbols/Circle.html">Circle</a></li>
+	
+	<li><a href="../symbols/Circumcenter.html">Circumcenter</a></li>
+	
+	<li><a href="../symbols/Circumcircle.html">Circumcircle</a></li>
+	
+	<li><a href="../symbols/CircumcircleArc.html">CircumcircleArc</a></li>
+	
+	<li><a href="../symbols/CircumcircleSector.html">CircumcircleSector</a></li>
+	
+	<li><a href="../symbols/Conic.html">Conic</a></li>
+	
+	<li><a href="../symbols/Curve.html">Curve</a></li>
+	
+	<li><a href="../symbols/Ellipse.html">Ellipse</a></li>
+	
+	<li><a href="../symbols/Functiongraph.html">Functiongraph</a></li>
+	
+	<li><a href="../symbols/Glider.html">Glider</a></li>
+	
+	<li><a href="../symbols/Grid.html">Grid</a></li>
+	
+	<li><a href="../symbols/Group.html">Group</a></li>
+	
+	<li><a href="../symbols/Hatch.html">Hatch</a></li>
+	
+	<li><a href="../symbols/Hyperbola.html">Hyperbola</a></li>
+	
+	<li><a href="../symbols/Image.html">Image</a></li>
+	
+	<li><a href="../symbols/Incenter.html">Incenter</a></li>
+	
+	<li><a href="../symbols/Incircle.html">Incircle</a></li>
+	
+	<li><a href="../symbols/Inequality.html">Inequality</a></li>
+	
+	<li><a href="../symbols/Input.html">Input</a></li>
+	
+	<li><a href="../symbols/Integral.html">Integral</a></li>
+	
+	<li><a href="../symbols/Intersection.html">Intersection</a></li>
+	
+	<li></li>
+	
+	<li></li>
+	
+	<li></li>
+	
+	<li></li>
+	
+	<li></li>
+	
+	<li></li>
+	
+	<li></li>
+	
+	<li></li>
+	
+	<li></li>
+	
+	<li></li>
+	
+	<li></li>
+	
+	<li></li>
+	
+	<li></li>
+	
+	<li></li>
+	
+	<li></li>
+	
+	<li></li>
+	
+	<li></li>
+	
+	<li></li>
+	
+	<li></li>
+	
+	<li></li>
+	
+	<li></li>
+	
+	<li></li>
+	
+	<li></li>
+	
+	<li></li>
+	
+	<li></li>
+	
+	<li></li>
+	
+	<li></li>
+	
+	<li></li>
+	
+	<li></li>
+	
+	<li></li>
+	
+	<li></li>
+	
+	<li></li>
+	
+	<li></li>
+	
+	<li></li>
+	
+	<li></li>
+	
+	<li></li>
+	
+	<li></li>
+	
+	<li></li>
+	
+	<li></li>
+	
+	<li></li>
+	
+	<li></li>
+	
+	<li></li>
+	
+	<li></li>
+	
+	<li></li>
+	
+	<li></li>
+	
+	<li><a href="../symbols/Line.html">Line</a></li>
+	
+	<li><a href="../symbols/Locus.html">Locus</a></li>
+	
+	<li><a href="../symbols/MajorArc.html">MajorArc</a></li>
+	
+	<li><a href="../symbols/MajorSector.html">MajorSector</a></li>
+	
+	<li><a href="../symbols/Midpoint.html">Midpoint</a></li>
+	
+	<li><a href="../symbols/MinorArc.html">MinorArc</a></li>
+	
+	<li><a href="../symbols/MinorSector.html">MinorSector</a></li>
+	
+	<li><a href="../symbols/Mirrorpoint.html">Mirrorpoint</a></li>
+	
+	<li><a href="../symbols/NonReflexAngle.html">NonReflexAngle</a></li>
+	
+	<li><a href="../symbols/Normal.html">Normal</a></li>
+	
+	<li><a href="../symbols/Orthogonalprojection.html">Orthogonalprojection</a></li>
+	
+	<li><a href="../symbols/OtherIntersection.html">OtherIntersection</a></li>
+	
+	<li><a href="../symbols/Parabola.html">Parabola</a></li>
+	
+	<li><a href="../symbols/Parallel.html">Parallel</a></li>
+	
+	<li><a href="../symbols/Parallelpoint.html">Parallelpoint</a></li>
+	
+	<li><a href="../symbols/Perpendicular.html">Perpendicular</a></li>
+	
+	<li><a href="../symbols/PerpendicularPoint.html">PerpendicularPoint</a></li>
+	
+	<li><a href="../symbols/PerpendicularSegment.html">PerpendicularSegment</a></li>
+	
+	<li><a href="../symbols/Point.html">Point</a></li>
+	
+	<li><a href="../symbols/PolarLine.html">PolarLine</a></li>
+	
+	<li><a href="../symbols/PolePoint.html">PolePoint</a></li>
+	
+	<li><a href="../symbols/Polygon.html">Polygon</a></li>
+	
+	<li></li>
+	
+	<li><a href="../symbols/RadicalAxis.html">RadicalAxis</a></li>
+	
+	<li><a href="../symbols/Reflection.html">Reflection</a></li>
+	
+	<li><a href="../symbols/ReflexAngle.html">ReflexAngle</a></li>
+	
+	<li><a href="../symbols/RegularPolygon.html">RegularPolygon</a></li>
+	
+	<li><a href="../symbols/Riemannsum.html">Riemannsum</a></li>
+	
+	<li><a href="../symbols/Sector.html">Sector</a></li>
+	
+	<li><a href="../symbols/Segment.html">Segment</a></li>
+	
+	<li><a href="../symbols/Semicircle.html">Semicircle</a></li>
+	
+	<li><a href="../symbols/Slider.html">Slider</a></li>
+	
+	<li><a href="../symbols/Slopetriangle.html">Slopetriangle</a></li>
+	
+	<li><a href="../symbols/Stepfunction.html">Stepfunction</a></li>
+	
+	<li><a href="../symbols/Tangent.html">Tangent</a></li>
+	
+	<li><a href="../symbols/Tapemeasure.html">Tapemeasure</a></li>
+	
+	<li><a href="../symbols/Text.html">Text</a></li>
+	
+	<li><a href="../symbols/Ticks.html">Ticks</a></li>
+	
+	<li><a href="../symbols/Tracecurve.html">Tracecurve</a></li>
+	
+</ul>
+<h2 onclick="switchList('myClList');" style="cursor: pointer"><img src="static/expandable.gif"/> Classes</h2>
+<ul class="classList" id="myClList" style="display: block;">
+	
+	<li><i><a href="../symbols/_global_.html">_global_</a></i></li>
+	
+	<li></li>
+	
+	<li></li>
+	
+	<li></li>
+	
+	<li></li>
+	
+	<li></li>
+	
+	<li></li>
+	
+	<li></li>
+	
+	<li></li>
+	
+	<li></li>
+	
+	<li></li>
+	
+	<li></li>
+	
+	<li></li>
+	
+	<li></li>
+	
+	<li></li>
+	
+	<li></li>
+	
+	<li></li>
+	
+	<li></li>
+	
+	<li></li>
+	
+	<li></li>
+	
+	<li></li>
+	
+	<li></li>
+	
+	<li></li>
+	
+	<li></li>
+	
+	<li></li>
+	
+	<li></li>
+	
+	<li></li>
+	
+	<li></li>
+	
+	<li></li>
+	
+	<li></li>
+	
+	<li></li>
+	
+	<li><a href="../symbols/JXG.html">JXG</a></li>
+	
+	<li><a href="../symbols/JXG.AbstractRenderer.html">JXG.AbstractRenderer</a></li>
+	
+	<li><a href="../symbols/JXG.Board.html">JXG.Board</a></li>
+	
+	<li><a href="../symbols/JXG.C.html">JXG.C</a></li>
+	
+	<li><a href="../symbols/JXG.CanvasRenderer.html">JXG.CanvasRenderer</a></li>
+	
+	<li><a href="../symbols/JXG.Circle.html">JXG.Circle</a></li>
+	
+	<li><a href="../symbols/JXG.Complex.html">JXG.Complex</a></li>
+	
+	<li><a href="../symbols/JXG.Composition.html">JXG.Composition</a></li>
+	
+	<li><a href="../symbols/JXG.Coords.html">JXG.Coords</a></li>
+	
+	<li><a href="../symbols/JXG.CoordsElement.html">JXG.CoordsElement</a></li>
+	
+	<li><a href="../symbols/JXG.Curve.html">JXG.Curve</a></li>
+	
+	<li><a href="../symbols/JXG.Dump.html">JXG.Dump</a></li>
+	
+	<li><a href="../symbols/JXG.EventEmitter.html">JXG.EventEmitter</a></li>
+	
+	<li><a href="../symbols/JXG.GeometryElement.html">JXG.GeometryElement</a></li>
+	
+	<li><a href="../symbols/JXG.GeonextParser.html">JXG.GeonextParser</a></li>
+	
+	<li><a href="../symbols/JXG.Group.html">JXG.Group</a></li>
+	
+	<li><a href="../symbols/JXG.Image.html">JXG.Image</a></li>
+	
+	<li><a href="../symbols/JXG.JessieCode.html">JXG.JessieCode</a></li>
+	
+	<li><a href="../symbols/JXG.JSXGraph.html">JXG.JSXGraph</a></li>
+	
+	<li><a href="../symbols/JXG.Line.html">JXG.Line</a></li>
+	
+	<li><a href="../symbols/JXG.Math.html">JXG.Math</a></li>
+	
+	<li><a href="../symbols/JXG.Math.Geometry.html">JXG.Math.Geometry</a></li>
+	
+	<li><a href="../symbols/JXG.Math.Numerics.html">JXG.Math.Numerics</a></li>
+	
+	<li><a href="../symbols/JXG.Math.Poly.html">JXG.Math.Poly</a></li>
+	
+	<li><a href="../symbols/JXG.Math.Poly.Monomial.html">JXG.Math.Poly.Monomial</a></li>
+	
+	<li><a href="../symbols/JXG.Math.Poly.Polynomial.html">JXG.Math.Poly.Polynomial</a></li>
+	
+	<li><a href="../symbols/JXG.Math.Poly.Ring.html">JXG.Math.Poly.Ring</a></li>
+	
+	<li><a href="../symbols/JXG.Math.Statistics.html">JXG.Math.Statistics</a></li>
+	
+	<li><a href="../symbols/JXG.Math.Symbolic.html">JXG.Math.Symbolic</a></li>
+	
+	<li><a href="../symbols/JXG.NoRenderer.html">JXG.NoRenderer</a></li>
+	
+	<li><a href="../symbols/JXG.Options.html">JXG.Options</a></li>
+	
+	<li><a href="../symbols/JXG.Point.html">JXG.Point</a></li>
+	
+	<li><a href="../symbols/JXG.Polygon.html">JXG.Polygon</a></li>
+	
+	<li><a href="../symbols/JXG.Server.html">JXG.Server</a></li>
+	
+	<li><a href="../symbols/JXG.Server.modules.html">JXG.Server.modules</a></li>
+	
+	<li><a href="../symbols/JXG.SVGRenderer.html">JXG.SVGRenderer</a></li>
+	
+	<li><a href="../symbols/JXG.Text.html">JXG.Text</a></li>
+	
+	<li><a href="../symbols/JXG.Ticks.html">JXG.Ticks</a></li>
+	
+	<li><a href="../symbols/JXG.Turtle.html">JXG.Turtle</a></li>
+	
+	<li><a href="../symbols/JXG.Util.html">JXG.Util</a></li>
+	
+	<li><a href="../symbols/JXG.Util.Base64.html">JXG.Util.Base64</a></li>
+	
+	<li><a href="../symbols/JXG.Util.Unzip.html">JXG.Util.Unzip</a></li>
+	
+	<li><a href="../symbols/JXG.Util.UTF8.html">JXG.Util.UTF8</a></li>
+	
+	<li><a href="../symbols/JXG.VMLRenderer.html">JXG.VMLRenderer</a></li>
+	
+	<li><a href="../symbols/JXG.XML.html">JXG.XML</a></li>
+	
+	<li></li>
+	
+	<li></li>
+	
+	<li></li>
+	
+	<li></li>
+	
+	<li></li>
+	
+	<li></li>
+	
+	<li></li>
+	
+	<li></li>
+	
+	<li></li>
+	
+	<li></li>
+	
+	<li></li>
+	
+	<li></li>
+	
+	<li></li>
+	
+	<li></li>
+	
+	<li></li>
+	
+	<li></li>
+	
+	<li></li>
+	
+	<li></li>
+	
+	<li></li>
+	
+	<li></li>
+	
+	<li></li>
+	
+	<li></li>
+	
+	<li><a href="../symbols/Quadtree.html">Quadtree</a></li>
+	
+	<li></li>
+	
+	<li></li>
+	
+	<li></li>
+	
+	<li></li>
+	
+	<li></li>
+	
+	<li></li>
+	
+	<li></li>
+	
+	<li></li>
+	
+	<li></li>
+	
+	<li></li>
+	
+	<li></li>
+	
+	<li></li>
+	
+	<li></li>
+	
+	<li></li>
+	
+	<li></li>
+	
+	<li></li>
+	
+</ul>
+<hr />
+
+<script type="text/javascript">
+  /* <![CDATA[ */
+   	function switchList(id) {
+      document.getElementById(id).style.display = ( document.getElementById(id).style.display == 'block' ? 'none' : 'block' );
+      document.cookie = id.toLowerCase() + 'status=' + document.getElementById(id).style.display + ';';
+  	};
+  	
+	function initList(id) {
+      var cookieList = document.cookie.split(';');
+      for(var c=0; c<cookieList.length; c++) {
+        if(cookieList[c].indexOf(id.toLowerCase() + 'status') != -1) {
+          document.getElementById(id).style.display = cookieList[c].split('=')[1];
+        }
+      }
+  	};
+  	
+  	initList('myElList');
+    initList('myClList');
+  /* ]]> */
+</script>
+			<!-- end publish.classesIndex -->
+		</div>
+		
+		<div id="content">
+<!-- ============================== class title ============================ -->
+			<h1 class="classTitle">
+				
+				Class JXG.Curve
+			</h1>
+
+<!-- ============================== Inheritance tree ========================== -->
+
+<p>
+ <strong><a href="../symbols/JXG.GeometryElement.html">JXG.GeometryElement</a></strong><br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&#x21b3; <strong>JXG.Curve</strong><br /><br /></p>
+
+
+<!-- ============================== class summary ========================== -->
+			<p class="description">
+				Creates a new curve object. Do not use this constructor to create a curve. Use <a href="../symbols/JXG.Board.html#create">JXG.Board#create</a> with
+type <a href="../symbols/Curve.html">Curve</a>, or <a href="../symbols/Functiongraph.html">Functiongraph</a> instead.
+				
+				
+					<br /><br /><i>Defined in: </i> <a href="../symbols/src/src_base_curve.js.html">curve.js</a>.
+				
+
+                <br />Extends
+                    <a href="../symbols/JXG.GeometryElement.html">JXG.GeometryElement</a>.
+                
+			</p>
+
+<!-- ============================== constructor summary ==================== -->			
+			
+			<table class="summaryTable" cellspacing="0" summary="A summary of the constructor documented in the class JXG.Curve.">
+				<caption>Class Summary</caption>
+				<thead>
+					<tr>
+						<th scope="col">Constructor Attributes</th>
+						<th scope="col">Constructor Name and Description</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr>
+						<td class="attributes">&nbsp;</td>
+						<td class="nameDescription" >
+							<div class="fixedFont">
+								<b><a href="../symbols/JXG.Curve.html#constructor">JXG.Curve</a></b>(board, parents, attributes)
+							</div>
+							<div class="description">Curves are the common object for function graphs, parametric curves, polar curves, and data plots.</div>
+						</td>
+					</tr>
+				</tbody>
+			</table>
+			
+
+<!-- ============================== attributes summary ===================== -->
+			
+				
+				
+
+				
+				<dl class="inheritsList">
+				<dt>Fields borrowed from class <a href="../symbols/JXG.GeometryElement.html">JXG.GeometryElement</a>: </dt><dd><a href="../symbols/JXG.GeometryElement.html#_org_type">_org_type</a>, <a href="../symbols/JXG.GeometryElement.html#_pos">_pos</a>, <a href="../symbols/JXG.GeometryElement.html#addEvent">addEvent</a>, <a href="../symbols/JXG.GeometryElement.html#ancestors">ancestors</a>, <a href="../symbols/JXG.GeometryElement.html#baseElement">baseElement</a>, <a href="../symbols/JXG.GeometryElement.html#board">board</a>, <a href="../symbols/JXG.GeometryElement.html#childElements">childElements</a>, <a href="../symbols/JXG.GeometryElement.html#dash">dash</a>, <a href="../symbols/JXG.GeometryElement.html#descendants">descendants</a>, <a href="../symbols/JXG.GeometryElement.html#draft">draft</a>, <a href="../symbols/JXG.GeometryElement.html#dump">dump</a>, <a href="../symbols/JXG.GeometryElement.html#elementClass">elementClass</a>, <a href="../symbols/JXG.GeometryElement.html#elType">elType</a>, <a href="../symbols/JXG.GeometryElement.html#eventHandlers">eventHandlers</a>, <a href="../symbols/JXG.GeometryElement.html#fillColor">fillColor</a>, <a href="../symbols/JXG.GeometryElement.html#fillOpacity">fillOpacity</a>, <a href="../symbols/JXG.GeometryElement.html#fixed">fixed</a>, <a href="../symbols/JXG.GeometryElement.html#frozen">frozen</a>, <a href="../symbols/JXG.GeometryElement.html#getProperty">getProperty</a>, <a href="../symbols/JXG.GeometryElement.html#hasLabel">hasLabel</a>, <a href="../symbols/JXG.GeometryElement.html#highlight">highlight</a>, <a href="../symbols/JXG.GeometryElement.html#highlighted">highlighted</a>, <a href="../symbols/JXG.GeometryElement.html#highlightFillColor">highlightFillColor</a>, <a href="../symbols/JXG.GeometryElement.html#highlightFillOpacity">highlightFillOpacity</a>, <a href="../symbols/JXG.GeometryElement.html#highlightStrokeColor">highlightStrokeColor</a>, <a href="../symbols/JXG.GeometryElement.html#highlightStrokeOpacity">highlightStrokeOpacity</a>, <a href="../symbols/JXG.GeometryElement.html#highlightStrokeWidth">highlightStrokeWidth</a>, <a href="../symbols/JXG.GeometryElement.html#id">id</a>, <a href="../symbols/JXG.GeometryElement.html#isDraggable">isDraggable</a>, <a href="../symbols/JXG.GeometryElement.html#isReal">isReal</a>, <a href="../symbols/JXG.GeometryElement.html#lastDragTime">lastDragTime</a>, <a href="../symbols/JXG.GeometryElement.html#methodMap">methodMap</a>, <a href="../symbols/JXG.GeometryElement.html#mouseover">mouseover</a>, <a href="../symbols/JXG.GeometryElement.html#name">name</a>, <a href="../symbols/JXG.GeometryElement.html#needsRegularUpdate">needsRegularUpdate</a>, <a href="../symbols/JXG.GeometryElement.html#needsUpdate">needsUpdate</a>, <a href="../symbols/JXG.GeometryElement.html#notExistingParents">notExistingParents</a>, <a href="../symbols/JXG.GeometryElement.html#numTraces">numTraces</a>, <a href="../symbols/JXG.GeometryElement.html#parents">parents</a>, <a href="../symbols/JXG.GeometryElement.html#quadraticform">quadraticform</a>, <a href="../symbols/JXG.GeometryElement.html#removeEvent">removeEvent</a>, <a href="../symbols/JXG.GeometryElement.html#rendNode">rendNode</a>, <a href="../symbols/JXG.GeometryElement.html#scalable">scalable</a>, <a href="../symbols/JXG.GeometryElement.html#setProperty">setProperty</a>, <a href="../symbols/JXG.GeometryElement.html#shadow">shadow</a>, <a href="../symbols/JXG.GeometryElement.html#snapToGrid">snapToGrid</a>, <a href="../symbols/JXG.GeometryElement.html#stdform">stdform</a>, <a href="../symbols/JXG.GeometryElement.html#strokeColor">strokeColor</a>, <a href="../symbols/JXG.GeometryElement.html#strokeOpacity">strokeOpacity</a>, <a href="../symbols/JXG.GeometryElement.html#strokeWidth">strokeWidth</a>, <a href="../symbols/JXG.GeometryElement.html#subs">subs</a>, <a href="../symbols/JXG.GeometryElement.html#symbolic">symbolic</a>, <a href="../symbols/JXG.GeometryElement.html#trace">trace</a>, <a href="../symbols/JXG.GeometryElement.html#traceAttributes">traceAttributes</a>, <a href="../symbols/JXG.GeometryElement.html#traces">traces</a>, <a href="../symbols/JXG.GeometryElement.html#transformations">transformations</a>, <a href="../symbols/JXG.GeometryElement.html#type">type</a>, <a href="../symbols/JXG.GeometryElement.html#visible">visible</a>, <a href="../symbols/JXG.GeometryElement.html#visProp">visProp</a>, <a href="../symbols/JXG.GeometryElement.html#withLabel">withLabel</a></dd>
+				</dl>
+				
+			
+
+<!-- ============================== properties summary ===================== -->
+			
+				
+				
+				<table class="summaryTable" cellspacing="0" summary="A summary of the fields documented in the class JXG.Curve.">
+					<caption>Field Summary</caption>
+					<thead>
+						<tr>
+							<th scope="col">Field Attributes</th>
+							<th scope="col">Field Name and Description</th>
+						</tr>
+					</thead>
+					<tbody>
+					
+						<tr>
+							<td class="attributes">&nbsp;</td>
+							<td class="nameDescription">
+								<div class="fixedFont">
+								<b><a href="../symbols/JXG.Curve.html#numberPoints">numberPoints</a></b>
+								</div>
+								<div class="description">Number of points on curves.</div>
+							</td>
+						</tr>
+					
+						<tr>
+							<td class="attributes">&nbsp;</td>
+							<td class="nameDescription">
+								<div class="fixedFont">
+								<b><a href="../symbols/JXG.Curve.html#qdt">qdt</a></b>
+								</div>
+								<div class="description">Stores a quad tree if it is required.</div>
+							</td>
+						</tr>
+					
+					</tbody>
+				</table>
+				
+				
+				
+				<dl class="inheritsList">
+				<dt>Fields borrowed from class <a href="../symbols/JXG.GeometryElement.html">JXG.GeometryElement</a>: </dt><dd><a href="../symbols/JXG.GeometryElement.html#_org_type">_org_type</a>, <a href="../symbols/JXG.GeometryElement.html#_pos">_pos</a>, <a href="../symbols/JXG.GeometryElement.html#addEvent">addEvent</a>, <a href="../symbols/JXG.GeometryElement.html#ancestors">ancestors</a>, <a href="../symbols/JXG.GeometryElement.html#baseElement">baseElement</a>, <a href="../symbols/JXG.GeometryElement.html#board">board</a>, <a href="../symbols/JXG.GeometryElement.html#childElements">childElements</a>, <a href="../symbols/JXG.GeometryElement.html#dash">dash</a>, <a href="../symbols/JXG.GeometryElement.html#descendants">descendants</a>, <a href="../symbols/JXG.GeometryElement.html#draft">draft</a>, <a href="../symbols/JXG.GeometryElement.html#dump">dump</a>, <a href="../symbols/JXG.GeometryElement.html#elementClass">elementClass</a>, <a href="../symbols/JXG.GeometryElement.html#elType">elType</a>, <a href="../symbols/JXG.GeometryElement.html#eventHandlers">eventHandlers</a>, <a href="../symbols/JXG.GeometryElement.html#fillColor">fillColor</a>, <a href="../symbols/JXG.GeometryElement.html#fillOpacity">fillOpacity</a>, <a href="../symbols/JXG.GeometryElement.html#fixed">fixed</a>, <a href="../symbols/JXG.GeometryElement.html#frozen">frozen</a>, <a href="../symbols/JXG.GeometryElement.html#getProperty">getProperty</a>, <a href="../symbols/JXG.GeometryElement.html#hasLabel">hasLabel</a>, <a href="../symbols/JXG.GeometryElement.html#highlight">highlight</a>, <a href="../symbols/JXG.GeometryElement.html#highlighted">highlighted</a>, <a href="../symbols/JXG.GeometryElement.html#highlightFillColor">highlightFillColor</a>, <a href="../symbols/JXG.GeometryElement.html#highlightFillOpacity">highlightFillOpacity</a>, <a href="../symbols/JXG.GeometryElement.html#highlightStrokeColor">highlightStrokeColor</a>, <a href="../symbols/JXG.GeometryElement.html#highlightStrokeOpacity">highlightStrokeOpacity</a>, <a href="../symbols/JXG.GeometryElement.html#highlightStrokeWidth">highlightStrokeWidth</a>, <a href="../symbols/JXG.GeometryElement.html#id">id</a>, <a href="../symbols/JXG.GeometryElement.html#isDraggable">isDraggable</a>, <a href="../symbols/JXG.GeometryElement.html#isReal">isReal</a>, <a href="../symbols/JXG.GeometryElement.html#lastDragTime">lastDragTime</a>, <a href="../symbols/JXG.GeometryElement.html#methodMap">methodMap</a>, <a href="../symbols/JXG.GeometryElement.html#mouseover">mouseover</a>, <a href="../symbols/JXG.GeometryElement.html#name">name</a>, <a href="../symbols/JXG.GeometryElement.html#needsRegularUpdate">needsRegularUpdate</a>, <a href="../symbols/JXG.GeometryElement.html#needsUpdate">needsUpdate</a>, <a href="../symbols/JXG.GeometryElement.html#notExistingParents">notExistingParents</a>, <a href="../symbols/JXG.GeometryElement.html#numTraces">numTraces</a>, <a href="../symbols/JXG.GeometryElement.html#parents">parents</a>, <a href="../symbols/JXG.GeometryElement.html#quadraticform">quadraticform</a>, <a href="../symbols/JXG.GeometryElement.html#removeEvent">removeEvent</a>, <a href="../symbols/JXG.GeometryElement.html#rendNode">rendNode</a>, <a href="../symbols/JXG.GeometryElement.html#scalable">scalable</a>, <a href="../symbols/JXG.GeometryElement.html#setProperty">setProperty</a>, <a href="../symbols/JXG.GeometryElement.html#shadow">shadow</a>, <a href="../symbols/JXG.GeometryElement.html#snapToGrid">snapToGrid</a>, <a href="../symbols/JXG.GeometryElement.html#stdform">stdform</a>, <a href="../symbols/JXG.GeometryElement.html#strokeColor">strokeColor</a>, <a href="../symbols/JXG.GeometryElement.html#strokeOpacity">strokeOpacity</a>, <a href="../symbols/JXG.GeometryElement.html#strokeWidth">strokeWidth</a>, <a href="../symbols/JXG.GeometryElement.html#subs">subs</a>, <a href="../symbols/JXG.GeometryElement.html#symbolic">symbolic</a>, <a href="../symbols/JXG.GeometryElement.html#trace">trace</a>, <a href="../symbols/JXG.GeometryElement.html#traceAttributes">traceAttributes</a>, <a href="../symbols/JXG.GeometryElement.html#traces">traces</a>, <a href="../symbols/JXG.GeometryElement.html#transformations">transformations</a>, <a href="../symbols/JXG.GeometryElement.html#type">type</a>, <a href="../symbols/JXG.GeometryElement.html#visible">visible</a>, <a href="../symbols/JXG.GeometryElement.html#visProp">visProp</a>, <a href="../symbols/JXG.GeometryElement.html#withLabel">withLabel</a></dd>
+				</dl>
+				
+			
+
+<!-- ============================== methods summary ======================== -->
+			
+				
+				
+				<table class="summaryTable" cellspacing="0" summary="A summary of the methods documented in the class JXG.Curve.">
+					<caption>Method Summary</caption>
+					<thead>
+						<tr>
+							<th scope="col">Method Attributes</th>
+							<th scope="col">Method Name and Description</th>
+						</tr>
+					</thead>
+					<tbody>
+					
+						<tr>
+							<td class="attributes">&lt;private&gt; &nbsp;</td>
+							<td class="nameDescription">
+								<div class="fixedFont"><b><a href="../symbols/JXG.Curve.html#_borderCase">_borderCase</a></b>(a, b, c, ta, tb, tc, depth)
+								</div>
+								<div class="description">Investigate a function term at the bounds of intervals where
+the function is not defined, e.g.</div>
+							</td>
+						</tr>
+					
+						<tr>
+							<td class="attributes">&lt;private&gt; &nbsp;</td>
+							<td class="nameDescription">
+								<div class="fixedFont"><b><a href="../symbols/JXG.Curve.html#_insertPoint">_insertPoint</a></b>(pnt)
+								</div>
+								<div class="description">Add a point to the curve plot.</div>
+							</td>
+						</tr>
+					
+						<tr>
+							<td class="attributes">&lt;private&gt; &nbsp;</td>
+							<td class="nameDescription">
+								<div class="fixedFont"><b><a href="../symbols/JXG.Curve.html#_isUndefined">_isUndefined</a></b>(a, ta, b, tb)
+								</div>
+								<div class="description">Test if the function is undefined on an interval:
+If the interval borders a and b are undefined, 20 random values
+are tested if they are undefined, too.</div>
+							</td>
+						</tr>
+					
+						<tr>
+							<td class="attributes">&lt;private&gt; &nbsp;</td>
+							<td class="nameDescription">
+								<div class="fixedFont"><b><a href="../symbols/JXG.Curve.html#_plotRecursive">_plotRecursive</a></b>(a, ta, b, tb, depth, delta)
+								</div>
+								<div class="description">Recursive interval bisection algorithm for curve plotting.</div>
+							</td>
+						</tr>
+					
+						<tr>
+							<td class="attributes">&lt;private&gt; &nbsp;</td>
+							<td class="nameDescription">
+								<div class="fixedFont"><b><a href="../symbols/JXG.Curve.html#_triangleDists">_triangleDists</a></b>(a, b, c)
+								</div>
+								<div class="description">Compute distances in screen coordinates between the points ab,
+ac, cb, and cd, where d = (a + b)/2.</div>
+							</td>
+						</tr>
+					
+						<tr>
+							<td class="attributes">&nbsp;</td>
+							<td class="nameDescription">
+								<div class="fixedFont"><b><a href="../symbols/JXG.Curve.html#addTransform">addTransform</a></b>(transform)
+								</div>
+								<div class="description">Add transformations to this curve.</div>
+							</td>
+						</tr>
+					
+						<tr>
+							<td class="attributes">&nbsp;</td>
+							<td class="nameDescription">
+								<div class="fixedFont"><b><a href="../symbols/JXG.Curve.html#allocatePoints">allocatePoints</a></b>()
+								</div>
+								<div class="description">Allocate points in the Coords array this.points</div>
+							</td>
+						</tr>
+					
+						<tr>
+							<td class="attributes">&nbsp;</td>
+							<td class="nameDescription">
+								<div class="fixedFont"><b><a href="../symbols/JXG.Curve.html#checkReal">checkReal</a></b>()
+								</div>
+								<div class="description">Check if at least one point on the curve is finite and real.</div>
+							</td>
+						</tr>
+					
+						<tr>
+							<td class="attributes">&nbsp;</td>
+							<td class="nameDescription">
+								<div class="fixedFont"><b><a href="../symbols/JXG.Curve.html#generateTerm">generateTerm</a></b>(varname, xterm, yterm, mi, ma)
+								</div>
+								<div class="description">Converts the GEONExT syntax of the defining function term into JavaScript.</div>
+							</td>
+						</tr>
+					
+						<tr>
+							<td class="attributes">&nbsp;</td>
+							<td class="nameDescription">
+								<div class="fixedFont"><b><a href="../symbols/JXG.Curve.html#hasPoint">hasPoint</a></b>(x, y, start)
+								</div>
+								<div class="description">Checks whether (x,y) is near the curve.</div>
+							</td>
+						</tr>
+					
+						<tr>
+							<td class="attributes">&lt;private&gt; &nbsp;</td>
+							<td class="nameDescription">
+								<div class="fixedFont"><b><a href="../symbols/JXG.Curve.html#interpolationFunctionFromArray">interpolationFunctionFromArray</a></b>(which)
+								</div>
+								<div class="description">Generate the method curve.X() in case curve.dataX is an array
+and generate the method curve.Y() in case curve.dataY is an array.</div>
+							</td>
+						</tr>
+					
+						<tr>
+							<td class="attributes">&lt;private&gt; &nbsp;</td>
+							<td class="nameDescription">
+								<div class="fixedFont"><b><a href="../symbols/JXG.Curve.html#isDistOK">isDistOK</a></b>(dx, dy, MAXX, MAXY)
+								</div>
+								<div class="description">Compares the absolute value of <tt>dx</tt> with <tt>MAXX</tt> and the absolute value of <tt>dy</tt>
+with <tt>MAXY</tt>.</div>
+							</td>
+						</tr>
+					
+						<tr>
+							<td class="attributes">&lt;private&gt; &nbsp;</td>
+							<td class="nameDescription">
+								<div class="fixedFont"><b><a href="../symbols/JXG.Curve.html#isSegmentDefined">isSegmentDefined</a></b>(x0, y0, x1, y1)
+								</div>
+								<div class="description"></div>
+							</td>
+						</tr>
+					
+						<tr>
+							<td class="attributes">&lt;private&gt; &nbsp;</td>
+							<td class="nameDescription">
+								<div class="fixedFont"><b><a href="../symbols/JXG.Curve.html#isSegmentOutside">isSegmentOutside</a></b>(x0, y0, x1, y1)
+								</div>
+								<div class="description">Crude and cheap test if the segment defined by the two points <tt>(x0, y0)</tt> and <tt>(x1, y1)</tt> is
+outside the viewport of the board.</div>
+							</td>
+						</tr>
+					
+						<tr>
+							<td class="attributes">&nbsp;</td>
+							<td class="nameDescription">
+								<div class="fixedFont"><b><a href="../symbols/JXG.Curve.html#maxX">maxX</a></b>()
+								</div>
+								<div class="description">Gives the default value of the right bound for the curve.</div>
+							</td>
+						</tr>
+					
+						<tr>
+							<td class="attributes">&nbsp;</td>
+							<td class="nameDescription">
+								<div class="fixedFont"><b><a href="../symbols/JXG.Curve.html#minX">minX</a></b>()
+								</div>
+								<div class="description">Gives the default value of the left bound for the curve.</div>
+							</td>
+						</tr>
+					
+						<tr>
+							<td class="attributes">&nbsp;</td>
+							<td class="nameDescription">
+								<div class="fixedFont"><b><a href="../symbols/JXG.Curve.html#notifyParents">notifyParents</a></b>(contentStr)
+								</div>
+								<div class="description">Finds dependencies in a given term and notifies the parents by adding the
+dependent object to the found objects child elements.</div>
+							</td>
+						</tr>
+					
+						<tr>
+							<td class="attributes">&nbsp;</td>
+							<td class="nameDescription">
+								<div class="fixedFont"><b><a href="../symbols/JXG.Curve.html#update">update</a></b>()
+								</div>
+								<div class="description">Computes for equidistant points on the x-axis the values of the function</div>
+							</td>
+						</tr>
+					
+						<tr>
+							<td class="attributes">&nbsp;</td>
+							<td class="nameDescription">
+								<div class="fixedFont"><b><a href="../symbols/JXG.Curve.html#updateCurve">updateCurve</a></b>()
+								</div>
+								<div class="description">Computes for equidistant points on the x-axis the values
+of the function.</div>
+							</td>
+						</tr>
+					
+						<tr>
+							<td class="attributes">&nbsp;</td>
+							<td class="nameDescription">
+								<div class="fixedFont"><b><a href="../symbols/JXG.Curve.html#updateDataArray">updateDataArray</a></b>()
+								</div>
+								<div class="description">For dynamic dataplots updateCurve can be used to compute new entries
+for the arrays JXG.Curve#dataX and JXG.Curve#dataY.</div>
+							</td>
+						</tr>
+					
+						<tr>
+							<td class="attributes">&nbsp;</td>
+							<td class="nameDescription">
+								<div class="fixedFont"><b><a href="../symbols/JXG.Curve.html#updateParametricCurve">updateParametricCurve</a></b>(mi, ma)
+								</div>
+								<div class="description">Updates the data points of a parametric curve.</div>
+							</td>
+						</tr>
+					
+						<tr>
+							<td class="attributes">&nbsp;</td>
+							<td class="nameDescription">
+								<div class="fixedFont"><b><a href="../symbols/JXG.Curve.html#updateParametricCurveNaive">updateParametricCurveNaive</a></b>(mi, ma, len)
+								</div>
+								<div class="description">Updates the data points of a parametric curve.</div>
+							</td>
+						</tr>
+					
+						<tr>
+							<td class="attributes">&nbsp;</td>
+							<td class="nameDescription">
+								<div class="fixedFont"><b><a href="../symbols/JXG.Curve.html#updateParametricCurveOld">updateParametricCurveOld</a></b>(mi, ma)
+								</div>
+								<div class="description">Updates the data points of a parametric curve.</div>
+							</td>
+						</tr>
+					
+						<tr>
+							<td class="attributes">&nbsp;</td>
+							<td class="nameDescription">
+								<div class="fixedFont"><b><a href="../symbols/JXG.Curve.html#updateRenderer">updateRenderer</a></b>()
+								</div>
+								<div class="description">Updates the visual contents of the curve.</div>
+							</td>
+						</tr>
+					
+						<tr>
+							<td class="attributes">&nbsp;</td>
+							<td class="nameDescription">
+								<div class="fixedFont"><b><a href="../symbols/JXG.Curve.html#updateTransform">updateTransform</a></b>(p)
+								</div>
+								<div class="description">Applies the transformations of the curve to the given point <tt>p</tt>.</div>
+							</td>
+						</tr>
+					
+						<tr>
+							<td class="attributes">&nbsp;</td>
+							<td class="nameDescription">
+								<div class="fixedFont"><b><a href="../symbols/JXG.Curve.html#Z">Z</a></b>(t)
+								</div>
+								<div class="description">Treat the curve as curve with homogeneous coordinates.</div>
+							</td>
+						</tr>
+					
+					</tbody>
+				</table>
+				
+				
+				
+				<dl class="inheritsList">
+				<dt>Methods borrowed from class <a href="../symbols/JXG.GeometryElement.html">JXG.GeometryElement</a>: </dt><dd><a href="../symbols/JXG.GeometryElement.html#_set">_set</a>, <a href="../symbols/JXG.GeometryElement.html#addChild">addChild</a>, <a href="../symbols/JXG.GeometryElement.html#addDescendants">addDescendants</a>, <a href="../symbols/JXG.GeometryElement.html#addParents">addParents</a>, <a href="../symbols/JXG.GeometryElement.html#addRotation">addRotation</a>, <a href="../symbols/JXG.GeometryElement.html#animate">animate</a>, <a href="../symbols/JXG.GeometryElement.html#bounds">bounds</a>, <a href="../symbols/JXG.GeometryElement.html#clearTrace">clearTrace</a>, <a href="../symbols/JXG.GeometryElement.html#cloneToBackground">cloneToBackground</a>, <a href="../symbols/JXG.GeometryElement.html#countChildren">countChildren</a>, <a href="../symbols/JXG.GeometryElement.html#createGradient">createGradient</a>, <a href="../symbols/JXG.GeometryElement.html#createLabel">createLabel</a>, <a href="../symbols/JXG.GeometryElement.html#draggable">draggable</a>, <a href="../symbols/JXG.GeometryElement.html#generatePolynomial">generatePolynomial</a>, <a href="../symbols/JXG.GeometryElement.html#getAttribute">getAttribute</a>, <a href="../symbols/JXG.GeometryElement.html#getAttributes">getAttributes</a>, <a href="../symbols/JXG.GeometryElement.html#getLabelAnchor">getLabelAnchor</a>, <a href="../symbols/JXG.GeometryElement.html#getName">getName</a>, <a href="../symbols/JXG.GeometryElement.html#getParents">getParents</a>, <a href="../symbols/JXG.GeometryElement.html#getTextAnchor">getTextAnchor</a>, <a href="../symbols/JXG.GeometryElement.html#getType">getType</a>, <a href="../symbols/JXG.GeometryElement.html#handleSnapToGrid">handleSnapToGrid</a>, <a href="../symbols/JXG.GeometryElement.html#hideElement">hideElement</a>, <a href="../symbols/JXG.GeometryElement.html#labelColor">labelColor</a>, <a href="../symbols/JXG.GeometryElement.html#noHighlight">noHighlight</a>, <a href="../symbols/JXG.GeometryElement.html#normalize">normalize</a>, <a href="../symbols/JXG.GeometryElement.html#off">off</a>, <a href="../symbols/JXG.GeometryElement.html#on">on</a>, <a href="../symbols/JXG.GeometryElement.html#prepareUpdate">prepareUpdate</a>, <a href="../symbols/JXG.GeometryElement.html#remove">remove</a>, <a href="../symbols/JXG.GeometryElement.html#removeChild">removeChild</a>, <a href="../symbols/JXG.GeometryElement.html#removeDescendants">removeDescendants</a>, <a href="../symbols/JXG.GeometryElement.html#resolveShortcuts">resolveShortcuts</a>, <a href="../symbols/JXG.GeometryElement.html#setArrow">setArrow</a>, <a href="../symbols/JXG.GeometryElement.html#setAttribute">setAttribute</a>, <a href="../symbols/JXG.GeometryElement.html#setDash">setDash</a>, <a href="../symbols/JXG.GeometryElement.html#setLabelText">setLabelText</a>, <a href="../symbols/JXG.GeometryElement.html#setName">setName</a>, <a href="../symbols/JXG.GeometryElement.html#setPosition">setPosition</a>, <a href="../symbols/JXG.GeometryElement.html#setPositionDirectly">setPositionDirectly</a>, <a href="../symbols/JXG.GeometryElement.html#showElement">showElement</a>, <a href="../symbols/JXG.GeometryElement.html#snapToPoints">snapToPoints</a>, <a href="../symbols/JXG.GeometryElement.html#triggerEventHandlers">triggerEventHandlers</a></dd>
+				</dl>
+				
+			
+<!-- ============================== events summary ======================== -->
+			
+				
+				
+				
+				
+				<dl class="inheritsList">
+				<dt>Events borrowed from class <a href="../symbols/JXG.GeometryElement.html">JXG.GeometryElement</a>: </dt><dd><a href="../symbols/JXG.GeometryElement.html#event:attribute">attribute</a>, attribute:&lt;attribute&gt;&lt;attribute&gt;, <a href="../symbols/JXG.GeometryElement.html#event:down">down</a>, <a href="../symbols/JXG.GeometryElement.html#event:drag">drag</a>, <a href="../symbols/JXG.GeometryElement.html#event:mousedown">mousedown</a>, <a href="../symbols/JXG.GeometryElement.html#event:mousedrag">mousedrag</a>, <a href="../symbols/JXG.GeometryElement.html#event:mousemove">mousemove</a>, <a href="../symbols/JXG.GeometryElement.html#event:mouseout">mouseout</a>, <a href="../symbols/JXG.GeometryElement.html#event:mouseover">mouseover</a>, <a href="../symbols/JXG.GeometryElement.html#event:mouseup">mouseup</a>, <a href="../symbols/JXG.GeometryElement.html#event:move">move</a>, <a href="../symbols/JXG.GeometryElement.html#event:out">out</a>, <a href="../symbols/JXG.GeometryElement.html#event:over">over</a>, <a href="../symbols/JXG.GeometryElement.html#event:touchdown">touchdown</a>, <a href="../symbols/JXG.GeometryElement.html#event:touchdrag">touchdrag</a>, <a href="../symbols/JXG.GeometryElement.html#event:touchup">touchup</a>, <a href="../symbols/JXG.GeometryElement.html#event:up">up</a></dd>
+				</dl>
+				
+			
+
+<!-- ============================== constructor details ==================== -->
+			
+			<div class="details"><a name="constructor"> </a>
+				<div class="sectionTitle">
+					Class Detail
+				</div>
+				
+				<div class="fixedFont">
+						<b>JXG.Curve</b>(board, parents, attributes)
+				</div>
+				
+				<div class="description">
+					Curves are the common object for function graphs, parametric curves, polar curves, and data plots.
+					
+				</div>
+				
+				
+					
+						<dl class="detailList">
+                        
+                        
+    						<dt class="heading">Parameters:</dt>
+                        
+						
+							<dt>
+                                
+    								<span class="light fixedFont">{String|<a href="../symbols/JXG.Board.html">JXG.Board</a>}</span>  <b>board</b>
+	    							
+                                
+                                
+							</dt>
+								<dd>The board the new curve is drawn on.</dd><br /><br />
+						
+							<dt>
+                                
+    								<span class="light fixedFont">{Array}</span>  <b>parents</b>
+	    							
+                                
+                                
+							</dt>
+								<dd>defining terms An array with the functon terms or the data points of the curve.</dd><br /><br />
+						
+							<dt>
+                                
+    								<span class="light fixedFont">{Object}</span>  <b>attributes</b>
+	    							
+                                
+                                
+							</dt>
+								<dd>Defines the visual appearance of the curve.</dd><br /><br />
+						
+						</dl>
+					
+					
+					
+					
+					
+					
+					
+						<dl class="detailList">
+						<dt class="heading">See:</dt>
+						
+							<dd><a href="../symbols/JXG.Board.html#generateName">JXG.Board#generateName</a></dd>
+						
+							<dd>JXG.Board#addCurve</dd>
+						
+						</dl>
+					
+
+				
+				
+
+			</div>
+			
+
+<!-- ============================== attributes details ========================== -->
+			
+
+<!-- ============================== field details ========================== -->
+			
+				<div class="sectionTitle">
+                     Field Detail
+				</div>
+				
+					<a name="numberPoints"> </a>
+					<div class="fixedFont">
+					
+					
+					<b>numberPoints</b>
+					
+					</div>
+					<div class="description">
+						Number of points on curves. This value changes
+between numberPointsLow and numberPointsHigh.
+It is set in <a href="../symbols/JXG.Curve.html#updateCurve">JXG.Curve#updateCurve</a>.
+						
+						
+					</div>
+					
+					
+
+						
+						
+						
+						
+
+					<hr />
+				
+					<a name="qdt"> </a>
+					<div class="fixedFont">
+					
+					
+					<b>qdt</b>
+					
+					</div>
+					<div class="description">
+						Stores a quad tree if it is required. The quad tree is generated in the curve
+updates and can be used to speed up the hasPoint method.
+						
+						
+					</div>
+					
+					
+
+						
+						
+						
+						
+
+					
+				
+			
+
+<!-- ============================== method details ========================= -->		
+			
+				<div class="sectionTitle">
+					Method Detail
+				</div>
+				
+					<a name="_borderCase"> </a>
+					<div class="fixedFont">&lt;private&gt; 
+					
+					<span class="light">{JXG.Boolean}</span>
+					<b>_borderCase</b>(a, b, c, ta, tb, tc, depth)
+					
+					</div>
+					<div class="description">
+						Investigate a function term at the bounds of intervals where
+the function is not defined, e.g. log(x) at x = 0.
+
+c is inbetween a and b
+						
+						
+					</div>
+					
+						
+							<dl class="detailList">
+							<dt class="heading">Parameters:</dt>
+							
+								<dt>
+									<span class="light fixedFont">{Array}</span> <b>a</b>
+									
+								</dt>
+								<dd>Screen coordinates of the left interval bound</dd>
+							
+								<dt>
+									<span class="light fixedFont">{Array}</span> <b>b</b>
+									
+								</dt>
+								<dd>Screen coordinates of the right interval bound</dd>
+							
+								<dt>
+									<span class="light fixedFont">{Array}</span> <b>c</b>
+									
+								</dt>
+								<dd>Screen coordinates of the bisection point at (ta + tb) / 2</dd>
+							
+								<dt>
+									<span class="light fixedFont">{Number}</span> <b>ta</b>
+									
+								</dt>
+								<dd>Parameter which evaluates to a, i.e. [1, X(ta), Y(ta)] = a in screen coordinates</dd>
+							
+								<dt>
+									<span class="light fixedFont">{Number}</span> <b>tb</b>
+									
+								</dt>
+								<dd>Parameter which evaluates to b, i.e. [1, X(tb), Y(tb)] = b in screen coordinates</dd>
+							
+								<dt>
+									<span class="light fixedFont">{Number}</span> <b>tc</b>
+									
+								</dt>
+								<dd>(ta + tb) / 2 = tc. Parameter which evaluates to b, i.e. [1, X(tc), Y(tc)] = c in screen coordinates</dd>
+							
+								<dt>
+									<span class="light fixedFont">{Number}</span> <b>depth</b>
+									
+								</dt>
+								<dd>Actual recursion depth. The recursion stops if depth is equal to 0.</dd>
+							
+							</dl>
+						
+						
+						
+						
+						
+							<dl class="detailList">
+							<dt class="heading">Returns:</dt>
+							
+								<dd><span class="light fixedFont">{JXG.Boolean}</span> true if the point is inserted and the recursion should stop, false otherwise.</dd>
+							
+							</dl>
+						
+						
+						
+
+					
+					
+					<hr />
+				
+					<a name="_insertPoint"> </a>
+					<div class="fixedFont">&lt;private&gt; 
+					
+					
+					<b>_insertPoint</b>(pnt)
+					
+					</div>
+					<div class="description">
+						Add a point to the curve plot. If the new point is too close to the previously inserted point,
+it is skipped.
+Used in JXG.Curve._plotRecursive.
+						
+						
+					</div>
+					
+						
+							<dl class="detailList">
+							<dt class="heading">Parameters:</dt>
+							
+								<dt>
+									<span class="light fixedFont">{<a href="../symbols/JXG.Coords.html">JXG.Coords</a>}</span> <b>pnt</b>
+									
+								</dt>
+								<dd>Coords to add to the list of points</dd>
+							
+							</dl>
+						
+						
+						
+						
+						
+						
+						
+
+					
+					
+					<hr />
+				
+					<a name="_isUndefined"> </a>
+					<div class="fixedFont">&lt;private&gt; 
+					
+					
+					<b>_isUndefined</b>(a, ta, b, tb)
+					
+					</div>
+					<div class="description">
+						Test if the function is undefined on an interval:
+If the interval borders a and b are undefined, 20 random values
+are tested if they are undefined, too.
+Only if all values are undefined, we declare the function to be undefined in this interval.
+						
+						
+					</div>
+					
+						
+							<dl class="detailList">
+							<dt class="heading">Parameters:</dt>
+							
+								<dt>
+									<span class="light fixedFont">{Array}</span> <b>a</b>
+									
+								</dt>
+								<dd>Screen coordinates of the left interval bound</dd>
+							
+								<dt>
+									<span class="light fixedFont">{Number}</span> <b>ta</b>
+									
+								</dt>
+								<dd>Parameter which evaluates to a, i.e. [1, X(ta), Y(ta)] = a in screen coordinates</dd>
+							
+								<dt>
+									<span class="light fixedFont">{Array}</span> <b>b</b>
+									
+								</dt>
+								<dd>Screen coordinates of the right interval bound</dd>
+							
+								<dt>
+									<span class="light fixedFont">{Number}</span> <b>tb</b>
+									
+								</dt>
+								<dd>Parameter which evaluates to b, i.e. [1, X(tb), Y(tb)] = b in screen coordinates</dd>
+							
+							</dl>
+						
+						
+						
+						
+						
+						
+						
+
+					
+					
+					<hr />
+				
+					<a name="_plotRecursive"> </a>
+					<div class="fixedFont">&lt;private&gt; 
+					
+					<span class="light">{<a href="../symbols/JXG.Curve.html">JXG.Curve</a>}</span>
+					<b>_plotRecursive</b>(a, ta, b, tb, depth, delta)
+					
+					</div>
+					<div class="description">
+						Recursive interval bisection algorithm for curve plotting. 
+Used in JXG.Curve.updateParametricCurve.
+						
+						
+					</div>
+					
+						
+							<dl class="detailList">
+							<dt class="heading">Parameters:</dt>
+							
+								<dt>
+									<span class="light fixedFont">{Array}</span> <b>a</b>
+									
+								</dt>
+								<dd>Screen coordinates of the left interval bound</dd>
+							
+								<dt>
+									<span class="light fixedFont">{Number}</span> <b>ta</b>
+									
+								</dt>
+								<dd>Parameter which evaluates to a, i.e. [1, X(ta), Y(ta)] = a in screen coordinates</dd>
+							
+								<dt>
+									<span class="light fixedFont">{Array}</span> <b>b</b>
+									
+								</dt>
+								<dd>Screen coordinates of the right interval bound</dd>
+							
+								<dt>
+									<span class="light fixedFont">{Number}</span> <b>tb</b>
+									
+								</dt>
+								<dd>Parameter which evaluates to b, i.e. [1, X(tb), Y(tb)] = b in screen coordinates</dd>
+							
+								<dt>
+									<span class="light fixedFont">{Number}</span> <b>depth</b>
+									
+								</dt>
+								<dd>Actual recursion depth. The recursion stops if depth is equal to 0.</dd>
+							
+								<dt>
+									<span class="light fixedFont">{Number}</span> <b>delta</b>
+									
+								</dt>
+								<dd>If the distance of the bisection point at (ta + tb) / 2 from the point (a + b) / 2 is less then delta,
+                the segment [a,b] is regarded as straight line.</dd>
+							
+							</dl>
+						
+						
+						
+						
+						
+							<dl class="detailList">
+							<dt class="heading">Returns:</dt>
+							
+								<dd><span class="light fixedFont">{<a href="../symbols/JXG.Curve.html">JXG.Curve</a>}</span> Reference to the curve object.</dd>
+							
+							</dl>
+						
+						
+						
+
+					
+					
+					<hr />
+				
+					<a name="_triangleDists"> </a>
+					<div class="fixedFont">&lt;private&gt; 
+					
+					<span class="light">{Array}</span>
+					<b>_triangleDists</b>(a, b, c)
+					
+					</div>
+					<div class="description">
+						Compute distances in screen coordinates between the points ab,
+ac, cb, and cd, where d = (a + b)/2.
+cd is used for the smoothness test, ab, ac, cb are used to detect jumps, cusps and poles.
+						
+						
+					</div>
+					
+						
+							<dl class="detailList">
+							<dt class="heading">Parameters:</dt>
+							
+								<dt>
+									<span class="light fixedFont">{Array}</span> <b>a</b>
+									
+								</dt>
+								<dd>Screen coordinates of the left interval bound</dd>
+							
+								<dt>
+									<span class="light fixedFont">{Array}</span> <b>b</b>
+									
+								</dt>
+								<dd>Screen coordinates of the right interval bound</dd>
+							
+								<dt>
+									<span class="light fixedFont">{Array}</span> <b>c</b>
+									
+								</dt>
+								<dd>Screen coordinates of the bisection point at (ta + tb) / 2</dd>
+							
+							</dl>
+						
+						
+						
+						
+						
+							<dl class="detailList">
+							<dt class="heading">Returns:</dt>
+							
+								<dd><span class="light fixedFont">{Array}</span> array of distances in screen coordinates between: ab, ac, cb, and cd.</dd>
+							
+							</dl>
+						
+						
+						
+
+					
+					
+					<hr />
+				
+					<a name="addTransform"> </a>
+					<div class="fixedFont">
+					
+					<span class="light">{<a href="../symbols/JXG.Curve.html">JXG.Curve</a>}</span>
+					<b>addTransform</b>(transform)
+					
+					</div>
+					<div class="description">
+						Add transformations to this curve.
+						
+						
+					</div>
+					
+						
+							<dl class="detailList">
+							<dt class="heading">Parameters:</dt>
+							
+								<dt>
+									<span class="light fixedFont">{<a href="../symbols/JXG.html#.Transformation">JXG.Transformation</a>|Array}</span> <b>transform</b>
+									
+								</dt>
+								<dd>Either one <a href="../symbols/JXG.html#.Transformation">JXG.Transformation</a> or an array of <a href="../symbols/JXG.html#.Transformation">JXG.Transformation</a>s.</dd>
+							
+							</dl>
+						
+						
+						
+						
+						
+							<dl class="detailList">
+							<dt class="heading">Returns:</dt>
+							
+								<dd><span class="light fixedFont">{<a href="../symbols/JXG.Curve.html">JXG.Curve</a>}</span> Reference to the curve object.</dd>
+							
+							</dl>
+						
+						
+						
+
+					
+					
+					<hr />
+				
+					<a name="allocatePoints"> </a>
+					<div class="fixedFont">
+					
+					
+					<b>allocatePoints</b>()
+					
+					</div>
+					<div class="description">
+						Allocate points in the Coords array this.points
+						
+						
+					</div>
+					
+						
+						
+						
+						
+						
+						
+						
+
+					
+					
+					<hr />
+				
+					<a name="checkReal"> </a>
+					<div class="fixedFont">
+					
+					
+					<b>checkReal</b>()
+					
+					</div>
+					<div class="description">
+						Check if at least one point on the curve is finite and real.
+						
+						
+					</div>
+					
+						
+						
+						
+						
+						
+						
+						
+
+					
+					
+					<hr />
+				
+					<a name="generateTerm"> </a>
+					<div class="fixedFont">
+					
+					
+					<b>generateTerm</b>(varname, xterm, yterm, mi, ma)
+					
+					</div>
+					<div class="description">
+						Converts the GEONExT syntax of the defining function term into JavaScript.
+New methods X() and Y() for the Curve object are generated, further
+new methods for minX() and maxX().
+						
+						
+					</div>
+					
+						
+							<dl class="detailList">
+							<dt class="heading">Parameters:</dt>
+							
+								<dt>
+									<b>varname</b>
+									
+								</dt>
+								<dd></dd>
+							
+								<dt>
+									<b>xterm</b>
+									
+								</dt>
+								<dd></dd>
+							
+								<dt>
+									<b>yterm</b>
+									
+								</dt>
+								<dd></dd>
+							
+								<dt>
+									<b>mi</b>
+									
+								</dt>
+								<dd></dd>
+							
+								<dt>
+									<b>ma</b>
+									
+								</dt>
+								<dd></dd>
+							
+							</dl>
+						
+						
+						
+						
+						
+						
+						
+							<dl class="detailList">
+							<dt class="heading">See:</dt>
+							
+								<dd>JXG.GeonextParser.geonext2JS.</dd>
+							
+							</dl>
+						
+
+					
+					
+					<hr />
+				
+					<a name="hasPoint"> </a>
+					<div class="fixedFont">
+					
+					<span class="light">{Boolean}</span>
+					<b>hasPoint</b>(x, y, start)
+					
+					</div>
+					<div class="description">
+						Checks whether (x,y) is near the curve.
+						
+						
+					</div>
+					
+						
+							<dl class="detailList">
+							<dt class="heading">Parameters:</dt>
+							
+								<dt>
+									<span class="light fixedFont">{Number}</span> <b>x</b>
+									
+								</dt>
+								<dd>Coordinate in x direction, screen coordinates.</dd>
+							
+								<dt>
+									<span class="light fixedFont">{Number}</span> <b>y</b>
+									
+								</dt>
+								<dd>Coordinate in y direction, screen coordinates.</dd>
+							
+								<dt>
+									<span class="light fixedFont">{Number}</span> <b>start</b>
+									
+								</dt>
+								<dd>Optional start index for search on data plots.</dd>
+							
+							</dl>
+						
+						
+						
+						
+						
+							<dl class="detailList">
+							<dt class="heading">Returns:</dt>
+							
+								<dd><span class="light fixedFont">{Boolean}</span> True if (x,y) is near the curve, False otherwise.</dd>
+							
+							</dl>
+						
+						
+						
+
+					
+					
+					<hr />
+				
+					<a name="interpolationFunctionFromArray"> </a>
+					<div class="fixedFont">&lt;private&gt; 
+					
+					<span class="light">{function}</span>
+					<b>interpolationFunctionFromArray</b>(which)
+					
+					</div>
+					<div class="description">
+						Generate the method curve.X() in case curve.dataX is an array
+and generate the method curve.Y() in case curve.dataY is an array.
+						
+						
+					</div>
+					
+						
+							<dl class="detailList">
+							<dt class="heading">Parameters:</dt>
+							
+								<dt>
+									<span class="light fixedFont">{String}</span> <b>which</b>
+									
+								</dt>
+								<dd>Either 'X' or 'Y'</dd>
+							
+							</dl>
+						
+						
+						
+						
+						
+							<dl class="detailList">
+							<dt class="heading">Returns:</dt>
+							
+								<dd><span class="light fixedFont">{function}</span> </dd>
+							
+							</dl>
+						
+						
+						
+
+					
+					
+					<hr />
+				
+					<a name="isDistOK"> </a>
+					<div class="fixedFont">&lt;private&gt; 
+					
+					<span class="light">{Boolean}</span>
+					<b>isDistOK</b>(dx, dy, MAXX, MAXY)
+					
+					</div>
+					<div class="description">
+						Compares the absolute value of <tt>dx</tt> with <tt>MAXX</tt> and the absolute value of <tt>dy</tt>
+with <tt>MAXY</tt>.
+						
+						
+					</div>
+					
+						
+							<dl class="detailList">
+							<dt class="heading">Parameters:</dt>
+							
+								<dt>
+									<span class="light fixedFont">{Number}</span> <b>dx</b>
+									
+								</dt>
+								<dd></dd>
+							
+								<dt>
+									<span class="light fixedFont">{Number}</span> <b>dy</b>
+									
+								</dt>
+								<dd></dd>
+							
+								<dt>
+									<span class="light fixedFont">{Number}</span> <b>MAXX</b>
+									
+								</dt>
+								<dd></dd>
+							
+								<dt>
+									<span class="light fixedFont">{Number}</span> <b>MAXY</b>
+									
+								</dt>
+								<dd></dd>
+							
+							</dl>
+						
+						
+						
+						
+						
+							<dl class="detailList">
+							<dt class="heading">Returns:</dt>
+							
+								<dd><span class="light fixedFont">{Boolean}</span> <tt>true</tt>, if <tt>|dx| &lt; MAXX</tt> and <tt>|dy| &lt; MAXY</tt>.</dd>
+							
+							</dl>
+						
+						
+						
+
+					
+					
+					<hr />
+				
+					<a name="isSegmentDefined"> </a>
+					<div class="fixedFont">&lt;private&gt; 
+					
+					
+					<b>isSegmentDefined</b>(x0, y0, x1, y1)
+					
+					</div>
+					<div class="description">
+						
+						
+						
+					</div>
+					
+						
+							<dl class="detailList">
+							<dt class="heading">Parameters:</dt>
+							
+								<dt>
+									<b>x0</b>
+									
+								</dt>
+								<dd></dd>
+							
+								<dt>
+									<b>y0</b>
+									
+								</dt>
+								<dd></dd>
+							
+								<dt>
+									<b>x1</b>
+									
+								</dt>
+								<dd></dd>
+							
+								<dt>
+									<b>y1</b>
+									
+								</dt>
+								<dd></dd>
+							
+							</dl>
+						
+						
+						
+						
+						
+						
+						
+
+					
+					
+					<hr />
+				
+					<a name="isSegmentOutside"> </a>
+					<div class="fixedFont">&lt;private&gt; 
+					
+					<span class="light">{Boolean}</span>
+					<b>isSegmentOutside</b>(x0, y0, x1, y1)
+					
+					</div>
+					<div class="description">
+						Crude and cheap test if the segment defined by the two points <tt>(x0, y0)</tt> and <tt>(x1, y1)</tt> is
+outside the viewport of the board. All parameters have to be given in screen coordinates.
+						
+						
+					</div>
+					
+						
+							<dl class="detailList">
+							<dt class="heading">Parameters:</dt>
+							
+								<dt>
+									<span class="light fixedFont">{Number}</span> <b>x0</b>
+									
+								</dt>
+								<dd></dd>
+							
+								<dt>
+									<span class="light fixedFont">{Number}</span> <b>y0</b>
+									
+								</dt>
+								<dd></dd>
+							
+								<dt>
+									<span class="light fixedFont">{Number}</span> <b>x1</b>
+									
+								</dt>
+								<dd></dd>
+							
+								<dt>
+									<span class="light fixedFont">{Number}</span> <b>y1</b>
+									
+								</dt>
+								<dd></dd>
+							
+							</dl>
+						
+						
+						
+						
+						
+							<dl class="detailList">
+							<dt class="heading">Returns:</dt>
+							
+								<dd><span class="light fixedFont">{Boolean}</span> <tt>true</tt> if the given segment is outside the visible area.</dd>
+							
+							</dl>
+						
+						
+						
+
+					
+					
+					<hr />
+				
+					<a name="maxX"> </a>
+					<div class="fixedFont">
+					
+					<span class="light">{Number}</span>
+					<b>maxX</b>()
+					
+					</div>
+					<div class="description">
+						Gives the default value of the right bound for the curve.
+May be overwritten in <a href="../symbols/JXG.Curve.html#generateTerm">JXG.Curve#generateTerm</a>.
+						
+						
+					</div>
+					
+						
+						
+						
+						
+						
+							<dl class="detailList">
+							<dt class="heading">Returns:</dt>
+							
+								<dd><span class="light fixedFont">{Number}</span> Right bound for the curve.</dd>
+							
+							</dl>
+						
+						
+						
+
+					
+					
+					<hr />
+				
+					<a name="minX"> </a>
+					<div class="fixedFont">
+					
+					<span class="light">{Number}</span>
+					<b>minX</b>()
+					
+					</div>
+					<div class="description">
+						Gives the default value of the left bound for the curve.
+May be overwritten in <a href="../symbols/JXG.Curve.html#generateTerm">JXG.Curve#generateTerm</a>.
+						
+						
+					</div>
+					
+						
+						
+						
+						
+						
+							<dl class="detailList">
+							<dt class="heading">Returns:</dt>
+							
+								<dd><span class="light fixedFont">{Number}</span> Left bound for the curve.</dd>
+							
+							</dl>
+						
+						
+						
+
+					
+					
+					<hr />
+				
+					<a name="notifyParents"> </a>
+					<div class="fixedFont">
+					
+					
+					<b>notifyParents</b>(contentStr)
+					
+					</div>
+					<div class="description">
+						Finds dependencies in a given term and notifies the parents by adding the
+dependent object to the found objects child elements.
+						
+						
+					</div>
+					
+						
+							<dl class="detailList">
+							<dt class="heading">Parameters:</dt>
+							
+								<dt>
+									<span class="light fixedFont">{String}</span> <b>contentStr</b>
+									
+								</dt>
+								<dd>String containing dependencies for the given object.</dd>
+							
+							</dl>
+						
+						
+						
+						
+						
+						
+						
+
+					
+					
+					<hr />
+				
+					<a name="update"> </a>
+					<div class="fixedFont">
+					
+					<span class="light">{<a href="../symbols/JXG.Curve.html">JXG.Curve</a>}</span>
+					<b>update</b>()
+					
+					</div>
+					<div class="description">
+						Computes for equidistant points on the x-axis the values of the function
+						
+						
+					</div>
+					
+						
+						
+						
+						
+						
+							<dl class="detailList">
+							<dt class="heading">Returns:</dt>
+							
+								<dd><span class="light fixedFont">{<a href="../symbols/JXG.Curve.html">JXG.Curve</a>}</span> Reference to the curve object.</dd>
+							
+							</dl>
+						
+						
+						
+							<dl class="detailList">
+							<dt class="heading">See:</dt>
+							
+								<dd><a href="../symbols/JXG.Curve.html#updateCurve">JXG.Curve#updateCurve</a></dd>
+							
+							</dl>
+						
+
+					
+					
+					<hr />
+				
+					<a name="updateCurve"> </a>
+					<div class="fixedFont">
+					
+					<span class="light">{<a href="../symbols/JXG.Curve.html">JXG.Curve</a>}</span>
+					<b>updateCurve</b>()
+					
+					</div>
+					<div class="description">
+						Computes for equidistant points on the x-axis the values
+of the function.
+If the mousemove event triggers this update, we use only few
+points. Otherwise, e.g. on mouseup, many points are used.
+						
+						
+					</div>
+					
+						
+						
+						
+						
+						
+							<dl class="detailList">
+							<dt class="heading">Returns:</dt>
+							
+								<dd><span class="light fixedFont">{<a href="../symbols/JXG.Curve.html">JXG.Curve</a>}</span> Reference to the curve object.</dd>
+							
+							</dl>
+						
+						
+						
+							<dl class="detailList">
+							<dt class="heading">See:</dt>
+							
+								<dd><a href="../symbols/JXG.Curve.html#update">JXG.Curve#update</a></dd>
+							
+							</dl>
+						
+
+					
+					
+					<hr />
+				
+					<a name="updateDataArray"> </a>
+					<div class="fixedFont">
+					
+					
+					<b>updateDataArray</b>()
+					
+					</div>
+					<div class="description">
+						For dynamic dataplots updateCurve can be used to compute new entries
+for the arrays JXG.Curve#dataX and JXG.Curve#dataY. It
+is used in <a href="../symbols/JXG.Curve.html#updateCurve">JXG.Curve#updateCurve</a>. Default is an empty method, can
+be overwritten by the user.
+						
+						
+					</div>
+					
+						
+						
+						
+						
+						
+						
+						
+
+					
+					
+					<hr />
+				
+					<a name="updateParametricCurve"> </a>
+					<div class="fixedFont">
+					
+					<span class="light">{<a href="../symbols/JXG.Curve.html">JXG.Curve</a>}</span>
+					<b>updateParametricCurve</b>(mi, ma)
+					
+					</div>
+					<div class="description">
+						Updates the data points of a parametric curve. This version is used if JXG.Curve#doadvancedplot is <tt>true</tt>.
+						
+						
+					</div>
+					
+						
+							<dl class="detailList">
+							<dt class="heading">Parameters:</dt>
+							
+								<dt>
+									<span class="light fixedFont">{Number}</span> <b>mi</b>
+									
+								</dt>
+								<dd>Left bound of curve</dd>
+							
+								<dt>
+									<span class="light fixedFont">{Number}</span> <b>ma</b>
+									
+								</dt>
+								<dd>Right bound of curve</dd>
+							
+							</dl>
+						
+						
+						
+						
+						
+							<dl class="detailList">
+							<dt class="heading">Returns:</dt>
+							
+								<dd><span class="light fixedFont">{<a href="../symbols/JXG.Curve.html">JXG.Curve</a>}</span> Reference to the curve object.</dd>
+							
+							</dl>
+						
+						
+						
+
+					
+					
+					<hr />
+				
+					<a name="updateParametricCurveNaive"> </a>
+					<div class="fixedFont">
+					
+					<span class="light">{<a href="../symbols/JXG.Curve.html">JXG.Curve</a>}</span>
+					<b>updateParametricCurveNaive</b>(mi, ma, len)
+					
+					</div>
+					<div class="description">
+						Updates the data points of a parametric curve. This version is used if JXG.Curve#doadvancedplot is <tt>false</tt>.
+						
+						
+					</div>
+					
+						
+							<dl class="detailList">
+							<dt class="heading">Parameters:</dt>
+							
+								<dt>
+									<span class="light fixedFont">{Number}</span> <b>mi</b>
+									
+								</dt>
+								<dd>Left bound of curve</dd>
+							
+								<dt>
+									<span class="light fixedFont">{Number}</span> <b>ma</b>
+									
+								</dt>
+								<dd>Right bound of curve</dd>
+							
+								<dt>
+									<span class="light fixedFont">{Number}</span> <b>len</b>
+									
+								</dt>
+								<dd>Number of data points</dd>
+							
+							</dl>
+						
+						
+						
+						
+						
+							<dl class="detailList">
+							<dt class="heading">Returns:</dt>
+							
+								<dd><span class="light fixedFont">{<a href="../symbols/JXG.Curve.html">JXG.Curve</a>}</span> Reference to the curve object.</dd>
+							
+							</dl>
+						
+						
+						
+
+					
+					
+					<hr />
+				
+					<a name="updateParametricCurveOld"> </a>
+					<div class="fixedFont">
+					
+					<span class="light">{<a href="../symbols/JXG.Curve.html">JXG.Curve</a>}</span>
+					<b>updateParametricCurveOld</b>(mi, ma)
+					
+					</div>
+					<div class="description">
+						Updates the data points of a parametric curve. This version is used if JXG.Curve#doadvancedplot is <tt>true</tt>.
+Since 0.99 this algorithm is deprecated. It still can be used if JXG.Curve#doadvancedplotold is <tt>true</tt>.
+						
+						
+					</div>
+					
+						
+							<dl class="detailList">
+							<dt class="heading">Parameters:</dt>
+							
+								<dt>
+									<span class="light fixedFont">{Number}</span> <b>mi</b>
+									
+								</dt>
+								<dd>Left bound of curve</dd>
+							
+								<dt>
+									<span class="light fixedFont">{Number}</span> <b>ma</b>
+									
+								</dt>
+								<dd>Right bound of curve</dd>
+							
+							</dl>
+						
+						
+						
+						
+						
+							<dl class="detailList">
+							<dt class="heading">Returns:</dt>
+							
+								<dd><span class="light fixedFont">{<a href="../symbols/JXG.Curve.html">JXG.Curve</a>}</span> Reference to the curve object.</dd>
+							
+							</dl>
+						
+						
+						
+
+					
+					
+					<hr />
+				
+					<a name="updateRenderer"> </a>
+					<div class="fixedFont">
+					
+					<span class="light">{<a href="../symbols/JXG.Curve.html">JXG.Curve</a>}</span>
+					<b>updateRenderer</b>()
+					
+					</div>
+					<div class="description">
+						Updates the visual contents of the curve.
+						
+						
+					</div>
+					
+						
+						
+						
+						
+						
+							<dl class="detailList">
+							<dt class="heading">Returns:</dt>
+							
+								<dd><span class="light fixedFont">{<a href="../symbols/JXG.Curve.html">JXG.Curve</a>}</span> Reference to the curve object.</dd>
+							
+							</dl>
+						
+						
+						
+
+					
+					
+					<hr />
+				
+					<a name="updateTransform"> </a>
+					<div class="fixedFont">
+					
+					<span class="light">{<a href="../symbols/JXG.Point.html">JXG.Point</a>}</span>
+					<b>updateTransform</b>(p)
+					
+					</div>
+					<div class="description">
+						Applies the transformations of the curve to the given point <tt>p</tt>.
+Before using it, JXG.Curve#updateTransformMatrix has to be called.
+						
+						
+					</div>
+					
+						
+							<dl class="detailList">
+							<dt class="heading">Parameters:</dt>
+							
+								<dt>
+									<span class="light fixedFont">{<a href="../symbols/JXG.Point.html">JXG.Point</a>}</span> <b>p</b>
+									
+								</dt>
+								<dd></dd>
+							
+							</dl>
+						
+						
+						
+						
+						
+							<dl class="detailList">
+							<dt class="heading">Returns:</dt>
+							
+								<dd><span class="light fixedFont">{<a href="../symbols/JXG.Point.html">JXG.Point</a>}</span> The given point.</dd>
+							
+							</dl>
+						
+						
+						
+
+					
+					
+					<hr />
+				
+					<a name="Z"> </a>
+					<div class="fixedFont">
+					
+					<span class="light">{Number}</span>
+					<b>Z</b>(t)
+					
+					</div>
+					<div class="description">
+						Treat the curve as curve with homogeneous coordinates.
+						
+						
+					</div>
+					
+						
+							<dl class="detailList">
+							<dt class="heading">Parameters:</dt>
+							
+								<dt>
+									<span class="light fixedFont">{Number}</span> <b>t</b>
+									
+								</dt>
+								<dd>A number between 0.0 and 1.0.</dd>
+							
+							</dl>
+						
+						
+						
+						
+						
+							<dl class="detailList">
+							<dt class="heading">Returns:</dt>
+							
+								<dd><span class="light fixedFont">{Number}</span> Always 1.0</dd>
+							
+							</dl>
+						
+						
+						
+
+					
+					
+					
+				
+			
+			
+<!-- ============================== event details ========================= -->		
+			
+			
+			<hr />
+			
+			
+
+		</div>
+
+		
+<!-- ============================== footer ================================= -->
+		<div class="fineprint" style="clear:both">
+			
+			Documentation generated by <a href="http://code.google.com/p/jsdoc-toolkit/" target="_blank">JsDoc Toolkit</a> 2.4.0 on Thu Jan 15 2015 14:24:26 GMT+0100 (CET)
+		</div>
+	</body>
+</html>

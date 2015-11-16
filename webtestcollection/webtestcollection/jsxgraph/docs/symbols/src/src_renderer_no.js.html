@@ -1,0 +1,643 @@
+<html><head><meta http-equiv="content-type" content="text/html; charset=utf-8"> <style>
+	.KEYW {color: #933;}
+	.COMM {color: #bbb; font-style: italic;}
+	.NUMB {color: #393;}
+	.STRN {color: #393;}
+	.REGX {color: #339;}
+	.line {border-right: 1px dotted #666; color: #666; font-style: normal;}
+	</style></head><body><pre><span class='line'>  1</span> <span class="COMM">/*
+<span class='line'>  2</span>     Copyright 2008-2013
+<span class='line'>  3</span>         Matthias Ehmann,
+<span class='line'>  4</span>         Michael Gerhaeuser,
+<span class='line'>  5</span>         Carsten Miller,
+<span class='line'>  6</span>         Bianca Valentin,
+<span class='line'>  7</span>         Alfred Wassermann,
+<span class='line'>  8</span>         Peter Wilfahrt
+<span class='line'>  9</span> 
+<span class='line'> 10</span>     This file is part of JSXGraph.
+<span class='line'> 11</span> 
+<span class='line'> 12</span>     JSXGraph is free software dual licensed under the GNU LGPL or MIT License.
+<span class='line'> 13</span> 
+<span class='line'> 14</span>     You can redistribute it and/or modify it under the terms of the
+<span class='line'> 15</span> 
+<span class='line'> 16</span>       * GNU Lesser General Public License as published by
+<span class='line'> 17</span>         the Free Software Foundation, either version 3 of the License, or
+<span class='line'> 18</span>         (at your option) any later version
+<span class='line'> 19</span>       OR
+<span class='line'> 20</span>       * MIT License: https://github.com/jsxgraph/jsxgraph/blob/master/LICENSE.MIT
+<span class='line'> 21</span> 
+<span class='line'> 22</span>     JSXGraph is distributed in the hope that it will be useful,
+<span class='line'> 23</span>     but WITHOUT ANY WARRANTY; without even the implied warranty of
+<span class='line'> 24</span>     MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+<span class='line'> 25</span>     GNU Lesser General Public License for more details.
+<span class='line'> 26</span> 
+<span class='line'> 27</span>     You should have received a copy of the GNU Lesser General Public License and
+<span class='line'> 28</span>     the MIT License along with JSXGraph. If not, see &lt;http://www.gnu.org/licenses/>
+<span class='line'> 29</span>     and &lt;http://opensource.org/licenses/MIT/>.
+<span class='line'> 30</span>  */</span><span class="WHIT">
+<span class='line'> 31</span> 
+<span class='line'> 32</span> 
+<span class='line'> 33</span> </span><span class="COMM">/*global JXG: true, define: true, AMprocessNode: true, MathJax: true, document: true */</span><span class="WHIT">
+<span class='line'> 34</span> </span><span class="COMM">/*jslint nomen: true, plusplus: true, newcap:true*/</span><span class="WHIT">
+<span class='line'> 35</span> 
+<span class='line'> 36</span> </span><span class="COMM">/* depends:
+<span class='line'> 37</span>  jxg
+<span class='line'> 38</span>  renderer/abstract
+<span class='line'> 39</span> */</span><span class="WHIT">
+<span class='line'> 40</span> 
+<span class='line'> 41</span> </span><span class="COMM">/**
+<span class='line'> 42</span>  * @fileoverview JSXGraph can use various technologies to render the contents of a construction, e.g.
+<span class='line'> 43</span>  * SVG, VML, and HTML5 Canvas. To accomplish this, The rendering and the logic and control mechanisms
+<span class='line'> 44</span>  * are completely separated from each other. Every rendering technology has it's own class, called
+<span class='line'> 45</span>  * Renderer, e.g. SVGRenderer for SVG, the same for VML and Canvas. The common base for all available
+<span class='line'> 46</span>  * renderers is the class AbstractRenderer.
+<span class='line'> 47</span>  */</span><span class="WHIT">
+<span class='line'> 48</span> 
+<span class='line'> 49</span> </span><span class="NAME">define</span><span class="PUNC">(</span><span class="PUNC">[</span><span class="STRN">'jxg'</span><span class="PUNC">,</span><span class="WHIT"> </span><span class="STRN">'renderer/abstract'</span><span class="PUNC">]</span><span class="PUNC">,</span><span class="WHIT"> </span><span class="KEYW">function</span><span class="WHIT"> </span><span class="PUNC">(</span><span class="NAME">JXG</span><span class="PUNC">,</span><span class="WHIT"> </span><span class="NAME">AbstractRenderer</span><span class="PUNC">)</span><span class="WHIT"> </span><span class="PUNC">{</span><span class="WHIT">
+<span class='line'> 50</span> 
+<span class='line'> 51</span> </span><span class="WHIT">    </span><span class="STRN">"use strict"</span><span class="PUNC">;</span><span class="WHIT">
+<span class='line'> 52</span> 
+<span class='line'> 53</span> </span><span class="WHIT">    </span><span class="COMM">/**
+<span class='line'> 54</span>      * This renderer draws nothing. It is intended to be used in environments where none of our rendering engines
+<span class='line'> 55</span>      * are available, e.g. WebWorkers.
+<span class='line'> 56</span>      * @class JXG.AbstractRenderer
+<span class='line'> 57</span>      */</span><span class="WHIT">
+<span class='line'> 58</span> </span><span class="WHIT">    </span><span class="NAME">JXG.NoRenderer</span><span class="WHIT"> </span><span class="PUNC">=</span><span class="WHIT"> </span><span class="KEYW">function</span><span class="WHIT"> </span><span class="PUNC">(</span><span class="PUNC">)</span><span class="WHIT"> </span><span class="PUNC">{</span><span class="WHIT">
+<span class='line'> 59</span> </span><span class="WHIT">        </span><span class="COMM">/**
+<span class='line'> 60</span>          * If this property is set to &lt;tt>true&lt;/tt> the visual properties of the elements are updated
+<span class='line'> 61</span>          * on every update. Visual properties means: All the stuff stored in the
+<span class='line'> 62</span>          * {@link JXG.GeometryElement#visProp} property won't be set if enhancedRendering is &lt;tt>false&lt;/tt>
+<span class='line'> 63</span>          * @type Boolean
+<span class='line'> 64</span>          * @default true
+<span class='line'> 65</span>          */</span><span class="WHIT">
+<span class='line'> 66</span> </span><span class="WHIT">        </span><span class="NAME">this.enhancedRendering</span><span class="WHIT"> </span><span class="PUNC">=</span><span class="WHIT"> </span><span class="KEYW">false</span><span class="PUNC">;</span><span class="WHIT">
+<span class='line'> 67</span> 
+<span class='line'> 68</span> </span><span class="WHIT">        </span><span class="COMM">/**
+<span class='line'> 69</span>          * This is used to easily determine which renderer we are using
+<span class='line'> 70</span>          * @example if (board.renderer.type === 'vml') {
+<span class='line'> 71</span>          *     // do something
+<span class='line'> 72</span>          * }
+<span class='line'> 73</span>          * @type String
+<span class='line'> 74</span>          */</span><span class="WHIT">
+<span class='line'> 75</span> </span><span class="WHIT">        </span><span class="NAME">this.type</span><span class="WHIT"> </span><span class="PUNC">=</span><span class="WHIT"> </span><span class="STRN">'no'</span><span class="PUNC">;</span><span class="WHIT">
+<span class='line'> 76</span> </span><span class="WHIT">    </span><span class="PUNC">}</span><span class="PUNC">;</span><span class="WHIT">
+<span class='line'> 77</span> 
+<span class='line'> 78</span> </span><span class="WHIT">    </span><span class="NAME">JXG.extend</span><span class="PUNC">(</span><span class="NAME">JXG.NoRenderer.prototype</span><span class="PUNC">,</span><span class="WHIT"> </span><span class="COMM">/** @lends JXG.AbstractRenderer.prototype */</span><span class="WHIT"> </span><span class="PUNC">{</span><span class="WHIT">
+<span class='line'> 79</span> </span><span class="WHIT">        </span><span class="COMM">/* ******************************** *
+<span class='line'> 80</span>          *    Point drawing and updating    *
+<span class='line'> 81</span>          * ******************************** */</span><span class="WHIT">
+<span class='line'> 82</span> 
+<span class='line'> 83</span> </span><span class="WHIT">        </span><span class="COMM">/**
+<span class='line'> 84</span>          * Draws a point on the {@link JXG.Board}.
+<span class='line'> 85</span>          * @param {JXG.Point} element Reference to a {@link JXG.Point} object that has to be drawn.
+<span class='line'> 86</span>          * @see Point
+<span class='line'> 87</span>          * @see JXG.Point
+<span class='line'> 88</span>          * @see JXG.AbstractRenderer#updatePoint
+<span class='line'> 89</span>          * @see JXG.AbstractRenderer#changePointStyle
+<span class='line'> 90</span>          */</span><span class="WHIT">
+<span class='line'> 91</span> </span><span class="WHIT">        </span><span class="NAME">drawPoint</span><span class="PUNC">:</span><span class="WHIT"> </span><span class="KEYW">function</span><span class="WHIT"> </span><span class="PUNC">(</span><span class="NAME">element</span><span class="PUNC">)</span><span class="WHIT"> </span><span class="PUNC">{</span><span class="PUNC">}</span><span class="PUNC">,</span><span class="WHIT">
+<span class='line'> 92</span> 
+<span class='line'> 93</span> </span><span class="WHIT">        </span><span class="COMM">/**
+<span class='line'> 94</span>          * Updates visual appearance of the renderer element assigned to the given {@link JXG.Point}.
+<span class='line'> 95</span>          * @param {JXG.Point} element Reference to a {@link JXG.Point} object, that has to be updated.
+<span class='line'> 96</span>          * @see Point
+<span class='line'> 97</span>          * @see JXG.Point
+<span class='line'> 98</span>          * @see JXG.AbstractRenderer#drawPoint
+<span class='line'> 99</span>          * @see JXG.AbstractRenderer#changePointStyle
+<span class='line'>100</span>          */</span><span class="WHIT">
+<span class='line'>101</span> </span><span class="WHIT">        </span><span class="NAME">updatePoint</span><span class="PUNC">:</span><span class="WHIT"> </span><span class="KEYW">function</span><span class="WHIT"> </span><span class="PUNC">(</span><span class="NAME">element</span><span class="PUNC">)</span><span class="WHIT"> </span><span class="PUNC">{</span><span class="WHIT"> </span><span class="PUNC">}</span><span class="PUNC">,</span><span class="WHIT">
+<span class='line'>102</span> 
+<span class='line'>103</span> </span><span class="WHIT">        </span><span class="COMM">/**
+<span class='line'>104</span>          * Changes the style of a {@link JXG.Point}. This is required because the point styles differ in what
+<span class='line'>105</span>          * elements have to be drawn, e.g. if the point is marked by a "x" or a "+" two lines are drawn, if
+<span class='line'>106</span>          * it's marked by spot a circle is drawn. This method removes the old renderer element(s) and creates
+<span class='line'>107</span>          * the new one(s).
+<span class='line'>108</span>          * @param {JXG.Point} element Reference to a {@link JXG.Point} object, that's style is changed.
+<span class='line'>109</span>          * @see Point
+<span class='line'>110</span>          * @see JXG.Point
+<span class='line'>111</span>          * @see JXG.AbstractRenderer#updatePoint
+<span class='line'>112</span>          * @see JXG.AbstractRenderer#drawPoint
+<span class='line'>113</span>          */</span><span class="WHIT">
+<span class='line'>114</span> </span><span class="WHIT">        </span><span class="NAME">changePointStyle</span><span class="PUNC">:</span><span class="WHIT"> </span><span class="KEYW">function</span><span class="WHIT"> </span><span class="PUNC">(</span><span class="NAME">element</span><span class="PUNC">)</span><span class="WHIT"> </span><span class="PUNC">{</span><span class="WHIT"> </span><span class="PUNC">}</span><span class="PUNC">,</span><span class="WHIT">
+<span class='line'>115</span> 
+<span class='line'>116</span> </span><span class="WHIT">        </span><span class="COMM">/* ******************************** *
+<span class='line'>117</span>          *           Lines                  *
+<span class='line'>118</span>          * ******************************** */</span><span class="WHIT">
+<span class='line'>119</span> 
+<span class='line'>120</span> </span><span class="WHIT">        </span><span class="COMM">/**
+<span class='line'>121</span>          * Draws a line on the {@link JXG.Board}.
+<span class='line'>122</span>          * @param {JXG.Line} element Reference to a line object, that has to be drawn.
+<span class='line'>123</span>          * @see Line
+<span class='line'>124</span>          * @see JXG.Line
+<span class='line'>125</span>          * @see JXG.AbstractRenderer#updateLine
+<span class='line'>126</span>          */</span><span class="WHIT">
+<span class='line'>127</span> </span><span class="WHIT">        </span><span class="NAME">drawLine</span><span class="PUNC">:</span><span class="WHIT"> </span><span class="KEYW">function</span><span class="WHIT"> </span><span class="PUNC">(</span><span class="NAME">element</span><span class="PUNC">)</span><span class="WHIT"> </span><span class="PUNC">{</span><span class="WHIT"> </span><span class="PUNC">}</span><span class="PUNC">,</span><span class="WHIT">
+<span class='line'>128</span> 
+<span class='line'>129</span> </span><span class="WHIT">        </span><span class="COMM">/**
+<span class='line'>130</span>          * Updates visual appearance of the renderer element assigned to the given {@link JXG.Line}.
+<span class='line'>131</span>          * @param {JXG.Line} element Reference to the {@link JXG.Line} object that has to be updated.
+<span class='line'>132</span>          * @see Line
+<span class='line'>133</span>          * @see JXG.Line
+<span class='line'>134</span>          * @see JXG.AbstractRenderer#drawLine
+<span class='line'>135</span>          */</span><span class="WHIT">
+<span class='line'>136</span> </span><span class="WHIT">        </span><span class="NAME">updateLine</span><span class="PUNC">:</span><span class="WHIT"> </span><span class="KEYW">function</span><span class="WHIT"> </span><span class="PUNC">(</span><span class="NAME">element</span><span class="PUNC">)</span><span class="WHIT"> </span><span class="PUNC">{</span><span class="WHIT"> </span><span class="PUNC">}</span><span class="PUNC">,</span><span class="WHIT">
+<span class='line'>137</span> 
+<span class='line'>138</span> </span><span class="WHIT">        </span><span class="COMM">/**
+<span class='line'>139</span>          * Creates a rendering node for ticks added to a line.
+<span class='line'>140</span>          * @param {JXG.Line} element A arbitrary line.
+<span class='line'>141</span>          * @see Line
+<span class='line'>142</span>          * @see Ticks
+<span class='line'>143</span>          * @see JXG.Line
+<span class='line'>144</span>          * @see JXG.Ticks
+<span class='line'>145</span>          * @see JXG.AbstractRenderer#updateTicks
+<span class='line'>146</span>          */</span><span class="WHIT">
+<span class='line'>147</span> </span><span class="WHIT">        </span><span class="NAME">drawTicks</span><span class="PUNC">:</span><span class="WHIT"> </span><span class="KEYW">function</span><span class="WHIT"> </span><span class="PUNC">(</span><span class="NAME">element</span><span class="PUNC">)</span><span class="WHIT"> </span><span class="PUNC">{</span><span class="WHIT"> </span><span class="PUNC">}</span><span class="PUNC">,</span><span class="WHIT">
+<span class='line'>148</span> 
+<span class='line'>149</span> </span><span class="WHIT">        </span><span class="COMM">/**
+<span class='line'>150</span>          * Update {@link Ticks} on a {@link JXG.Line}. This method is only a stub and has to be implemented
+<span class='line'>151</span>          * in any descendant renderer class.
+<span class='line'>152</span>          * @param {JXG.Line} element Reference of an line object, thats ticks have to be updated.
+<span class='line'>153</span>          * @see Line
+<span class='line'>154</span>          * @see Ticks
+<span class='line'>155</span>          * @see JXG.Line
+<span class='line'>156</span>          * @see JXG.Ticks
+<span class='line'>157</span>          * @see JXG.AbstractRenderer#drawTicks
+<span class='line'>158</span>          */</span><span class="WHIT">
+<span class='line'>159</span> </span><span class="WHIT">        </span><span class="NAME">updateTicks</span><span class="PUNC">:</span><span class="WHIT"> </span><span class="KEYW">function</span><span class="WHIT"> </span><span class="PUNC">(</span><span class="NAME">element</span><span class="PUNC">)</span><span class="WHIT"> </span><span class="PUNC">{</span><span class="WHIT"> </span><span class="COMM">/* stub */</span><span class="WHIT"> </span><span class="PUNC">}</span><span class="PUNC">,</span><span class="WHIT">
+<span class='line'>160</span> 
+<span class='line'>161</span> </span><span class="WHIT">        </span><span class="COMM">/* **************************
+<span class='line'>162</span>          *    Curves
+<span class='line'>163</span>          * **************************/</span><span class="WHIT">
+<span class='line'>164</span> 
+<span class='line'>165</span> </span><span class="WHIT">        </span><span class="COMM">/**
+<span class='line'>166</span>          * Draws a {@link JXG.Curve} on the {@link JXG.Board}.
+<span class='line'>167</span>          * @param {JXG.Curve} element Reference to a graph object, that has to be plotted.
+<span class='line'>168</span>          * @see Curve
+<span class='line'>169</span>          * @see JXG.Curve
+<span class='line'>170</span>          * @see JXG.AbstractRenderer#updateCurve
+<span class='line'>171</span>          */</span><span class="WHIT">
+<span class='line'>172</span> </span><span class="WHIT">        </span><span class="NAME">drawCurve</span><span class="PUNC">:</span><span class="WHIT"> </span><span class="KEYW">function</span><span class="WHIT"> </span><span class="PUNC">(</span><span class="NAME">element</span><span class="PUNC">)</span><span class="WHIT"> </span><span class="PUNC">{</span><span class="WHIT"> </span><span class="PUNC">}</span><span class="PUNC">,</span><span class="WHIT">
+<span class='line'>173</span> 
+<span class='line'>174</span> </span><span class="WHIT">        </span><span class="COMM">/**
+<span class='line'>175</span>          * Updates visual appearance of the renderer element assigned to the given {@link JXG.Curve}.
+<span class='line'>176</span>          * @param {JXG.Curve} element Reference to a {@link JXG.Curve} object, that has to be updated.
+<span class='line'>177</span>          * @see Curve
+<span class='line'>178</span>          * @see JXG.Curve
+<span class='line'>179</span>          * @see JXG.AbstractRenderer#drawCurve
+<span class='line'>180</span>          */</span><span class="WHIT">
+<span class='line'>181</span> </span><span class="WHIT">        </span><span class="NAME">updateCurve</span><span class="PUNC">:</span><span class="WHIT"> </span><span class="KEYW">function</span><span class="WHIT"> </span><span class="PUNC">(</span><span class="NAME">element</span><span class="PUNC">)</span><span class="WHIT"> </span><span class="PUNC">{</span><span class="WHIT"> </span><span class="PUNC">}</span><span class="PUNC">,</span><span class="WHIT">
+<span class='line'>182</span> 
+<span class='line'>183</span> </span><span class="WHIT">        </span><span class="COMM">/* **************************
+<span class='line'>184</span>          *    Circle related stuff
+<span class='line'>185</span>          * **************************/</span><span class="WHIT">
+<span class='line'>186</span> 
+<span class='line'>187</span> </span><span class="WHIT">        </span><span class="COMM">/**
+<span class='line'>188</span>          * Draws a {@link JXG.Circle}
+<span class='line'>189</span>          * @param {JXG.Circle} element Reference to a {@link JXG.Circle} object that has to be drawn.
+<span class='line'>190</span>          * @see Circle
+<span class='line'>191</span>          * @see JXG.Circle
+<span class='line'>192</span>          * @see JXG.AbstractRenderer#updateEllipse
+<span class='line'>193</span>          */</span><span class="WHIT">
+<span class='line'>194</span> </span><span class="WHIT">        </span><span class="NAME">drawEllipse</span><span class="PUNC">:</span><span class="WHIT"> </span><span class="KEYW">function</span><span class="WHIT"> </span><span class="PUNC">(</span><span class="NAME">element</span><span class="PUNC">)</span><span class="WHIT"> </span><span class="PUNC">{</span><span class="WHIT"> </span><span class="PUNC">}</span><span class="PUNC">,</span><span class="WHIT">
+<span class='line'>195</span> 
+<span class='line'>196</span> </span><span class="WHIT">        </span><span class="COMM">/**
+<span class='line'>197</span>          * Updates visual appearance of a given {@link JXG.Circle} on the {@link JXG.Board}.
+<span class='line'>198</span>          * @param {JXG.Circle} element Reference to a {@link JXG.Circle} object, that has to be updated.
+<span class='line'>199</span>          * @see Circle
+<span class='line'>200</span>          * @see JXG.Circle
+<span class='line'>201</span>          * @see JXG.AbstractRenderer#drawEllipse
+<span class='line'>202</span>          */</span><span class="WHIT">
+<span class='line'>203</span> </span><span class="WHIT">        </span><span class="NAME">updateEllipse</span><span class="PUNC">:</span><span class="WHIT"> </span><span class="KEYW">function</span><span class="WHIT"> </span><span class="PUNC">(</span><span class="NAME">element</span><span class="PUNC">)</span><span class="WHIT"> </span><span class="PUNC">{</span><span class="WHIT"> </span><span class="PUNC">}</span><span class="PUNC">,</span><span class="WHIT">
+<span class='line'>204</span> 
+<span class='line'>205</span> 
+<span class='line'>206</span> </span><span class="WHIT">        </span><span class="COMM">/* **************************
+<span class='line'>207</span>          *   Polygon related stuff
+<span class='line'>208</span>          * **************************/</span><span class="WHIT">
+<span class='line'>209</span> 
+<span class='line'>210</span> </span><span class="WHIT">        </span><span class="COMM">/**
+<span class='line'>211</span>          * Draws a {@link JXG.Polygon} on the {@link JXG.Board}.
+<span class='line'>212</span>          * @param {JXG.Polygon} element Reference to a Polygon object, that is to be drawn.
+<span class='line'>213</span>          * @see Polygon
+<span class='line'>214</span>          * @see JXG.Polygon
+<span class='line'>215</span>          * @see JXG.AbstractRenderer#updatePolygon
+<span class='line'>216</span>          */</span><span class="WHIT">
+<span class='line'>217</span> </span><span class="WHIT">        </span><span class="NAME">drawPolygon</span><span class="PUNC">:</span><span class="WHIT"> </span><span class="KEYW">function</span><span class="WHIT"> </span><span class="PUNC">(</span><span class="NAME">element</span><span class="PUNC">)</span><span class="WHIT"> </span><span class="PUNC">{</span><span class="WHIT"> </span><span class="PUNC">}</span><span class="PUNC">,</span><span class="WHIT">
+<span class='line'>218</span> 
+<span class='line'>219</span> </span><span class="WHIT">        </span><span class="COMM">/**
+<span class='line'>220</span>          * Updates properties of a {@link JXG.Polygon}'s rendering node.
+<span class='line'>221</span>          * @param {JXG.Polygon} element Reference to a {@link JXG.Polygon} object, that has to be updated.
+<span class='line'>222</span>          * @see Polygon
+<span class='line'>223</span>          * @see JXG.Polygon
+<span class='line'>224</span>          * @see JXG.AbstractRenderer#drawPolygon
+<span class='line'>225</span>          */</span><span class="WHIT">
+<span class='line'>226</span> </span><span class="WHIT">        </span><span class="NAME">updatePolygon</span><span class="PUNC">:</span><span class="WHIT"> </span><span class="KEYW">function</span><span class="WHIT"> </span><span class="PUNC">(</span><span class="NAME">element</span><span class="PUNC">)</span><span class="WHIT"> </span><span class="PUNC">{</span><span class="WHIT"> </span><span class="PUNC">}</span><span class="PUNC">,</span><span class="WHIT">
+<span class='line'>227</span> 
+<span class='line'>228</span> </span><span class="WHIT">        </span><span class="COMM">/* **************************
+<span class='line'>229</span>          *    Text related stuff
+<span class='line'>230</span>          * **************************/</span><span class="WHIT">
+<span class='line'>231</span> 
+<span class='line'>232</span> </span><span class="WHIT">        </span><span class="COMM">/**
+<span class='line'>233</span>          * Shows a small copyright notice in the top left corner of the board.
+<span class='line'>234</span>          * @param {String} str The copyright notice itself
+<span class='line'>235</span>          * @param {Number} fontsize Size of the font the copyright notice is written in
+<span class='line'>236</span>          */</span><span class="WHIT">
+<span class='line'>237</span> </span><span class="WHIT">        </span><span class="NAME">displayCopyright</span><span class="PUNC">:</span><span class="WHIT"> </span><span class="KEYW">function</span><span class="WHIT"> </span><span class="PUNC">(</span><span class="NAME">str</span><span class="PUNC">,</span><span class="WHIT"> </span><span class="NAME">fontsize</span><span class="PUNC">)</span><span class="WHIT"> </span><span class="PUNC">{</span><span class="WHIT"> </span><span class="COMM">/* stub */</span><span class="WHIT"> </span><span class="PUNC">}</span><span class="PUNC">,</span><span class="WHIT">
+<span class='line'>238</span> 
+<span class='line'>239</span> </span><span class="WHIT">        </span><span class="COMM">/**
+<span class='line'>240</span>          * An internal text is a {@link JXG.Text} element which is drawn using only
+<span class='line'>241</span>          * the given renderer but no HTML. This method is only a stub, the drawing
+<span class='line'>242</span>          * is done in the special renderers.
+<span class='line'>243</span>          * @param {JXG.Text} element Reference to a {@link JXG.Text} object
+<span class='line'>244</span>          * @see Text
+<span class='line'>245</span>          * @see JXG.Text
+<span class='line'>246</span>          * @see JXG.AbstractRenderer#updateInternalText
+<span class='line'>247</span>          * @see JXG.AbstractRenderer#drawText
+<span class='line'>248</span>          * @see JXG.AbstractRenderer#updateText
+<span class='line'>249</span>          * @see JXG.AbstractRenderer#updateTextStyle
+<span class='line'>250</span>          */</span><span class="WHIT">
+<span class='line'>251</span> </span><span class="WHIT">        </span><span class="NAME">drawInternalText</span><span class="PUNC">:</span><span class="WHIT"> </span><span class="KEYW">function</span><span class="WHIT"> </span><span class="PUNC">(</span><span class="NAME">element</span><span class="PUNC">)</span><span class="WHIT"> </span><span class="PUNC">{</span><span class="WHIT"> </span><span class="COMM">/* stub */</span><span class="WHIT"> </span><span class="PUNC">}</span><span class="PUNC">,</span><span class="WHIT">
+<span class='line'>252</span> 
+<span class='line'>253</span> </span><span class="WHIT">        </span><span class="COMM">/**
+<span class='line'>254</span>          * Updates visual properties of an already existing {@link JXG.Text} element.
+<span class='line'>255</span>          * @param {JXG.Text} element Reference to an {@link JXG.Text} object, that has to be updated.
+<span class='line'>256</span>          * @see Text
+<span class='line'>257</span>          * @see JXG.Text
+<span class='line'>258</span>          * @see JXG.AbstractRenderer#drawInternalText
+<span class='line'>259</span>          * @see JXG.AbstractRenderer#drawText
+<span class='line'>260</span>          * @see JXG.AbstractRenderer#updateText
+<span class='line'>261</span>          * @see JXG.AbstractRenderer#updateTextStyle
+<span class='line'>262</span>          */</span><span class="WHIT">
+<span class='line'>263</span> </span><span class="WHIT">        </span><span class="NAME">updateInternalText</span><span class="PUNC">:</span><span class="WHIT"> </span><span class="KEYW">function</span><span class="WHIT"> </span><span class="PUNC">(</span><span class="NAME">element</span><span class="PUNC">)</span><span class="WHIT"> </span><span class="PUNC">{</span><span class="WHIT"> </span><span class="COMM">/* stub */</span><span class="WHIT"> </span><span class="PUNC">}</span><span class="PUNC">,</span><span class="WHIT">
+<span class='line'>264</span> 
+<span class='line'>265</span> </span><span class="WHIT">        </span><span class="COMM">/**
+<span class='line'>266</span>          * Displays a {@link JXG.Text} on the {@link JXG.Board} by putting a HTML div over it.
+<span class='line'>267</span>          * @param {JXG.Text} element Reference to an {@link JXG.Text} object, that has to be displayed
+<span class='line'>268</span>          * @see Text
+<span class='line'>269</span>          * @see JXG.Text
+<span class='line'>270</span>          * @see JXG.AbstractRenderer#drawInternalText
+<span class='line'>271</span>          * @see JXG.AbstractRenderer#updateText
+<span class='line'>272</span>          * @see JXG.AbstractRenderer#updateInternalText
+<span class='line'>273</span>          * @see JXG.AbstractRenderer#updateTextStyle
+<span class='line'>274</span>          */</span><span class="WHIT">
+<span class='line'>275</span> </span><span class="WHIT">        </span><span class="NAME">drawText</span><span class="PUNC">:</span><span class="WHIT"> </span><span class="KEYW">function</span><span class="WHIT"> </span><span class="PUNC">(</span><span class="NAME">element</span><span class="PUNC">)</span><span class="WHIT"> </span><span class="PUNC">{</span><span class="WHIT"> </span><span class="PUNC">}</span><span class="PUNC">,</span><span class="WHIT">
+<span class='line'>276</span> 
+<span class='line'>277</span> </span><span class="WHIT">        </span><span class="COMM">/**
+<span class='line'>278</span>          * Updates visual properties of an already existing {@link JXG.Text} element.
+<span class='line'>279</span>          * @param {JXG.Text} element Reference to an {@link JXG.Text} object, that has to be updated.
+<span class='line'>280</span>          * @see Text
+<span class='line'>281</span>          * @see JXG.Text
+<span class='line'>282</span>          * @see JXG.AbstractRenderer#drawText
+<span class='line'>283</span>          * @see JXG.AbstractRenderer#drawInternalText
+<span class='line'>284</span>          * @see JXG.AbstractRenderer#updateInternalText
+<span class='line'>285</span>          * @see JXG.AbstractRenderer#updateTextStyle
+<span class='line'>286</span>          */</span><span class="WHIT">
+<span class='line'>287</span> </span><span class="WHIT">        </span><span class="NAME">updateText</span><span class="PUNC">:</span><span class="WHIT"> </span><span class="KEYW">function</span><span class="WHIT"> </span><span class="PUNC">(</span><span class="NAME">element</span><span class="PUNC">)</span><span class="WHIT"> </span><span class="PUNC">{</span><span class="WHIT"> </span><span class="PUNC">}</span><span class="PUNC">,</span><span class="WHIT">
+<span class='line'>288</span> 
+<span class='line'>289</span> </span><span class="WHIT">        </span><span class="COMM">/**
+<span class='line'>290</span>          * Updates CSS style properties of a {@link JXG.Text} node.
+<span class='line'>291</span>          * @param {JXG.Text} element Reference to the {@link JXG.Text} object, that has to be updated.
+<span class='line'>292</span>          * @param {Boolean} doHighlight
+<span class='line'>293</span>          * @see Text
+<span class='line'>294</span>          * @see JXG.Text
+<span class='line'>295</span>          * @see JXG.AbstractRenderer#drawText
+<span class='line'>296</span>          * @see JXG.AbstractRenderer#drawInternalText
+<span class='line'>297</span>          * @see JXG.AbstractRenderer#updateText
+<span class='line'>298</span>          * @see JXG.AbstractRenderer#updateInternalText
+<span class='line'>299</span>          */</span><span class="WHIT">
+<span class='line'>300</span> </span><span class="WHIT">        </span><span class="NAME">updateTextStyle</span><span class="PUNC">:</span><span class="WHIT"> </span><span class="KEYW">function</span><span class="WHIT"> </span><span class="PUNC">(</span><span class="NAME">element</span><span class="PUNC">,</span><span class="WHIT"> </span><span class="NAME">doHighlight</span><span class="PUNC">)</span><span class="WHIT"> </span><span class="PUNC">{</span><span class="WHIT"> </span><span class="PUNC">}</span><span class="PUNC">,</span><span class="WHIT">
+<span class='line'>301</span> 
+<span class='line'>302</span> </span><span class="WHIT">        </span><span class="COMM">/**
+<span class='line'>303</span>          * Set color and opacity of internal texts.
+<span class='line'>304</span>          * SVG needs its own version.
+<span class='line'>305</span>          * @private
+<span class='line'>306</span>          * @see JXG.AbstractRenderer#updateTextStyle
+<span class='line'>307</span>          * @see JXG.AbstractRenderer#updateInternalTextStyle
+<span class='line'>308</span>          */</span><span class="WHIT">
+<span class='line'>309</span> </span><span class="WHIT">        </span><span class="NAME">updateInternalTextStyle</span><span class="PUNC">:</span><span class="WHIT"> </span><span class="KEYW">function</span><span class="WHIT"> </span><span class="PUNC">(</span><span class="NAME">element</span><span class="PUNC">,</span><span class="WHIT"> </span><span class="NAME">strokeColor</span><span class="PUNC">,</span><span class="WHIT"> </span><span class="NAME">strokeOpacity</span><span class="PUNC">)</span><span class="WHIT"> </span><span class="PUNC">{</span><span class="WHIT"> </span><span class="COMM">/* stub */</span><span class="WHIT"> </span><span class="PUNC">}</span><span class="PUNC">,</span><span class="WHIT">
+<span class='line'>310</span> 
+<span class='line'>311</span> </span><span class="WHIT">        </span><span class="COMM">/* **************************
+<span class='line'>312</span>          *    Image related stuff
+<span class='line'>313</span>          * **************************/</span><span class="WHIT">
+<span class='line'>314</span> 
+<span class='line'>315</span> </span><span class="WHIT">        </span><span class="COMM">/**
+<span class='line'>316</span>          * Draws an {@link JXG.Image} on a board; This is just a template that has to be implemented by special renderers.
+<span class='line'>317</span>          * @param {JXG.Image} element Reference to the image object that is to be drawn
+<span class='line'>318</span>          * @see Image
+<span class='line'>319</span>          * @see JXG.Image
+<span class='line'>320</span>          * @see JXG.AbstractRenderer#updateImage
+<span class='line'>321</span>          */</span><span class="WHIT">
+<span class='line'>322</span> </span><span class="WHIT">        </span><span class="NAME">drawImage</span><span class="PUNC">:</span><span class="WHIT"> </span><span class="KEYW">function</span><span class="WHIT"> </span><span class="PUNC">(</span><span class="NAME">element</span><span class="PUNC">)</span><span class="WHIT"> </span><span class="PUNC">{</span><span class="WHIT"> </span><span class="COMM">/* stub */</span><span class="WHIT"> </span><span class="PUNC">}</span><span class="PUNC">,</span><span class="WHIT">
+<span class='line'>323</span> 
+<span class='line'>324</span> </span><span class="WHIT">        </span><span class="COMM">/**
+<span class='line'>325</span>          * Updates the properties of an {@link JXG.Image} element.
+<span class='line'>326</span>          * @param {JXG.Image} element Reference to an {@link JXG.Image} object, that has to be updated.
+<span class='line'>327</span>          * @see Image
+<span class='line'>328</span>          * @see JXG.Image
+<span class='line'>329</span>          * @see JXG.AbstractRenderer#drawImage
+<span class='line'>330</span>          */</span><span class="WHIT">
+<span class='line'>331</span> </span><span class="WHIT">        </span><span class="NAME">updateImage</span><span class="PUNC">:</span><span class="WHIT"> </span><span class="KEYW">function</span><span class="WHIT"> </span><span class="PUNC">(</span><span class="NAME">element</span><span class="PUNC">)</span><span class="WHIT"> </span><span class="PUNC">{</span><span class="WHIT"> </span><span class="PUNC">}</span><span class="PUNC">,</span><span class="WHIT">
+<span class='line'>332</span> 
+<span class='line'>333</span> </span><span class="WHIT">        </span><span class="COMM">/**
+<span class='line'>334</span>          * Applies transformations on images and text elements. This method is just a stub and has to be implemented in all
+<span class='line'>335</span>          * descendant classes where text and image transformations are to be supported.
+<span class='line'>336</span>          * @param {JXG.Image|JXG.Text} element A {@link JXG.Image} or {@link JXG.Text} object.
+<span class='line'>337</span>          * @param {Array} transformations An array of {@link JXG.Transformation} objects. This is usually the transformations property
+<span class='line'>338</span>          * of the given element &lt;tt>el&lt;/tt>.
+<span class='line'>339</span>          */</span><span class="WHIT">
+<span class='line'>340</span> </span><span class="WHIT">        </span><span class="NAME">transformImage</span><span class="PUNC">:</span><span class="WHIT"> </span><span class="KEYW">function</span><span class="WHIT"> </span><span class="PUNC">(</span><span class="NAME">element</span><span class="PUNC">,</span><span class="WHIT"> </span><span class="NAME">transformations</span><span class="PUNC">)</span><span class="WHIT"> </span><span class="PUNC">{</span><span class="WHIT"> </span><span class="COMM">/* stub */</span><span class="WHIT"> </span><span class="PUNC">}</span><span class="PUNC">,</span><span class="WHIT">
+<span class='line'>341</span> 
+<span class='line'>342</span> </span><span class="WHIT">        </span><span class="COMM">/**
+<span class='line'>343</span>          * If the URL of the image is provided by a function the URL has to be updated during updateImage()
+<span class='line'>344</span>          * @param {JXG.Image} element Reference to an image object.
+<span class='line'>345</span>          * @see JXG.AbstractRenderer#updateImage
+<span class='line'>346</span>          */</span><span class="WHIT">
+<span class='line'>347</span> </span><span class="WHIT">        </span><span class="NAME">updateImageURL</span><span class="PUNC">:</span><span class="WHIT"> </span><span class="KEYW">function</span><span class="WHIT"> </span><span class="PUNC">(</span><span class="NAME">element</span><span class="PUNC">)</span><span class="WHIT"> </span><span class="PUNC">{</span><span class="WHIT"> </span><span class="COMM">/* stub */</span><span class="WHIT"> </span><span class="PUNC">}</span><span class="PUNC">,</span><span class="WHIT">
+<span class='line'>348</span> 
+<span class='line'>349</span> </span><span class="WHIT">        </span><span class="COMM">/* **************************
+<span class='line'>350</span>          * Render primitive objects
+<span class='line'>351</span>          * **************************/</span><span class="WHIT">
+<span class='line'>352</span> 
+<span class='line'>353</span> </span><span class="WHIT">        </span><span class="COMM">/**
+<span class='line'>354</span>          * Appends a node to a specific layer level. This is just an abstract method and has to be implemented
+<span class='line'>355</span>          * in all renderers that want to use the &lt;tt>createPrim&lt;/tt> model to draw.
+<span class='line'>356</span>          * @param {Node} node A DOM tree node.
+<span class='line'>357</span>          * @param {Number} level The layer the node is attached to. This is the index of the layer in
+<span class='line'>358</span>          * {@link JXG.SVGRenderer#layer} or the &lt;tt>z-index&lt;/tt> style property of the node in VMLRenderer.
+<span class='line'>359</span>          */</span><span class="WHIT">
+<span class='line'>360</span> </span><span class="WHIT">        </span><span class="NAME">appendChildPrim</span><span class="PUNC">:</span><span class="WHIT"> </span><span class="KEYW">function</span><span class="WHIT"> </span><span class="PUNC">(</span><span class="NAME">node</span><span class="PUNC">,</span><span class="WHIT"> </span><span class="NAME">level</span><span class="PUNC">)</span><span class="WHIT"> </span><span class="PUNC">{</span><span class="WHIT"> </span><span class="COMM">/* stub */</span><span class="WHIT"> </span><span class="PUNC">}</span><span class="PUNC">,</span><span class="WHIT">
+<span class='line'>361</span> 
+<span class='line'>362</span> </span><span class="WHIT">        </span><span class="COMM">/**
+<span class='line'>363</span>          * Stores the rendering nodes. This is an abstract method which has to be implemented in all renderers that use
+<span class='line'>364</span>          * the &lt;tt>createPrim&lt;/tt> method.
+<span class='line'>365</span>          * @param {JXG.GeometryElement} element A JSXGraph element.
+<span class='line'>366</span>          * @param {String} type The XML node name. Only used in VMLRenderer.
+<span class='line'>367</span>          */</span><span class="WHIT">
+<span class='line'>368</span> </span><span class="WHIT">        </span><span class="NAME">appendNodesToElement</span><span class="PUNC">:</span><span class="WHIT"> </span><span class="KEYW">function</span><span class="WHIT"> </span><span class="PUNC">(</span><span class="NAME">element</span><span class="PUNC">,</span><span class="WHIT"> </span><span class="NAME">type</span><span class="PUNC">)</span><span class="WHIT"> </span><span class="PUNC">{</span><span class="WHIT"> </span><span class="COMM">/* stub */</span><span class="WHIT"> </span><span class="PUNC">}</span><span class="PUNC">,</span><span class="WHIT">
+<span class='line'>369</span> 
+<span class='line'>370</span> </span><span class="WHIT">        </span><span class="COMM">/**
+<span class='line'>371</span>          * Creates a node of a given type with a given id.
+<span class='line'>372</span>          * @param {String} type The type of the node to create.
+<span class='line'>373</span>          * @param {String} id Set the id attribute to this.
+<span class='line'>374</span>          * @returns {Node} Reference to the created node.
+<span class='line'>375</span>          */</span><span class="WHIT">
+<span class='line'>376</span> </span><span class="WHIT">        </span><span class="NAME">createPrim</span><span class="PUNC">:</span><span class="WHIT"> </span><span class="KEYW">function</span><span class="WHIT"> </span><span class="PUNC">(</span><span class="NAME">type</span><span class="PUNC">,</span><span class="WHIT"> </span><span class="NAME">id</span><span class="PUNC">)</span><span class="WHIT"> </span><span class="PUNC">{</span><span class="WHIT">
+<span class='line'>377</span> </span><span class="WHIT">            </span><span class="COMM">/* stub */</span><span class="WHIT">
+<span class='line'>378</span> </span><span class="WHIT">            </span><span class="KEYW">return</span><span class="WHIT"> </span><span class="KEYW">null</span><span class="PUNC">;</span><span class="WHIT">
+<span class='line'>379</span> </span><span class="WHIT">        </span><span class="PUNC">}</span><span class="PUNC">,</span><span class="WHIT">
+<span class='line'>380</span> 
+<span class='line'>381</span> </span><span class="WHIT">        </span><span class="COMM">/**
+<span class='line'>382</span>          * Removes an element node. Just a stub.
+<span class='line'>383</span>          * @param {Node} node The node to remove.
+<span class='line'>384</span>          */</span><span class="WHIT">
+<span class='line'>385</span> </span><span class="WHIT">        </span><span class="NAME">remove</span><span class="PUNC">:</span><span class="WHIT"> </span><span class="KEYW">function</span><span class="WHIT"> </span><span class="PUNC">(</span><span class="NAME">node</span><span class="PUNC">)</span><span class="WHIT"> </span><span class="PUNC">{</span><span class="WHIT"> </span><span class="COMM">/* stub */</span><span class="WHIT"> </span><span class="PUNC">}</span><span class="PUNC">,</span><span class="WHIT">
+<span class='line'>386</span> 
+<span class='line'>387</span> </span><span class="WHIT">        </span><span class="COMM">/**
+<span class='line'>388</span>          * Can be used to create the nodes to display arrows. This is an abstract method which has to be implemented
+<span class='line'>389</span>          * in any descendant renderer.
+<span class='line'>390</span>          * @param {JXG.GeometryElement} element The element the arrows are to be attached to.
+<span class='line'>391</span>          */</span><span class="WHIT">
+<span class='line'>392</span> </span><span class="WHIT">        </span><span class="NAME">makeArrows</span><span class="PUNC">:</span><span class="WHIT"> </span><span class="KEYW">function</span><span class="WHIT"> </span><span class="PUNC">(</span><span class="NAME">element</span><span class="PUNC">)</span><span class="WHIT"> </span><span class="PUNC">{</span><span class="WHIT"> </span><span class="COMM">/* stub */</span><span class="WHIT"> </span><span class="PUNC">}</span><span class="PUNC">,</span><span class="WHIT">
+<span class='line'>393</span> 
+<span class='line'>394</span> </span><span class="WHIT">        </span><span class="COMM">/**
+<span class='line'>395</span>          * Updates an ellipse node primitive. This is an abstract method which has to be implemented in all renderers
+<span class='line'>396</span>          * that use the &lt;tt>createPrim&lt;/tt> method.
+<span class='line'>397</span>          * @param {Node} node Reference to the node.
+<span class='line'>398</span>          * @param {Number} x Centre X coordinate
+<span class='line'>399</span>          * @param {Number} y Centre Y coordinate
+<span class='line'>400</span>          * @param {Number} rx The x-axis radius.
+<span class='line'>401</span>          * @param {Number} ry The y-axis radius.
+<span class='line'>402</span>          */</span><span class="WHIT">
+<span class='line'>403</span> </span><span class="WHIT">        </span><span class="NAME">updateEllipsePrim</span><span class="PUNC">:</span><span class="WHIT"> </span><span class="KEYW">function</span><span class="WHIT"> </span><span class="PUNC">(</span><span class="NAME">node</span><span class="PUNC">,</span><span class="WHIT"> </span><span class="NAME">x</span><span class="PUNC">,</span><span class="WHIT"> </span><span class="NAME">y</span><span class="PUNC">,</span><span class="WHIT"> </span><span class="NAME">rx</span><span class="PUNC">,</span><span class="WHIT"> </span><span class="NAME">ry</span><span class="PUNC">)</span><span class="WHIT"> </span><span class="PUNC">{</span><span class="WHIT"> </span><span class="COMM">/* stub */</span><span class="WHIT"> </span><span class="PUNC">}</span><span class="PUNC">,</span><span class="WHIT">
+<span class='line'>404</span> 
+<span class='line'>405</span> </span><span class="WHIT">        </span><span class="COMM">/**
+<span class='line'>406</span>          * Refreshes a line node. This is an abstract method which has to be implemented in all renderers that use
+<span class='line'>407</span>          * the &lt;tt>createPrim&lt;/tt> method.
+<span class='line'>408</span>          * @param {Node} node The node to be refreshed.
+<span class='line'>409</span>          * @param {Number} p1x The first point's x coordinate.
+<span class='line'>410</span>          * @param {Number} p1y The first point's y coordinate.
+<span class='line'>411</span>          * @param {Number} p2x The second point's x coordinate.
+<span class='line'>412</span>          * @param {Number} p2y The second point's y coordinate.
+<span class='line'>413</span>          * @param {JXG.Board} board
+<span class='line'>414</span>          */</span><span class="WHIT">
+<span class='line'>415</span> </span><span class="WHIT">        </span><span class="NAME">updateLinePrim</span><span class="PUNC">:</span><span class="WHIT"> </span><span class="KEYW">function</span><span class="WHIT"> </span><span class="PUNC">(</span><span class="NAME">node</span><span class="PUNC">,</span><span class="WHIT"> </span><span class="NAME">p1x</span><span class="PUNC">,</span><span class="WHIT"> </span><span class="NAME">p1y</span><span class="PUNC">,</span><span class="WHIT"> </span><span class="NAME">p2x</span><span class="PUNC">,</span><span class="WHIT"> </span><span class="NAME">p2y</span><span class="PUNC">,</span><span class="WHIT"> </span><span class="NAME">board</span><span class="PUNC">)</span><span class="WHIT"> </span><span class="PUNC">{</span><span class="WHIT"> </span><span class="COMM">/* stub */</span><span class="WHIT"> </span><span class="PUNC">}</span><span class="PUNC">,</span><span class="WHIT">
+<span class='line'>416</span> 
+<span class='line'>417</span> </span><span class="WHIT">        </span><span class="COMM">/**
+<span class='line'>418</span>          * Updates a path element. This is an abstract method which has to be implemented in all renderers that use
+<span class='line'>419</span>          * the &lt;tt>createPrim&lt;/tt> method.
+<span class='line'>420</span>          * @param {Node} node The path node.
+<span class='line'>421</span>          * @param {String} pathString A string formatted like e.g. &lt;em>'M 1,2 L 3,1 L5,5'&lt;/em>. The format of the string
+<span class='line'>422</span>          * depends on the rendering engine.
+<span class='line'>423</span>          * @param {JXG.Board} board Reference to the element's board.
+<span class='line'>424</span>          */</span><span class="WHIT">
+<span class='line'>425</span> </span><span class="WHIT">        </span><span class="NAME">updatePathPrim</span><span class="PUNC">:</span><span class="WHIT"> </span><span class="KEYW">function</span><span class="WHIT"> </span><span class="PUNC">(</span><span class="NAME">node</span><span class="PUNC">,</span><span class="WHIT"> </span><span class="NAME">pathString</span><span class="PUNC">,</span><span class="WHIT"> </span><span class="NAME">board</span><span class="PUNC">)</span><span class="WHIT"> </span><span class="PUNC">{</span><span class="WHIT"> </span><span class="COMM">/* stub */</span><span class="WHIT"> </span><span class="PUNC">}</span><span class="PUNC">,</span><span class="WHIT">
+<span class='line'>426</span> 
+<span class='line'>427</span> </span><span class="WHIT">        </span><span class="COMM">/**
+<span class='line'>428</span>          * Builds a path data string to draw a point with a face other than &lt;em>rect&lt;/em> and &lt;em>circle&lt;/em>. Since
+<span class='line'>429</span>          * the format of such a string usually depends on the renderer this method
+<span class='line'>430</span>          * is only an abstract method. Therefore, it has to be implemented in the descendant renderer itself unless
+<span class='line'>431</span>          * the renderer does not use the createPrim interface but the draw* interfaces to paint.
+<span class='line'>432</span>          * @param {JXG.Point} element The point element
+<span class='line'>433</span>          * @param {Number} size A positive number describing the size. Usually the half of the width and height of
+<span class='line'>434</span>          * the drawn point.
+<span class='line'>435</span>          * @param {String} type A string describing the point's face. This method only accepts the shortcut version of
+<span class='line'>436</span>          * each possible face: &lt;tt>x, +, &lt;>, ^, v, >, &lt;
+<span class='line'>437</span>          */</span><span class="WHIT">
+<span class='line'>438</span> </span><span class="WHIT">        </span><span class="NAME">updatePathStringPoint</span><span class="PUNC">:</span><span class="WHIT"> </span><span class="KEYW">function</span><span class="WHIT"> </span><span class="PUNC">(</span><span class="NAME">element</span><span class="PUNC">,</span><span class="WHIT"> </span><span class="NAME">size</span><span class="PUNC">,</span><span class="WHIT"> </span><span class="NAME">type</span><span class="PUNC">)</span><span class="WHIT"> </span><span class="PUNC">{</span><span class="WHIT"> </span><span class="COMM">/* stub */</span><span class="WHIT"> </span><span class="PUNC">}</span><span class="PUNC">,</span><span class="WHIT">
+<span class='line'>439</span> 
+<span class='line'>440</span> </span><span class="WHIT">        </span><span class="COMM">/**
+<span class='line'>441</span>          * Builds a path data string from a {@link JXG.Curve} element. Since the path data strings heavily depend on the
+<span class='line'>442</span>          * underlying rendering technique this method is just a stub. Although such a path string is of no use for the
+<span class='line'>443</span>          * CanvasRenderer, this method is used there to draw a path directly.
+<span class='line'>444</span>          * @param element
+<span class='line'>445</span>          */</span><span class="WHIT">
+<span class='line'>446</span> </span><span class="WHIT">        </span><span class="NAME">updatePathStringPrim</span><span class="PUNC">:</span><span class="WHIT"> </span><span class="KEYW">function</span><span class="WHIT"> </span><span class="PUNC">(</span><span class="NAME">element</span><span class="PUNC">)</span><span class="WHIT"> </span><span class="PUNC">{</span><span class="WHIT"> </span><span class="COMM">/* stub */</span><span class="WHIT"> </span><span class="PUNC">}</span><span class="PUNC">,</span><span class="WHIT">
+<span class='line'>447</span> 
+<span class='line'>448</span> </span><span class="WHIT">        </span><span class="COMM">/**
+<span class='line'>449</span>          * Builds a path data string from a {@link JXG.Curve} element such that the curve looks like
+<span class='line'>450</span>          * hand drawn.
+<span class='line'>451</span>          * Since the path data strings heavily depend on the
+<span class='line'>452</span>          * underlying rendering technique this method is just a stub. Although such a path string is of no use for the
+<span class='line'>453</span>          * CanvasRenderer, this method is used there to draw a path directly.
+<span class='line'>454</span>          * @param element
+<span class='line'>455</span>          */</span><span class="WHIT">
+<span class='line'>456</span> </span><span class="WHIT">        </span><span class="NAME">updatePathStringBezierPrim</span><span class="PUNC">:</span><span class="WHIT"> </span><span class="KEYW">function</span><span class="WHIT"> </span><span class="PUNC">(</span><span class="NAME">element</span><span class="PUNC">)</span><span class="WHIT"> </span><span class="PUNC">{</span><span class="WHIT"> </span><span class="COMM">/* stub */</span><span class="WHIT"> </span><span class="PUNC">}</span><span class="PUNC">,</span><span class="WHIT">
+<span class='line'>457</span> 
+<span class='line'>458</span> 
+<span class='line'>459</span> </span><span class="WHIT">        </span><span class="COMM">/**
+<span class='line'>460</span>          * Update a polygon primitive.
+<span class='line'>461</span>          * @param {Node} node
+<span class='line'>462</span>          * @param {JXG.Polygon} element A JSXGraph element of type {@link JXG.Polygon}
+<span class='line'>463</span>          */</span><span class="WHIT">
+<span class='line'>464</span> </span><span class="WHIT">        </span><span class="NAME">updatePolygonPrim</span><span class="PUNC">:</span><span class="WHIT"> </span><span class="KEYW">function</span><span class="WHIT"> </span><span class="PUNC">(</span><span class="NAME">node</span><span class="PUNC">,</span><span class="WHIT"> </span><span class="NAME">element</span><span class="PUNC">)</span><span class="WHIT"> </span><span class="PUNC">{</span><span class="WHIT"> </span><span class="COMM">/* stub */</span><span class="WHIT"> </span><span class="PUNC">}</span><span class="PUNC">,</span><span class="WHIT">
+<span class='line'>465</span> 
+<span class='line'>466</span> </span><span class="WHIT">        </span><span class="COMM">/**
+<span class='line'>467</span>          * Update a rectangle primitive. This is used only for points with face of type 'rect'.
+<span class='line'>468</span>          * @param {Node} node The node yearning to be updated.
+<span class='line'>469</span>          * @param {Number} x x coordinate of the top left vertex.
+<span class='line'>470</span>          * @param {Number} y y coordinate of the top left vertex.
+<span class='line'>471</span>          * @param {Number} w Width of the rectangle.
+<span class='line'>472</span>          * @param {Number} h The rectangle's height.
+<span class='line'>473</span>          */</span><span class="WHIT">
+<span class='line'>474</span> </span><span class="WHIT">        </span><span class="NAME">updateRectPrim</span><span class="PUNC">:</span><span class="WHIT"> </span><span class="KEYW">function</span><span class="WHIT"> </span><span class="PUNC">(</span><span class="NAME">node</span><span class="PUNC">,</span><span class="WHIT"> </span><span class="NAME">x</span><span class="PUNC">,</span><span class="WHIT"> </span><span class="NAME">y</span><span class="PUNC">,</span><span class="WHIT"> </span><span class="NAME">w</span><span class="PUNC">,</span><span class="WHIT"> </span><span class="NAME">h</span><span class="PUNC">)</span><span class="WHIT"> </span><span class="PUNC">{</span><span class="WHIT"> </span><span class="COMM">/* stub */</span><span class="WHIT"> </span><span class="PUNC">}</span><span class="PUNC">,</span><span class="WHIT">
+<span class='line'>475</span> 
+<span class='line'>476</span> </span><span class="WHIT">        </span><span class="COMM">/* **************************
+<span class='line'>477</span>          *  Set Attributes
+<span class='line'>478</span>          * **************************/</span><span class="WHIT">
+<span class='line'>479</span> 
+<span class='line'>480</span> </span><span class="WHIT">        </span><span class="COMM">/**
+<span class='line'>481</span>          * Sets a node's attribute.
+<span class='line'>482</span>          * @param {Node} node The node that is to be updated.
+<span class='line'>483</span>          * @param {String} key Name of the attribute.
+<span class='line'>484</span>          * @param {String} val New value for the attribute.
+<span class='line'>485</span>          */</span><span class="WHIT">
+<span class='line'>486</span> </span><span class="WHIT">        </span><span class="NAME">setPropertyPrim</span><span class="PUNC">:</span><span class="WHIT"> </span><span class="KEYW">function</span><span class="WHIT"> </span><span class="PUNC">(</span><span class="NAME">node</span><span class="PUNC">,</span><span class="WHIT"> </span><span class="NAME">key</span><span class="PUNC">,</span><span class="WHIT"> </span><span class="NAME">val</span><span class="PUNC">)</span><span class="WHIT"> </span><span class="PUNC">{</span><span class="WHIT"> </span><span class="COMM">/* stub */</span><span class="WHIT"> </span><span class="PUNC">}</span><span class="PUNC">,</span><span class="WHIT">
+<span class='line'>487</span> 
+<span class='line'>488</span> </span><span class="WHIT">        </span><span class="COMM">/**
+<span class='line'>489</span>          * Shows a hidden element on the canvas; Only a stub, requires implementation in the derived renderer.
+<span class='line'>490</span>          * @param {JXG.GeometryElement} element Reference to the object that has to appear.
+<span class='line'>491</span>          * @see JXG.AbstractRenderer#hide
+<span class='line'>492</span>          */</span><span class="WHIT">
+<span class='line'>493</span> </span><span class="WHIT">        </span><span class="NAME">show</span><span class="PUNC">:</span><span class="WHIT"> </span><span class="KEYW">function</span><span class="WHIT"> </span><span class="PUNC">(</span><span class="NAME">element</span><span class="PUNC">)</span><span class="WHIT"> </span><span class="PUNC">{</span><span class="WHIT"> </span><span class="COMM">/* stub */</span><span class="WHIT"> </span><span class="PUNC">}</span><span class="PUNC">,</span><span class="WHIT">
+<span class='line'>494</span> 
+<span class='line'>495</span> </span><span class="WHIT">        </span><span class="COMM">/**
+<span class='line'>496</span>          * Hides an element on the canvas; Only a stub, requires implementation in the derived renderer.
+<span class='line'>497</span>          * @param {JXG.GeometryElement} element Reference to the geometry element that has to disappear.
+<span class='line'>498</span>          * @see JXG.AbstractRenderer#show
+<span class='line'>499</span>          */</span><span class="WHIT">
+<span class='line'>500</span> </span><span class="WHIT">        </span><span class="NAME">hide</span><span class="PUNC">:</span><span class="WHIT"> </span><span class="KEYW">function</span><span class="WHIT"> </span><span class="PUNC">(</span><span class="NAME">element</span><span class="PUNC">)</span><span class="WHIT"> </span><span class="PUNC">{</span><span class="WHIT"> </span><span class="COMM">/* stub */</span><span class="WHIT"> </span><span class="PUNC">}</span><span class="PUNC">,</span><span class="WHIT">
+<span class='line'>501</span> 
+<span class='line'>502</span> </span><span class="WHIT">        </span><span class="COMM">/**
+<span class='line'>503</span>          * Sets the buffering as recommended by SVGWG. Until now only Opera supports this and will be ignored by
+<span class='line'>504</span>          * other browsers. Although this feature is only supported by SVG we have this method in {@link JXG.AbstractRenderer}
+<span class='line'>505</span>          * because it is called from outside the renderer.
+<span class='line'>506</span>          * @param {Node} node The SVG DOM Node which buffering type to update.
+<span class='line'>507</span>          * @param {String} type Either 'auto', 'dynamic', or 'static'. For an explanation see
+<span class='line'>508</span>          *   {@link http://www.w3.org/TR/SVGTiny12/painting.html#BufferedRenderingProperty}.
+<span class='line'>509</span>          */</span><span class="WHIT">
+<span class='line'>510</span> </span><span class="WHIT">        </span><span class="NAME">setBuffering</span><span class="PUNC">:</span><span class="WHIT"> </span><span class="KEYW">function</span><span class="WHIT"> </span><span class="PUNC">(</span><span class="NAME">node</span><span class="PUNC">,</span><span class="WHIT"> </span><span class="NAME">type</span><span class="PUNC">)</span><span class="WHIT"> </span><span class="PUNC">{</span><span class="WHIT"> </span><span class="COMM">/* stub */</span><span class="WHIT"> </span><span class="PUNC">}</span><span class="PUNC">,</span><span class="WHIT">
+<span class='line'>511</span> 
+<span class='line'>512</span> </span><span class="WHIT">        </span><span class="COMM">/**
+<span class='line'>513</span>          * Sets an element's dash style.
+<span class='line'>514</span>          * @param {JXG.GeometryElement} element An JSXGraph element.
+<span class='line'>515</span>          */</span><span class="WHIT">
+<span class='line'>516</span> </span><span class="WHIT">        </span><span class="NAME">setDashStyle</span><span class="PUNC">:</span><span class="WHIT"> </span><span class="KEYW">function</span><span class="WHIT"> </span><span class="PUNC">(</span><span class="NAME">element</span><span class="PUNC">)</span><span class="WHIT"> </span><span class="PUNC">{</span><span class="WHIT"> </span><span class="COMM">/* stub */</span><span class="WHIT"> </span><span class="PUNC">}</span><span class="PUNC">,</span><span class="WHIT">
+<span class='line'>517</span> 
+<span class='line'>518</span> </span><span class="WHIT">        </span><span class="COMM">/**
+<span class='line'>519</span>          * Puts an object into draft mode, i.e. it's visual appearance will be changed. For GEONE&lt;sub>x&lt;/sub>T backwards compatibility.
+<span class='line'>520</span>          * @param {JXG.GeometryElement} element Reference of the object that is in draft mode.
+<span class='line'>521</span>          */</span><span class="WHIT">
+<span class='line'>522</span> </span><span class="WHIT">        </span><span class="NAME">setDraft</span><span class="PUNC">:</span><span class="WHIT"> </span><span class="KEYW">function</span><span class="WHIT"> </span><span class="PUNC">(</span><span class="NAME">element</span><span class="PUNC">)</span><span class="WHIT"> </span><span class="PUNC">{</span><span class="WHIT"> </span><span class="PUNC">}</span><span class="PUNC">,</span><span class="WHIT">
+<span class='line'>523</span> 
+<span class='line'>524</span> </span><span class="WHIT">        </span><span class="COMM">/**
+<span class='line'>525</span>          * Puts an object from draft mode back into normal mode.
+<span class='line'>526</span>          * @param {JXG.GeometryElement} element Reference of the object that no longer is in draft mode.
+<span class='line'>527</span>          */</span><span class="WHIT">
+<span class='line'>528</span> </span><span class="WHIT">        </span><span class="NAME">removeDraft</span><span class="PUNC">:</span><span class="WHIT"> </span><span class="KEYW">function</span><span class="WHIT"> </span><span class="PUNC">(</span><span class="NAME">element</span><span class="PUNC">)</span><span class="WHIT"> </span><span class="PUNC">{</span><span class="WHIT"> </span><span class="PUNC">}</span><span class="PUNC">,</span><span class="WHIT">
+<span class='line'>529</span> 
+<span class='line'>530</span> </span><span class="WHIT">        </span><span class="COMM">/**
+<span class='line'>531</span>          * Sets up nodes for rendering a gradient fill.
+<span class='line'>532</span>          * @param element
+<span class='line'>533</span>          */</span><span class="WHIT">
+<span class='line'>534</span> </span><span class="WHIT">        </span><span class="NAME">setGradient</span><span class="PUNC">:</span><span class="WHIT"> </span><span class="KEYW">function</span><span class="WHIT"> </span><span class="PUNC">(</span><span class="NAME">element</span><span class="PUNC">)</span><span class="WHIT"> </span><span class="PUNC">{</span><span class="WHIT"> </span><span class="COMM">/* stub */</span><span class="WHIT"> </span><span class="PUNC">}</span><span class="PUNC">,</span><span class="WHIT">
+<span class='line'>535</span> 
+<span class='line'>536</span> </span><span class="WHIT">        </span><span class="COMM">/**
+<span class='line'>537</span>          * Updates the gradient fill.
+<span class='line'>538</span>          * @param {JXG.GeometryElement} element An JSXGraph element with an area that can be filled.
+<span class='line'>539</span>          */</span><span class="WHIT">
+<span class='line'>540</span> </span><span class="WHIT">        </span><span class="NAME">updateGradient</span><span class="PUNC">:</span><span class="WHIT"> </span><span class="KEYW">function</span><span class="WHIT"> </span><span class="PUNC">(</span><span class="NAME">element</span><span class="PUNC">)</span><span class="WHIT"> </span><span class="PUNC">{</span><span class="WHIT"> </span><span class="COMM">/* stub */</span><span class="WHIT"> </span><span class="PUNC">}</span><span class="PUNC">,</span><span class="WHIT">
+<span class='line'>541</span> 
+<span class='line'>542</span> </span><span class="WHIT">        </span><span class="COMM">/**
+<span class='line'>543</span>          * Sets an objects fill color.
+<span class='line'>544</span>          * @param {JXG.GeometryElement} element Reference of the object that wants a new fill color.
+<span class='line'>545</span>          * @param {String} color Color in a HTML/CSS compatible format. If you don't want any fill color at all, choose 'none'.
+<span class='line'>546</span>          * @param {Number} opacity Opacity of the fill color. Must be between 0 and 1.
+<span class='line'>547</span>          */</span><span class="WHIT">
+<span class='line'>548</span> </span><span class="WHIT">        </span><span class="NAME">setObjectFillColor</span><span class="PUNC">:</span><span class="WHIT"> </span><span class="KEYW">function</span><span class="WHIT"> </span><span class="PUNC">(</span><span class="NAME">element</span><span class="PUNC">,</span><span class="WHIT"> </span><span class="NAME">color</span><span class="PUNC">,</span><span class="WHIT"> </span><span class="NAME">opacity</span><span class="PUNC">)</span><span class="WHIT"> </span><span class="PUNC">{</span><span class="WHIT"> </span><span class="COMM">/* stub */</span><span class="WHIT"> </span><span class="PUNC">}</span><span class="PUNC">,</span><span class="WHIT">
+<span class='line'>549</span> 
+<span class='line'>550</span> </span><span class="WHIT">        </span><span class="COMM">/**
+<span class='line'>551</span>          * Changes an objects stroke color to the given color.
+<span class='line'>552</span>          * @param {JXG.GeometryElement} element Reference of the {@link JXG.GeometryElement} that gets a new stroke color.
+<span class='line'>553</span>          * @param {String} color Color value in a HTML compatible format, e.g. &lt;strong>#00ff00&lt;/strong> or &lt;strong>green&lt;/strong> for green.
+<span class='line'>554</span>          * @param {Number} opacity Opacity of the fill color. Must be between 0 and 1.
+<span class='line'>555</span>          */</span><span class="WHIT">
+<span class='line'>556</span> </span><span class="WHIT">        </span><span class="NAME">setObjectStrokeColor</span><span class="PUNC">:</span><span class="WHIT"> </span><span class="KEYW">function</span><span class="WHIT"> </span><span class="PUNC">(</span><span class="NAME">element</span><span class="PUNC">,</span><span class="WHIT"> </span><span class="NAME">color</span><span class="PUNC">,</span><span class="WHIT"> </span><span class="NAME">opacity</span><span class="PUNC">)</span><span class="WHIT"> </span><span class="PUNC">{</span><span class="WHIT"> </span><span class="COMM">/* stub */</span><span class="WHIT"> </span><span class="PUNC">}</span><span class="PUNC">,</span><span class="WHIT">
+<span class='line'>557</span> 
+<span class='line'>558</span> </span><span class="WHIT">        </span><span class="COMM">/**
+<span class='line'>559</span>          * Sets an element's stroke width.
+<span class='line'>560</span>          * @param {JXG.GeometryElement} element Reference to the geometry element.
+<span class='line'>561</span>          * @param {Number} width The new stroke width to be assigned to the element.
+<span class='line'>562</span>          */</span><span class="WHIT">
+<span class='line'>563</span> </span><span class="WHIT">        </span><span class="NAME">setObjectStrokeWidth</span><span class="PUNC">:</span><span class="WHIT"> </span><span class="KEYW">function</span><span class="WHIT"> </span><span class="PUNC">(</span><span class="NAME">element</span><span class="PUNC">,</span><span class="WHIT"> </span><span class="NAME">width</span><span class="PUNC">)</span><span class="WHIT"> </span><span class="PUNC">{</span><span class="WHIT"> </span><span class="COMM">/* stub */</span><span class="WHIT"> </span><span class="PUNC">}</span><span class="PUNC">,</span><span class="WHIT">
+<span class='line'>564</span> 
+<span class='line'>565</span> </span><span class="WHIT">        </span><span class="COMM">/**
+<span class='line'>566</span>          * Sets the shadow properties to a geometry element. This method is only a stub, it is implemented in the actual renderers.
+<span class='line'>567</span>          * @param {JXG.GeometryElement} element Reference to a geometry object, that should get a shadow
+<span class='line'>568</span>          */</span><span class="WHIT">
+<span class='line'>569</span> </span><span class="WHIT">        </span><span class="NAME">setShadow</span><span class="PUNC">:</span><span class="WHIT"> </span><span class="KEYW">function</span><span class="WHIT"> </span><span class="PUNC">(</span><span class="NAME">element</span><span class="PUNC">)</span><span class="WHIT"> </span><span class="PUNC">{</span><span class="WHIT"> </span><span class="COMM">/* stub */</span><span class="WHIT"> </span><span class="PUNC">}</span><span class="PUNC">,</span><span class="WHIT">
+<span class='line'>570</span> 
+<span class='line'>571</span> </span><span class="WHIT">        </span><span class="COMM">/**
+<span class='line'>572</span>          * Highlights an object, i.e. changes the current colors of the object to its highlighting colors
+<span class='line'>573</span>          * @param {JXG.GeometryElement} element Reference of the object that will be highlighted.
+<span class='line'>574</span>          * @returns {JXG.AbstractRenderer} Reference to the renderer
+<span class='line'>575</span>          */</span><span class="WHIT">
+<span class='line'>576</span> </span><span class="WHIT">        </span><span class="NAME">highlight</span><span class="PUNC">:</span><span class="WHIT"> </span><span class="KEYW">function</span><span class="WHIT"> </span><span class="PUNC">(</span><span class="NAME">element</span><span class="PUNC">)</span><span class="WHIT"> </span><span class="PUNC">{</span><span class="WHIT"> </span><span class="PUNC">}</span><span class="PUNC">,</span><span class="WHIT">
+<span class='line'>577</span> 
+<span class='line'>578</span> </span><span class="WHIT">        </span><span class="COMM">/**
+<span class='line'>579</span>          * Uses the normal colors of an object, i.e. the opposite of {@link JXG.AbstractRenderer#highlight}.
+<span class='line'>580</span>          * @param {JXG.GeometryElement} element Reference of the object that will get its normal colors.
+<span class='line'>581</span>          * @returns {JXG.AbstractRenderer} Reference to the renderer
+<span class='line'>582</span>          */</span><span class="WHIT">
+<span class='line'>583</span> </span><span class="WHIT">        </span><span class="NAME">noHighlight</span><span class="PUNC">:</span><span class="WHIT"> </span><span class="KEYW">function</span><span class="WHIT"> </span><span class="PUNC">(</span><span class="NAME">element</span><span class="PUNC">)</span><span class="WHIT"> </span><span class="PUNC">{</span><span class="WHIT"> </span><span class="PUNC">}</span><span class="PUNC">,</span><span class="WHIT">
+<span class='line'>584</span> 
+<span class='line'>585</span> 
+<span class='line'>586</span> </span><span class="WHIT">        </span><span class="COMM">/* **************************
+<span class='line'>587</span>          * renderer control
+<span class='line'>588</span>          * **************************/</span><span class="WHIT">
+<span class='line'>589</span> 
+<span class='line'>590</span> </span><span class="WHIT">        </span><span class="COMM">/**
+<span class='line'>591</span>          * Stop redraw. This method is called before every update, so a non-vector-graphics based renderer
+<span class='line'>592</span>          * can use this method to delete the contents of the drawing panel. This is an abstract method every
+<span class='line'>593</span>          * descendant renderer should implement, if appropriate.
+<span class='line'>594</span>          * @see JXG.AbstractRenderer#unsuspendRedraw
+<span class='line'>595</span>          */</span><span class="WHIT">
+<span class='line'>596</span> </span><span class="WHIT">        </span><span class="NAME">suspendRedraw</span><span class="PUNC">:</span><span class="WHIT"> </span><span class="KEYW">function</span><span class="WHIT"> </span><span class="PUNC">(</span><span class="PUNC">)</span><span class="WHIT"> </span><span class="PUNC">{</span><span class="WHIT"> </span><span class="COMM">/* stub */</span><span class="WHIT"> </span><span class="PUNC">}</span><span class="PUNC">,</span><span class="WHIT">
+<span class='line'>597</span> 
+<span class='line'>598</span> </span><span class="WHIT">        </span><span class="COMM">/**
+<span class='line'>599</span>          * Restart redraw. This method is called after updating all the rendering node attributes.
+<span class='line'>600</span>          * @see JXG.AbstractRenderer#suspendRedraw
+<span class='line'>601</span>          */</span><span class="WHIT">
+<span class='line'>602</span> </span><span class="WHIT">        </span><span class="NAME">unsuspendRedraw</span><span class="PUNC">:</span><span class="WHIT"> </span><span class="KEYW">function</span><span class="WHIT"> </span><span class="PUNC">(</span><span class="PUNC">)</span><span class="WHIT"> </span><span class="PUNC">{</span><span class="WHIT"> </span><span class="COMM">/* stub */</span><span class="WHIT"> </span><span class="PUNC">}</span><span class="PUNC">,</span><span class="WHIT">
+<span class='line'>603</span> 
+<span class='line'>604</span> </span><span class="WHIT">        </span><span class="COMM">/**
+<span class='line'>605</span>          * The tiny zoom bar shown on the bottom of a board (if showNavigation on board creation is true).
+<span class='line'>606</span>          * @param {JXG.Board} board Reference to a JSXGraph board.
+<span class='line'>607</span>          */</span><span class="WHIT">
+<span class='line'>608</span> </span><span class="WHIT">        </span><span class="NAME">drawZoomBar</span><span class="PUNC">:</span><span class="WHIT"> </span><span class="KEYW">function</span><span class="WHIT"> </span><span class="PUNC">(</span><span class="NAME">board</span><span class="PUNC">)</span><span class="WHIT"> </span><span class="PUNC">{</span><span class="WHIT"> </span><span class="PUNC">}</span><span class="PUNC">,</span><span class="WHIT">
+<span class='line'>609</span> 
+<span class='line'>610</span> </span><span class="WHIT">        </span><span class="COMM">/**
+<span class='line'>611</span>          * Wrapper for getElementById for maybe other renderers which elements are not directly accessible by DOM methods like document.getElementById().
+<span class='line'>612</span>          * @param {String} id Unique identifier for element.
+<span class='line'>613</span>          * @returns {Object} Reference to a JavaScript object. In case of SVG/VMLRenderer it's a reference to a SVG/VML node.
+<span class='line'>614</span>          */</span><span class="WHIT">
+<span class='line'>615</span> </span><span class="WHIT">        </span><span class="NAME">getElementById</span><span class="PUNC">:</span><span class="WHIT"> </span><span class="KEYW">function</span><span class="WHIT"> </span><span class="PUNC">(</span><span class="NAME">id</span><span class="PUNC">)</span><span class="WHIT"> </span><span class="PUNC">{</span><span class="WHIT">
+<span class='line'>616</span> </span><span class="WHIT">            </span><span class="KEYW">return</span><span class="WHIT"> </span><span class="KEYW">null</span><span class="PUNC">;</span><span class="WHIT">
+<span class='line'>617</span> </span><span class="WHIT">        </span><span class="PUNC">}</span><span class="PUNC">,</span><span class="WHIT">
+<span class='line'>618</span> 
+<span class='line'>619</span> </span><span class="WHIT">        </span><span class="COMM">/**
+<span class='line'>620</span>          * Resizes the rendering element
+<span class='line'>621</span>          * @param {Number} w New width
+<span class='line'>622</span>          * @param {Number} h New height
+<span class='line'>623</span>          */</span><span class="WHIT">
+<span class='line'>624</span> </span><span class="WHIT">        </span><span class="NAME">resize</span><span class="PUNC">:</span><span class="WHIT"> </span><span class="KEYW">function</span><span class="WHIT"> </span><span class="PUNC">(</span><span class="NAME">w</span><span class="PUNC">,</span><span class="WHIT"> </span><span class="NAME">h</span><span class="PUNC">)</span><span class="WHIT"> </span><span class="PUNC">{</span><span class="WHIT"> </span><span class="COMM">/* stub */</span><span class="PUNC">}</span><span class="PUNC">,</span><span class="WHIT">
+<span class='line'>625</span> 
+<span class='line'>626</span> </span><span class="WHIT">        </span><span class="NAME">removeToInsertLater</span><span class="PUNC">:</span><span class="WHIT"> </span><span class="KEYW">function</span><span class="WHIT"> </span><span class="PUNC">(</span><span class="PUNC">)</span><span class="WHIT"> </span><span class="PUNC">{</span><span class="WHIT">
+<span class='line'>627</span> </span><span class="WHIT">            </span><span class="KEYW">return</span><span class="WHIT"> </span><span class="KEYW">function</span><span class="WHIT"> </span><span class="PUNC">(</span><span class="PUNC">)</span><span class="WHIT"> </span><span class="PUNC">{</span><span class="PUNC">}</span><span class="PUNC">;</span><span class="WHIT">
+<span class='line'>628</span> </span><span class="WHIT">        </span><span class="PUNC">}</span><span class="WHIT">
+<span class='line'>629</span> 
+<span class='line'>630</span> </span><span class="WHIT">    </span><span class="PUNC">}</span><span class="PUNC">)</span><span class="PUNC">;</span><span class="WHIT">
+<span class='line'>631</span> 
+<span class='line'>632</span> </span><span class="WHIT">    </span><span class="NAME">JXG.NoRenderer.prototype</span><span class="WHIT"> </span><span class="PUNC">=</span><span class="WHIT"> </span><span class="KEYW">new</span><span class="WHIT"> </span><span class="NAME">AbstractRenderer</span><span class="PUNC">(</span><span class="PUNC">)</span><span class="PUNC">;</span><span class="WHIT">
+<span class='line'>633</span> 
+<span class='line'>634</span> </span><span class="WHIT">    </span><span class="KEYW">return</span><span class="WHIT"> </span><span class="NAME">JXG.NoRenderer</span><span class="PUNC">;</span><span class="WHIT">
+<span class='line'>635</span> </span><span class="PUNC">}</span><span class="PUNC">)</span><span class="PUNC">;</span><span class="WHIT">
+<span class='line'>636</span> </span></pre></body></html>
