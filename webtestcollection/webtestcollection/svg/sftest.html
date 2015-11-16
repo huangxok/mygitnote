@@ -1,0 +1,188 @@
+﻿<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <title></title>
+    <style>
+        html, body {
+            width: 100%;
+            height: 100%;
+            background: #f1f1f1;
+        }
+
+        @font-face {
+            font-family: 'kaiti';
+            src: url('simkai-webfont.svg#simkai-webfont') format('svg');
+            font-weight: normal;
+            font-style: normal;
+        }
+
+        ruby {
+            font-size: 72px;
+        }
+
+        rt {
+            font-size: 70px;
+        }
+
+        a {
+            transform: rotate(30deg,0deg);
+        }
+    </style>
+    <style type="text/css">
+        #panel, #flip {
+            padding: 5px;
+            text-align: center;
+            background-color: #e5eecc;
+            border: solid 1px #c3c3c3;
+        }
+
+        #panel {
+            padding: 50px;
+            display: none;
+        }
+    </style>
+
+</head>
+<body style="height:100%;background-color:#ff6a00;">
+    <div style="pointer-events:none"></div>
+    <script>
+        var gl = '<glyph unicode="#" horiz-adv-x="170" d="M12 118H53L65 171H75L65 118H121L132 171H143L132 118H158V108H130L119 57H158V46H117L106 -4H95L106 46H49L38 -4H27L38 46H12V57H41L51 108H12V118ZM62 108L51 57H108L119 108H62Z" />'
+        xmldoc = new XMLDocument("Microsoft.XMLDOM");
+        xmldoc.async = 'false';
+        xmldoc.loadXML(gl);
+        parse = new DOMParser();
+        xmldoc = parse.parseFromString(gl, 'text/xml');
+
+    </script>
+    <a></a>
+    <!--<embed src="simkai-webfont.svg" width="100" height="200"
+           type="image/svg+xml" />-->
+    <svg style="width:400px;height:400px;">
+        <!--<path d="M28 -2L25 0Q83 23 92 79Q73 63 55 64Q14 68 10 111Q15 158 60 163Q111 159 114 97Q111 22 28 -2ZM29 114Q31 73 59 70Q76 71 93 86Q94 88 94 102Q93 156 59 158Q30 156 29 114Z"></path>-->
+        <!--<path d="M28 0L25 2Q83 25 92 81Q73 65 55 66Q14 70 10 113Q15 160 60 165Q111 161 114 99Q111 24 28 0ZM29 116Q31 75 59 72Q76 73 93 88Q94 90 94 104Q93 158 59 160Q30 158 29 116Z"></path>-->
+        <path fill="red" id="abc" style="border:2px solid blue; transform: rotateX(180deg) translate(0,-180px); -webkit-transform: rotateX(180deg) translate(0,-180px)" d="M28 0L25 2Q83 25 92 81Q73 65 55 66Q14 70 10 113Q15 160 60 165Q111 161 114 99Q111 24 28 0ZM29 116Q31 75 59 72Q76 73 93 88Q94 90 94 104Q93 158 59 160Q30 158 29 116Z"></path>
+        <!--<path id="abc" d="M28 165L25 163Q83 140 92 84Q73 100 55 99Q14 95 10 52Q15 5 60 0Q111 5 114 66Q111 141 28 165ZM29 49Q31 90 59 93Q76 92 93 77Q94 70 94 61Q93 7 59 5Q30 7 29 49Z"></path>-->
+        <!--<path d="M28 0l-3 2q58 23 67 79q-19 -16 -37 -15q-41 4 -45 47q5 47 50 52q51 -4 54 -66q-3 -75 -86 -99zM29 114q2 -41 30 -44q17 1 34 16q1 2 1 16q-1 54 -35 56q-29 -2 -30 -44z"></path>-->
+        <path style="width:200px;height:200px; transform: rotateX(180deg) translate(180px,-180px);" d="M109 142q-1 -1 -6 -3q-6 -1 -10 -3q-21 -8 -39 -12q-8 -2 -9 -1t6 4q35 18 33 25q0 2 1 3q20 -3 24 -13zM38 81q-7 2 -7 4t7 3q50 10 127 37q9 3 17 0q6 -2 4 -5q-1 -2 -9 -4q-60 -15 -120 -35q-10 -4 -19 0zM79 131q15 -5 15 -11q-3 -17 -1 -35q2 -48 2 -74
+q-5 -24 -16 -26q-2 0 -5 5q-5 10 -13 16q-6 6 -5 7q0 1 6 -1q1 0 3 -1q12 -3 13 -1q4 4 4 30q2 63 -6 86q-1 4 0 5q0 1 3 0zM11 35q1 1 6 2q15 2 34 10q32 13 67 28q3 1 4 -1q0 -2 -2 -3q-13 -8 -41 -21q-15 -8 -23 -12q-11 -6 -20 -13q-7 -4 -8 -3q-16 5 -17 13zM109 208
+q8 5 25 -8q0 -4 -1 -10q-1 -10 0 -20q9 -100 55 -151q17 -16 29 -18q4 -1 10 19q2 8 4 7q1 0 1 -8q0 -17 4 -33q2 -9 0 -10q-20 -3 -53 28q-44 48 -62 158q-1 3 -2 12q-1 4 -1 6q-2 13 -7 22q-2 4 -2 6zM117 17q-8 -3 -9 -2q-1 2 5 5q39 23 57 56q7 11 5 20q0 2 1 3
+q17 -4 20 -15q-10 -10 -16 -19q-23 -32 -63 -48zM153 171q14 6 32 -2q12 -12 2 -20q-22 8 -34 22z"></path>
+        <path d="M65 163H74V14Q73 4 83 5H98V0H33V5H47Q57 4 56 15V142Q38 127 24 121L22 125Q46 141 65 163Z"></path>
+        <path id="" style="-webkit-transform-origin:50% 50%;-webkit-transform:translate(100px,80px) rotateX(180deg);" d="M65 163H74V14Q73 4 83 5H98V0H33V5H47Q57 4 56 15V142Q38 127 24 121L22 125Q46 141 65 163Z"></path>
+    </svg>
+    <script>
+        var abc = document.getElementById('abc');
+
+    </script>
+    <script>
+        var abc = document.getElementById('abc');
+        var strabc = abc.getAttribute('d');
+
+    </script>
+    <script>
+        //A
+        var darr1 = [[28, 0], [25, 2], [83, 25]];
+        //p
+        var darr2 = [[28, 0], [-3, 2], [58, 23]];
+
+        //[[28, 0], [25, 2], [58, 23]]
+        //相对路径转绝对路径
+        function p2a(arr) {
+            if (Object.prototype.toString.call(arr).slice(8, -1) === "Array") {
+                var temp = [];                          //存放临时绝对路径值
+                var results = [];                       //返回结果
+                temp.push(arr[0][0], arr[0][1]);        //加入起始点
+                results.push(arr[0]);                   //将起始点加入到返回结果中
+                for (var i = 1; i < arr.length; i++) {  //遍历起始点以外的点
+                    var point = [];                     //用于获取每个点的临时变量
+                    var x = arr[i][0] + temp[0];        //x点
+                    var y = arr[i][1] + temp[1];        //y点
+                    temp[0] = x;                        //将计算后的绝对路径下的x点重新赋值给临时变量的x
+                    temp[1] = y;                        //将计算后的绝对路径下的y点重新赋值给临时变量的x
+                    point.push(x, y);                   //形成一个点
+                    results.push(point);                //形成以个点数组
+                }
+                return results;                         //返回数组
+            }
+        }
+
+        var pp = p2a(darr2);
+
+
+        ////A
+        //var darr1 = [[28, 0], [25, 2], [83, 25]];
+        ////p
+        //var darr2 = [[28, 0], [-3, 2], [58, 23]];
+
+        //          [[28, 0], [-3, 2], [58, 23]]
+        //绝对路径转相对路径
+        function a2p(arr) {
+            if (Object.prototype.toString.call(arr).slice(8, -1) === "Array") {
+                var temp = [];                              //临时变量
+                var results = [];                           //返回数组
+                temp.push(arr[0][0], arr[0][1]);            //默认临时变量为传入参数的第一个 起始点
+                results.push(arr[0]);                       //将起始点点加入数组
+                for (var i = 1; i < arr.length; i++) {
+                    var point = [];                         //临时生成的x y坐标点数组
+                    var x = arr[i][0] - temp[0];            //x
+                    var y = arr[i][1] - temp[1];            //y
+                    temp[0] = arr[i][0];                    //重新temp x
+                    temp[1] = arr[i][1];                    //重新temp y
+                    point.push(x, y);
+                    results.push(point);
+                }
+                return results;
+            }
+
+        }
+        var pa = a2p(darr1);
+    </script>
+    <svg>
+        <font horiz-adv-x="1024" vert-adv-y="2048">
+            <glyph unicode="&#x2019;" horiz-adv-x="2048" d="M400 1284q-32 44 -28 104t48 96t116 16t96 -84t-4 -144t-84 -152t-148 -148t-104 -68t56 80t100 124t72 132q-88 0 -120 44z" />
+        </font>
+    </svg>
+    <svg>
+        <path transform="translate(300,0)" d="M109 142q-1 -1 -6 -3q-6 -1 -10 -3q-21 -8 -39 -12q-8 -2 -9 -1t6 4q35 18 33 25q0 2 1 3q20 -3 24 -13zM38 81q-7 2 -7 4t7 3q50 10 127 37q9 3 17 0q6 -2 4 -5q-1 -2 -9 -4q-60 -15 -120 -35q-10 -4 -19 0zM79 131q15 -5 15 -11q-3 -17 -1 -35q2 -48 2 -74
+        q-5 -24 -16 -26q-2 0 -5 5q-5 10 -13 16q-6 6 -5 7q0 1 6 -1q1 0 3 -1q12 -3 13 -1q4 4 4 30q2 63 -6 86q-1 4 0 5q0 1 3 0zM11 35q1 1 6 2q15 2 34 10q32 13 67 28q3 1 4 -1q0 -2 -2 -3q-13 -8 -41 -21q-15 -8 -23 -12q-11 -6 -20 -13q-7 -4 -8 -3q-16 5 -17 13zM109 208
+        q8 5 25 -8q0 -4 -1 -10q-1 -10 0 -20q9 -100 55 -151q17 -16 29 -18q4 -1 10 19q2 8 4 7q1 0 1 -8q0 -17 4 -33q2 -9 0 -10q-20 -3 -53 28q-44 48 -62 158q-1 3 -2 12q-1 4 -1 6q-2 13 -7 22q-2 4 -2 6zM117 17q-8 -3 -9 -2q-1 2 5 5q39 23 57 56q7 11 5 20q0 2 1 3
+        q17 -4 20 -15q-10 -10 -16 -19q-23 -32 -63 -48zM153 171q14 6 32 -2q12 -12 2 -20q-22 8 -34 22z"></path>
+        <path d="M109 142Q108 141 103 139Q97 138 93 136Q72 128 54 124Q46 122 45 123Q44 124 51 127Q86 145 84 152Q84 154 85 155Q105 152 109 142ZM38 81Q31 83 31 85Q31 87 38 88Q88 98 165 125Q174 128 182 125Q188 123
+186 120Q185 118 177 116Q117 101 57 81Q47 77 38 81ZM79 131Q94 126 94 120Q91 103 93 85Q95 37 95 11Q90 -13 79 -15Q77 -15 74 -10Q69 0 61 6Q55 12 56 13Q56 14 62 12Q63 12 65 11Q77 8 78 10Q82 14 82 40Q84 103 76 126Q75 130 76 131Q76 132 79 131ZM11 35Q12
+36 17 37Q32 39 51 47Q83 60 118 75Q121 76 122 74Q122 72 120 71Q107 63 79 50Q64 42 56 38Q45 32 36 25Q29 21 28 22Q12 27 11 35ZM109 208Q117 213 134 200Q134 196 133 190Q132 180 133 170Q142 70 188 19Q205 3 217 1Q221 0 227 20Q229 28 231 27Q232 27 232
+19Q232 2 236 -14Q238 -23 236 -24Q216 -27 183 4Q139 52 121 162Q120 165 119 174Q118 178 118 180Q116 193 111 202Q109 206 109 208ZM117 17Q109 14 108 15Q107 17 113 20Q152 43 170 76Q177 87 175 96Q175 98 176 99Q193 95 196 84Q186 74 180 65Q157 33 117
+17ZM153 171Q167 177 185 169Q197 157 187 149Q165 157 153 171Z"></path>
+        </g>
+
+    </svg>
+    <svg>
+        <path d="M109 142q-1 -1 -6 -3q-6 -1 -10 -3q-21 -8 -39 -12q-8 -2 -9 -1t6 4q35 18 33 25q0 2 1 3q20 -3 24 -13zM38 81q-7 2 -7 4t7 3q50 10 127 37q9 3 17 0q6 -2 4 -5q-1 -2 -9 -4q-60 -15 -120 -35q-10 -4 -19 0zM79 131q15 -5 15 -11q-3 -17 -1 -35q2 -48 2 -74
+        q-5 -24 -16 -26q-2 0 -5 5q-5 10 -13 16q-6 6 -5 7q0 1 6 -1q1 0 3 -1q12 -3 13 -1q4 4 4 30q2 63 -6 86q-1 4 0 5q0 1 3 0zM11 35q1 1 6 2q15 2 34 10q32 13 67 28q3 1 4 -1q0 -2 -2 -3q-13 -8 -41 -21q-15 -8 -23 -12q-11 -6 -20 -13q-7 -4 -8 -3q-16 5 -17 13zM109 208
+        q8 5 25 -8q0 -4 -1 -10q-1 -10 0 -20q9 -100 55 -151q17 -16 29 -18q4 -1 10 19q2 8 4 7q1 0 1 -8q0 -17 4 -33q2 -9 0 -10q-20 -3 -53 28q-44 48 -62 158q-1 3 -2 12q-1 4 -1 6q-2 13 -7 22q-2 4 -2 6zM117 17q-8 -3 -9 -2q-1 2 5 5q39 23 57 56q7 11 5 20q0 2 1 3
+        q17 -4 20 -15q-10 -10 -16 -19q-23 -32 -63 -48zM153 171q14 6 32 -2q12 -12 2 -20q-22 8 -34 22z"></path>
+    </svg>
+    <div style="font-family:KaiTi;font-size:720px">
+        你好&#xa0;&#xa4;&#xa7;&#xa8;&#xad;&#xb0;
+    </div>
+    <script src="../Scripts/jquery-1.7.1.js"></script>
+    <script>
+        $(document).ready(function () {
+            $("#flip").click(function () {
+                $("#panel").slideDown(5000);
+            });
+            $("#stop").click(function () {
+                var dd = $("#panel");
+                dd.stop();
+            });
+        });
+    </script>
+
+    <button id="stop">停止滑动</button>
+    <div id="flip">点击这里，向下滑动面板</div>
+    <div id="panel">Hello world!</div>
+    <ruby>
+        中国人民万万岁<rt>zhong guo ren min wan wan sui</rt><br>
+        博客园<rt>bo ke yuan</rt>
+    </ruby>
+</body>
+</html>

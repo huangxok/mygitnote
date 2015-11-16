@@ -1,0 +1,51 @@
+M       (x y)+    	起始点  
+Z       none   		关闭路径
+L	(x y)+		直线到
+H       x+		水平到   保持y坐标不变，x轴移动到x 形成水平线
+V	y+		垂直到   保持x坐标不变，y轴移动到y 形成水平线
+C	(x1y1 x2y2 xy)+ 三次贝塞尔
+S	(x2y2 xy)+	光滑三次贝塞尔
+Q	(x1y1 xy)+      二次贝塞尔
+T       (xy）+		光滑二次贝塞尔		
+A	(rx ry x-axis-rotation large-arc-flag sweep-flag x y)+ 椭圆弧
+R       x1y1 (xy)+
+
+大写为绝对位置 小写为相对位置
+如M 
+
+CSQT 厕所切图
+CS一对   S前必有C或S  否则变成Q
+QT一堆   T前必有Q或T  否则变成L 直线
+<svg id="svg" width="200" height="100">
+    <desc>三次贝塞尔曲线</desc><defs></defs>
+    <path d="M20 20 C90 40, 130 40, 180 20" stroke="#000000" fill="none" style="stroke-width: 2px;"></path>
+    <text x="90" y="60">A杯罩</text>
+</svg>
+A罩杯
+<svg id="svg" width="300" height="100">
+    <desc>二次贝塞尔平滑曲线</desc><defs></defs>
+    <path d="M20 10 Q140 40 180 20 T280 30" stroke="#000000" fill="none" style="stroke-width: 2px;"></path>
+    <text x="120" y="60">小蛮腰</text>
+    <text x="200" y="40">小翘臀</text>
+</svg>
+小蛮腰 小翘臀
+
+三次贝塞尔命令
+
+C x1 y1 x2 y2 x y
+c dx1 dy1 dx2 dy2 dx dy
+
+组合形式
+
+起点M点       曲线关键点
+     M  .            . （x,y）
+         .          .
+          .        .
+(x1，y1)   ........ （x2,y2）  
+      控制点1    控制点2
+参考地址： http://www.zhangxinxu.com/wordpress/2014/06/deep-understand-svg-path-bezier-curves-command/
+http://dayu.pw/svgcontrol/
+
+
+
+

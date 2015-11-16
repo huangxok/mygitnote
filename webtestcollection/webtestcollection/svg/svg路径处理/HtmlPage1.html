@@ -1,0 +1,72 @@
+﻿<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <title></title>
+</head>
+<body>
+    <div id="kb">
+        <div id="kb1">
+            <div id="kb11"></div>
+            <div id="kb12"></div>
+        </div>
+        <div id="kb2">
+            <div id="kb21">
+                <p></p>
+            </div>
+            <div id="kb22"></div>
+        </div>
+        <div id="kb3">
+            <span></span>
+        </div>
+    </div>
+    <input type="text" onchange="show(this)" value="啊" />
+    <script>
+        function show(o) {
+            alert(o.value)
+        }
+    </script>
+    <script>
+        function getPath2arr(path) {
+            if (typeof path) {
+                var regnum = /^[+-]?([0-9]*\.?[0-9]+|[0-9]+\.?[0-9]*)$/g;
+                var arr = path.match(regnum);
+                return arr;
+            } else {
+                return null;
+            }
+        }
+        function dealarr(arr) {
+            arr.forEach(function (item) {
+                item = item * 2;
+            })
+            return arr;
+        }
+        function matchreplace(pathstring) {
+            var regnum = /^[+-]?([0-9]*\.?[0-9]+|[0-9]+\.?[0-9]*)$/g;
+            var count = 0;
+            var newpath = pathstring.replace(regnum, function () {
+                console.log(count++)
+                var value = pathstring.exec(regnum);
+                console.log(value);
+                value = value * 2;
+                console.log(value);
+                return value;
+            })
+
+        }
+        var regexp_string = '13 25 14 25';
+        var regnum = /^[+-]?([0-9]*\.?[0-9]+|[0-9]+\.?[0-9]*)$/g;
+        var count = 0;
+        var newUrl2 = regexp_string.replace(regnum, function () {
+            debugger;
+            console.log("第" + (count++) + "次运行");
+            console.log("replace输入参数：%o", arguments);
+            var val = regnum.exec(url);
+            val = val * 2;
+            return val
+        });
+        console.log("replace返回字符串：" + newUrl2);
+        console.groupEnd("正则表达式");
+    </script>
+</body>
+</html>
