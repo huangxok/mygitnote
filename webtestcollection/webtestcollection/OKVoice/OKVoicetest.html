@@ -1,0 +1,147 @@
+﻿<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <title></title>
+    <meta charset="utf-8" />
+    <script src="crypto-js.js"></script>
+    <style>
+        .list li {
+            list-style: none;
+        }
+
+            .list li > span {
+                display: inline-block;
+                width: 150px;
+            }
+
+            .list li > select {
+                width: 300px;
+            }
+    </style>
+</head>
+<body>
+    <ul class="list">
+        <li>
+            <span>apiKey（apiKey）:</span>
+            <select id="okvoiceapikey">
+                <option>请选择apiKey</option>
+                <option value="920c657431d374436117b00f9b18be78" selected>920c657431d374436117b00f9b18be78</option>
+            </select>
+        </li>
+        <li>
+            <span>apisecretKey（apisecretKey）:</span>
+            <select id="okvoiceapisecretkey">
+                <option>请选择apiKey</option>
+                <option value="fd1993ac9dd85cdb6b8f08a16c30ce8c" selected>fd1993ac9dd85cdb6b8f08a16c30ce8c</option>
+            </select>
+        </li>
+        <li>
+            <span>expires（时间）:</span>
+            <select id="okvoiceexpires">
+                <option>请选择expires</option>
+                <option value="5">5</option>
+                <option value="10">10</option>
+                <option value="30">30</option>
+                <option value="60">60</option>
+                <option value="100">100</option>
+                <option value="3600" selected>3600</option>
+            </select>
+        </li>
+        <li>
+            <span>voice（发音）:</span>
+            <select id="okvoicevoice">
+                <option>请选择voice</option>
+                <option value="cnmale" selected>cnmale</option>
+                <option value="cnfemale">cnfemale</option>
+                <option value="cnctmale">cnctmale</option>
+                <option value="cnctfemale">cnctfemale</option>
+                <option value="enmale">enmale</option>
+                <option value="enfemale">enfemale</option>
+            </select>
+        </li>
+        <li>
+            <span>format（格式）:</span>
+            <select id="okvoiceformat">
+                <option>请选择format</option>
+                <option value="1" selected>MP3</option>
+                <option value="2">WAV</option>
+            </select>
+        </li>
+        <li>
+            <span>speed（语速）:</span>
+            <select id="okvoicespeed">
+                <option>请选择语速</option>
+                <option value="0.2">0.2</option>
+                <option value="0.4">0.4</option>
+                <option value="0.5">0.5</option>
+                <option value="0.7">0.7</option>
+                <option value="0.8">0.8</option>
+                <option value="1" selected>1</option>
+                <option value="2">2</option>
+                <option value="3">3</option>
+                <option value="4">4</option>
+                <option value="5">5</option>
+            </select>
+        </li>
+        <li>
+            <span>text（内容）：</span>
+            <input id="okvoicetext" style="width:1000px;" type="text" placeholder="请输入入字符，多音字采用《py=a1》啊《/py》" />
+        </li>
+        <li>
+            <span>签名字符串:</span>
+            <input id="okvoicesignture" type="text" readonly style="width:800px;" />
+        </li>
+        <li>
+            <span>url（地址）:</span>
+            <textarea id="okvoiceurl" type="text" readonly style="width:800px;height:200px;"></textarea>
+        </li>
+        <li>
+            <button id="okvoicesubmit">生成url</button>
+        </li>
+    </ul>
+    <script>
+        var btn = document.getElementById('okvoicesubmit');
+        var okvoiceapikey = document.getElementById('okvoiceapikey');
+        var okvoiceapisecretkey = document.getElementById('okvoiceapisecretkey');
+        var okvoiceexpires = document.getElementById('okvoiceexpires');
+        var okvoicevoice = document.getElementById('okvoicevoice');
+        var okvoiceformat = document.getElementById('okvoiceformat');
+        var okvoicespeed = document.getElementById('okvoicespeed');
+        var okvoicesignture = document.getElementById('okvoicesignture')
+        var okvoicetext = document.getElementById('okvoicetext');
+        var okvoiceurl = document.getElementById('okvoiceurl');
+        var url = 'http://api.okvoice.com/tts?';
+
+        btn.addEventListener('click', function (ev) {
+            var expiresa = parseInt((Date.now()).toString().slice(0, -3)) + parseInt(okvoiceexpires.value);
+            var signture =
+                'apiKey='
+                 + okvoiceapikey.value +
+                 '&expires=' +
+                 +expiresa +
+                 '&speed='
+                 + okvoicespeed.value +
+                 '&text='
+                 + okvoicetext.value +
+                 '&voice='
+                 + okvoicevoice.value;
+            console.log(signture);
+            okvoicesignture.value = CryptoJS.HmacSHA1(signture, okvoiceapisecretkey.value);
+            okvoiceurl.textContent = url +
+                                     'apiKey='
+                                     + okvoiceapikey.value +
+                                     '&expires='
+                                     + expiresa +
+                                     '&speed='
+                                     + okvoicespeed.value +
+                                     '&text='
+                                     + okvoicetext.value +
+                                     '&voice='
+                                     + okvoicevoice.value +
+                                     '&signature='
+                                     + okvoicesignture.value
+            console.log(okvoiceurl.textContent);
+        });
+    </script>
+</body>
+</html>
