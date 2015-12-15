@@ -1,0 +1,26 @@
+﻿<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta http-equiv="content-type" content="text/html; charset=utf-8">
+    <meta name="author" content="oscar999">
+    <title></title>
+    <script>
+        function handleFiles(files) {
+            if (files.length) {
+                var file = files[0];
+                var reader = new FileReader();
+                reader.onload = function () {
+                    document.getElementById("filecontent").innerHTML = this.result;
+                };
+                reader.readAsBinaryString(file);
+            }
+        }
+    </script>
+
+</head>
+<body>
+
+    <input type="file" id="file" onchange="handleFiles(this.files)" />
+    <div id="filecontent"></div>
+</body>
+</html>

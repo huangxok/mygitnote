@@ -621,7 +621,7 @@ bitmap.pixels = new Uint8Array(buffer, start);
 至此，图像文件的数据全部处理完成。下一步，可以根据需要，进行图像变形，或者转换格式，或者展示在Canvas网页元素之中。
 
 ## 参考链接
-
+http://javascript.ruanyifeng.com/stdlib/arraybuffer.html
 - Ilmari Heikkinen, [Typed Arrays: Binary Data in the Browser](http://www.html5rocks.com/en/tutorials/webgl/typed_arrays/)
 - Khronos, [Typed Array Specification](http://www.khronos.org/registry/typedarray/specs/latest/)
 - Ian Elliot, [Reading A BMP File In JavaScript](http://www.i-programmer.info/projects/36-web/6234-reading-a-bmp-file-in-javascript.html)	
