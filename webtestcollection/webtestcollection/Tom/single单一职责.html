@@ -4,7 +4,12 @@
     <title></title>
 </head>
 <body>
-    <script>
+    <script src="../Scripts/jquery-1.7.1.js"></script>
+    <ul id="products"></ul>
+    <ul id="cart"></ul>
+    <label for="inputfile">name</label>
+    <input name="inputfile" type="file" hidden="hidden"/>
+    <!--<script>
         //产品类
         //para id  产品id description 产品描述
         function Product(id, description) {
@@ -51,10 +56,167 @@
                                             .appendTo("#products");
             });
         })();
-    </script>
+    </script>-->
     <script>
         //最终代码
         //首先我们先来实现事件聚合的功能，该功能分为2部分，1个是Event，用于Handler回调的代码，1个是EventAggregator用来订阅和发布Event，代码如下：
+        function Event(name) {
+            var handlers = [];
+            this.getName = function () {
+                return name;
+            };
+            this.addHandler = function (handler) {
+                handlers.push(handler);
+            };
+            this.removeHandler = function (handler) {
+                for (var i = 0; i < handlers.length; i++) {
+                    if (handlers[i] == handler) {
+                        handlers.splice(i, 1);
+                        break;
+                    }
+                }
+            };
+            //调用handlers数组中每个handler方法
+            this.emit = function (eventArgs) {
+                handlers.forEach(function (h) {
+                    h(eventArgs);
+                });
+            };
+        }
+        //订阅和发布事件
+        function EventAggregator() {
+            var events = [];
+
+            function getEvent(eventName) {
+                return $.grep(events, function (event) {
+                    return event.getName() === eventName;
+                })[0];
+            }
+
+            this.publish = function (eventName, eventArgs) {
+                var event = getEvent(eventName);
+                if (!event) {
+                    event = new Event(eventName);
+                    events.push(event);
+                }
+                event.emit(eventArgs);
+            };
+
+            this.subscribe = function (eventName, handler) {
+                var event = getEvent(eventName);
+
+                if (!event) {
+                    event = new Event(eventName);
+                    events.push(event);
+                }
+                event.addHandler(handler);
+            };
+        }
+        //产品类
+        function Product(id, description) {
+            this.getId = function () {
+                return id;
+            };
+            this.getDescription = function () {
+                return description;
+            };
+        }
+        //购物车类
+        function Cart(eventAggregator) {
+            var items = [];
+            this.addItem = function (item) {
+                items.push(item);
+                eventAggregator.publish("itemAdded", item);
+            };
+        }
+        //购物车控制器 发布事件 addlistener
+        function CartController(cart, eventAggregator) {
+            eventAggregator.subscribe("itemAdded", function (eventArgs) {
+                var newItem = $('<li></li>').html(eventArgs.getDescription()).attr('id-cart', eventArgs.getId()).appendTo("#cart");
+            });
+            eventAggregator.subscribe("productSelected", function (eventArgs) {
+                cart.addItem(eventArgs.product);
+            });
+        }
+        //产品仓库
+        function ProductRepository() {
+            var products = [new Product(1, "Star Wars Lego Ship"),
+            new Product(2, "Barbie Doll"),
+            new Product(3, "Remote Control Airplane")];
+            this.getProducts = function () {
+                return products;
+            }
+        }
+        //产品控制器
+        function ProductController(eventAggregator, productRepository) {
+            var products = productRepository.getProducts();
+
+            function onProductSelected() {
+                var productId = $(this).attr('id');
+                var product = $.grep(products, function (x) {
+                    return x.getId() == productId;
+                })[0];
+                eventAggregator.publish("productSelected", {
+                    product: product
+                });
+            }
+            products.forEach(function (product) {
+                var newItem = $('<li></li>').html(product.getDescription())
+                                    .attr('id', product.getId())
+                                    .dblclick(onProductSelected)
+                                    .appendTo("#products");
+            });
+        }
+
+        //(function () {
+        //实例化一个事件发布订阅对象
+        var eventAggregator = new EventAggregator();
+        //实例化一个购物车 发射itemAdded
+        var cart = new Cart(eventAggregator);
+        //实例化一个购车控制器 参数为        购物车，和发布订阅对象
+        //订阅事件
+        var cartController = new CartController(cart, eventAggregator);
+        //实例化产品(具体的产品)
+        var productRepository = new ProductRepository();
+        //实例化产品控制器                           发布产品订阅事件   产品
+        var productController = new ProductController(eventAggregator, productRepository);
+        //})();
+
+    </script>
+    <script>
+        //Function.prototype.bind = function (context) {
+        //    var self = this;
+        //    return function () {
+        //        self.apply(context, arguments)
+        //    }
+        //}
+        var obj = {
+            name: 'tom'
+        }
+        var func = function () {
+            alert(this.name);
+        }.bind(obj);
+
+        func();
+        /*
+            入口:func
+            执行过程：
+            func - > bind
+                     bind(obj)   传入的实参为obj context为就是obj
+                     self = this 因为是间接调用this指向调用的对象，bind的调用对象是func 即 function(){alert(this.name)}
+                     self.apply(context,arguments)  -> 将context即obj传入其中,arguments为 return function (这里没有值所以这个函数里面的arguments没有) { self.apply(context, arguments) }所在函数 因为没有值 length为0
+                     bind 函数返回值 是间接调用func函数 这样的写法在这里没有什么意义，为什么这么说
+                     因为Function的bind方法默认的this值就是指向调用的函数，所以在这里的self没有什么意义，尽量不要去重写js的原始对象
+        */
+
+    </script>
+    <script>
+        //重构代码
+
+        //让我们来分解一下，以便代码各自存放到各自的对象里，为此，我们参考了martinfowler的事件聚合（Event Aggregator）理论在处理代码以便各对象之间进行通信。
+
+        //首先我们先来实现事件聚合的功能，该功能分为2部分，1个是Event，用于Handler回调的代码，1个是EventAggregator用来订阅和发布Event，代码如下：
+
         function Event(name) {
             var handlers = [];
 
@@ -75,14 +237,13 @@
                 }
             };
 
-            //调用handlers数组中每个handler方法
             this.fire = function (eventArgs) {
                 handlers.forEach(function (h) {
                     h(eventArgs);
                 });
             };
         }
-        //订阅和发布事件
+
         function EventAggregator() {
             var events = [];
 
@@ -113,7 +274,8 @@
                 event.addHandler(handler);
             };
         }
-        //产品类
+        //然后，我们来声明Product对象，代码如下：
+
         function Product(id, description) {
             this.getId = function () {
                 return id;
@@ -122,7 +284,8 @@
                 return description;
             };
         }
-        //购物车类
+        //接着来声明Cart对象，该对象的addItem的function里我们要触发发布一个事件itemAdded，然后将item作为参数传进去。
+
         function Cart(eventAggregator) {
             var items = [];
 
@@ -131,7 +294,8 @@
                 eventAggregator.publish("itemAdded", item);
             };
         }
-        //购物车控制器
+        //CartController主要是接受cart对象和事件聚合器，通过订阅itemAdded来增加一个li元素节点，通过订阅productSelected事件来添加product。
+
         function CartController(cart, eventAggregator) {
             eventAggregator.subscribe("itemAdded", function (eventArgs) {
                 var newItem = $('<li></li>').html(eventArgs.getDescription()).attr('id-cart', eventArgs.getId()).appendTo("#cart");
@@ -141,17 +305,19 @@
                 cart.addItem(eventArgs.product);
             });
         }
-        //产品仓库
+        //Repository的目的是为了获取数据（可以从ajax里获取），然后暴露get数据的方法。
+
         function ProductRepository() {
             var products = [new Product(1, "Star Wars Lego Ship"),
-            new Product(2, "Barbie Doll"),
-            new Product(3, "Remote Control Airplane")];
+                    new Product(2, "Barbie Doll"),
+                    new Product(3, "Remote Control Airplane")];
 
             this.getProducts = function () {
                 return products;
             }
         }
-        //产品控制器
+        //ProductController里定义了一个onProductSelect方法，主要是发布触发productSelected事件，forEach主要是用于绑定数据到产品列表上，代码如下：
+
         function ProductController(eventAggregator, productRepository) {
             var products = productRepository.getProducts();
 
@@ -167,52 +333,21 @@
 
             products.forEach(function (product) {
                 var newItem = $('<li></li>').html(product.getDescription())
-                                    .attr('id', product.getId())
-                                    .dblclick(onProductSelected)
-                                    .appendTo("#products");
+                                            .attr('id', product.getId())
+                                            .dblclick(onProductSelected)
+                                            .appendTo("#products");
             });
         }
+        //最后声明匿名函数（需要确保HTML都加载完了才能执行这段代码，比如放在jQuery的ready方法里）：
 
         (function () {
-            //实例化一个事件发布订阅对象
             var eventAggregator = new EventAggregator(),
-                //实例化一个购物车
-                cart = new Cart(eventAggregator),
-                //实例化一个购车控制器 参数为        购物车，和发布订阅对象
-                //订阅事件
-                cartController = new CartController(cart, eventAggregator),
-                //实例化产品(具体的产品)
-                productRepository = new ProductRepository(),
-                //实例化产品控制器                           发布产品订阅事件   产品
-                productController = new ProductController(eventAggregator, productRepository);
+        cart = new Cart(eventAggregator),
+        cartController = new CartController(cart, eventAggregator),
+        productRepository = new ProductRepository(),
+        productController = new ProductController(eventAggregator, productRepository);
         })();
-    </script>
-    <script>
-        //Function.prototype.bind = function (context) {
-        //    var self = this;
-        //    return function () {
-        //        self.apply(context, arguments)
-        //    }
-        //}
-        var obj = {
-            name: 'tom'
-        }
-        var func = function () {
-            alert(this.name);
-        }.bind(obj);
-       
-        func();
-        /*
-            入口:func
-            执行过程：
-            func - > bind
-                     bind(obj)   传入的实参为obj context为就是obj
-                     self = this 因为是间接调用this指向调用的对象，bind的调用对象是func 即 function(){alert(this.name)}
-                     self.apply(context,arguments)  -> 将context即obj传入其中,arguments为 return function (这里没有值所以这个函数里面的arguments没有) { self.apply(context, arguments) }所在函数 因为没有值 length为0
-                     bind 函数返回值 是间接调用func函数 这样的写法在这里没有什么意义，为什么这么说
-                     因为Function的bind方法默认的this值就是指向调用的函数，所以在这里的self没有什么意义，尽量不要去重写js的原始对象                            
-        */
-
+        //可以看到匿名函数的代码减少了很多，主要是一个对象的实例化代码，代码里我们介绍了Controller的概念，他接受信息然后传递到action，我们也介绍了Repository的概念，主要是用来处理product的展示，重构的结果就是写了一大堆的对象声明，但是好处是每个对象有了自己明确的职责，该展示数据的展示数据，改处理集合的处理集合，这样耦合度就非常低了。
     </script>
 </body>
 </html>
