@@ -1,0 +1,138 @@
+﻿<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <title></title>
+</head>
+<body>
+    <script>
+        var Singletontester = (function () {
+            function Singletontester(args) {
+                var args = args || {};
+                this.name = 'SingletonTester';
+                this.pointX = args.pointX || 6;
+                this.pointY = args.pointY || 10;
+            }
+            var instance;
+            var _static = {
+                name: 'SingleonTester',
+                getInstance: function (args) {
+                    if (instance === undefined) {
+                        instance = new Singletontester(args)
+                    }
+                    return instance;
+                }
+            }
+            return _static;
+        })();
+        var singletonTest = SingletonTester.getInstance({ pointX: 5 });
+        console.log(singletonTest.pointX); // 输出 5
+    </script>
+    <script>
+        function Universe() {
+            // 判断是否存在实例
+            if (typeof Universe.instance === 'object') {
+                return Universe.instance;
+            }
+            // 其它内容
+            this.start_time = 0;
+            this.bang = "Big";
+
+            // 缓存
+            Universe.instance = this;
+
+            // 隐式返回this
+        }
+
+        // 测试
+        var uni = new Universe();
+        var uni2 = new Universe();
+        console.log(uni === uni2); // true
+    </script>
+    <script>
+        function Universe() {
+            //缓存的实例
+            var instance = this;
+            //其他内容
+            this.start_time = 0;
+            this.bang = 'Big';
+            //重写构造函数
+            Universe = function () {
+                return instance;
+            }
+        }
+        // 测试
+        var uni = new Universe();
+        var uni2 = new Universe();
+        uni.bang = "123";
+        console.log(uni === uni2); // true
+        console.log(uni2.bang); // 123
+    </script>
+    <script>
+        function Universe() {
+            //缓存实例
+            var instance;
+            //重写构造函数
+            Universe = function Universe() {
+                return instance;
+            }
+            //处理原型
+            Universe.prototype = this;
+            //实例
+            instance = new Universe();
+            //重设构造函数指针
+            instance.constructor = Universe;
+            //其他功能
+            instance.start_time = 0;
+            instance.bang = 'Big';
+            return instance;
+        }
+        // 测试
+        var uni = new Universe();
+        var uni2 = new Universe();
+        console.log(uni === uni2); // true
+
+        // 添加原型属性
+        Universe.prototype.nothing = true;
+
+        var uni = new Universe();
+
+        Universe.prototype.everything = true;
+
+        var uni2 = new Universe();
+
+        console.log(uni.nothing); // true
+        console.log(uni2.nothing); // true
+        console.log(uni.everything); // true
+        console.log(uni2.everything); // true
+        console.log(uni.constructor === Universe); // true
+    </script>
+    <script>
+        var Universe;
+
+        (function () {
+
+            var instance;
+
+            Universe = function Universe() {
+
+                if (instance) {
+                    return instance;
+                }
+
+                instance = this;
+
+                // 其它内容
+                this.start_time = 0;
+                this.bang = "Big";
+            };
+        }());
+
+        //测试代码
+        var a = new Universe();
+        var b = new Universe();
+        alert(a === b); // true
+        a.bang = "123";
+        alert(b.bang); // 123
+    </script>
+</body>
+</html>

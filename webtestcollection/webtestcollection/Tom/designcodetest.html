@@ -1,0 +1,65 @@
+﻿<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <title></title>
+</head>
+<body>
+    <script>
+        function Event1(name) {
+            this.handlers = [];            
+        }
+        Event1.prototype.addhandler = function (handler) {
+            this.handlers.push(handler)
+        }
+        Event1.prototype.removehandler = function (handler) {
+            for (var i = 0; i < this.handlers.length; i++) {
+                if (handlers[i] == handler) {
+                    handlers.splice(i, 1);
+                    break;
+                }
+            }
+        }
+        Event1.prototype.emit = function (handler) {
+            for (var i = 0; i < this.handlers.length; i++) {
+                this.handlers[i](handler)
+            }
+        }
+
+        function EventAggregator() {
+            this.events = [];
+        }
+
+        EventAggregator.prototype.getEvent = function (name) {
+            for (var _i = 0; _i < this.events.length; _i++) {
+                if (this.events[_i] == name) {
+                    return name;
+                }
+            }
+        }
+
+        EventAggregator.prototype.subscribe = function (type, handler) {
+            if (typeof handler !== 'function') {
+                throw new Error('handler only takes instances of Function');
+            }
+            var event = this.getEvent(type);
+            if (!event) {
+                event = new Event1()
+                this.events.push(event);
+            }
+            event.addhandler(handler);
+
+        }
+        EventAggregator.prototype.publish = function (type,handler) {
+            if (typeof handler !== 'function') {
+                throw new Error('handler only takes instances of Function');
+            }
+            var event = this.getEvent(type);
+            if (!event) {
+                event = new Event1()
+                this.events.push(event);
+            }
+            event.emit(handler);
+        }
+    </script>
+</body>
+</html>

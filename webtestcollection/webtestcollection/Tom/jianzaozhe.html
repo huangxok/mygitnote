@@ -1,0 +1,30 @@
+﻿<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <title></title>
+</head>
+<body>
+    <script>
+        function getBeerById(id, callback) {
+            // 使用ID来请求数据，然后返回数据.
+            asyncRequest('GET', 'beer.uri?id=' + id, function (resp) {
+                // callback调用 response
+                callback(resp.responseText);
+            });
+        }
+
+        var el = document.querySelector('#test');
+        el.addEventListener('click', getBeerByIdBridge, false);
+
+        function getBeerByIdBridge(e) {
+            getBeerById(this.id, function (beer) {
+                console.log('Requested Beer: ' + beer);
+            });
+        }
+        //根据建造者的定义，表相即是回调，也就是说获取数据以后如何显示和处理取
+        //决于回调函数，相应地回调函数在处理数据的时候不需要关注是如何获取数据
+        //的，同样的例子也可以在jquery的ajax方法里看到，有很多回调函数（比如
+        //success, error回调等），主要目的就是职责分离
+    </script>
+</body>
+</html>
