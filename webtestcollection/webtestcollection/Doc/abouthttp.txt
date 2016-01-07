@@ -1,0 +1,71 @@
+为什么上传文件的表单里要加个属性 enctype
+　　 上传文件的表单中<form>要加属性enctype="multipart/form-data",很多人只是死记硬背知道上传表单要这么 写，知其然而不知其所以然。那到底为什么要添加这个属性呢？它是什么意思呢？它又有什么其他可选值呢？ 其实form表单在你不写enctype属性时，也默认为其添加了enctype属性值，默认值是enctype="application/x- www-form-urlencoded".这个属性管理的是表单的MIME编码，共有三个值可选：
+
+　　①application/x-www-form-urlencoded (默认值)
+
+　　②multipart/form-data
+
+　　③text/plain
+
+　　其中①application/x-www-form-urlencoded是默认值，大家可能在AJAX里见过这 个：xmlHttp.setRequestHeader("Content-Type","application/x-www-form- urlencoded"); 这两个要做的是同一件事情，就是设置表单传输的编码。在AJAX里不写有可能会报错，但是在HTML的form表单里是可以不写 enctype="application/x-www-form-urlencoded"的，因为默认HTML表单就是这种传输编码类型。而 ②multipart-form-data是用来指定传输数据的特殊类型的，主要就是我们上传的非文本的内容，比如图片或者mp3等等。 ③text/plain是纯文本传输的意思，在发送邮件时要设置这种编码类型，否则会出现接收时编码混乱的问题，网络上经常拿text/plain和 text/html做比较，其实这两个很好区分，前者用来传输纯文本文件，后者则是传递html代码的编码类型，在发送头文件时才用得上。①和③都不能用 于上传文件，只有multipart/form-data才能完整的传递文件数据。
+
+　　上面提到的MIME，它的英文全称是"Multipurpose Internet Mail Extensions" 多功能Internet 邮件扩充服务，它是一种多用途网际邮件扩充协议，在1992年最早应用于电子邮件系统，但后来也应用到浏览器。服务器会将它们发送的多媒体数据的类型告诉 浏览器，而通知手段就是说明该多媒体数据的MIME类型，从而让浏览器知道接收到的信息哪些是MP3文件，哪些是Shockwave文件等等。服务器将 MIME标志符放入传送的数据中来告诉浏览器使用哪种插件读取相关文件。
+
+　　简单说，MIME类型就是设定某种扩展名的文件用一种应用程序来打开的方式类型，当该扩展名文件被访问的时候，浏览器会自动使用指定应用程序来打开。多用于指定一些客户端自定义的文件名，以及一些媒体文件打开方式。
+
+　　浏览器接收到文件后，会进入插件系统进行查找，查找出哪种插件可以识别读取接收到的文件。如果浏览器不清楚调用哪种插件系统，它可能会告诉用户缺少某 插件，或者直接选择某现有插件来试图读取接收到的文件，后者可能会导致系统的崩溃。传输的信息中缺少MIME标识可能导致的情况很难估计，因为某些计算机 系统可能不会出现什么故障，但某些计算机可能就会因此而崩溃。
+
+　　　　 检查一个服务器是否正确设置了MIME类型的步骤是：
+
+　　1. 在Netscape浏览器中打开服务器网页
+
+　　2. 进入"View"菜单，选择"Page Info"
+
+　　3. 在弹出的窗口中点击上层框架中的"EMBED"
+
+　　4. 在下层框架中查看MIME的类型是否为"application/x-director"或"application/x-shockwave- flash"，如果是上述信息的话表明服务器已经正确设置了MIME类型；而如果MIME类型列出的是文本内容、八位一组的数据或是其它形式均表明服务器 的MIME类型没有设置正确。
+
+　　如果服务器没有正确标明其发送的数据的类型，服务器管理员应该正确添加相关信息，具体操作方法非常简单快捷。
+
+　　每个MIME类型由两部分组成，前面是数据的大类别，例如声音audio、图象image等，后面定义具体的种类。
+
+　　常见的MIME类型
+
+　　　　超文本标记语言文本 .html,.html text/html
+
+　　　　普通文本 .txt text/plain
+
+　　　　RTF文本 .rtf application/rtf
+
+　　　　GIF图形 .gif image/gif
+
+　　　　JPEG图形 .jpeg,.jpg image/jpeg
+
+　　　　au声音文件 .au audio/basic
+
+　　　　MIDI音乐文件 mid,.midi audio/midi,audio/x-midi
+
+　　　　RealAudio音乐文件 .ra, .ram audio/x-pn-realaudio
+
+　　　　MPEG文件 .mpg,.mpeg video/mpeg
+
+　　　　AVI文件 .avi video/x-msvideo
+
+　　　　GZIP文件 .gz application/x-gzip
+
+　　　　TAR文件 .tar application/x-tar
+
+　　　　Internet中有一个专门组织IANA来确认标准的MIME类型，但Internet发展的太快，很多应用程序等不及IANA来确认他们使用 的MIME类型为标准类型。因此他们使用在类别中以x-开头的方法标识这个类别还没有成为标准，例如：x-gzip，x-tar等。事实上这些类型运用的 很广泛，已经成为了事实标准。只要客户机和服务器共同承认这个MIME类型，即使它是不标准的类型也没有关系，客户程序就能根据MIME类型，采用具体的 处理手段来处理数据。而Web服务器和浏览器（包括操作系统）中，缺省都设置了标准的和常见的MIME类型，只有对于不常见的 MIME类型，才需要同时设置服务器和客户浏览器，以进行识别。
+----------------------------------------------------------------
+表单中enctype="multipart/form-data"的意思，是设置表单的MIME编码。默认情况，
+这个编码格式是application/x-www-form-urlencoded，不能用于文件上传；
+只有使用了multipart/form-data，才能完整的传递文件数据，进行下面的操作.
+enctype="multipart/form-data"是上传二进制数据; form里面的input的值以2进制的方式传过去。
+form里面的input的值以2进制的方式传过去，
+所以request就得不到值了。也就是说加了这段代码,用request就会传递不成功,取表单值加入数据库时，用到下面的：
+
+SmartUpload su = new SmartUpload();//新建一个SmartUpload对象
+
+su.getRequest().getParameterValues();取数组值
+
+su.getRequest().getParameter( );取单个参数单个值

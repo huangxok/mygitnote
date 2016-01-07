@@ -1,0 +1,757 @@
+链接1：http://javascript.ruanyifeng.com/dom/event.html
+------start 链接1-----------------------
+一.一段不常用的代码即解释，关于触发页面不同元素间关系的代码
+
+relatedTarget
+relatedTarget属性返回事件的次要相关节点。对于那些没有次要相关节点的事件，该属性返回null。
+
+下表列出不同事件的target属性和relatedTarget属性含义。
+
+事件名称	target属性	relatedTarget属性
+focusin	接受焦点的节点	丧失焦点的节点
+focusout	丧失焦点的节点	接受焦点的节点
+mouseenter	将要进入的节点	将要离开的节点
+mouseleave	将要离开的节点	将要进入的节点
+mouseout	将要离开的节点	将要进入的节点
+mouseover	将要进入的节点	将要离开的节点
+dragenter	将要进入的节点	将要离开的节点
+dragexit	将要离开的节点	将要进入的节点
+// HTML代码为
+// <div id="outer" style="height:50px;width:50px;border-width:1px solid black;">
+//   <div id="inner" style="height:25px;width:25px;border:1px solid black;"></div>
+// </div>
+
+var inner = document.getElementById("inner");
+
+inner.addEventListener("mouseover", function (){
+  console.log('进入' + event.target.id + " 离开" + event.relatedTarget.id);
+});
+inner.addEventListener("mouseenter", function (){
+  console.log('进入' + event.target.id + " 离开" + event.relatedTarget.id);
+});
+inner.addEventListener("mouseout", function (){
+  console.log('离开' + event.target.id + " 进入" + event.relatedTarget.id);
+});
+inner.addEventListener("mouseleave", function (){
+  console.log('离开' + event.target.id + " 进入" + event.relatedTarget.id);
+});
+
+二.关于滚轮事件
+wheel事件
+wheel事件是与鼠标滚轮相关的事件，目前只有一个wheel事件。用户滚动鼠标的滚轮，就触发这个事件。
+
+该事件除了继承了MouseEvent、UIEvent、Event的属性，还有几个自己的属性。
+
+deltaX：返回一个数值，表示滚轮的水平滚动量。
+deltaY：返回一个数值，表示滚轮的垂直滚动量。
+deltaZ：返回一个数值，表示滚轮的Z轴滚动量。
+deltaMode：返回一个数值，表示滚动的单位，适用于上面三个属性。0表示像素，1表示行，2表示页。
+浏览器提供一个WheelEvent构造函数，可以用来生成滚轮事件的实例。它接受两个参数，第一个是事件名称，第二个是配置对象。
+
+var syntheticEvent = new WheelEvent("syntheticWheel", {"deltaX": 4, "deltaMode": 0});
+
+三.只允许输入数字验证
+验证代码一
+// HTML代码为
+// <input type="text"
+//   name="myInput"
+//   onkeypress="return numbersOnly(this, event);"
+//   onpaste="return false;"
+// />
+
+function numbersOnly(oToCheckField, oKeyEvent) {
+  return oKeyEvent.charCode === 0
+    || /\d/.test(String.fromCharCode(oKeyEvent.charCode));
+}
+
+验证代码二
+preventDefault()
+preventDefault方法取消浏览器对当前事件的默认行为，比如点击链接后，浏览器跳转到指定页面，或者按一下空格键，页面向下滚动一段距离。该方法生效的前提是，事件的cancelable属性为true，如果为false，则调用该方法没有任何效果。
+
+该方法不会阻止事件的进一步传播（stopPropagation方法可用于这个目的）。只要在事件的传播过程中（捕获阶段、目标阶段、冒泡阶段皆可），使用了preventDefault方法，该事件的默认方法就不会执行。
+
+// HTML代码为
+// <input type="checkbox" id="my-checkbox" />
+
+var cb = document.getElementById('my-checkbox');
+
+cb.addEventListener(
+  'click',
+  function (e){ e.preventDefault(); },
+  false
+);
+上面代码为点击单选框的事件，设置监听函数，取消默认行为。由于浏览器的默认行为是选中单选框，所以这段代码会导致无法选中单选框。
+
+利用这个方法，可以为文本输入框设置校验条件。如果用户的输入不符合条件，就无法将字符输入文本框。
+
+function checkName(e) {
+  if (e.charCode < 97 || e.charCode > 122) {
+    e.preventDefault();
+  }
+}
+上面函数设为文本框的keypress监听函数后，将只能输入小写字母，否则输入事件的默认事件（写入文本框）将被取消
+
+如果用户一直按键不松开，就会连续触发键盘事件，触发的顺序如下。
+keydown
+keypress
+keydown
+keypress
+（重复以上过程）
+keyup
+
+html：<input type="text" name="myInput2"
+           onkeydown="numbersOnly2();"
+           onkeypress="numbersonly3();"
+           onkeyup="numbersOnly4();" />
+      <script>
+        function numbersOnly2(oToCheckField, oKeyEvent) {
+            console.log(1)
+        }
+        function numbersonly3(oToCheckField, oKeyEvent) {
+            console.log(2)
+        }
+        function numbersOnly4(oToCheckField, oKeyEvent) {
+            console.log(3)
+        }
+      </script>
+
+button，buttons
+以下属性返回事件的鼠标键信息。
+（1）button
+button属性返回一个数值，表示按下了鼠标哪个键。
+
+-1：没有按下键。
+0：按下主键（通常是左键）。
+1：按下辅助键（通常是中键或者滚轮键）。
+2：按下次键（通常是右键）。
+// HTML代码为
+// <button onmouseup="whichButton(event);">点击</button>
+
+var whichButton = function (e) {
+  switch (e.button) {
+    case 0:
+      console.log('Left button clicked.');
+      break;
+    case 1:
+      console.log('Middle button clicked.');
+      break;
+    case 2:
+      console.log('Right button clicked.');
+      break;
+    default:
+      console.log('Unexpected code: ' + e.button);
+  }
+}
+（2）buttons
+
+buttons属性返回一个3个比特位的值，表示同时按下了哪些键。它用来处理同时按下多个鼠标键的情况。
+
+1：二进制为001，表示按下左键。
+2：二进制为010，表示按下右键。
+4：二进制为100，表示按下中键或滚轮键。
+同时按下多个键的时候，每个按下的键对应的比特位都会有值。比如，同时按下左键和右键，会返回3（二进制为011）。
+
+
+
+isTrusted
+
+isTrusted属性返回一个布尔值，表示该事件是否可以信任。
+
+var bool = event.isTrusted;
+Firefox浏览器中，用户触发的事件会返回true，脚本触发的事件返回false；IE浏览器中，除了使用createEvent方法生成的事件，所有其他事件都返回true；Chrome浏览器不支持该属性。
+
+四.进度事件
+进度事件
+进度事件用来描述一个事件进展的过程，比如XMLHttpRequest对象发出的HTTP请求的过程、<img>、<audio>、<video>、<style>、<link>加载外部资源的过程。下载和上传都会发生进度事件。
+
+进度事件有以下几种。
+
+abort事件：当进度事件被中止时触发。如果发生错误，导致进程中止，不会触发该事件。
+
+error事件：由于错误导致资源无法加载时触发。
+
+load事件：进度成功结束时触发。
+
+loadstart事件：进度开始时触发。
+
+loadend事件：进度停止时触发，发生顺序排在error事件\abort事件\load事件后面。
+
+progress事件：当操作处于进度之中，由传输的数据块不断触发。
+
+timeout事件：进度超过限时触发。
+
+image.addEventListener('load', function(event) {
+  image.classList.add('finished');
+});
+
+image.addEventListener('error', function(event) {
+  image.style.display = 'none';
+});
+上面代码在图片元素加载完成后，为图片元素的class属性添加一个值“finished”。如果加载失败，就把图片元素的样式设置为不显示。
+
+有时候，图片加载会在脚本运行之前就完成，尤其是当脚本放置在网页底部的时候，因此有可能使得load和error事件的监听函数根本不会被执行。所以，比较可靠的方式，是用complete属性先判断一下是否加载完成。
+
+function loaded() {
+  // code after image loaded
+}
+
+if (image.complete) {
+  loaded();
+} else {
+  image.addEventListener('load', loaded);
+}
+由于DOM没有提供像complete属性那样的，判断是否发生加载错误的属性，所以error事件的监听函数最好放在img元素的HTML属性中，这样才能保证发生加载错误时百分之百会执行。
+
+<img src="/wrong/url" onerror="this.style.display='none';" />
+error事件有一个特殊的性质，就是不会冒泡。这样的设计是正确的，防止引发父元素的error事件监听函数。
+
+进度事件使用ProgressEvent对象表示。ProgressEvent实例有以下属性。
+
+lengthComputable：返回一个布尔值，表示当前进度是否具有可计算的长度。如果为false，就表示当前进度无法测量。
+
+total：返回一个数值，表示当前进度的总长度。如果是通过HTTP下载某个资源，表示内容本身的长度，不含HTTP头部的长度。如果lengthComputable属性为false，则total属性就无法取得正确的值。
+
+loaded：返回一个数值，表示当前进度已经完成的数量。该属性除以total属性，就可以得到目前进度的百分比。
+
+下面是一个例子。
+
+var xhr = new XMLHttpRequest();
+
+xhr.addEventListener("progress", updateProgress, false);
+xhr.addEventListener("load", transferComplete, false);
+xhr.addEventListener("error", transferFailed, false);
+xhr.addEventListener("abort", transferCanceled, false);
+
+xhr.open();
+
+function updateProgress (e) {
+  if (e.lengthComputable) {
+    var percentComplete = e.loaded / e.total;
+  } else {
+    console.log('不能计算进度');
+  }
+}
+
+function transferComplete(e) {
+  console.log('传输结束');
+}
+
+function transferFailed(evt) {
+  console.log('传输过程中发生错误');
+}
+
+function transferCanceled(evt) {
+  console.log('用户取消了传输');
+}
+loadend事件的监听函数，可以用来取代abort事件/load事件/error事件的监听函数。
+
+req.addEventListener("loadend", loadEnd, false);
+
+function loadEnd(e) {
+  console.log('传输结束，成功失败未知');
+}
+loadend事件本身不提供关于进度结束的原因，但可以用它来做所有进度结束场景都需要做的一些操作。
+
+另外，上面是下载过程的进度事件，还存在上传过程的进度事件。这时所有监听函数都要放在XMLHttpRequest.upload对象上面。
+
+var xhr = new XMLHttpRequest();
+
+xhr.upload.addEventListener("progress", updateProgress, false);
+xhr.upload.addEventListener("load", transferComplete, false);
+xhr.upload.addEventListener("error", transferFailed, false);
+xhr.upload.addEventListener("abort", transferCanceled, false);
+
+xhr.open();
+浏览器提供一个ProgressEvent构造函数，用来生成进度事件的实例。
+
+progressEvent = new ProgressEvent(type, {
+  lengthComputable: aBooleanValue,
+  loaded: aNumber,
+  total: aNumber
+});
+上面代码中，ProgressEvent构造函数的第一个参数是事件类型（字符串），第二个参数是配置对象，用来指定lengthComputable属性（默认值为false）、loaded属性（默认值为0）、total属性（默认值为0）。
+
+
+拖拉事件
+拖拉指的是，用户在某个对象上按下鼠标键不放，拖动它到另一个位置，然后释放鼠标键，将该对象放在那里。
+
+拖拉的对象有好几种，包括Element节点、图片、链接、选中的文字等等。在HTML网页中，除了Element节点默认不可以拖拉，其他（图片、链接、选中的文字）都是可以直接拖拉的。为了让Element节点可拖拉，可以将该节点的draggable属性设为true。
+
+<div draggable="true">
+  此区域可拖拉
+</div>
+draggable属性可用于任何Element节点，但是图片（img元素）和链接（a元素）不加这个属性，就可以拖拉。对于它们，用到这个属性的时候，往往是将其设为false，防止拖拉。
+
+注意，一旦某个Element节点的draggable属性设为true，就无法再用鼠标选中该节点内部的文字或子节点了。
+
+事件种类
+当Element节点或选中的文本被拖拉时，就会持续触发拖拉事件，包括以下一些事件。
+
+drag事件：拖拉过程中，在被拖拉的节点上持续触发。
+
+dragstart事件：拖拉开始时在被拖拉的节点上触发，该事件的target属性是被拖拉的节点。通常应该在这个事件的监听函数中，指定拖拉的数据。
+
+dragend事件：拖拉结束时（释放鼠标键或按下escape键）在被拖拉的节点上触发，该事件的target属性是被拖拉的节点。它与dragStart事件，在同一个节点上触发。不管拖拉是否跨窗口，或者中途被取消，dragend事件总是会触发的。
+
+dragenter事件：拖拉进入当前节点时，在当前节点上触发，该事件的target属性是当前节点。通常应该在这个事件的监听函数中，指定是否允许在当前节点放下（drop）拖拉的数据。如果当前节点没有该事件的监听函数，或者监听函数不执行任何操作，就意味着不允许在当前节点放下数据。在视觉上显示拖拉进入当前节点，也是在这个事件的监听函数中设置。
+
+dragover事件：拖拉到当前节点上方时，在当前节点上持续触发，该事件的target属性是当前节点。该事件与dragenter事件基本类似，默认会重置当前的拖拉事件的效果（DataTransfer对象的dropEffect属性）为none，即不允许放下被拖拉的节点，所以如果允许在当前节点drop数据，通常会使用preventDefault方法，取消重置拖拉效果为none。
+
+dragleave事件：拖拉离开当前节点范围时，在当前节点上触发，该事件的target属性是当前节点。在视觉上显示拖拉离开当前节点，就在这个事件的监听函数中设置。
+
+drop事件：被拖拉的节点或选中的文本，释放到目标节点时，在目标节点上触发。注意，如果当前节点不允许drop，即使在该节点上方松开鼠标键，也不会触发该事件。如果用户按下Escape键，取消这个操作，也不会触发该事件。该事件的监听函数负责取出拖拉数据，并进行相关处理。
+
+将A元素拖入到B元素中
+A为被拖放元素 B为当前节点
+与被拖放元素有关的事件
+dragstart，drag，dragend,drop
+与进入的节点有关的事件
+dragenter，dragover，dragleaave
+
+
+
+关于拖拉事件，有以下几点注意事项。
+
+拖拉过程只触发以上这些拖拉事件，尽管鼠标在移动，但是鼠标事件不会触发。
+
+将文件从操作系统拖拉进浏览器，不会触发dragStart和dragend事件。
+
+dragenter和dragover事件的监听函数，用来指定可以放下（drop）拖拉的数据。由于网页的大部分区域不适合作为drop的目标节点，所以这两个事件的默认设置为当前节点不允许drop。如果想要在目标节点上drop拖拉的数据，首先必须阻止这两个事件的默认行为，或者取消这两个事件。
+
+<div ondragover="return false">
+<div ondragover="event.preventDefault()">
+上面代码中，如果不取消拖拉事件或者阻止默认行为，就不可能在div节点上drop被拖拉的节点。
+
+拖拉事件用一个DragEvent对象表示，该对象继承MouseEvent对象，因此也就继承了UIEvent和Event对象。DragEvent对象只有一个独有的属性DataTransfer，其他都是继承的属性。DataTransfer属性用来读写拖拉事件中传输的数据，详见下文《DataTransfer对象》的部分。
+
+下面的例子展示，如何动态改变被拖动节点的背景色。
+
+div.addEventListener("dragstart", function(e) {
+  this.style.backgroundColor = "red";
+}, false);
+div.addEventListener("dragend", function(e) {
+  this.style.backgroundColor = "green";
+}, false);
+上面代码中，div节点被拖动时，背景色会变为红色，拖动结束，又变回绿色。
+
+下面是一个例子，显示如何实现将一个节点从当前父节点，拖拉到另一个父节点中。
+
+// HTML代码为
+// <div class="dropzone">
+//    <div id="draggable" draggable="true">
+//       该节点可拖拉
+//    </div>
+// </div>
+// <div class="dropzone"></div>
+// <div class="dropzone"></div>
+// <div class="dropzone"></div>
+
+// 被拖拉节点
+var dragged;
+
+document.addEventListener("dragstart", function( event ) {
+  // 保存被拖拉节点
+  dragged = event.target;
+  // 被拖拉节点的背景色变透明
+  event.target.style.opacity = .5;
+}, false);
+
+document.addEventListener("dragend", function( event ) {
+  // 被拖拉节点的背景色恢复正常
+  event.target.style.opacity = "";
+}, false);
+
+document.addEventListener("dragover", function( event ) {
+  // 防止拖拉效果被重置，允许被拖拉的节点放入目标节点
+  event.preventDefault();
+}, false);
+
+document.addEventListener("dragenter", function( event ) {
+  // 目标节点的背景色变紫色
+  // 由于该事件会冒泡，所以要过滤节点
+  if ( event.target.className == "dropzone" ) {
+    event.target.style.background = "purple";
+  }
+}, false);
+
+document.addEventListener("dragleave", function( event ) {
+  // 目标节点的背景色恢复原样
+  if ( event.target.className == "dropzone" ) {
+    event.target.style.background = "";
+  }
+}, false);
+
+document.addEventListener("drop", function( event ) {
+  // 防止事件默认行为（比如某些Elment节点上可以打开链接）
+  event.preventDefault();
+  if ( event.target.className == "dropzone" ) {
+    // 恢复目标节点背景色
+    event.target.style.background = "";
+    // 将被拖拉节点插入目标节点
+    dragged.parentNode.removeChild( dragged );
+    event.target.appendChild( dragged );
+  }
+}, false);
+
+
+
+
+五.DataTransfer
+DataTransfer对象概述
+所有的拖拉事件都有一个dataTransfer属性，用来保存需要传递的数据。这个属性的值是一个DataTransfer对象。
+
+拖拉的数据保存两方面的数据：数据的种类（又称格式）和数据的值。数据的种类是一个MIME字符串，比如 text/plain或者image/jpeg，数据的值是一个字符串。一般来说，如果拖拉一段文本，则数据默认就是那段文本；如果拖拉一个链接，则数据默认就是链接的URL。
+
+当拖拉事件开始的时候，可以提供数据类型和数据值；在拖拉过程中，通过dragenter和dragover事件的监听函数，检查数据类型，以确定是否允许放下（drop）被拖拉的对象。比如，在只允许放下链接的区域，检查拖拉的数据类型是否为text/uri-list。
+
+发生drop事件时，监听函数取出拖拉的数据，对其进行处理。
+
+DataTransfer对象的属性
+DataTransfer对象有以下属性。
+
+（1）dropEffect
+
+dropEffect属性设置放下（drop）被拖拉节点时的效果，可能的值包括copy（复制被拖拉的节点）、move（移动被拖拉的节点）、link（创建指向被拖拉的节点的链接）、none（无法放下被拖拉的节点）。设置除此以外的值，都是无效的。
+
+target.addEventListener('dragover', function(e) {
+  e.preventDefault();
+  e.stopPropagation();
+  e.dataTransfer.dropEffect = 'copy';
+});
+dropEffect属性一般在dragenter和dragove事件的监听函数中设置，对于dragstart、drag、dragleave这三个事件，该属性不起作用。进入目标节点后，拖拉行为会初始化成用户设定的效果，用户可以通过按下Shift键和Control键，改变初始设置，在copy、move、link三种效果中切换。
+
+鼠标箭头会根据dropEffect属性改变形状，提示目前正处于哪一种效果。这意味着，通过鼠标就能判断是否可以在当前节点drop被拖拉的节点。
+
+（2）effectAllowed
+
+effectAllowed属性设置本次拖拉中允许的效果，可能的值包括copy（复制被拖拉的节点）、move（移动被拖拉的节点）、link（创建指向被拖拉节点的链接）、copyLink（允许copy或link）、copyMove（允许copy或move）、linkMove（允许link或move）、all（允许所有效果）、none（无法放下被拖拉的节点）、uninitialized（默认值，等同于all）。如果某种效果是不允许的，用户就无法在目标节点中达成这种效果。
+
+dragstart事件的监听函数，可以设置被拖拉节点允许的效果；dragenter和dragover事件的监听函数，可以设置目标节点允许的效果。
+
+event.dataTransfer.effectAllowed = "copy";
+dropEffect属性和effectAllowed属性，往往配合使用。
+
+event.dataTransfer.effectAllowed = "copyMove";
+event.dataTransfer.dropEffect = "copy";
+上面代码中，copy是指定的效果，但是可以通过Shift或Ctrl键（根据平台而定），将效果切换成move。
+
+只要dropEffect属性和effectAllowed属性之中，有一个为none，就无法在目标节点上完成drop操作。
+
+（3）files
+
+files属性是一个FileList对象，包含一组本地文件，可以用来在拖拉操作中传送。如果本次拖拉不涉及文件，则属性为空的FileList对象。
+
+下面就是一个接收拖拉文件的例子。
+
+// HTML代码为
+// <div id="output" style="min-height: 200px;border: 1px solid black;">
+//   文件拖拉到这里
+// </div>
+
+var div = document.getElementById('output');
+
+div.addEventListener("dragenter", function( event ) {
+  div.textContent = '';
+  event.stopPropagation();
+  event.preventDefault();
+}, false);
+
+div.addEventListener("dragover", function( event ) {
+  event.stopPropagation();
+  event.preventDefault();
+}, false);
+
+div.addEventListener("drop", function( event ) {
+  event.stopPropagation();
+  event.preventDefault();
+  var files = event.dataTransfer.files;
+  for (var i = 0; i < files.length; i++) {
+    div.textContent += files[i].name + ' ' + files[i].size + '字节\n';
+  }
+}, false);
+上面代码中，通过files属性读取拖拉文件的信息。如果想要读取文件内容，就要使用FileReader对象。
+
+div.addEventListener('drop', function(e) {
+  e.preventDefault();
+  e.stopPropagation();
+
+  var fileList = e.dataTransfer.files;
+  if (fileList.length > 0) {
+    var file = fileList[0];
+    var reader = new FileReader();
+    reader.onloadend = function(e) {
+      if (e.target.readyState == FileReader.DONE) {
+        var content = reader.result;
+        contentDiv.innerHTML = "File: " + file.name + "\n\n" + content;
+      }
+    }
+    reader.readAsBinaryString(file);
+  }
+});
+（4）types
+
+types属性是一个数组，保存每一次拖拉的数据格式，比如拖拉文件，则格式信息就为File。
+
+下面是一个例子，通过检查dataTransfer属性的类型，决定是否允许在当前节点执行drop操作。
+
+function contains(list, value){
+  for( var i = 0; i < list.length; ++i ){
+    if(list[i] === value) return true;
+  }
+  return false;
+}
+
+function doDragOver(event){
+  var isLink = contains( event.dataTransfer.types, "text/uri-list");
+  if (isLink) event.preventDefault();
+}
+上面代码中，只有当被拖拉的节点是一个链接时，才允许在当前节点放下。
+
+DataTransfer对象的方法
+DataTransfer对象有以下方法。
+
+（1）setData()
+
+setData方法用来设置事件所带有的指定类型的数据。它接受两个参数，第一个是数据类型，第二个是具体数据。如果指定的类型在现有数据中不存在，则该类型将写入types属性；如果已经存在，在该类型的现有数据将被替换。
+
+event.dataTransfer.setData("text/plain", "Text to drag");
+上面代码为事件加入纯文本格式的数据。
+
+如果拖拉文本框或者拖拉选中的文本，会默认将文本数据添加到dataTransfer属性，不用手动指定。
+
+<div draggable="true" ondragstart="
+  event.dataTransfer.setData('text/plain', 'bbb')">
+  aaa
+</div>
+上面代码中，拖拉数据实际上是bbb，而不是aaa。
+
+下面是添加其他类型的数据。由于text/plain是最普遍支持的格式，为了保证兼容性，建议最后总是将数据保存一份纯文本的格式。
+
+var dt = event.dataTransfer;
+
+// 添加链接
+dt.setData("text/uri-list", "http://www.example.com");
+dt.setData("text/plain", "http://www.example.com");
+// 添加HTML代码
+dt.setData("text/html", "Hello there, <strong>stranger</strong>");
+dt.setData("text/plain", "Hello there, <strong>stranger</strong>");
+// 添加图像的URL
+dt.setData("text/uri-list", imageurl);
+dt.setData("text/plain", imageurl);
+可以一次提供多种格式的数据。
+
+var dt = event.dataTransfer;
+dt.setData("application/x-bookmark", bookmarkString);
+dt.setData("text/uri-list", "http://www.example.com");
+dt.setData("text/plain", "http://www.example.com");
+上面代码中，通过在同一个事件上面，存放三种类型的数据，使得拖拉事件可以在不同的对象上面，drop不同的值。注意，第一种格式是一个自定义格式，浏览器默认无法读取，这意味着，只有某个部署了特定代码的节点，才可能drop（读取到）这个数据。
+
+（2）getData()
+
+getData方法接受一个字符串（表示数据类型）作为参数，返回事件所带的指定类型的数据（通常是用setData方法添加的数据）。如果指定类型的数据不存在，则返回空字符串。通常只有drop事件触发后，才能取出数据。如果取出另一个域名存放的数据，将会报错。
+
+下面是一个drop事件的监听函数，用来取出指定类型的数据。
+
+function onDrop(event){
+  var data = event.dataTransfer.getData("text/plain");
+  event.target.textContent = data;
+  event.preventDefault();
+}
+上面代码取出拖拉事件的文本数据，将其替换成当前节点的文本内容。注意，这时还必须取消浏览器的默认行为，因为假如用户拖拉的是一个链接，浏览器默认会在当前窗口打开这个链接。
+
+getData方法返回的是一个字符串，如果其中包含多项数据，就必须手动解析。
+
+function doDrop(event){
+  var lines = event.dataTransfer.getData("text/uri-list").split("\n");
+  for (let line of lines) {
+    let link = document.createElement("a");
+    link.href = line;
+    link.textContent = line;
+    event.target.appendChild(link);
+  }
+  event.preventDefault();
+}
+上面代码中，getData方法返回的是一组链接，就必须自行解析。
+
+类型值指定为URL，可以取出第一个有效链接。
+
+var link = event.dataTransfer.getData("URL");
+下面是一次性取出多种类型的数据。
+
+function doDrop(event){
+  var types = event.dataTransfer.types;
+  var supportedTypes = ["text/uri-list", "text/plain"];
+  types = supportedTypes.filter(function (value) types.includes(value));
+  if (types.length)
+    var data = event.dataTransfer.getData(types[0]);
+  event.preventDefault();
+}
+（3）clearData()
+
+clearData方法接受一个字符串（表示数据类型）作为参数，删除事件所带的指定类型的数据。如果没有指定类型，则删除所有数据。如果指定类型不存在，则原数据不受影响。
+
+event.dataTransfer.clearData("text/uri-list");
+上面代码清除事件所带的URL数据。
+
+（4）setDragImage()
+
+拖动过程中（dragstart事件触发后），浏览器会显示一张图片跟随鼠标一起移动，表示被拖动的节点。这张图片是自动创造的，通常显示为被拖动节点的外观，不需要自己动手设置。setDragImage方法可以用来自定义这张图片，它接受三个参数，第一个是img图片元素或者canvas元素，如果省略或为null则使用被拖动的节点的外观，第二个和第三个参数为鼠标相对于该图片左上角的横坐标和右坐标。
+
+下面是一个例子。
+
+// HTML代码为
+// <div id="drag-with-image" class="dragdemo" draggable="true">
+     drag me
+// </div>
+
+var div = document.getElementById("drag-with-image");
+div.addEventListener("dragstart", function(e) {
+  var img = document.createElement("img");
+  img.src = "http://path/to/img";
+  e.dataTransfer.setDragImage(img, 0, 0);
+}, false);
+
+六
+自定义事件和事件模拟
+除了浏览器预定义的那些事件，用户还可以自定义事件，然后手动触发。
+
+// 新建事件实例
+var event = new Event('build');
+
+// 添加监听函数
+elem.addEventListener('build', function (e) { ... }, false);
+
+// 触发事件
+elem.dispatchEvent(event);
+上面代码触发了自定义事件，该事件会层层向上冒泡。在冒泡过程中，如果有一个元素定义了该事件的监听函数，该监听函数就会触发。
+
+由于IE不支持这个API，如果在IE中自定义事件，需要使用后文的“老式方法”。
+
+CustomEvent()
+Event构造函数只能指定事件名，不能在事件上绑定数据。如果需要在触发事件的同时，传入指定的数据，需要使用CustomEvent构造函数生成自定义的事件对象。
+
+var event = new CustomEvent('build', { 'detail': 'hello' });
+function eventHandler(e) {
+  console.log(e.detail);
+}
+上面代码中，CustomEvent构造函数的第一个参数是事件名称，第二个参数是一个对象，该对象的detail属性会绑定在事件对象之上。
+
+下面是另一个例子。
+
+var myEvent = new CustomEvent("myevent", {
+  detail: {
+    foo: "bar"
+  },
+  bubbles: true,
+  cancelable: false
+});
+
+el.addEventListener('myevent', function(event) {
+  console.log('Hello ' + event.detail.foo);
+});
+
+el.dispatchEvent(myEvent);
+IE不支持这个方法，可以用下面的垫片函数模拟。
+
+(function () {
+  function CustomEvent ( event, params ) {
+    params = params || { bubbles: false, cancelable: false, detail: undefined };
+    var evt = document.createEvent( 'CustomEvent' );
+    evt.initCustomEvent( event, params.bubbles, params.cancelable, params.detail );
+    return evt;
+   }
+
+  CustomEvent.prototype = window.Event.prototype;
+
+  window.CustomEvent = CustomEvent;
+})();
+事件的模拟
+有时，需要在脚本中模拟触发某种类型的事件，这时就必须使用这种事件的构造函数。
+
+下面是一个通过MouseEvent构造函数，模拟触发click鼠标事件的例子。
+
+function simulateClick() {
+  var event = new MouseEvent('click', {
+    'bubbles': true,
+    'cancelable': true
+  });
+  var cb = document.getElementById('checkbox');
+  cb.dispatchEvent(event);
+}
+自定义事件的老式写法
+老式浏览器不一定支持各种类型事件的构造函数。因此，有时为了兼容，会用到一些非标准的方法。这些方法未来会被逐步淘汰，但是目前浏览器还广泛支持。除非是为了兼容老式浏览器，尽量不要使用。
+
+（1）document.createEvent()
+
+document.createEvent方法用来新建指定类型的事件。它所生成的Event实例，可以传入dispatchEvent方法。
+
+// 新建Event实例
+var event = document.createEvent('Event');
+
+// 事件的初始化
+event.initEvent('build', true, true);
+
+// 加上监听函数
+document.addEventListener('build', doSomething, false);
+
+// 触发事件
+document.dispatchEvent(event);
+createEvent方法接受一个字符串作为参数，可能的值参见下表“数据类型”一栏。使用了某一种“事件类型”，就必须使用对应的事件初始化方法。
+
+事件类型	事件初始化方法
+UIEvents	event.initUIEvent
+MouseEvents	event.initMouseEvent
+MutationEvents	event.initMutationEvent
+HTMLEvents	event.initEvent
+Event	event.initEvent
+CustomEvent	event.initCustomEvent
+KeyboardEvent	event.initKeyEvent
+（2）event.initEvent()
+
+事件对象的initEvent方法，用来初始化事件对象，还能向事件对象添加属性。该方法的参数必须是一个使用Document.createEvent()生成的Event实例，而且必须在dispatchEvent方法之前调用。
+
+var event = document.createEvent('Event');
+event.initEvent('my-custom-event', true, true, {foo:'bar'});
+someElement.dispatchEvent(event);
+initEvent方法可以接受四个参数。
+
+type：事件名称，格式为字符串。
+bubbles：事件是否应该冒泡，格式为布尔值。可以使用event.bubbles属性读取它的值。
+cancelable：事件是否能被取消，格式为布尔值。可以使用event.cancelable属性读取它的值。
+option：为事件对象指定额外的属性。
+事件模拟的老式写法
+事件模拟的非标准做法是，对document.createEvent方法生成的事件对象，使用对应的事件初始化方法进行初始化。比如，click事件对象属于MouseEvent对象，也属于UIEvent对象，因此要用initMouseEvent方法或initUIEvent方法进行初始化。
+
+（1）event.initMouseEvent()
+
+initMouseEvent方法用来初始化Document.createEvent方法新建的鼠标事件。该方法必须在事件新建（document.createEvent方法）之后、触发（dispatchEvent方法）之前调用。
+
+initMouseEvent方法有很长的参数。
+
+event.initMouseEvent(type, canBubble, cancelable, view,
+  detail, screenX, screenY, clientX, clientY,
+  ctrlKey, altKey, shiftKey, metaKey,
+  button, relatedTarget
+);
+上面这些参数的含义，参见MouseEvent构造函数的部分。
+
+模仿并触发click事件的写法如下。
+
+var simulateDivClick = document.createEvent('MouseEvents');
+
+simulateDivClick.initMouseEvent('click',true,true,
+  document.defaultView,0,0,0,0,0,false,
+  false,false,0,null,null
+);
+
+divElement.dispatchEvent(simulateDivClick);
+（2）UIEvent.initUIEvent()
+
+UIEvent.initUIEvent()用来初始化一个UI事件。该方法必须在事件新建（document.createEvent方法）之后、触发（dispatchEvent方法）之前调用。
+
+event.initUIEvent(type, canBubble, cancelable, view, detail)
+该方法的参数含义，可以参见MouseEvent构造函数的部分。其中，detail参数是一个数值，含义与事件类型有关，对于鼠标事件，这个值表示鼠标按键在某个位置按下的次数。
+
+var e = document.createEvent("UIEvent");
+e.initUIEvent("click", true, true, window, 1);
+-------end 链接1---------------------------
