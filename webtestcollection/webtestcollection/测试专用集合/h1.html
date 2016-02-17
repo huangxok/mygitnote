@@ -8,36 +8,60 @@
     </style>
 </head>
 <body>
-    <div style="width:700px;height:100px;border:1px solid #ecc;border-bottom-color: #fff;position:relative;top: 1px;z-index:9999">
+    <svg>
+        <path d="M152 99V102L171 105V21Q171 10 184 13L191 15V10L155 -1H152V15Q125 -2 109 -1Q68 2 65 46Q65 75 87 91Q103 104 125 104Q140 104 152 99ZM152 20V78Q137 97 119 97Q85 94 83 55Q86 12 119 8Q131 8 152 20ZM130
+143L160 175V170L132 124H125L98 170V175L130 143Z" style="transform:scale(1,1) translateX(100px);fill:rgba(255,0,0,1)"></path>
 
+    </svg>
+    <svg xmlns="http://www.w3.org/2000/svg" version="1.1">
+        <g>
+            <circle cx="20" cy="20" r="20" stroke="none" fill="red">
+            </circle>
+            <text x="20" y="30" style="stroke: black; stroke-width: 5px;fill: none;font-size:24px;text-anchor: middle">1</text>
+        </g>
+    </svg>
+    <i>
+
+        <input id="txttest" type="text" value="你好，world世界." />
+
+    </i>
+    <div style="">
+        你话圣达菲
+        <img src="../js旋转图片/1.jpg" style="vertical-align:middle;" />
     </div>
-    <div style="width:800px;height:100px;border:1px solid #ecc;position:relative;z-index:-1">
+    <div id="teste" contenteditable="true" style="width:200px;height:200px;border:1px solid #eee">
+
+        你好，杰克。欢迎来到这个世界。
     </div>
-    <select id="a">
-        <option value="0">请选择</option>
-        <option value="2">北京</option>
-        <option value="3">上海</option>
-        <option value="4">天津</option>
-        <option value="5">河北</option>
-    </select>
-    <select id="b">
-        <option value="0">请选择</option>
-        <option value="2">北京</option>
-        <option value="3">上海</option>
-        <option value="4">天津</option>
-        <option value="5">河北</option>
-    </select>
-    <a href="h44444.html">onclic</a>
     <script>
-        (function () {
-            document.getElementById('a').onchange = function () {
-                if (this.value == 0) {
-                    document.getElementById('b').setAttribute('disabled', 'disabled');
-                } else {
-                    document.getElementById('b').removeAttribute('disabled');
-                }
-            }
-        })()
+        var txt = document.getElementById('txttest');
+        txt.focus();
+        txt.setSelectionRange(1, 5);
+    </script>
+    <script>
+        function Universe() {
+
+            // 缓存的实例
+            var instance = this;
+
+            // 其它内容
+            this.start_time = 0;
+            this.bang = "Big";
+
+            // 重写构造函数
+            Universe = function () {
+                return instance;
+            };
+        }
+    </script>
+    <script>
+        setInterval(function () {
+            var el = document.getElementById('teste');
+            var sel = document.getSelection();
+            var obj = [sel.focusNode, sel.focusOffset];
+            var dd = sel.getRangeAt(0)
+            console.log(dd.startOffset);
+        }, 5000);
     </script>
 </body>
 </html>

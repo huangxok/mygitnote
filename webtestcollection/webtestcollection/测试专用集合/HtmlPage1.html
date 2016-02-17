@@ -44,5 +44,44 @@
         }())
         setTimeout(uniqueinteger, 10000);
     </script>
+    <script>
+        function Universe() {
+            //缓存实例
+            var instance;
+            //重写构造函数
+            var that;
+            Universe = function Universe() {
+                that = this;
+                return instance;
+            }
+            //处理原型
+            Universe.prototype = this;
+            //实例
+            instance = new Universe();
+            //重设构造函数指针
+            instance.constructor = Universe;
+            //其他功能
+            instance.start_time = 0;
+            instance.bang = 'Big';
+            return instance;
+        }
+    </script>
+
+    <script>
+        var add = function (x, y) {
+            return x + y;
+        }
+        var reduce = function (x, y) {
+            return x - y;
+        }
+        function plus(f, g) {
+            return function () {
+                return f.apply(this, arguments) * g.apply(this, arguments);
+            };
+        }
+
+        var com = plus(add, reduce);
+        var d = com(3, 2);
+    </script>
 </body>
 </html>
